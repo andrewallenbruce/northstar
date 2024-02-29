@@ -20,3 +20,6 @@ Imports:
    rlang,
    stringr,
    glue
+Suggests:
+   gt
+

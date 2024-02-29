@@ -31,7 +31,7 @@ pak::pak("andrewallenbruce/northstar")
 
 ## Example: Payment Amount Calculation
 
-```{r example}
+```{r example, warning=FALSE, message=FALSE}
 library(northstar)
 library(dplyr)
 ```
