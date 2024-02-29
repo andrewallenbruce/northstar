@@ -1,0 +1,11 @@
+file: gpci.qs
+file_size: 3789
+pin_hash: 56bda82317bd4f61
+type: qs
+title: GPCIs 2024
+description: Geographic Practice Cost Indices (GPCIs) by State and Medicare Locality
+  2024
+tags: ~
+urls: ~
+created: 20240229T141339Z
+api_version: 1
