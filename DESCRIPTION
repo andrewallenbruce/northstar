@@ -1,10 +1,10 @@
 Package: northstar
-Title: Revenue Integrity
+Title: Revenue Integrity Tools
 Version: 0.0.0.9000
 Authors@R: 
     person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
-Description: What the package does (one paragraph).
+Description: Revenue integrity tools.
 License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -18,4 +18,5 @@ Imports:
    dplyr,
    pins,
    rlang,
-   stringr
+   stringr,
+   glue
