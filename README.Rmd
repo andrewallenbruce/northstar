@@ -18,38 +18,80 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of northstar is to ...
+The goal of **northstar** is to ...
 
 ## Installation
 
-You can install the development version of northstar from [GitHub](https://github.com/) with:
+You can install the development version of **northstar** from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("andrewallenbruce/northstar")
+# install.packages("pak")
+pak::pak("andrewallenbruce/northstar")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ```{r example}
 library(northstar)
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
+```{r}
+rvu() |> 
+  dplyr::filter(status == "A", 
+                work.rvu == max(work.rvu, na.rm = TRUE)) |> 
+  dplyr::select(hcpcs, 
+                description,
+                work.rvu, 
+                pe.rvu_nonfac, 
+                pe.rvu_fac, 
+                mp.rvu, 
+                cf) |>
+  dplyr::glimpse()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+gpci() |> 
+  dplyr::filter(state == "GA", 
+                locality == "01") |>
+  dplyr::glimpse()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+```{r}
+par <- northstar:::calc_payment(
+  wk.rvu  = 108.91,
+  pe.rvu  = 35.14,
+  mp.rvu  = 26.95,
+  wk.gpci = 1.0,
+  pe.gpci = 0.997,
+  mp.gpci = 1.128,
+  cf      = 32.7442)
+
+nonpar <- par * 0.95
+```
+
+```{r}
+pp <- function(par    = par, 
+               nonpar = nonpar, 
+               lc     = limiting_charge(par)) {
+  
+  glue::glue("Participating Amount:    {gt::vec_fmt_currency(par)}\n",  
+             "Non-Particpating Amount: {gt::vec_fmt_currency(nonpar)}\n", 
+             "Limiting Charge:         {gt::vec_fmt_currency(lc)}",
+             par = par, 
+             nonpar = nonpar, 
+             lc = lc)
+}
+
+pp(par, 
+   nonpar, 
+   limiting_charge(par))
+```
+
+```{r}
+payment() |> 
+  dplyr::filter(hcpcs == "39503", 
+                carrier_no == "10212",
+                locality == "01") |> 
+  dplyr::glimpse()
+```

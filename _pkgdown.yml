@@ -1,4 +1,7 @@
 url: https://andrewallenbruce.github.io/northstar/
 template:
   bootstrap: 5
+  bootswatch: sandstone
+  bslib:
+    code_font: {google: "Fira Code"}
 
