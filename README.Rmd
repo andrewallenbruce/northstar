@@ -37,16 +37,16 @@ library(dplyr)
 ```
 
 
-```{r}
+```{r eval=FALSE}
 rvu() |> 
   filter(status   == "A",
-         work.rvu == max(work.rvu, na.rm = TRUE)) |> 
+         wrvu == max(wrvu, na.rm = TRUE)) |> 
   select(hcpcs, 
          description,
-         work.rvu, 
-         pe.rvu_nonfac, 
-         pe.rvu_fac, 
-         mp.rvu, 
+         wrvu, 
+         prvu_nf, 
+         prvu_f, 
+         mrvu, 
          cf) |>
   glimpse()
 ```
@@ -68,15 +68,15 @@ calc_amounts(wrvu  = 108.91,
              cf    = 32.7442)
 ```
 
-```{r}
+```{r eval=FALSE}
 payment() |> 
   filter(hcpcs      == "39503", 
          carrier_no == "10212",
          locality   == "01") |> 
   select(hcpcs,
-         mac = carrier_no,
+         mac,
          locality,
-         fee_nonfac,
-         fee_fac) |> 
+         fee_nf,
+         fee_f) |> 
   glimpse()
 ```

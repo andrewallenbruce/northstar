@@ -3,14 +3,12 @@ library(tidyverse)
 library(janitor)
 
 root <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
-
-# NATIONAL PHYSICIAN FEE SCHEDULE RELATIVE VALUE FILE CALENDAR YEAR 2024
-# rvu_xl <- here::here("data/RVU24A-010323/PPRRVU24_JAN.xlsx")
-
 rvu_xl     <- glue::glue("{root}RVU24A-010323/PPRRVU24_JAN.xlsx")
 pfs_pay_xl <- glue::glue("{root}PFREV24A_0/PFALL24.csv")
 gpci_xl    <- glue::glue("{root}RVU24A-010323/GPCI2024.xlsx")
 
+# NATIONAL PHYSICIAN FEE SCHEDULE RELATIVE VALUE FILE CALENDAR YEAR 2024
+# rvu_xl <- here::here("data/RVU24A-010323/PPRRVU24_JAN.xlsx")
 
 rvu <- read_excel(rvu_xl, col_types = "text") |>
   row_to_names(row_number = 9) |>
@@ -27,30 +25,29 @@ rvu <- read_excel(rvu_xl, col_types = "text") |>
                   post_op,
                   non_facility_pe_used_for_opps_payment_amount,
                   facility_pe_used_for_opps_payment_amount,
-                  mp_used_for_opps_payment_amount
-  ),
-  readr::parse_number)) |>
+                  mp_used_for_opps_payment_amount), readr::parse_number)) |>
   rename(
-    status = status_code,
-    unused = not_used_for_medicare_payment,
-    work.rvu = work_rvu,
-    pe.rvu_nonfac = non_fac_pe_rvu,
-    nonfac_ind_na = non_fac_na_indicator,
-    pe.rvu_fac = facility_pe_rvu,
-    fac_ind_na = facility_na_indicator,
-    mp.rvu = mp_rvu,
-    total_nonfac = non_facility_total,
-    total_fac = facility_total,
-    pctc = pctc_ind,
-    endo = endo_base,
-    cf = conv_factor,
-    phys_sup_diag_proc = physician_supervision_of_diagnostic_procedures,
-    calc_flag = calculation_flag,
-    diag_img_fm_ind = diagnostic_imaging_family_indicator,
-    pe.rvu_nonfac_opps = non_facility_pe_used_for_opps_payment_amount,
-    pe.rvu_fac_opps = facility_pe_used_for_opps_payment_amount,
-    mp.rvu_opps = mp_used_for_opps_payment_amount
-  )
+    status       = status_code,
+    notused      = not_used_for_medicare_payment,
+    wrvu         = work_rvu,
+    prvu_nf      = non_fac_pe_rvu,
+    prvu_f       = facility_pe_rvu,
+    nf_ind_na    = non_fac_na_indicator,
+    f_ind_na     = facility_na_indicator,
+    mrvu         = mp_rvu,
+    total_nf     = non_facility_total,
+    total_f      = facility_total,
+    pctc         = pctc_ind,
+    endo         = endo_base,
+    cf           = conv_factor,
+    phys_dxpx    = physician_supervision_of_diagnostic_procedures,
+    calc         = calculation_flag,
+    dximgfm_ind  = diagnostic_imaging_family_indicator,
+    prvu_nf_opps = non_facility_pe_used_for_opps_payment_amount,
+    prvu_f_opps  = facility_pe_used_for_opps_payment_amount,
+    mrvu_opps    = mp_used_for_opps_payment_amount)
+
+# [18,500 x 31]
 
 rvu |>
   filter(hcpcs == "A0021")
@@ -58,36 +55,39 @@ rvu |>
 # ANNUAL PHYSICIAN FEE SCHEDULE PAYMENT AMOUNT FILE
 # pfs_pay_xl <- here::here("data/PFREV24A_0/PFALL24.csv")
 
-pfs_pay <- readr::read_csv(pfs_pay_xl, col_types = strrep("c", 16)) |>
+pfs_pay <- readr::read_csv(pfs_pay_xl,
+                           col_types = strrep("c", 16)) |>
   slice(-c(990483:990487))
 
 names(pfs_pay) <- c(
   "year",
-  "carrier_no",
+  "mac",
   "locality",
   "hcpcs",
   "mod",
-  "fee_nonfac", # "non_fac_fee_sched_amount"
-  "fee_fac", # "facility_fee_sched_amount"
+  "fee_nf", # "non_fac_fee_sched_amount"
+  "fee_f", # "facility_fee_sched_amount"
   "pctc",
   "status",
   "mult_surg",
-  "ther_red_nonfac", # "therapy_reduction_nonfac"
-  "flat_visit", # flat_visit_fee
-  "ther_red_fac", # "therapy_reduction_fac"
+  "therapy_nf", # "therapy_reduction_nonfac"
+  "flatfee_visit", # flat_visit_fee
+  "therapy_f", # "therapy_reduction_fac"
   "opps", # "opps_indicator"
-  "opps_nonfac",
-  "opps_fac"
+  "opps_nf",
+  "opps_f"
 )
 
 pfs_pay <- pfs_pay |>
   mutate(across(c(
     year,
-    contains("fac"),
-    flat_visit
+    contains("fee"),
+    contains("therapy"),
+    contains("opps_"),
     ), readr::parse_number)) |>
   select(-pctc)
 
+# [990,482 x 15]
 pfs_pay |>
   filter(hcpcs == "A0021")
 
@@ -100,14 +100,17 @@ gpci <- read_excel(gpci_xl, col_types = "text") |>
   filter(!is.na(state)) |>
   rename(mac = medicare_administrative_contractor_mac,
          locality = locality_number,
-         gpci.pw_floor = x2024_pw_gpci_with_1_0_floor,
-         gpci.pe = x2024_pe_gpci,
-         gpci.mp = x2024_mp_gpci
+         wgpci = x2024_pw_gpci_with_1_0_floor,
+         pgpci = x2024_pe_gpci,
+         mgpci = x2024_mp_gpci
   ) |>
   mutate(across(contains("gpci"), readr::parse_number)) |>
-  mutate(locality_name = str_remove_all(locality_name, fixed("*")),
-         state = fct(state))
+  mutate(ftnote = str_extract_all(locality_name, fixed("*")),
+         locality_name = str_remove_all(locality_name, fixed("*")),
+         state = fct(state)) |>
+  unnest(ftnote, keep_empty = TRUE)
 
+# [114 x 8]
 gpci
 
 

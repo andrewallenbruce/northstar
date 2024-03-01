@@ -28,26 +28,16 @@ library(dplyr)
 ``` r
 rvu() |> 
   filter(status   == "A",
-         work.rvu == max(work.rvu, na.rm = TRUE)) |> 
+         wrvu == max(wrvu, na.rm = TRUE)) |> 
   select(hcpcs, 
          description,
-         work.rvu, 
-         pe.rvu_nonfac, 
-         pe.rvu_fac, 
-         mp.rvu, 
+         wrvu, 
+         prvu_nf, 
+         prvu_f, 
+         mrvu, 
          cf) |>
   glimpse()
 ```
-
-    > Rows: 1
-    > Columns: 7
-    > $ hcpcs         <chr> "39503"
-    > $ description   <chr> "Repair of diaphragm hernia"
-    > $ work.rvu      <dbl> 108.91
-    > $ pe.rvu_nonfac <dbl> 35.14
-    > $ pe.rvu_fac    <dbl> 35.14
-    > $ mp.rvu        <dbl> 26.95
-    > $ cf            <dbl> 32.7442
 
 ``` r
 gpci() |> 
@@ -77,7 +67,7 @@ calc_amounts(wrvu  = 108.91,
 ```
 
     > Participating Amount:    $5,708.76
-    > Non-Particpating Amount: $6,236.82
+    > Non-Particpating Amount: $5,423.32
     > Limiting Charge:         $6,236.82
 
 ``` r
@@ -86,17 +76,9 @@ payment() |>
          carrier_no == "10212",
          locality   == "01") |> 
   select(hcpcs,
-         mac = carrier_no,
+         mac,
          locality,
-         fee_nonfac,
-         fee_fac) |> 
+         fee_nf,
+         fee_f) |> 
   glimpse()
 ```
-
-    > Rows: 1
-    > Columns: 5
-    > $ hcpcs      <chr> "39503"
-    > $ mac        <chr> "10212"
-    > $ locality   <chr> "01"
-    > $ fee_nonfac <dbl> 5708.76
-    > $ fee_fac    <dbl> 5708.76

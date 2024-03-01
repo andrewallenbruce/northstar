@@ -21,7 +21,7 @@ calc_nonpar_amount <- function(participating_amount) {
 
   stopifnot("`participating_amount` must be numeric" = is.numeric(participating_amount))
 
-  participating_amount * 1.0925
+  participating_amount * 0.95
 }
 
 #' Calculate Physician Fee Schedule Payment Amounts
@@ -63,7 +63,7 @@ calc_amounts <- function(wrvu,
   glue::glue("Participating Amount:    {gt::vec_fmt_currency(x$par)}\n",
              "Non-Particpating Amount: {gt::vec_fmt_currency(x$nonpar)}\n",
              "Limiting Charge:         {gt::vec_fmt_currency(x$limit)}",
-             par = x$par,
+             par    = x$par,
              nonpar = x$nonpar,
-             limit = x$limit)
+             limit  = x$limit)
 }
