@@ -39,8 +39,7 @@ library(dplyr)
 
 ```{r eval=FALSE}
 rvu() |> 
-  filter(status   == "A",
-         wrvu == max(wrvu, na.rm = TRUE)) |> 
+  filter(hcpcs == "11646") |> 
   select(hcpcs, 
          description,
          wrvu, 
@@ -54,25 +53,27 @@ rvu() |>
 ```{r}
 gpci() |> 
   filter(state    == "GA", 
-         locality == "01") |>
+         locality == "99") |>
+  select(-ftnote) |> 
   glimpse()
 ```
 
 ```{r}
-calc_amounts(wrvu  = 108.91,
-             prvu  = 35.14,
-             mrvu  = 26.95,
-             wgpci = 1.0,
-             pgpci = 0.997,
-             mgpci = 1.128,
-             cf    = 32.7442)
+calc_amounts(wrvu     = 6.26,
+             prvu_nf  = 7.92,
+             prvu_f   = 4.36,
+             mrvu     = 0.99,
+             wgpci    = 1.0,
+             pgpci    = 0.883,
+             mgpci    = 1.125,
+             cf       = 32.7442)
 ```
 
-```{r eval=FALSE}
+```{r}
 payment() |> 
-  filter(hcpcs      == "39503", 
-         carrier_no == "10212",
-         locality   == "01") |> 
+  filter(hcpcs    == "11646", 
+         mac      == "10212",
+         locality == "99") |> 
   select(hcpcs,
          mac,
          locality,

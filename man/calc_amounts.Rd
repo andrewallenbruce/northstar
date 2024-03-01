@@ -4,12 +4,14 @@
 \alias{calc_amounts}
 \title{Calculate Physician Fee Schedule Payment Amounts}
 \usage{
-calc_amounts(wrvu, prvu, mrvu, wgpci, pgpci, mgpci, cf)
+calc_amounts(wrvu, prvu_f, prvu_nf, mrvu, wgpci, pgpci, mgpci, cf)
 }
 \arguments{
 \item{wrvu}{numeric}
 
-\item{prvu}{numeric}
+\item{prvu_f}{numeric}
+
+\item{prvu_nf}{numeric}
 
 \item{mrvu}{numeric}
 
@@ -28,11 +30,12 @@ description
 Calculate Physician Fee Schedule Payment Amounts
 }
 \examples{
-calc_amounts(wrvu  = 108.91,
-             prvu  = 35.14,
-             mrvu  = 26.95,
-             wgpci = 1.0,
-             pgpci = 0.997,
-             mgpci = 1.128,
-             cf    = 32.7442)
+calc_amounts(wrvu     = 6.26,
+             prvu_nf  = 7.92,
+             prvu_f   = 4.36,
+             mrvu     = 0.99,
+             wgpci    = 1.0,
+             pgpci    = 0.883,
+             mgpci    = 1.125,
+             cf       = 32.7442)
 }

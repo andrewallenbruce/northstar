@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{rvu}
 \alias{rvu}
-\title{PFS RVU 2024}
+\title{2024 National Physician Fee Schedule Relative Value File}
 \usage{
 rvu()
 }
@@ -10,7 +10,7 @@ rvu()
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-PFS RVU 2024
+2024 National Physician Fee Schedule Relative Value File
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

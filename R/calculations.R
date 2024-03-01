@@ -26,7 +26,8 @@ calc_nonpar_amount <- function(participating_amount) {
 
 #' Calculate Physician Fee Schedule Payment Amounts
 #' @param wrvu numeric
-#' @param prvu numeric
+#' @param prvu_f numeric
+#' @param prvu_nf numeric
 #' @param mrvu numeric
 #' @param wgpci numeric
 #' @param pgpci numeric
@@ -34,16 +35,18 @@ calc_nonpar_amount <- function(participating_amount) {
 #' @param cf numeric
 #' @return description
 #' @examples
-#' calc_amounts(wrvu  = 108.91,
-#'              prvu  = 35.14,
-#'              mrvu  = 26.95,
-#'              wgpci = 1.0,
-#'              pgpci = 0.997,
-#'              mgpci = 1.128,
-#'              cf    = 32.7442)
+#' calc_amounts(wrvu     = 6.26,
+#'              prvu_nf  = 7.92,
+#'              prvu_f   = 4.36,
+#'              mrvu     = 0.99,
+#'              wgpci    = 1.0,
+#'              pgpci    = 0.883,
+#'              mgpci    = 1.125,
+#'              cf       = 32.7442)
 #' @export
 calc_amounts <- function(wrvu,
-                         prvu,
+                         prvu_f,
+                         prvu_nf,
                          mrvu,
                          wgpci,
                          pgpci,
@@ -51,19 +54,34 @@ calc_amounts <- function(wrvu,
                          cf) {
 
   stopifnot("all arguments must be numeric" = is.numeric(
-    c(wrvu, prvu, mrvu, wgpci, pgpci, mgpci, cf)))
+    c(wrvu, prvu_f, prvu_nf, mrvu, wgpci, pgpci, mgpci, cf)))
 
-  par_amt <- ((wrvu * wgpci) + (prvu * pgpci) + (mrvu * mgpci)) * cf
+  par_amt_f  <- ((wrvu * wgpci) + (prvu_f * pgpci) + (mrvu * mgpci)) * cf
+  par_amt_nf <- ((wrvu * wgpci) + (prvu_nf * pgpci) + (mrvu * mgpci)) * cf
 
-  x <- list(
-    par    = par_amt,
-    nonpar = calc_nonpar_amount(par_amt),
-    limit  = calc_limiting_charge(par_amt))
+  f <- list(
+    par    = par_amt_f,
+    nonpar = calc_nonpar_amount(par_amt_f),
+    limit  = calc_limiting_charge(par_amt_f))
 
-  glue::glue("Participating Amount:    {gt::vec_fmt_currency(x$par)}\n",
-             "Non-Particpating Amount: {gt::vec_fmt_currency(x$nonpar)}\n",
-             "Limiting Charge:         {gt::vec_fmt_currency(x$limit)}",
-             par    = x$par,
-             nonpar = x$nonpar,
-             limit  = x$limit)
+  nf <- list(
+    par    = par_amt_nf,
+    nonpar = calc_nonpar_amount(par_amt_nf),
+    limit  = calc_limiting_charge(par_amt_nf))
+
+  glue::glue("Facility:\n",
+             "Participating Amount    = {gt::vec_fmt_currency(parf)}\n",
+             "Non-Particpating Amount = {gt::vec_fmt_currency(nonparf)}\n",
+             "Limiting Charge         = {gt::vec_fmt_currency(limitf)}",
+             "\n\n",
+             "Non-Facility:\n",
+             "Participating Amount    = {gt::vec_fmt_currency(parnf)}\n",
+             "Non-Particpating Amount = {gt::vec_fmt_currency(nonparnf)}\n",
+             "Limiting Charge         = {gt::vec_fmt_currency(limitnf)}",
+             parf     = f$par,
+             nonparf  = f$nonpar,
+             limitf   = f$limit,
+             parnf    = nf$par,
+             nonparnf = nf$nonpar,
+             limitnf  = nf$limit)
 }

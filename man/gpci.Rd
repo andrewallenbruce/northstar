@@ -2,15 +2,23 @@
 % Please edit documentation in R/databases.R
 \name{gpci}
 \alias{gpci}
-\title{GPCIs 2024}
+\title{2024 Geographic Practice Cost Indices}
 \usage{
-gpci()
+gpci(
+  search = NULL,
+  col = c("mac", "state", "locality", "locality_name", "code")
+)
+}
+\arguments{
+\item{search}{description}
+
+\item{col}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-GPCIs 2024
+2024 Geographic Practice Cost Indices
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

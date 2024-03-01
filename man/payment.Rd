@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{payment}
 \alias{payment}
-\title{PFS Payment Amount 2024}
+\title{2024 Physician Fee Schedule Payment Amount File}
 \usage{
 payment()
 }
@@ -10,7 +10,7 @@ payment()
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-PFS Payment Amount 2024
+2024 Physician Fee Schedule Payment Amount File
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

@@ -1,4 +1,4 @@
-#' PFS RVU 2024
+#' 2024 National Physician Fee Schedule Relative Value File
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' rvu()
@@ -7,7 +7,7 @@ rvu <- function() {
   pins::pin_read(mount_board(), "rvu")
 }
 
-#' PFS Payment Amount 2024
+#' 2024 Physician Fee Schedule Payment Amount File
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' payment()
@@ -16,11 +16,23 @@ payment <- function() {
   pins::pin_read(mount_board(), "pymt")
 }
 
-#' GPCIs 2024
+#' 2024 Geographic Practice Cost Indices
+#' @param search description
+#' @param col description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' gpci()
 #' @export
-gpci <- function() {
-  pins::pin_read(mount_board(), "gpci")
+gpci <- function(search = NULL,
+                 col = c("mac",
+                         "state",
+                         "locality",
+                         "locality_name",
+                         "code")) {
+
+  gpci <- pins::pin_read(mount_board(), "gpci")
+  col <- match.arg(col)
+
+  if (!is.null(search)) gpci <- srchcol(gpci, col = col, search = search, ignore = TRUE)
+  return(gpci)
 }
