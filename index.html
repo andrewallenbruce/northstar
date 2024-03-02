@@ -89,22 +89,31 @@
 <span>         <span class="va">mrvu</span>, </span>
 <span>         <span class="va">cf</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">7</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">6.26</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> prvu_nf     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">7.92</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> prvu_f      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">4.36</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.99</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cf          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">32.7442</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gpci.html">gpci</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">state</span>    <span class="op">==</span> <span class="st">"GA"</span>, </span>
 <span>         <span class="va">locality</span> <span class="op">==</span> <span class="st">"99"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">ftnote</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">7</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac           <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state         <span class="sc">&lt;</span>fct<span class="sc">&gt;</span> GA</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality_name <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REST OF GEORGIA"</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci         <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci         <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.883</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci         <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.125</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">7</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac           <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state         <span class="sc">&lt;</span>fct<span class="sc">&gt;</span> GA</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality_name <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REST OF GEORGIA"</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci         <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci         <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.883</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci         <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.125</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calc_amounts.html">calc_amounts</a></span><span class="op">(</span>wrvu     <span class="op">=</span> <span class="fl">6.26</span>,</span>
 <span>             prvu_nf  <span class="op">=</span> <span class="fl">7.92</span>,</span>
 <span>             prvu_f   <span class="op">=</span> <span class="fl">4.36</span>,</span>
@@ -113,16 +122,16 @@
 <span>             pgpci    <span class="op">=</span> <span class="fl">0.883</span>,</span>
 <span>             mgpci    <span class="op">=</span> <span class="fl">1.125</span>,</span>
 <span>             cf       <span class="op">=</span> <span class="fl">32.7442</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility<span class="sc">:</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">367.51</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">349.13</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">401.50</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="sc">&gt;</span> </span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility<span class="sc">:</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">470.44</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">446.92</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">513.96</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility<span class="sc">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">367.51</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">349.13</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">401.50</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility<span class="sc">:</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">470.44</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">446.92</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">513.96</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/payment.html">payment</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">hcpcs</span>    <span class="op">==</span> <span class="st">"11646"</span>, </span>
 <span>         <span class="va">mac</span>      <span class="op">==</span> <span class="st">"10212"</span>,</span>
@@ -133,13 +142,13 @@
 <span>         <span class="va">fee_nf</span>,</span>
 <span>         <span class="va">fee_f</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">5</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_nf   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">470.44</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_f    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">367.51</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">5</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_nf   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">470.44</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_f    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">367.51</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
