@@ -36,3 +36,12 @@ gpci <- function(search = NULL,
   if (!is.null(search)) gpci <- srchcol(gpci, col = col, search = search, ignore = TRUE)
   return(gpci)
 }
+
+#' 2024 Healthcare Common Procedure Coding System (HCPCS)
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' hcpcs()
+#' @export
+hcpcs <- function() {
+  pins::pin_read(mount_board(), "hcpcs")
+}

@@ -38,6 +38,16 @@ rvu() |>
   glimpse()
 ```
 
+    > Rows: 1
+    > Columns: 7
+    > $ hcpcs       <chr> "11646"
+    > $ description <chr> "Exc f/e/e/n/l mal+mrg >4 cm"
+    > $ wrvu        <dbl> 6.26
+    > $ prvu_nf     <dbl> 7.92
+    > $ prvu_f      <dbl> 4.36
+    > $ mrvu        <dbl> 0.99
+    > $ cf          <dbl> 32.7442
+
 ``` r
 gpci() |> 
   filter(state    == "GA", 

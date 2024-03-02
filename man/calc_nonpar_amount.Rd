@@ -16,5 +16,5 @@ description
 Calculate Non-Participating Amount
 }
 \examples{
-calc_limiting_charge(26.35)
+calc_nonpar_amount(26.35)
 }

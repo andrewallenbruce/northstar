@@ -15,7 +15,7 @@ calc_limiting_charge <- function(participating_amount) {
 #' @param participating_amount numeric
 #' @return description
 #' @examples
-#' calc_limiting_charge(26.35)
+#' calc_nonpar_amount(26.35)
 #' @export
 calc_nonpar_amount <- function(participating_amount) {
 

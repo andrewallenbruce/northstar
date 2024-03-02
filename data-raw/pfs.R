@@ -47,10 +47,84 @@ rvu <- read_excel(rvu_xl, col_types = "text") |>
     prvu_f_opps  = facility_pe_used_for_opps_payment_amount,
     mrvu_opps    = mp_used_for_opps_payment_amount)
 
+rvu <- rvu |>
+  mutate(
+    nf_ind_na   = ifelse(!is.na(nf_ind_na), 1, 0),
+    f_ind_na    = ifelse(!is.na(f_ind_na), 1, 0),
+    notused     = ifelse(!is.na(notused), 1, 0),
+    mod         = ifelse(is.na(mod), "00", mod),
+    dximgfm_ind = ifelse(dximgfm_ind == "88", 1, 0),
+    nf_ind_na   = as.integer(nf_ind_na),
+    f_ind_na    = as.integer(f_ind_na),
+    notused     = as.integer(notused),
+    mult_proc   = as.integer(mult_proc),
+    bilat_surg  = as.integer(bilat_surg),
+    asst_surg   = as.integer(asst_surg),
+    co_surg     = as.integer(co_surg),
+    team_surg   = as.integer(team_surg)
+  ) |>
+  rename(
+    nf_rare      = nf_ind_na,
+    f_rare       = f_ind_na,
+    nf_total     = total_nf,
+    f_total      = total_f,
+    unused       = notused,
+    nf_prvu      = prvu_nf,
+    f_prvu       = prvu_f,
+    nf_prvu_opps = prvu_nf_opps,
+    f_prvu_opps  = prvu_f_opps,
+    global       = glob_days,
+    op_pre       = pre_op,
+    op_intra     = intra_op,
+    op_post      = post_op,
+    surg_bilat   = bilat_surg,
+    surg_asst    = asst_surg,
+    surg_co      = co_surg,
+    surg_team    = team_surg,
+    dximg        = dximgfm_ind,
+    supvis       = phys_dxpx,
+  ) |>
+  filter(!is.na(calc)) |>
+  mutate(calc = NULL)
+
 # [18,500 x 31]
 
+# HCPCS Level 1
+# Category I: numbers only, except for G0402, G0438, G0439
+# Category II: 5 digits, ending in F
+# Category III: 5 digits, ending in T
+#
+# HCPCS Level 2
+# Level II codes are composed of a single letter [A-V], followed by 4 digits.
+# A = Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental
+lk_lvl2 <- c(
+  "A" = "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
+  "B" = "Enteral and Parenteral Therapy",
+  "C" = "Temporary Hospital Outpatient Prospective Payment System",
+  "D" = "Dental Procedures",
+  "E" = "Durable Medical Equipment",
+  "G" = "Temporary Procedures & Professional Services",
+  "H" = "Rehabilitative Services",
+  "J" = "Drugs Administered Other Than Oral Method, Chemotherapy Drugs",
+  "K" = "Temporary Codes for Durable Medical Equipment Regional Carriers",
+  "L" = "Orthotic/Prosthetic Procedures",
+  "M" = "Medical Services",
+  "P" = "Pathology and Laboratory",
+  "Q" = "Temporary Codes",
+  "R" = "Diagnostic Radiology Services",
+  "S" = "Private Payer Codes",
+  "T" = "State Medicaid Agency Codes",
+  "V" = "Vision/Hearing Services"
+)
+
 rvu |>
-  filter(hcpcs == "A0021")
+  mutate(hcpcs_letters = str_detect(hcpcs, regex("[A-Z]"))) |>
+  # mutate(level2 = str_detect(hcpcs, regex("^[A-Z]"))) |>
+  # mutate(level2 = str_detect(hcpcs, regex("[A-Z]$"))) |>
+  # mutate(cpt = str_detect(hcpcs, regex("^[0-9]"))) |>
+  filter(hcpcs_letters == TRUE) |>
+  slice(3000:5000)
+  glimpse()
 
 # ANNUAL PHYSICIAN FEE SCHEDULE PAYMENT AMOUNT FILE
 # pfs_pay_xl <- here::here("data/PFREV24A_0/PFALL24.csv")
@@ -100,15 +174,16 @@ gpci <- read_excel(gpci_xl, col_types = "text") |>
   filter(!is.na(state)) |>
   rename(mac = medicare_administrative_contractor_mac,
          locality = locality_number,
+         name = locality_name,
          wgpci = x2024_pw_gpci_with_1_0_floor,
          pgpci = x2024_pe_gpci,
-         mgpci = x2024_mp_gpci
-  ) |>
+         mgpci = x2024_mp_gpci) |>
   mutate(across(contains("gpci"), readr::parse_number)) |>
-  mutate(ftnote = str_extract_all(locality_name, fixed("*")),
-         locality_name = str_remove_all(locality_name, fixed("*")),
+  mutate(ftnote = str_extract_all(name, fixed("*")),
+         name = str_remove_all(name, fixed("*")),
          state = fct(state)) |>
-  unnest(ftnote, keep_empty = TRUE)
+  unnest(ftnote, keep_empty = TRUE) |>
+  select(-ftnote)
 
 # [114 x 8]
 gpci

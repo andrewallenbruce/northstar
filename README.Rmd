@@ -37,7 +37,7 @@ library(dplyr)
 ```
 
 
-```{r eval=FALSE}
+```{r}
 rvu() |> 
   filter(hcpcs == "11646") |> 
   select(hcpcs, 
