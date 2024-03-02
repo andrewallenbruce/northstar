@@ -1,39 +1,58 @@
 #' 2024 National Physician Fee Schedule Relative Value File
+#' @param hcpcs description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' rvu()
+#' rvu(hcpcs = "11646")
 #' @export
-rvu <- function() {
-  pins::pin_read(mount_board(), "rvu")
+rvu <- function(hcpcs = NULL) {
+
+  rvu <- pins::pin_read(mount_board(), "rvu")
+
+  if (!is.null(hcpcs)) {rvu <- vctrs::vec_slice(rvu, rvu$hcpcs == hcpcs)}
+
+  return(rvu)
 }
 
 #' 2024 Physician Fee Schedule Payment Amount File
+#' @param hcpcs description
+#' @param mac description
+#' @param locality description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' payment()
+#' payment(hcpcs = "11646", locality = "01", mac = "10212")
 #' @export
-payment <- function() {
-  pins::pin_read(mount_board(), "pymt")
+payment <- function(hcpcs = NULL,
+                    mac = NULL,
+                    locality = NULL) {
+
+  pmt <- pins::pin_read(mount_board(), "pymt")
+
+  if (!is.null(hcpcs))    {pmt <- vctrs::vec_slice(pmt, pmt$hcpcs == hcpcs)}
+  if (!is.null(mac))      {pmt <- vctrs::vec_slice(pmt, pmt$mac == mac)}
+  if (!is.null(locality)) {pmt <- vctrs::vec_slice(pmt, pmt$locality == locality)}
+
+  return(pmt)
+
 }
 
 #' 2024 Geographic Practice Cost Indices
-#' @param search description
-#' @param col description
+#' @param mac description
+#' @param state description
+#' @param locality description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' gpci()
+#' gpci(state = "GA", locality = "01", mac = "10212")
 #' @export
-gpci <- function(search = NULL,
-                 col = c("mac",
-                         "state",
-                         "locality",
-                         "locality_name",
-                         "code")) {
+gpci <- function(mac = NULL,
+                 state = NULL,
+                 locality = NULL) {
 
   gpci <- pins::pin_read(mount_board(), "gpci")
-  col <- match.arg(col)
 
-  if (!is.null(search)) gpci <- srchcol(gpci, col = col, search = search, ignore = TRUE)
+  if (!is.null(mac))      {gpci <- vctrs::vec_slice(gpci, gpci$mac == mac)}
+  if (!is.null(state))    {gpci <- vctrs::vec_slice(gpci, gpci$state == state)}
+  if (!is.null(locality)) {gpci <- vctrs::vec_slice(gpci, gpci$locality == locality)}
+
   return(gpci)
 }
 

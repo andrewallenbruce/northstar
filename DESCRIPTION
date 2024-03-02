@@ -19,7 +19,8 @@ Imports:
    pins,
    rlang,
    stringr,
-   glue
+   glue,
+   vctrs
 Suggests:
    gt
 

@@ -4,15 +4,14 @@
 \alias{gpci}
 \title{2024 Geographic Practice Cost Indices}
 \usage{
-gpci(
-  search = NULL,
-  col = c("mac", "state", "locality", "locality_name", "code")
-)
+gpci(mac = NULL, state = NULL, locality = NULL)
 }
 \arguments{
-\item{search}{description}
+\item{mac}{description}
 
-\item{col}{description}
+\item{state}{description}
+
+\item{locality}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -22,6 +21,6 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-gpci()
+gpci(state = "GA", locality = "01", mac = "10212")
 \dontshow{\}) # examplesIf}
 }

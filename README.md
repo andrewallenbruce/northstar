@@ -26,16 +26,16 @@ library(dplyr)
 ```
 
 ``` r
-rvu() |> 
-  filter(hcpcs == "11646") |> 
+rvu <- rvu(hcpcs = "11646") |> 
   select(hcpcs, 
          description,
          wrvu, 
          prvu_nf, 
          prvu_f, 
          mrvu, 
-         cf) |>
-  glimpse()
+         cf)
+
+rvu |> glimpse()
 ```
 
     > Rows: 1
@@ -49,32 +49,33 @@ rvu() |>
     > $ cf          <dbl> 32.7442
 
 ``` r
-gpci() |> 
-  filter(state    == "GA", 
-         locality == "99") |>
-  select(-ftnote) |> 
-  glimpse()
+gp <- gpci(
+  state    = "GA",
+  locality = "99",
+  mac      = "10212")
+
+gp |> glimpse()
 ```
 
     > Rows: 1
     > Columns: 7
-    > $ mac           <chr> "10212"
-    > $ state         <fct> GA
-    > $ locality      <chr> "99"
-    > $ locality_name <chr> "REST OF GEORGIA"
-    > $ wgpci         <dbl> 1
-    > $ pgpci         <dbl> 0.883
-    > $ mgpci         <dbl> 1.125
+    > $ mac      <chr> "10212"
+    > $ state    <fct> GA
+    > $ locality <chr> "99"
+    > $ name     <chr> "REST OF GEORGIA"
+    > $ wgpci    <dbl> 1
+    > $ pgpci    <dbl> 0.883
+    > $ mgpci    <dbl> 1.125
 
 ``` r
-calc_amounts(wrvu     = 6.26,
-             prvu_nf  = 7.92,
-             prvu_f   = 4.36,
-             mrvu     = 0.99,
-             wgpci    = 1.0,
-             pgpci    = 0.883,
-             mgpci    = 1.125,
-             cf       = 32.7442)
+calc_amounts(wrvu     = rvu$wrvu,
+             prvu_nf  = rvu$prvu_nf,
+             prvu_f   = rvu$prvu_f,
+             mrvu     = rvu$mrvu,
+             cf       = rvu$cf,
+             wgpci    = gp$wgpci,
+             pgpci    = gp$pgpci,
+             mgpci    = gp$mgpci)
 ```
 
     > Facility:
@@ -88,10 +89,9 @@ calc_amounts(wrvu     = 6.26,
     > Limiting Charge         = $513.96
 
 ``` r
-payment() |> 
-  filter(hcpcs    == "11646", 
-         mac      == "10212",
-         locality == "99") |> 
+payment(hcpcs    = "11646", 
+        mac      = "10212",
+        locality = "99") |> 
   select(hcpcs,
          mac,
          locality,

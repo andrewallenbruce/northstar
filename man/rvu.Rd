@@ -4,7 +4,10 @@
 \alias{rvu}
 \title{2024 National Physician Fee Schedule Relative Value File}
 \usage{
-rvu()
+rvu(hcpcs = NULL)
+}
+\arguments{
+\item{hcpcs}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -14,6 +17,6 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-rvu()
+rvu(hcpcs = "11646")
 \dontshow{\}) # examplesIf}
 }
