@@ -8,17 +8,18 @@
 
 The goal of **northstar** is to …
 
-## Installation
+## :package: Installation
 
-You can install the development version of **northstar** from
-[GitHub](https://github.com/) with:
+You can install **northstar** from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
 pak::pak("andrewallenbruce/northstar")
 ```
 
-## Example: Payment Amount Calculation
+## :beginner: Usage
+
+**Fee Schedule Calculation**
 
 ``` r
 library(northstar)

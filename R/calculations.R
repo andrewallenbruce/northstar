@@ -43,6 +43,7 @@ calc_nonpar_amount <- function(participating_amount) {
 #'              pgpci    = 0.883,
 #'              mgpci    = 1.125,
 #'              cf       = 32.7442)
+#' @autoglobal
 #' @export
 calc_amounts <- function(wrvu,
                          prvu_f,

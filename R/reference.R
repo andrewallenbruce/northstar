@@ -13,6 +13,7 @@ global_days <- function() {
     "Code is related to another service and is always included in the global period of the other service."))
 }
 
+#' @autoglobal
 #' @noRd
 status_codes <- function() {
 

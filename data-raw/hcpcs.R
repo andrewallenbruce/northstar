@@ -38,6 +38,34 @@ coverage <- c(
   "S" = "Non-Covered by Medicare Statute"
 )
 
+# HCPCS Level 1
+# Category I: numbers only, except for G0402, G0438, G0439
+# Category II: 5 digits, ending in F
+# Category III: 5 digits, ending in T
+#
+# HCPCS Level 2
+# Level II codes are composed of a single letter [A-V], followed by 4 digits.
+# A = Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental
+lk_lvl2 <- c(
+  "A" = "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
+  "B" = "Enteral and Parenteral Therapy",
+  "C" = "Temporary Hospital Outpatient Prospective Payment System",
+  "D" = "Dental Procedures",
+  "E" = "Durable Medical Equipment",
+  "G" = "Temporary Procedures & Professional Services",
+  "H" = "Rehabilitative Services",
+  "J" = "Drugs Administered Other Than Oral Method, Chemotherapy Drugs",
+  "K" = "Temporary Codes for Durable Medical Equipment Regional Carriers",
+  "L" = "Orthotic/Prosthetic Procedures",
+  "M" = "Medical Services",
+  "P" = "Pathology and Laboratory",
+  "Q" = "Temporary Codes",
+  "R" = "Diagnostic Radiology Services",
+  "S" = "Private Payer Codes",
+  "T" = "State Medicaid Agency Codes",
+  "V" = "Vision/Hearing Services"
+)
+
 # BETOS
 betos <- c("D1A" = "Medical/surgical supplies",
   "D1B" = "Hospital beds",

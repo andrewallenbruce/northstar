@@ -21,8 +21,8 @@ rvu <- function(hcpcs = NULL) {
 #' @examplesIf interactive()
 #' payment(hcpcs = "11646", locality = "01", mac = "10212")
 #' @export
-payment <- function(hcpcs = NULL,
-                    mac = NULL,
+payment <- function(hcpcs    = NULL,
+                    mac      = NULL,
                     locality = NULL) {
 
   pmt <- pins::pin_read(mount_board(), "pymt")
@@ -43,8 +43,8 @@ payment <- function(hcpcs = NULL,
 #' @examplesIf interactive()
 #' gpci(state = "GA", locality = "01", mac = "10212")
 #' @export
-gpci <- function(mac = NULL,
-                 state = NULL,
+gpci <- function(mac      = NULL,
+                 state    = NULL,
                  locality = NULL) {
 
   gpci <- pins::pin_read(mount_board(), "gpci")
@@ -63,4 +63,13 @@ gpci <- function(mac = NULL,
 #' @export
 hcpcs <- function() {
   pins::pin_read(mount_board(), "hcpcs")
+}
+
+#' 2023 CPT Descriptors (Clinician & Consumer-Friendly)
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' cpt_descriptors()
+#' @export
+cpt_descriptors <- function() {
+  pins::pin_read(mount_board(), "cpt_descriptors")
 }

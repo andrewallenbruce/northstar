@@ -1,3 +1,5 @@
+cpt_descriptors:
+- cpt_descriptors/20240304T194107Z-f2132/
 gpci:
 - gpci/20240302T201334Z-94cfd/
 hcpcs:
@@ -5,4 +7,4 @@ hcpcs:
 pymt:
 - pymt/20240301T191527Z-8e4f8/
 rvu:
-- rvu/20240301T191525Z-74e8b/
+- rvu/20240304T192950Z-faa59/

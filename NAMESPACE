@@ -3,6 +3,7 @@
 export(calc_amounts)
 export(calc_limiting_charge)
 export(calc_nonpar_amount)
+export(cpt_descriptors)
 export(gpci)
 export(hcpcs)
 export(payment)

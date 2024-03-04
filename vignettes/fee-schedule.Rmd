@@ -1,43 +1,31 @@
 ---
-output: github_document
+title: "Fee Schedule"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fee Schedule}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = FALSE,
-  comment = ">",
-  fig.path = "man/figures/README-",
+  collapse  = FALSE,
+  echo      = TRUE,
+  message   = TRUE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "",
+  dpi       = 600, 
   out.width = "100%"
-)
+  )
 ```
 
-# northstar
-
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of **northstar** is to ...
-
-## :package: Installation
-
-You can install **northstar** from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("pak")
-pak::pak("andrewallenbruce/northstar")
-```
-
-## :beginner: Usage
-
-__Fee Schedule Calculation__
-
-```{r example, warning=FALSE, message=FALSE}
+```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
 ```
 
+# Fee Schedule Calculation
 
 ```{r}
 rvu <- rvu(hcpcs = "11646") |> 
