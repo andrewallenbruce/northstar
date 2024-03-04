@@ -25,6 +25,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_amounts.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/calc_amounts_df.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_limiting_charge.html</loc>
   </url>
   <url>
@@ -46,7 +49,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/payment.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/pfs.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/rvu.html</loc>
