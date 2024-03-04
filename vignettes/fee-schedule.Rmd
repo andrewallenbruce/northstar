@@ -25,6 +25,16 @@ library(northstar)
 library(dplyr)
 ```
 
+## Return Information about HCPCS Code
+
+```{r}
+calc_amounts_df(hcpcs    = "11646", 
+                state    = "GA", 
+                locality = "99", 
+                mac      = "10212") |> 
+  glimpse()
+```
+
 # Fee Schedule Calculation
 
 ```{r}

@@ -86,3 +86,49 @@ calc_amounts <- function(wrvu,
              nonparnf = nf$nonpar,
              limitnf  = nf$limit)
 }
+
+#' Calculate Physician Fee Schedule Payment Amounts
+#' @param hcpcs numeric
+#' @param state numeric
+#' @param locality numeric
+#' @param mac numeric
+#' @return description
+#' @examples
+#' calc_amounts_df(hcpcs = "11646",
+#'                 state = "GA",
+#'                 locality = "99",
+#'                 mac = "10212")
+#' @autoglobal
+#' @export
+calc_amounts_df <- function(hcpcs, state, locality, mac) {
+
+  rvu <- rvu(hcpcs = hcpcs) |>
+    dplyr::rename(mod_rvu = mod,
+                  status_rvu = status)
+
+  rvu$cf <- as.double(rvu$cf)
+
+  gp <- gpci(
+    state    = state,
+    locality = locality,
+    mac      = mac)
+
+  fs <- pfs(
+    hcpcs = hcpcs,
+    locality = locality,
+    mac = mac) |>
+    dplyr::rename(mod_pfs = mod,
+                  status_pfs = status)
+
+  vctrs::vec_cbind(rvu, gp) |>
+    dplyr::left_join(fs,
+    by = dplyr::join_by(hcpcs, mac, locality)) |>
+    dplyr::mutate(
+      par_amt_f  = ((wrvu * wgpci) + (f_prvu * pgpci) + (mrvu * mgpci)) * cf,
+      par_amt_nf = ((wrvu * wgpci) + (nf_prvu * pgpci) + (mrvu * mgpci)) * cf,
+      nonpar_amt_f = calc_nonpar_amount(par_amt_f),
+      nonpar_amt_nf = calc_nonpar_amount(par_amt_nf),
+      limit_f = calc_limiting_charge(par_amt_f),
+      limit_nf = calc_limiting_charge(par_amt_nf))
+
+}

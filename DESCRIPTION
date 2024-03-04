@@ -27,7 +27,8 @@ Suggests:
     gt,
     knitr,
     rmarkdown,
-    roxyglobals
+    roxyglobals,
+    qs
 VignetteBuilder: knitr
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE

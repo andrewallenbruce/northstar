@@ -19,11 +19,11 @@ rvu <- function(hcpcs = NULL) {
 #' @param locality description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' payment(hcpcs = "11646", locality = "01", mac = "10212")
+#' pfs(hcpcs = "11646", locality = "01", mac = "10212")
 #' @export
-payment <- function(hcpcs    = NULL,
-                    mac      = NULL,
-                    locality = NULL) {
+pfs <- function(hcpcs    = NULL,
+                mac      = NULL,
+                locality = NULL) {
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
