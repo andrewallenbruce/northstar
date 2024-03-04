@@ -84,6 +84,8 @@ rvu <- read_excel(rvu_xl, col_types = "text") |>
   mutate(calc = NULL,
          cf = format(32.7442, digits = 5))
 
+rvu$cf <- as.double(rvu$cf)
+
 # [18,499 x 31]
 
 rvu |>

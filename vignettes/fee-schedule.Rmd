@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
+library(qs)
 ```
 
 ## Return Information about HCPCS Code
