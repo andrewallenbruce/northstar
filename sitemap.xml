@@ -7,10 +7,19 @@
     <loc>https://andrewallenbruce.github.io/northstar/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/articles/fee-schedule.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/authors.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/news/index.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_amounts.html</loc>
@@ -20,6 +29,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_nonpar_amount.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/cpt_descriptors.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/gpci.html</loc>
