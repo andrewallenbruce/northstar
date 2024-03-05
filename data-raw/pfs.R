@@ -16,32 +16,35 @@ names(pfs_pay) <- c(
   "mac",
   "locality",
   "hcpcs",
-  "mod",
+  "mod_pfs",
   "fee_nf", # "non_fac_fee_sched_amount"
   "fee_f", # "facility_fee_sched_amount"
   "pctc",
-  "status",
-  "mult_surg",
-  "therapy_nf", # "therapy_reduction_nonfac"
-  "flatfee_visit", # flat_visit_fee
-  "therapy_f", # "therapy_reduction_fac"
+  "status_pfs",
+  "mult_surg_pfs",
+  "ther_nf", # "therapy_reduction_nonfac"
+  "flat_vis", # flat_visit_fee
+  "ther_f", # "therapy_reduction_fac"
   "opps", # "opps_indicator"
   "opps_nf",
   "opps_f"
 )
 
 pfs_pay <- pfs_pay |>
-  mutate(across(c(
-    year,
-    contains("fee"),
-    contains("therapy"),
-    contains("opps_")),
+  mutate(across(
+    c(
+      year,
+      contains("fee"),
+      contains("ther_"),
+      contains("opps_"),
+      flat_vis
+    ),
     readr::parse_number)) |>
   select(-pctc)
 
 # [990,482 x 15]
 pfs_pay |>
-  filter(hcpcs == "A0021")
+  filter(hcpcs == "11646")
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))

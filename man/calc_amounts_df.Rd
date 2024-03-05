@@ -22,8 +22,10 @@ description
 Calculate Physician Fee Schedule Payment Amounts
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 calc_amounts_df(hcpcs = "11646",
                 state = "GA",
                 locality = "99",
                 mac = "10212")
+\dontshow{\}) # examplesIf}
 }

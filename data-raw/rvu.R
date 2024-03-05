@@ -23,79 +23,111 @@ rvu <- read_excel(rvu_xl, col_types = "text") |>
                   post_op,
                   non_facility_pe_used_for_opps_payment_amount,
                   facility_pe_used_for_opps_payment_amount,
-                  mp_used_for_opps_payment_amount), readr::parse_number)) |>
+                  mp_used_for_opps_payment_amount),
+                readr::parse_number)) |>
+  mutate(
+    non_fac_na_indicator                = ifelse(!is.na(non_fac_na_indicator), 1, 0),
+    facility_na_indicator               = ifelse(!is.na(facility_na_indicator), 1, 0),
+    not_used_for_medicare_payment       = ifelse(!is.na(not_used_for_medicare_payment), 1, 0),
+    mod                                 = ifelse(is.na(mod), "00", mod),
+    diagnostic_imaging_family_indicator = ifelse(diagnostic_imaging_family_indicator == "88", 1, 0),
+    non_fac_na_indicator                = as.integer(non_fac_na_indicator),
+    facility_na_indicator               = as.integer(facility_na_indicator),
+    not_used_for_medicare_payment       = as.integer(not_used_for_medicare_payment),
+    mult_proc                           = as.integer(mult_proc),
+    bilat_surg                          = as.integer(bilat_surg),
+    asst_surg                           = as.integer(asst_surg),
+    co_surg                             = as.integer(co_surg),
+    team_surg                           = as.integer(team_surg)
+  ) |>
+  unite(rare, c("non_fac_na_indicator",
+                "facility_na_indicator"),
+        sep = "",
+        remove = TRUE) |>
   rename(
-    status       = status_code,
-    notused      = not_used_for_medicare_payment,
+    status_rvu   = status_code,
+    mod_rvu      = mod,
+    unused       = not_used_for_medicare_payment,
     wrvu         = work_rvu,
-    prvu_nf      = non_fac_pe_rvu,
-    prvu_f       = facility_pe_rvu,
-    nf_ind_na    = non_fac_na_indicator,
-    f_ind_na     = facility_na_indicator,
+    nf_prvu      = non_fac_pe_rvu,
+    f_prvu       = facility_pe_rvu,
     mrvu         = mp_rvu,
-    total_nf     = non_facility_total,
-    total_f      = facility_total,
+    nf_total     = non_facility_total,
+    f_total      = facility_total,
     pctc         = pctc_ind,
     endo         = endo_base,
     cf           = conv_factor,
-    phys_dxpx    = physician_supervision_of_diagnostic_procedures,
-    calc         = calculation_flag,
-    dximgfm_ind  = diagnostic_imaging_family_indicator,
-    prvu_nf_opps = non_facility_pe_used_for_opps_payment_amount,
-    prvu_f_opps  = facility_pe_used_for_opps_payment_amount,
-    mrvu_opps    = mp_used_for_opps_payment_amount) |>
-  mutate(
-    nf_ind_na   = ifelse(!is.na(nf_ind_na), 1, 0),
-    f_ind_na    = ifelse(!is.na(f_ind_na), 1, 0),
-    notused     = ifelse(!is.na(notused), 1, 0),
-    mod         = ifelse(is.na(mod), "00", mod),
-    dximgfm_ind = ifelse(dximgfm_ind == "88", 1, 0),
-    nf_ind_na   = as.integer(nf_ind_na),
-    f_ind_na    = as.integer(f_ind_na),
-    notused     = as.integer(notused),
-    mult_proc   = as.integer(mult_proc),
-    bilat_surg  = as.integer(bilat_surg),
-    asst_surg   = as.integer(asst_surg),
-    co_surg     = as.integer(co_surg),
-    team_surg   = as.integer(team_surg)
-  ) |>
-  rename(
-    nf_rare      = nf_ind_na,
-    f_rare       = f_ind_na,
-    nf_total     = total_nf,
-    f_total      = total_f,
-    unused       = notused,
-    nf_prvu      = prvu_nf,
-    f_prvu       = prvu_f,
-    nf_prvu_opps = prvu_nf_opps,
-    f_prvu_opps  = prvu_f_opps,
+    supvis       = physician_supervision_of_diagnostic_procedures,
+    dximg        = diagnostic_imaging_family_indicator,
+    nf_prvu_opps = non_facility_pe_used_for_opps_payment_amount,
+    f_prvu_opps  = facility_pe_used_for_opps_payment_amount,
+    mrvu_opps    = mp_used_for_opps_payment_amount,
     global       = glob_days,
     op_pre       = pre_op,
     op_intra     = intra_op,
     op_post      = post_op,
+    mult_proc_rvu    = mult_proc,
     surg_bilat   = bilat_surg,
     surg_asst    = asst_surg,
     surg_co      = co_surg,
-    surg_team    = team_surg,
-    dximg        = dximgfm_ind,
-    supvis       = phys_dxpx,
-  ) |>
-  filter(!is.na(calc)) |>
-  mutate(calc = NULL,
-         cf = format(32.7442, digits = 5))
+    surg_team    = team_surg) |>
+  filter(!is.na(calculation_flag)) |>
+  mutate(calculation_flag = NULL,
+         cf = format(32.7442, digits = 5),
+         nf_total = NULL,
+         f_total = NULL) |>
+  mutate(op_ind = op_pre + op_intra + op_post, .before = op_pre)
 
 rvu$cf <- as.double(rvu$cf)
 
-# [18,499 x 31]
+rvu <- rvu |>
+  select(
+    hcpcs,
+    description,
+    mod_rvu,
+    status_rvu,
+    wrvu,
+    nf_prvu,
+    f_prvu,
+    mrvu,
+    cf,
+    nf_prvu_opps,
+    f_prvu_opps,
+    mrvu_opps,
+    global,
+    op_ind,
+    op_pre,
+    op_intra,
+    op_post,
+    pctc,
+    mult_proc_rvu,
+    surg_bilat,
+    surg_asst,
+    surg_co,
+    surg_team,
+    endo,
+    supvis,
+    dximg,
+    unused,
+    rare
+    )
+
+# [18,499 x 28]
+
+
+rvu |> select(cf) # [non_fac, facility]
 
 rvu |>
-  mutate(hcpcs_letters = str_detect(hcpcs, regex("[A-Z]"))) |>
-  # mutate(level2 = str_detect(hcpcs, regex("^[A-Z]"))) |>
-  # mutate(level2 = str_detect(hcpcs, regex("[A-Z]$"))) |>
-  # mutate(cpt = str_detect(hcpcs, regex("^[0-9]"))) |>
-  filter(hcpcs_letters == TRUE) |>
-  slice(3000:5000)
+  mutate(rare = case_match(rare,
+                           "00" ~ "Neither",
+                           "10" ~ "Non-Facility",
+                           "01" ~ "Facility",
+                           "11" ~ "Both"),
+    rare = factor(rare,
+                  levels = c("Neither", "Non-Facility", "Facility", "Both"))
+    )
 
+rvu |> count(supvis)
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))

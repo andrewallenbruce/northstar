@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
-  comment   = "",
+  comment   = ">",
   dpi       = 600, 
   out.width = "100%"
   )
@@ -43,8 +43,8 @@ rvu <- rvu(hcpcs = "11646") |>
   select(hcpcs, 
          description,
          wrvu, 
-         prvu_nf, 
-         prvu_f, 
+         nf_prvu, 
+         f_prvu, 
          mrvu, 
          cf)
 
@@ -62,8 +62,8 @@ gp |> glimpse()
 
 ```{r}
 calc_amounts(wrvu     = rvu$wrvu,
-             prvu_nf  = rvu$prvu_nf,
-             prvu_f   = rvu$prvu_f,
+             prvu_nf  = rvu$nf_prvu,
+             prvu_f   = rvu$f_prvu,
              mrvu     = rvu$mrvu,
              cf       = rvu$cf,
              wgpci    = gp$wgpci,
@@ -72,9 +72,9 @@ calc_amounts(wrvu     = rvu$wrvu,
 ```
 
 ```{r}
-payment(hcpcs    = "11646", 
-        mac      = "10212",
-        locality = "99") |> 
+pfs(hcpcs    = "11646", 
+    mac      = "10212",
+    locality = "99") |> 
   select(hcpcs,
          mac,
          locality,
@@ -82,3 +82,4 @@ payment(hcpcs    = "11646",
          fee_f) |> 
   glimpse()
 ```
+

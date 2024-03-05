@@ -93,7 +93,7 @@ calc_amounts <- function(wrvu,
 #' @param locality numeric
 #' @param mac numeric
 #' @return description
-#' @examples
+#' @examplesIf interactive()
 #' calc_amounts_df(hcpcs = "11646",
 #'                 state = "GA",
 #'                 locality = "99",
@@ -102,11 +102,9 @@ calc_amounts <- function(wrvu,
 #' @export
 calc_amounts_df <- function(hcpcs, state, locality, mac) {
 
-  rvu <- rvu(hcpcs = hcpcs) |>
-    dplyr::rename(mod_rvu = mod,
-                  status_rvu = status)
+  cf <- 32.7442
 
-  rvu$cf <- as.double(rvu$cf)
+  rvu <- rvu(hcpcs = hcpcs)
 
   gp <- gpci(
     state    = state,
@@ -116,9 +114,7 @@ calc_amounts_df <- function(hcpcs, state, locality, mac) {
   fs <- pfs(
     hcpcs = hcpcs,
     locality = locality,
-    mac = mac) |>
-    dplyr::rename(mod_pfs = mod,
-                  status_pfs = status)
+    mac = mac)
 
   vctrs::vec_cbind(rvu, gp) |>
     dplyr::left_join(fs,

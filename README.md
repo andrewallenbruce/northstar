@@ -47,7 +47,7 @@ rvu |> glimpse()
     > $ nf_prvu     <dbl> 7.92
     > $ f_prvu      <dbl> 4.36
     > $ mrvu        <dbl> 0.99
-    > $ cf          <chr> "32.744"
+    > $ cf          <dbl> 32.744
 
 ``` r
 gp <- gpci(
@@ -69,15 +69,25 @@ gp |> glimpse()
     > $ mgpci    <dbl> 1.125
 
 ``` r
-# calc_amounts(wrvu     = rvu$wrvu,
-#              prvu_nf  = rvu$prvu_nf,
-#              prvu_f   = rvu$prvu_f,
-#              mrvu     = rvu$mrvu,
-#              cf       = rvu$cf,
-#              wgpci    = gp$wgpci,
-#              pgpci    = gp$pgpci,
-#              mgpci    = gp$mgpci)
+calc_amounts(wrvu     = rvu$wrvu,
+             prvu_nf  = rvu$nf_prvu,
+             prvu_f   = rvu$f_prvu,
+             mrvu     = rvu$mrvu,
+             cf       = rvu$cf,
+             wgpci    = gp$wgpci,
+             pgpci    = gp$pgpci,
+             mgpci    = gp$mgpci)
 ```
+
+    > Facility:
+    > Participating Amount    = $367.51
+    > Non-Particpating Amount = $349.13
+    > Limiting Charge         = $401.50
+    > 
+    > Non-Facility:
+    > Participating Amount    = $470.44
+    > Non-Particpating Amount = $446.91
+    > Limiting Charge         = $513.95
 
 ``` r
 pfs(hcpcs    = "11646", 
@@ -112,9 +122,9 @@ calc_amounts_df(hcpcs    = "11646",
     > Rows: 1
     > Columns: 55
     > $ hcpcs         <chr> "11646"
-    > $ mod_rvu       <chr> "00"
+    > $ mod.x         <chr> "00"
     > $ description   <chr> "Exc f/e/e/n/l mal+mrg >4 cm"
-    > $ status_rvu    <chr> "A"
+    > $ status.x      <chr> "A"
     > $ unused        <int> 0
     > $ wrvu          <dbl> 6.26
     > $ nf_prvu       <dbl> 7.92
@@ -149,10 +159,10 @@ calc_amounts_df(hcpcs    = "11646",
     > $ pgpci         <dbl> 0.883
     > $ mgpci         <dbl> 1.125
     > $ year          <dbl> 2024
-    > $ mod_pfs       <chr> NA
+    > $ mod.y         <chr> NA
     > $ fee_nf        <dbl> 470.44
     > $ fee_f         <dbl> 367.51
-    > $ status_pfs    <chr> "0"
+    > $ status.y      <chr> "0"
     > $ mult_surg     <chr> "A"
     > $ therapy_nf    <dbl> 2
     > $ flatfee_visit <dbl> 0

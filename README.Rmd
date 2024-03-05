@@ -62,14 +62,14 @@ gp |> glimpse()
 ```
 
 ```{r}
-# calc_amounts(wrvu     = rvu$wrvu,
-#              prvu_nf  = rvu$prvu_nf,
-#              prvu_f   = rvu$prvu_f,
-#              mrvu     = rvu$mrvu,
-#              cf       = rvu$cf,
-#              wgpci    = gp$wgpci,
-#              pgpci    = gp$pgpci,
-#              mgpci    = gp$mgpci)
+calc_amounts(wrvu     = rvu$wrvu,
+             prvu_nf  = rvu$nf_prvu,
+             prvu_f   = rvu$f_prvu,
+             mrvu     = rvu$mrvu,
+             cf       = rvu$cf,
+             wgpci    = gp$wgpci,
+             pgpci    = gp$pgpci,
+             mgpci    = gp$mgpci)
 ```
 
 ```{r}
