@@ -57,60 +57,60 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">calc_amounts</span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">prvu_f</span>, <span class="va">prvu_nf</span>, <span class="va">mrvu</span>, <span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span>, <span class="va">cf</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">calc_amounts</span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">fprvu</span>, <span class="va">nprvu</span>, <span class="va">mrvu</span>, <span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span>, <span class="va">cf</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>wrvu</dt>
-<dd><p>numeric</p></dd>
+<dd><p>Work RVUs</p></dd>
 
 
-<dt>prvu_f</dt>
-<dd><p>numeric</p></dd>
+<dt>fprvu</dt>
+<dd><p>Facility Practice Expense RVUs</p></dd>
 
 
-<dt>prvu_nf</dt>
-<dd><p>numeric</p></dd>
+<dt>nprvu</dt>
+<dd><p>Non-Facility Practice Expense RVUs</p></dd>
 
 
 <dt>mrvu</dt>
-<dd><p>numeric</p></dd>
+<dd><p>Malpractice RVUs</p></dd>
 
 
 <dt>wgpci</dt>
-<dd><p>numeric</p></dd>
+<dd><p>Work GPCI</p></dd>
 
 
 <dt>pgpci</dt>
-<dd><p>numeric</p></dd>
+<dd><p>Practice Expense GPCI</p></dd>
 
 
 <dt>mgpci</dt>
-<dd><p>numeric</p></dd>
+<dd><p>Malpractice GPCI</p></dd>
 
 
 <dt>cf</dt>
-<dd><p>numeric</p></dd>
+<dd><p>Conversion Factor</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>description</p>
+<p>Facility &amp; Non-Facility Participating, Non-Participating &amp; Limiting Charge Amounts</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">calc_amounts</span><span class="op">(</span>wrvu     <span class="op">=</span> <span class="fl">6.26</span>,</span></span>
-<span class="r-in"><span>             prvu_nf  <span class="op">=</span> <span class="fl">7.92</span>,</span></span>
-<span class="r-in"><span>             prvu_f   <span class="op">=</span> <span class="fl">4.36</span>,</span></span>
-<span class="r-in"><span>             mrvu     <span class="op">=</span> <span class="fl">0.99</span>,</span></span>
-<span class="r-in"><span>             wgpci    <span class="op">=</span> <span class="fl">1.0</span>,</span></span>
-<span class="r-in"><span>             pgpci    <span class="op">=</span> <span class="fl">0.883</span>,</span></span>
-<span class="r-in"><span>             mgpci    <span class="op">=</span> <span class="fl">1.125</span>,</span></span>
-<span class="r-in"><span>             cf       <span class="op">=</span> <span class="fl">32.7442</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">calc_amounts</span><span class="op">(</span>wrvu <span class="op">=</span> <span class="fl">6.26</span>,</span></span>
+<span class="r-in"><span>             nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span></span>
+<span class="r-in"><span>             fprvu <span class="op">=</span> <span class="fl">4.36</span>,</span></span>
+<span class="r-in"><span>             mrvu <span class="op">=</span> <span class="fl">0.99</span>,</span></span>
+<span class="r-in"><span>             wgpci <span class="op">=</span> <span class="fl">1.0</span>,</span></span>
+<span class="r-in"><span>             pgpci <span class="op">=</span> <span class="fl">0.883</span>,</span></span>
+<span class="r-in"><span>             mgpci <span class="op">=</span> <span class="fl">1.125</span>,</span></span>
+<span class="r-in"><span>             cf <span class="op">=</span> <span class="fl">32.7442</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Facility:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Participating Amount    = $367.51</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Non-Particpating Amount = $349.13</span>
