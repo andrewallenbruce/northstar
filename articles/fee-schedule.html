@@ -86,7 +86,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/traversc/qs" class="external-link">qs</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="return-information-about-hcpcs-code">Return Information about HCPCS Code<a class="anchor" aria-label="anchor" href="#return-information-about-hcpcs-code"></a>
+<h3 id="look-up-hcpcs-code">Look Up HCPCS Code<a class="anchor" aria-label="anchor" href="#look-up-hcpcs-code"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_amounts_df.html">calc_amounts_df</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
@@ -125,19 +125,19 @@
 <span><span class="co">#&gt; $ unused      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
 <span><span class="co">#&gt; $ rare        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span>
 <span><span class="co">#&gt; $ mac         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10212"</span></span>
-<span><span class="co">#&gt; $ state       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> GA</span></span>
 <span><span class="co">#&gt; $ locality    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99"</span></span>
+<span><span class="co">#&gt; $ mult_surg   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ flat_vis    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ ntherapy    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2</span></span>
+<span><span class="co">#&gt; $ ftherapy    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ opps        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ state       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> GA</span></span>
 <span><span class="co">#&gt; $ name        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "REST OF GEORGIA"</span></span>
 <span><span class="co">#&gt; $ wgpci       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1</span></span>
 <span><span class="co">#&gt; $ pgpci       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.883</span></span>
 <span><span class="co">#&gt; $ mgpci       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.125</span></span>
 <span><span class="co">#&gt; $ counties    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALL OTHER COUNTIES"</span></span>
 <span><span class="co">#&gt; $ two_macs    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ mult_surg   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
-<span><span class="co">#&gt; $ flat_vis    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ntherapy    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ ftherapy    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ opps        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
 <span><span class="co">#&gt; $ fpar        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 367.5065</span></span>
 <span><span class="co">#&gt; $ npar        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 470.4366</span></span>
 <span><span class="co">#&gt; $ fnpar       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 349.1312</span></span>
@@ -146,64 +146,95 @@
 <span><span class="co">#&gt; $ nlim        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 513.952</span></span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="fee-schedule-calculation">Fee Schedule Calculation<a class="anchor" aria-label="anchor" href="#fee-schedule-calculation"></a>
+<h2 id="physician-fee-schedule-amount-calculation">Physician Fee Schedule Amount Calculation<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-amount-calculation"></a>
 </h2>
+<table class="table"><tbody>
+<tr class="odd">
+<td><span class="math inline">\(RVU_w\)</span></td>
+<td>
+<em>Work</em> Relative Value Unit</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(GPCI_w\)</span></td>
+<td>
+<em>Work</em> Geographic Practice Cost Index</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(RVU_p\)</span></td>
+<td>
+<em>Practice Expense</em> Relative Value Unit</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(GPCI_p\)</span></td>
+<td>
+<em>Practice Expense</em> Geographic Practice Cost Index</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(RVU_m\)</span></td>
+<td>
+<em>Malpractice</em> Relative Value Unit</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(GPCI_m\)</span></td>
+<td>
+<em>Malpractice</em> Geographic Practice Cost Index</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(CF\)</span></td>
+<td>Conversion Factor</td>
+</tr>
+</tbody></table>
+<p><br></p>
+<p>The Participating amount is calculated as follows: <br></p>
+<p><span class="math display">\[x = [(RVU_w \times GPCI_w) + (RVU_p
+\times GPCI_p) + (RVU_m \times GPCI_m)] \times CF\]</span></p>
+<p><br></p>
+<p>The Non-participating amount is calculated as follows: <br></p>
+<p><span class="math display">\[ y = 0.95x\]</span></p>
+<p><br></p>
+<p>The Limiting charge is calculated as follows: <br></p>
+<p><span class="math display">\[ z = 0.95(1.15x)\]</span></p>
+<p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rvu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">hcpcs</span>, </span>
-<span>         <span class="va">description</span>,</span>
-<span>         <span class="va">wrvu</span>, </span>
-<span>         <span class="va">nf_prvu</span>, </span>
-<span>         <span class="va">f_prvu</span>, </span>
-<span>         <span class="va">mrvu</span>, </span>
-<span>         <span class="va">cf</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `nf_prvu` doesn't exist.</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rvu</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; function (hcpcs = NULL)</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gpci.html">gpci</a></span><span class="op">(</span></span>
-<span>  state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
-<span>  locality <span class="op">=</span> <span class="st">"99"</span>,</span>
-<span>  mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gp</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 9</span></span>
-<span><span class="co">#&gt; $ mac      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10212"</span></span>
-<span><span class="co">#&gt; $ state    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> GA</span></span>
-<span><span class="co">#&gt; $ locality <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99"</span></span>
-<span><span class="co">#&gt; $ name     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "REST OF GEORGIA"</span></span>
-<span><span class="co">#&gt; $ wgpci    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ pgpci    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.883</span></span>
-<span><span class="co">#&gt; $ mgpci    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.125</span></span>
-<span><span class="co">#&gt; $ counties <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALL OTHER COUNTIES"</span></span>
-<span><span class="co">#&gt; $ two_macs <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_amounts.html">calc_amounts</a></span><span class="op">(</span>wrvu     <span class="op">=</span> <span class="va">rvu</span><span class="op">$</span><span class="va">wrvu</span>,</span>
-<span>             prvu_nf  <span class="op">=</span> <span class="va">rvu</span><span class="op">$</span><span class="va">nf_prvu</span>,</span>
-<span>             prvu_f   <span class="op">=</span> <span class="va">rvu</span><span class="op">$</span><span class="va">f_prvu</span>,</span>
-<span>             mrvu     <span class="op">=</span> <span class="va">rvu</span><span class="op">$</span><span class="va">mrvu</span>,</span>
-<span>             cf       <span class="op">=</span> <span class="va">rvu</span><span class="op">$</span><span class="va">cf</span>,</span>
-<span>             wgpci    <span class="op">=</span> <span class="va">gp</span><span class="op">$</span><span class="va">wgpci</span>,</span>
-<span>             pgpci    <span class="op">=</span> <span class="va">gp</span><span class="op">$</span><span class="va">pgpci</span>,</span>
-<span>             mgpci    <span class="op">=</span> <span class="va">gp</span><span class="op">$</span><span class="va">mgpci</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in calc_amounts(wrvu = rvu$wrvu, prvu_nf = rvu$nf_prvu, prvu_f = rvu$f_prvu, : unused arguments (prvu_nf = rvu$nf_prvu, prvu_f = rvu$f_prvu)</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/pfs.html">pfs</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
-<span>    mac      <span class="op">=</span> <span class="st">"10212"</span>,</span>
-<span>    locality <span class="op">=</span> <span class="st">"99"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">hcpcs</span>,</span>
-<span>         <span class="va">mac</span>,</span>
-<span>         <span class="va">locality</span>,</span>
-<span>         <span class="va">fee_nf</span>,</span>
-<span>         <span class="va">fee_f</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">nprvu</span>, <span class="va">fprvu</span>, <span class="va">mrvu</span>, <span class="va">cf</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `fee_nf` doesn't exist.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 5</span></span>
+<span><span class="co">#&gt; $ wrvu  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 6.26</span></span>
+<span><span class="co">#&gt; $ nprvu <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.92</span></span>
+<span><span class="co">#&gt; $ fprvu <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.36</span></span>
+<span><span class="co">#&gt; $ mrvu  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.99</span></span>
+<span><span class="co">#&gt; $ cf    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 32.744</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gpci.html">gpci</a></span><span class="op">(</span>state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
+<span>     locality <span class="op">=</span> <span class="st">"99"</span>,</span>
+<span>     mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 3</span></span>
+<span><span class="co">#&gt; $ wgpci <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ pgpci <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.883</span></span>
+<span><span class="co">#&gt; $ mgpci <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.125</span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_amounts.html">calc_amounts</a></span><span class="op">(</span>wrvu  <span class="op">=</span> <span class="fl">6.26</span>,</span>
+<span>             nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span>
+<span>             fprvu <span class="op">=</span> <span class="fl">4.36</span>,</span>
+<span>             mrvu  <span class="op">=</span> <span class="fl">0.99</span>,</span>
+<span>             cf    <span class="op">=</span> <span class="fl">32.744</span>,</span>
+<span>             wgpci <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>             pgpci <span class="op">=</span> <span class="fl">0.883</span>,</span>
+<span>             mgpci <span class="op">=</span> <span class="fl">1.125</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Facility:</span></span>
+<span><span class="co">#&gt; Participating Amount    = $367.51</span></span>
+<span><span class="co">#&gt; Non-Particpating Amount = $349.13</span></span>
+<span><span class="co">#&gt; Limiting Charge         = $401.50</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Non-Facility:</span></span>
+<span><span class="co">#&gt; Participating Amount    = $470.44</span></span>
+<span><span class="co">#&gt; Non-Particpating Amount = $446.91</span></span>
+<span><span class="co">#&gt; Limiting Charge         = $513.95</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
