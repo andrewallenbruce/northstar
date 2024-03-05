@@ -1,0 +1,10 @@
+file: pymt.qs
+file_size: 76901
+pin_hash: fbf6db110a7a9388
+type: qs
+title: PFS Payment Amount 2024
+description: Annual Physician Fee Schedule Payment Amount File 2024
+tags: ~
+urls: ~
+created: 20240305T044800Z
+api_version: 1

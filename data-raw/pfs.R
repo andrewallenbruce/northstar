@@ -11,17 +11,18 @@ pfs_pay_xl <- glue::glue("{root}PFREV24A_0/PFALL24.csv")
 pfs_pay <- read_csv(pfs_pay_xl, col_types = strrep("c", 16)) |>
   slice(-c(990483:990487))
 
+
 names(pfs_pay) <- c(
   "year",
   "mac",
   "locality",
   "hcpcs",
-  "mod_pfs",
+  "mod",
   "fee_nf", # "non_fac_fee_sched_amount"
   "fee_f", # "facility_fee_sched_amount"
   "pctc",
-  "status_pfs",
-  "mult_surg_pfs",
+  "mult_surg",
+  "status",
   "ther_nf", # "therapy_reduction_nonfac"
   "flat_vis", # flat_visit_fee
   "ther_f", # "therapy_reduction_fac"
@@ -40,11 +41,24 @@ pfs_pay <- pfs_pay |>
       flat_vis
     ),
     readr::parse_number)) |>
-  select(-pctc)
+  select(-pctc) |>
+  mutate(mod = ifelse(is.na(mod), "00", mod),
+         opps = ifelse(opps == "9", "0", opps))
 
 # [990,482 x 15]
-pfs_pay |>
-  filter(hcpcs == "11646")
+pfs_pay <- pfs_pay |>
+  select(-c(year, fee_nf, fee_f, opps_nf, opps_f)) |>
+  select(mac,
+         locality,
+         hcpcs,
+         mod,
+         status,
+         mult_surg,
+         flat_vis,
+         ther_nf,
+         ther_f,
+         opps
+         )
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))
