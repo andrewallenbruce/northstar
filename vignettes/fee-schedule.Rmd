@@ -37,6 +37,7 @@ calc_amounts_df(hcpcs    = "11646",
 ```
 
 # Physician Fee Schedule Amount Calculation
+<br>
 
 |          |                                                   |
 |----------|---------------------------------------------------|
@@ -50,40 +51,30 @@ calc_amounts_df(hcpcs    = "11646",
 
 <br>
 
-The Participating amount is calculated as follows:
-<br>
+The __Participating amount__ is calculated as follows:
+
+<br><br>
 
 $$x = [(RVU_w \times GPCI_w) + (RVU_p \times GPCI_p) + (RVU_m \times GPCI_m)] \times CF$$
 
 <br>
 
-The Non-participating amount is calculated as follows:
+The __Non-participating amount__ is calculated as follows:
+
 <br>
 
 $$ y = 0.95x$$
 
 <br>
 
-The Limiting charge is calculated as follows:
+The __Limiting charge__ is calculated as follows:
+
 <br>
 
 $$ z = 0.95(1.15x)$$
 
 <br>
 
-```{r}
-rvu(hcpcs = "11646") |> 
-  select(wrvu, nprvu, fprvu, mrvu, cf) |>
-  glimpse()
-```
-
-```{r}
-gpci(state    = "GA",
-     locality = "99",
-     mac      = "10212") |> 
-  select(wgpci, pgpci, mgpci) |>
-  glimpse()
-```
 
 ```{r}
 calc_amounts(wrvu  = 6.26,
@@ -95,4 +86,40 @@ calc_amounts(wrvu  = 6.26,
              pgpci = 0.883,
              mgpci = 1.125)
 ```
+
+## Data Sources
+
+```{r}
+rvu(hcpcs = "11646") |> 
+  glimpse()
+```
+
+```{r}
+gpci(state    = "GA",
+     locality = "99",
+     mac      = "10212") |> 
+  glimpse()
+```
+
+```{r}
+pfs(hcpcs    = "11646", 
+    locality = "99",
+    mac      = "10212") |> 
+  glimpse()
+```
+
+```{r}
+hcpcs() |> 
+  filter(hcpcs == "V5299") |> 
+  glimpse()
+```
+
+```{r}
+cpt_descriptors() |> 
+  filter(cpt == "11646") |> 
+  select(-clinician_descriptor) |>
+  distinct() |>
+  unlist()
+```
+
 

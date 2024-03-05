@@ -125,8 +125,8 @@ calc_amounts_df <- function(hcpcs,
                                    mac = mac)) |>
     purrr::list_rbind()
 
-  dplyr::left_join(rv, fs, by = dplyr::join_by(hcpcs, mod, status)) |>
-    dplyr::left_join(gp, by = dplyr::join_by(mac, locality)) |>
+  res <- dplyr::left_join(gp, fs, by = dplyr::join_by(mac, locality)) |>
+    dplyr::left_join(rv, by = dplyr::join_by(hcpcs, mod, status)) |>
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
       npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
@@ -134,5 +134,56 @@ calc_amounts_df <- function(hcpcs,
       nnpar = calc_nonpar_amount(npar),
       flim  = calc_limiting_charge(fpar),
       nlim  = calc_limiting_charge(npar))
+
+  dplyr::select(res,
+                hcpcs,
+                description,
+                mod,
+                status,
+                mac,
+                state,
+                locality,
+                area = name,
+                counties,
+                two_macs,
+                wgpci,
+                pgpci,
+                mgpci,
+                wrvu,
+                nprvu,
+                fprvu,
+                mrvu,
+                cf,
+                fpar,
+                npar,
+                fnpar,
+                nnpar,
+                flim,
+                nlim,
+                opps,
+                nprvu_opps,
+                mrvu_opps,
+                fprvu_opps,
+                mult_surg,
+                flat_vis,
+                ntherapy,
+                ftherapy,
+                global,
+                op_ind,
+                op_pre,
+                op_intra,
+                op_post,
+                pctc,
+                mult_proc,
+                surg_bilat,
+                surg_asst,
+                surg_co,
+                surg_team,
+                supvis,
+                dximg,
+                endo,
+                rare,
+                unused
+                )
 
 }

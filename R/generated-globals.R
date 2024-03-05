@@ -4,9 +4,29 @@ utils::globalVariables(c(
   # <status_codes>
   "code",
   # <calc_amounts_df>
+  "counties",
+  # <calc_amounts_df>
+  "description",
+  # <calc_amounts_df>
+  "dximg",
+  # <calc_amounts_df>
+  "endo",
+  # <calc_amounts_df>
+  "flat_vis",
+  # <calc_amounts_df>
+  "flim",
+  # <calc_amounts_df>
+  "fnpar",
+  # <calc_amounts_df>
   "fpar",
   # <calc_amounts_df>
   "fprvu",
+  # <calc_amounts_df>
+  "fprvu_opps",
+  # <calc_amounts_df>
+  "ftherapy",
+  # <calc_amounts_df>
+  "global",
   # <calc_amounts_df>
   "mgpci",
   # <calc_amounts_df>
@@ -14,17 +34,61 @@ utils::globalVariables(c(
   # <calc_amounts_df>
   "mrvu",
   # <calc_amounts_df>
+  "mrvu_opps",
+  # <calc_amounts_df>
+  "mult_proc",
+  # <calc_amounts_df>
+  "mult_surg",
+  # <calc_amounts_df>
+  "name",
+  # <calc_amounts_df>
+  "nlim",
+  # <calc_amounts_df>
+  "nnpar",
+  # <calc_amounts_df>
   "npar",
   # <calc_amounts_df>
   "nprvu",
   # <calc_amounts_df>
+  "nprvu_opps",
+  # <calc_amounts_df>
+  "ntherapy",
+  # <calc_amounts_df>
+  "op_ind",
+  # <calc_amounts_df>
+  "op_intra",
+  # <calc_amounts_df>
+  "op_post",
+  # <calc_amounts_df>
+  "op_pre",
+  # <calc_amounts_df>
+  "opps",
+  # <calc_amounts_df>
+  "pctc",
+  # <calc_amounts_df>
   "pgpci",
+  # <calc_amounts_df>
+  "rare",
   # <abb2full>
   "state.abb",
   # <abb2full>
   "state.name",
   # <calc_amounts_df>
   "status",
+  # <calc_amounts_df>
+  "supvis",
+  # <calc_amounts_df>
+  "surg_asst",
+  # <calc_amounts_df>
+  "surg_bilat",
+  # <calc_amounts_df>
+  "surg_co",
+  # <calc_amounts_df>
+  "surg_team",
+  # <calc_amounts_df>
+  "two_macs",
+  # <calc_amounts_df>
+  "unused",
   # <calc_amounts_df>
   "wgpci",
   # <calc_amounts_df>
