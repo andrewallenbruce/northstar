@@ -8,15 +8,29 @@ two <- read_excel(level2, col_types = "text") |>
   clean_names() |>
   remove_empty() |>
   rename(hcpcs = hcpc) |>
-  mutate(len = str_length(hcpcs), .after = hcpcs) |>
-  mutate(type = if_else(len == 2, "mod", "code"), .after = hcpcs) |>
-  mutate(len = NULL) |>
-  mutate(add_dt = convert_to_date(add_dt),
+  mutate(len   = str_length(hcpcs), .after = hcpcs) |>
+  mutate(type  = if_else(len == 2, "mod", "code"), .after = hcpcs) |>
+  mutate(len   = NULL) |>
+  mutate(add_dt     = convert_to_date(add_dt),
          act_eff_dt = convert_to_date(act_eff_dt),
-         term_dt = convert_to_date(term_dt))
+         term_dt    = convert_to_date(term_dt),
+         asc_dt     = convert_to_date(asc_dt)) |>
+  select(-c(seqnum, recid, anest_bu)) |>
+  unite("price", price1:price2, sep = ":", remove = TRUE, na.rm = TRUE) |>
+  mutate(price = na_if(price, "")) |>
+  unite("cim", cim1:cim2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
+  mutate(cim = na_if(cim, "")) |>
+  unite("mcm", mcm1:mcm3, sep = ", ", remove = TRUE, na.rm = TRUE) |>
+  mutate(mcm = na_if(mcm, "")) |>
+  unite("labcert", labcert1:labcert4, sep = ", ", remove = TRUE, na.rm = TRUE) |>
+  mutate(labcert = na_if(labcert, "")) |>
+  unite("xref", xref1:xref2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
+  mutate(xref = na_if(xref, "")) |>
+  unite("tos", tos1:tos4, sep = ":", remove = TRUE, na.rm = TRUE) |>
+  mutate(tos = na_if(tos, ""))
 
 two |>
-  count(price1)
+  count(action_cd) |> print(n = Inf)
 
 board <- pins::board_folder(here::here("pins"))
 
@@ -29,6 +43,8 @@ board |>
 
 board |> pins::write_board_manifest()
 
+# BLANK = Not Approved For ASC
+asc_grp <- c("YY" = "Procedure approved to be performed in an Ambulatory Surgical Center. Access the ASC tables on the CMS website to get the dollar amounts.")
 
 coverage <- c(
   "C" = "Carrier Judgment",
@@ -38,15 +54,97 @@ coverage <- c(
   "S" = "Non-Covered by Medicare Statute"
 )
 
-# HCPCS Level 1
-# Category I: numbers only, except for G0402, G0438, G0439
-# Category II: 5 digits, ending in F
-# Category III: 5 digits, ending in T
-#
-# HCPCS Level 2
-# Level II codes are composed of a single letter [A-V], followed by 4 digits.
-# A = Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental
-lk_lvl2 <- c(
+action <- c(
+  "A" = "Add procedure or modifier code",
+  "B" = "Change in both administrative data field and long description of procedure or modifier code",
+  "C" = "Change in long description of procedure or modifier code",
+  "D" = "Discontinue procedure or modifier code",
+  "F" = "Change in administrative data field of procedure or modifier code",
+  "N" = "No maintenance for this code",
+  "P" = "Payment change (MOG, pricing indicator codes, anesthesia base units,Ambulatory Surgical Centers)",
+  "R" = "Re-activate discontinued/deleted procedure or modifier code",
+  "S" = "Change in short description of procedure code",
+  "T" = "Miscellaneous change (BETOS, type of service)"
+)
+
+pricing_indicator <- c(
+  "00" = "Service not separately priced by part B (e.g., services not covered, bundled, used by part a only, etc.)",
+  "11" = "Price established using National RVUs",
+  "12" = "Price established using national anesthesia base units",
+  "13" = "Price established by carriers (e.g., not otherwise classified, individual determination, carrier discretion)",
+  "21" = "Price subject to national limitation amount",
+  "22" = "Price established by carriers (e.g., gap-fills, carrier established panels)",
+  "31" = "Frequently serviced DME (price subject to floors and ceilings)",
+  "32" = "Inexpensive & routinely purchased DME (price subject to floors and ceilings)",
+  "33" = "Oxygen and oxygen equipment (price subject to floors and ceilings)",
+  "34" = "DME supplies (price subject to floors and ceilings)",
+  "35" = "Surgical dressings (price subject to floors and ceilings)",
+  "36" = "Capped rental DME (price subject to floors and ceilings)",
+  "37" = "Ostomy, tracheostomy and urological supplies (price subject to floors and ceilings)",
+  "38" = "Orthotics, prosthetics, prosthetic devices & vision services (price subject to floors and ceilings)",
+  "39" = "Parenteral and Enteral Nutrition",
+  "40" = "Lymphedema Compression Treatment Items",
+  "45" = "Customized DME items",
+  "46" = "Carrier priced (e.g., not otherwise classified, individual determination, carrier discretion, gap-filled amounts)",
+  "51" = "Drugs",
+  "52" = "Reasonable charge",
+  "53" = "Statute",
+  "54" = "Vaccinations",
+  "55" = "Splints and Casts",
+  "56" = "IOL's inserted in a physician's office",
+  "57" = "Other carrier priced",
+  "99" = "Value not established"
+)
+
+multiple_pricing_indicator <- c(
+  "9" = "Not applicable as HCPCS not priced separately by part B (pricing indicator is 00) or value is not established (pricing indicator is '99')",
+  "A" = "Not applicable as HCPCS priced under one methodology",
+  "B" = "Professional component of HCPCS priced using RVU's, while technical component and global service priced by Medicare part B carriers",
+  "C" = "Physician interpretation of clinical lab service is priced under physician fee schedule using RVUs, while pricing of lab service is paid under clinical lab fee schedule",
+  "D" = "Service performed by physician is priced under physician fee schedule using RVUs, while service performed by clinical psychologist is priced under clinical psychologist fee schedule (not applicable as of January 1, 1998)",
+  "E" = "Service performed by physician is priced under physician fee schedule using RVUs, service performed by clinical psychologist is priced under clinical psychologist's fee schedule and service performed by clinical social worker is priced under clinical social worker fee schedule (not applicable as of January 1, 1998)",
+  "F" = "Service performed by physician is priced under physician fee schedule by carriers, service performed by clinical psychologist is priced under clinical psychologist's fee schedule and service performed by clinical social worker is priced under clinical social worker fee schedule (not applicable as of January 1, 1998)",
+  "G" = "Clinical lab service priced under reasonable charge when service is submitted on claim with blood products, while service is priced under clinical lab fee schedule when there are no blood products on claim."
+)
+
+
+lab_cert <- c(
+  "010" = "Histocompatibility testing",
+  "100" = "Microbiology",
+  "110" = "Bacteriology",
+  "115" = "Mycobacteriology",
+  "120" = "Mycology",
+  "130" = "Parasitology",
+  "140" = "Virology",
+  "150" = "Other microbiology",
+  "200" = "Diagnostic immunology",
+  "210" = "Syphilis serology",
+  "220" = "General immunology",
+  "300" = "Chemistry",
+  "310" = "Routine chemistry",
+  "320" = "Urinalysis",
+  "330" = "Endocrinology",
+  "340" = "Toxicology",
+  "350" = "Other chemistry",
+  "400" = "Hematology",
+  "500" = "Immunohematology",
+  "510" = "Abo group & RH type",
+  "520" = "Antibody detection (transfusion)",
+  "530" = "Antibody detection (nontransfusion)",
+  "540" = "Antibody identification",
+  "550" = "Compatibility testing",
+  "560" = "Other immunohematology",
+  "600" = "Pathology",
+  "610" = "Histopathology",
+  "620" = "Oral pathology",
+  "630" = "Cytology",
+  "800" = "Radiobioassay",
+  "900" = "Clinical cytogenetics"
+)
+
+
+
+level2_sections <- c(
   "A" = "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
   "B" = "Enteral and Parenteral Therapy",
   "C" = "Temporary Hospital Outpatient Prospective Payment System",
@@ -67,7 +165,8 @@ lk_lvl2 <- c(
 )
 
 # BETOS
-betos <- c("D1A" = "Medical/surgical supplies",
+betos <- c(
+  "D1A" = "Medical/surgical supplies",
   "D1B" = "Hospital beds",
   "D1C" = "Oxygen and supplies",
   "D1D" = "Wheelchairs",
@@ -174,3 +273,40 @@ betos <- c("D1A" = "Medical/surgical supplies",
   "Y2"  = "Other - Non-Medicare fee schedule",
   "Z1"  = "Local codes",
   "Z2"  = "Undefined codes")
+
+tos <- c(
+  "1" = "Medical care",
+  "2" = "Surgery",
+  "3" = "Consultation",
+  "4" = "Diagnostic radiology",
+  "5" = "Diagnostic laboratory",
+  "6" = "Therapeutic radiology",
+  "7" = "Anesthesia",
+  "8" = "Assistant at surgery",
+  "9" = "Other medical items or services",
+  "0" = "Whole blood only eff 01/96, whole blood or packed red cells before 01/96",
+  "A" = "Used durable medical equipment (DME)",
+  "B" = "High risk screening mammography (obsolete 1/1/98)",
+  "C" = "Low risk screening mammography (obsolete 1/1/98)",
+  "D" = "Ambulance (eff 04/95)",
+  "E" = "Enteral/parenteral nutrients/supplies (eff 04/95)",
+  "F" = "Ambulatory surgical center (facility usage for surgical services)",
+  "G" = "Immunosuppressive drugs",
+  "H" = "Hospice services (discontinued 01/95)",
+  "I" = "Purchase of DME (installment basis) (discontinued 04/95)",
+  "J" = "Diabetic shoes (eff 04/95)",
+  "K" = "Hearing items and services (eff 04/95)",
+  "L" = "ESRD supplies (eff 04/95) (renal supplier in the home before 04/95)",
+  "M" = "Monthly capitation payment for dialysis",
+  "N" = "Kidney donor",
+  "P" = "Lump sum purchase of DME, prosthetics, orthotics",
+  "Q" = "Vision items or services",
+  "R" = "Rental of DME",
+  "S" = "Surgical dressings or other medical supplies (eff 04/95)",
+  "T" = "Psychological therapy (term. 12/31/97) outpatient mental health limitation (eff. 1/1/98)",
+  "U" = "Occupational therapy",
+  "V" = "Pneumococcal/flu vaccine (eff 01/96), Pneumococcal/flu/hepatitis B vaccine (eff 04/95-12/95), Pneumococcal only before 04/95",
+  "W" = "Physical therapy",
+  "Y" = "Second opinion on elective surgery (obsoleted 1/97)",
+  "Z" = "Third opinion on elective surgery (obsoleted 1/97)"
+)
