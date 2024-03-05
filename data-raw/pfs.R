@@ -23,9 +23,9 @@ names(pfs_pay) <- c(
   "pctc",
   "mult_surg",
   "status",
-  "ther_nf", # "therapy_reduction_nonfac"
+  "ntherapy", # "therapy_reduction_nonfac"
   "flat_vis", # flat_visit_fee
-  "ther_f", # "therapy_reduction_fac"
+  "ftherapy", # "therapy_reduction_fac"
   "opps", # "opps_indicator"
   "opps_nf",
   "opps_f"
@@ -36,18 +36,15 @@ pfs_pay <- pfs_pay |>
     c(
       year,
       contains("fee"),
-      contains("ther_"),
+      contains("therapy"),
       contains("opps_"),
       flat_vis
     ),
     readr::parse_number)) |>
   select(-pctc) |>
   mutate(mod = ifelse(is.na(mod), "00", mod),
-         opps = ifelse(opps == "9", "0", opps))
-
-# [990,482 x 15]
-pfs_pay <- pfs_pay |>
-  select(-c(year, fee_nf, fee_f, opps_nf, opps_f)) |>
+         opps = ifelse(opps == "9", "0", opps)) |>
+  # select(-c(year, fee_nf, fee_f, opps_nf, opps_f)) |>
   select(mac,
          locality,
          hcpcs,
@@ -55,10 +52,12 @@ pfs_pay <- pfs_pay |>
          status,
          mult_surg,
          flat_vis,
-         ther_nf,
-         ther_f,
+         ntherapy,
+         ftherapy,
          opps
          )
+
+# [990,482 x 15]
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))
