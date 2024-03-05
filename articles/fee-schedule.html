@@ -95,7 +95,7 @@
 <span>                mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>&gt; Rows: 1
-&gt; Columns: 53
+&gt; Columns: 48
 &gt; $ hcpcs          [3m [38;5;246m&lt;chr&gt; [39m [23m "11646"
 &gt; $ description    [3m [38;5;246m&lt;chr&gt; [39m [23m "Exc f/e/e/n/l mal+mrg &gt;4 cm"
 &gt; $ mod_rvu        [3m [38;5;246m&lt;chr&gt; [39m [23m "00"
@@ -131,18 +131,13 @@
 &gt; $ wgpci          [3m [38;5;246m&lt;dbl&gt; [39m [23m 1
 &gt; $ pgpci          [3m [38;5;246m&lt;dbl&gt; [39m [23m 0.883
 &gt; $ mgpci          [3m [38;5;246m&lt;dbl&gt; [39m [23m 1.125
-&gt; $ year           [3m [38;5;246m&lt;dbl&gt; [39m [23m 2024
-&gt; $ mod_pfs        [3m [38;5;246m&lt;chr&gt; [39m [23m NA
-&gt; $ fee_nf         [3m [38;5;246m&lt;dbl&gt; [39m [23m 470.44
-&gt; $ fee_f          [3m [38;5;246m&lt;dbl&gt; [39m [23m 367.51
-&gt; $ status_pfs     [3m [38;5;246m&lt;chr&gt; [39m [23m "0"
-&gt; $ mult_surg_pfs  [3m [38;5;246m&lt;chr&gt; [39m [23m "A"
-&gt; $ ther_nf        [3m [38;5;246m&lt;dbl&gt; [39m [23m 2
+&gt; $ mod            [3m [38;5;246m&lt;chr&gt; [39m [23m "00"
+&gt; $ status         [3m [38;5;246m&lt;chr&gt; [39m [23m "A"
+&gt; $ mult_surg      [3m [38;5;246m&lt;chr&gt; [39m [23m "0"
 &gt; $ flat_vis       [3m [38;5;246m&lt;dbl&gt; [39m [23m 0
+&gt; $ ther_nf        [3m [38;5;246m&lt;dbl&gt; [39m [23m 2
 &gt; $ ther_f         [3m [38;5;246m&lt;dbl&gt; [39m [23m 0
-&gt; $ opps           [3m [38;5;246m&lt;chr&gt; [39m [23m "9"
-&gt; $ opps_nf        [3m [38;5;246m&lt;dbl&gt; [39m [23m 0
-&gt; $ opps_f         [3m [38;5;246m&lt;dbl&gt; [39m [23m 0
+&gt; $ opps           [3m [38;5;246m&lt;chr&gt; [39m [23m "0"
 &gt; $ par_amt_f      [3m [38;5;246m&lt;dbl&gt; [39m [23m 367.5065
 &gt; $ par_amt_nf     [3m [38;5;246m&lt;dbl&gt; [39m [23m 470.4366
 &gt; $ nonpar_amt_f   [3m [38;5;246m&lt;dbl&gt; [39m [23m 349.1312
@@ -217,13 +212,9 @@
 <span>         <span class="va">fee_nf</span>,</span>
 <span>         <span class="va">fee_f</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>&gt; Rows: 1
-&gt; Columns: 5
-&gt; $ hcpcs     [3m [38;5;246m&lt;chr&gt; [39m [23m "11646"
-&gt; $ mac       [3m [38;5;246m&lt;chr&gt; [39m [23m "10212"
-&gt; $ locality  [3m [38;5;246m&lt;chr&gt; [39m [23m "99"
-&gt; $ fee_nf    [3m [38;5;246m&lt;dbl&gt; [39m [23m 470.44
-&gt; $ fee_f     [3m [38;5;246m&lt;dbl&gt; [39m [23m 367.51</code></pre>
+<pre><code>&gt;  [1m [33mError [39m in `select()`: [22m
+&gt;  [33m! [39m Can't subset columns that don't exist.
+&gt;  [31m✖ [39m Column `fee_nf` doesn't exist.</code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
