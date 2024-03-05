@@ -27,5 +27,8 @@ calc_amounts_df(hcpcs = "11646",
                 state = "GA",
                 locality = "99",
                 mac = "10212")
+
+calc_amounts_df(hcpcs = c("39503", "43116", "33935", "11646"),
+                state = "GA")
 \dontshow{\}) # examplesIf}
 }

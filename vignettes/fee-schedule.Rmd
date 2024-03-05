@@ -26,7 +26,7 @@ library(dplyr)
 library(qs)
 ```
 
-## Return Information about HCPCS Code
+## Look Up HCPCS Code
 
 ```{r}
 calc_amounts_df(hcpcs    = "11646", 
@@ -36,50 +36,63 @@ calc_amounts_df(hcpcs    = "11646",
   glimpse()
 ```
 
-# Fee Schedule Calculation
+# Physician Fee Schedule Amount Calculation
+
+|          |                                                   |
+|----------|---------------------------------------------------|
+| $RVU_w$  | *Work* Relative Value Unit                        |
+| $GPCI_w$ | *Work* Geographic Practice Cost Index             |
+| $RVU_p$  | *Practice Expense* Relative Value Unit            |
+| $GPCI_p$ | *Practice Expense* Geographic Practice Cost Index |
+| $RVU_m$  | *Malpractice* Relative Value Unit                 |
+| $GPCI_m$ | *Malpractice* Geographic Practice Cost Index      |
+| $CF$     | Conversion Factor                                 |
+
+<br>
+
+The Participating amount is calculated as follows:
+<br>
+
+$$x = [(RVU_w \times GPCI_w) + (RVU_p \times GPCI_p) + (RVU_m \times GPCI_m)] \times CF$$
+
+<br>
+
+The Non-participating amount is calculated as follows:
+<br>
+
+$$ y = 0.95x$$
+
+<br>
+
+The Limiting charge is calculated as follows:
+<br>
+
+$$ z = 0.95(1.15x)$$
+
+<br>
 
 ```{r}
-rvu <- rvu(hcpcs = "11646") |> 
-  select(hcpcs, 
-         description,
-         wrvu, 
-         nf_prvu, 
-         f_prvu, 
-         mrvu, 
-         cf)
-
-rvu |> glimpse()
-```
-
-```{r}
-gp <- gpci(
-  state    = "GA",
-  locality = "99",
-  mac      = "10212")
-
-gp |> glimpse()
-```
-
-```{r}
-calc_amounts(wrvu     = rvu$wrvu,
-             prvu_nf  = rvu$nf_prvu,
-             prvu_f   = rvu$f_prvu,
-             mrvu     = rvu$mrvu,
-             cf       = rvu$cf,
-             wgpci    = gp$wgpci,
-             pgpci    = gp$pgpci,
-             mgpci    = gp$mgpci)
-```
-
-```{r}
-pfs(hcpcs    = "11646", 
-    mac      = "10212",
-    locality = "99") |> 
-  select(hcpcs,
-         mac,
-         locality,
-         fee_nf,
-         fee_f) |> 
+rvu(hcpcs = "11646") |> 
+  select(wrvu, nprvu, fprvu, mrvu, cf) |>
   glimpse()
+```
+
+```{r}
+gpci(state    = "GA",
+     locality = "99",
+     mac      = "10212") |> 
+  select(wgpci, pgpci, mgpci) |>
+  glimpse()
+```
+
+```{r}
+calc_amounts(wrvu  = 6.26,
+             nprvu = 7.92,
+             fprvu = 4.36,
+             mrvu  = 0.99,
+             cf    = 32.744,
+             wgpci = 1,
+             pgpci = 0.883,
+             mgpci = 1.125)
 ```
 

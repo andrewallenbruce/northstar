@@ -25,24 +25,27 @@ calc_nonpar_amount <- function(participating_amount) {
 }
 
 #' Calculate Physician Fee Schedule Payment Amounts
-#' @param wrvu Work RVUs
-#' @param fprvu Facility Practice Expense RVUs
-#' @param nprvu Non-Facility Practice Expense RVUs
-#' @param mrvu Malpractice RVUs
+#'
+#' ((Work RVU x Work GPCI) + (PE RVU x PE GPCI) + (MP RVU x MP GPCI)) x CF
+#'
+#' @param wrvu Work RVU
+#' @param fprvu Facility Practice Expense RVU
+#' @param nprvu Non-Facility Practice Expense RVU
+#' @param mrvu Malpractice RVU
 #' @param wgpci Work GPCI
 #' @param pgpci Practice Expense GPCI
 #' @param mgpci Malpractice GPCI
 #' @param cf Conversion Factor
 #' @return Facility & Non-Facility Participating, Non-Participating & Limiting Charge Amounts
 #' @examples
-#' calc_amounts(wrvu = 6.26,
+#' calc_amounts(wrvu  = 6.26,
 #'              nprvu = 7.92,
 #'              fprvu = 4.36,
-#'              mrvu = 0.99,
+#'              mrvu  = 0.99,
 #'              wgpci = 1.0,
 #'              pgpci = 0.883,
 #'              mgpci = 1.125,
-#'              cf = 32.7442)
+#'              cf    = 32.7442)
 #' @autoglobal
 #' @export
 calc_amounts <- function(wrvu,
@@ -98,26 +101,32 @@ calc_amounts <- function(wrvu,
 #'                 state = "GA",
 #'                 locality = "99",
 #'                 mac = "10212")
+#'
+#' calc_amounts_df(hcpcs = c("39503", "43116", "33935", "11646"),
+#'                 state = "GA")
 #' @autoglobal
 #' @export
-calc_amounts_df <- function(hcpcs, state = NULL, locality = NULL, mac = NULL) {
+calc_amounts_df <- function(hcpcs,
+                            state = NULL,
+                            locality = NULL,
+                            mac = NULL) {
 
   cf <- 32.7442
 
-  rvus <- rvu(hcpcs = hcpcs)
+  rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |>
+    purrr::list_rbind()
 
-  gp <- gpci(
-    state    = state,
-    locality = locality,
-    mac      = mac)
+  gp <- gpci(state = state,
+             locality = locality,
+             mac = mac)
 
-  fs <- pfs(
-    hcpcs    = hcpcs,
-    locality = locality,
-    mac      = mac)
+  fs <- purrr::map(hcpcs, \(x) pfs(hcpcs = x,
+                                   locality = locality,
+                                   mac = mac)) |>
+    purrr::list_rbind()
 
-  vctrs::vec_cbind(rvus, gp) |>
-    dplyr::left_join(fs, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+  dplyr::left_join(rv, fs, by = dplyr::join_by(hcpcs, mod, status)) |>
+    dplyr::left_join(gp, by = dplyr::join_by(mac, locality)) |>
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
       npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,

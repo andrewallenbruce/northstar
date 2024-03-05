@@ -22,7 +22,8 @@ Imports:
    stringr,
    glue,
    vctrs,
-   cli
+   cli,
+   purrr
 Suggests:
     gt,
     knitr,

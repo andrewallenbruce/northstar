@@ -7,13 +7,13 @@
 calc_amounts(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)
 }
 \arguments{
-\item{wrvu}{Work RVUs}
+\item{wrvu}{Work RVU}
 
-\item{fprvu}{Facility Practice Expense RVUs}
+\item{fprvu}{Facility Practice Expense RVU}
 
-\item{nprvu}{Non-Facility Practice Expense RVUs}
+\item{nprvu}{Non-Facility Practice Expense RVU}
 
-\item{mrvu}{Malpractice RVUs}
+\item{mrvu}{Malpractice RVU}
 
 \item{wgpci}{Work GPCI}
 
@@ -27,15 +27,15 @@ calc_amounts(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)
 Facility & Non-Facility Participating, Non-Participating & Limiting Charge Amounts
 }
 \description{
-Calculate Physician Fee Schedule Payment Amounts
+((Work RVU x Work GPCI) + (PE RVU x PE GPCI) + (MP RVU x MP GPCI)) x CF
 }
 \examples{
-calc_amounts(wrvu = 6.26,
+calc_amounts(wrvu  = 6.26,
              nprvu = 7.92,
              fprvu = 4.36,
-             mrvu = 0.99,
+             mrvu  = 0.99,
              wgpci = 1.0,
              pgpci = 0.883,
              mgpci = 1.125,
-             cf = 32.7442)
+             cf    = 32.7442)
 }
