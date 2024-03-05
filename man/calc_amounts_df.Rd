@@ -4,7 +4,7 @@
 \alias{calc_amounts_df}
 \title{Calculate Physician Fee Schedule Payment Amounts}
 \usage{
-calc_amounts_df(hcpcs, state, locality, mac)
+calc_amounts_df(hcpcs, state = NULL, locality = NULL, mac = NULL)
 }
 \arguments{
 \item{hcpcs}{numeric}

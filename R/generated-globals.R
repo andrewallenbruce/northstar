@@ -4,23 +4,27 @@ utils::globalVariables(c(
   # <status_codes>
   "code",
   # <calc_amounts_df>
-  "f_prvu",
+  "fpar",
+  # <calc_amounts_df>
+  "fprvu",
   # <calc_amounts_df>
   "mgpci",
   # <calc_amounts_df>
+  "mod",
+  # <calc_amounts_df>
   "mrvu",
   # <calc_amounts_df>
-  "nf_prvu",
+  "npar",
   # <calc_amounts_df>
-  "par_amt_f",
-  # <calc_amounts_df>
-  "par_amt_nf",
+  "nprvu",
   # <calc_amounts_df>
   "pgpci",
   # <abb2full>
   "state.abb",
   # <abb2full>
   "state.name",
+  # <calc_amounts_df>
+  "status",
   # <calc_amounts_df>
   "wgpci",
   # <calc_amounts_df>

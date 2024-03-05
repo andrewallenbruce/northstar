@@ -40,47 +40,40 @@ library(dplyr)
 
 
 ```{r}
-rvu <- rvu(hcpcs = "11646") |> 
+rvu(hcpcs = "11646") |> 
   select(hcpcs, 
          description,
          wrvu, 
-         nf_prvu, 
-         f_prvu, 
+         nprvu, 
+         fprvu, 
          mrvu, 
-         cf)
-
-rvu |> glimpse()
+         cf) |> 
+  glimpse()
 ```
 
 ```{r}
-gp <- gpci(
+gpci(
   state    = "GA",
   locality = "99",
-  mac      = "10212")
-
-gp |> glimpse()
+  mac      = "10212") |> 
+  glimpse()
 ```
 
 ```{r}
-calc_amounts(wrvu     = rvu$wrvu,
-             prvu_nf  = rvu$nf_prvu,
-             prvu_f   = rvu$f_prvu,
-             mrvu     = rvu$mrvu,
-             cf       = rvu$cf,
-             wgpci    = gp$wgpci,
-             pgpci    = gp$pgpci,
-             mgpci    = gp$mgpci)
+calc_amounts(wrvu  = 6.26,
+             nprvu = 7.92,
+             fprvu = 4.36,
+             mrvu  = 0.99,
+             cf    = 32.744,
+             wgpci = 1,
+             pgpci = 0.883,
+             mgpci = 1.125)
 ```
 
 ```{r}
 pfs(hcpcs    = "11646", 
     mac      = "10212",
     locality = "99") |> 
-  select(hcpcs,
-         mac,
-         locality,
-         fee_nf,
-         fee_f) |> 
   glimpse()
 ```
 

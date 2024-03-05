@@ -4,38 +4,38 @@
 \alias{calc_amounts}
 \title{Calculate Physician Fee Schedule Payment Amounts}
 \usage{
-calc_amounts(wrvu, prvu_f, prvu_nf, mrvu, wgpci, pgpci, mgpci, cf)
+calc_amounts(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)
 }
 \arguments{
-\item{wrvu}{numeric}
+\item{wrvu}{Work RVUs}
 
-\item{prvu_f}{numeric}
+\item{fprvu}{Facility Practice Expense RVUs}
 
-\item{prvu_nf}{numeric}
+\item{nprvu}{Non-Facility Practice Expense RVUs}
 
-\item{mrvu}{numeric}
+\item{mrvu}{Malpractice RVUs}
 
-\item{wgpci}{numeric}
+\item{wgpci}{Work GPCI}
 
-\item{pgpci}{numeric}
+\item{pgpci}{Practice Expense GPCI}
 
-\item{mgpci}{numeric}
+\item{mgpci}{Malpractice GPCI}
 
-\item{cf}{numeric}
+\item{cf}{Conversion Factor}
 }
 \value{
-description
+Facility & Non-Facility Participating, Non-Participating & Limiting Charge Amounts
 }
 \description{
 Calculate Physician Fee Schedule Payment Amounts
 }
 \examples{
-calc_amounts(wrvu     = 6.26,
-             prvu_nf  = 7.92,
-             prvu_f   = 4.36,
-             mrvu     = 0.99,
-             wgpci    = 1.0,
-             pgpci    = 0.883,
-             mgpci    = 1.125,
-             cf       = 32.7442)
+calc_amounts(wrvu = 6.26,
+             nprvu = 7.92,
+             fprvu = 4.36,
+             mrvu = 0.99,
+             wgpci = 1.0,
+             pgpci = 0.883,
+             mgpci = 1.125,
+             cf = 32.7442)
 }

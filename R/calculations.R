@@ -25,29 +25,29 @@ calc_nonpar_amount <- function(participating_amount) {
 }
 
 #' Calculate Physician Fee Schedule Payment Amounts
-#' @param wrvu numeric
-#' @param prvu_f numeric
-#' @param prvu_nf numeric
-#' @param mrvu numeric
-#' @param wgpci numeric
-#' @param pgpci numeric
-#' @param mgpci numeric
-#' @param cf numeric
-#' @return description
+#' @param wrvu Work RVUs
+#' @param fprvu Facility Practice Expense RVUs
+#' @param nprvu Non-Facility Practice Expense RVUs
+#' @param mrvu Malpractice RVUs
+#' @param wgpci Work GPCI
+#' @param pgpci Practice Expense GPCI
+#' @param mgpci Malpractice GPCI
+#' @param cf Conversion Factor
+#' @return Facility & Non-Facility Participating, Non-Participating & Limiting Charge Amounts
 #' @examples
-#' calc_amounts(wrvu     = 6.26,
-#'              prvu_nf  = 7.92,
-#'              prvu_f   = 4.36,
-#'              mrvu     = 0.99,
-#'              wgpci    = 1.0,
-#'              pgpci    = 0.883,
-#'              mgpci    = 1.125,
-#'              cf       = 32.7442)
+#' calc_amounts(wrvu = 6.26,
+#'              nprvu = 7.92,
+#'              fprvu = 4.36,
+#'              mrvu = 0.99,
+#'              wgpci = 1.0,
+#'              pgpci = 0.883,
+#'              mgpci = 1.125,
+#'              cf = 32.7442)
 #' @autoglobal
 #' @export
 calc_amounts <- function(wrvu,
-                         prvu_f,
-                         prvu_nf,
+                         fprvu,
+                         nprvu,
                          mrvu,
                          wgpci,
                          pgpci,
@@ -55,36 +55,36 @@ calc_amounts <- function(wrvu,
                          cf) {
 
   stopifnot("all arguments must be numeric" = is.numeric(
-    c(wrvu, prvu_f, prvu_nf, mrvu, wgpci, pgpci, mgpci, cf)))
+    c(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)))
 
-  par_amt_f  <- ((wrvu * wgpci) + (prvu_f * pgpci) + (mrvu * mgpci)) * cf
-  par_amt_nf <- ((wrvu * wgpci) + (prvu_nf * pgpci) + (mrvu * mgpci)) * cf
+  fpar <- ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf
+  npar <- ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf
 
   f <- list(
-    par    = par_amt_f,
-    nonpar = calc_nonpar_amount(par_amt_f),
-    limit  = calc_limiting_charge(par_amt_f))
+    par    = fpar,
+    nonpar = calc_nonpar_amount(fpar),
+    limit  = calc_limiting_charge(fpar))
 
-  nf <- list(
-    par    = par_amt_nf,
-    nonpar = calc_nonpar_amount(par_amt_nf),
-    limit  = calc_limiting_charge(par_amt_nf))
+  n <- list(
+    par    = npar,
+    nonpar = calc_nonpar_amount(npar),
+    limit  = calc_limiting_charge(npar))
 
   glue::glue("Facility:\n",
-             "Participating Amount    = {gt::vec_fmt_currency(parf)}\n",
-             "Non-Particpating Amount = {gt::vec_fmt_currency(nonparf)}\n",
-             "Limiting Charge         = {gt::vec_fmt_currency(limitf)}",
+             "Participating Amount    = {gt::vec_fmt_currency(fpar)}\n",
+             "Non-Particpating Amount = {gt::vec_fmt_currency(fnpar)}\n",
+             "Limiting Charge         = {gt::vec_fmt_currency(flim)}",
              "\n\n",
              "Non-Facility:\n",
-             "Participating Amount    = {gt::vec_fmt_currency(parnf)}\n",
-             "Non-Particpating Amount = {gt::vec_fmt_currency(nonparnf)}\n",
-             "Limiting Charge         = {gt::vec_fmt_currency(limitnf)}",
-             parf     = f$par,
-             nonparf  = f$nonpar,
-             limitf   = f$limit,
-             parnf    = nf$par,
-             nonparnf = nf$nonpar,
-             limitnf  = nf$limit)
+             "Participating Amount    = {gt::vec_fmt_currency(npar)}\n",
+             "Non-Particpating Amount = {gt::vec_fmt_currency(nnpar)}\n",
+             "Limiting Charge         = {gt::vec_fmt_currency(nlim)}",
+             fpar  = f$par,
+             fnpar = f$nonpar,
+             flim  = f$limit,
+             npar  = n$par,
+             nnpar = n$nonpar,
+             nlim  = n$limit)
 }
 
 #' Calculate Physician Fee Schedule Payment Amounts
@@ -100,11 +100,11 @@ calc_amounts <- function(wrvu,
 #'                 mac = "10212")
 #' @autoglobal
 #' @export
-calc_amounts_df <- function(hcpcs, state, locality, mac) {
+calc_amounts_df <- function(hcpcs, state = NULL, locality = NULL, mac = NULL) {
 
   cf <- 32.7442
 
-  rvu <- rvu(hcpcs = hcpcs)
+  rvus <- rvu(hcpcs = hcpcs)
 
   gp <- gpci(
     state    = state,
@@ -112,19 +112,18 @@ calc_amounts_df <- function(hcpcs, state, locality, mac) {
     mac      = mac)
 
   fs <- pfs(
-    hcpcs = hcpcs,
+    hcpcs    = hcpcs,
     locality = locality,
-    mac = mac)
+    mac      = mac)
 
-  vctrs::vec_cbind(rvu, gp) |>
-    dplyr::left_join(fs,
-    by = dplyr::join_by(hcpcs, mac, locality)) |>
+  vctrs::vec_cbind(rvus, gp) |>
+    dplyr::left_join(fs, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
     dplyr::mutate(
-      par_amt_f  = ((wrvu * wgpci) + (f_prvu * pgpci) + (mrvu * mgpci)) * cf,
-      par_amt_nf = ((wrvu * wgpci) + (nf_prvu * pgpci) + (mrvu * mgpci)) * cf,
-      nonpar_amt_f = calc_nonpar_amount(par_amt_f),
-      nonpar_amt_nf = calc_nonpar_amount(par_amt_nf),
-      limit_f = calc_limiting_charge(par_amt_f),
-      limit_nf = calc_limiting_charge(par_amt_nf))
+      fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
+      npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
+      fnpar = calc_nonpar_amount(fpar),
+      nnpar = calc_nonpar_amount(npar),
+      flim  = calc_limiting_charge(fpar),
+      nlim  = calc_limiting_charge(npar))
 
 }
