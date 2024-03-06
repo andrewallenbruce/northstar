@@ -7,8 +7,7 @@ gh_raw <- function(x) {
 #' Wrapper to mount package's [pins::board_url()]
 #' @noRd
 mount_board <- function() {
-  pins::board_url(gh_raw(
-    "andrewallenbruce/northstar/master/pins/"))
+  pins::board_url(gh_raw("andrewallenbruce/northstar/master/pins/"))
 }
 
 #' Search a data frame's column by string

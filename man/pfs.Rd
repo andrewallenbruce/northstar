@@ -21,6 +21,8 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-pfs(hcpcs = "11646", locality = "01", mac = "10212")
+pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
+    locality = "01",
+    mac      = "10212")
 \dontshow{\}) # examplesIf}
 }

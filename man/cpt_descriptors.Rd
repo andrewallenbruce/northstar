@@ -4,7 +4,10 @@
 \alias{cpt_descriptors}
 \title{2023 CPT Descriptors (Clinician & Consumer-Friendly)}
 \usage{
-cpt_descriptors()
+cpt_descriptors(hcpcs = NULL)
+}
+\arguments{
+\item{hcpcs}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

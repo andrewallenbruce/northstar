@@ -6,11 +6,11 @@
 #' @export
 rvu <- function(hcpcs = NULL) {
 
-  rvu <- pins::pin_read(mount_board(), "rvu")
+  rv <- pins::pin_read(mount_board(), "rvu")
 
-  if (!is.null(hcpcs)) {rvu <- vctrs::vec_slice(rvu, rvu$hcpcs == hcpcs)}
+  if (!is.null(hcpcs)) rv <- dplyr::filter(rv, hcpcs %chin% hcpcs)
 
-  return(rvu)
+  return(rv)
 }
 
 #' 2024 Physician Fee Schedule Payment Amount File
@@ -19,7 +19,9 @@ rvu <- function(hcpcs = NULL) {
 #' @param locality description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' pfs(hcpcs = "11646", locality = "01", mac = "10212")
+#' pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
+#'     locality = "01",
+#'     mac      = "10212")
 #' @export
 pfs <- function(hcpcs    = NULL,
                 mac      = NULL,
@@ -27,9 +29,9 @@ pfs <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  if (!is.null(hcpcs))    {pmt <- vctrs::vec_slice(pmt, pmt$hcpcs    == hcpcs)}
-  if (!is.null(mac))      {pmt <- vctrs::vec_slice(pmt, pmt$mac      == mac)}
-  if (!is.null(locality)) {pmt <- vctrs::vec_slice(pmt, pmt$locality == locality)}
+  if (!is.null(locality)) pmt <- dplyr::filter(pmt, locality %chin% locality)
+  if (!is.null(mac))      pmt <- dplyr::filter(pmt, mac %chin% mac)
+  if (!is.null(hcpcs))    pmt <- dplyr::filter(pmt, hcpcs %chin% hcpcs)
 
   return(pmt)
 
@@ -47,29 +49,43 @@ gpci <- function(mac      = NULL,
                  state    = NULL,
                  locality = NULL) {
 
-  gpci <- pins::pin_read(mount_board(), "gpci")
+  gp <- pins::pin_read(mount_board(), "gpci")
 
-  if (!is.null(mac))      {gpci <- vctrs::vec_slice(gpci, gpci$mac      == mac)}
-  if (!is.null(state))    {gpci <- vctrs::vec_slice(gpci, gpci$state    == state)}
-  if (!is.null(locality)) {gpci <- vctrs::vec_slice(gpci, gpci$locality == locality)}
+  if (!is.null(locality)) gp <- dplyr::filter(gp, locality %chin% locality)
+  if (!is.null(mac))      gp <- dplyr::filter(gp, mac %chin% mac)
+  if (!is.null(state))    gp <- dplyr::filter(gp, state %chin% state)
 
-  return(gpci)
+  return(gp)
 }
 
 #' 2024 Healthcare Common Procedure Coding System (HCPCS)
+#' @param hcpcs description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' hcpcs()
+#' hcpcs_lv2(hcpcs = c("39503", "43116", "33935", "11646"))
 #' @export
-hcpcs <- function() {
-  pins::pin_read(mount_board(), "hcpcs")
+hcpcs_lv2 <- function(hcpcs = NULL) {
+
+  L2 <- pins::pin_read(mount_board(), "hcpcs")
+
+  if (!is.null(hcpcs)) L2 <- dplyr::filter(L2, hcpcs %chin% hcpcs)
+
+  return(L2)
+
 }
 
 #' 2023 CPT Descriptors (Clinician & Consumer-Friendly)
+#' @param hcpcs description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' cpt_descriptors()
 #' @export
-cpt_descriptors <- function() {
-  pins::pin_read(mount_board(), "cpt_descriptors")
+cpt_descriptors <- function(hcpcs = NULL) {
+
+  cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
+
+  if (!is.null(hcpcs)) cpt <- dplyr::filter(cpt, hcpcs %chin% hcpcs)
+
+  return(cpt)
+
 }

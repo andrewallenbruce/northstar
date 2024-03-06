@@ -4,6 +4,6 @@
 ## usethis namespace: start
 # @importFrom zeallot %<-%
 # @importFrom stringi %s+%
-# @importFrom rlang %||%
+#' @importFrom data.table %chin%
 ## usethis namespace: end
 NULL
