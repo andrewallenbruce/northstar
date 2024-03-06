@@ -4,6 +4,7 @@
 #' @examplesIf interactive()
 #' is_valid_length("11646")
 #' @noRd
+#' @autoglobal
 is_valid_length <- function(x,
                             arg = rlang::caller_arg(x),
                             call = rlang::caller_env()) {
@@ -22,9 +23,12 @@ is_valid_length <- function(x,
 #' @examplesIf interactive()
 #' is_category_I("11646")
 #' @noRd
+#' @autoglobal
 is_category_I <- function(x,
                           arg = rlang::caller_arg(x),
                           call = rlang::caller_env()) {
+  # https://www.johndcook.com/blog/2019/05/05/regex_icd_codes/
+  #
   is_valid_length(x)
 
   stringr::str_detect(x, stringr::regex("^\\d{5}$"))
@@ -57,6 +61,7 @@ is_category_I <- function(x,
 #' @examplesIf interactive()
 #' is_category_II("1164F")
 #' @noRd
+#' @autoglobal
 is_category_II <- function(x,
                           arg = rlang::caller_arg(x),
                           call = rlang::caller_env()) {
@@ -75,6 +80,7 @@ is_category_II <- function(x,
 #' @examplesIf interactive()
 #' is_category_III("1164T")
 #' @noRd
+#' @autoglobal
 is_category_III <- function(x,
                            arg = rlang::caller_arg(x),
                            call = rlang::caller_env()) {
@@ -96,10 +102,29 @@ is_category_III <- function(x,
 #' @examplesIf interactive()
 #' is_level_II("E8015")
 #' @noRd
+#' @autoglobal
 is_level_II <- function(x,
                        arg = rlang::caller_arg(x),
                        call = rlang::caller_env()) {
   is_valid_length(x)
 
   stringr::str_detect(x, stringr::regex("^[a-vA-V]\\d{4}$"))
+}
+
+#' Check if code is HCPCS Level III
+#' @param x string
+#' @return boolean
+#' @examplesIf interactive()
+#' label_hcpcs("A0010")
+#' @noRd
+#' @autoglobal
+label_hcpcs <- function(x,
+                        arg = rlang::caller_arg(x),
+                        call = rlang::caller_env()) {
+
+  if (is_category_I(x))   return("L1:C1")
+  if (is_category_II(x))  return("L1:C2")
+  if (is_category_III(x)) return("L1:C3")
+  if (is_level_II(x))     return("L2")
+  else NA_character_
 }

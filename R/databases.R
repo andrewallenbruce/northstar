@@ -27,8 +27,8 @@ pfs <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  if (!is.null(hcpcs))    {pmt <- vctrs::vec_slice(pmt, pmt$hcpcs == hcpcs)}
-  if (!is.null(mac))      {pmt <- vctrs::vec_slice(pmt, pmt$mac == mac)}
+  if (!is.null(hcpcs))    {pmt <- vctrs::vec_slice(pmt, pmt$hcpcs    == hcpcs)}
+  if (!is.null(mac))      {pmt <- vctrs::vec_slice(pmt, pmt$mac      == mac)}
   if (!is.null(locality)) {pmt <- vctrs::vec_slice(pmt, pmt$locality == locality)}
 
   return(pmt)
@@ -49,8 +49,8 @@ gpci <- function(mac      = NULL,
 
   gpci <- pins::pin_read(mount_board(), "gpci")
 
-  if (!is.null(mac))      {gpci <- vctrs::vec_slice(gpci, gpci$mac == mac)}
-  if (!is.null(state))    {gpci <- vctrs::vec_slice(gpci, gpci$state == state)}
+  if (!is.null(mac))      {gpci <- vctrs::vec_slice(gpci, gpci$mac      == mac)}
+  if (!is.null(state))    {gpci <- vctrs::vec_slice(gpci, gpci$state    == state)}
   if (!is.null(locality)) {gpci <- vctrs::vec_slice(gpci, gpci$locality == locality)}
 
   return(gpci)
