@@ -8,7 +8,7 @@ rvu <- function(hcpcs = NULL) {
 
   rv <- pins::pin_read(mount_board(), "rvu")
 
-  if (!is.null(hcpcs)) rv <- dplyr::filter(rv, hcpcs %chin% hcpcs)
+  if (!is.null(hcpcs)) {rv <- vctrs::vec_slice(rv, rv$hcpcs == hcpcs)}
 
   return(rv)
 }
@@ -29,9 +29,9 @@ pfs <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  if (!is.null(locality)) pmt <- dplyr::filter(pmt, locality %chin% locality)
-  if (!is.null(mac))      pmt <- dplyr::filter(pmt, mac %chin% mac)
-  if (!is.null(hcpcs))    pmt <- dplyr::filter(pmt, hcpcs %chin% hcpcs)
+  if (!is.null(hcpcs))    {pmt <- vctrs::vec_slice(pmt, pmt$hcpcs    == hcpcs)}
+  if (!is.null(mac))      {pmt <- vctrs::vec_slice(pmt, pmt$mac      == mac)}
+  if (!is.null(locality)) {pmt <- vctrs::vec_slice(pmt, pmt$locality == locality)}
 
   return(pmt)
 
@@ -50,10 +50,11 @@ gpci <- function(mac      = NULL,
                  locality = NULL) {
 
   gp <- pins::pin_read(mount_board(), "gpci")
+  # gp$state <- as.character(gp$state)
 
-  if (!is.null(locality)) gp <- dplyr::filter(gp, locality %chin% locality)
-  if (!is.null(mac))      gp <- dplyr::filter(gp, mac %chin% mac)
-  if (!is.null(state))    gp <- dplyr::filter(gp, state %chin% state)
+  if (!is.null(mac))      {gp <- vctrs::vec_slice(gp, gp$mac      == mac)}
+  if (!is.null(state))    {gp <- vctrs::vec_slice(gp, gp$state    == state)}
+  if (!is.null(locality)) {gp <- vctrs::vec_slice(gp, gp$locality == locality)}
 
   return(gp)
 }
@@ -66,11 +67,12 @@ gpci <- function(mac      = NULL,
 #' @export
 hcpcs_lv2 <- function(hcpcs = NULL) {
 
-  L2 <- pins::pin_read(mount_board(), "hcpcs")
+  l2 <- pins::pin_read(mount_board(), "hcpcs")
 
-  if (!is.null(hcpcs)) L2 <- dplyr::filter(L2, hcpcs %chin% hcpcs)
+  # if (!is.null(hcpcs)) L2 <- dplyr::filter(L2, hcpcs %chin% hcpcs)
+  if (!is.null(hcpcs)) l2 <- vctrs::vec_slice(l2, l2$hcpcs == hcpcs)
 
-  return(L2)
+  return(l2)
 
 }
 
@@ -84,7 +86,8 @@ cpt_descriptors <- function(hcpcs = NULL) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
-  if (!is.null(hcpcs)) cpt <- dplyr::filter(cpt, hcpcs %chin% hcpcs)
+  # if (!is.null(hcpcs)) cpt <- dplyr::filter(cpt, hcpcs %chin% hcpcs)
+  if (!is.null(hcpcs)) cpt <- vctrs::vec_slice(cpt, cpt$cpt == hcpcs)
 
   return(cpt)
 

@@ -109,17 +109,15 @@ pfs(hcpcs    = "11646",
 ```
 
 ```{r}
-hcpcs() |> 
-  filter(hcpcs == "V5299") |> 
+hcpcs_lv2(hcpcs = "V5299") |> 
   glimpse()
 ```
 
 ```{r}
-cpt_descriptors() |> 
-  filter(cpt == "11646") |> 
+cpt_descriptors(hcpcs = "11646") |> 
   select(-clinician_descriptor) |>
   distinct() |>
-  unlist()
+  glimpse()
 ```
 
 

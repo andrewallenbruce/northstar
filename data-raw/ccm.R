@@ -21,28 +21,29 @@ ccm <- coding |>
                   medicare_patient_responsibility_national,
                   non_medicare_participants_charge_limit_self_pay,
                   mo_health_net),
-         keep_empty = TRUE) |>
-  rename(hcpcs           = cpt_hcpcs_code,
-         reimbursement   = medicare_reimbursement_national,
-         pat_resp        = medicare_patient_responsibility_national,
-         sp_limit        = non_medicare_participants_charge_limit_self_pay,
-         mohn            = mo_health_net,
-         mohn_auth       = mo_health_net_prior_auth,
-         short           = short_description,
-         long            = long_description,
-         criteria        = criteria_for_selecting_code,
-         mue_value      = medicare_mue_values,
-         mue_adjud       = medicare_mue_adjudication_indicator,
-         mue_reason      = medicare_mue_rationale,
-         )
+         keep_empty = TRUE)
+  # rename(hcpcs           = cpt_hcpcs_code,
+  #        reimbursement   = medicare_reimbursement_national,
+  #        pat_resp        = medicare_patient_responsibility_national,
+  #        sp_limit        = non_medicare_participants_charge_limit_self_pay,
+  #        mohn            = mo_health_net,
+  #        mohn_auth       = mo_health_net_prior_auth,
+  #        short           = short_description,
+  #        long            = long_description,
+  #        criteria        = criteria_for_selecting_code,
+  #        mue_value      = medicare_mue_values,
+  #        mue_adjud       = medicare_mue_adjudication_indicator,
+  #        mue_reason      = medicare_mue_rationale,
+  #        )
 
 ccm_hcpcs <- ccm |>
-  filter(!is.na(hcpcs)) |>
-  distinct(hcpcs) |>
-  pull(hcpcs)
+  filter(!is.na(cpt_hcpcs_code)) |>
+  distinct(cpt_hcpcs_code) |>
+  pull(cpt_hcpcs_code)
 
 
 ccm_npfs <- calc_amounts_df(hcpcs = ccm_hcpcs, state = "MO")
+ccm_npfs <- calc_amounts_df(hcpcs = ccm_hcpcs, state = "KS")
 
 
 ccm_desc <- cpt_descriptors() |>
@@ -53,7 +54,7 @@ ccm_desc <- cpt_descriptors() |>
          consumer_desc = consumer_descriptor,
          clinician_desc = clinician_descriptor)
 
-L2 <- hcpcs() |>
+L2 <- hcpcs_lv2() |>
   filter(hcpcs %in% ccm_hcpcs) |>
   remove_empty() |>
   mutate(cov       = reference("hcpcs")$cov[cov],
@@ -72,7 +73,7 @@ L2 <- hcpcs() |>
          date_added = add_dt,
          date_effective = act_eff_dt)
 
-ccm_npfs |>
+ccm_sheet <- ccm_npfs |>
   mutate(
     status     = reference("pfs")$stat[status],
     mult_proc  = reference("pfs")$mult[as.character(mult_proc)],
@@ -103,3 +104,5 @@ ccm_npfs |>
   mutate(type = map_chr(hcpcs, label_hcpcs), .after = hcpcs) |>
   select(hcpcs, type, description, mac:tos) |>
   print(n = Inf)
+
+googlesheets4::gs4_create("ccm_sheet_KS", sheets = ccm_sheet)
