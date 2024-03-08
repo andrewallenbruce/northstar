@@ -21,8 +21,7 @@ gpci <- read_excel(gpci_xl, col_types = "text") |>
          mgpci    = x2024_mp_gpci) |>
   mutate(across(contains("gpci"), readr::parse_number)) |>
   mutate(ftnote = str_extract_all(name, fixed("*")),
-         name   = str_remove_all(name, fixed("*")),
-         state  = fct(state)) |>
+         name   = str_remove_all(name, fixed("*"))) |>
   unnest(ftnote, keep_empty = TRUE) |>
   select(-ftnote)
 
@@ -45,7 +44,7 @@ locco <- read_excel(locco_xl, col_types = "text") |>
 
 
 states <- dplyr::tibble(
-  abb = gpci() |> count(state) |> pull(state),
+  abb = gpci |> count(state) |> pull(state),
   full = locco |> count(state) |> pull(state)
 )
 
@@ -59,7 +58,8 @@ states[49, 2] <- "VIRGIN ISLANDS"
 states <- states |> tibble::deframe()
 
 locco <- locco |>
-  mutate(state = fct_recode(state, !!!states))
+  mutate(state = fct_recode(state, !!!states),
+         state = as.character(state))
 
 gpci <- gpci |>
   left_join(locco,

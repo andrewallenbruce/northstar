@@ -50,7 +50,7 @@ gpci <- function(mac      = NULL,
                  locality = NULL) {
 
   gp <- pins::pin_read(mount_board(), "gpci")
-  # gp$state <- as.character(gp$state)
+  gp$state <- as.character(gp$state)
 
   if (!is.null(mac))      {gp <- vctrs::vec_slice(gp, gp$mac      == mac)}
   if (!is.null(state))    {gp <- vctrs::vec_slice(gp, gp$state    == state)}
