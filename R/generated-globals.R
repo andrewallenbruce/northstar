@@ -2,7 +2,13 @@
 
 utils::globalVariables(c(
   # <calc_amounts_df>
+  "clinician_descriptor",
+  # <calc_amounts_df>
+  "consumer_descriptor",
+  # <calc_amounts_df>
   "counties",
+  # <calc_amounts_df>
+  "cpt",
   # <calc_amounts_df>
   "description",
   # <calc_amounts_df>

@@ -1,3 +1,5 @@
+
+
 #' @noRd
 global_days <- function() {
   c("000" = "Endoscopic or minor procedure with related preoperative and postoperative relative values on the day of the procedure only included in the fee schedule payment amount. Evaluation and Management services on the day of the procedure generally not payable.",

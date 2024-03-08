@@ -8,3 +8,4 @@
 ^pkgdown$
 ^\.github$
 ^pins$
+^vignettes/articles$

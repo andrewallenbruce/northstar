@@ -1,0 +1,31 @@
+---
+title: "Columns"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = FALSE,
+  echo      = TRUE,
+  message   = TRUE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 600, 
+  out.width = "100%"
+  )
+```
+
+```{r setup, message=FALSE, warning=FALSE}
+library(northstar)
+library(dplyr)
+```
+
+## Look Up HCPCS Code
+
+```{r}
+calc_amounts_df(hcpcs    = "11646", 
+                state    = "GA", 
+                locality = "99", 
+                mac      = "10212") |> 
+  glimpse()
+```

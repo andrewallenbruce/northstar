@@ -125,8 +125,12 @@ calc_amounts_df <- function(hcpcs,
                                    mac = mac)) |>
     purrr::list_rbind()
 
+  desc <- purrr::map(hcpcs, \(x) cpt_descriptors(hcpcs = x)) |>
+    purrr::list_rbind()
+
   res <- dplyr::left_join(gp, fs, by = dplyr::join_by(mac, locality)) |>
     dplyr::left_join(rv, by = dplyr::join_by(hcpcs, mod, status)) |>
+    dplyr::left_join(desc, by = dplyr::join_by(hcpcs == cpt)) |>
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
       npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
@@ -138,6 +142,8 @@ calc_amounts_df <- function(hcpcs,
   dplyr::select(res,
                 hcpcs,
                 description,
+                clin_desc = clinician_descriptor,
+                cons_desc = consumer_descriptor,
                 mod,
                 status,
                 mac,
