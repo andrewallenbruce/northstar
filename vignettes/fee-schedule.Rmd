@@ -114,10 +114,7 @@ hcpcs_lv2(hcpcs = "V5299") |>
 ```
 
 ```{r}
-cpt_descriptors(hcpcs = "11646") |> 
-  select(-clinician_descriptor) |>
-  distinct() |>
-  glimpse()
+cpt_descriptors(hcpcs = "11646")
 ```
 
 

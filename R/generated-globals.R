@@ -28,7 +28,7 @@ utils::globalVariables(c(
   # <calc_amounts_df>
   "fprvu_opps",
   # <calc_amounts_df>
-  "ftherapy",
+  "fther",
   # <calc_amounts_df>
   "global",
   # <calc_amounts_df>
@@ -56,7 +56,7 @@ utils::globalVariables(c(
   # <calc_amounts_df>
   "nprvu_opps",
   # <calc_amounts_df>
-  "ntherapy",
+  "nther",
   # <calc_amounts_df>
   "op_ind",
   # <calc_amounts_df>

@@ -53,6 +53,21 @@ na_blank <- function(x) {
   return(x)
 }
 
+#' Invert a named vector
+#' @param x A named vector
+#' @return A named vector with names and values inverted
+#' @examples
+#' invert_named(x = c("name" = "element"))
+#' invert_named(x = c("element" = "name"))
+#' @autoglobal
+#' @noRd
+invert_named <- function(x) {
+  if(is.null(names(x))) {
+    stop("Input must be a named vector.")
+  }
+  rlang::set_names(names(x), unname(x))
+}
+
 #' @param abb state abbreviation
 #' @return state full name
 #' @autoglobal

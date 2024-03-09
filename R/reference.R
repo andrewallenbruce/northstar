@@ -1,5 +1,94 @@
+#' @autoglobal
+#' @noRd
+pfs_labels <- function() {
+  dplyr::tribble(
+    ~var,        ~label,                              ~description,
+    #----        #-----                              #-----------
+    "mac",       "Carrier Number",                   "Medicare Administrative Contractor (MAC) Number",
+    "locality",  "Locality",                         "Identification of Pricing Locality",
+    "hcpcs",     "HCPCS Code",                       "CPT or Level 2 HCPCS code number for the service",
+    "mod",       "Modifier",                         "For diagnostic tests, a blank in this field denotes the global service and Modifiers 26 & TC identify the components. Modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion.",
+    "status",    "Status Code",                      "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of A, R, or T, are used for Medicare payment.",
+    "mult_surg", "Multiple Surgery Indicator",       "Indicates applicable payment adjustment rule for multiple procedures (Modifier 51)",
+    "flat_vis",  "Flat Rate Visit Fee",              "Effective January 1, 2021, this field may also contain the Flat Visit Fee for the Primary Care First Model",
+    "nther",     "Non-Facility Therapy Reduction",   "Pricing amount that reflects 50 percent payment for the PE for services furnished in office and other noninstitutional settings",
+    "fther",     "Facility Therapy Reduction",       "Pricing amount that reflects 50 percent payment for the PE for services furnished in an institutional setting",
+    "fee_nf",    "Non-Facility Fee Schedule Amount", "Pricing amount for the non-facility setting.",
+    "fee_f",     "Facility Fee Schedule Amount",     "Pricing amount for the facility setting.",
+    "opps",      "OPPS Indicator",                   "1 = Subject to OPPS payment cap determination, 9 = Not subject to OPPS payment cap determination",
+    "opps_nf",   "OPPS Non-Facility",                "Pricing amount for the non-facility setting that has been capped at the level of the OPPS Payment Amount",
+    "opps_f",    "OPPS Facility",                    "Pricing amount for the facility setting that has been capped at the level of the OPPS Payment Amount"
+  )
+}
 
+#' @autoglobal
+#' @noRd
+rvu_labels <- function() {
+  dplyr::tribble(
+    ~var,        ~  label,                                         ~description,
+    #----          #-----                                          #-----------
+    "hcpcs",       "HCPCS Code",                                   "CPT or Level 2 HCPCS code number for the service",
+    "description", "Description",                                  "Description of the service",
+    "mod",         "Modifier",                                     "For diagnostic tests, a blank in this field denotes the global service and Modifiers 26 & TC identify the components. Modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion.",
+    "status",      "Status Code",                                  "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of A, R, or T, are used for Medicare payment.",
+    "wrvu",        "Work RVU",                                     "Relative Value Unit (RVU) for the physician work in the service",
+    "nprvu",       "Non-Facility Practice Expense RVU",            "Relative Value Unit (RVU) for the resource-based practice expense for the non-facility setting",
+    "fprvu",       "Facility Practice Expense RVU",                "Relative Value Unit (RVU) for the resource-based practice expense for the facility setting",
+    "mrvu",        "Malpractice RVU",                              "Relative Value Unit (RVU) for the malpractice expense for the service",
+    "cf",          "Conversion Factor",                            "This is the multiplier that transforms relative values into payment amounts. This conversion factor reflects the MEI update adjustment. For 2002 and beyond, there is a single conversion factor for all services.",
+    "nprvu_opps",  "Non-Facility PE Used for OPPS Payment Amount", "Non-Facility Practice Expense RVUs used for OPPS payment amount",
+    "fprvu_opps",  "Facility PE Used for OPPS Payment Amount",     "Facility Practice Expense RVUs used for OPPS payment amount",
+    "global",      "Global Days",                                  "Identifies the number of global days for the service",
+    "op_ind",      "Operative Percentage Indicator",               "1 = Has percentages, 0 = Does not have percentages",
+    "op_pre",      "Preoperative Percentage",                      "Percentage for preoperative portion of global package",
+    "op_intra",    "Intraoperative Percentage",                    "Percentage for intraoperative portion of global package, including postoperative work in the hospital",
+    "op_post",     "Postoperative Percentage",                     "Percentage for postoperative portion of global package that is provided in the office after discharge from the hospital",
+    "pctc",        "PCTC Indicator",                               "Indicates the applicable payment adjustment rule for the service",
+    "mult_proc",   "Multiple Procedure Indicator",                 "Indicates applicable payment adjustment rule for multiple procedures (Modifier 51)",
+    "surg_bilat",  "Bilateral Surgery Indicator",                  "Indicates applicable payment adjustment rule for bilateral procedures (Modifier 50)",
+    "surg_asst",   "Assistant Surgery Indicator",                  "Indicates applicable payment adjustment rule for assistant at surgery (Modifier 80, 81, 82, or AS)",
+    "surg_co",     "Co-Surgery Indicator",                         "Indicates applicable payment adjustment rule for co-surgeons (Modifier 62)",
+    "surg_team",   "Team Surgery Indicator",                       "Indicates applicable payment adjustment rule for team surgeons (Modifier 66)",
+    "endo",        "Endoscopic Base Code",                         "Identifies an endoscopic base code for each code with a multiple surgery indicator of 3",
+    "supvis",      "Physician Supervision Indicator",              "Indicates the level of physician supervision required for the service",
+    "dximg",       "Diagnostic Imaging Family Indicator",          "Identifies the applicable diagnostic service family for HCPCS codes with a multiple procedure indicator of 4",
+    "unused",      "Not Used for Medicare Payment",                "Indicates whether the code is used for Medicare payment",
+    "rare",        "Rarely/Never Performed",                       "Indicates procedure rarely/never performed in: 00 (Neither), 01 (Facility), 10 (Non-Facility), 11 (Both)"
+  )
+}
 
+#' @autoglobal
+#' @noRd
+column_labels <- function(output = c("df", "md"), type = c("pfs", "rvu")) {
+
+  output <- match.arg(output)
+  type <- match.arg(type)
+
+  if (type == "pfs") {res <- pfs_labels()}
+  if (type == "rvu") {res <- rvu_labels()}
+
+  if (output == "df") {return(res)}
+
+  if (output == "md") {
+    return(
+      res |>
+        mutate(var         = gluedown::md_code(var),
+               label       = gluedown::md_bold(label),
+               description = gluedown::md_hardline(description))
+    )
+  }
+}
+
+#' @autoglobal
+#' @noRd
+opps_ref <- function() {
+  c(
+    "1" = "Subject to OPPS payment cap determination.",
+    "9" = "Not subject to OPPS payment cap determination."
+    )
+}
+
+#' @autoglobal
 #' @noRd
 global_days <- function() {
   c("000" = "Endoscopic or minor procedure with related preoperative and postoperative relative values on the day of the procedure only included in the fee schedule payment amount. Evaluation and Management services on the day of the procedure generally not payable.",
@@ -11,6 +100,7 @@ global_days <- function() {
     "ZZZ" = "Code is related to another service and is always included in the global period of the other service.")
 }
 
+#' @autoglobal
 #' @noRd
 pctc_ind <- function() {
   list(
@@ -159,22 +249,23 @@ reference <- function(type = c("pfs", "hcpcs")) {
 
   type <- match.arg(type)
 
-  # Endoscopic Base Code: identifies an endoscopic base code
-  # for each code with a multiple surgery indicator of 3
-
   if (type == "pfs") {
-    return(list(
-      glob = global_days(),
-       stat = status_codes(),
-       pctc = pctc_ind(),
-       img = diagnostic_imaging(),
-       phys = physician_supervision(),
-       team = team_surgery(),
-       co = co_surgeons(),
-       asst = assistant_surgery(),
-       bil = bilateral_surgery(),
-       mult = multiple_procedure(),
-       rare = rarely()))}
+    return(
+      list(
+        glob = global_days(),
+        stat = status_codes(),
+        pctc = pctc_ind(),
+        img  = diagnostic_imaging(),
+        phys = physician_supervision(),
+        team = team_surgery(),
+        co   = co_surgeons(),
+        asst = assistant_surgery(),
+        bil  = bilateral_surgery(),
+        mult = multiple_procedure(),
+        rare = rarely()
+        )
+      )
+    }
 
   if (type == "hcpcs") {return(reference_hcpcs())}
 }

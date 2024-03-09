@@ -27,6 +27,7 @@ Imports:
    purrr
 Suggests:
     gt,
+    gluedown,
     knitr,
     rmarkdown,
     roxyglobals,

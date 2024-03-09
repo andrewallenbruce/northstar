@@ -18,14 +18,41 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
+library(gluedown)
+library(gt)
+
+gt_style <- function(x) {
+  x |> 
+  gt(rowname_col = "var") |>
+  fmt_markdown() |> 
+  cols_align("left") |> 
+  opt_stylize(color = "cyan") |> 
+  tab_options(
+    column_labels.hidden = TRUE,
+    table.font.size = px(14),
+    table.width = pct(100),
+    heading.title.font.size = px(16),
+    heading.subtitle.font.size = px(16),
+    source_notes.font.size = px(16),
+    row_group.as_column = TRUE
+    )
+}
 ```
 
-## Look Up HCPCS Code
+# Physician Fee Schedule Payment Amount File
 
 ```{r}
-calc_amounts_df(hcpcs    = "11646", 
-                state    = "GA", 
-                locality = "99", 
-                mac      = "10212") |> 
-  glimpse()
+northstar:::column_labels("md", "pfs") |> 
+  gt_style()
 ```
+
+
+# Physician Fee Schedule Relative Value File
+
+```{r}
+northstar:::column_labels("md", "rvu") |> 
+  gt_style()
+```
+
+
+# Geographic Practice Cost Indices by State & Medicare Locality
