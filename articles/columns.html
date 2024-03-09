@@ -84,21 +84,1384 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kiernann.github.io/gluedown/" class="external-link">gluedown</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gt_style</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"var"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_markdown.html" class="external-link">fmt_markdown</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span><span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"cyan"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
+<span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    table.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
+<span>    table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
+<span>    heading.title.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
+<span>    heading.subtitle.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
+<span>    source_notes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
+<span>    row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="look-up-hcpcs-code">Look Up HCPCS Code<a class="anchor" aria-label="anchor" href="#look-up-hcpcs-code"></a>
+<h2 id="physician-fee-schedule-payment-amount-file">Physician Fee Schedule Payment Amount File<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-payment-amount-file"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_amounts_df.html">calc_amounts_df</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
-<span>                state    <span class="op">=</span> <span class="st">"GA"</span>, </span>
-<span>                locality <span class="op">=</span> <span class="st">"99"</span>, </span>
-<span>                mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `ntherapy` doesn't exist.</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">:::</span><span class="fu">column_labels</span><span class="op">(</span><span class="st">"md"</span>, <span class="st">"pfs"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_style</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="hqilxcpctp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hqilxcpctp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hqilxcpctp thead, #hqilxcpctp tbody, #hqilxcpctp tfoot, #hqilxcpctp tr, #hqilxcpctp td, #hqilxcpctp th {
+  border-style: none;
+}
+
+#hqilxcpctp p {
+  margin: 0;
+  padding: 0;
+}
+
+#hqilxcpctp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #016763;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #016763;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hqilxcpctp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hqilxcpctp .gt_title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hqilxcpctp .gt_subtitle {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hqilxcpctp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hqilxcpctp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+}
+
+#hqilxcpctp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hqilxcpctp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hqilxcpctp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hqilxcpctp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hqilxcpctp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hqilxcpctp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hqilxcpctp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hqilxcpctp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hqilxcpctp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  vertical-align: middle;
+}
+
+#hqilxcpctp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hqilxcpctp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hqilxcpctp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #A5FEF2;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #A5FEF2;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #A5FEF2;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hqilxcpctp .gt_stub {
+  color: #FFFFFF;
+  background-color: #01837B;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #01837B;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqilxcpctp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hqilxcpctp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hqilxcpctp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hqilxcpctp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqilxcpctp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #01837B;
+}
+
+#hqilxcpctp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hqilxcpctp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+}
+
+#hqilxcpctp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #A5FEF2;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqilxcpctp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #01837B;
+}
+
+#hqilxcpctp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #01837B;
+}
+
+#hqilxcpctp .gt_striped {
+  background-color: #F4F4F4;
+}
+
+#hqilxcpctp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+}
+
+#hqilxcpctp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hqilxcpctp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqilxcpctp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hqilxcpctp .gt_sourcenote {
+  font-size: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hqilxcpctp .gt_left {
+  text-align: left;
+}
+
+#hqilxcpctp .gt_center {
+  text-align: center;
+}
+
+#hqilxcpctp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hqilxcpctp .gt_font_normal {
+  font-weight: normal;
+}
+
+#hqilxcpctp .gt_font_bold {
+  font-weight: bold;
+}
+
+#hqilxcpctp .gt_font_italic {
+  font-style: italic;
+}
+
+#hqilxcpctp .gt_super {
+  font-size: 65%;
+}
+
+#hqilxcpctp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hqilxcpctp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hqilxcpctp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hqilxcpctp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hqilxcpctp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hqilxcpctp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hqilxcpctp .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>mac</code></p>
+</div></th>
+<td headers="stub_1_1 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Carrier Number</strong></p>
+</div></td>
+<td headers="stub_1_1 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Medicare Administrative Contractor (MAC) Number</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>locality</code></p>
+</div></th>
+<td headers="stub_1_2 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Locality</strong></p>
+</div></td>
+<td headers="stub_1_2 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Identification of Pricing Locality</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>hcpcs</code></p>
+</div></th>
+<td headers="stub_1_3 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>HCPCS Code</strong></p>
+</div></td>
+<td headers="stub_1_3 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>CPT or Level 2 HCPCS code number for the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>mod</code></p>
+</div></th>
+<td headers="stub_1_4 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Modifier</strong></p>
+</div></td>
+<td headers="stub_1_4 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>For diagnostic tests, a blank in this field denotes the global service and Modifiers 26 &amp; TC identify the components. Modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>status</code></p>
+</div></th>
+<td headers="stub_1_5 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Status Code</strong></p>
+</div></td>
+<td headers="stub_1_5 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of A, R, or T, are used for Medicare payment.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>mult_surg</code></p>
+</div></th>
+<td headers="stub_1_6 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Multiple Surgery Indicator</strong></p>
+</div></td>
+<td headers="stub_1_6 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates applicable payment adjustment rule for multiple procedures (Modifier 51)</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>flat_vis</code></p>
+</div></th>
+<td headers="stub_1_7 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Flat Rate Visit Fee</strong></p>
+</div></td>
+<td headers="stub_1_7 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Effective January 1, 2021, this field may also contain the Flat Visit Fee for the Primary Care First Model</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>nther</code></p>
+</div></th>
+<td headers="stub_1_8 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Non-Facility Therapy Reduction</strong></p>
+</div></td>
+<td headers="stub_1_8 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Pricing amount that reflects 50 percent payment for the PE for services furnished in office and other noninstitutional settings</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>fther</code></p>
+</div></th>
+<td headers="stub_1_9 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Facility Therapy Reduction</strong></p>
+</div></td>
+<td headers="stub_1_9 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Pricing amount that reflects 50 percent payment for the PE for services furnished in an institutional setting</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>fee_nf</code></p>
+</div></th>
+<td headers="stub_1_10 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Non-Facility Fee Schedule Amount</strong></p>
+</div></td>
+<td headers="stub_1_10 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Pricing amount for the non-facility setting.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>fee_f</code></p>
+</div></th>
+<td headers="stub_1_11 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Facility Fee Schedule Amount</strong></p>
+</div></td>
+<td headers="stub_1_11 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Pricing amount for the facility setting.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>opps</code></p>
+</div></th>
+<td headers="stub_1_12 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>OPPS Indicator</strong></p>
+</div></td>
+<td headers="stub_1_12 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>1 = Subject to OPPS payment cap determination, 9 = Not subject to OPPS payment cap determination</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>opps_nf</code></p>
+</div></th>
+<td headers="stub_1_13 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>OPPS Non-Facility</strong></p>
+</div></td>
+<td headers="stub_1_13 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Pricing amount for the non-facility setting that has been capped at the level of the OPPS Payment Amount</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>opps_f</code></p>
+</div></th>
+<td headers="stub_1_14 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>OPPS Facility</strong></p>
+</div></td>
+<td headers="stub_1_14 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Pricing amount for the facility setting that has been capped at the level of the OPPS Payment Amount</p>
+</div></td>
+</tr>
+</tbody></table>
 </div>
-  </main>
+</div>
+<div class="section level2">
+<h2 id="physician-fee-schedule-relative-value-file">Physician Fee Schedule Relative Value File<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-relative-value-file"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">:::</span><span class="fu">column_labels</span><span class="op">(</span><span class="st">"md"</span>, <span class="st">"rvu"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_style</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="tqjlxqciuu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tqjlxqciuu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tqjlxqciuu thead, #tqjlxqciuu tbody, #tqjlxqciuu tfoot, #tqjlxqciuu tr, #tqjlxqciuu td, #tqjlxqciuu th {
+  border-style: none;
+}
+
+#tqjlxqciuu p {
+  margin: 0;
+  padding: 0;
+}
+
+#tqjlxqciuu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #016763;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #016763;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tqjlxqciuu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tqjlxqciuu .gt_title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tqjlxqciuu .gt_subtitle {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tqjlxqciuu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tqjlxqciuu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+}
+
+#tqjlxqciuu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tqjlxqciuu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tqjlxqciuu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tqjlxqciuu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tqjlxqciuu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tqjlxqciuu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tqjlxqciuu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tqjlxqciuu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tqjlxqciuu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+  vertical-align: middle;
+}
+
+#tqjlxqciuu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tqjlxqciuu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tqjlxqciuu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #A5FEF2;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #A5FEF2;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #A5FEF2;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tqjlxqciuu .gt_stub {
+  color: #FFFFFF;
+  background-color: #01837B;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #01837B;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqjlxqciuu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tqjlxqciuu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tqjlxqciuu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tqjlxqciuu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqjlxqciuu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #01837B;
+}
+
+#tqjlxqciuu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tqjlxqciuu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+}
+
+#tqjlxqciuu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #A5FEF2;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqjlxqciuu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #01837B;
+}
+
+#tqjlxqciuu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #01837B;
+}
+
+#tqjlxqciuu .gt_striped {
+  background-color: #F4F4F4;
+}
+
+#tqjlxqciuu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #01837B;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #01837B;
+}
+
+#tqjlxqciuu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tqjlxqciuu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqjlxqciuu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tqjlxqciuu .gt_sourcenote {
+  font-size: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqjlxqciuu .gt_left {
+  text-align: left;
+}
+
+#tqjlxqciuu .gt_center {
+  text-align: center;
+}
+
+#tqjlxqciuu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tqjlxqciuu .gt_font_normal {
+  font-weight: normal;
+}
+
+#tqjlxqciuu .gt_font_bold {
+  font-weight: bold;
+}
+
+#tqjlxqciuu .gt_font_italic {
+  font-style: italic;
+}
+
+#tqjlxqciuu .gt_super {
+  font-size: 65%;
+}
+
+#tqjlxqciuu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tqjlxqciuu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tqjlxqciuu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tqjlxqciuu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tqjlxqciuu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tqjlxqciuu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tqjlxqciuu .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>hcpcs</code></p>
+</div></th>
+<td headers="stub_1_1 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>HCPCS Code</strong></p>
+</div></td>
+<td headers="stub_1_1 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>CPT or Level 2 HCPCS code number for the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>description</code></p>
+</div></th>
+<td headers="stub_1_2 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Description</strong></p>
+</div></td>
+<td headers="stub_1_2 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Description of the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>mod</code></p>
+</div></th>
+<td headers="stub_1_3 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Modifier</strong></p>
+</div></td>
+<td headers="stub_1_3 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>For diagnostic tests, a blank in this field denotes the global service and Modifiers 26 &amp; TC identify the components. Modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>status</code></p>
+</div></th>
+<td headers="stub_1_4 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Status Code</strong></p>
+</div></td>
+<td headers="stub_1_4 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of A, R, or T, are used for Medicare payment.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>wrvu</code></p>
+</div></th>
+<td headers="stub_1_5 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Work RVU</strong></p>
+</div></td>
+<td headers="stub_1_5 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Relative Value Unit (RVU) for the physician work in the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>nprvu</code></p>
+</div></th>
+<td headers="stub_1_6 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Non-Facility Practice Expense RVU</strong></p>
+</div></td>
+<td headers="stub_1_6 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Relative Value Unit (RVU) for the resource-based practice expense for the non-facility setting</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>fprvu</code></p>
+</div></th>
+<td headers="stub_1_7 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Facility Practice Expense RVU</strong></p>
+</div></td>
+<td headers="stub_1_7 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Relative Value Unit (RVU) for the resource-based practice expense for the facility setting</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>mrvu</code></p>
+</div></th>
+<td headers="stub_1_8 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Malpractice RVU</strong></p>
+</div></td>
+<td headers="stub_1_8 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Relative Value Unit (RVU) for the malpractice expense for the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>cf</code></p>
+</div></th>
+<td headers="stub_1_9 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Conversion Factor</strong></p>
+</div></td>
+<td headers="stub_1_9 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>This is the multiplier that transforms relative values into payment amounts. This conversion factor reflects the MEI update adjustment. For 2002 and beyond, there is a single conversion factor for all services.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>nprvu_opps</code></p>
+</div></th>
+<td headers="stub_1_10 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Non-Facility PE Used for OPPS Payment Amount</strong></p>
+</div></td>
+<td headers="stub_1_10 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Non-Facility Practice Expense RVUs used for OPPS payment amount</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>fprvu_opps</code></p>
+</div></th>
+<td headers="stub_1_11 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Facility PE Used for OPPS Payment Amount</strong></p>
+</div></td>
+<td headers="stub_1_11 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Facility Practice Expense RVUs used for OPPS payment amount</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>global</code></p>
+</div></th>
+<td headers="stub_1_12 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Global Days</strong></p>
+</div></td>
+<td headers="stub_1_12 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Identifies the number of global days for the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>op_ind</code></p>
+</div></th>
+<td headers="stub_1_13 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Operative Percentage Indicator</strong></p>
+</div></td>
+<td headers="stub_1_13 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>1 = Has percentages, 0 = Does not have percentages</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>op_pre</code></p>
+</div></th>
+<td headers="stub_1_14 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Preoperative Percentage</strong></p>
+</div></td>
+<td headers="stub_1_14 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Percentage for preoperative portion of global package</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>op_intra</code></p>
+</div></th>
+<td headers="stub_1_15 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Intraoperative Percentage</strong></p>
+</div></td>
+<td headers="stub_1_15 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Percentage for intraoperative portion of global package, including postoperative work in the hospital</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>op_post</code></p>
+</div></th>
+<td headers="stub_1_16 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Postoperative Percentage</strong></p>
+</div></td>
+<td headers="stub_1_16 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Percentage for postoperative portion of global package that is provided in the office after discharge from the hospital</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>pctc</code></p>
+</div></th>
+<td headers="stub_1_17 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>PCTC Indicator</strong></p>
+</div></td>
+<td headers="stub_1_17 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Indicates the applicable payment adjustment rule for the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>mult_proc</code></p>
+</div></th>
+<td headers="stub_1_18 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Multiple Procedure Indicator</strong></p>
+</div></td>
+<td headers="stub_1_18 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates applicable payment adjustment rule for multiple procedures (Modifier 51)</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>surg_bilat</code></p>
+</div></th>
+<td headers="stub_1_19 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Bilateral Surgery Indicator</strong></p>
+</div></td>
+<td headers="stub_1_19 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Indicates applicable payment adjustment rule for bilateral procedures (Modifier 50)</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>surg_asst</code></p>
+</div></th>
+<td headers="stub_1_20 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Assistant Surgery Indicator</strong></p>
+</div></td>
+<td headers="stub_1_20 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates applicable payment adjustment rule for assistant at surgery (Modifier 80, 81, 82, or AS)</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>surg_co</code></p>
+</div></th>
+<td headers="stub_1_21 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Co-Surgery Indicator</strong></p>
+</div></td>
+<td headers="stub_1_21 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Indicates applicable payment adjustment rule for co-surgeons (Modifier 62)</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>surg_team</code></p>
+</div></th>
+<td headers="stub_1_22 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Team Surgery Indicator</strong></p>
+</div></td>
+<td headers="stub_1_22 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates applicable payment adjustment rule for team surgeons (Modifier 66)</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>endo</code></p>
+</div></th>
+<td headers="stub_1_23 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Endoscopic Base Code</strong></p>
+</div></td>
+<td headers="stub_1_23 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Identifies an endoscopic base code for each code with a multiple surgery indicator of 3</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>supvis</code></p>
+</div></th>
+<td headers="stub_1_24 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Physician Supervision Indicator</strong></p>
+</div></td>
+<td headers="stub_1_24 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates the level of physician supervision required for the service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>dximg</code></p>
+</div></th>
+<td headers="stub_1_25 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Diagnostic Imaging Family Indicator</strong></p>
+</div></td>
+<td headers="stub_1_25 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Identifies the applicable diagnostic service family for HCPCS codes with a multiple procedure indicator of 4</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>unused</code></p>
+</div></th>
+<td headers="stub_1_26 label" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p><strong>Not Used for Medicare Payment</strong></p>
+</div></td>
+<td headers="stub_1_26 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
+<p>Indicates whether the code is used for Medicare payment</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p><code>rare</code></p>
+</div></th>
+<td headers="stub_1_27 label" class="gt_row gt_left"><div class="gt_from_md">
+<p><strong>Rarely/Never Performed</strong></p>
+</div></td>
+<td headers="stub_1_27 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Indicates procedure rarely/never performed in: 00 (Neither), 01 (Facility), 10 (Non-Facility), 11 (Both)</p>
+</div></td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="section level2">
+<h2 id="geographic-practice-cost-indices-by-state-medicare-locality">Geographic Practice Cost Indices by State &amp; Medicare
+Locality<a class="anchor" aria-label="anchor" href="#geographic-practice-cost-indices-by-state-medicare-locality"></a>
+</h2>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
