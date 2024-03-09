@@ -72,9 +72,9 @@ column_labels <- function(output = c("df", "md"), type = c("pfs", "rvu")) {
   if (output == "md") {
     return(
       res |>
-        mutate(var         = gluedown::md_code(var),
-               label       = gluedown::md_bold(label),
-               description = gluedown::md_hardline(description))
+        dplyr::mutate(var         = gluedown::md_code(var),
+                      label       = gluedown::md_bold(label),
+                      description = gluedown::md_hardline(description))
     )
   }
 }
@@ -98,6 +98,23 @@ global_days <- function() {
     "XXX" = "Global concept does not apply.",
     "YYY" = "Carrier determines whether the global concept applies and establishes postoperative period, if appropriate, at time of pricing.",
     "ZZZ" = "Code is related to another service and is always included in the global period of the other service.")
+}
+
+#' @autoglobal
+#' @noRd
+pctc_tf <- function() {
+  list(
+    "0" = FALSE,
+    "1" = TRUE,
+    "2" = FALSE,
+    "3" = FALSE,
+    "4" = FALSE,
+    "5" = FALSE,
+    "6" = FALSE,
+    "7" = FALSE,
+    "8" = FALSE,
+    "9" = FALSE
+    )
 }
 
 #' @autoglobal

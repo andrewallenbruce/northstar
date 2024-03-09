@@ -10,6 +10,7 @@ utils::globalVariables(c(
   # <calc_amounts_df>
   "cpt",
   # <calc_amounts_df>
+  # <column_labels>
   "description",
   # <calc_amounts_df>
   "dximg",
@@ -31,6 +32,8 @@ utils::globalVariables(c(
   "fther",
   # <calc_amounts_df>
   "global",
+  # <column_labels>
+  "label",
   # <calc_amounts_df>
   "mgpci",
   # <calc_amounts_df>
@@ -93,6 +96,8 @@ utils::globalVariables(c(
   "two_macs",
   # <calc_amounts_df>
   "unused",
+  # <column_labels>
+  "var",
   # <calc_amounts_df>
   "wgpci",
   # <calc_amounts_df>

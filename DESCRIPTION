@@ -28,6 +28,7 @@ Imports:
 Suggests:
     gt,
     gluedown,
+    fontawesome,
     knitr,
     rmarkdown,
     roxyglobals,
