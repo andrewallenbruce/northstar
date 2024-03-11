@@ -2,24 +2,41 @@
 % Please edit documentation in R/calculations.R
 \name{hcpcs_search}
 \alias{hcpcs_search}
-\title{Calculate Physician Fee Schedule Payment Amounts}
+\title{Look up Information about HCPCS Codes}
 \usage{
 hcpcs_search(hcpcs, state = NULL, locality = NULL, mac = NULL)
 }
 \arguments{
-\item{hcpcs}{numeric}
+\item{hcpcs}{< \emph{character} > 5-character HCPCS Code}
 
-\item{state}{numeric}
+\item{state}{< \emph{character} > 2-character state abbreviation}
 
-\item{locality}{numeric}
+\item{locality}{< \emph{character} > 2-character locality id}
 
-\item{mac}{numeric}
+\item{mac}{< \emph{character} > 5-character MAC id code}
 }
 \value{
-description
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Column} \tab \strong{Description} \cr
+   \code{hcpcs} \tab 5-character HCPCS Code \cr
+   \code{hcpcs_type} \tab HCPCS Type \cr
+   \code{description} \tab HCPCS Description \cr
+   \code{cons_desc} \tab HCPCS Level I Consumer Description \cr
+   \code{clin_descs} \tab HCPCS Level I Clinician Descriptions \cr
+   \code{mod} \tab Modifier \cr
+   \code{status} \tab Status Code \cr
+   \code{mac} \tab Medicare Administrative Contractor ID \cr
+   \code{state} \tab State Abbreviation \cr
+   \code{locality} \tab State Abbreviation \cr
+   \code{area} \tab State Abbreviation \cr
+   \code{counties} \tab State Abbreviation \cr
+   \code{two_macs} \tab State Abbreviation \cr
+   \code{wgpci} \tab State Abbreviation \cr
+   \code{pgpci} \tab State Abbreviation \cr
+}
 }
 \description{
-Calculate Physician Fee Schedule Payment Amounts
+Look up Information about HCPCS Codes
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

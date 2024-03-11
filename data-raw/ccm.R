@@ -5,7 +5,7 @@ library(northstar)
 
 id <- "11iFT9rPKqzu6LgO0sjBtr0K-u5TkrljksoYsTf-hytA"
 coding <- read_sheet(id, sheet = "Coding/Reimbursement") |> clean_names()
-resource <- read_sheet(id, sheet = "Resources") |> clean_names()
+# resource <- read_sheet(id, sheet = "Resources") |> clean_names()
 
 # gs4_get(gs_id)
 # googlesheets4::gs4_browse(gs_id)
@@ -22,19 +22,6 @@ ccm <- coding |>
                   non_medicare_participants_charge_limit_self_pay,
                   mo_health_net),
          keep_empty = TRUE)
-  # rename(hcpcs           = cpt_hcpcs_code,
-  #        reimbursement   = medicare_reimbursement_national,
-  #        pat_resp        = medicare_patient_responsibility_national,
-  #        sp_limit        = non_medicare_participants_charge_limit_self_pay,
-  #        mohn            = mo_health_net,
-  #        mohn_auth       = mo_health_net_prior_auth,
-  #        short           = short_description,
-  #        long            = long_description,
-  #        criteria        = criteria_for_selecting_code,
-  #        mue_value      = medicare_mue_values,
-  #        mue_adjud       = medicare_mue_adjudication_indicator,
-  #        mue_reason      = medicare_mue_rationale,
-  #        )
 
 ccm_hcpcs <- ccm |>
   filter(!is.na(cpt_hcpcs_code)) |>
@@ -42,17 +29,14 @@ ccm_hcpcs <- ccm |>
   pull(cpt_hcpcs_code)
 
 
-ccm_npfs <- calc_amounts_df(hcpcs = ccm_hcpcs, state = "MO")
-ccm_npfs <- calc_amounts_df(hcpcs = ccm_hcpcs, state = "KS")
+ccm_npfs <- hcpcs_search(hcpcs = ccm_hcpcs, state = c("MO", "KS"))
 
 
-ccm_desc <- cpt_descriptors() |>
-  filter(cpt %in% c(ccm_hcpcs)) |>
-  # select(-clinician_descriptor) |>
-  distinct() |>
-  rename(hcpcs = cpt,
-         consumer_desc = consumer_descriptor,
-         clinician_desc = clinician_descriptor)
+# ccm_desc <- descriptors(hcpcs = ccm_hcpcs) |>
+#   distinct() |>
+#   rename(hcpcs = cpt,
+#          consumer_desc = consumer_descriptor,
+#          clinician_desc = clinician_descriptor)
 
 L2 <- hcpcs_lv2() |>
   filter(hcpcs %in% ccm_hcpcs) |>

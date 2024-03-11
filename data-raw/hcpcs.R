@@ -34,7 +34,7 @@ two <- read_excel(level2, col_types = "text") |>
          action      = action_cd)
 
 two |>
-  count(action_cd) |> print(n = Inf)
+  count(action) |> print(n = Inf)
 
 board <- pins::board_folder(here::here("pins"))
 

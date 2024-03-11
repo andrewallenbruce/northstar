@@ -16,7 +16,6 @@ BugReports: https://github.com/andrewallenbruce/northstar/issues
 Depends: 
     R (>= 4.1.0)
 Imports:
-   data.table,
    dplyr,
    pins,
    rlang,
@@ -24,7 +23,8 @@ Imports:
    glue,
    vctrs,
    cli,
-   tidyr
+   tidyr,
+   purrr
 Suggests:
     gt,
     gluedown,

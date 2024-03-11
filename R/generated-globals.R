@@ -2,6 +2,8 @@
 
 utils::globalVariables(c(
   # <hcpcs_search>
+  "cf",
+  # <hcpcs_search>
   "clinician_descriptor",
   # <hcpcs_search>
   "cpt",

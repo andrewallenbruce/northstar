@@ -1,61 +1,81 @@
 #' Calculate Limiting Charge
-#' @param participating_amount numeric
-#' @return description
+#'
+#' The Medicare limiting charge is set by law at 115% of the payment amount
+#' for the service furnished by the Non-participating physician.
+#'
+#' However, the law sets the payment amount for Non-participating physicians
+#' at 95% of the payment amount for Participating physicians (i.e., the fee
+#' schedule amount).
+#'
+#' Calculating 95% of 115% of an amount is equivalent to multiplying the
+#' amount by a factor of 1.0925 (or 109.25%).
+#'
+#' Therefore, to calculate the Medicare limiting charge for a physician
+#' service for a locality, multiply the fee schedule amount by a factor
+#' of 1.0925. The result is the Medicare limiting charge for that service for
+#' that locality to which the fee schedule amount applies.
+#'
+#' @param par_amount < *double* > Participating Amount
+#' @return numeric vector of Limiting Charge Amount
 #' @examples
-#' calc_limiting_charge(26.35)
+#' limiting_charge(26.35)
 #' @export
-calc_limiting_charge <- function(participating_amount) {
+limiting_charge <- function(par_amount) {
 
-  stopifnot("`participating_amount` must be numeric" = is.numeric(participating_amount))
+  stopifnot("`par_amount` must be numeric" = is.numeric(par_amount))
 
-  participating_amount * 1.0925
+  par_amount * 1.0925
 }
 
 #' Calculate Non-Participating Amount
-#' @param participating_amount numeric
-#' @return description
+#'
+#' The payment amount for Non-participating physicians is 95% of the payment
+#' amount for Participating physicians (i.e., the fee schedule amount).
+#'
+#' @param par_amount < *double* > Participating Amount
+#' @return numeric vector of Non-participating amount
 #' @examples
-#' calc_nonpar_amount(26.35)
+#' nonpar_amount(26.35)
 #' @export
-calc_nonpar_amount <- function(participating_amount) {
+nonpar_amount <- function(par_amount) {
 
-  stopifnot("`participating_amount` must be numeric" = is.numeric(participating_amount))
+  stopifnot("`par_amount` must be numeric" = is.numeric(par_amount))
 
-  participating_amount * 0.95
+  par_amount * 0.95
 }
 
 #' Calculate Physician Fee Schedule Payment Amounts
 #'
-#' ((Work RVU x Work GPCI) + (PE RVU x PE GPCI) + (MP RVU x MP GPCI)) x CF
+#' ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 #'
-#' @param wrvu Work RVU
-#' @param fprvu Facility Practice Expense RVU
-#' @param nprvu Non-Facility Practice Expense RVU
-#' @param mrvu Malpractice RVU
-#' @param wgpci Work GPCI
-#' @param pgpci Practice Expense GPCI
-#' @param mgpci Malpractice GPCI
-#' @param cf Conversion Factor
-#' @return Facility & Non-Facility Participating, Non-Participating & Limiting Charge Amounts
+#' @param wrvu < *double* > Work RVU
+#' @param fprvu < *double* > Facility Practice Expense RVU
+#' @param nprvu < *double* > Non-Facility Practice Expense RVU
+#' @param mrvu < *double* > Malpractice RVU
+#' @param wgpci < *double* > Work GPCI
+#' @param pgpci < *double* > Practice Expense GPCI
+#' @param mgpci < *double* > Malpractice GPCI
+#' @param cf < *double* > Conversion Factor, default is `32.7442`
+#' @return **Facility** & **Non-Facility** Participating, Non-Participating & Limiting Charge Amounts
 #' @examples
-#' calc_amounts(wrvu  = 6.26,
-#'              nprvu = 7.92,
-#'              fprvu = 4.36,
-#'              mrvu  = 0.99,
-#'              wgpci = 1.0,
-#'              pgpci = 0.883,
-#'              mgpci = 1.125,
-#'              cf    = 32.7442)
+#' calculate_amounts(wrvu  = 6.26,
+#'                   nprvu = 7.92,
+#'                   fprvu = 4.36,
+#'                   mrvu  = 0.99,
+#'                   wgpci = 1.053,
+#'                   pgpci = 0.883,
+#'                   mgpci = 1.125,
+#'                   cf    = 32.7442)
 #' @autoglobal
 #' @export
-calc_amounts <- function(wrvu,
-                         fprvu,
-                         nprvu,
-                         mrvu,
-                         wgpci,
-                         pgpci,
-                         mgpci,
-                         cf) {
+calculate_amounts <- function(wrvu,
+                              fprvu,
+                              nprvu,
+                              mrvu,
+                              wgpci,
+                              pgpci,
+                              mgpci,
+                              cf = 32.7442) {
 
   stopifnot("all arguments must be numeric" = is.numeric(
     c(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)))
@@ -65,13 +85,13 @@ calc_amounts <- function(wrvu,
 
   f <- list(
     par    = fpar,
-    nonpar = calc_nonpar_amount(fpar),
-    limit  = calc_limiting_charge(fpar))
+    nonpar = nonpar_amount(fpar),
+    limit  = limiting_charge(fpar))
 
   n <- list(
     par    = npar,
-    nonpar = calc_nonpar_amount(npar),
-    limit  = calc_limiting_charge(npar))
+    nonpar = nonpar_amount(npar),
+    limit  = limiting_charge(npar))
 
   glue::glue("Facility:\n",
              "Participating Amount    = {gt::vec_fmt_currency(fpar)}\n",
@@ -90,12 +110,32 @@ calc_amounts <- function(wrvu,
              nlim  = n$limit)
 }
 
-#' Calculate Physician Fee Schedule Payment Amounts
-#' @param hcpcs numeric
-#' @param state numeric
-#' @param locality numeric
-#' @param mac numeric
-#' @return description
+#' Look up Information about HCPCS Codes
+#' @param hcpcs < *character* > 5-character HCPCS Code
+#' @param state < *character* > 2-character state abbreviation
+#' @param locality < *character* > 2-character locality id
+#' @param mac < *character* > 5-character MAC id code
+#'
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Column**    |**Description**                       |
+#' |:-------------|:-------------------------------------|
+#' |`hcpcs`       |5-character HCPCS Code                |
+#' |`hcpcs_type`  |HCPCS Type                            |
+#' |`description` |HCPCS Description                     |
+#' |`cons_desc`   |HCPCS Level I Consumer Description    |
+#' |`clin_descs`  |HCPCS Level I Clinician Descriptions  |
+#' |`mod`         |Modifier                              |
+#' |`status`      |Status Code                           |
+#' |`mac`         |Medicare Administrative Contractor ID |
+#' |`state`       |State Abbreviation                    |
+#' |`locality`    |State Abbreviation                    |
+#' |`area`        |State Abbreviation                    |
+#' |`counties`    |State Abbreviation                    |
+#' |`two_macs`    |State Abbreviation                    |
+#' |`wgpci`       |State Abbreviation                    |
+#' |`pgpci`       |State Abbreviation                    |
+#'
 #' @examplesIf interactive()
 #' hcpcs_search(hcpcs = "V5299",
 #'              state = "GA",
@@ -115,27 +155,48 @@ hcpcs_search <- function(hcpcs,
   # fs <- purrr::map(hcpcs, \(x) pfs(hcpcs = x, locality = locality, mac = mac)) |> purrr::list_rbind()
   # desc <- purrr::map(hcpcs, \(x) cpt_descriptors(hcpcs = x)) |> purrr::list_rbind()
 
-  cf <- 32.7442
-
   rv <- rvu(hcpcs = hcpcs)
 
   gp <- gpci(state = state, locality = locality, mac = mac)
 
   fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
 
-  desc <- descriptors(hcpcs = hcpcs) |>
-    tidyr::nest(clinician_descriptors = clinician_descriptor)
+  ds <- descriptors(hcpcs = hcpcs) |> tidyr::nest(clinician_descriptors = clinician_descriptor)
 
-  dplyr::left_join(gp, fs, by = dplyr::join_by(mac, locality)) |>
-    dplyr::left_join(rv, by   = dplyr::join_by(hcpcs, mod, status)) |>
-    dplyr::left_join(desc, by = dplyr::join_by(hcpcs == cpt)) |>
+  l2 <- level2(hcpcs = hcpcs)
+
+  x <- list(
+    rvus        = if(!vctrs::vec_is_empty(rv)) rv else NULL,
+    gpci        = if(!vctrs::vec_is_empty(gp)) gp else NULL,
+    payment     = if(!vctrs::vec_is_empty(fs)) fs else NULL,
+    descriptors = if(!vctrs::vec_is_empty(ds)) ds else NULL,
+    level_2     = if(!vctrs::vec_is_empty(l2)) l2 else NULL
+  ) |>
+    purrr::compact()
+
+  res <- vctrs::vec_cbind(x$rvus, x$gpci)
+
+  if (rlang::has_name(x, "level_2")) {
+
+    res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs))
+
+  }
+
+  if (rlang::has_name(x, "descriptors")) {
+
+    res <- dplyr::left_join(res, x$payment, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+      dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs == cpt))
+
+  }
+
+  res |>
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
       npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
-      fnpar = calc_nonpar_amount(fpar),
-      nnpar = calc_nonpar_amount(npar),
-      flim  = calc_limiting_charge(fpar),
-      nlim  = calc_limiting_charge(npar)) |>
+      fnpar = nonpar_amount(fpar),
+      nnpar = nonpar_amount(npar),
+      flim  = limiting_charge(fpar),
+      nlim  = limiting_charge(npar)) |>
     dplyr::rowwise() |>
     dplyr::mutate(hcpcs_type = case_hcpcs(hcpcs)) |>
     dplyr::ungroup() |>
@@ -151,6 +212,8 @@ cols_amounts <- function(df) {
   cols <- c('hcpcs',
             'hcpcs_type',
             'description',
+            'long_description',
+            'short_description',
             'clin_desc'        = 'clinician_descriptor',
             'cons_desc'        = 'consumer_descriptor',
             'clin_descs'       = 'clinician_descriptors',
@@ -199,7 +262,25 @@ cols_amounts <- function(df) {
             'dximg',
             'endo',
             'rare',
-            'unused')
+            'unused',
+            'price',
+            'mult_pi',
+            'cim',
+            'mcm',
+            'statute',
+            'labcert',
+            'xref',
+            'cov',
+            'asc_grp',
+            'asc_dt',
+            'procnote',
+            'betos',
+            'tos',
+            'date_added',
+            'date_action',
+            'date_ended',
+            'action'
+            )
 
   df |> dplyr::select(dplyr::any_of(cols))
 }
