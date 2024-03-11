@@ -90,63 +90,64 @@
 <h3 id="look-up-hcpcs-code">Look Up HCPCS Code<a class="anchor" aria-label="anchor" href="#look-up-hcpcs-code"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/calc_amounts_df.html">calc_amounts_df</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
-<span>                state    <span class="op">=</span> <span class="st">"GA"</span>, </span>
-<span>                locality <span class="op">=</span> <span class="st">"99"</span>, </span>
-<span>                mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcpcs_search.html">hcpcs_search</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
+<span>             state    <span class="op">=</span> <span class="st">"GA"</span>, </span>
+<span>             locality <span class="op">=</span> <span class="st">"99"</span>, </span>
+<span>             mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 10</span></span>
-<span><span class="co">#&gt; Columns: 50</span></span>
-<span><span class="co">#&gt; $ hcpcs       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11646", "11646", "11646", "11646", "11646", "11646", "116…</span></span>
-<span><span class="co">#&gt; $ description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Exc f/e/e/n/l mal+mrg &gt;4 cm", "Exc f/e/e/n/l mal+mrg &gt;4 c…</span></span>
-<span><span class="co">#&gt; $ clin_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Excision of malignant lesion of ear, including margins, m…</span></span>
-<span><span class="co">#&gt; $ cons_desc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Removal of cancer skin growth of face, ears, eyelids, nos…</span></span>
-<span><span class="co">#&gt; $ mod         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
-<span><span class="co">#&gt; $ status      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A", "A", "A", "A", "A", "A", "A", "A", "A", "A"</span></span>
-<span><span class="co">#&gt; $ mac         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10212", "10212", "10212", "10212", "10212", "10212", "102…</span></span>
-<span><span class="co">#&gt; $ state       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA", "GA", "GA", "GA", "GA", "GA", "GA", "GA", "GA", "GA"</span></span>
-<span><span class="co">#&gt; $ locality    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99", "99", "99", "99", "99", "99", "99", "99", "99", "99"</span></span>
-<span><span class="co">#&gt; $ area        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "REST OF GEORGIA", "REST OF GEORGIA", "REST OF GEORGIA", "…</span></span>
-<span><span class="co">#&gt; $ counties    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALL OTHER COUNTIES", "ALL OTHER COUNTIES", "ALL OTHER COU…</span></span>
-<span><span class="co">#&gt; $ two_macs    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</span></span>
-<span><span class="co">#&gt; $ wgpci       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</span></span>
-<span><span class="co">#&gt; $ pgpci       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.883, 0.883, 0.883, 0.883, 0.883, 0.883, 0.883, 0.883, 0.…</span></span>
-<span><span class="co">#&gt; $ mgpci       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.125, 1.125, 1.125, 1.125, 1.125, 1.125, 1.125, 1.125, 1.…</span></span>
-<span><span class="co">#&gt; $ wrvu        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 6.26, 6.26, 6.26, 6.26, 6.26, 6.26, 6.26, 6.26, 6.26, 6.26</span></span>
-<span><span class="co">#&gt; $ nprvu       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.92, 7.92, 7.92, 7.92, 7.92, 7.92, 7.92, 7.92, 7.92, 7.92</span></span>
-<span><span class="co">#&gt; $ fprvu       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.36, 4.36, 4.36, 4.36, 4.36, 4.36, 4.36, 4.36, 4.36, 4.36</span></span>
-<span><span class="co">#&gt; $ mrvu        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99</span></span>
-<span><span class="co">#&gt; $ cf          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 32.744, 32.744, 32.744, 32.744, 32.744, 32.744, 32.744, 32…</span></span>
-<span><span class="co">#&gt; $ fpar        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 367.5065, 367.5065, 367.5065, 367.5065, 367.5065, 367.5065…</span></span>
-<span><span class="co">#&gt; $ npar        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 470.4366, 470.4366, 470.4366, 470.4366, 470.4366, 470.4366…</span></span>
-<span><span class="co">#&gt; $ fnpar       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 349.1312, 349.1312, 349.1312, 349.1312, 349.1312, 349.1312…</span></span>
-<span><span class="co">#&gt; $ nnpar       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 446.9148, 446.9148, 446.9148, 446.9148, 446.9148, 446.9148…</span></span>
-<span><span class="co">#&gt; $ flim        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 401.5009, 401.5009, 401.5009, 401.5009, 401.5009, 401.5009…</span></span>
-<span><span class="co">#&gt; $ nlim        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 513.952, 513.952, 513.952, 513.952, 513.952, 513.952, 513.…</span></span>
-<span><span class="co">#&gt; $ opps        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9", "9", "9", "9", "9", "9", "9"</span></span>
-<span><span class="co">#&gt; $ nprvu_opps  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span></span>
-<span><span class="co">#&gt; $ mrvu_opps   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span></span>
-<span><span class="co">#&gt; $ fprvu_opps  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span></span>
-<span><span class="co">#&gt; $ mult_surg   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"</span></span>
-<span><span class="co">#&gt; $ flat_vis    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span></span>
-<span><span class="co">#&gt; $ nther       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2</span></span>
-<span><span class="co">#&gt; $ fther       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span></span>
-<span><span class="co">#&gt; $ global      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "010", "010", "010", "010", "010", "010", "010", "010", "0…</span></span>
-<span><span class="co">#&gt; $ op_ind      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1</span></span>
-<span><span class="co">#&gt; $ op_pre      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1</span></span>
-<span><span class="co">#&gt; $ op_intra    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8</span></span>
-<span><span class="co">#&gt; $ op_post     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1</span></span>
-<span><span class="co">#&gt; $ pctc        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"</span></span>
-<span><span class="co">#&gt; $ mult_proc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"</span></span>
-<span><span class="co">#&gt; $ surg_bilat  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"</span></span>
-<span><span class="co">#&gt; $ surg_asst   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"</span></span>
-<span><span class="co">#&gt; $ surg_co     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"</span></span>
-<span><span class="co">#&gt; $ surg_team   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"</span></span>
-<span><span class="co">#&gt; $ supvis      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "09", "09", "09", "09", "09", "09", "09", "09", "09", "09"</span></span>
-<span><span class="co">#&gt; $ dximg       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99", "99", "99", "99", "99", "99", "99", "99", "99", "99"</span></span>
-<span><span class="co">#&gt; $ endo        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA</span></span>
-<span><span class="co">#&gt; $ rare        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00", "00", "00", "00", "00", "00", "00", "00", "00", "00"</span></span>
-<span><span class="co">#&gt; $ unused      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 51</span></span>
+<span><span class="co">#&gt; $ hcpcs            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11646"</span></span>
+<span><span class="co">#&gt; $ hcpcs_type       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Category I"</span></span>
+<span><span class="co">#&gt; $ description      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
+<span><span class="co">#&gt; $ cons_desc        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Removal of cancer skin growth of face, ears, eyelids…</span></span>
+<span><span class="co">#&gt; $ clin_descs       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;tbl_df[10 x 1]&gt;]</span></span>
+<span><span class="co">#&gt; $ mod              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ status           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A"</span></span>
+<span><span class="co">#&gt; $ mac              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10212"</span></span>
+<span><span class="co">#&gt; $ state            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
+<span><span class="co">#&gt; $ locality         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99"</span></span>
+<span><span class="co">#&gt; $ area             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "REST OF GEORGIA"</span></span>
+<span><span class="co">#&gt; $ counties         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALL OTHER COUNTIES"</span></span>
+<span><span class="co">#&gt; $ two_macs         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
+<span><span class="co">#&gt; $ wgpci            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ pgpci            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.883</span></span>
+<span><span class="co">#&gt; $ mgpci            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.125</span></span>
+<span><span class="co">#&gt; $ wrvu             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 6.26</span></span>
+<span><span class="co">#&gt; $ nonfac_prvu      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.92</span></span>
+<span><span class="co">#&gt; $ fac_prvu         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 4.36</span></span>
+<span><span class="co">#&gt; $ mrvu             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.99</span></span>
+<span><span class="co">#&gt; $ cf               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 32.744</span></span>
+<span><span class="co">#&gt; $ fac_par          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 367.5065</span></span>
+<span><span class="co">#&gt; $ nonfac_par       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 470.4366</span></span>
+<span><span class="co">#&gt; $ fac_nonpar       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 349.1312</span></span>
+<span><span class="co">#&gt; $ nonfac_nonpar    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 446.9148</span></span>
+<span><span class="co">#&gt; $ fac_limit        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 401.5009</span></span>
+<span><span class="co">#&gt; $ nonfac_limit     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 513.952</span></span>
+<span><span class="co">#&gt; $ opps             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9"</span></span>
+<span><span class="co">#&gt; $ nonfac_prvu_opps <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ fac_prvu_opps    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ mrvu_opps        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ mult_surg        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ flat_vis         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ nonfac_therapy   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2</span></span>
+<span><span class="co">#&gt; $ fac_therapy      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
+<span><span class="co">#&gt; $ global           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "010"</span></span>
+<span><span class="co">#&gt; $ op_ind           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ op_pre           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1</span></span>
+<span><span class="co">#&gt; $ op_intra         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.8</span></span>
+<span><span class="co">#&gt; $ op_post          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1</span></span>
+<span><span class="co">#&gt; $ pctc             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ mult_proc        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2"</span></span>
+<span><span class="co">#&gt; $ surg_bilat       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ surg_asst        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1"</span></span>
+<span><span class="co">#&gt; $ surg_co          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ surg_team        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0"</span></span>
+<span><span class="co">#&gt; $ supvis           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "09"</span></span>
+<span><span class="co">#&gt; $ dximg            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99"</span></span>
+<span><span class="co">#&gt; $ endo             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ rare             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span>
+<span><span class="co">#&gt; $ unused           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="physician-fee-schedule-amount-calculation">Physician Fee Schedule Amount Calculation<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-amount-calculation"></a>
@@ -296,7 +297,7 @@ follows:</p>
 <span><span class="co">#&gt; $ opps_nf   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span>
 <span><span class="co">#&gt; $ opps_f    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcpcs_lv2.html">hcpcs_lv2</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/level2.html">level2</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 1</span></span>
 <span><span class="co">#&gt; Columns: 21</span></span>
@@ -317,25 +318,19 @@ follows:</p>
 <span><span class="co">#&gt; $ procnote          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
 <span><span class="co">#&gt; $ betos             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O1F"</span></span>
 <span><span class="co">#&gt; $ tos               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K"</span></span>
-<span><span class="co">#&gt; $ add_dt            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1982-01-01</span></span>
-<span><span class="co">#&gt; $ act_eff_dt        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1995-01-01</span></span>
-<span><span class="co">#&gt; $ term_dt           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ action_cd         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "N"</span></span></code></pre>
+<span><span class="co">#&gt; $ date_added        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1982-01-01</span></span>
+<span><span class="co">#&gt; $ date_action       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1995-01-01</span></span>
+<span><span class="co">#&gt; $ date_ended        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ action            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "N"</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/cpt_descriptors.html">cpt_descriptors</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
-<span><span class="co">#&gt;    cpt   clinician_descriptor                                consumer_descriptor</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 11646 Excision of malignant lesion of ear, including mar… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 11646 Excision of malignant lesion of ear, more than 4.0… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 11646 Excision of malignant lesion of eyelid, including … Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 11646 Excision of malignant lesion of eyelid, more than … Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 11646 Excision of malignant lesion of face, including ma… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 11646 Excision of malignant lesion of face, more than 4.… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 11646 Excision of malignant lesion of lip, including mar… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 11646 Excision of malignant lesion of lip, more than 4.0… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 11646 Excision of malignant lesion of nose, including ma… Removal of cancer …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11646 Excision of malignant lesion of nose, more than 4.… Removal of cancer …</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/descriptors.html">descriptors</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>clinician_descriptors <span class="op">=</span> <span class="va">clinician_descriptor</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 3</span></span>
+<span><span class="co">#&gt; $ cpt                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11646"</span></span>
+<span><span class="co">#&gt; $ consumer_descriptor   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Removal of cancer skin growth of face, ears, ey…</span></span>
+<span><span class="co">#&gt; $ clinician_descriptors <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;tbl_df[10 x 1]&gt;]</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

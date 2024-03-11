@@ -91,72 +91,139 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="return-information-about-hcpcs-code">Return Information about HCPCS Code<a class="anchor" aria-label="anchor" href="#return-information-about-hcpcs-code"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/hcpcs_search.html">hcpcs_search</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span>, </span>
+<span>             state <span class="op">=</span> <span class="st">"GA"</span>, </span>
+<span>             locality <span class="op">=</span> <span class="st">"99"</span>, </span>
+<span>             mac <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">28</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod         <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"A"</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">6.26</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">7.92</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">4.36</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.99</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cf          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">32.744</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu_opps   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> global      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"010"</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_ind      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_pre      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.1</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_intra    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.8</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_post     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.1</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pctc        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_proc   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_bilat  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_asst   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_co     <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_team   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> endo        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> supvis      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"09"</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> dximg       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> unused      <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rare        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">51</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs            <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs_type       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Category I"</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cons_desc        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Removal of cancer skin growth of face, ears, eyelids…</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="st">&gt; $ clin_descs       &lt;list&gt; [&lt;tbl_df[10 x 1]&gt;]</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="st">&gt; $ mod              &lt;chr&gt; NA</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="st">&gt; $ status           &lt;chr&gt; "</span>A<span class="st">"</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="st">&gt; $ mac              &lt;chr&gt; "</span><span class="dv">10212</span><span class="st">"</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="st">&gt; $ state            &lt;chr&gt; "</span>GA<span class="st">"</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="st">&gt; $ locality         &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">&gt; $ area             &lt;chr&gt; "</span>REST OF GEORGIA<span class="st">"</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="st">&gt; $ counties         &lt;chr&gt; "</span>ALL OTHER COUNTIES<span class="st">"</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="st">&gt; $ two_macs         &lt;lgl&gt; FALSE</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">&gt; $ wgpci            &lt;dbl&gt; 1</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="st">&gt; $ pgpci            &lt;dbl&gt; 0.883</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="st">&gt; $ mgpci            &lt;dbl&gt; 1.125</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="st">&gt; $ wrvu             &lt;dbl&gt; 6.26</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="st">&gt; $ nonfac_prvu      &lt;dbl&gt; 7.92</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="st">&gt; $ fac_prvu         &lt;dbl&gt; 4.36</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="st">&gt; $ mrvu             &lt;dbl&gt; 0.99</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="st">&gt; $ cf               &lt;dbl&gt; 32.744</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="st">&gt; $ fac_par          &lt;dbl&gt; 367.5065</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="st">&gt; $ nonfac_par       &lt;dbl&gt; 470.4366</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="st">&gt; $ fac_nonpar       &lt;dbl&gt; 349.1312</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">&gt; $ nonfac_nonpar    &lt;dbl&gt; 446.9148</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">&gt; $ fac_limit        &lt;dbl&gt; 401.5009</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">&gt; $ nonfac_limit     &lt;dbl&gt; 513.952</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">&gt; $ opps             &lt;chr&gt; "</span><span class="dv">9</span><span class="st">"</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">&gt; $ nonfac_prvu_opps &lt;dbl&gt; 0</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">&gt; $ fac_prvu_opps    &lt;dbl&gt; 0</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="st">&gt; $ mrvu_opps        &lt;dbl&gt; 0</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="st">&gt; $ mult_surg        &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="st">&gt; $ flat_vis         &lt;dbl&gt; 0</span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="st">&gt; $ nonfac_therapy   &lt;dbl&gt; 2</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="st">&gt; $ fac_therapy      &lt;dbl&gt; 0</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="st">&gt; $ global           &lt;chr&gt; "</span><span class="dv">010</span><span class="st">"</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="st">&gt; $ op_ind           &lt;dbl&gt; 1</span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="st">&gt; $ op_pre           &lt;dbl&gt; 0.1</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="st">&gt; $ op_intra         &lt;dbl&gt; 0.8</span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="st">&gt; $ op_post          &lt;dbl&gt; 0.1</span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="st">&gt; $ pctc             &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="st">&gt; $ mult_proc        &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="st">&gt; $ surg_bilat       &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="st">&gt; $ surg_asst        &lt;chr&gt; "</span><span class="dv">1</span><span class="st">"</span></span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="st">&gt; $ surg_co          &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="st">&gt; $ surg_team        &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="st">&gt; $ supvis           &lt;chr&gt; "</span><span class="dv">09</span><span class="st">"</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="st">&gt; $ dximg            &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="st">&gt; $ endo             &lt;chr&gt; NA</span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="st">&gt; $ rare             &lt;chr&gt; "</span><span class="dv">00</span><span class="st">"</span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="st">&gt; $ unused           &lt;int&gt; 0</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">28</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"V5299"</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Hearing service"</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod         <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"R"</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cf          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">32.744</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu_opps   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> global      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"XXX"</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_ind      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_pre      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_intra    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_post     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pctc        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_proc   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_bilat  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_asst   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_co     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_team   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> endo        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> supvis      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"09"</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> dximg       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> unused      <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rare        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gpci.html">gpci</a></span><span class="op">(</span>state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
 <span>     locality <span class="op">=</span> <span class="st">"99"</span>,</span>
 <span>     mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">9</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state    <span class="sc">&lt;</span>fct<span class="sc">&gt;</span> GA</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> name     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REST OF GEORGIA"</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.883</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.125</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ALL OTHER COUNTIES"</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> two_macs <span class="sc">&lt;</span>lgl<span class="sc">&gt;</span> <span class="cn">FALSE</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">9</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"GA"</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> name     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REST OF GEORGIA"</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.883</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.125</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ALL OTHER COUNTIES"</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> two_macs <span class="sc">&lt;</span>lgl<span class="sc">&gt;</span> <span class="cn">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pfs.html">pfs</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
 <span>    mac      <span class="op">=</span> <span class="st">"10212"</span>,</span>
 <span>    locality <span class="op">=</span> <span class="st">"99"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">10</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"A"</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_surg <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> flat_vis  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> ntherapy  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> ftherapy  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">14</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"A"</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_surg <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> flat_vis  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nther     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">2</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fther     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_nf    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">470.44</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_f     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">367.51</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"9"</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps_nf   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps_f    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calc_amounts.html">calc_amounts</a></span><span class="op">(</span>wrvu  <span class="op">=</span> <span class="fl">6.26</span>,</span>
 <span>             nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span>
 <span>             fprvu <span class="op">=</span> <span class="fl">4.36</span>,</span>
@@ -165,75 +232,15 @@
 <span>             wgpci <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>             pgpci <span class="op">=</span> <span class="fl">0.883</span>,</span>
 <span>             mgpci <span class="op">=</span> <span class="fl">1.125</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility<span class="sc">:</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">367.51</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">349.13</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">401.50</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span> </span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility<span class="sc">:</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">470.44</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">446.91</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">513.95</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="return-information-about-hcpcs-code">Return Information about HCPCS Code<a class="anchor" aria-label="anchor" href="#return-information-about-hcpcs-code"></a>
-</h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/calc_amounts_df.html">calc_amounts_df</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
-<span>                state    <span class="op">=</span> <span class="st">"GA"</span>, </span>
-<span>                locality <span class="op">=</span> <span class="st">"99"</span>, </span>
-<span>                mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">48</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod         <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"A"</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac         <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state       <span class="sc">&lt;</span>fct<span class="sc">&gt;</span> GA</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> area        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REST OF GEORGIA"</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ALL OTHER COUNTIES"</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> two_macs    <span class="sc">&lt;</span>lgl<span class="sc">&gt;</span> <span class="cn">FALSE</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.883</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.125</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">6.26</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">7.92</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">4.36</span></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.99</span></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cf          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">32.744</span></span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fpar        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">367.5065</span></span>
-<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> npar        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">470.4366</span></span>
-<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fnpar       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">349.1312</span></span>
-<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nnpar       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">446.9148</span></span>
-<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> flim        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">401.5009</span></span>
-<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nlim        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">513.952</span></span>
-<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu_opps   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_surg   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> flat_vis    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> ntherapy    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> ftherapy    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> global      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"010"</span></span>
-<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_ind      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_pre      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.1</span></span>
-<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_intra    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.8</span></span>
-<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_post     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.1</span></span>
-<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pctc        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_proc   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_bilat  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_asst   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_co     <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_team   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> supvis      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"09"</span></span>
-<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> dximg       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> endo        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
-<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rare        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span>
-<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> unused      <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility<span class="sc">:</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">367.51</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">349.13</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">401.50</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="sc">&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility<span class="sc">:</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="er">&gt;</span> Participating Amount    <span class="ot">=</span> <span class="er">$</span><span class="fl">470.44</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating Amount <span class="ot">=</span> <span class="er">$</span><span class="fl">446.91</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge         <span class="ot">=</span> <span class="er">$</span><span class="fl">513.95</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

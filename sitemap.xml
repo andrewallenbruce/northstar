@@ -28,25 +28,25 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_amounts.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/calc_amounts_df.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_limiting_charge.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/calc_nonpar_amount.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/cpt_descriptors.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/descriptors.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/gpci.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/hcpcs_lv2.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/hcpcs_search.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/level2.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
