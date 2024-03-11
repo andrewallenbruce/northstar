@@ -88,32 +88,32 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kiernann.github.io/gluedown/" class="external-link">gluedown</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="physician-fee-schedule-payment-amount-file">Physician Fee Schedule Payment Amount File<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-payment-amount-file"></a>
+<h2 id="pfs-payment-amount-file">PFS Payment Amount File<a class="anchor" aria-label="anchor" href="#pfs-payment-amount-file"></a>
 </h2>
 <p>This file contains locality-specific physician fee schedule payment
 amounts for services covered by the Medicare Physician Fee Schedule
 (MPFS) with one record for each unique combination of carrier, locality,
 procedure code and modifier.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">:::</span><span class="fu">column_labels</span><span class="op">(</span><span class="st">"md"</span>, <span class="st">"pfs"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">:::</span><span class="fu">col_lab</span><span class="op">(</span><span class="st">"md"</span>, <span class="st">"pfs"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt_style</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="obbcgfjpwy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#obbcgfjpwy table {
+<div id="ecxzqrcidf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ecxzqrcidf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#obbcgfjpwy thead, #obbcgfjpwy tbody, #obbcgfjpwy tfoot, #obbcgfjpwy tr, #obbcgfjpwy td, #obbcgfjpwy th {
+#ecxzqrcidf thead, #ecxzqrcidf tbody, #ecxzqrcidf tfoot, #ecxzqrcidf tr, #ecxzqrcidf td, #ecxzqrcidf th {
   border-style: none;
 }
 
-#obbcgfjpwy p {
+#ecxzqrcidf p {
   margin: 0;
   padding: 0;
 }
 
-#obbcgfjpwy .gt_table {
+#ecxzqrcidf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -139,12 +139,12 @@ procedure code and modifier.</p>
   border-left-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_caption {
+#ecxzqrcidf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#obbcgfjpwy .gt_title {
+#ecxzqrcidf .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -156,7 +156,7 @@ procedure code and modifier.</p>
   border-bottom-width: 0;
 }
 
-#obbcgfjpwy .gt_subtitle {
+#ecxzqrcidf .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -168,7 +168,7 @@ procedure code and modifier.</p>
   border-top-width: 0;
 }
 
-#obbcgfjpwy .gt_heading {
+#ecxzqrcidf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -180,13 +180,13 @@ procedure code and modifier.</p>
   border-right-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_bottom_border {
+#ecxzqrcidf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_col_headings {
+#ecxzqrcidf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -201,7 +201,7 @@ procedure code and modifier.</p>
   border-right-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_col_heading {
+#ecxzqrcidf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -221,7 +221,7 @@ procedure code and modifier.</p>
   overflow-x: hidden;
 }
 
-#obbcgfjpwy .gt_column_spanner_outer {
+#ecxzqrcidf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -233,15 +233,15 @@ procedure code and modifier.</p>
   padding-right: 4px;
 }
 
-#obbcgfjpwy .gt_column_spanner_outer:first-child {
+#ecxzqrcidf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#obbcgfjpwy .gt_column_spanner_outer:last-child {
+#ecxzqrcidf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#obbcgfjpwy .gt_column_spanner {
+#ecxzqrcidf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -253,11 +253,11 @@ procedure code and modifier.</p>
   width: 100%;
 }
 
-#obbcgfjpwy .gt_spanner_row {
+#ecxzqrcidf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#obbcgfjpwy .gt_group_heading {
+#ecxzqrcidf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -283,7 +283,7 @@ procedure code and modifier.</p>
   text-align: left;
 }
 
-#obbcgfjpwy .gt_empty_group_heading {
+#ecxzqrcidf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -298,15 +298,15 @@ procedure code and modifier.</p>
   vertical-align: middle;
 }
 
-#obbcgfjpwy .gt_from_md > :first-child {
+#ecxzqrcidf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#obbcgfjpwy .gt_from_md > :last-child {
+#ecxzqrcidf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#obbcgfjpwy .gt_row {
+#ecxzqrcidf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -325,7 +325,7 @@ procedure code and modifier.</p>
   overflow-x: hidden;
 }
 
-#obbcgfjpwy .gt_stub {
+#ecxzqrcidf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -338,7 +338,7 @@ procedure code and modifier.</p>
   padding-right: 5px;
 }
 
-#obbcgfjpwy .gt_stub_row_group {
+#ecxzqrcidf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -352,15 +352,15 @@ procedure code and modifier.</p>
   vertical-align: top;
 }
 
-#obbcgfjpwy .gt_row_group_first td {
+#ecxzqrcidf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#obbcgfjpwy .gt_row_group_first th {
+#ecxzqrcidf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#obbcgfjpwy .gt_summary_row {
+#ecxzqrcidf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -370,16 +370,16 @@ procedure code and modifier.</p>
   padding-right: 5px;
 }
 
-#obbcgfjpwy .gt_first_summary_row {
+#ecxzqrcidf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_first_summary_row.thick {
+#ecxzqrcidf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#obbcgfjpwy .gt_last_summary_row {
+#ecxzqrcidf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -389,7 +389,7 @@ procedure code and modifier.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_grand_summary_row {
+#ecxzqrcidf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -399,7 +399,7 @@ procedure code and modifier.</p>
   padding-right: 5px;
 }
 
-#obbcgfjpwy .gt_first_grand_summary_row {
+#ecxzqrcidf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -409,7 +409,7 @@ procedure code and modifier.</p>
   border-top-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_last_grand_summary_row_top {
+#ecxzqrcidf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -419,11 +419,11 @@ procedure code and modifier.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_striped {
+#ecxzqrcidf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#obbcgfjpwy .gt_table_body {
+#ecxzqrcidf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -432,7 +432,7 @@ procedure code and modifier.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_footnotes {
+#ecxzqrcidf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -446,7 +446,7 @@ procedure code and modifier.</p>
   border-right-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_footnote {
+#ecxzqrcidf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -455,7 +455,7 @@ procedure code and modifier.</p>
   padding-right: 5px;
 }
 
-#obbcgfjpwy .gt_sourcenotes {
+#ecxzqrcidf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -469,7 +469,7 @@ procedure code and modifier.</p>
   border-right-color: #D3D3D3;
 }
 
-#obbcgfjpwy .gt_sourcenote {
+#ecxzqrcidf .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -477,63 +477,63 @@ procedure code and modifier.</p>
   padding-right: 5px;
 }
 
-#obbcgfjpwy .gt_left {
+#ecxzqrcidf .gt_left {
   text-align: left;
 }
 
-#obbcgfjpwy .gt_center {
+#ecxzqrcidf .gt_center {
   text-align: center;
 }
 
-#obbcgfjpwy .gt_right {
+#ecxzqrcidf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#obbcgfjpwy .gt_font_normal {
+#ecxzqrcidf .gt_font_normal {
   font-weight: normal;
 }
 
-#obbcgfjpwy .gt_font_bold {
+#ecxzqrcidf .gt_font_bold {
   font-weight: bold;
 }
 
-#obbcgfjpwy .gt_font_italic {
+#ecxzqrcidf .gt_font_italic {
   font-style: italic;
 }
 
-#obbcgfjpwy .gt_super {
+#ecxzqrcidf .gt_super {
   font-size: 65%;
 }
 
-#obbcgfjpwy .gt_footnote_marks {
+#ecxzqrcidf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#obbcgfjpwy .gt_asterisk {
+#ecxzqrcidf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#obbcgfjpwy .gt_indent_1 {
+#ecxzqrcidf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#obbcgfjpwy .gt_indent_2 {
+#ecxzqrcidf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#obbcgfjpwy .gt_indent_3 {
+#ecxzqrcidf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#obbcgfjpwy .gt_indent_4 {
+#ecxzqrcidf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#obbcgfjpwy .gt_indent_5 {
+#ecxzqrcidf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -667,7 +667,7 @@ procedure code and modifier.</p>
 <p><strong>OPPS Indicator</strong></p>
 </div></td>
 <td headers="stub_1_12 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>1 = Subject to OPPS payment cap determination, 9 = Not subject to OPPS payment cap determination</p>
+<p><code>1</code> = Subject to OPPS payment cap determination, <code>9</code> = Not subject to OPPS payment cap determination</p>
 </div></td>
 </tr>
 <tr>
@@ -696,7 +696,7 @@ procedure code and modifier.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="physician-fee-schedule-relative-value-file">Physician Fee Schedule Relative Value File<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-relative-value-file"></a>
+<h2 id="pfs-relative-value-file">PFS Relative Value File<a class="anchor" aria-label="anchor" href="#pfs-relative-value-file"></a>
 </h2>
 <p>This file contains information on services covered by the Medicare
 Physician Fee Schedule (MPFS) in 2024. For more than 10,000 physician
@@ -713,25 +713,25 @@ The GPCIs are applied in the calculation of a fee schedule payment
 amount by multiplying the RVU for each component times the GPCI for that
 component.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">:::</span><span class="fu">column_labels</span><span class="op">(</span><span class="st">"md"</span>, <span class="st">"rvu"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">:::</span><span class="fu">col_lab</span><span class="op">(</span><span class="st">"md"</span>, <span class="st">"rvu"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt_style</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="aohttreyxz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aohttreyxz table {
+<div id="sbjsdmsvbl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sbjsdmsvbl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aohttreyxz thead, #aohttreyxz tbody, #aohttreyxz tfoot, #aohttreyxz tr, #aohttreyxz td, #aohttreyxz th {
+#sbjsdmsvbl thead, #sbjsdmsvbl tbody, #sbjsdmsvbl tfoot, #sbjsdmsvbl tr, #sbjsdmsvbl td, #sbjsdmsvbl th {
   border-style: none;
 }
 
-#aohttreyxz p {
+#sbjsdmsvbl p {
   margin: 0;
   padding: 0;
 }
 
-#aohttreyxz .gt_table {
+#sbjsdmsvbl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -757,12 +757,12 @@ component.</p>
   border-left-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_caption {
+#sbjsdmsvbl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aohttreyxz .gt_title {
+#sbjsdmsvbl .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -774,7 +774,7 @@ component.</p>
   border-bottom-width: 0;
 }
 
-#aohttreyxz .gt_subtitle {
+#sbjsdmsvbl .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -786,7 +786,7 @@ component.</p>
   border-top-width: 0;
 }
 
-#aohttreyxz .gt_heading {
+#sbjsdmsvbl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -798,13 +798,13 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_bottom_border {
+#sbjsdmsvbl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_col_headings {
+#sbjsdmsvbl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -819,7 +819,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_col_heading {
+#sbjsdmsvbl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -839,7 +839,7 @@ component.</p>
   overflow-x: hidden;
 }
 
-#aohttreyxz .gt_column_spanner_outer {
+#sbjsdmsvbl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -851,15 +851,15 @@ component.</p>
   padding-right: 4px;
 }
 
-#aohttreyxz .gt_column_spanner_outer:first-child {
+#sbjsdmsvbl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aohttreyxz .gt_column_spanner_outer:last-child {
+#sbjsdmsvbl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aohttreyxz .gt_column_spanner {
+#sbjsdmsvbl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -871,11 +871,11 @@ component.</p>
   width: 100%;
 }
 
-#aohttreyxz .gt_spanner_row {
+#sbjsdmsvbl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aohttreyxz .gt_group_heading {
+#sbjsdmsvbl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -901,7 +901,7 @@ component.</p>
   text-align: left;
 }
 
-#aohttreyxz .gt_empty_group_heading {
+#sbjsdmsvbl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -916,15 +916,15 @@ component.</p>
   vertical-align: middle;
 }
 
-#aohttreyxz .gt_from_md > :first-child {
+#sbjsdmsvbl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aohttreyxz .gt_from_md > :last-child {
+#sbjsdmsvbl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aohttreyxz .gt_row {
+#sbjsdmsvbl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -943,7 +943,7 @@ component.</p>
   overflow-x: hidden;
 }
 
-#aohttreyxz .gt_stub {
+#sbjsdmsvbl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -956,7 +956,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#aohttreyxz .gt_stub_row_group {
+#sbjsdmsvbl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -970,15 +970,15 @@ component.</p>
   vertical-align: top;
 }
 
-#aohttreyxz .gt_row_group_first td {
+#sbjsdmsvbl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aohttreyxz .gt_row_group_first th {
+#sbjsdmsvbl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aohttreyxz .gt_summary_row {
+#sbjsdmsvbl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -988,16 +988,16 @@ component.</p>
   padding-right: 5px;
 }
 
-#aohttreyxz .gt_first_summary_row {
+#sbjsdmsvbl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_first_summary_row.thick {
+#sbjsdmsvbl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aohttreyxz .gt_last_summary_row {
+#sbjsdmsvbl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1007,7 +1007,7 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_grand_summary_row {
+#sbjsdmsvbl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1017,7 +1017,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#aohttreyxz .gt_first_grand_summary_row {
+#sbjsdmsvbl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1027,7 +1027,7 @@ component.</p>
   border-top-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_last_grand_summary_row_top {
+#sbjsdmsvbl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1037,11 +1037,11 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_striped {
+#sbjsdmsvbl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aohttreyxz .gt_table_body {
+#sbjsdmsvbl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1050,7 +1050,7 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_footnotes {
+#sbjsdmsvbl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1064,7 +1064,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_footnote {
+#sbjsdmsvbl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1073,7 +1073,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#aohttreyxz .gt_sourcenotes {
+#sbjsdmsvbl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1087,7 +1087,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#aohttreyxz .gt_sourcenote {
+#sbjsdmsvbl .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1095,63 +1095,63 @@ component.</p>
   padding-right: 5px;
 }
 
-#aohttreyxz .gt_left {
+#sbjsdmsvbl .gt_left {
   text-align: left;
 }
 
-#aohttreyxz .gt_center {
+#sbjsdmsvbl .gt_center {
   text-align: center;
 }
 
-#aohttreyxz .gt_right {
+#sbjsdmsvbl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aohttreyxz .gt_font_normal {
+#sbjsdmsvbl .gt_font_normal {
   font-weight: normal;
 }
 
-#aohttreyxz .gt_font_bold {
+#sbjsdmsvbl .gt_font_bold {
   font-weight: bold;
 }
 
-#aohttreyxz .gt_font_italic {
+#sbjsdmsvbl .gt_font_italic {
   font-style: italic;
 }
 
-#aohttreyxz .gt_super {
+#sbjsdmsvbl .gt_super {
   font-size: 65%;
 }
 
-#aohttreyxz .gt_footnote_marks {
+#sbjsdmsvbl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aohttreyxz .gt_asterisk {
+#sbjsdmsvbl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aohttreyxz .gt_indent_1 {
+#sbjsdmsvbl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aohttreyxz .gt_indent_2 {
+#sbjsdmsvbl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aohttreyxz .gt_indent_3 {
+#sbjsdmsvbl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aohttreyxz .gt_indent_4 {
+#sbjsdmsvbl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aohttreyxz .gt_indent_5 {
+#sbjsdmsvbl .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1463,7 +1463,7 @@ component.</p>
 <span></span>
 <span><span class="va">foot_mod</span> <span class="op">&lt;-</span> <span class="st">"For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."</span></span>
 <span></span>
-<span><span class="va">mod_join</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span><span class="va">modifiers</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  mod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"26"</span>, <span class="st">"TC"</span>, <span class="st">"53"</span><span class="op">)</span>,</span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Professional Component"</span>, <span class="st">"Technical Component"</span>, <span class="st">"Discontinued Procedure"</span><span class="op">)</span>,</span>
 <span>  description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -1473,14 +1473,16 @@ component.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">mod</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">mod_join</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span></span>
+<span></span>
+<span><span class="va">modifiers</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"mod"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>n <span class="op">=</span> <span class="st">"# of Codes"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_stub.html" class="external-link">cells_stub</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"For diagnostic tests, a blank in this field denotes the Global Service &amp; the following modifiers identify the components:"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
 <span>    footnote <span class="op">=</span> <span class="va">foot_53</span>,</span>
@@ -1498,23 +1500,23 @@ component.</p>
 <span>    source_notes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
 <span>    row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<div id="hanalnqsda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hanalnqsda table {
+<div id="paroygpqjy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#paroygpqjy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hanalnqsda thead, #hanalnqsda tbody, #hanalnqsda tfoot, #hanalnqsda tr, #hanalnqsda td, #hanalnqsda th {
+#paroygpqjy thead, #paroygpqjy tbody, #paroygpqjy tfoot, #paroygpqjy tr, #paroygpqjy td, #paroygpqjy th {
   border-style: none;
 }
 
-#hanalnqsda p {
+#paroygpqjy p {
   margin: 0;
   padding: 0;
 }
 
-#hanalnqsda .gt_table {
+#paroygpqjy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1540,12 +1542,12 @@ component.</p>
   border-left-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_caption {
+#paroygpqjy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hanalnqsda .gt_title {
+#paroygpqjy .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -1557,7 +1559,7 @@ component.</p>
   border-bottom-width: 0;
 }
 
-#hanalnqsda .gt_subtitle {
+#paroygpqjy .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -1569,7 +1571,7 @@ component.</p>
   border-top-width: 0;
 }
 
-#hanalnqsda .gt_heading {
+#paroygpqjy .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1581,13 +1583,13 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_bottom_border {
+#paroygpqjy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_col_headings {
+#paroygpqjy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1602,7 +1604,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_col_heading {
+#paroygpqjy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1622,7 +1624,7 @@ component.</p>
   overflow-x: hidden;
 }
 
-#hanalnqsda .gt_column_spanner_outer {
+#paroygpqjy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1634,15 +1636,15 @@ component.</p>
   padding-right: 4px;
 }
 
-#hanalnqsda .gt_column_spanner_outer:first-child {
+#paroygpqjy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hanalnqsda .gt_column_spanner_outer:last-child {
+#paroygpqjy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hanalnqsda .gt_column_spanner {
+#paroygpqjy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1654,11 +1656,11 @@ component.</p>
   width: 100%;
 }
 
-#hanalnqsda .gt_spanner_row {
+#paroygpqjy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hanalnqsda .gt_group_heading {
+#paroygpqjy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1684,7 +1686,7 @@ component.</p>
   text-align: left;
 }
 
-#hanalnqsda .gt_empty_group_heading {
+#paroygpqjy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1699,15 +1701,15 @@ component.</p>
   vertical-align: middle;
 }
 
-#hanalnqsda .gt_from_md > :first-child {
+#paroygpqjy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hanalnqsda .gt_from_md > :last-child {
+#paroygpqjy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hanalnqsda .gt_row {
+#paroygpqjy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1726,7 +1728,7 @@ component.</p>
   overflow-x: hidden;
 }
 
-#hanalnqsda .gt_stub {
+#paroygpqjy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1739,7 +1741,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#hanalnqsda .gt_stub_row_group {
+#paroygpqjy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1753,15 +1755,15 @@ component.</p>
   vertical-align: top;
 }
 
-#hanalnqsda .gt_row_group_first td {
+#paroygpqjy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hanalnqsda .gt_row_group_first th {
+#paroygpqjy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hanalnqsda .gt_summary_row {
+#paroygpqjy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1771,16 +1773,16 @@ component.</p>
   padding-right: 5px;
 }
 
-#hanalnqsda .gt_first_summary_row {
+#paroygpqjy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_first_summary_row.thick {
+#paroygpqjy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hanalnqsda .gt_last_summary_row {
+#paroygpqjy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1790,7 +1792,7 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_grand_summary_row {
+#paroygpqjy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1800,7 +1802,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#hanalnqsda .gt_first_grand_summary_row {
+#paroygpqjy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1810,7 +1812,7 @@ component.</p>
   border-top-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_last_grand_summary_row_top {
+#paroygpqjy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1820,11 +1822,11 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_striped {
+#paroygpqjy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hanalnqsda .gt_table_body {
+#paroygpqjy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1833,7 +1835,7 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_footnotes {
+#paroygpqjy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1847,7 +1849,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_footnote {
+#paroygpqjy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1856,7 +1858,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#hanalnqsda .gt_sourcenotes {
+#paroygpqjy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1870,7 +1872,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#hanalnqsda .gt_sourcenote {
+#paroygpqjy .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1878,105 +1880,101 @@ component.</p>
   padding-right: 5px;
 }
 
-#hanalnqsda .gt_left {
+#paroygpqjy .gt_left {
   text-align: left;
 }
 
-#hanalnqsda .gt_center {
+#paroygpqjy .gt_center {
   text-align: center;
 }
 
-#hanalnqsda .gt_right {
+#paroygpqjy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hanalnqsda .gt_font_normal {
+#paroygpqjy .gt_font_normal {
   font-weight: normal;
 }
 
-#hanalnqsda .gt_font_bold {
+#paroygpqjy .gt_font_bold {
   font-weight: bold;
 }
 
-#hanalnqsda .gt_font_italic {
+#paroygpqjy .gt_font_italic {
   font-style: italic;
 }
 
-#hanalnqsda .gt_super {
+#paroygpqjy .gt_super {
   font-size: 65%;
 }
 
-#hanalnqsda .gt_footnote_marks {
+#paroygpqjy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hanalnqsda .gt_asterisk {
+#paroygpqjy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hanalnqsda .gt_indent_1 {
+#paroygpqjy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hanalnqsda .gt_indent_2 {
+#paroygpqjy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hanalnqsda .gt_indent_3 {
+#paroygpqjy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hanalnqsda .gt_indent_4 {
+#paroygpqjy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hanalnqsda .gt_indent_5 {
+#paroygpqjy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>For diagnostic tests, a blank in this field denotes the Global Service &amp; the following modifiers identify the components:</td>
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>For diagnostic tests, a blank in this field denotes the Global Service &amp; the following modifiers identify the components:</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="# of Codes"># of Codes</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="description">description</th>
     </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">26</th>
-<td headers="stub_1_1 n" class="gt_row gt_left">1096</td>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">26</th>
 <td headers="stub_1_1 name" class="gt_row gt_left">Professional Component</td>
 <td headers="stub_1_1 description" class="gt_row gt_left">Certain procedures are a combination of a physician or other qualified health care professional component and a technical component. When the physician or other qualified health care professional component is reported separately, the service may be identified by adding modifier 26 to the usual procedure number.</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">TC</th>
-<td headers="stub_1_2 n" class="gt_row gt_left">1076</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">TC</th>
 <td headers="stub_1_2 name" class="gt_row gt_left">Technical Component</td>
 <td headers="stub_1_2 description" class="gt_row gt_left">Under certain circumstances, a charge may be made for the technical component alone. Under those circumstances the technical component charge is identified by adding modifier TC to the usual procedure number. Technical component charges are institutional charges and not billed separately by physicians; however, portable x-ray suppliers only bill for technical component and should utilize modifier TC. The charge data from portable x-ray suppliers will then be used to build customary and prevailing profiles.</td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
 </th>
-<td headers="stub_1_3 n" class="gt_row gt_left">4</td>
 <td headers="stub_1_3 name" class="gt_row gt_left">Discontinued Procedure</td>
 <td headers="stub_1_3 description" class="gt_row gt_left">Under certain circumstances, the physician or other qualified health care professional may elect to terminate a surgical or diagnostic procedure. Due to extenuating circumstances or those that threaten the well being of the patient, it may be necessary to indicate that a surgical or diagnostic procedure was started but discontinued. This circumstance may be reported by adding modifier 53 to the code reported by the individual for the discontinued procedure.</td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes">
 <tr>
-<td class="gt_footnote" colspan="4"> For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration.</td>
+<td class="gt_footnote" colspan="3"> For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration.</td>
     </tr>
 <tr>
-<td class="gt_footnote" colspan="4">
+<td class="gt_footnote" colspan="3">
 <span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use).</td>
     </tr>
 </tfoot>
@@ -1993,56 +1991,24 @@ description of values.</p>
 <strong>R</strong>, or <strong>T</strong>, are used for Medicare
 payment.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">status_lookup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"A"</span> <span class="op">=</span> <span class="st">"**Active Code**"</span>,</span>
-<span>  <span class="st">"B"</span> <span class="op">=</span> <span class="st">"**Payment Bundled**"</span>,</span>
-<span>  <span class="st">"C"</span> <span class="op">=</span> <span class="st">"**Carrier Priced**"</span>,</span>
-<span>  <span class="st">"D"</span> <span class="op">=</span> <span class="st">"**Deleted Codes**"</span>,</span>
-<span>  <span class="st">"E"</span> <span class="op">=</span> <span class="st">"**Regulatory Exclusion**"</span>,</span>
-<span>  <span class="st">"F"</span> <span class="op">=</span> <span class="st">"**Deleted/Discontinued Codes**"</span>,</span>
-<span>  <span class="st">"X"</span> <span class="op">=</span> <span class="st">"**Statutory Exclusion**"</span>,</span>
-<span>  <span class="st">"I"</span> <span class="op">=</span> <span class="st">"**Not Valid for Medicare Purposes**"</span>,</span>
-<span>  <span class="st">"M"</span> <span class="op">=</span> <span class="st">"**Measurement Code**"</span>,</span>
-<span>  <span class="st">"R"</span> <span class="op">=</span> <span class="st">"**Restricted Coverage**"</span>,</span>
-<span>  <span class="st">"N"</span> <span class="op">=</span> <span class="st">"**Non-Covered Service**"</span>,</span>
-<span>  <span class="st">"J"</span> <span class="op">=</span> <span class="st">"**Anesthesia Service**"</span>,</span>
-<span>  <span class="st">"P"</span> <span class="op">=</span> <span class="st">"**Bundled/Excluded Code**"</span>,</span>
-<span>  <span class="st">"T"</span> <span class="op">=</span> <span class="st">"**No Other Services Payable**"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">status_lookup2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"A"</span> <span class="op">=</span> <span class="st">"These codes are separately paid under the Physician Fee Schedule if covered. There will be RVUs and payment amounts for codes with this status. The presence of an A indicator does not mean that Medicare has made a National Coverage Determination regarding the service. Carriers remain responsible for coverage decisions in the absence of a national Medicare policy."</span>,</span>
-<span>  <span class="st">"X"</span> <span class="op">=</span> <span class="st">"These codes represent an item or service that is not in the statutory definition of “physician services” for fee schedule payment purposes. No RVUs or payment amounts are shown for these codes and no payment may be made under the physician fee schedule. Ex: Ambulance services and Clinical Diagnostic Laboratory Services."</span>,</span>
-<span>  <span class="st">"I"</span> <span class="op">=</span> <span class="st">"Medicare uses another code for reporting of, and payment for, these services. (Code NOT subject to a 90 day grace period.)"</span>,</span>
-<span>  <span class="st">"E"</span> <span class="op">=</span> <span class="st">"These codes are for items and/or services that CMS chose to exclude from the fee schedule payment by regulation. No RVUs or payment amounts are shown and no payment may be made under the fee schedule for these codes. Payment for them, when covered, continues under reasonable charge procedures."</span>,</span>
-<span>  <span class="st">"M"</span> <span class="op">=</span> <span class="st">"Used for reporting purposes only."</span>,</span>
-<span>  <span class="st">"C"</span> <span class="op">=</span> <span class="st">"Carriers will establish RVUs and payment amounts for these services, generally on an individual case basis following review of documentation such as an operative report."</span>,</span>
-<span>  <span class="st">"R"</span> <span class="op">=</span> <span class="st">"Special coverage instructions apply."</span>,</span>
-<span>  <span class="st">"N"</span> <span class="op">=</span> <span class="st">"These codes are carried on the HCPCS tape as noncovered services."</span>,</span>
-<span>  <span class="st">"J"</span> <span class="op">=</span> <span class="st">"No relative Status units or payment amounts for anesthesia codes on the database, only used to facilitate the identification of anesthesia services."</span>,</span>
-<span>  <span class="st">"P"</span> <span class="op">=</span> <span class="st">"There are no RVUs and no payment amounts for these services. No separate payment is made for them under the fee schedule. If the item or service is covered as incident to a physician service and is provided on the same day as a physician service, payment for it is bundled into the payment for the physician service to which it is incident (an example is an elastic bandage furnished by a physician incident to a physician service). If the item or service is covered as other than incident to a physician service, it is excluded from the fee schedule (for example, colostomy supplies) and is paid under the other payment provision of the Act."</span>,</span>
-<span>  <span class="st">"B"</span> <span class="op">=</span> <span class="st">"Payment for covered services are always bundled into payment for other services not specified: There will be no RVUs or payment amounts for these codes and no separate payment is ever made. When these services are covered, payment for them is subsumed by the payment for the services to which they are incident (an example is a telephone call from a hospital nurse regarding care of a patient)."</span>,</span>
-<span>  <span class="st">"T"</span> <span class="op">=</span> <span class="st">"There are RVUs and payment amounts for these services, but they are only paid if there are no other services payable under the physician fee schedule billed on the same date by the same provider. If any other services payable under the physician fee schedule are billed on the same date by the same provider, these services are bundled into the physician services for which payment is made."</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">status</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">status_lookup</span><span class="op">[</span><span class="va">status</span><span class="op">]</span>,</span>
-<span>         description <span class="op">=</span> <span class="va">status_lookup2</span><span class="op">[</span><span class="va">status</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"status"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>, <span class="st">"I"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"N"</span>, <span class="st">"J"</span>, <span class="st">"P"</span>, <span class="st">"T"</span>, <span class="st">"X"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">code</span>, <span class="va">status_codes</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html" class="external-link">unnest_wider</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">ref</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>n <span class="op">=</span> <span class="st">"# of Codes"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_markdown.html" class="external-link">fmt_markdown</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_integer.html" class="external-link">fmt_integer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_stub.html" class="external-link">cells_stub</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"yellow"</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,</span>
 <span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span></span>
 <span>      columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>      rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">12</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>      rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">12</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
 <span>    table.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
 <span>    table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
@@ -2053,606 +2019,15 @@ payment.</p>
 <span>    row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    row_group.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<div id="xpoacbmala" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xpoacbmala table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#xpoacbmala thead, #xpoacbmala tbody, #xpoacbmala tfoot, #xpoacbmala tr, #xpoacbmala td, #xpoacbmala th {
-  border-style: none;
-}
-
-#xpoacbmala p {
-  margin: 0;
-  padding: 0;
-}
-
-#xpoacbmala .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: 100%;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#xpoacbmala .gt_title {
-  color: #333333;
-  font-size: 16px;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#xpoacbmala .gt_subtitle {
-  color: #333333;
-  font-size: 16px;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#xpoacbmala .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#xpoacbmala .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#xpoacbmala .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#xpoacbmala .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#xpoacbmala .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#xpoacbmala .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#xpoacbmala .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 24px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#xpoacbmala .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 24px;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#xpoacbmala .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#xpoacbmala .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#xpoacbmala .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#xpoacbmala .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpoacbmala .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#xpoacbmala .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#xpoacbmala .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#xpoacbmala .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpoacbmala .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#xpoacbmala .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpoacbmala .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#xpoacbmala .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpoacbmala .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#xpoacbmala .gt_sourcenote {
-  font-size: 16px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xpoacbmala .gt_left {
-  text-align: left;
-}
-
-#xpoacbmala .gt_center {
-  text-align: center;
-}
-
-#xpoacbmala .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#xpoacbmala .gt_font_normal {
-  font-weight: normal;
-}
-
-#xpoacbmala .gt_font_bold {
-  font-weight: bold;
-}
-
-#xpoacbmala .gt_font_italic {
-  font-style: italic;
-}
-
-#xpoacbmala .gt_super {
-  font-size: 65%;
-}
-
-#xpoacbmala .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#xpoacbmala .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#xpoacbmala .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#xpoacbmala .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#xpoacbmala .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#xpoacbmala .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#xpoacbmala .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="# of Codes"># of Codes</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="description">description</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>A</p>
-</div></th>
-<td headers="stub_1_1 n" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);">8,975</td>
-<td headers="stub_1_1 name" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);"><div class="gt_from_md">
-<p><strong>Active Code</strong></p>
-</div></td>
-<td headers="stub_1_1 description" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);"><div class="gt_from_md">
-<p>These codes are separately paid under the Physician Fee Schedule if covered. There will be RVUs and payment amounts for codes with this status. The presence of an A indicator does not mean that Medicare has made a National Coverage Determination regarding the service. Carriers remain responsible for coverage decisions in the absence of a national Medicare policy.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>X</p>
-</div></th>
-<td headers="stub_1_2 n" class="gt_row gt_left">2,527</td>
-<td headers="stub_1_2 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Statutory Exclusion</strong></p>
-</div></td>
-<td headers="stub_1_2 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>These codes represent an item or service that is not in the statutory definition of “physician services” for fee schedule payment purposes. No RVUs or payment amounts are shown for these codes and no payment may be made under the physician fee schedule. Ex: Ambulance services and Clinical Diagnostic Laboratory Services.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>I</p>
-</div></th>
-<td headers="stub_1_3 n" class="gt_row gt_left">1,411</td>
-<td headers="stub_1_3 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Not Valid for Medicare Purposes</strong></p>
-</div></td>
-<td headers="stub_1_3 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Medicare uses another code for reporting of, and payment for, these services. (Code NOT subject to a 90 day grace period.)</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>E</p>
-</div></th>
-<td headers="stub_1_4 n" class="gt_row gt_left">1,343</td>
-<td headers="stub_1_4 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Regulatory Exclusion</strong></p>
-</div></td>
-<td headers="stub_1_4 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>These codes are for items and/or services that CMS chose to exclude from the fee schedule payment by regulation. No RVUs or payment amounts are shown and no payment may be made under the fee schedule for these codes. Payment for them, when covered, continues under reasonable charge procedures.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>M</p>
-</div></th>
-<td headers="stub_1_5 n" class="gt_row gt_left">1,201</td>
-<td headers="stub_1_5 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Measurement Code</strong></p>
-</div></td>
-<td headers="stub_1_5 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Used for reporting purposes only.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>C</p>
-</div></th>
-<td headers="stub_1_6 n" class="gt_row gt_left">1,156</td>
-<td headers="stub_1_6 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Carrier Priced</strong></p>
-</div></td>
-<td headers="stub_1_6 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Carriers will establish RVUs and payment amounts for these services, generally on an individual case basis following review of documentation such as an operative report.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>R</p>
-</div></th>
-<td headers="stub_1_7 n" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);">1,050</td>
-<td headers="stub_1_7 name" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);"><div class="gt_from_md">
-<p><strong>Restricted Coverage</strong></p>
-</div></td>
-<td headers="stub_1_7 description" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);"><div class="gt_from_md">
-<p>Special coverage instructions apply.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>N</p>
-</div></th>
-<td headers="stub_1_8 n" class="gt_row gt_left">327</td>
-<td headers="stub_1_8 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Non-Covered Service</strong></p>
-</div></td>
-<td headers="stub_1_8 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>These codes are carried on the HCPCS tape as noncovered services.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>J</p>
-</div></th>
-<td headers="stub_1_9 n" class="gt_row gt_left">276</td>
-<td headers="stub_1_9 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Anesthesia Service</strong></p>
-</div></td>
-<td headers="stub_1_9 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>No relative Status units or payment amounts for anesthesia codes on the database, only used to facilitate the identification of anesthesia services.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>P</p>
-</div></th>
-<td headers="stub_1_10 n" class="gt_row gt_left">142</td>
-<td headers="stub_1_10 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Bundled/Excluded Code</strong></p>
-</div></td>
-<td headers="stub_1_10 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>There are no RVUs and no payment amounts for these services. No separate payment is made for them under the fee schedule. If the item or service is covered as incident to a physician service and is provided on the same day as a physician service, payment for it is bundled into the payment for the physician service to which it is incident (an example is an elastic bandage furnished by a physician incident to a physician service). If the item or service is covered as other than incident to a physician service, it is excluded from the fee schedule (for example, colostomy supplies) and is paid under the other payment provision of the Act.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>B</p>
-</div></th>
-<td headers="stub_1_11 n" class="gt_row gt_left">83</td>
-<td headers="stub_1_11 name" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Payment Bundled</strong></p>
-</div></td>
-<td headers="stub_1_11 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Payment for covered services are always bundled into payment for other services not specified: There will be no RVUs or payment amounts for these codes and no separate payment is ever made. When these services are covered, payment for them is subsumed by the payment for the services to which they are incident (an example is a telephone call from a hospital nurse regarding care of a patient).</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>T</p>
-</div></th>
-<td headers="stub_1_12 n" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);">8</td>
-<td headers="stub_1_12 name" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);"><div class="gt_from_md">
-<p><strong>No Other Services Payable</strong></p>
-</div></td>
-<td headers="stub_1_12 description" class="gt_row gt_left" style="background-color: rgba(255,255,0,0.3);"><div class="gt_from_md">
-<p>There are RVUs and payment amounts for these services, but they are only paid if there are no other services payable under the physician fee schedule billed on the same date by the same provider. If any other services payable under the physician fee schedule are billed on the same date by the same provider, these services are bundled into the physician services for which payment is made.</p>
-</div></td>
-</tr>
-</tbody>
-</table>
-</div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `ref = purrr::map(code, status_codes)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'status_codes' not found</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="global">Global<a class="anchor" aria-label="anchor" href="#global"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">glob_join</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  global <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"000"</span>, <span class="st">"010"</span>, <span class="st">"090"</span>, <span class="st">"MMM"</span>, <span class="st">"XXX"</span>, <span class="st">"YYY"</span>, <span class="st">"ZZZ"</span><span class="op">)</span>,</span>
 <span>  description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -2666,15 +2041,11 @@ payment.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">global</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">global</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">glob_join</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">global</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="va">glob_join</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"global"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_markdown.html" class="external-link">fmt_markdown</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_integer.html" class="external-link">fmt_integer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>n <span class="op">=</span> <span class="st">"# of Codes"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -2689,23 +2060,23 @@ payment.</p>
 <span>    source_notes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
 <span>    row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<div id="djhguvlxxp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#djhguvlxxp table {
+<div id="gyuvjxilab" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gyuvjxilab table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#djhguvlxxp thead, #djhguvlxxp tbody, #djhguvlxxp tfoot, #djhguvlxxp tr, #djhguvlxxp td, #djhguvlxxp th {
+#gyuvjxilab thead, #gyuvjxilab tbody, #gyuvjxilab tfoot, #gyuvjxilab tr, #gyuvjxilab td, #gyuvjxilab th {
   border-style: none;
 }
 
-#djhguvlxxp p {
+#gyuvjxilab p {
   margin: 0;
   padding: 0;
 }
 
-#djhguvlxxp .gt_table {
+#gyuvjxilab .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2731,12 +2102,12 @@ payment.</p>
   border-left-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_caption {
+#gyuvjxilab .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#djhguvlxxp .gt_title {
+#gyuvjxilab .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -2748,7 +2119,7 @@ payment.</p>
   border-bottom-width: 0;
 }
 
-#djhguvlxxp .gt_subtitle {
+#gyuvjxilab .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -2760,7 +2131,7 @@ payment.</p>
   border-top-width: 0;
 }
 
-#djhguvlxxp .gt_heading {
+#gyuvjxilab .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2772,13 +2143,13 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_bottom_border {
+#gyuvjxilab .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_col_headings {
+#gyuvjxilab .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2793,7 +2164,7 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_col_heading {
+#gyuvjxilab .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2813,7 +2184,7 @@ payment.</p>
   overflow-x: hidden;
 }
 
-#djhguvlxxp .gt_column_spanner_outer {
+#gyuvjxilab .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2825,15 +2196,15 @@ payment.</p>
   padding-right: 4px;
 }
 
-#djhguvlxxp .gt_column_spanner_outer:first-child {
+#gyuvjxilab .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#djhguvlxxp .gt_column_spanner_outer:last-child {
+#gyuvjxilab .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#djhguvlxxp .gt_column_spanner {
+#gyuvjxilab .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2845,11 +2216,11 @@ payment.</p>
   width: 100%;
 }
 
-#djhguvlxxp .gt_spanner_row {
+#gyuvjxilab .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#djhguvlxxp .gt_group_heading {
+#gyuvjxilab .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2875,7 +2246,7 @@ payment.</p>
   text-align: left;
 }
 
-#djhguvlxxp .gt_empty_group_heading {
+#gyuvjxilab .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2890,15 +2261,15 @@ payment.</p>
   vertical-align: middle;
 }
 
-#djhguvlxxp .gt_from_md > :first-child {
+#gyuvjxilab .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#djhguvlxxp .gt_from_md > :last-child {
+#gyuvjxilab .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#djhguvlxxp .gt_row {
+#gyuvjxilab .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2917,7 +2288,7 @@ payment.</p>
   overflow-x: hidden;
 }
 
-#djhguvlxxp .gt_stub {
+#gyuvjxilab .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2930,7 +2301,7 @@ payment.</p>
   padding-right: 5px;
 }
 
-#djhguvlxxp .gt_stub_row_group {
+#gyuvjxilab .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2944,15 +2315,15 @@ payment.</p>
   vertical-align: top;
 }
 
-#djhguvlxxp .gt_row_group_first td {
+#gyuvjxilab .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#djhguvlxxp .gt_row_group_first th {
+#gyuvjxilab .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#djhguvlxxp .gt_summary_row {
+#gyuvjxilab .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2962,16 +2333,16 @@ payment.</p>
   padding-right: 5px;
 }
 
-#djhguvlxxp .gt_first_summary_row {
+#gyuvjxilab .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_first_summary_row.thick {
+#gyuvjxilab .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#djhguvlxxp .gt_last_summary_row {
+#gyuvjxilab .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2981,7 +2352,7 @@ payment.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_grand_summary_row {
+#gyuvjxilab .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2991,7 +2362,7 @@ payment.</p>
   padding-right: 5px;
 }
 
-#djhguvlxxp .gt_first_grand_summary_row {
+#gyuvjxilab .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3001,7 +2372,7 @@ payment.</p>
   border-top-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_last_grand_summary_row_top {
+#gyuvjxilab .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3011,11 +2382,11 @@ payment.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_striped {
+#gyuvjxilab .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#djhguvlxxp .gt_table_body {
+#gyuvjxilab .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3024,7 +2395,7 @@ payment.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_footnotes {
+#gyuvjxilab .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3038,7 +2409,7 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_footnote {
+#gyuvjxilab .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3047,7 +2418,7 @@ payment.</p>
   padding-right: 5px;
 }
 
-#djhguvlxxp .gt_sourcenotes {
+#gyuvjxilab .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3061,7 +2432,7 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#djhguvlxxp .gt_sourcenote {
+#gyuvjxilab .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3069,134 +2440,126 @@ payment.</p>
   padding-right: 5px;
 }
 
-#djhguvlxxp .gt_left {
+#gyuvjxilab .gt_left {
   text-align: left;
 }
 
-#djhguvlxxp .gt_center {
+#gyuvjxilab .gt_center {
   text-align: center;
 }
 
-#djhguvlxxp .gt_right {
+#gyuvjxilab .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#djhguvlxxp .gt_font_normal {
+#gyuvjxilab .gt_font_normal {
   font-weight: normal;
 }
 
-#djhguvlxxp .gt_font_bold {
+#gyuvjxilab .gt_font_bold {
   font-weight: bold;
 }
 
-#djhguvlxxp .gt_font_italic {
+#gyuvjxilab .gt_font_italic {
   font-style: italic;
 }
 
-#djhguvlxxp .gt_super {
+#gyuvjxilab .gt_super {
   font-size: 65%;
 }
 
-#djhguvlxxp .gt_footnote_marks {
+#gyuvjxilab .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#djhguvlxxp .gt_asterisk {
+#gyuvjxilab .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#djhguvlxxp .gt_indent_1 {
+#gyuvjxilab .gt_indent_1 {
   text-indent: 5px;
 }
 
-#djhguvlxxp .gt_indent_2 {
+#gyuvjxilab .gt_indent_2 {
   text-indent: 10px;
 }
 
-#djhguvlxxp .gt_indent_3 {
+#gyuvjxilab .gt_indent_3 {
   text-indent: 15px;
 }
 
-#djhguvlxxp .gt_indent_4 {
+#gyuvjxilab .gt_indent_4 {
   text-indent: 20px;
 }
 
-#djhguvlxxp .gt_indent_5 {
+#gyuvjxilab .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="# of Codes"># of Codes</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="description">description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
-<p>XXX</p>
-</div></th>
-<td headers="stub_1_1 n" class="gt_row gt_left">11,262</td>
-<td headers="stub_1_1 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Global concept does not apply.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
-<p>090</p>
-</div></th>
-<td headers="stub_1_2 n" class="gt_row gt_left">3,771</td>
-<td headers="stub_1_2 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Major surgery with a 1-day preoperative period and 90-day postoperative period included in the fee schedule amount.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
 <p>000</p>
 </div></th>
-<td headers="stub_1_3 n" class="gt_row gt_left">1,326</td>
-<td headers="stub_1_3 description" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_1 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Endoscopic or minor procedure with related preoperative and postoperative relative values on the day of the procedure only included in the fee schedule payment amount<br><br>Evaluation and Management services on the day of the procedure generally not payable.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
-<p>YYY</p>
-</div></th>
-<td headers="stub_1_4 n" class="gt_row gt_left">933</td>
-<td headers="stub_1_4 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Carrier determines whether the global concept applies and establishes postoperative period, if appropriate, at time of pricing.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
-<p>ZZZ</p>
-</div></th>
-<td headers="stub_1_5 n" class="gt_row gt_left">719</td>
-<td headers="stub_1_5 description" class="gt_row gt_left"><div class="gt_from_md">
-<p>Code is related to another service and is always included in the global period of the other service.</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
 <p>010</p>
 </div></th>
-<td headers="stub_1_6 n" class="gt_row gt_left">471</td>
-<td headers="stub_1_6 description" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_2 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Minor procedure with preoperative relative values on the day of the procedure and postoperative relative values during a 10-day postoperative period included in the fee schedule amount<br><br>Evaluation and Management services on the day of the procedure and during the 10-day postoperative period generally not payable.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
+<p>090</p>
+</div></th>
+<td headers="stub_1_3 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Major surgery with a 1-day preoperative period and 90-day postoperative period included in the fee schedule amount.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
 <p>MMM</p>
 </div></th>
-<td headers="stub_1_7 n" class="gt_row gt_left">17</td>
-<td headers="stub_1_7 description" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_4 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Maternity codes; usual global period does not apply.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
+<p>XXX</p>
+</div></th>
+<td headers="stub_1_5 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Global concept does not apply.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
+<p>YYY</p>
+</div></th>
+<td headers="stub_1_6 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Carrier determines whether the global concept applies and establishes postoperative period, if appropriate, at time of pricing.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;"><div class="gt_from_md">
+<p>ZZZ</p>
+</div></th>
+<td headers="stub_1_7 description" class="gt_row gt_left"><div class="gt_from_md">
+<p>Code is related to another service and is always included in the global period of the other service.</p>
 </div></td>
 </tr>
 </tbody>
@@ -3206,21 +2569,23 @@ payment.</p>
 <div class="section level3">
 <h3 id="pctc">PCTC<a class="anchor" aria-label="anchor" href="#pctc"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pctc_lookup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"0"</span> <span class="op">=</span> <span class="st">"**Physician Services**"</span>,</span>
-<span>  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"**Diagnostic Tests for Radiology Services**"</span>,</span>
-<span>  <span class="st">"2"</span> <span class="op">=</span> <span class="st">"**Professional Component Only**"</span>,</span>
-<span>  <span class="st">"3"</span> <span class="op">=</span> <span class="st">"**Technical Component Only**"</span>,</span>
-<span>  <span class="st">"4"</span> <span class="op">=</span> <span class="st">"**Global Test Only**"</span>,</span>
-<span>  <span class="st">"5"</span> <span class="op">=</span> <span class="st">"**Incident To**"</span>,</span>
-<span>  <span class="st">"6"</span> <span class="op">=</span> <span class="st">"**Laboratory Physician Interpretation**"</span>,</span>
-<span>  <span class="st">"7"</span> <span class="op">=</span> <span class="st">"**Physical Therapy Service**"</span>,</span>
-<span>  <span class="st">"8"</span> <span class="op">=</span> <span class="st">"**Physician Interpretation**"</span>,</span>
-<span>  <span class="st">"9"</span> <span class="op">=</span> <span class="st">"**Not Applicable**"</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pctc_codes</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pctc_label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"0"</span> <span class="op">=</span> <span class="st">"Physician Services"</span>,</span>
+<span>  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"Diagnostic Tests for Radiology Services"</span>,</span>
+<span>  <span class="st">"2"</span> <span class="op">=</span> <span class="st">"Professional Component Only"</span>,</span>
+<span>  <span class="st">"3"</span> <span class="op">=</span> <span class="st">"Technical Component Only"</span>,</span>
+<span>  <span class="st">"4"</span> <span class="op">=</span> <span class="st">"Global Test Only"</span>,</span>
+<span>  <span class="st">"5"</span> <span class="op">=</span> <span class="st">"Incident To"</span>,</span>
+<span>  <span class="st">"6"</span> <span class="op">=</span> <span class="st">"Laboratory Physician Interpretation"</span>,</span>
+<span>  <span class="st">"7"</span> <span class="op">=</span> <span class="st">"Physical Therapy Service"</span>,</span>
+<span>  <span class="st">"8"</span> <span class="op">=</span> <span class="st">"Physician Interpretation"</span>,</span>
+<span>  <span class="st">"9"</span> <span class="op">=</span> <span class="st">"Not Applicable"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">pctc_lookup2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span><span class="va">pctc_desc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"0"</span> <span class="op">=</span> <span class="st">"Modifiers 26 and TC &lt;b&gt;&lt;u&gt;cannot&lt;/u&gt;&lt;/b&gt; be used since Physician Services cannot be split into Professional and Technical components.&lt;br&gt;&lt;br&gt;Examples: Visits, Consultations, Surgical Procedures.&lt;br&gt;&lt;br&gt;RVU Components: **PW**, **PE**, **MP**."</span>,</span>
 <span>  </span>
 <span>  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"Modifiers 26 and TC &lt;b&gt;&lt;u&gt;can&lt;/u&gt;&lt;/b&gt; be used with these codes.&lt;br&gt;&lt;br&gt;Examples: Pulmonary Function Tests, Therapeutic Radiology Procedures, e.g., Radiation Therapy.&lt;br&gt;&lt;br&gt;These codes have both a Professional and Technical component.&lt;br&gt;&lt;br&gt;Total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense.&lt;br&gt;&lt;br&gt;Total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only.&lt;br&gt;&lt;br&gt;Total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense."</span>,</span>
@@ -3243,34 +2608,22 @@ payment.</p>
 <span>  <span class="st">"9"</span> <span class="op">=</span> <span class="st">"Concept of a professional/technical component does not apply."</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">pctc</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">pctc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    category <span class="op">=</span> <span class="va">pctc_lookup</span><span class="op">[</span><span class="va">pctc</span><span class="op">]</span>,</span>
-<span>    description <span class="op">=</span> <span class="va">pctc_lookup2</span><span class="op">[</span><span class="va">pctc</span><span class="op">]</span></span>
+<span><span class="va">pctc_codes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    category <span class="op">=</span> <span class="va">pctc_label</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>    description <span class="op">=</span> <span class="va">pctc_desc</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span><span class="op">]</span></span>
 <span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"pctc"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_stub.html" class="external-link">cells_stub</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>n <span class="op">=</span> <span class="st">"# of Codes"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_markdown.html" class="external-link">fmt_markdown</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_integer.html" class="external-link">fmt_integer</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_row_striping.html" class="external-link">opt_row_striping</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_outline.html" class="external-link">opt_table_outline</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_lines.html" class="external-link">opt_table_lines</a></span><span class="op">(</span>extent <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="co"># tab_style(</span></span>
-<span>  <span class="co">#   style = list(</span></span>
-<span>  <span class="co">#     cell_text(align = "center", </span></span>
-<span>  <span class="co">#               size = px(18), </span></span>
-<span>  <span class="co">#               color = "white"),</span></span>
-<span>  <span class="co">#     cell_fill(color = grayteal$g),</span></span>
-<span>  <span class="co">#     cell_borders(color = grayteal$g)</span></span>
-<span>  <span class="co">#     ),</span></span>
-<span>  <span class="co">#   locations = cells_stub()) |&gt; </span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
-<span>    <span class="co"># table.font.color = grayteal$i,</span></span>
-<span>    <span class="co"># table_body.vlines.color = grayteal$a,</span></span>
 <span>    table_body.vlines.style <span class="op">=</span> <span class="st">"solid"</span>,</span>
 <span>    table_body.vlines.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>    table.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
@@ -3281,23 +2634,23 @@ payment.</p>
 <span>    source_notes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
 <span>    row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<div id="snzszlmhft" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#snzszlmhft table {
+<div id="cshnssxvlt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cshnssxvlt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#snzszlmhft thead, #snzszlmhft tbody, #snzszlmhft tfoot, #snzszlmhft tr, #snzszlmhft td, #snzszlmhft th {
+#cshnssxvlt thead, #cshnssxvlt tbody, #cshnssxvlt tfoot, #cshnssxvlt tr, #cshnssxvlt td, #cshnssxvlt th {
   border-style: none;
 }
 
-#snzszlmhft p {
+#cshnssxvlt p {
   margin: 0;
   padding: 0;
 }
 
-#snzszlmhft .gt_table {
+#cshnssxvlt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3306,16 +2659,16 @@ payment.</p>
   color: #333333;
   font-size: 14px;
   font-weight: normal;
-  font-style: none;
+  font-style: normal;
   background-color: #FFFFFF;
   width: 100%;
-  border-top-style: none;
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #A8A8A8;
   border-left-style: none;
@@ -3323,12 +2676,12 @@ payment.</p>
   border-left-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_caption {
+#cshnssxvlt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#snzszlmhft .gt_title {
+#cshnssxvlt .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -3340,7 +2693,7 @@ payment.</p>
   border-bottom-width: 0;
 }
 
-#snzszlmhft .gt_subtitle {
+#cshnssxvlt .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -3352,7 +2705,7 @@ payment.</p>
   border-top-width: 0;
 }
 
-#snzszlmhft .gt_heading {
+#cshnssxvlt .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3364,17 +2717,17 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_bottom_border {
-  border-bottom-style: none;
+#cshnssxvlt .gt_bottom_border {
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_col_headings {
-  border-top-style: none;
+#cshnssxvlt .gt_col_headings {
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
   border-left-style: none;
@@ -3385,7 +2738,7 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_col_heading {
+#cshnssxvlt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3405,7 +2758,7 @@ payment.</p>
   overflow-x: hidden;
 }
 
-#snzszlmhft .gt_column_spanner_outer {
+#cshnssxvlt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3417,16 +2770,16 @@ payment.</p>
   padding-right: 4px;
 }
 
-#snzszlmhft .gt_column_spanner_outer:first-child {
+#cshnssxvlt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#snzszlmhft .gt_column_spanner_outer:last-child {
+#cshnssxvlt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#snzszlmhft .gt_column_spanner {
-  border-bottom-style: none;
+#cshnssxvlt .gt_column_spanner {
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
   vertical-align: bottom;
@@ -3437,11 +2790,11 @@ payment.</p>
   width: 100%;
 }
 
-#snzszlmhft .gt_spanner_row {
+#cshnssxvlt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#snzszlmhft .gt_group_heading {
+#cshnssxvlt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3451,10 +2804,10 @@ payment.</p>
   font-size: 80%;
   font-weight: bolder;
   text-transform: uppercase;
-  border-top-style: none;
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
   border-left-style: none;
@@ -3467,36 +2820,36 @@ payment.</p>
   text-align: left;
 }
 
-#snzszlmhft .gt_empty_group_heading {
+#cshnssxvlt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
   font-weight: bolder;
-  border-top-style: none;
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
 
-#snzszlmhft .gt_from_md > :first-child {
+#cshnssxvlt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#snzszlmhft .gt_from_md > :last-child {
+#cshnssxvlt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#snzszlmhft .gt_row {
+#cshnssxvlt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
-  border-top-style: none;
+  border-top-style: solid;
   border-top-width: 1px;
   border-top-color: #D3D3D3;
   border-left-style: solid;
@@ -3509,26 +2862,26 @@ payment.</p>
   overflow-x: hidden;
 }
 
-#snzszlmhft .gt_stub {
+#cshnssxvlt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
   font-weight: bolder;
   text-transform: uppercase;
-  border-right-style: none;
+  border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#snzszlmhft .gt_stub_row_group {
+#cshnssxvlt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
   font-weight: initial;
   text-transform: inherit;
-  border-right-style: none;
+  border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
   padding-left: 5px;
@@ -3536,15 +2889,15 @@ payment.</p>
   vertical-align: top;
 }
 
-#snzszlmhft .gt_row_group_first td {
+#cshnssxvlt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#snzszlmhft .gt_row_group_first th {
+#cshnssxvlt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#snzszlmhft .gt_summary_row {
+#cshnssxvlt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3554,26 +2907,26 @@ payment.</p>
   padding-right: 5px;
 }
 
-#snzszlmhft .gt_first_summary_row {
-  border-top-style: none;
+#cshnssxvlt .gt_first_summary_row {
+  border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_first_summary_row.thick {
+#cshnssxvlt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#snzszlmhft .gt_last_summary_row {
+#cshnssxvlt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_grand_summary_row {
+#cshnssxvlt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3583,40 +2936,40 @@ payment.</p>
   padding-right: 5px;
 }
 
-#snzszlmhft .gt_first_grand_summary_row {
+#cshnssxvlt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
-  border-top-style: none;
+  border-top-style: double;
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_last_grand_summary_row_top {
+#cshnssxvlt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
-  border-bottom-style: none;
+  border-bottom-style: double;
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_striped {
+#cshnssxvlt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#snzszlmhft .gt_table_body {
-  border-top-style: none;
+#cshnssxvlt .gt_table_body {
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_footnotes {
+#cshnssxvlt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3630,7 +2983,7 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_footnote {
+#cshnssxvlt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3639,7 +2992,7 @@ payment.</p>
   padding-right: 5px;
 }
 
-#snzszlmhft .gt_sourcenotes {
+#cshnssxvlt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3653,7 +3006,7 @@ payment.</p>
   border-right-color: #D3D3D3;
 }
 
-#snzszlmhft .gt_sourcenote {
+#cshnssxvlt .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3661,117 +3014,104 @@ payment.</p>
   padding-right: 5px;
 }
 
-#snzszlmhft .gt_left {
+#cshnssxvlt .gt_left {
   text-align: left;
 }
 
-#snzszlmhft .gt_center {
+#cshnssxvlt .gt_center {
   text-align: center;
 }
 
-#snzszlmhft .gt_right {
+#cshnssxvlt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#snzszlmhft .gt_font_normal {
+#cshnssxvlt .gt_font_normal {
   font-weight: normal;
 }
 
-#snzszlmhft .gt_font_bold {
+#cshnssxvlt .gt_font_bold {
   font-weight: bold;
 }
 
-#snzszlmhft .gt_font_italic {
+#cshnssxvlt .gt_font_italic {
   font-style: italic;
 }
 
-#snzszlmhft .gt_super {
+#cshnssxvlt .gt_super {
   font-size: 65%;
 }
 
-#snzszlmhft .gt_footnote_marks {
+#cshnssxvlt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#snzszlmhft .gt_asterisk {
+#cshnssxvlt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#snzszlmhft .gt_indent_1 {
+#cshnssxvlt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#snzszlmhft .gt_indent_2 {
+#cshnssxvlt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#snzszlmhft .gt_indent_3 {
+#cshnssxvlt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#snzszlmhft .gt_indent_4 {
+#cshnssxvlt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#snzszlmhft .gt_indent_5 {
+#cshnssxvlt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="# of Codes"># of Codes</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="category">category</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="description">description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>0</p>
-</div></th>
-<td headers="stub_1_1 n" class="gt_row gt_left">7,128</td>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">0</th>
 <td headers="stub_1_1 category" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Physician Services</strong></p>
+<p>Physician Services</p>
 </div></td>
 <td headers="stub_1_1 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Modifiers 26 and TC <b><u>cannot</u></b> be used since Physician Services cannot be split into Professional and Technical components.<br><br>Examples: Visits, Consultations, Surgical Procedures.<br><br>RVU Components: <strong>PW</strong>, <strong>PE</strong>, <strong>MP</strong>.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>1</p>
-</div></th>
-<td headers="stub_1_2 n" class="gt_row gt_left gt_striped">3,229</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">1</th>
 <td headers="stub_1_2 category" class="gt_row gt_left gt_striped"><div class="gt_from_md">
-<p><strong>Diagnostic Tests for Radiology Services</strong></p>
+<p>Diagnostic Tests for Radiology Services</p>
 </div></td>
 <td headers="stub_1_2 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
 <p>Modifiers 26 and TC <b><u>can</u></b> be used with these codes.<br><br>Examples: Pulmonary Function Tests, Therapeutic Radiology Procedures, e.g., Radiation Therapy.<br><br>These codes have both a Professional and Technical component.<br><br>Total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense.<br><br>Total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only.<br><br>Total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>2</p>
-</div></th>
-<td headers="stub_1_3 n" class="gt_row gt_left">44</td>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">2</th>
 <td headers="stub_1_3 category" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Professional Component Only</strong></p>
+<p>Professional Component Only</p>
 </div></td>
 <td headers="stub_1_3 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Stand-alone codes that describe the physician work portion of selected diagnostic tests for which there is an associated code that describes the technical component of the diagnostic test only and another associated code that describes the global test.<br><br>Example Code: <strong>93010</strong>: <em>Electrocardiogram; Interpretation and Report.</em><br><br>RVU Components: <strong>PW</strong>, <strong>PE</strong>, <strong>MP</strong>.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>3</p>
-</div></th>
-<td headers="stub_1_4 n" class="gt_row gt_left gt_striped">178</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">3</th>
 <td headers="stub_1_4 category" class="gt_row gt_left gt_striped"><div class="gt_from_md">
-<p><strong>Technical Component Only</strong></p>
+<p>Technical Component Only</p>
 </div></td>
 <td headers="stub_1_4 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
 <p>Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Stand-alone codes that describe the technical component (i.e., staff and equipment costs) of selected diagnostic tests for which there is an associated code that describes the professional component of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and therefore do not have a related professional
@@ -3779,72 +3119,54 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>4</p>
-</div></th>
-<td headers="stub_1_5 n" class="gt_row gt_left">17</td>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">4</th>
 <td headers="stub_1_5 category" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Global Test Only</strong></p>
+<p>Global Test Only</p>
 </div></td>
 <td headers="stub_1_5 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Stand-alone codes that describe selected diagnostic tests for which there are associated codes that describe <em>(a)</em> the professional component of the test only, and <em>(b)</em> the technical component of the test only.<br><br>RVU Components: <strong>PW</strong>, <strong>PE</strong>, <strong>MP</strong>.<br><br>Total RVUs = Sum of the total RVUs for the professional and technical components only codes combined.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>5</p>
-</div></th>
-<td headers="stub_1_6 n" class="gt_row gt_left gt_striped">104</td>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">5</th>
 <td headers="stub_1_6 category" class="gt_row gt_left gt_striped"><div class="gt_from_md">
-<p><strong>Incident To</strong></p>
+<p>Incident To</p>
 </div></td>
 <td headers="stub_1_6 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
 <p>Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Services covered <b><u>incident to</u></b> a physician’s service when they are provided by auxiliary personnel employed by the physician and working under his or her direct personal supervision.<br><br>Payment may not be made by carriers for these services when they are provided to hospital inpatients or patients in a hospital outpatient department.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>6</p>
-</div></th>
-<td headers="stub_1_7 n" class="gt_row gt_left">20</td>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">6</th>
 <td headers="stub_1_7 category" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Laboratory Physician Interpretation</strong></p>
+<p>Laboratory Physician Interpretation</p>
 </div></td>
 <td headers="stub_1_7 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Modifier TC <b><u>cannot</u></b> be used with these codes.<br><br>Clinical laboratory codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of the tests is paid for under the lab fee schedule. <br><br>RVU Components: <strong>PW</strong>, <strong>PE</strong>, <strong>MP</strong>.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>7</p>
-</div></th>
-<td headers="stub_1_8 n" class="gt_row gt_left gt_striped">74</td>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">7</th>
 <td headers="stub_1_8 category" class="gt_row gt_left gt_striped"><div class="gt_from_md">
-<p><strong>Physical Therapy Service</strong></p>
+<p>Physical Therapy Service</p>
 </div></td>
 <td headers="stub_1_8 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
 <p>Payment may not be made if the service is provided to either a patient in a hospital outpatient department or to an inpatient of the hospital by an independently practicing physical or occupational therapist.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>8</p>
-</div></th>
-<td headers="stub_1_9 n" class="gt_row gt_left">1</td>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">8</th>
 <td headers="stub_1_9 category" class="gt_row gt_left"><div class="gt_from_md">
-<p><strong>Physician Interpretation</strong></p>
+<p>Physician Interpretation</p>
 </div></td>
 <td headers="stub_1_9 description" class="gt_row gt_left"><div class="gt_from_md">
 <p>Identifies the professional component of clinical laboratory codes for which separate payment may be made only if the physician interprets an abnormal smear for hospital inpatient. This applies to CPT codes 88141, 85060 and HCPCS code P3001-26. No TC billing is recognized because payment for the underlying clinical laboratory test is made to the hospital, generally through the PPS rate. No payment is recognized for CPT codes 88141, 85060 or HCPCS code P3001-26 furnished to hospital outpatients or non-hospital patients. The physician interpretation is paid through the clinical laboratory fee schedule payment for the clinical laboratory test.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
-<p>9</p>
-</div></th>
-<td headers="stub_1_10 n" class="gt_row gt_left gt_striped">7,704</td>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub" style="font-size: 16px; text-align: center;">9</th>
 <td headers="stub_1_10 category" class="gt_row gt_left gt_striped"><div class="gt_from_md">
-<p><strong>Not Applicable</strong></p>
+<p>Not Applicable</p>
 </div></td>
 <td headers="stub_1_10 description" class="gt_row gt_left gt_striped"><div class="gt_from_md">
 <p>Concept of a professional/technical component does not apply.</p>
@@ -3857,7 +3179,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
 <div class="section level3">
 <h3 id="multiple-procedure">Multiple Procedure<a class="anchor" aria-label="anchor" href="#multiple-procedure"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_pro_lookup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"0"</span> <span class="op">=</span> <span class="st">"No payment adjustment rules.&lt;br&gt;&lt;br&gt;If the procedure is reported on the same day as another procedure, base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount for the procedure."</span>,</span>
 <span>  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"Standard payment adjustment rules.&lt;br&gt;&lt;br&gt;If the procedure is reported on the same day as another procedure that has an indicator of 1, 2 or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 25%, 25%, 25%, and by report).&lt;br&gt;&lt;br&gt;Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage."</span>,</span>
@@ -3893,23 +3215,23 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
 <span>    source_notes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
 <span>    row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<div id="idgvcgegje" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#idgvcgegje table {
+<div id="nyynkpypgo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nyynkpypgo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#idgvcgegje thead, #idgvcgegje tbody, #idgvcgegje tfoot, #idgvcgegje tr, #idgvcgegje td, #idgvcgegje th {
+#nyynkpypgo thead, #nyynkpypgo tbody, #nyynkpypgo tfoot, #nyynkpypgo tr, #nyynkpypgo td, #nyynkpypgo th {
   border-style: none;
 }
 
-#idgvcgegje p {
+#nyynkpypgo p {
   margin: 0;
   padding: 0;
 }
 
-#idgvcgegje .gt_table {
+#nyynkpypgo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3935,12 +3257,12 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-left-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_caption {
+#nyynkpypgo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#idgvcgegje .gt_title {
+#nyynkpypgo .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -3952,7 +3274,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-bottom-width: 0;
 }
 
-#idgvcgegje .gt_subtitle {
+#nyynkpypgo .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -3964,7 +3286,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-top-width: 0;
 }
 
-#idgvcgegje .gt_heading {
+#nyynkpypgo .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3976,13 +3298,13 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-right-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_bottom_border {
+#nyynkpypgo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_col_headings {
+#nyynkpypgo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3997,7 +3319,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-right-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_col_heading {
+#nyynkpypgo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4017,7 +3339,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   overflow-x: hidden;
 }
 
-#idgvcgegje .gt_column_spanner_outer {
+#nyynkpypgo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4029,15 +3351,15 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   padding-right: 4px;
 }
 
-#idgvcgegje .gt_column_spanner_outer:first-child {
+#nyynkpypgo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#idgvcgegje .gt_column_spanner_outer:last-child {
+#nyynkpypgo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#idgvcgegje .gt_column_spanner {
+#nyynkpypgo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4049,11 +3371,11 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   width: 100%;
 }
 
-#idgvcgegje .gt_spanner_row {
+#nyynkpypgo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#idgvcgegje .gt_group_heading {
+#nyynkpypgo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4079,7 +3401,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   text-align: left;
 }
 
-#idgvcgegje .gt_empty_group_heading {
+#nyynkpypgo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4094,15 +3416,15 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   vertical-align: middle;
 }
 
-#idgvcgegje .gt_from_md > :first-child {
+#nyynkpypgo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#idgvcgegje .gt_from_md > :last-child {
+#nyynkpypgo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#idgvcgegje .gt_row {
+#nyynkpypgo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4121,7 +3443,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   overflow-x: hidden;
 }
 
-#idgvcgegje .gt_stub {
+#nyynkpypgo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4134,7 +3456,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   padding-right: 5px;
 }
 
-#idgvcgegje .gt_stub_row_group {
+#nyynkpypgo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4148,15 +3470,15 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   vertical-align: top;
 }
 
-#idgvcgegje .gt_row_group_first td {
+#nyynkpypgo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#idgvcgegje .gt_row_group_first th {
+#nyynkpypgo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#idgvcgegje .gt_summary_row {
+#nyynkpypgo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4166,16 +3488,16 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   padding-right: 5px;
 }
 
-#idgvcgegje .gt_first_summary_row {
+#nyynkpypgo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_first_summary_row.thick {
+#nyynkpypgo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#idgvcgegje .gt_last_summary_row {
+#nyynkpypgo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4185,7 +3507,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-bottom-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_grand_summary_row {
+#nyynkpypgo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4195,7 +3517,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   padding-right: 5px;
 }
 
-#idgvcgegje .gt_first_grand_summary_row {
+#nyynkpypgo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4205,7 +3527,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-top-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_last_grand_summary_row_top {
+#nyynkpypgo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4215,11 +3537,11 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-bottom-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_striped {
+#nyynkpypgo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#idgvcgegje .gt_table_body {
+#nyynkpypgo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4228,7 +3550,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-bottom-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_footnotes {
+#nyynkpypgo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4242,7 +3564,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-right-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_footnote {
+#nyynkpypgo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4251,7 +3573,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   padding-right: 5px;
 }
 
-#idgvcgegje .gt_sourcenotes {
+#nyynkpypgo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4265,7 +3587,7 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   border-right-color: #D3D3D3;
 }
 
-#idgvcgegje .gt_sourcenote {
+#nyynkpypgo .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4273,63 +3595,63 @@ code.<br><br>Example Code: <strong>93005</strong> <em>Electrocardiogram; Tracing
   padding-right: 5px;
 }
 
-#idgvcgegje .gt_left {
+#nyynkpypgo .gt_left {
   text-align: left;
 }
 
-#idgvcgegje .gt_center {
+#nyynkpypgo .gt_center {
   text-align: center;
 }
 
-#idgvcgegje .gt_right {
+#nyynkpypgo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#idgvcgegje .gt_font_normal {
+#nyynkpypgo .gt_font_normal {
   font-weight: normal;
 }
 
-#idgvcgegje .gt_font_bold {
+#nyynkpypgo .gt_font_bold {
   font-weight: bold;
 }
 
-#idgvcgegje .gt_font_italic {
+#nyynkpypgo .gt_font_italic {
   font-style: italic;
 }
 
-#idgvcgegje .gt_super {
+#nyynkpypgo .gt_super {
   font-size: 65%;
 }
 
-#idgvcgegje .gt_footnote_marks {
+#nyynkpypgo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#idgvcgegje .gt_asterisk {
+#nyynkpypgo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#idgvcgegje .gt_indent_1 {
+#nyynkpypgo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#idgvcgegje .gt_indent_2 {
+#nyynkpypgo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#idgvcgegje .gt_indent_3 {
+#nyynkpypgo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#idgvcgegje .gt_indent_4 {
+#nyynkpypgo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#idgvcgegje .gt_indent_5 {
+#nyynkpypgo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4427,7 +3749,7 @@ locality/county crosswalk. The GPCI reflects the relative costs of
 physician work, practice expense, and malpractice insurance in a
 geographic area compared to the national average costs for each
 component.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gpci.html">gpci</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">counties</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col   <span class="op">=</span> <span class="st">"mac"</span>, </span>
@@ -4475,23 +3797,23 @@ component.</p>
 <span>    source_notes.font.size     <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
 <span>    row_group.as_column        <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt_marks</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">two_macs</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="ksfjysljbh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ksfjysljbh table {
+<div id="occeyjizsn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#occeyjizsn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ksfjysljbh thead, #ksfjysljbh tbody, #ksfjysljbh tfoot, #ksfjysljbh tr, #ksfjysljbh td, #ksfjysljbh th {
+#occeyjizsn thead, #occeyjizsn tbody, #occeyjizsn tfoot, #occeyjizsn tr, #occeyjizsn td, #occeyjizsn th {
   border-style: none;
 }
 
-#ksfjysljbh p {
+#occeyjizsn p {
   margin: 0;
   padding: 0;
 }
 
-#ksfjysljbh .gt_table {
+#occeyjizsn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4517,12 +3839,12 @@ component.</p>
   border-left-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_caption {
+#occeyjizsn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ksfjysljbh .gt_title {
+#occeyjizsn .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -4534,7 +3856,7 @@ component.</p>
   border-bottom-width: 0;
 }
 
-#ksfjysljbh .gt_subtitle {
+#occeyjizsn .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -4546,7 +3868,7 @@ component.</p>
   border-top-width: 0;
 }
 
-#ksfjysljbh .gt_heading {
+#occeyjizsn .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -4558,13 +3880,13 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_bottom_border {
+#occeyjizsn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_col_headings {
+#occeyjizsn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4579,7 +3901,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_col_heading {
+#occeyjizsn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4599,7 +3921,7 @@ component.</p>
   overflow-x: hidden;
 }
 
-#ksfjysljbh .gt_column_spanner_outer {
+#occeyjizsn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4611,15 +3933,15 @@ component.</p>
   padding-right: 4px;
 }
 
-#ksfjysljbh .gt_column_spanner_outer:first-child {
+#occeyjizsn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ksfjysljbh .gt_column_spanner_outer:last-child {
+#occeyjizsn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ksfjysljbh .gt_column_spanner {
+#occeyjizsn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4631,11 +3953,11 @@ component.</p>
   width: 100%;
 }
 
-#ksfjysljbh .gt_spanner_row {
+#occeyjizsn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ksfjysljbh .gt_group_heading {
+#occeyjizsn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4661,7 +3983,7 @@ component.</p>
   text-align: left;
 }
 
-#ksfjysljbh .gt_empty_group_heading {
+#occeyjizsn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4676,15 +3998,15 @@ component.</p>
   vertical-align: middle;
 }
 
-#ksfjysljbh .gt_from_md > :first-child {
+#occeyjizsn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ksfjysljbh .gt_from_md > :last-child {
+#occeyjizsn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ksfjysljbh .gt_row {
+#occeyjizsn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4703,7 +4025,7 @@ component.</p>
   overflow-x: hidden;
 }
 
-#ksfjysljbh .gt_stub {
+#occeyjizsn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4716,7 +4038,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#ksfjysljbh .gt_stub_row_group {
+#occeyjizsn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4730,15 +4052,15 @@ component.</p>
   vertical-align: top;
 }
 
-#ksfjysljbh .gt_row_group_first td {
+#occeyjizsn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ksfjysljbh .gt_row_group_first th {
+#occeyjizsn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ksfjysljbh .gt_summary_row {
+#occeyjizsn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4748,16 +4070,16 @@ component.</p>
   padding-right: 5px;
 }
 
-#ksfjysljbh .gt_first_summary_row {
+#occeyjizsn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_first_summary_row.thick {
+#occeyjizsn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ksfjysljbh .gt_last_summary_row {
+#occeyjizsn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4767,7 +4089,7 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_grand_summary_row {
+#occeyjizsn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4777,7 +4099,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#ksfjysljbh .gt_first_grand_summary_row {
+#occeyjizsn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4787,7 +4109,7 @@ component.</p>
   border-top-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_last_grand_summary_row_top {
+#occeyjizsn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4797,11 +4119,11 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_striped {
+#occeyjizsn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ksfjysljbh .gt_table_body {
+#occeyjizsn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4810,7 +4132,7 @@ component.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_footnotes {
+#occeyjizsn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4824,7 +4146,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_footnote {
+#occeyjizsn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4833,7 +4155,7 @@ component.</p>
   padding-right: 5px;
 }
 
-#ksfjysljbh .gt_sourcenotes {
+#occeyjizsn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4847,7 +4169,7 @@ component.</p>
   border-right-color: #D3D3D3;
 }
 
-#ksfjysljbh .gt_sourcenote {
+#occeyjizsn .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4855,63 +4177,63 @@ component.</p>
   padding-right: 5px;
 }
 
-#ksfjysljbh .gt_left {
+#occeyjizsn .gt_left {
   text-align: left;
 }
 
-#ksfjysljbh .gt_center {
+#occeyjizsn .gt_center {
   text-align: center;
 }
 
-#ksfjysljbh .gt_right {
+#occeyjizsn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ksfjysljbh .gt_font_normal {
+#occeyjizsn .gt_font_normal {
   font-weight: normal;
 }
 
-#ksfjysljbh .gt_font_bold {
+#occeyjizsn .gt_font_bold {
   font-weight: bold;
 }
 
-#ksfjysljbh .gt_font_italic {
+#occeyjizsn .gt_font_italic {
   font-style: italic;
 }
 
-#ksfjysljbh .gt_super {
+#occeyjizsn .gt_super {
   font-size: 65%;
 }
 
-#ksfjysljbh .gt_footnote_marks {
+#occeyjizsn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ksfjysljbh .gt_asterisk {
+#occeyjizsn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ksfjysljbh .gt_indent_1 {
+#occeyjizsn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ksfjysljbh .gt_indent_2 {
+#occeyjizsn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ksfjysljbh .gt_indent_3 {
+#occeyjizsn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ksfjysljbh .gt_indent_4 {
+#occeyjizsn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ksfjysljbh .gt_indent_5 {
+#occeyjizsn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
