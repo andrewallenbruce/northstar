@@ -104,68 +104,75 @@
 <span>             mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">61</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs            <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cons_desc        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Removal of cancer skin growth of face, ears, eyelids…</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="st">&gt; $ clin_descs       &lt;list&gt; [&lt;tbl_df[10 x 1]&gt;]</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="st">&gt; $ mod              &lt;chr&gt; NA</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="st">&gt; $ status           &lt;chr&gt; "</span>A<span class="st">"</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="st">&gt; $ mac              &lt;chr&gt; "</span><span class="dv">10212</span><span class="st">"</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="st">&gt; $ state            &lt;chr&gt; "</span>GA<span class="st">"</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="st">&gt; $ locality         &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="st">&gt; $ area             &lt;chr&gt; "</span>REST OF GEORGIA<span class="st">"</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">&gt; $ counties         &lt;chr&gt; "</span>ALL OTHER COUNTIES<span class="st">"</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="st">&gt; $ two_macs         &lt;lgl&gt; FALSE</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="st">&gt; $ wgpci            &lt;dbl&gt; 1</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">&gt; $ pgpci            &lt;dbl&gt; 0.883</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="st">&gt; $ mgpci            &lt;dbl&gt; 1.125</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="st">&gt; $ wrvu             &lt;dbl&gt; 6.26</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="st">&gt; $ nonfac_prvu      &lt;dbl&gt; 7.92</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="st">&gt; $ fac_prvu         &lt;dbl&gt; 4.36</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="st">&gt; $ mrvu             &lt;dbl&gt; 0.99</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="st">&gt; $ cf               &lt;dbl&gt; 32.744</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="st">&gt; $ fac_par          &lt;dbl&gt; 367.5065</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="st">&gt; $ nonfac_par       &lt;dbl&gt; 470.4366</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="st">&gt; $ fac_nonpar       &lt;dbl&gt; 349.1312</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="st">&gt; $ nonfac_nonpar    &lt;dbl&gt; 446.9148</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">&gt; $ fac_limit        &lt;dbl&gt; 401.5009</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">&gt; $ nonfac_limit     &lt;dbl&gt; 513.952</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">&gt; $ opps             &lt;chr&gt; "</span><span class="dv">9</span><span class="st">"</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">&gt; $ nonfac_prvu_opps &lt;dbl&gt; 0</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">&gt; $ fac_prvu_opps    &lt;dbl&gt; 0</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">&gt; $ mrvu_opps        &lt;dbl&gt; 0</span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="st">&gt; $ mult_surg        &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="st">&gt; $ flat_vis         &lt;dbl&gt; 0</span></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="st">&gt; $ nonfac_therapy   &lt;dbl&gt; 2</span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="st">&gt; $ fac_therapy      &lt;dbl&gt; 0</span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="st">&gt; $ global           &lt;chr&gt; "</span><span class="dv">010</span><span class="st">"</span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="st">&gt; $ op_ind           &lt;dbl&gt; 1</span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="st">&gt; $ op_pre           &lt;dbl&gt; 0.1</span></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="st">&gt; $ op_intra         &lt;dbl&gt; 0.8</span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="st">&gt; $ op_post          &lt;dbl&gt; 0.1</span></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="st">&gt; $ pctc             &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="st">&gt; $ mult_proc        &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="st">&gt; $ surg_bilat       &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="st">&gt; $ surg_asst        &lt;chr&gt; "</span><span class="dv">1</span><span class="st">"</span></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="st">&gt; $ surg_co          &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="st">&gt; $ surg_team        &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="st">&gt; $ supvis           &lt;chr&gt; "</span><span class="dv">09</span><span class="st">"</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="st">&gt; $ dximg            &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="st">&gt; $ endo             &lt;chr&gt; NA</span></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="st">&gt; $ rare             &lt;chr&gt; "</span><span class="dv">00</span><span class="st">"</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="st">&gt; $ unused           &lt;int&gt; 0</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="st">&gt; $ rbcs             &lt;chr&gt; "</span>PS038O<span class="st">"</span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="st">&gt; $ cat.id           &lt;chr&gt; "</span>P<span class="st">"</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="st">&gt; $ sub.id           &lt;chr&gt; "</span>PS<span class="st">"</span></span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="st">&gt; $ fam.id           &lt;chr&gt; "</span><span class="dv">038</span><span class="st">"</span></span>
-<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a><span class="st">&gt; $ category         &lt;chr&gt; "</span>Procedure<span class="st">"</span></span>
-<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="st">&gt; $ subcategory      &lt;chr&gt; "</span>Skin<span class="st">"</span></span>
-<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="st">&gt; $ family           &lt;chr&gt; "</span>Skin Lesion Excision<span class="st">"</span></span>
-<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="st">&gt; $ major            &lt;chr&gt; "</span>Other<span class="st">"</span></span>
-<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="st">&gt; $ date_hcpcs_add   &lt;date&gt; 1984-01-01</span></span>
-<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a><span class="st">&gt; $ date_hcpcs_end   &lt;date&gt; 9999-12-31</span></span>
-<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a><span class="st">&gt; $ date_rbcs_assign &lt;date&gt; 2014-01-01</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">68</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs              <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cpt_section        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Surgery"</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs_level        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"I"</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cpt_category       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"I"</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Exc f/e/e/n/l mal+mrg &gt;4 cm"</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cons_desc          <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Removal of cancer skin growth of face, ears, eyeli…</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="st">&gt; $ clin_descs         &lt;list&gt; [&lt;tbl_df[10 x 1]&gt;]</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="st">&gt; $ status             &lt;chr&gt; "</span>A<span class="st">"</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="st">&gt; $ mac                &lt;chr&gt; "</span><span class="dv">10212</span><span class="st">"</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="st">&gt; $ state              &lt;chr&gt; "</span>GA<span class="st">"</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">&gt; $ locality           &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="st">&gt; $ area               &lt;chr&gt; "</span>REST OF GEORGIA<span class="st">"</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="st">&gt; $ counties           &lt;chr&gt; "</span>ALL OTHER COUNTIES<span class="st">"</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">&gt; $ two_macs           &lt;lgl&gt; FALSE</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="st">&gt; $ wgpci              &lt;dbl&gt; 1</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="st">&gt; $ pgpci              &lt;dbl&gt; 0.883</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="st">&gt; $ mgpci              &lt;dbl&gt; 1.125</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="st">&gt; $ wrvu               &lt;dbl&gt; 6.26</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="st">&gt; $ nonfac_prvu        &lt;dbl&gt; 7.92</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="st">&gt; $ fac_prvu           &lt;dbl&gt; 4.36</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="st">&gt; $ mrvu               &lt;dbl&gt; 0.99</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="st">&gt; $ cf                 &lt;dbl&gt; 32.744</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="st">&gt; $ fac_par            &lt;dbl&gt; 367.5065</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="st">&gt; $ nonfac_par         &lt;dbl&gt; 470.4366</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">&gt; $ fac_nonpar         &lt;dbl&gt; 349.1312</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">&gt; $ nonfac_nonpar      &lt;dbl&gt; 446.9148</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">&gt; $ fac_limit          &lt;dbl&gt; 401.5009</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">&gt; $ nonfac_limit       &lt;dbl&gt; 513.952</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">&gt; $ opps               &lt;chr&gt; "</span><span class="dv">9</span><span class="st">"</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">&gt; $ nonfac_prvu_opps   &lt;dbl&gt; 0</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="st">&gt; $ fac_prvu_opps      &lt;dbl&gt; 0</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="st">&gt; $ mrvu_opps          &lt;dbl&gt; 0</span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="st">&gt; $ fac_par_opps       &lt;dbl&gt; 241.4461</span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="st">&gt; $ nonfac_par_opps    &lt;dbl&gt; 241.4461</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="st">&gt; $ fac_nonpar_opps    &lt;dbl&gt; 229.3738</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="st">&gt; $ nonfac_nonpar_opps &lt;dbl&gt; 229.3738</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="st">&gt; $ fac_limit_opps     &lt;dbl&gt; 263.7798</span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="st">&gt; $ nonfac_limit_opps  &lt;dbl&gt; 263.7798</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="st">&gt; $ mult_surg          &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="st">&gt; $ flat_vis           &lt;dbl&gt; 0</span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="st">&gt; $ nonfac_therapy     &lt;dbl&gt; 2</span></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="st">&gt; $ fac_therapy        &lt;dbl&gt; 0</span></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="st">&gt; $ global             &lt;chr&gt; "</span><span class="dv">010</span><span class="st">"</span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="st">&gt; $ op_ind             &lt;dbl&gt; 1</span></span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="st">&gt; $ op_pre             &lt;dbl&gt; 0.1</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="st">&gt; $ op_intra           &lt;dbl&gt; 0.8</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="st">&gt; $ op_post            &lt;dbl&gt; 0.1</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="st">&gt; $ pctc               &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="st">&gt; $ mult_proc          &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="st">&gt; $ surg_bilat         &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="st">&gt; $ surg_asst          &lt;chr&gt; "</span><span class="dv">1</span><span class="st">"</span></span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="st">&gt; $ surg_co            &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="st">&gt; $ surg_team          &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="st">&gt; $ supvis             &lt;chr&gt; "</span><span class="dv">09</span><span class="st">"</span></span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a><span class="st">&gt; $ dximg              &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="st">&gt; $ rare               &lt;chr&gt; "</span><span class="dv">00</span><span class="st">"</span></span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="st">&gt; $ unused             &lt;int&gt; 0</span></span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="st">&gt; $ rbcs               &lt;chr&gt; "</span>PS038O<span class="st">"</span></span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="st">&gt; $ cat.id             &lt;chr&gt; "</span>P<span class="st">"</span></span>
+<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a><span class="st">&gt; $ sub.id             &lt;chr&gt; "</span>PS<span class="st">"</span></span>
+<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a><span class="st">&gt; $ fam.id             &lt;chr&gt; "</span><span class="dv">038</span><span class="st">"</span></span>
+<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a><span class="st">&gt; $ category           &lt;chr&gt; "</span>Procedure<span class="st">"</span></span>
+<span id="cb4-65"><a href="#cb4-65" tabindex="-1"></a><span class="st">&gt; $ subcategory        &lt;chr&gt; "</span>Skin<span class="st">"</span></span>
+<span id="cb4-66"><a href="#cb4-66" tabindex="-1"></a><span class="st">&gt; $ family             &lt;chr&gt; "</span>Skin Lesion Excision<span class="st">"</span></span>
+<span id="cb4-67"><a href="#cb4-67" tabindex="-1"></a><span class="st">&gt; $ major              &lt;chr&gt; "</span>Other<span class="st">"</span></span>
+<span id="cb4-68"><a href="#cb4-68" tabindex="-1"></a><span class="st">&gt; $ date_hcpcs_add     &lt;date&gt; 1984-01-01</span></span>
+<span id="cb4-69"><a href="#cb4-69" tabindex="-1"></a><span class="st">&gt; $ date_hcpcs_end     &lt;date&gt; 9999-12-31</span></span>
+<span id="cb4-70"><a href="#cb4-70" tabindex="-1"></a><span class="st">&gt; $ date_rbcs_assign   &lt;date&gt; 2014-01-01</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
@@ -200,20 +207,20 @@
 <span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rare        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gpci.html">gpci</a></span><span class="op">(</span>state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
-<span>     locality <span class="op">=</span> <span class="st">"99"</span>,</span>
+<span>     locality <span class="op">=</span> <span class="st">"01"</span>,</span>
 <span>     mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">9</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"GA"</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> name     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REST OF GEORGIA"</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"01"</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> name     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ATLANTA"</span></span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.883</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.125</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ALL OTHER COUNTIES"</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> two_macs <span class="sc">&lt;</span>lgl<span class="sc">&gt;</span> <span class="cn">FALSE</span></span></code></pre></div>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.997</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.128</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYETTE, FO…</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="st">&gt; $ two_macs &lt;lgl&gt; FALSE</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pfs.html">pfs</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
 <span>    mac      <span class="op">=</span> <span class="st">"10212"</span>,</span>
