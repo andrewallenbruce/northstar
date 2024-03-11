@@ -24,6 +24,6 @@ OPPS-based payment caps.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-opps(hcpcs = "11646")
+opps(hcpcs = "70170")
 \dontshow{\}) # examplesIf}
 }

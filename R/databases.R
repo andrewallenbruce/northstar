@@ -202,7 +202,7 @@ rbcs <- function(hcpcs       = NULL,
 #' @param locality description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' opps(hcpcs = "11646")
+#' opps(hcpcs = "70170")
 #' @export
 opps <- function(hcpcs = NULL,
                  mac = NULL,

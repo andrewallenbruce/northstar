@@ -20,7 +20,8 @@ Imports:
     rlang,
     stringr,
     tidyr,
-    vctrs
+    vctrs,
+    janitor
 Suggests:
     fontawesome,
     gluedown,

@@ -42,10 +42,10 @@ library(dplyr)
 ## Return Information about HCPCS Code
 
 ```{r}
-hcpcs_search(hcpcs = "11646", 
-             state = "GA", 
+hcpcs_search(hcpcs    = "11646", 
+             state    = "GA", 
              locality = "99", 
-             mac = "10212") |> 
+             mac      = "10212") |> 
   glimpse()
 ```
 
@@ -72,13 +72,15 @@ pfs(hcpcs    = "11646",
 
 
 ```{r}
-calc_amounts(wrvu  = 6.26,
-             nprvu = 7.92,
-             fprvu = 4.36,
-             mrvu  = 0.99,
-             cf    = 32.744,
-             wgpci = 1,
-             pgpci = 0.883,
-             mgpci = 1.125)
+calculate_amounts(
+  wrvu  = 6.26,
+  nprvu = 7.92,
+  fprvu = 4.36,
+  mrvu  = 0.99,
+  cf    = 32.744,
+  wgpci = 1,
+  pgpci = 0.883,
+  mgpci = 1.125
+)
 ```
 

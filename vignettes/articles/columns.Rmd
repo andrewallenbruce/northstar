@@ -16,12 +16,13 @@ knitr::opts_chunk$set(
 
 gt_style <- function(gt_tbl) {
   gt_tbl |> 
-    opt_all_caps() |>
+    # opt_all_caps() |>
     fmt_markdown() |> 
     fmt_integer() |> 
     cols_align("left") |> 
     tab_style(
-    style = cell_text(align = "center", size = px(18)),
+    style = cell_text(align = "center", 
+                      size = px(18)),
     locations = cells_stub()) |> 
     tab_options(
       column_labels.hidden       = TRUE,

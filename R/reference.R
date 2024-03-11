@@ -10,7 +10,7 @@ ref <- function(type = c("pfs", "rvu", "lvl2")) {
         stat = status_codes(),
         mod  = modifiers(),
         mult = multiple_procedure(),
-        opps = opps_ref()
+        opps = opps_ind()
       ))
   }
 
@@ -41,7 +41,6 @@ ref <- function(type = c("pfs", "rvu", "lvl2")) {
         price   = price_indicator(),
         mult    = multiple_price_indicator(),
         betos   = betos(),
-        section = section(),
         lab     = labcert(),
         tos     = type_of_service()
       ))
@@ -131,7 +130,7 @@ rvu_lab <- function() {
 
 #' @autoglobal
 #' @noRd
-opps_ref <- function() {
+opps_ind <- function() {
   c(
     "1" = "Subject to OPPS payment cap determination.",
     "9" = "Not subject to OPPS payment cap determination."
@@ -164,16 +163,17 @@ modifiers <- function() {
 #' @noRd
 pctc_ind <- function() {
   list(
-    "0" = c(label = "Physician Service Codes", description = "Physician services. The concept of PC/TC does not apply since physician services cannot be split into professional and technical components. Modifiers 26 and TC cannot be used with these codes. The RVUS include values for physician work, practice expense and malpractice expense. There are some codes with no work RVUs."),
-    "1" = c(label = "Diagnostic Tests for Radiology Services", description = "Diagnostic tests. These codes have both a professional and technical component. Modifiers 26 and TC can be used with these codes. The total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense. The total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only. The total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense."),
-    "2" = c(label = "Professional Component Only Codes", description = "Standalone codes that describe the physician work portion of selected diagnostic tests for which there is an associated code that describes the technical component of the diagnostic test only and another associated code that describes the global test. The total RVUs for professional component only codes include values for physician work, practice expense, and malpractice expense."),
-    "3" = c(label = "Technical Component Only Codes", description = "Standalone codes that describe the technical component (i.e., staff and equipment costs) of selected diagnostic tests for which there is an associated code that describes the professional component of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and therefore do not have a related professional code. Modifiers 26 and TC cannot be used with these codes. The total RVUs for technical component only codes include values for practice expense and malpractice expense only."),
-    "4" = c(label = "Global Test Only Codes", description = "Standalone codes that describe selected diagnostic tests for which there are associated codes that describe 1. the professional component of the test only, and 2. the technical component of the test only. Modifiers 26 and TC cannot be used with these codes. The total RVUs for global procedure only codes include values for physician work, practice expense, and malpractice expense. The total RVUs for global procedure only codes equals the sum of the total RVUs for the professional and technical components only codes combined."),
-    "5" = c(label = "Incident To Codes", description = "Services covered incident to a physician's service when they are provided by auxiliary personnel employed by the physician and working under his or her direct personal supervision. Payment may not be made by A/B MACs (B) for these services when they are provided to hospital inpatients or patients in a hospital outpatient department. Modifiers 26 and TC cannot be used with these codes."),
-    "6" = c(label = "Laboratory Physician Interpretation Codes", description = "Clinical laboratory codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of the tests is paid for under the lab fee schedule. Modifier TC cannot be used with these codes. The total RVUs for laboratory physician interpretation codes include values for physician work, practice expense, and malpractice expense."),
-    "7" = c(label = "Physical therapy service, for which payment may not be made", description = "Payment may not be made if the service is provided to either a patient in a hospital outpatient department or to an inpatient of the hospital by an independently practicing physical or occupational therapist."),
-    "8" = c(label = "Physician interpretation codes", description = "Identifies the professional component of clinical laboratory codes for which separate payment may be made only if the physician interprets an abnormal smear for hospital inpatient. This applies to CPT codes 85060. No TC billing is recognized because payment for the underlying clinical laboratory test is made to the hospital, generally through the PPS rate. No payment is recognized for CPT codes 85060 furnished to hospital outpatients or non-hospital patients. The physician interpretation is paid through the clinical laboratory fee schedule payment for the clinical laboratory test."),
-    "9" = c(label = "Not Applicable", description = "Concept of a professional/technical component does not apply"))
+    "0" = dplyr::tibble(label = "Physician Service Codes", description = "Physician services. The concept of PC/TC does not apply since physician services cannot be split into professional and technical components. Modifiers 26 and TC cannot be used with these codes. The RVUS include values for physician work, practice expense and malpractice expense. There are some codes with no work RVUs."),
+    "1" = dplyr::tibble(label = "Diagnostic Tests for Radiology Services", description = "Diagnostic tests. These codes have both a professional and technical component. Modifiers 26 and TC can be used with these codes. The total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense. The total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only. The total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense."),
+    "2" = dplyr::tibble(label = "Professional Component Only Codes", description = "Standalone codes that describe the physician work portion of selected diagnostic tests for which there is an associated code that describes the technical component of the diagnostic test only and another associated code that describes the global test. The total RVUs for professional component only codes include values for physician work, practice expense, and malpractice expense."),
+    "3" = dplyr::tibble(label = "Technical Component Only Codes", description = "Standalone codes that describe the technical component (i.e., staff and equipment costs) of selected diagnostic tests for which there is an associated code that describes the professional component of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and therefore do not have a related professional code. Modifiers 26 and TC cannot be used with these codes. The total RVUs for technical component only codes include values for practice expense and malpractice expense only."),
+    "4" = dplyr::tibble(label = "Global Test Only Codes", description = "Standalone codes that describe selected diagnostic tests for which there are associated codes that describe 1. the professional component of the test only, and 2. the technical component of the test only. Modifiers 26 and TC cannot be used with these codes. The total RVUs for global procedure only codes include values for physician work, practice expense, and malpractice expense. The total RVUs for global procedure only codes equals the sum of the total RVUs for the professional and technical components only codes combined."),
+    "5" = dplyr::tibble(label = "Incident To Codes", description = "Services covered incident to a physician's service when they are provided by auxiliary personnel employed by the physician and working under his or her direct personal supervision. Payment may not be made by A/B MACs (B) for these services when they are provided to hospital inpatients or patients in a hospital outpatient department. Modifiers 26 and TC cannot be used with these codes."),
+    "6" = dplyr::tibble(label = "Laboratory Physician Interpretation Codes", description = "Clinical laboratory codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of the tests is paid for under the lab fee schedule. Modifier TC cannot be used with these codes. The total RVUs for laboratory physician interpretation codes include values for physician work, practice expense, and malpractice expense."),
+    "7" = dplyr::tibble(label = "Physical therapy service, for which payment may not be made", description = "Payment may not be made if the service is provided to either a patient in a hospital outpatient department or to an inpatient of the hospital by an independently practicing physical or occupational therapist."),
+    "8" = dplyr::tibble(label = "Physician interpretation codes", description = "Identifies the professional component of clinical laboratory codes for which separate payment may be made only if the physician interprets an abnormal smear for hospital inpatient. This applies to CPT codes 85060. No TC billing is recognized because payment for the underlying clinical laboratory test is made to the hospital, generally through the PPS rate. No payment is recognized for CPT codes 85060 furnished to hospital outpatients or non-hospital patients. The physician interpretation is paid through the clinical laboratory fee schedule payment for the clinical laboratory test."),
+    "9" = dplyr::tibble(label = "Not Applicable", description = "Concept of a professional/technical component does not apply")
+    )
 }
 
 #' @autoglobal
@@ -421,30 +421,6 @@ labcert <- function() {
     "630" = "Cytology",
     "800" = "Radiobioassay",
     "900" = "Clinical cytogenetics")
-}
-
-#' @autoglobal
-#' @noRd
-section <- function() {
-  c(
-    "A" = "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
-    "B" = "Enteral and Parenteral Therapy",
-    "C" = "Temporary Hospital Outpatient Prospective Payment System",
-    "D" = "Dental Procedures",
-    "E" = "Durable Medical Equipment",
-    "G" = "Temporary Procedures & Professional Services",
-    "H" = "Rehabilitative Services",
-    "J" = "Drugs Administered Other Than Oral Method, Chemotherapy Drugs",
-    "K" = "Temporary Codes for Durable Medical Equipment Regional Carriers",
-    "L" = "Orthotic/Prosthetic Procedures",
-    "M" = "Medical Services",
-    "P" = "Pathology and Laboratory",
-    "Q" = "Temporary Codes",
-    "R" = "Diagnostic Radiology Services",
-    "S" = "Private Payer Codes",
-    "T" = "State Medicaid Agency Codes",
-    "V" = "Vision/Hearing Services"
-    )
 }
 
 #' @autoglobal

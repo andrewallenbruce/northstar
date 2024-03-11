@@ -14,7 +14,8 @@ is_valid_length <- function(x,
       "A {.strong HCPCS} code is {.emph 5} characters.",
       "x" = "{.strong {.val {x}}} is {.val {nchar(x)}}."),
       call = call)}
-  x
+
+  if (grepl("[[:lower:]]*", x)) {toupper(x)}
 }
 
 #' Check if code is HCPCS Level I
@@ -44,7 +45,7 @@ is_level_I <- function(x,
                        call = rlang::caller_env()) {
   is_valid_length(x)
 
-  stringr::str_detect(x, stringr::regex("^\\d{4}[a-vA-V0-9]$"))
+  stringr::str_detect(x, stringr::regex("^\\d{4}[A-Z0-9]$"))
 }
 
 #' Check if code is HCPCS Level II
@@ -78,7 +79,7 @@ is_level_II <- function(x,
                         call = rlang::caller_env()) {
   is_valid_length(x)
 
-  stringr::str_detect(x, stringr::regex("^[a-vA-V]\\d{4}$"))
+  stringr::str_detect(x, stringr::regex("^[A-V]\\d{4}$"))
 }
 
 #' Check if code is HCPCS Level 1 Category I (CPT)
@@ -95,7 +96,7 @@ is_category_I <- function(x,
   # https://www.johndcook.com/blog/2019/05/05/regex_icd_codes/
   is_level_I(x)
 
-  stringr::str_detect(x, stringr::regex("^\\d{5}$"))
+  stringr::str_detect(x, stringr::regex("^\\d{4}[A-EG-SU-Z0-9]$"))
 }
 
 #' Check if code is HCPCS Level 1 Category II
@@ -120,6 +121,12 @@ is_category_I <- function(x,
 #'
 #' Consequently, they do not have a relative value associated with them.
 #'
+#' Category II codes are:
+#' + Alphanumeric and consist of four digits followed by the letter F
+#' + NOT billing codes
+#' + Used to track services on claims for performance measurement
+#' + Not to be used as a substitute for Category I codes
+#'
 #' @param x string
 #' @return boolean
 #' @examplesIf interactive()
@@ -143,7 +150,7 @@ is_category_II <- function(x,
 #' @param x string
 #' @return boolean
 #' @examplesIf interactive()
-#' is_category_III("1164T")
+#' is_category_III("0074T")
 #' @noRd
 #' @autoglobal
 is_category_III <- function(x,
@@ -152,31 +159,4 @@ is_category_III <- function(x,
   is_level_I(x)
 
   stringr::str_detect(x, stringr::regex("^\\d{4}[T]$"))
-}
-
-#' Check if code is HCPCS Level III
-#' @param x string
-#' @return boolean
-#' @examplesIf interactive()
-#' label_hcpcs("A0010")
-#' @noRd
-#' @autoglobal
-case_hcpcs <- function(x, type = c("level", "category")) {
-
-  type <- match.arg(type)
-
-  if (type == "level") {
-    dplyr::case_when(
-      is_level_I(x) == TRUE ~ "I",
-      is_level_II(x) == TRUE ~ "II")
-  }
-
-  if (type == "category") {
-
-  dplyr::case_when(
-    is_category_I(x) == TRUE ~ "I",
-    is_category_II(x) == TRUE ~ "II",
-    is_category_III(x) == TRUE ~ "III")
-  }
-
 }

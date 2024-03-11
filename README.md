@@ -29,17 +29,16 @@ library(dplyr)
 ## Return Information about HCPCS Code
 
 ``` r
-hcpcs_search(hcpcs = "11646", 
-             state = "GA", 
+hcpcs_search(hcpcs    = "11646", 
+             state    = "GA", 
              locality = "99", 
-             mac = "10212") |> 
+             mac      = "10212") |> 
   glimpse()
 ```
 
     > Rows: 1
-    > Columns: 51
+    > Columns: 61
     > $ hcpcs            <chr> "11646"
-    > $ hcpcs_type       <chr> "Category I"
     > $ description      <chr> "Exc f/e/e/n/l mal+mrg >4 cm"
     > $ cons_desc        <chr> "Removal of cancer skin growth of face, ears, eyelids…
     > $ clin_descs       <list> [<tbl_df[10 x 1]>]
@@ -89,6 +88,17 @@ hcpcs_search(hcpcs = "11646",
     > $ endo             <chr> NA
     > $ rare             <chr> "00"
     > $ unused           <int> 0
+    > $ rbcs             <chr> "PS038O"
+    > $ cat.id           <chr> "P"
+    > $ sub.id           <chr> "PS"
+    > $ fam.id           <chr> "038"
+    > $ category         <chr> "Procedure"
+    > $ subcategory      <chr> "Skin"
+    > $ family           <chr> "Skin Lesion Excision"
+    > $ major            <chr> "Other"
+    > $ date_hcpcs_add   <date> 1984-01-01
+    > $ date_hcpcs_end   <date> 9999-12-31
+    > $ date_rbcs_assign <date> 2014-01-01
 
 ``` r
 rvu(hcpcs = "V5299") |> glimpse()
@@ -169,14 +179,16 @@ pfs(hcpcs    = "11646",
     > $ opps_f    <dbl> 0
 
 ``` r
-calc_amounts(wrvu  = 6.26,
-             nprvu = 7.92,
-             fprvu = 4.36,
-             mrvu  = 0.99,
-             cf    = 32.744,
-             wgpci = 1,
-             pgpci = 0.883,
-             mgpci = 1.125)
+calculate_amounts(
+  wrvu  = 6.26,
+  nprvu = 7.92,
+  fprvu = 4.36,
+  mrvu  = 0.99,
+  cf    = 32.744,
+  wgpci = 1,
+  pgpci = 0.883,
+  mgpci = 1.125
+)
 ```
 
     > Facility:

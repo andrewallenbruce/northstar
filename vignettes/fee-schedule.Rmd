@@ -30,11 +30,22 @@ library(qs)
 
 ```{r}
 hcpcs_search(
-  hcpcs = c("39503", "43116", "33935", "11646", "1164F", "V5299"), 
+  hcpcs = "39503", 
   state = "GA", 
   locality = "99", 
-  mac = "10212")
+  mac = "10212") |> 
+  glimpse()
 ```
+
+
+```{r}
+hcpcs_search(hcpcs = "70170", 
+             state = "NY", 
+             locality = "01",
+             mac = "13202") |> 
+  glimpse()
+```
+
 
 # Physician Fee Schedule Amount Calculation
 <br>

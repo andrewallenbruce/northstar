@@ -200,10 +200,12 @@ hcpcs_search <- function(hcpcs,
       nnpar = nonpar_amount(npar),
       flim  = limiting_charge(fpar),
       nlim  = limiting_charge(npar)) |>
-    dplyr::rowwise() |>
-    dplyr::mutate(hcpcs_type = case_hcpcs(hcpcs)) |>
-    dplyr::ungroup() |>
-    cols_amounts()
+    cols_amounts() |>
+    case_cpt_category(hcpcs) |>
+    case_hcpcs_level(hcpcs) |>
+    case_cpt_section(hcpcs) |>
+    case_hcpcs_section(hcpcs) |>
+    janitor::remove_empty(which = c("rows", "cols"))
 
 }
 
