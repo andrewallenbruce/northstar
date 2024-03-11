@@ -199,7 +199,14 @@ hcpcs_search <- function(hcpcs,
       fnpar = nonpar_amount(fpar),
       nnpar = nonpar_amount(npar),
       flim  = limiting_charge(fpar),
-      nlim  = limiting_charge(npar)) |>
+      nlim  = limiting_charge(npar),
+      fpar_opps = ((wrvu * wgpci) + (fprvu_opps * pgpci) + (mrvu * mgpci)) * cf,
+      npar_opps  = ((wrvu * wgpci) + (nprvu_opps * pgpci) + (mrvu * mgpci)) * cf,
+      fnpar_opps = nonpar_amount(fpar_opps),
+      nnpar_opps = nonpar_amount(npar_opps),
+      flim_opps  = limiting_charge(fpar_opps),
+      nlim_opps  = limiting_charge(npar_opps),
+      ) |>
     cols_amounts() |>
     case_cpt_category(hcpcs) |>
     case_hcpcs_level(hcpcs) |>
@@ -248,6 +255,12 @@ cols_amounts <- function(df) {
             'nonfac_prvu_opps' = 'nprvu_opps',
             'fac_prvu_opps'    = 'fprvu_opps',
             'mrvu_opps',
+            'fac_par_opps'          = 'fpar_opps',
+            'nonfac_par_opps'       = 'npar_opps',
+            'fac_nonpar_opps'       = 'fnpar_opps',
+            'nonfac_nonpar_opps'    = 'nnpar_opps',
+            'fac_limit_opps'        = 'flim_opps',
+            'nonfac_limit_opps'     = 'nlim_opps',
             'mult_surg',
             'flat_vis',
             'nonfac_therapy'   = 'nther',

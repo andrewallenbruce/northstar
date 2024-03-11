@@ -12,7 +12,11 @@ utils::globalVariables(c(
   # <hcpcs_search>
   "fpar",
   # <hcpcs_search>
+  "fpar_opps",
+  # <hcpcs_search>
   "fprvu",
+  # <hcpcs_search>
+  "fprvu_opps",
   # <col_lab>
   "label",
   # <hcpcs_search>
@@ -24,7 +28,11 @@ utils::globalVariables(c(
   # <hcpcs_search>
   "npar",
   # <hcpcs_search>
+  "npar_opps",
+  # <hcpcs_search>
   "nprvu",
+  # <hcpcs_search>
+  "nprvu_opps",
   # <hcpcs_search>
   "pgpci",
   # <abb2full>

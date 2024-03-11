@@ -57,7 +57,7 @@ rvu(hcpcs = "V5299") |> glimpse()
 
 ```{r}
 gpci(state    = "GA",
-     locality = "99",
+     locality = "01",
      mac      = "10212") |> 
   glimpse()
 ```

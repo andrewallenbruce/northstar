@@ -23,7 +23,6 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
-library(qs)
 ```
 
 ## Look Up HCPCS Code
@@ -39,10 +38,15 @@ hcpcs_search(
 
 
 ```{r}
+opps(hcpcs = "70170", mac = "10212", locality = "01") |> 
+  glimpse()
+```
+
+
+```{r}
 hcpcs_search(hcpcs = "70170", 
-             state = "NY", 
-             locality = "01",
-             mac = "13202") |> 
+             state = "GA", 
+             locality = "01") |> 
   glimpse()
 ```
 
