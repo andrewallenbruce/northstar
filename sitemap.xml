@@ -25,13 +25,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/news/index.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/calc_amounts.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/calc_limiting_charge.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/calc_nonpar_amount.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/descriptors.html</loc>
@@ -49,10 +43,19 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/level2.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/limiting_charge.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/nonpar_amount.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/pfs.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/rbcs.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/rvu.html</loc>
