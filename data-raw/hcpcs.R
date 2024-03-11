@@ -17,17 +17,21 @@ two <- read_excel(level2, col_types = "text") |>
          asc_dt     = convert_to_date(asc_dt)) |>
   select(-c(seqnum, recid, anest_bu)) |>
   unite("price", price1:price2, sep = ":", remove = TRUE, na.rm = TRUE) |>
-  mutate(price = na_if(price, "")) |>
   unite("cim", cim1:cim2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  mutate(cim = na_if(cim, "")) |>
   unite("mcm", mcm1:mcm3, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  mutate(mcm = na_if(mcm, "")) |>
   unite("labcert", labcert1:labcert4, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  mutate(labcert = na_if(labcert, "")) |>
   unite("xref", xref1:xref2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  mutate(xref = na_if(xref, "")) |>
   unite("tos", tos1:tos4, sep = ":", remove = TRUE, na.rm = TRUE) |>
-  mutate(tos = na_if(tos, ""))
+  mutate(price       = na_if(price, "")) |>
+  mutate(cim         = na_if(cim, "")) |>
+  mutate(mcm         = na_if(mcm, "")) |>
+  mutate(labcert     = na_if(labcert, "")) |>
+  mutate(xref        = na_if(xref, "")) |>
+  mutate(tos         = na_if(tos, "")) |>
+  rename(date_added  = add_dt,
+         date_action = act_eff_dt,
+         date_ended  = term_dt,
+         action      = action_cd)
 
 two |>
   count(action_cd) |> print(n = Inf)

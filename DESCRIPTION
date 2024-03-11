@@ -24,7 +24,7 @@ Imports:
    glue,
    vctrs,
    cli,
-   purrr
+   tidyr
 Suggests:
     gt,
     gluedown,

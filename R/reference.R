@@ -292,7 +292,9 @@ reference <- function(type = c("pfs", "hcpcs")) {
 reference_hcpcs <- function() {
 
   list(
-    asc_grp = c("YY" = "Procedure approved to be performed in an ASC", "NA" = "Not Approved For ASC"),
+    asc_grp = c(
+      "YY" = "Procedure approved to be performed in an ASC",
+      "NA" = "Not Approved For ASC"),
     cov = c(
       "C" = "Carrier Judgment",
       "D" = "Special Coverage Instructions Apply",

@@ -29,10 +29,10 @@ library(qs)
 ## Look Up HCPCS Code
 
 ```{r}
-calc_amounts_df(hcpcs    = "11646", 
-                state    = "GA", 
-                locality = "99", 
-                mac      = "10212") |> 
+hcpcs_search(hcpcs    = "11646", 
+             state    = "GA", 
+             locality = "99", 
+             mac      = "10212") |> 
   glimpse()
 ```
 
@@ -109,12 +109,14 @@ pfs(hcpcs    = "11646",
 ```
 
 ```{r}
-hcpcs_lv2(hcpcs = "V5299") |> 
+level2(hcpcs = "V5299") |> 
   glimpse()
 ```
 
 ```{r}
-cpt_descriptors(hcpcs = "11646")
+descriptors(hcpcs = "11646") |> 
+  tidyr::nest(clinician_descriptors = clinician_descriptor) |> 
+  glimpse()
 ```
 
 

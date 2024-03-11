@@ -118,13 +118,13 @@ is_level_II <- function(x,
 #' label_hcpcs("A0010")
 #' @noRd
 #' @autoglobal
-label_hcpcs <- function(x,
-                        arg = rlang::caller_arg(x),
-                        call = rlang::caller_env()) {
+case_hcpcs <- function(x) {
 
-  if (is_category_I(x))   return("L1:C1")
-  if (is_category_II(x))  return("L1:C2")
-  if (is_category_III(x)) return("L1:C3")
-  if (is_level_II(x))     return("L2")
-  else NA_character_
+  dplyr::case_when(
+    is_category_I(x) == TRUE ~ "Category I",
+    is_category_II(x) == TRUE ~ "Category II",
+    is_category_III(x) == TRUE ~ "Category III",
+    is_level_II(x) == TRUE ~ "Level II"
+  )
+
 }

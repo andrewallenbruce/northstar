@@ -41,12 +41,15 @@ pfs_pay <- pfs_pay |>
     ),
     readr::parse_number)) |>
   select(-pctc) |>
+  rowwise() |>
+  mutate(hcpcs_type = case_hcpcs(hcpcs)) |>
+  ungroup() |>
   # mutate(mod = ifelse(is.na(mod), "00", mod),
   #        opps = ifelse(opps == "9", "0", opps)) |>
   # select(-c(year, fee_nf, fee_f, opps_nf, opps_f)) |>
-  select(mac,
+  select(hcpcs,
+         mac,
          locality,
-         hcpcs,
          mod,
          status,
          mult_surg,
@@ -57,8 +60,7 @@ pfs_pay <- pfs_pay |>
          fee_f,
          opps,
          opps_nf,
-         opps_f
-         )
+         opps_f)
 
 # [990,482 x 15]
 

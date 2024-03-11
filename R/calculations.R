@@ -97,39 +97,37 @@ calc_amounts <- function(wrvu,
 #' @param mac numeric
 #' @return description
 #' @examplesIf interactive()
-#' calc_amounts_df(hcpcs = "11646",
-#'                 state = "GA",
-#'                 locality = "99",
-#'                 mac = "10212")
+#' hcpcs_search(hcpcs = "V5299",
+#'              state = "GA",
+#'              locality = "99",
+#'              mac = "10212")
 #'
-#' calc_amounts_df(hcpcs = c("39503", "43116", "33935", "11646"),
-#'                 state = "GA")
+#' hcpcs_search(hcpcs = c("39503", "43116", "33935", "11646"),
+#'              state = "GA")
 #' @autoglobal
 #' @export
-calc_amounts_df <- function(hcpcs,
-                            state = NULL,
-                            locality = NULL,
-                            mac = NULL) {
+hcpcs_search <- function(hcpcs,
+                         state = NULL,
+                         locality = NULL,
+                         mac = NULL) {
+
+  # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
+  # fs <- purrr::map(hcpcs, \(x) pfs(hcpcs = x, locality = locality, mac = mac)) |> purrr::list_rbind()
+  # desc <- purrr::map(hcpcs, \(x) cpt_descriptors(hcpcs = x)) |> purrr::list_rbind()
 
   cf <- 32.7442
 
-  rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |>
-    purrr::list_rbind()
+  rv <- rvu(hcpcs = hcpcs)
 
-  gp <- gpci(state = state,
-             locality = locality,
-             mac = mac)
+  gp <- gpci(state = state, locality = locality, mac = mac)
 
-  fs <- purrr::map(hcpcs, \(x) pfs(hcpcs = x,
-                                   locality = locality,
-                                   mac = mac)) |>
-    purrr::list_rbind()
+  fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
 
-  desc <- purrr::map(hcpcs, \(x) cpt_descriptors(hcpcs = x)) |>
-    purrr::list_rbind()
+  desc <- descriptors(hcpcs = hcpcs) |>
+    tidyr::nest(clinician_descriptors = clinician_descriptor)
 
-  res <- dplyr::left_join(gp, fs, by = dplyr::join_by(mac, locality)) |>
-    dplyr::left_join(rv, by = dplyr::join_by(hcpcs, mod, status)) |>
+  dplyr::left_join(gp, fs, by = dplyr::join_by(mac, locality)) |>
+    dplyr::left_join(rv, by   = dplyr::join_by(hcpcs, mod, status)) |>
     dplyr::left_join(desc, by = dplyr::join_by(hcpcs == cpt)) |>
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
@@ -137,59 +135,71 @@ calc_amounts_df <- function(hcpcs,
       fnpar = calc_nonpar_amount(fpar),
       nnpar = calc_nonpar_amount(npar),
       flim  = calc_limiting_charge(fpar),
-      nlim  = calc_limiting_charge(npar))
+      nlim  = calc_limiting_charge(npar)) |>
+    dplyr::rowwise() |>
+    dplyr::mutate(hcpcs_type = case_hcpcs(hcpcs)) |>
+    dplyr::ungroup() |>
+    cols_amounts()
 
-  dplyr::select(res,
-                hcpcs,
-                description,
-                clin_desc = clinician_descriptor,
-                cons_desc = consumer_descriptor,
-                mod,
-                status,
-                mac,
-                state,
-                locality,
-                area = name,
-                counties,
-                two_macs,
-                wgpci,
-                pgpci,
-                mgpci,
-                wrvu,
-                nprvu,
-                fprvu,
-                mrvu,
-                cf,
-                fpar,
-                npar,
-                fnpar,
-                nnpar,
-                flim,
-                nlim,
-                opps,
-                nprvu_opps,
-                mrvu_opps,
-                fprvu_opps,
-                mult_surg,
-                flat_vis,
-                nther,
-                fther,
-                global,
-                op_ind,
-                op_pre,
-                op_intra,
-                op_post,
-                pctc,
-                mult_proc,
-                surg_bilat,
-                surg_asst,
-                surg_co,
-                surg_team,
-                supvis,
-                dximg,
-                endo,
-                rare,
-                unused
-                )
+}
 
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_amounts <- function(df) {
+
+  cols <- c('hcpcs',
+            'hcpcs_type',
+            'description',
+            'clin_desc'        = 'clinician_descriptor',
+            'cons_desc'        = 'consumer_descriptor',
+            'clin_descs'       = 'clinician_descriptors',
+            'mod',
+            'status',
+            'mac',
+            'state',
+            'locality',
+            'area'             = 'name',
+            'counties',
+            'two_macs',
+            'wgpci',
+            'pgpci',
+            'mgpci',
+            'wrvu',
+            'nonfac_prvu'      = 'nprvu',
+            'fac_prvu'         = 'fprvu',
+            'mrvu',
+            'cf',
+            'fac_par'          = 'fpar',
+            'nonfac_par'       = 'npar',
+            'fac_nonpar'       = 'fnpar',
+            'nonfac_nonpar'    = 'nnpar',
+            'fac_limit'        = 'flim',
+            'nonfac_limit'     = 'nlim',
+            'opps',
+            'nonfac_prvu_opps' = 'nprvu_opps',
+            'fac_prvu_opps'    = 'fprvu_opps',
+            'mrvu_opps',
+            'mult_surg',
+            'flat_vis',
+            'nonfac_therapy'   = 'nther',
+            'fac_therapy'      = 'fther',
+            'global',
+            'op_ind',
+            'op_pre',
+            'op_intra',
+            'op_post',
+            'pctc',
+            'mult_proc',
+            'surg_bilat',
+            'surg_asst',
+            'surg_co',
+            'surg_team',
+            'supvis',
+            'dximg',
+            'endo',
+            'rare',
+            'unused')
+
+  df |> dplyr::select(dplyr::any_of(cols))
 }
