@@ -17,6 +17,70 @@ is_valid_length <- function(x,
   x
 }
 
+#' Check if code is HCPCS Level I
+#'
+#' HCPCS Level I is comprised of CPT (Current Procedural Terminology),
+#' a numeric coding system maintained by the American Medical Association
+#' (AMA). CPT is a uniform coding system consisting of descriptive terms and
+#' identifying codes that are used primarily to identify medical services and
+#' procedures furnished by physicians and other health care professionals.
+#' These health care professionals use the CPT to identify services and
+#' procedures for which they bill public or private health insurance programs.
+#'
+#' Decisions regarding the addition, deletion, or revision of CPT codes are
+#' made by the AMA. The CPT codes are republished and updated annually by the
+#' AMA. Level I of the HCPCS, the CPT codes, does not include codes needed to
+#' separately report medical items or services that are regularly billed by
+#' suppliers other than physicians.
+#'
+#' @param x string
+#' @return boolean
+#' @examplesIf interactive()
+#' is_level_II("E8015")
+#' @noRd
+#' @autoglobal
+is_level_I <- function(x,
+                       arg = rlang::caller_arg(x),
+                       call = rlang::caller_env()) {
+  is_valid_length(x)
+
+  stringr::str_detect(x, stringr::regex("^\\d{4}[a-vA-V0-9]$"))
+}
+
+#' Check if code is HCPCS Level II
+#'
+#' HCPCS Level II is a standardized coding system that is used primarily to
+#' identify products, supplies, and services not included in the CPT code set
+#' jurisdiction, such as ambulance services and durable medical equipment,
+#' prosthetics, orthotics, and supplies (DMEPOS) when used outside a
+#' physician's office.
+#'
+#' Level II of the HCPCS is a standardized coding system that is used primarily
+#' to identify products, supplies, and services not included in the CPT codes,
+#' such as ambulance services and durable medical equipment, prosthetics,
+#' orthotics, and supplies (DMEPOS) when used outside a physician's office.
+#' Because Medicare and other insurers cover a variety of services, supplies,
+#' and equipment that are not identified by CPT codes, the level II HCPCS codes
+#' were established for submitting claims for these items. The development and
+#' use of level II of the HCPCS began in the 1980's. Level II codes are also
+#' referred to as alpha-numeric codes because they consist of a single
+#' alphabetical letter followed by 4 numeric digits, while CPT codes are
+#' identified using 5 numeric digits.
+#'
+#' @param x string
+#' @return boolean
+#' @examplesIf interactive()
+#' is_level_II("E8015")
+#' @noRd
+#' @autoglobal
+is_level_II <- function(x,
+                        arg = rlang::caller_arg(x),
+                        call = rlang::caller_env()) {
+  is_valid_length(x)
+
+  stringr::str_detect(x, stringr::regex("^[a-vA-V]\\d{4}$"))
+}
+
 #' Check if code is HCPCS Level 1 Category I (CPT)
 #' @param x string
 #' @return boolean
@@ -27,9 +91,9 @@ is_valid_length <- function(x,
 is_category_I <- function(x,
                           arg = rlang::caller_arg(x),
                           call = rlang::caller_env()) {
+
   # https://www.johndcook.com/blog/2019/05/05/regex_icd_codes/
-  #
-  is_valid_length(x)
+  is_level_I(x)
 
   stringr::str_detect(x, stringr::regex("^\\d{5}$"))
 }
@@ -65,7 +129,8 @@ is_category_I <- function(x,
 is_category_II <- function(x,
                           arg = rlang::caller_arg(x),
                           call = rlang::caller_env()) {
-  is_valid_length(x)
+
+  is_level_I(x)
 
   stringr::str_detect(x, stringr::regex("^\\d{4}[F]$"))
 }
@@ -84,31 +149,9 @@ is_category_II <- function(x,
 is_category_III <- function(x,
                            arg = rlang::caller_arg(x),
                            call = rlang::caller_env()) {
-  is_valid_length(x)
+  is_level_I(x)
 
   stringr::str_detect(x, stringr::regex("^\\d{4}[T]$"))
-}
-
-#' Check if code is HCPCS Level II
-#'
-#' HCPCS Level II is a standardized coding system that is used primarily to
-#' identify products, supplies, and services not included in the CPT code set
-#' jurisdiction, such as ambulance services and durable medical equipment,
-#' prosthetics, orthotics, and supplies (DMEPOS) when used outside a
-#' physician's office.
-#'
-#' @param x string
-#' @return boolean
-#' @examplesIf interactive()
-#' is_level_II("E8015")
-#' @noRd
-#' @autoglobal
-is_level_II <- function(x,
-                       arg = rlang::caller_arg(x),
-                       call = rlang::caller_env()) {
-  is_valid_length(x)
-
-  stringr::str_detect(x, stringr::regex("^[a-vA-V]\\d{4}$"))
 }
 
 #' Check if code is HCPCS Level III
@@ -118,13 +161,22 @@ is_level_II <- function(x,
 #' label_hcpcs("A0010")
 #' @noRd
 #' @autoglobal
-case_hcpcs <- function(x) {
+case_hcpcs <- function(x, type = c("level", "category")) {
+
+  type <- match.arg(type)
+
+  if (type == "level") {
+    dplyr::case_when(
+      is_level_I(x) == TRUE ~ "I",
+      is_level_II(x) == TRUE ~ "II")
+  }
+
+  if (type == "category") {
 
   dplyr::case_when(
-    is_category_I(x) == TRUE ~ "Category I",
-    is_category_II(x) == TRUE ~ "Category II",
-    is_category_III(x) == TRUE ~ "Category III",
-    is_level_II(x) == TRUE ~ "Level II"
-  )
+    is_category_I(x) == TRUE ~ "I",
+    is_category_II(x) == TRUE ~ "II",
+    is_category_III(x) == TRUE ~ "III")
+  }
 
 }

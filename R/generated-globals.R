@@ -7,13 +7,13 @@ utils::globalVariables(c(
   "clinician_descriptor",
   # <hcpcs_search>
   "cpt",
-  # <column_labels>
+  # <col_lab>
   "description",
   # <hcpcs_search>
   "fpar",
   # <hcpcs_search>
   "fprvu",
-  # <column_labels>
+  # <col_lab>
   "label",
   # <hcpcs_search>
   "mgpci",
@@ -33,7 +33,7 @@ utils::globalVariables(c(
   "state.name",
   # <hcpcs_search>
   "status",
-  # <column_labels>
+  # <col_lab>
   "var",
   # <hcpcs_search>
   "wgpci",

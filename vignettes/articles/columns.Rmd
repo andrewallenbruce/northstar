@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
   out.width = "100%"
   )
 
-
 gt_style <- function(x) {
   x |> 
   gt(rowname_col = "var") |>
@@ -57,24 +56,24 @@ library(gluedown)
 library(gt)
 ```
 
-# Physician Fee Schedule Payment Amount File
+# PFS Payment Amount File
 
 This file contains locality-specific physician fee schedule payment amounts for services covered by the Medicare Physician Fee Schedule (MPFS) with one record for each unique combination of carrier, locality, procedure code and modifier.
 
 ```{r}
-northstar:::column_labels("md", "pfs") |> 
+northstar:::col_lab("md", "pfs") |> 
   gt_style()
 ```
 
 
-# Physician Fee Schedule Relative Value File
+# PFS Relative Value File
 
 This file contains information on services covered by the Medicare Physician Fee Schedule (MPFS) in 2024. For more than 10,000 physician services, the file contains the associated relative value units (RVUs), a fee schedule status indicator, and various payment policy indicators needed for payment adjustment (i.e., payment of assistant at surgery, team surgery, bilateral surgery, etc.).
 
 The Medicare physician fee schedule amounts are adjusted to reflect the variation in practice costs from area to area. A geographic practice cost index (GPCI) has been established for every Medicare payment locality for each of the three components of a procedure’s relative value unit (i.e., the RVUs for work, practice expense, and malpractice). The GPCIs are applied in the calculation of a fee schedule payment amount by multiplying the RVU for each component times the GPCI for that component.
 
 ```{r}
-northstar:::column_labels("md", "rvu") |> 
+northstar:::col_lab("md", "rvu") |> 
   gt_style()
 ```
 
@@ -86,7 +85,7 @@ foot_53 <- "Not used to report the elective cancellation of a procedure prior to
 
 foot_mod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
 
-mod_join <- dplyr::tibble(
+modifiers <- dplyr::tibble(
   mod = c("26", "TC", "53"),
   name = c("Professional Component", "Technical Component", "Discontinued Procedure"),
   description = c(
@@ -96,14 +95,16 @@ mod_join <- dplyr::tibble(
   )
 )
 
-rvu() |> 
-  count(mod, sort = TRUE) |> 
-  filter(!is.na(mod)) |> 
-  left_join(mod_join, by = join_by(mod)) |> 
+
+
+modifiers |> 
   gt(rowname_col = "mod") |> 
-  cols_label(n = "# of Codes") |> 
   cols_align(align = "left") |> 
   opt_all_caps() |>
+  tab_style(
+    style = cell_text(align = "center", size = px(16)),
+    locations = cells_stub()
+  ) |> 
   tab_header(title = "For diagnostic tests, a blank in this field denotes the Global Service & the following modifiers identify the components:") |> 
   tab_footnote(
     footnote = foot_53,
@@ -131,56 +132,24 @@ Indicates whether the code is in the fee schedule and whether it is separately p
 Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment.
 
 ```{r}
-status_lookup <- c(
-  "A" = "**Active Code**",
-  "B" = "**Payment Bundled**",
-  "C" = "**Carrier Priced**",
-  "D" = "**Deleted Codes**",
-  "E" = "**Regulatory Exclusion**",
-  "F" = "**Deleted/Discontinued Codes**",
-  "X" = "**Statutory Exclusion**",
-  "I" = "**Not Valid for Medicare Purposes**",
-  "M" = "**Measurement Code**",
-  "R" = "**Restricted Coverage**",
-  "N" = "**Non-Covered Service**",
-  "J" = "**Anesthesia Service**",
-  "P" = "**Bundled/Excluded Code**",
-  "T" = "**No Other Services Payable**"
-)
-
-status_lookup2 <- c(
-  "A" = "These codes are separately paid under the Physician Fee Schedule if covered. There will be RVUs and payment amounts for codes with this status. The presence of an A indicator does not mean that Medicare has made a National Coverage Determination regarding the service. Carriers remain responsible for coverage decisions in the absence of a national Medicare policy.",
-  "X" = "These codes represent an item or service that is not in the statutory definition of “physician services” for fee schedule payment purposes. No RVUs or payment amounts are shown for these codes and no payment may be made under the physician fee schedule. Ex: Ambulance services and Clinical Diagnostic Laboratory Services.",
-  "I" = "Medicare uses another code for reporting of, and payment for, these services. (Code NOT subject to a 90 day grace period.)",
-  "E" = "These codes are for items and/or services that CMS chose to exclude from the fee schedule payment by regulation. No RVUs or payment amounts are shown and no payment may be made under the fee schedule for these codes. Payment for them, when covered, continues under reasonable charge procedures.",
-  "M" = "Used for reporting purposes only.",
-  "C" = "Carriers will establish RVUs and payment amounts for these services, generally on an individual case basis following review of documentation such as an operative report.",
-  "R" = "Special coverage instructions apply.",
-  "N" = "These codes are carried on the HCPCS tape as noncovered services.",
-  "J" = "No relative Status units or payment amounts for anesthesia codes on the database, only used to facilitate the identification of anesthesia services.",
-  "P" = "There are no RVUs and no payment amounts for these services. No separate payment is made for them under the fee schedule. If the item or service is covered as incident to a physician service and is provided on the same day as a physician service, payment for it is bundled into the payment for the physician service to which it is incident (an example is an elastic bandage furnished by a physician incident to a physician service). If the item or service is covered as other than incident to a physician service, it is excluded from the fee schedule (for example, colostomy supplies) and is paid under the other payment provision of the Act.",
-  "B" = "Payment for covered services are always bundled into payment for other services not specified: There will be no RVUs or payment amounts for these codes and no separate payment is ever made. When these services are covered, payment for them is subsumed by the payment for the services to which they are incident (an example is a telephone call from a hospital nurse regarding care of a patient).",
-  "T" = "There are RVUs and payment amounts for these services, but they are only paid if there are no other services payable under the physician fee schedule billed on the same date by the same provider. If any other services payable under the physician fee schedule are billed on the same date by the same provider, these services are bundled into the physician services for which payment is made."
-)
-
-rvu() |> 
-  count(status, sort = TRUE) |> 
-  filter(!is.na(status)) |> 
-  mutate(name = status_lookup[status],
-         description = status_lookup2[status]) |>  
-  gt(rowname_col = "status") |> 
+dplyr::tibble(code = sort(
+  c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))) |> 
+  dplyr::mutate(ref = purrr::map(code, status_codes)) |> 
+  tidyr::unnest_wider(col = ref) |> 
+  gt(rowname_col = "code") |> 
   cols_align(align = "left") |> 
-  cols_label(n = "# of Codes") |> 
   fmt_markdown() |> 
   fmt_integer() |> 
   opt_all_caps() |>
   tab_style(
+    style = cell_text(align = "center", size = px(16)),
+    locations = cells_stub()
+  ) |> 
+  tab_style(
     style = cell_fill(color = "yellow", alpha = 0.3),
     locations = cells_body(
       columns = everything(),
-      rows = c(1, 7, 12)
-    )
-  ) |> 
+      rows = c(1, 12, 13))) |> 
   tab_options(
     table.font.size = px(14),
     table.width = pct(100),
@@ -210,15 +179,11 @@ glob_join <- dplyr::tibble(
   )
 )
 
-rvu() |> 
-  filter(!is.na(global)) |>
-  count(global, sort = TRUE) |> 
-  left_join(glob_join, by = join_by(global)) |> 
+glob_join |> 
   gt(rowname_col = "global") |> 
   fmt_markdown() |> 
   fmt_integer() |> 
   cols_align(align = "left") |> 
-  cols_label(n = "# of Codes") |> 
   opt_all_caps() |>
   tab_style(
     style = cell_text(align = "center", size = px(16)),
@@ -239,20 +204,22 @@ rvu() |>
 ## PCTC
 
 ```{r}
-pctc_lookup <- c(
-  "0" = "**Physician Services**",
-  "1" = "**Diagnostic Tests for Radiology Services**",
-  "2" = "**Professional Component Only**",
-  "3" = "**Technical Component Only**",
-  "4" = "**Global Test Only**",
-  "5" = "**Incident To**",
-  "6" = "**Laboratory Physician Interpretation**",
-  "7" = "**Physical Therapy Service**",
-  "8" = "**Physician Interpretation**",
-  "9" = "**Not Applicable**"
+pctc_codes <- dplyr::tibble(code = 0:9)
+
+pctc_label <- c(
+  "0" = "Physician Services",
+  "1" = "Diagnostic Tests for Radiology Services",
+  "2" = "Professional Component Only",
+  "3" = "Technical Component Only",
+  "4" = "Global Test Only",
+  "5" = "Incident To",
+  "6" = "Laboratory Physician Interpretation",
+  "7" = "Physical Therapy Service",
+  "8" = "Physician Interpretation",
+  "9" = "Not Applicable"
 )
 
-pctc_lookup2 <- c(
+pctc_desc <- c(
   "0" = "Modifiers 26 and TC <b><u>cannot</u></b> be used since Physician Services cannot be split into Professional and Technical components.<br><br>Examples: Visits, Consultations, Surgical Procedures.<br><br>RVU Components: **PW**, **PE**, **MP**.",
   
   "1" = "Modifiers 26 and TC <b><u>can</u></b> be used with these codes.<br><br>Examples: Pulmonary Function Tests, Therapeutic Radiology Procedures, e.g., Radiation Therapy.<br><br>These codes have both a Professional and Technical component.<br><br>Total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense.<br><br>Total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only.<br><br>Total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense.",
@@ -275,34 +242,22 @@ code.<br><br>Example Code: **93005** *Electrocardiogram; Tracing Only, without i
   "9" = "Concept of a professional/technical component does not apply."
 )
 
-rvu() |> 
-  filter(!is.na(pctc)) |> 
-  count(pctc) |> 
-  mutate(
-    category = pctc_lookup[pctc],
-    description = pctc_lookup2[pctc]
+pctc_codes |> 
+  dplyr::mutate(
+    category = pctc_label[as.character(code)],
+    description = pctc_desc[as.character(code)]
     ) |> 
-  gt(rowname_col = "pctc") |> 
+  gt(rowname_col = "code") |> 
+  tab_style(
+    style = cell_text(align = "center", size = px(16)),
+    locations = cells_stub()
+  ) |> 
   cols_align(align = "left") |> 
-  cols_label(n = "# of Codes") |> 
   fmt_markdown() |> 
   fmt_integer() |> 
   opt_all_caps() |>
   opt_row_striping() |> 
-  opt_table_outline(style = "none") |> 
-  opt_table_lines(extent = "none") |> 
-  # tab_style(
-  #   style = list(
-  #     cell_text(align = "center", 
-  #               size = px(18), 
-  #               color = "white"),
-  #     cell_fill(color = grayteal$g),
-  #     cell_borders(color = grayteal$g)
-  #     ),
-  #   locations = cells_stub()) |> 
   tab_options(
-    # table.font.color = grayteal$i,
-    # table_body.vlines.color = grayteal$a,
     table_body.vlines.style = "solid",
     table_body.vlines.width = px(2),
     table.font.size = px(14),

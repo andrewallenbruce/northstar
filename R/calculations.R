@@ -161,32 +161,33 @@ hcpcs_search <- function(hcpcs,
 
   fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
 
-  ds <- descriptors(hcpcs = hcpcs) |> tidyr::nest(clinician_descriptors = clinician_descriptor)
+  ds <- descriptors(hcpcs = hcpcs) |>
+    tidyr::nest(clinician_descriptors = clinician_descriptor)
 
   l2 <- level2(hcpcs = hcpcs)
+
+  rb <- rbcs(hcpcs = hcpcs)
 
   x <- list(
     rvus        = if(!vctrs::vec_is_empty(rv)) rv else NULL,
     gpci        = if(!vctrs::vec_is_empty(gp)) gp else NULL,
     payment     = if(!vctrs::vec_is_empty(fs)) fs else NULL,
     descriptors = if(!vctrs::vec_is_empty(ds)) ds else NULL,
-    level_2     = if(!vctrs::vec_is_empty(l2)) l2 else NULL
-  ) |>
+    level_2     = if(!vctrs::vec_is_empty(l2)) l2 else NULL,
+    rbcs        = if(!vctrs::vec_is_empty(rb)) rb else NULL) |>
     purrr::compact()
 
-  res <- vctrs::vec_cbind(x$rvus, x$gpci)
+  res <- vctrs::vec_cbind(x$rvus, x$gpci) |>
+    dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
 
   if (rlang::has_name(x, "level_2")) {
-
     res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs))
-
   }
 
   if (rlang::has_name(x, "descriptors")) {
-
-    res <- dplyr::left_join(res, x$payment, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+    res <- dplyr::left_join(res, x$payment,
+                            by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
       dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs == cpt))
-
   }
 
   res |>
@@ -279,7 +280,18 @@ cols_amounts <- function(df) {
             'date_added',
             'date_action',
             'date_ended',
-            'action'
+            'action',
+            'rbcs',
+            'cat.id',
+            'sub.id',
+            'fam.id',
+            'category',
+            'subcategory',
+            'family',
+            'major',
+            'date_hcpcs_add',
+            'date_hcpcs_end',
+            'date_rbcs_assign'
             )
 
   df |> dplyr::select(dplyr::any_of(cols))
