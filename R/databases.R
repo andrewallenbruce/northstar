@@ -5,8 +5,13 @@
 #' rvu(hcpcs = "11646")
 #' @export
 rvu <- function(hcpcs = NULL) {
+
   rv <- pins::pin_read(mount_board(), "rvu")
-  if (!is.null(hcpcs)) {rv <- vctrs::vec_slice(rv, vctrs::vec_in(rv$hcpcs, hcpcs))}
+
+  if (!is.null(hcpcs)) {
+    hcpcs <- unique(hcpcs)
+    rv    <- vctrs::vec_slice(rv, vctrs::vec_in(rv$hcpcs, hcpcs))
+  }
   return(rv)
 }
 
@@ -26,10 +31,20 @@ pfs <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  if (!is.null(hcpcs))    {pmt <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$hcpcs, hcpcs))}
-  if (!is.null(mac))      {pmt <- vctrs::vec_slice(pmt, pmt$mac == mac)}
-  if (!is.null(locality)) {pmt <- vctrs::vec_slice(pmt, pmt$locality == locality)}
+  if (!is.null(hcpcs))    {
+    hcpcs <- unique(hcpcs)
+    pmt   <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$hcpcs, hcpcs))
+  }
 
+  if (!is.null(mac))      {
+    mac <- unique(mac)
+    pmt <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$mac, mac))
+  }
+
+  if (!is.null(locality)) {
+    loc <- unique(locality)
+    pmt <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$locality, loc))
+  }
   return(pmt)
 }
 
@@ -64,7 +79,11 @@ gpci <- function(mac      = NULL,
 level2 <- function(hcpcs = NULL) {
 
   l2 <- pins::pin_read(mount_board(), "hcpcs")
-  if (!is.null(hcpcs)) {l2 <- vctrs::vec_slice(l2, vctrs::vec_in(l2$hcpcs, hcpcs))}
+
+  if (!is.null(hcpcs))    {
+    hcpcs <- unique(hcpcs)
+    l2    <- vctrs::vec_slice(l2, vctrs::vec_in(l2$hcpcs, hcpcs))
+  }
   return(l2)
 }
 
@@ -77,9 +96,12 @@ level2 <- function(hcpcs = NULL) {
 descriptors <- function(hcpcs = NULL) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
-  if (!is.null(hcpcs)) {cpt <- vctrs::vec_slice(cpt, vctrs::vec_in(cpt$cpt, hcpcs))}
-  return(cpt)
 
+  if (!is.null(hcpcs))    {
+    hcpcs <- unique(hcpcs)
+    cpt   <- vctrs::vec_slice(cpt, vctrs::vec_in(cpt$cpt, hcpcs))
+  }
+  return(cpt)
 }
 
 #' Restructured BETOS Classification for HCPCS
@@ -166,4 +188,41 @@ rbcs <- function(hcpcs       = NULL,
   if (!is.null(major))       {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$major, major))}
 
   return(rb)
+}
+
+#' OPPSCAP
+#'
+#' Contains the payment amounts after the application of the OPPS-based payment
+#' caps, except for carrier priced codes. For carrier price codes, the field
+#' only contains the OPPS-based payment caps. Carrier prices cannot exceed the
+#' OPPS-based payment caps.
+#'
+#' @param hcpcs description
+#' @param mac description
+#' @param locality description
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' opps(hcpcs = "11646")
+#' @export
+opps <- function(hcpcs = NULL,
+                 mac = NULL,
+                 locality = NULL) {
+
+  op <- pins::pin_read(mount_board(), "opps")
+
+  if (!is.null(hcpcs)) {
+    hcpcs <- unique(hcpcs)
+    op    <- vctrs::vec_slice(op, vctrs::vec_in(op$hcpcs, hcpcs))
+  }
+
+  if (!is.null(mac))      {
+    mac <- unique(mac)
+    op <- vctrs::vec_slice(op, vctrs::vec_in(op$mac, mac))
+  }
+
+  if (!is.null(locality)) {
+    loc <- unique(locality)
+    op <- vctrs::vec_slice(op, vctrs::vec_in(op$locality, loc))
+  }
+  return(op)
 }

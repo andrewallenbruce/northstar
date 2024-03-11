@@ -152,10 +152,11 @@ hcpcs_search <- function(hcpcs,
                          mac = NULL) {
 
   # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
-  # fs <- purrr::map(hcpcs, \(x) pfs(hcpcs = x, locality = locality, mac = mac)) |> purrr::list_rbind()
-  # desc <- purrr::map(hcpcs, \(x) cpt_descriptors(hcpcs = x)) |> purrr::list_rbind()
 
   rv <- rvu(hcpcs = hcpcs)
+
+  if (vctrs::vec_is_empty(rv)) {cli::cli_abort(
+    "No RVUs found for HCPCS code {.strong {.val {hcpcs}}}.")}
 
   gp <- gpci(state = state, locality = locality, mac = mac)
 
@@ -177,7 +178,8 @@ hcpcs_search <- function(hcpcs,
     rbcs        = if(!vctrs::vec_is_empty(rb)) rb else NULL) |>
     purrr::compact()
 
-  res <- vctrs::vec_cbind(x$rvus, x$gpci) |>
+
+  res <- dplyr::cross_join(x$rvus, x$gpci) |>
     dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
 
   if (rlang::has_name(x, "level_2")) {

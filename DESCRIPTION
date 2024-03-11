@@ -6,33 +6,34 @@ Authors@R:
 Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
 Description: Revenue integrity tools.
 License: Apache License (>= 2)
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
-    "roxyglobals::global_roclet"))
-RoxygenNote: 7.3.1
-URL: https://andrewallenbruce.github.io/northstar/, 
+URL: https://andrewallenbruce.github.io/northstar/,
     https://github.com/andrewallenbruce/northstar
 BugReports: https://github.com/andrewallenbruce/northstar/issues
 Depends: 
     R (>= 4.1.0)
 Imports:
-   dplyr,
-   pins,
-   rlang,
-   stringr,
-   glue,
-   vctrs,
-   cli,
-   tidyr,
-   purrr
+    cli,
+    dplyr,
+    glue,
+    pins,
+    purrr,
+    rlang,
+    stringr,
+    tidyr,
+    vctrs
 Suggests:
-    gt,
-    gluedown,
     fontawesome,
+    gluedown,
+    gt,
     knitr,
+    qs,
     rmarkdown,
-    roxyglobals,
-    qs
-VignetteBuilder: knitr
+    roxyglobals
+VignetteBuilder: 
+    knitr
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
+RoxygenNote: 7.3.1

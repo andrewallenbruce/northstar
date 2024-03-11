@@ -5,8 +5,7 @@ library(janitor)
 root <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
 opps_xl <- glue::glue("{root}RVU24A-010323/OPPSCAP_JAN.xlsx")
 
-# OPPSCAP contains the payment amounts after the application of the OPPS-based
-# payment caps, except for carrier priced codes.
+# OPPSCAP contains the payment amounts after the application of the OPPS-based payment caps, except for carrier priced codes.
 #
 # For carrier price codes, the field only contains the OPPS-based payment caps.
 #
@@ -17,7 +16,11 @@ opps <- read_excel(opps_xl, col_types = "text") |>
   mutate(across(c(
     non_facilty_price,
     facility_price),
-    readr::parse_number))
+    readr::parse_number)) |>
+  filter(hcpcs != "\u001a") |>
+  rename(mac = carrier,
+         fac_price = facility_price,
+         nonfac_price = non_facilty_price)
 
 opps
 

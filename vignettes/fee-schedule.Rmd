@@ -29,11 +29,12 @@ library(qs)
 ## Look Up HCPCS Code
 
 ```{r}
-hcpcs_search(hcpcs    = "11646", 
-             state    = "GA", 
-             locality = "99", 
-             mac      = "10212") |> 
-  glimpse()
+hcpcs_search(
+  hcpcs = c("39503", "43116", "33935", "11646", "1164F", "V5299"), 
+  state = "GA", 
+  locality = "99", 
+  mac = "10212")
+
 ```
 
 # Physician Fee Schedule Amount Calculation
@@ -77,7 +78,7 @@ $$ z = 0.95(1.15x)$$
 
 
 ```{r}
-calc_amounts(wrvu  = 6.26,
+calculate_amounts(wrvu  = 6.26,
              nprvu = 7.92,
              fprvu = 4.36,
              mrvu  = 0.99,
