@@ -34,7 +34,6 @@ hcpcs_search(
   state = "GA", 
   locality = "99", 
   mac = "10212")
-
 ```
 
 # Physician Fee Schedule Amount Calculation

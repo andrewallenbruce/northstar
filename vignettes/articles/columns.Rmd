@@ -2,7 +2,7 @@
 title: "Columns"
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE,
@@ -14,20 +14,25 @@ knitr::opts_chunk$set(
   out.width = "100%"
   )
 
-gt_style <- function(x) {
-  x |> 
-  gt(rowname_col = "var") |>
-  fmt_markdown() |> 
-  cols_align("left") |> 
-  # opt_stylize(color = "cyan") |> 
-  tab_options(
-    column_labels.hidden = TRUE,
-    table.font.size = px(14),
-    table.width = pct(100),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(16),
-    source_notes.font.size = px(16),
-    row_group.as_column = TRUE
+gt_style <- function(gt_tbl) {
+  gt_tbl |> 
+    opt_all_caps() |>
+    fmt_markdown() |> 
+    fmt_integer() |> 
+    cols_align("left") |> 
+    tab_style(
+    style = cell_text(align = "center", size = px(18)),
+    locations = cells_stub()) |> 
+    tab_options(
+      column_labels.hidden       = TRUE,
+      table.font.size            = px(14),
+      table.width                = pct(100),
+      heading.align = "left",
+      heading.title.font.size    = px(16),
+      heading.subtitle.font.size = px(16),
+      source_notes.font.size     = px(16),
+      row_group.as_column        = TRUE,
+      row_group.font.size = px(24)
     )
 }
 
@@ -38,18 +43,18 @@ gt_marks <- function(gt_tbl, cols) {
       x == TRUE ~ gt::html(
         fontawesome::fa("check",
                         prefer_type = "solid",
-                        fill = "black")),
+                        fill = "red")),
       x == FALSE ~ gt::html(
         fontawesome::fa("xmark",
                         prefer_type = "solid",
-                        fill = "red")),
+                        fill = "white")),
       .default = NA,
       .locations = gt::cells_body(
         columns = {{ cols }}))
 }
 ```
 
-```{r setup, message=FALSE, warning=FALSE}
+```{r pkgs, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
 library(gluedown)
@@ -62,6 +67,7 @@ This file contains locality-specific physician fee schedule payment amounts for 
 
 ```{r}
 northstar:::col_lab("md", "pfs") |> 
+  gt(rowname_col = "var") |>
   gt_style()
 ```
 
@@ -74,6 +80,7 @@ The Medicare physician fee schedule amounts are adjusted to reflect the variatio
 
 ```{r}
 northstar:::col_lab("md", "rvu") |> 
+  gt(rowname_col = "var") |>
   gt_style()
 ```
 
@@ -81,9 +88,9 @@ northstar:::col_lab("md", "rvu") |>
 ## Modifier
 
 ```{r}
-foot_53 <- "Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use)."
+f53 <- "Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use)."
 
-foot_mod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
+fmod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
 
 modifiers <- dplyr::tibble(
   mod = c("26", "TC", "53"),
@@ -95,78 +102,39 @@ modifiers <- dplyr::tibble(
   )
 )
 
-
-
 modifiers |> 
   gt(rowname_col = "mod") |> 
-  cols_align(align = "left") |> 
-  opt_all_caps() |>
-  tab_style(
-    style = cell_text(align = "center", size = px(16)),
-    locations = cells_stub()
-  ) |> 
-  tab_header(title = "For diagnostic tests, a blank in this field denotes the Global Service & the following modifiers identify the components:") |> 
-  tab_footnote(
-    footnote = foot_53,
-    locations = cells_stub(rows = 3)
-  ) |> 
-  tab_footnote(
-    footnote = foot_mod
-  ) |> 
-  tab_options(
-    table.font.size = px(14),
-    table.width = pct(100),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(16),
-    heading.align = "left",
-    source_notes.font.size = px(16),
-    row_group.as_column = TRUE
-    )
+  tab_header(title = md("For **Diagnostic Tests**, a blank in this field denotes the **Global Service** & the following Modifiers identify the components:")) |> 
+  tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
+  tab_footnote(fmod) |> 
+  gt_style()
 ```
 
 
 ## Status
 
-Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. See Attachment A for description of values. 
-
-Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment.
-
 ```{r}
+stat <- northstar:::status_codes()
+
 dplyr::tibble(code = sort(
   c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))) |> 
-  dplyr::mutate(ref = purrr::map(code, status_codes)) |> 
-  tidyr::unnest_wider(col = ref) |> 
+  dplyr::mutate(ref = stat[code]) |>
+  tidyr::unnest_wider(col = ref) |>
   gt(rowname_col = "code") |> 
-  cols_align(align = "left") |> 
-  fmt_markdown() |> 
-  fmt_integer() |> 
-  opt_all_caps() |>
-  tab_style(
-    style = cell_text(align = "center", size = px(16)),
-    locations = cells_stub()
-  ) |> 
+  tab_header(title = md("Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment.")) |> 
   tab_style(
     style = cell_fill(color = "yellow", alpha = 0.3),
     locations = cells_body(
       columns = everything(),
       rows = c(1, 12, 13))) |> 
-  tab_options(
-    table.font.size = px(14),
-    table.width = pct(100),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(16),
-    heading.align = "left",
-    source_notes.font.size = px(16),
-    row_group.as_column = TRUE,
-    row_group.font.size = px(24)
-    )
+  gt_style()
 ```
 
 
 ## Global
 
 ```{r}
-glob_join <- dplyr::tibble(
+glob_days <- dplyr::tibble(
   global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"),
   description = c(
     "Endoscopic or minor procedure with related preoperative and postoperative relative values on the day of the procedure only included in the fee schedule payment amount<br><br>Evaluation and Management services on the day of the procedure generally not payable.",
@@ -179,25 +147,9 @@ glob_join <- dplyr::tibble(
   )
 )
 
-glob_join |> 
+glob_days |> 
   gt(rowname_col = "global") |> 
-  fmt_markdown() |> 
-  fmt_integer() |> 
-  cols_align(align = "left") |> 
-  opt_all_caps() |>
-  tab_style(
-    style = cell_text(align = "center", size = px(16)),
-    locations = cells_stub()
-  ) |> 
-  tab_options(
-    table.font.size = px(14),
-    table.width = pct(100),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(16),
-    heading.align = "left",
-    source_notes.font.size = px(16),
-    row_group.as_column = TRUE
-    )
+  gt_style()
 ```
 
 
@@ -248,33 +200,16 @@ pctc_codes |>
     description = pctc_desc[as.character(code)]
     ) |> 
   gt(rowname_col = "code") |> 
-  tab_style(
-    style = cell_text(align = "center", size = px(16)),
-    locations = cells_stub()
-  ) |> 
-  cols_align(align = "left") |> 
-  fmt_markdown() |> 
-  fmt_integer() |> 
-  opt_all_caps() |>
-  opt_row_striping() |> 
-  tab_options(
-    table_body.vlines.style = "solid",
-    table_body.vlines.width = px(2),
-    table.font.size = px(14),
-    table.width = pct(100),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(16),
-    heading.align = "left",
-    source_notes.font.size = px(16),
-    row_group.as_column = TRUE
-    )
+  gt_style()
 ```
 
 
 ## Multiple Procedure
 
 ```{r}
-mult_pro_lookup <- c(
+mult_codes <- dplyr::tibble(code = c(0:7, 9))
+
+mult_look <- c(
   "0" = "No payment adjustment rules.<br><br>If the procedure is reported on the same day as another procedure, base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount for the procedure.",
   "1" = "Standard payment adjustment rules.<br><br>If the procedure is reported on the same day as another procedure that has an indicator of 1, 2 or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 25%, 25%, 25%, and by report).<br><br>Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.",
   "2" = "Standard payment adjustment rules.<br><br>If the procedure is reported on the same day as another procedure with an indicator of 1, 2 or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 50%, 50%, 50% and by report).<br><br>Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.",
@@ -286,29 +221,10 @@ mult_pro_lookup <- c(
   "9" = "Missing"
 )
 
-rvu() |> 
-  count(mult_proc) |> 
-  filter(!is.na(mult_proc)) |> 
-  mutate(description = mult_pro_lookup[mult_proc]) |> 
-  gt(rowname_col = "mult_proc") |>
-  fmt_markdown() |> 
-  fmt_integer() |> 
-  tab_style(
-    style = cell_text(align = "center", size = px(18)),
-    locations = cells_stub()
-  ) |> 
-  cols_align(align = "left") |> 
-  cols_label(n = "# of Codes") |> 
-  opt_all_caps() |>
-  tab_options(
-    table.font.size = px(14),
-    table.width = pct(100),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(16),
-    heading.align = "left",
-    source_notes.font.size = px(16),
-    row_group.as_column = TRUE
-    )
+mult_codes |> 
+  mutate(description = mult_look[as.character(code)]) |> 
+  gt(rowname_col = "code") |>
+  gt_style()
 ```
 
 
