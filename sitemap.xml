@@ -28,10 +28,25 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_assistant_surgery.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_bilateral.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_co_surgeon.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_cpt_category.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_cpt_section.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_diagnostic_imaging.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_global_days.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_hcpcs_level.html</loc>
@@ -40,7 +55,31 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_hcpcs_section.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_modifier.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_multproc.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_opps_ind.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_pctc.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_physician_supervision.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_status.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_team_surgery.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/descriptors.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/display_long.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/gpci.html</loc>
