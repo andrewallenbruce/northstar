@@ -7,7 +7,7 @@ utils::globalVariables(c(
   "clinician_descriptor",
   # <hcpcs_search>
   "cpt",
-  # <col_lab>
+  # <col_lb>
   "description",
   # <hcpcs_search>
   "fpar",
@@ -17,7 +17,7 @@ utils::globalVariables(c(
   "fprvu",
   # <hcpcs_search>
   "fprvu_opps",
-  # <col_lab>
+  # <col_lb>
   "label",
   # <hcpcs_search>
   "mgpci",
@@ -25,6 +25,8 @@ utils::globalVariables(c(
   "mod",
   # <hcpcs_search>
   "mrvu",
+  # <hcpcs_search>
+  "mrvu_opps",
   # <hcpcs_search>
   "npar",
   # <hcpcs_search>
@@ -35,21 +37,13 @@ utils::globalVariables(c(
   "nprvu_opps",
   # <hcpcs_search>
   "pgpci",
-  # <abb2full>
-  "state.abb",
-  # <abb2full>
-  "state.name",
   # <hcpcs_search>
   "status",
-  # <col_lab>
+  # <col_lb>
   "var",
   # <hcpcs_search>
   "wgpci",
   # <hcpcs_search>
   "wrvu",
-  # <abb2full>
-  "x",
-  # <abb2full>
-  "y",
   NULL
 ))

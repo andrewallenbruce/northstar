@@ -10,7 +10,10 @@ coding <- read_sheet(id, sheet = "Coding/Reimbursement") |> clean_names()
 # gs4_get(gs_id)
 # googlesheets4::gs4_browse(gs_id)
 
-ccm <- coding |>
+coding |>
+  glimpse()
+
+coding <- coding |>
   mutate(cpt_hcpcs_code                                  = map(cpt_hcpcs_code, as.character),
          medicare_reimbursement_national                 = map(medicare_reimbursement_national, as.character),
          medicare_patient_responsibility_national        = map(medicare_patient_responsibility_national, as.character),
@@ -23,7 +26,7 @@ ccm <- coding |>
                   mo_health_net),
          keep_empty = TRUE)
 
-ccm_hcpcs <- ccm |>
+ccm_hcpcs <- coding |>
   filter(!is.na(cpt_hcpcs_code)) |>
   distinct(cpt_hcpcs_code) |>
   pull(cpt_hcpcs_code)
@@ -31,12 +34,9 @@ ccm_hcpcs <- ccm |>
 
 ccm_npfs <- hcpcs_search(hcpcs = ccm_hcpcs, state = c("MO", "KS"))
 
-
-# ccm_desc <- descriptors(hcpcs = ccm_hcpcs) |>
-#   distinct() |>
-#   rename(hcpcs = cpt,
-#          consumer_desc = consumer_descriptor,
-#          clinician_desc = clinician_descriptor)
+ccm_npfs |>
+  remove_empty() |>
+  glimpse()
 
 L2 <- hcpcs_lv2() |>
   filter(hcpcs %in% ccm_hcpcs) |>

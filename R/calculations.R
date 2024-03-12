@@ -80,34 +80,60 @@ calculate_amounts <- function(wrvu,
   stopifnot("all arguments must be numeric" = is.numeric(
     c(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)))
 
-  fpar <- ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf
-  npar <- ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf
+  frvus <- ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci))
+  nrvus <- ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci))
+
+  fpar <- frvus * cf
+  npar <- nrvus * cf
 
   f <- list(
+    prvu   = fprvu,
+    rvu    = frvus,
     par    = fpar,
     nonpar = nonpar_amount(fpar),
     limit  = limiting_charge(fpar))
 
   n <- list(
+    prvu   = nprvu,
+    rvu    = nrvus,
     par    = npar,
     nonpar = nonpar_amount(npar),
     limit  = limiting_charge(npar))
 
-  glue::glue("Facility:\n",
-             "Participating Amount    = {gt::vec_fmt_currency(fpar)}\n",
-             "Non-Particpating Amount = {gt::vec_fmt_currency(fnpar)}\n",
-             "Limiting Charge         = {gt::vec_fmt_currency(flim)}",
-             "\n\n",
-             "Non-Facility:\n",
-             "Participating Amount    = {gt::vec_fmt_currency(npar)}\n",
-             "Non-Particpating Amount = {gt::vec_fmt_currency(nnpar)}\n",
-             "Limiting Charge         = {gt::vec_fmt_currency(nlim)}",
-             fpar  = f$par,
-             fnpar = f$nonpar,
-             flim  = f$limit,
-             npar  = n$par,
-             nnpar = n$nonpar,
-             nlim  = n$limit)
+  cli::cli_inform(c(
+    "{.strong {.emph Facility}} Amounts:",
+    "\n",
+    "RVU Total ............ {.strong {.val {rlang::sym(gt::vec_fmt_number(f$rvu))}}}",
+    "Participating ........ {.strong {.val {rlang::sym(gt::vec_fmt_currency(f$par))}}}",
+    "Non-Particpating ..... {.strong {.val {rlang::sym(gt::vec_fmt_currency(f$nonpar))}}}",
+    "Limiting Charge ...... {.strong {.val {rlang::sym(gt::vec_fmt_currency(f$limit))}}}",
+    "\n\n",
+
+    "{.strong {.emph Non-Facility}} Amounts:",
+    "\n",
+    "RVU Total ............ {.strong {.val {rlang::sym(gt::vec_fmt_number(n$rvu))}}}",
+    "Participating ........ {.strong {.val {rlang::sym(gt::vec_fmt_currency(n$par))}}}",
+    "Non-Particpating ..... {.strong {.val {rlang::sym(gt::vec_fmt_currency(n$nonpar))}}}",
+    "Limiting Charge ...... {.strong {.val {rlang::sym(gt::vec_fmt_currency(n$limit))}}}"
+    )
+  )
+  invisible(list(fac = f, non = n))
+
+  # glue::glue("Facility:\n",
+  #            "Participating Amount    = {gt::vec_fmt_currency(fpar)}\n",
+  #            "Non-Particpating Amount = {gt::vec_fmt_currency(fnpar)}\n",
+  #            "Limiting Charge         = {gt::vec_fmt_currency(flim)}",
+  #            "\n\n",
+  #            "Non-Facility:\n",
+  #            "Participating Amount    = {gt::vec_fmt_currency(npar)}\n",
+  #            "Non-Particpating Amount = {gt::vec_fmt_currency(nnpar)}\n",
+  #            "Limiting Charge         = {gt::vec_fmt_currency(nlim)}",
+  #            fpar  = f$par,
+  #            fnpar = f$nonpar,
+  #            flim  = f$limit,
+  #            npar  = n$par,
+  #            nnpar = n$nonpar,
+  #            nlim  = n$limit)
 }
 
 #' Look up Information about HCPCS Codes
@@ -188,31 +214,29 @@ hcpcs_search <- function(hcpcs,
 
   if (rlang::has_name(x, "descriptors")) {
     res <- dplyr::left_join(res, x$payment,
-                            by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
       dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs == cpt))
   }
 
   res |>
     dplyr::mutate(
-      fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
-      npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
-      fnpar = nonpar_amount(fpar),
-      nnpar = nonpar_amount(npar),
-      flim  = limiting_charge(fpar),
-      nlim  = limiting_charge(npar),
-      fpar_opps = ((wrvu * wgpci) + (fprvu_opps * pgpci) + (mrvu * mgpci)) * cf,
-      npar_opps  = ((wrvu * wgpci) + (nprvu_opps * pgpci) + (mrvu * mgpci)) * cf,
-      fnpar_opps = nonpar_amount(fpar_opps),
-      nnpar_opps = nonpar_amount(npar_opps),
-      flim_opps  = limiting_charge(fpar_opps),
-      nlim_opps  = limiting_charge(npar_opps),
-      ) |>
+    fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
+    npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
+    fnpar = nonpar_amount(fpar),
+    nnpar = nonpar_amount(npar),
+    flim  = limiting_charge(fpar),
+    nlim  = limiting_charge(npar),
+    fpar_opps = ((wrvu * wgpci) + (fprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
+    npar_opps  = ((wrvu * wgpci) + (nprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
+    fnpar_opps = nonpar_amount(fpar_opps),
+    nnpar_opps = nonpar_amount(npar_opps),
+    flim_opps  = limiting_charge(fpar_opps),
+    nlim_opps  = limiting_charge(npar_opps)) |>
     cols_amounts() |>
     case_cpt_category(hcpcs) |>
     case_hcpcs_level(hcpcs) |>
     case_cpt_section(hcpcs) |>
-    case_hcpcs_section(hcpcs) |>
-    janitor::remove_empty(which = c("rows", "cols"))
+    case_hcpcs_section(hcpcs)
 
 }
 
@@ -226,52 +250,52 @@ cols_amounts <- function(df) {
             'description',
             'long_description',
             'short_description',
-            'clin_desc'        = 'clinician_descriptor',
-            'cons_desc'        = 'consumer_descriptor',
-            'clin_descs'       = 'clinician_descriptors',
+            'clin_desc' = 'clinician_descriptor',
+            'cons_desc' = 'consumer_descriptor',
+            'clin_descs' = 'clinician_descriptors',
             'mod',
             'status',
             'mac',
             'state',
             'locality',
-            'area'             = 'name',
+            'area' = 'name',
             'counties',
             'two_macs',
             'wgpci',
             'pgpci',
             'mgpci',
             'wrvu',
-            'nonfac_prvu'      = 'nprvu',
-            'fac_prvu'         = 'fprvu',
+            'nonfac_prvu' = 'nprvu',
+            'fac_prvu' = 'fprvu',
             'mrvu',
             'cf',
-            'fac_par'          = 'fpar',
-            'nonfac_par'       = 'npar',
-            'fac_nonpar'       = 'fnpar',
-            'nonfac_nonpar'    = 'nnpar',
-            'fac_limit'        = 'flim',
-            'nonfac_limit'     = 'nlim',
+            'fac_par' = 'fpar',
+            'nonfac_par' = 'npar',
+            'fac_nonpar' = 'fnpar',
+            'nonfac_nonpar' = 'nnpar',
+            'fac_limit' = 'flim',
+            'nonfac_limit' = 'nlim',
             'opps',
             'nonfac_prvu_opps' = 'nprvu_opps',
-            'fac_prvu_opps'    = 'fprvu_opps',
+            'fac_prvu_opps' = 'fprvu_opps',
             'mrvu_opps',
-            'fac_par_opps'          = 'fpar_opps',
-            'nonfac_par_opps'       = 'npar_opps',
-            'fac_nonpar_opps'       = 'fnpar_opps',
-            'nonfac_nonpar_opps'    = 'nnpar_opps',
-            'fac_limit_opps'        = 'flim_opps',
-            'nonfac_limit_opps'     = 'nlim_opps',
+            'fac_par_opps' = 'fpar_opps',
+            'nonfac_par_opps' = 'npar_opps',
+            'fac_nonpar_opps' = 'fnpar_opps',
+            'nonfac_nonpar_opps' = 'nnpar_opps',
+            'fac_limit_opps' = 'flim_opps',
+            'nonfac_limit_opps' = 'nlim_opps',
             'mult_surg',
+            'mult_proc',
             'flat_vis',
-            'nonfac_therapy'   = 'nther',
-            'fac_therapy'      = 'fther',
+            'nonfac_therapy' = 'nther',
+            'fac_therapy' = 'fther',
             'global',
             'op_ind',
             'op_pre',
             'op_intra',
             'op_post',
             'pctc',
-            'mult_proc',
             'surg_bilat',
             'surg_asst',
             'surg_co',
@@ -297,18 +321,18 @@ cols_amounts <- function(df) {
             'date_added',
             'date_action',
             'date_ended',
-            'action',
-            'rbcs',
-            'cat.id',
-            'sub.id',
-            'fam.id',
+            # 'action',
+            # 'rbcs',
+            # 'cat.id',
+            # 'sub.id',
+            # 'fam.id',
             'category',
             'subcategory',
             'family',
-            'major',
-            'date_hcpcs_add',
-            'date_hcpcs_end',
-            'date_rbcs_assign'
+            'major'
+            # 'date_hcpcs_add',
+            # 'date_hcpcs_end',
+            # 'date_rbcs_assign'
             )
 
   df |> dplyr::select(dplyr::any_of(cols))

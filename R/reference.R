@@ -1,61 +1,60 @@
+
+#' ref <- function(type = c("pfs", "rvu", "lvl2")) {
+#'
+#'   type <- match.arg(type)
+#'
+#'   if (type == "pfs") {
+#'     return(
+#'       list(
+#'         stat = status_codes(),
+#'         mod  = modifiers(),
+#'         mult = multiple_procedure(),
+#'         opps = opps_ind()
+#'       ))
+#'   }
+#'
+#'   if (type == "rvu") {
+#'     return(
+#'       list(
+#'         glob = global_days(),
+#'         stat = status_codes(),
+#'         mod  = modifiers(),
+#'         pctc = pctc_ind(),
+#'         img  = diagnostic_imaging(),
+#'         phys = physician_supervision(),
+#'         team = team_surgery(),
+#'         co   = co_surgeons(),
+#'         asst = assistant_surgery(),
+#'         bil  = bilateral_surgery(),
+#'         mult = multiple_procedure(),
+#'         rare = rarely()
+#'       ))
+#'   }
+#'
+#'   if (type == "lvl2") {
+#'     return(
+#'       list(
+#'         asc     = asc_group(),
+#'         cov     = coverage(),
+#'         action  = action_cd(),
+#'         price   = price_indicator(),
+#'         mult    = multiple_price_indicator(),
+#'         betos   = betos(),
+#'         lab     = labcert(),
+#'         tos     = type_of_service()
+#'       ))
+#'   }
+#' }
+
 #' @autoglobal
 #' @noRd
-ref <- function(type = c("pfs", "rvu", "lvl2")) {
-
-  type <- match.arg(type)
-
-  if (type == "pfs") {
-    return(
-      list(
-        stat = status_codes(),
-        mod  = modifiers(),
-        mult = multiple_procedure(),
-        opps = opps_ind()
-      ))
-  }
-
-  if (type == "rvu") {
-    return(
-      list(
-        glob = global_days(),
-        stat = status_codes(),
-        mod  = modifiers(),
-        pctc = pctc_ind(),
-        img  = diagnostic_imaging(),
-        phys = physician_supervision(),
-        team = team_surgery(),
-        co   = co_surgeons(),
-        asst = assistant_surgery(),
-        bil  = bilateral_surgery(),
-        mult = multiple_procedure(),
-        rare = rarely()
-      ))
-  }
-
-  if (type == "lvl2") {
-    return(
-      list(
-        asc     = asc_group(),
-        cov     = coverage(),
-        action  = action_cd(),
-        price   = price_indicator(),
-        mult    = multiple_price_indicator(),
-        betos   = betos(),
-        lab     = labcert(),
-        tos     = type_of_service()
-      ))
-  }
-}
-
-#' @autoglobal
-#' @noRd
-col_lab <- function(output = c("df", "md"), type = c("pfs", "rvu")) {
+col_lb <- function(output = c("md", "df"), type = c("pfs", "rvu")) {
 
   output <- match.arg(output)
   type <- match.arg(type)
 
-  if (type == "pfs") {res <- pfs_lab()}
-  if (type == "rvu") {res <- rvu_lab()}
+  if (type == "pfs") {res <- pfs_lb()}
+  if (type == "rvu") {res <- rvu_lb()}
 
   if (output == "df") {return(res)}
 
@@ -71,213 +70,61 @@ col_lab <- function(output = c("df", "md"), type = c("pfs", "rvu")) {
 
 #' @autoglobal
 #' @noRd
-pfs_lab <- function() {
+pfs_lb <- function() {
   dplyr::tribble(
     ~var,        ~label,                              ~description,
     #----        #-----                              #-----------
-    "mac",       "Carrier Number",                   "Medicare Administrative Contractor (MAC) Number",
-    "locality",  "Locality",                         "Identification of Pricing Locality",
-    "hcpcs",     "HCPCS Code",                       "CPT or Level 2 HCPCS code number for the service",
-    "mod",       "Modifier",                         "For diagnostic tests, a blank in this field denotes the global service and Modifiers 26 & TC identify the components. Modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion.",
-    "status",    "Status Code",                      "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of A, R, or T, are used for Medicare payment.",
-    "mult_surg", "Multiple Surgery Indicator",       "Indicates applicable payment adjustment rule for multiple procedures (Modifier 51)",
-    "flat_vis",  "Flat Rate Visit Fee",              "Effective January 1, 2021, this field may also contain the Flat Visit Fee for the Primary Care First Model",
-    "nther",     "Non-Facility Therapy Reduction",   "Pricing amount that reflects 50 percent payment for the PE for services furnished in office and other noninstitutional settings",
-    "fther",     "Facility Therapy Reduction",       "Pricing amount that reflects 50 percent payment for the PE for services furnished in an institutional setting",
-    "fee_nf",    "Non-Facility Fee Schedule Amount", "Pricing amount for the non-facility setting.",
-    "fee_f",     "Facility Fee Schedule Amount",     "Pricing amount for the facility setting.",
-    "opps",      "OPPS Indicator",                   "`1` = Subject to OPPS payment cap determination, `9` = Not subject to OPPS payment cap determination",
-    "opps_nf",   "OPPS Non-Facility",                "Pricing amount for the non-facility setting that has been capped at the level of the OPPS Payment Amount",
-    "opps_f",    "OPPS Facility",                    "Pricing amount for the facility setting that has been capped at the level of the OPPS Payment Amount"
+    "mac",       "Carrier Number",                   "Medicare Administrative Contractor ID",
+    "locality",  "Locality",                         "Pricing Locality ID",
+    "hcpcs",     "HCPCS Code",                       "HCPCS Procedure Code",
+    "mod",       "Modifier",                         "For diagnostic tests, a blank in this field denotes the global service, Mods 26 & TC identify components. Mod 53 indicates separate RVUs and fee schedule amount have been established for procedures terminated before completion.",
+    "status",    "Status Code",                      "Indicates if code is in fee schedule, if service is covered, whether separately payable. Only codes **A**, **R** and **T** used for Medicare payment.",
+    "mult_surg", "Multiple Surgery Indicator",       "Indicates applicable payment adjustment rule: Mod 51",
+    "flat_vis",  "Flat Rate Visit Fee",              "Contains Flat Visit Fee for Primary Care First Model",
+    "nther",     "Non-Facility Therapy Reduction",   "Fee reflects 50% PE payment for Non-facility services",
+    "fther",     "Facility Therapy Reduction",       "Fee reflects 50% PE payment for Facility services",
+    "fee_nf",    "Non-Facility Fee Schedule Amount", "Non-facility Pricing amount",
+    "fee_f",     "Facility Fee Schedule Amount",     "Facility Pricing amount",
+    "opps",      "OPPS Indicator",                   "OPPS Payment Cap Determination: `1` = Applies, `9` = Does not Apply",
+    "opps_nf",   "OPPS Non-Facility",                "OPPS Capped Non-facility Pricing amount",
+    "opps_f",    "OPPS Facility",                    "OPPS Capped Facility Pricing amount"
   )
 }
 
 #' @autoglobal
 #' @noRd
-rvu_lab <- function() {
+rvu_lb <- function() {
   dplyr::tribble(
     ~var,        ~  label,                                         ~description,
     #----          #-----                                          #-----------
-    "hcpcs",       "HCPCS Code",                                   "CPT or Level 2 HCPCS code number for the service",
-    "description", "Description",                                  "Description of the service",
+    "hcpcs",       "HCPCS Code",                                   "HCPCS Procedure Code",
+    "description", "Description",                                  "HCPCS Procedure Description",
     "mod",         "Modifier",                                     "For diagnostic tests, a blank in this field denotes the global service and Modifiers 26 & TC identify the components. Modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion.",
     "status",      "Status Code",                                  "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of A, R, or T, are used for Medicare payment.",
-    "wrvu",        "Work RVU",                                     "Relative Value Unit (RVU) for the physician work in the service",
-    "nprvu",       "Non-Facility Practice Expense RVU",            "Relative Value Unit (RVU) for the resource-based practice expense for the non-facility setting",
-    "fprvu",       "Facility Practice Expense RVU",                "Relative Value Unit (RVU) for the resource-based practice expense for the facility setting",
-    "mrvu",        "Malpractice RVU",                              "Relative Value Unit (RVU) for the malpractice expense for the service",
-    "cf",          "Conversion Factor",                            "This is the multiplier that transforms relative values into payment amounts. This conversion factor reflects the MEI update adjustment. For 2002 and beyond, there is a single conversion factor for all services.",
-    "nprvu_opps",  "Non-Facility PE Used for OPPS Payment Amount", "Non-Facility Practice Expense RVUs used for OPPS payment amount",
-    "fprvu_opps",  "Facility PE Used for OPPS Payment Amount",     "Facility Practice Expense RVUs used for OPPS payment amount",
-    "global",      "Global Days",                                  "Identifies the number of global days for the service",
+    "wrvu",        "Work RVU",                                     "RVU for Physician Work",
+    "nprvu",       "Non-Facility Practice Expense RVU",            "RVU for Non-facility Practice Expense",
+    "fprvu",       "Facility Practice Expense RVU",                "RVU for Facility Practice Expense",
+    "mrvu",        "Malpractice RVU",                              "RVU for Malpractice Expense",
+    "cf",          "Conversion Factor",                            "Multiplier that transforms RVUs into payment amounts",
+    "nprvu_opps",  "Non-Facility PE Used for OPPS Payment Amount", "Non-Facility Practice Expense RVUs used for OPPS payment",
+    "fprvu_opps",  "Facility PE Used for OPPS Payment Amount",     "Facility Practice Expense RVUs used for OPPS payment",
+    "global",      "Global Days",                                  "Identifies Number of Global Days",
     "op_ind",      "Operative Percentage Indicator",               "1 = Has percentages, 0 = Does not have percentages",
-    "op_pre",      "Preoperative Percentage",                      "Percentage for preoperative portion of global package",
-    "op_intra",    "Intraoperative Percentage",                    "Percentage for intraoperative portion of global package, including postoperative work in the hospital",
-    "op_post",     "Postoperative Percentage",                     "Percentage for postoperative portion of global package that is provided in the office after discharge from the hospital",
-    "pctc",        "PCTC Indicator",                               "Indicates the applicable payment adjustment rule for the service",
-    "mult_proc",   "Multiple Procedure Indicator",                 "Indicates applicable payment adjustment rule for multiple procedures (Modifier 51)",
-    "surg_bilat",  "Bilateral Surgery Indicator",                  "Indicates applicable payment adjustment rule for bilateral procedures (Modifier 50)",
-    "surg_asst",   "Assistant Surgery Indicator",                  "Indicates applicable payment adjustment rule for assistant at surgery (Modifier 80, 81, 82, or AS)",
-    "surg_co",     "Co-Surgery Indicator",                         "Indicates applicable payment adjustment rule for co-surgeons (Modifier 62)",
-    "surg_team",   "Team Surgery Indicator",                       "Indicates applicable payment adjustment rule for team surgeons (Modifier 66)",
-    "endo",        "Endoscopic Base Code",                         "Identifies an endoscopic base code for each code with a multiple surgery indicator of 3",
-    "supvis",      "Physician Supervision Indicator",              "Indicates the level of physician supervision required for the service",
-    "dximg",       "Diagnostic Imaging Family Indicator",          "Identifies the applicable diagnostic service family for HCPCS codes with a multiple procedure indicator of 4",
-    "unused",      "Not Used for Medicare Payment",                "Indicates whether the code is used for Medicare payment",
-    "rare",        "Rarely/Never Performed",                       "Indicates procedure rarely/never performed in: 00 (Neither), 01 (Facility), 10 (Non-Facility), 11 (Both)"
+    "op_pre",      "Preoperative Percentage",                      "Preoperative % of Global package",
+    "op_intra",    "Intraoperative Percentage",                    "Intraoperative % of Global package, including Postoperative work in the hospital",
+    "op_post",     "Postoperative Percentage",                     "Postoperative % of Global package, provided in-office, post-hospital discharge",
+    "pctc",        "PCTC Indicator",                               "PCTC Payment Adjustment",
+    "mult_proc",   "Multiple Procedure Indicator",                 "Multiple Procedures (Mod 51) Payment Adjustment",
+    "surg_bilat",  "Bilateral Surgery Indicator",                  "Bilateral Procedures (Mod 50) Payment Adjustment",
+    "surg_asst",   "Assistant Surgery Indicator",                  "Assistant at Surgery (Mods 80, 81, 82, or AS) Payment Adjustment",
+    "surg_co",     "Co-Surgery Indicator",                         "Co-surgeons (Mod 62) Payment Adjustment",
+    "surg_team",   "Team Surgery Indicator",                       "team surgeons (Mod 66) Payment Adjustment",
+    "endo",        "Endoscopic Base Code",                         "Endoscopic base code for HCPCS with Multiple Surgery indicator of **3**",
+    "supvis",      "Physician Supervision Indicator",              "Physician supervision level required for service",
+    "dximg",       "Diagnostic Imaging Family Indicator",          "Diagnostic Service Family for HCPCS with Multiple Procedure indicator of **4**",
+    "unused",      "Not Used for Medicare Payment",                "Whether code is used for Medicare payment or Not",
+    "rare",        "Rarely/Never Performed",                       "Procedure rarely/never performed in: `00` (Neither), `01` (Facility), `10` (Non-Facility), `11` (Both)"
   )
-}
-
-#' @autoglobal
-#' @noRd
-opps_ind <- function() {
-  c(
-    "1" = "Subject to OPPS payment cap determination.",
-    "9" = "Not subject to OPPS payment cap determination."
-    )
-}
-
-#' @autoglobal
-#' @noRd
-global_days <- function() {
-  c("000" = "Endoscopic or minor procedure with related preoperative and postoperative relative values on the day of the procedure only included in the fee schedule payment amount. Evaluation and Management services on the day of the procedure generally not payable.",
-    "010" = "Minor procedure with preoperative relative values on the day of the procedure and postoperative relative values during a 10-day postoperative period included in the fee schedule amount. Evaluation and Management services on the day of the procedure and during the 10-day postoperative period generally not payable.",
-    "090" = "Major surgery with a 1-day preoperative period and 90-day postoperative period included in the fee schedule amount.",
-    "MMM" = "Maternity codes; usual global period does not apply.",
-    "XXX" = "Global concept does not apply.",
-    "YYY" = "Carrier determines whether the global concept applies and establishes postoperative period, if appropriate, at time of pricing.",
-    "ZZZ" = "Code is related to another service and is always included in the global period of the other service.")
-}
-
-#' @autoglobal
-#' @noRd
-modifiers <- function() {
-  list(
-    "26" = c(label = "Professional Component", description = "Certain procedures are a combination of a physician or other qualified health care professional component and a technical component. When the physician or other qualified health care professional component is reported separately, the service may be identified by adding modifier 26 to the usual procedure number."),
-    "TC" = c(label = "Technical Component", description = "Under certain circumstances, a charge may be made for the technical component alone. Under those circumstances the technical component charge is identified by adding modifier TC to the usual procedure number. Technical component charges are institutional charges and not billed separately by physicians; however, portable x-ray suppliers only bill for technical component and should utilize modifier TC. The charge data from portable x-ray suppliers will then be used to build customary and prevailing profiles."),
-    "53" = c(label = "Discontinued Procedure", description = "Under certain circumstances, the physician or other qualified health care professional may elect to terminate a surgical or diagnostic procedure. Due to extenuating circumstances or those that threaten the well being of the patient, it may be necessary to indicate that a surgical or diagnostic procedure was started but discontinued. This circumstance may be reported by adding modifier 53 to the code reported by the individual for the discontinued procedure.")
-    )
-}
-
-#' @autoglobal
-#' @noRd
-pctc_ind <- function() {
-  list(
-    "0" = dplyr::tibble(label = "Physician Service Codes", description = "Physician services. The concept of PC/TC does not apply since physician services cannot be split into professional and technical components. Modifiers 26 and TC cannot be used with these codes. The RVUS include values for physician work, practice expense and malpractice expense. There are some codes with no work RVUs."),
-    "1" = dplyr::tibble(label = "Diagnostic Tests for Radiology Services", description = "Diagnostic tests. These codes have both a professional and technical component. Modifiers 26 and TC can be used with these codes. The total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense. The total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only. The total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense."),
-    "2" = dplyr::tibble(label = "Professional Component Only Codes", description = "Standalone codes that describe the physician work portion of selected diagnostic tests for which there is an associated code that describes the technical component of the diagnostic test only and another associated code that describes the global test. The total RVUs for professional component only codes include values for physician work, practice expense, and malpractice expense."),
-    "3" = dplyr::tibble(label = "Technical Component Only Codes", description = "Standalone codes that describe the technical component (i.e., staff and equipment costs) of selected diagnostic tests for which there is an associated code that describes the professional component of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and therefore do not have a related professional code. Modifiers 26 and TC cannot be used with these codes. The total RVUs for technical component only codes include values for practice expense and malpractice expense only."),
-    "4" = dplyr::tibble(label = "Global Test Only Codes", description = "Standalone codes that describe selected diagnostic tests for which there are associated codes that describe 1. the professional component of the test only, and 2. the technical component of the test only. Modifiers 26 and TC cannot be used with these codes. The total RVUs for global procedure only codes include values for physician work, practice expense, and malpractice expense. The total RVUs for global procedure only codes equals the sum of the total RVUs for the professional and technical components only codes combined."),
-    "5" = dplyr::tibble(label = "Incident To Codes", description = "Services covered incident to a physician's service when they are provided by auxiliary personnel employed by the physician and working under his or her direct personal supervision. Payment may not be made by A/B MACs (B) for these services when they are provided to hospital inpatients or patients in a hospital outpatient department. Modifiers 26 and TC cannot be used with these codes."),
-    "6" = dplyr::tibble(label = "Laboratory Physician Interpretation Codes", description = "Clinical laboratory codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of the tests is paid for under the lab fee schedule. Modifier TC cannot be used with these codes. The total RVUs for laboratory physician interpretation codes include values for physician work, practice expense, and malpractice expense."),
-    "7" = dplyr::tibble(label = "Physical therapy service, for which payment may not be made", description = "Payment may not be made if the service is provided to either a patient in a hospital outpatient department or to an inpatient of the hospital by an independently practicing physical or occupational therapist."),
-    "8" = dplyr::tibble(label = "Physician interpretation codes", description = "Identifies the professional component of clinical laboratory codes for which separate payment may be made only if the physician interprets an abnormal smear for hospital inpatient. This applies to CPT codes 85060. No TC billing is recognized because payment for the underlying clinical laboratory test is made to the hospital, generally through the PPS rate. No payment is recognized for CPT codes 85060 furnished to hospital outpatients or non-hospital patients. The physician interpretation is paid through the clinical laboratory fee schedule payment for the clinical laboratory test."),
-    "9" = dplyr::tibble(label = "Not Applicable", description = "Concept of a professional/technical component does not apply")
-    )
-}
-
-#' @autoglobal
-#' @noRd
-status_codes <- function() {
-
-  list(
-    "A" = c(label = "Active Code", description = "Separately paid under the Physician Fee Schedule if covered. There will be RVUs and payment amounts. Does not mean that Medicare has made a National Coverage Determination regarding the service. Carriers remain responsible for coverage decisions in the absence of a national Medicare policy."),
-    "B" = c(label = "Payment Bundled", description = "Payment for covered services are always bundled into payment for other services not specified. No RVUs or payment amounts and no separate payment is ever made. When these services are covered, payment for them is subsumed by the payment for the services to which they are incident. Example: telephone call from a hospital nurse regarding care of a patient."),
-    "C" = c(label = "Carrier Priced", description = "Carriers will establish RVUs and payment amounts for these services, generally on an individual case basis following review of documentation such as an operative report."),
-    "D" = c(label = "Deleted Codes", description = "Deleted effective with the beginning of the applicable year."),
-    "E" = c(label = "Regulatory Exclusion", description = "Item or service that CMS chose to exclude from the fee schedule payment by regulation. No RVUs or payment amounts are shown and no payment may be made under the fee schedule. Payment for them, when covered, continues under reasonable charge procedures."),
-    "F" = c(label = "Deleted/Discontinued Codes", description = "Code not subject to a 90 day grace period"),
-    "G" = c(label = "Not Valid for Medicare Purposes", description = "Medicare uses another code for reporting of, and payment for, these services. Code subject to a 90 day grace period."),
-    "H" = c(label = "Deleted Modifier", description = "Had an associated TC and/or 26 modifier in the previous year. For the current year, the TC or 26 component shown for the code has been deleted, and the deleted component is shown with a status code of H."),
-    "I" = c(label = "Not Valid for Medicare Purposes", description = "Medicare uses another code for reporting of, and payment for, these services. Code is NOT subject to a 90-day grace period."),
-    "J" = c(label = "Anesthesia Service", description = "No RVUs or payment amounts for anesthesia codes on the database, only used to facilitate the identification of anesthesia services."),
-    "M" = c(label = "Measurement Code", description = "Used for reporting purposes only."),
-    "N" = c(label = "Restricted Coverage", description = "Not covered by Medicare."),
-    "P" = c(label = "Non-Covered Service", description = "No RVUs and no payment amounts for these services. No separate payment is made for them under the fee schedule. If the item or service is covered as incident to a physician service and is provided on the same day as a physician service, payment for it is bundled into the payment for the physician service to which it is incident (an example is an elastic bandage furnished by a physician incident to a physician service). If the item or service is covered as other than incident to a physician service, it is excluded from the fee schedule (for example, colostomy supplies) and is paid under the other payment provision of the Act."),
-    "R" = c(label = "Bundled/Excluded Code", description = "Special coverage instructions apply. If covered, the service is contractor priced. NOTE: The majority of codes to which this indicator will be assigned are the alpha-numeric dental codes, which begin with D. We are assigning the indicator to a limited number of CPT codes which represent services that are covered only in unusual circumstances."),
-    "T" = c(label = "Injections", description = "There are RVUs and payment amounts for these services, but they are only paid if there are no other services payable under the physician fee schedule billed on the same date by the same provider. If any other services payable under the physician fee schedule are billed on the same date by the same provider, these services are bundled into the physician services for which payment is made. NOTE: This is a change from the previous definition, which states that injection services are bundled into any other services billed on the same date."),
-    "X" = c(label = "Statutory Exclusion", description = "Item or service that is not in the statutory definition of 'physician services' for fee schedule payment purposes. No RVUs or payment amounts are shown for these codes and no payment may be made under the physician fee schedule. Ex: Ambulance Services and Clinical Diagnostic Laboratory Services.")
-    )
-}
-
-#' @autoglobal
-#' @noRd
-diagnostic_imaging <- function() {
-  # Identifies the applicable diagnostic service family for
-  # HCPCS codes with a multiple procedure indicator of '4'.
-  c("01" = "Ultrasound (Chest / Abdomen / Pelvis-Non-Obstetrical)",
-    "02" = "CT and CTA (Chest / Thorax / Abd / Pelvis)",
-    "03" = "CT and CTA (Head / Brain / Orbit / Maxillofacial / Neck)",
-    "04" = "MRI and MRA (Chest / Abd / Pelvis)",
-    "05" = "MRI and MRA (Head / Brain / Neck)",
-    "06" = "MRI and MRA (Spine)",
-    "07" = "CT (Spine)",
-    "08" = "MRI and MRA (Lower Extremities)",
-    "09" = "CT and CTA (Lower Extremities)",
-    "10" = "MRI and MRA (Upper Extremities and Joints)",
-    "11" = "CT and CTA (Upper Extremities)",
-    "88" = "Subject to the reduction of the TC diagnostic imaging (effective for services January 1, 2011 and after). Subject to the reduction of the PC diagnostic imaging (effective for services January 1, 2012, and after)",
-    "99" = "Concept does not apply")
-}
-
-#' @autoglobal
-#' @noRd
-physician_supervision <- function() {
-  # This field is for use in post payment review.
-  c("01" = "Procedure must be performed under the general supervision of a physician.",
-    "02" = "Procedure must be performed under the direct supervision of a physician.",
-    "03" = "Procedure must be performed under the personal supervision of physician.",
-    "04" = "Physician supervision policy does not apply when procedure is furnished by a qualified, independent psychologist or a clinical psychologist; otherwise must be performed under the general supervision of a physician.",
-    "05" = "Physician supervision policy does not apply when procedure is furnished by a qualified audiologist; otherwise must be performed under the general supervision of a physician.",
-    "06" = "Procedure must be performed by a physician or a physical therapist (PT) who is certified by the American Board of Physical Therapy Specialties (ABPTS) as a qualified electrophysiological clinical specialist and is permitted to provide the procedure under State law.",
-    "21" = "Procedure may be performed by a technician with certification under general supervision of a physician; otherwise must be performed under direct supervision of a physician.",
-    "22" = "May be performed by a technician with on-line real-time contact with physician.",
-    "66" = "May be performed by a physician or by a physical therapist with ABPTS certification and certification in this specific procedure.",
-    "6A" = "Supervision standards for level 66 apply; in addition, the PT with ABPTS certification may supervise another PT, but only the PT with ABPTS certification may bill.",
-    "77" = "Procedure must be performed by a PT with ABPTS certification or by a PT without certification under direct supervision of a physician, or by a technician with certification under general supervision of a physician.",
-    "7A" = "Supervision standards for level 77 apply; in addition, the PT with ABPTS certification may supervise another PT, but only the PT with ABPTS certification may bill.",
-    "09" = "Concept does not apply")
-}
-
-#' @autoglobal
-#' @noRd
-team_surgery <- function() {
-  # Modifier 66: Indicates services for which team surgeons may be paid.
-  c("0" = "Team surgeons not permitted for this procedure.",
-    "1" = "Team surgeons could be paid, though supporting documentation required to establish medical necessity of a team; pay by report.",
-    "2" = "Team surgeons permitted; pay by report.",
-    "9" = "Concept does not apply")
-}
-
-#' @autoglobal
-#' @noRd
-co_surgeons <- function() {
-  # Modifier 62: Indicates services for which two surgeons, each in a different specialty, may be paid.
-  c("0" = "Co-surgeons not permitted for this procedure.",
-    "1" = "Co-surgeons could be paid, though supporting documentation required to establish medical necessity of two surgeons; pay by report.",
-    "2" = "Co-surgeons permitted; pay by report.",
-    "9" = "Concept does not apply")
-}
-
-#' @autoglobal
-#' @noRd
-assistant_surgery <- function() {
-  # Indicates services where an assistant at surgery is never paid for per Medicare Claims Manual.
-  c("0" = "Payment restriction for assistants at surgery applies to this procedure unless supporting documentation is submitted to establish medical necessity.",
-    "1" = "Statutory payment restriction for assistants at surgery applies to this procedure. Assistant at surgery may not be paid.",
-    "2" = "Payment restriction for assistants at surgery does not apply to this procedure. Assistant at surgery may be paid.",
-    "9" = "Concept does not apply")
-}
-
-#' @autoglobal
-#' @noRd
-bilateral_surgery <- function() {
-  # Modifier 50: Indicates services subject to payment adjustment.
-  c("0" = "150% payment adjustment for bilateral procedures does not apply. If procedure is reported with modifier -50 or with modifiers RT and LT, base the payment for the two sides on the lower of: (a) the total actual charge for both sides and (b) 100% of the fee schedule amount for a single code. The bilateral adjustment is inappropriate for codes in this category (a) because of physiology or anatomy, or (b) because the code description specifically states that it is a unilateral procedure and there is an existing code for the bilateral procedure.",
-    "1" = "150% payment adjustment for bilateral procedures applies. If the code is billed with the bilateral modifier or is reported twice on the same day by any other means (e.g., with RT and LT modifiers, or with a 2 in the units field), base the payment for these codes when reported as bilateral procedures on the lower of: (a) the total actual charge for both sides or (b) 150% of the fee schedule amount for a single code. If the code is reported as a bilateral procedure and is reported with other procedure codes on the same day, apply the bilateral adjustment before applying any multiple procedure rules.",
-    "2" = "150% payment adjustment does not apply. RVUs are already based on the procedure being performed as a bilateral procedure. If the procedure is reported with modifier -50 or is reported twice on the same day by any other means (e.g., with RT and LT modifiers or with a 2 in the units field), base the payment for both sides on the lower of (a) the total actual charge by the physician for both sides, or (b) 100% of the fee schedule for a single code. ",
-    "3" = "The usual payment adjustment for bilateral procedures does not apply. If the procedure is reported with modifier -50 or is reported for both sides on the same day by any other means (e.g., with RT and LT modifiers or with a 2 in the units field), base the payment for each side or organ or site of a paired organ on the lower of (a) the actual charge for each side or (b) 100% of the fee schedule amount for each side. If the procedure is reported as a bilateral procedure and with other procedure codes on the same day, determine the fee schedule amount for a bilateral procedure before applying any multiple procedure rules. Services in this category are generally radiology procedures or other diagnostic tests which are not subject to the special payment rules for other bilateral surgeries.",
-    "9" = "Concept does not apply")
 }
 
 #' @autoglobal
@@ -287,21 +134,6 @@ rarely <- function() {
     "01" = "Rarely/never performed in Facility setting",
     "10" = "Rarely/never performed in Non-facility setting",
     "11" = "Rarely/never performed in Facility or Non-facility setting")
-}
-
-#' @autoglobal
-#' @noRd
-multiple_procedure <- function() {
-  # Modifier 51: Indicates applicable payment adjustment rule for multiple procedures
-  c("0" = "No payment adjustment rules for multiple procedures apply. If procedure is reported on the same day as another procedure, base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount for the procedure.",
-    "1" = "Standard payment adjustment rules in effect before January 1, 1995 for multiple procedures apply. In the 1995 file, this indicator only applies to codes with a status code of D. If procedure is reported on the same day as another procedure that has an indicator of 1, 2, or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 25%, 25%, 25%, and by report). Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.",
-    "2" = "Standard payment adjustment rules for multiple procedures apply. If procedure is reported on the same day as another procedure with an indicator of 1, 2, or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 50%, 50%, 50% and by report). Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.",
-    "3" = "Special rules for multiple endoscopic procedures apply if procedure is billed with another endoscopy in the same family (i.e., another endoscopy that has the same base procedure). The base procedure for each code with this indicator is identified in the Endobase field of this file. Apply the multiple endoscopy rules to a family before ranking the family with the other procedures performed on the same day (for example, if multiple endoscopies in the same family are reported on the same day as endoscopies in another family or on the same day as a non-endoscopic procedure). If an endoscopic procedure is reported with only its base procedure, do not pay separately for the base procedure. Payment for the base procedure is included in the payment for the other endoscopy.",
-    "4" = "Special rules for the technical component (TC) of diagnostic imaging procedures apply if procedure is billed with another diagnostic imaging procedure in the same family (per the diagnostic imaging family indicator, below). If procedure is reported in the same session on the same day as another procedure with the same family indicator, rank the procedures by fee schedule amount for the TC. Pay 100% for the highest priced procedure, and 50% for each subsequent procedure. Base the payment for subsequent procedures on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage. Subject to 50% reduction of the TC diagnostic imaging (effective for services July 1, 2010 and after). Subject to 25% reduction of the PC of diagnostic imaging (effective for services January 1, 2012 through December 31, 2016). Subject to 5% reduction of the PC of diagnostic imaging (effective for services January 1, 2017 and after).",
-    "5" = "Subject to 50% of the practice expense component for certain therapy services.",
-    "6" = "Subject to 25% reduction of the second highest and subsequent procedures to the TC of diagnostic cardiovascular services, effective for services January 1, 2013, and thereafter.",
-    "7" = "Subject to 20% reduction of the second highest and subsequent procedures to the TC of diagnostic ophthalmology services, effective for services January 1, 2013, and thereafter.",
-    "9" = "Concept does not apply")
 }
 
 #' @autoglobal

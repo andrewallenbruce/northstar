@@ -22,7 +22,8 @@ gt_style <- function(gt_tbl) {
     cols_align("left") |> 
     tab_style(
     style = cell_text(align = "center", 
-                      size = px(18)),
+                      size = px(18),
+                      weight = "bold"),
     locations = cells_stub()) |> 
     tab_options(
       column_labels.hidden       = TRUE,
@@ -33,7 +34,7 @@ gt_style <- function(gt_tbl) {
       heading.subtitle.font.size = px(16),
       source_notes.font.size     = px(16),
       row_group.as_column        = TRUE,
-      row_group.font.size = px(24)
+      row_group.font.size        = px(24)
     )
 }
 
@@ -67,7 +68,7 @@ library(gt)
 This file contains locality-specific physician fee schedule payment amounts for services covered by the Medicare Physician Fee Schedule (MPFS) with one record for each unique combination of carrier, locality, procedure code and modifier.
 
 ```{r}
-northstar:::col_lab("md", "pfs") |> 
+northstar:::col_lb("md", "pfs") |> 
   gt(rowname_col = "var") |>
   gt_style()
 ```
@@ -80,8 +81,11 @@ This file contains information on services covered by the Medicare Physician Fee
 The Medicare physician fee schedule amounts are adjusted to reflect the variation in practice costs from area to area. A geographic practice cost index (GPCI) has been established for every Medicare payment locality for each of the three components of a procedure’s relative value unit (i.e., the RVUs for work, practice expense, and malpractice). The GPCIs are applied in the calculation of a fee schedule payment amount by multiplying the RVU for each component times the GPCI for that component.
 
 ```{r}
-northstar:::col_lab("md", "rvu") |> 
-  gt(rowname_col = "var") |>
+northstar:::col_lb("md", "rvu") |> 
+  gt(
+    rowname_col = "var"
+    # groupname_col = "var"
+    ) |>
   gt_style()
 ```
 
@@ -109,6 +113,15 @@ modifiers |>
   tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
   tab_footnote(fmod) |> 
   gt_style()
+```
+
+```{r}
+pctc_hcpcs <- rvu() |> 
+  filter(!is.na(mod), global != "XXX") |> 
+  count(hcpcs, sort = TRUE) |> 
+  pull(hcpcs)
+
+hcpcs_search(hcpcs = pctc_hcpcs, state = "GA", locality = "01")
 ```
 
 
@@ -219,7 +232,7 @@ mult_look <- c(
   "5" = "Subject to 50% of the practice expense component for certain therapy services.",
   "6" = "Subject to 25% reduction of the second highest and subsequent procedures to the TC of diagnostic cardiovascular services.",
   "7" = "Subject to 20% reduction of the second highest and subsequent procedures to the TC of diagnostic ophthalmology services.",
-  "9" = "Missing"
+  "9" = "Concept does not apply"
 )
 
 mult_codes |> 

@@ -14,14 +14,12 @@ Depends:
 Imports:
     cli,
     dplyr,
-    glue,
     pins,
     purrr,
     rlang,
     stringr,
     tidyr,
-    vctrs,
-    janitor
+    vctrs
 Suggests:
     fontawesome,
     gluedown,

@@ -68,33 +68,14 @@ invert_named <- function(x) {
   rlang::set_names(names(x), unname(x))
 }
 
-#' @param abb state abbreviation
-#' @return state full name
+#' Pivot data frame to long format for easy printing
+#' @param df data frame
+#' @param cols columns to pivot long, default is [dplyr::everything()]
 #' @autoglobal
-#' @noRd
-abb2full <- function(abb,
-                     arg = rlang::caller_arg(abb),
-                     call = rlang::caller_env()) {
+#' @export
+#' @keywords internal
+display_long <- function(df, cols = dplyr::everything()) {
 
-  results <- dplyr::tibble(x = c(state.abb[1:8],
-                                 'DC',
-                                 state.abb[9:50],
-                                 'AS', 'GU', 'MP', 'PR', 'VI', 'UK'),
-                           y = c(state.name[1:8],
-                                 'District of Columbia',
-                                 state.name[9:50],
-                                 'American Samoa',
-                                 'Guam',
-                                 'Northern Mariana Islands',
-                                 'Puerto Rico',
-                                 'Virgin Islands',
-                                 'Unknown')) |>
-    dplyr::filter(x == abb) |>
-    dplyr::pull(y)
-
-  if (vctrs::vec_is_empty(results)) {
-    cli::cli_abort(c("{.val {abb}} is not a valid state abbreviation."), # nolint
-                   call = call)
-  }
-  return(results)
+  df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
+    tidyr::pivot_longer({{ cols }})
 }

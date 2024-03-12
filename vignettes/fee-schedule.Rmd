@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
+library(gt)
 ```
 
 ## Look Up HCPCS Code
@@ -31,9 +32,25 @@ library(dplyr)
 hcpcs_search(
   hcpcs = "39503", 
   state = "GA", 
-  locality = "99", 
+  locality = "99",
   mac = "10212") |> 
-  glimpse()
+  dplyr::mutate(date_hcpcs_end = NULL, two_macs = NULL) |> 
+  dplyr::rowwise() |>
+  dplyr::mutate(clin_descs = purrr::map(clin_descs, ~paste0("* ", ., collapse = "\n"))) |>
+  tidyr::unnest(cols = clin_descs) |>
+  dplyr::ungroup() |> 
+  northstar:::display_long() |>
+  gt() |>
+  fmt_markdown() |> 
+  opt_table_font(font = google_font(name = "Jetbrains Mono")) |>
+  tab_options(
+    column_labels.hidden = TRUE,
+    table.width = pct(75),
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12))
 ```
 
 
@@ -92,14 +109,16 @@ $$ z = 0.95(1.15x)$$
 
 
 ```{r}
-calculate_amounts(wrvu  = 6.26,
-             nprvu = 7.92,
-             fprvu = 4.36,
-             mrvu  = 0.99,
-             cf    = 32.744,
-             wgpci = 1,
-             pgpci = 0.883,
-             mgpci = 1.125)
+calculate_amounts(
+  wrvu  = 6.26,
+  nprvu = 7.92,
+  fprvu = 4.36,
+  mrvu  = 0.99,
+  cf    = 32.744,
+  wgpci = 1,
+  pgpci = 0.883,
+  mgpci = 1.125
+)
 ```
 
 ## Data Sources
