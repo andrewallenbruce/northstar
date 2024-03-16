@@ -3,6 +3,7 @@
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' rvu(hcpcs = "11646")
+#' @autoglobal
 #' @export
 rvu <- function(hcpcs = NULL) {
 
@@ -24,6 +25,7 @@ rvu <- function(hcpcs = NULL) {
 #' pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
 #'     locality = "01",
 #'     mac      = "10212")
+#' @autoglobal
 #' @export
 pfs <- function(hcpcs    = NULL,
                 mac      = NULL,
@@ -56,6 +58,7 @@ pfs <- function(hcpcs    = NULL,
 #' @examplesIf interactive()
 #' gpci(state = "GA", locality = "01", mac = "10212")
 #' @export
+#' @autoglobal
 gpci <- function(mac      = NULL,
                  state    = NULL,
                  locality = NULL) {
@@ -76,6 +79,7 @@ gpci <- function(mac      = NULL,
 #' @examplesIf interactive()
 #' level2(hcpcs = c("39503", "43116", "33935", "11646"))
 #' @export
+#' @autoglobal
 level2 <- function(hcpcs = NULL) {
 
   l2 <- pins::pin_read(mount_board(), "hcpcs")
@@ -93,6 +97,7 @@ level2 <- function(hcpcs = NULL) {
 #' @examplesIf interactive()
 #' descriptors(hcpcs = c("39503", "43116", "33935", "11646"))
 #' @export
+#' @autoglobal
 descriptors <- function(hcpcs = NULL) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
@@ -171,6 +176,7 @@ descriptors <- function(hcpcs = NULL) {
 #' @examplesIf interactive()
 #' rbcs(hcpcs = "11646")
 #' @export
+#' @autoglobal
 rbcs <- function(hcpcs       = NULL,
                  rbcs        = NULL,
                  category    = NULL,
@@ -204,6 +210,7 @@ rbcs <- function(hcpcs       = NULL,
 #' @examplesIf interactive()
 #' opps(hcpcs = "70170")
 #' @export
+#' @autoglobal
 opps <- function(hcpcs = NULL,
                  mac = NULL,
                  locality = NULL) {
@@ -225,4 +232,17 @@ opps <- function(hcpcs = NULL,
     op <- vctrs::vec_slice(op, vctrs::vec_in(op$locality, loc))
   }
   return(op)
+}
+
+#' NCD Download Database
+#'
+#' Last Updated 2022-12-08
+#'
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' ncd()
+#' @export
+#' @autoglobal
+ncd <- function() {
+  pins::pin_read(mount_board(), "ncd")
 }

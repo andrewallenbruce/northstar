@@ -46,39 +46,41 @@ benefit_cat <- ncd$ncd_trkg_bnft_xref |>
 pub_ref <- ncd$ncd_pblctn_ref |>
   mutate(pblctn_cd = as.character(pblctn_cd))
 
-ncd$ncd_trkg |>
+ncd_join <- ncd$ncd_trkg |>
   mutate(pblctn_cd = as.character(pblctn_cd)) |>
   left_join(benefit_cat) |>
   left_join(pub_ref) |>
   clean_names() |>
   mutate(
-    natl_cvrg_type    = case_match(natl_cvrg_type, TRUE ~ "NCD", FALSE ~ "Coverage Provision"),
-    xref_txt          = iconv(xref_txt, to = "ASCII//TRANSLIT"),
-    itm_srvc_desc     = iconv(itm_srvc_desc, to = "ASCII//TRANSLIT"),
-    indctn_lmtn       = iconv(indctn_lmtn, to = "ASCII//TRANSLIT"),
-    othr_txt          = iconv(othr_txt, to = "ASCII//TRANSLIT"),
-    trnsmtl_url       = iconv(trnsmtl_url, to = "ASCII//TRANSLIT"),
-    rev_hstry         = iconv(rev_hstry, to = "ASCII//TRANSLIT"),
-    ncd_efctv_dt      = as.character(ncd_efctv_dt),
-    ncd_impltn_dt     = as.character(ncd_impltn_dt),
-    ncd_trmntn_dt     = as.character(ncd_trmntn_dt),
-    trnsmtl_issnc_dt  = as.character(trnsmtl_issnc_dt),
-    creatd_tmstmp     = as.character(creatd_tmstmp),
-    last_updt_tmstmp  = as.character(last_updt_tmstmp),
-    last_clrnc_tmstmp = as.character(last_clrnc_tmstmp)
+    natl_cvrg_type     = case_match(natl_cvrg_type, TRUE ~ "NCD", FALSE ~ "Coverage Provision"),
+    xref_txt           = iconv(xref_txt, to = "ASCII//TRANSLIT"),
+    itm_srvc_desc      = iconv(itm_srvc_desc, to = "ASCII//TRANSLIT"),
+    indctn_lmtn        = iconv(indctn_lmtn, to = "ASCII//TRANSLIT"),
+    othr_txt           = iconv(othr_txt, to = "ASCII//TRANSLIT"),
+    trnsmtl_url        = iconv(trnsmtl_url, to = "ASCII//TRANSLIT"),
+    rev_hstry          = iconv(rev_hstry, to = "ASCII//TRANSLIT"),
+    ncd_keyword        = iconv(ncd_keyword, to = "ASCII//TRANSLIT"),
+    ncd_mnl_sect_title = iconv(ncd_mnl_sect_title, to = "ASCII//TRANSLIT"),
+    ncd_efctv_dt       = as.character(ncd_efctv_dt),
+    ncd_impltn_dt      = as.character(ncd_impltn_dt),
+    ncd_trmntn_dt      = as.character(ncd_trmntn_dt),
+    trnsmtl_issnc_dt   = as.character(trnsmtl_issnc_dt),
+    creatd_tmstmp      = as.character(creatd_tmstmp),
+    last_updt_tmstmp   = as.character(last_updt_tmstmp),
+    last_clrnc_tmstmp  = as.character(last_clrnc_tmstmp)
     ) |>
   select(
     id             = ncd_id,
     version        = ncd_vrsn_num,
-    cov_type       = natl_cvrg_type,
-    cov_level      = cvrg_lvl_cd,
-    sec_no         = ncd_mnl_sect,
-    sec_nm         = ncd_mnl_sect_title,
+    # cov_type       = natl_cvrg_type,
+    coverage       = cvrg_lvl_cd,
+    section        = ncd_mnl_sect,
+    section_name   = ncd_mnl_sect_title,
     date_eff       = ncd_efctv_dt,
     date_impl      = ncd_impltn_dt,
     date_end       = ncd_trmntn_dt,
-    service_des    = itm_srvc_desc,
-    indic_limit    = indctn_lmtn,
+    description    = itm_srvc_desc,
+    indications    = indctn_lmtn,
     crossref       = xref_txt,
     other          = othr_txt,
     trsm_no        = trnsmtl_num,
@@ -98,15 +100,87 @@ ncd$ncd_trkg |>
     pub_code       = pblctn_cd,
     pub_number     = pblctn_num,
     pub_title      = pblctn_title) |>
-  # select(
-  #   service_des,
-  #   crossref,
-  #   indic_limit,
-  #   other,
-  #   trsm_url,
-  #   review_history,
-  #   date_eff
-  #   ) |>
-  gt() |>
-  sub_missing(missing_text = "")
+  mutate(
+    chg_req       = as.character(chg_req),
+    trsm_no       = as.character(trsm_no),
+    version       = as.character(version),
+    coverage      = as.character(coverage),
+    coverage      = case_match(coverage,
+      "1" ~ "Full",
+      "2" ~ "Restricted",
+      "3" ~ "None",
+      "4" ~ "Unknown"),
+    date_eff      = lubridate::ymd(date_eff),
+    date_eff      = as.Date(date_eff),
+    date_impl     = lubridate::ymd(date_impl),
+    date_end      = lubridate::ymd(date_end),
+    trsm_date     = lubridate::ymd(trsm_date),
+    date_approved = strex::str_before_first(date_approved, " "),
+    date_approved = lubridate::ymd(date_approved),
+    date_created  = strex::str_before_first(date_created, " "),
+    date_created  = lubridate::ymd(date_created),
+    last_updated  = strex::str_before_first(last_updated, " "),
+    last_updated  = lubridate::ymd(last_updated)
+    )
 
+# Update Pin
+board <- pins::board_folder(here::here("pins"))
+
+board |>
+  pins::pin_write(ncd_join,
+                  name = "ncd",
+                  title = "NCD Download Database. Last Updated 2022-12-08",
+                  type = "qs")
+
+board |> pins::write_board_manifest()
+
+ncd_join |>
+  select(contains("date")) |>
+  count(date_eff) |>
+  print(n = Inf)
+
+ncd_join |>
+  select(
+    id,
+    version,
+    coverage,
+    section,
+    section_name,
+    keyword,
+    description,
+    indications,
+    # crossref,
+    # other,
+    # trsm_no,
+    # trsm_url,
+    review_history,
+    # date_eff,
+    # date_impl,
+    # date_end,
+    # date_created,
+    # last_updated,
+    # date_approved,
+    # trsm_date
+    ) |>
+  gt() |>
+  sub_missing(missing_text = "") |>
+  # fmt_date(columns = everything()) |>
+  fmt_markdown() |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  tab_options(
+    table.font.size =  px(14),
+    table.width = pct(75))
+
+
+ncd_join |>
+  select(
+    date_eff,
+    date_impl,
+    date_end,
+    date_created,
+    last_updated,
+    date_approved,
+    trsm_date) |>
+  gt() |>
+  sub_missing(missing_text = "") |>
+  fmt_date(columns = everything())

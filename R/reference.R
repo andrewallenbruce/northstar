@@ -1,50 +1,50 @@
 
-#' ref <- function(type = c("pfs", "rvu", "lvl2")) {
-#'
-#'   type <- match.arg(type)
-#'
-#'   if (type == "pfs") {
-#'     return(
-#'       list(
-#'         stat = status_codes(),
-#'         mod  = modifiers(),
-#'         mult = multiple_procedure(),
-#'         opps = opps_ind()
-#'       ))
-#'   }
-#'
-#'   if (type == "rvu") {
-#'     return(
-#'       list(
-#'         glob = global_days(),
-#'         stat = status_codes(),
-#'         mod  = modifiers(),
-#'         pctc = pctc_ind(),
-#'         img  = diagnostic_imaging(),
-#'         phys = physician_supervision(),
-#'         team = team_surgery(),
-#'         co   = co_surgeons(),
-#'         asst = assistant_surgery(),
-#'         bil  = bilateral_surgery(),
-#'         mult = multiple_procedure(),
-#'         rare = rarely()
-#'       ))
-#'   }
-#'
-#'   if (type == "lvl2") {
-#'     return(
-#'       list(
-#'         asc     = asc_group(),
-#'         cov     = coverage(),
-#'         action  = action_cd(),
-#'         price   = price_indicator(),
-#'         mult    = multiple_price_indicator(),
-#'         betos   = betos(),
-#'         lab     = labcert(),
-#'         tos     = type_of_service()
-#'       ))
-#'   }
-#' }
+# ref <- function(type = c("pfs", "rvu", "lvl2")) {
+#
+#   type <- match.arg(type)
+#
+#   if (type == "pfs") {
+#     return(
+#       list(
+#         stat = status_codes(),
+#         mod  = modifiers(),
+#         mult = multiple_procedure(),
+#         opps = opps_ind()
+#       ))
+#   }
+#
+#   if (type == "rvu") {
+#     return(
+#       list(
+#         glob = global_days(),
+#         stat = status_codes(),
+#         mod  = modifiers(),
+#         pctc = pctc_ind(),
+#         img  = diagnostic_imaging(),
+#         phys = physician_supervision(),
+#         team = team_surgery(),
+#         co   = co_surgeons(),
+#         asst = assistant_surgery(),
+#         bil  = bilateral_surgery(),
+#         mult = multiple_procedure(),
+#         rare = rarely()
+#       ))
+#   }
+#
+#   if (type == "lvl2") {
+#     return(
+#       list(
+#         asc     = asc_group(),
+#         cov     = coverage(),
+#         action  = action_cd(),
+#         price   = price_indicator(),
+#         mult    = multiple_price_indicator(),
+#         betos   = betos(),
+#         lab     = labcert(),
+#         tos     = type_of_service()
+#       ))
+#   }
+# }
 
 #' @autoglobal
 #' @noRd

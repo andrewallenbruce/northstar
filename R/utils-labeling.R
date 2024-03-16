@@ -374,7 +374,7 @@ case_opps_ind <- function(df, col) {
 #' @param col column of Modifier indicators
 #' @return A [tibble][tibble::tibble-package] with an `mod_description` column
 #' @examples
-#' dplyr::tibble(mod = c("26", "TC", "53)) |> case_modifier(mod)
+#' dplyr::tibble(mod = c("26", "TC", "53")) |> case_modifier(mod)
 #' @export
 #' @keywords internal
 #' @autoglobal
