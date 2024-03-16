@@ -189,7 +189,6 @@ case_imaging <- function(df, col) {
 #'
 #' dplyr::tibble(supvis = x) |> case_supervision(supvis)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_supervision <- function(df, col) {
 
@@ -223,7 +222,6 @@ case_supervision <- function(df, col) {
 #' @examples
 #' dplyr::tibble(surg_team = c(0:2, "9")) |> case_team(surg_team)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_team <- function(df, col) {
 
@@ -248,7 +246,6 @@ case_team <- function(df, col) {
 #' @examples
 #' dplyr::tibble(surg_bilat = c(0:3, "9")) |> case_bilateral(surg_bilat)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_bilateral <- function(df, col) {
 
@@ -274,7 +271,6 @@ case_bilateral <- function(df, col) {
 #' @examples
 #' dplyr::tibble(mult_proc = as.character(0:9)) |> case_multproc(mult_proc)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_multproc <- function(df, col) {
 
@@ -376,7 +372,6 @@ case_opps <- function(df, col) {
 #' @examples
 #' dplyr::tibble(mod = c(26, "TC", 53)) |> case_modifier(mod)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_modifier <- function(df, col) {
 
@@ -404,7 +399,6 @@ case_modifier <- function(df, col) {
 #' @examples
 #' dplyr::tibble(pctc = as.character(0:9)) |> case_pctc(pctc)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_pctc <- function(df, col) {
   df |>
@@ -453,7 +447,6 @@ case_pctc <- function(df, col) {
 #' @examples
 #' dplyr::tibble(status = LETTERS) |> case_status(status)
 #' @export
-#' @keywords internal
 #' @autoglobal
 case_status <- function(df, col) {
 

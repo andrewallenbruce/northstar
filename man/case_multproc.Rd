@@ -20,4 +20,3 @@ Modifier 51: Indicates applicable payment adjustment rule for multiple procedure
 \examples{
 dplyr::tibble(mult_proc = as.character(0:9)) |> case_multproc(mult_proc)
 }
-\keyword{internal}

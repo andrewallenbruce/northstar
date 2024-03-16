@@ -20,4 +20,3 @@ Add Status Code Descriptions
 \examples{
 dplyr::tibble(status = LETTERS) |> case_status(status)
 }
-\keyword{internal}

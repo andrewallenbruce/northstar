@@ -24,4 +24,3 @@ x <- stringr::str_pad(
 
 dplyr::tibble(supvis = x) |> case_supervision(supvis)
 }
-\keyword{internal}

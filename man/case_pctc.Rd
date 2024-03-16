@@ -20,4 +20,3 @@ Add PCTC Indicator Descriptions
 \examples{
 dplyr::tibble(pctc = as.character(0:9)) |> case_pctc(pctc)
 }
-\keyword{internal}
