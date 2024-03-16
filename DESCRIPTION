@@ -22,6 +22,7 @@ Imports:
     vctrs
 Suggests:
     fontawesome,
+    janitor,
     gluedown,
     gt,
     knitr,

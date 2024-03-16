@@ -156,7 +156,7 @@ descriptors <- function(hcpcs = NULL) {
 #' + Treatment
 #' @param subcategory < *character* > RBCS Subcategory Description
 #' @param family < *character* > RBCS Family Description
-#' @param major < *character* > Whether the HCPCS code is a `"Major"`,
+#' @param procedure < *character* > Whether the HCPCS code is a `"Major"`,
 #' `"Other"`, or `"Non-Procedure"` code.
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -168,7 +168,7 @@ descriptors <- function(hcpcs = NULL) {
 #' |`category`          |RBCS Category                                |
 #' |`subcategory`       |RBCS Subcategory                             |
 #' |`family`            |RBCS Family                                  |
-#' |`major`             |RBCS Major Procedure Indicator               |
+#' |`procedure`         |RBCS Major Procedure Indicator               |
 #' |`date_hcpcs_add`    |Date HCPCS Code was added                    |
 #' |`date_hcpcs_end`    |Date HCPCS Code was no longer effective      |
 #' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
@@ -182,16 +182,17 @@ rbcs <- function(hcpcs       = NULL,
                  category    = NULL,
                  subcategory = NULL,
                  family      = NULL,
-                 major       = NULL) {
+                 procedure   = NULL) {
 
-  rb <- pins::pin_read(mount_board(), "rbcs")
+  rb <- pins::pin_read(mount_board(), "rbcs") |>
+    dplyr::rename(procedure = major)
 
   if (!is.null(hcpcs))       {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$hcpcs, hcpcs))}
   if (!is.null(rbcs))        {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$rbcs, rbcs))}
   if (!is.null(category))    {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$category, category))}
   if (!is.null(subcategory)) {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$subcategory, subcategory))}
   if (!is.null(family))      {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$family, family))}
-  if (!is.null(major))       {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$major, major))}
+  if (!is.null(procedure))   {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$procedure, procedure))}
 
   return(rb)
 }

@@ -10,7 +10,7 @@ rbcs(
   category = NULL,
   subcategory = NULL,
   family = NULL,
-  major = NULL
+  procedure = NULL
 )
 }
 \arguments{
@@ -34,7 +34,7 @@ rbcs(
 
 \item{family}{< \emph{character} > RBCS Family Description}
 
-\item{major}{< \emph{character} > Whether the HCPCS code is a \code{"Major"},
+\item{procedure}{< \emph{character} > Whether the HCPCS code is a \code{"Major"},
 \code{"Other"}, or \code{"Non-Procedure"} code.}
 }
 \value{
@@ -45,7 +45,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \code{category} \tab RBCS Category \cr
    \code{subcategory} \tab RBCS Subcategory \cr
    \code{family} \tab RBCS Family \cr
-   \code{major} \tab RBCS Major Procedure Indicator \cr
+   \code{procedure} \tab RBCS Major Procedure Indicator \cr
    \code{date_hcpcs_add} \tab Date HCPCS Code was added \cr
    \code{date_hcpcs_end} \tab Date HCPCS Code was no longer effective \cr
    \code{date_rbcs_assign} \tab Earliest Date that the RBCS ID was effective \cr

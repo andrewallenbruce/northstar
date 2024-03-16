@@ -177,16 +177,25 @@ hcpcs_search <- function(hcpcs,
                          locality = NULL,
                          mac = NULL) {
 
+  rlang::check_required(hcpcs)
+
   # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
 
-  rv <- rvu(hcpcs = hcpcs)
+  rv <- rvu(hcpcs     = hcpcs)
 
-  if (vctrs::vec_is_empty(rv)) {cli::cli_abort(
-    "No RVUs found for HCPCS code {.strong {.val {hcpcs}}}.")}
+  if (vctrs::vec_is_empty(rv)) {
+    cli::cli_abort(
+    "No RVUs found for HCPCS code {.strong {.val {hcpcs}}}."
+    )
+  }
 
-  gp <- gpci(state = state, locality = locality, mac = mac)
+  gp <- gpci(state    = state,
+             locality = locality,
+             mac      = mac)
 
-  fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
+  fs <- pfs(hcpcs     = hcpcs,
+            locality  = locality,
+            mac       = mac)
 
   ds <- descriptors(hcpcs = hcpcs) |>
     tidyr::nest(clinician_descriptors = clinician_descriptor)
@@ -196,26 +205,40 @@ hcpcs_search <- function(hcpcs,
   rb <- rbcs(hcpcs = hcpcs)
 
   x <- list(
-    rvus        = if(!vctrs::vec_is_empty(rv)) rv else NULL,
-    gpci        = if(!vctrs::vec_is_empty(gp)) gp else NULL,
-    payment     = if(!vctrs::vec_is_empty(fs)) fs else NULL,
-    descriptors = if(!vctrs::vec_is_empty(ds)) ds else NULL,
-    level_2     = if(!vctrs::vec_is_empty(l2)) l2 else NULL,
-    rbcs        = if(!vctrs::vec_is_empty(rb)) rb else NULL) |>
+    rvus        = if (!vctrs::vec_is_empty(rv)) rv else NULL,
+    gpci        = if (!vctrs::vec_is_empty(gp)) gp else NULL,
+    payment     = if (!vctrs::vec_is_empty(fs)) fs else NULL,
+    descriptors = if (!vctrs::vec_is_empty(ds)) ds else NULL,
+    level_2     = if (!vctrs::vec_is_empty(l2)) l2 else NULL,
+    rbcs        = if (!vctrs::vec_is_empty(rb)) rb else NULL) |>
     purrr::compact()
 
 
-  res <- dplyr::cross_join(x$rvus, x$gpci) |>
-    dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
+  res <- dplyr::cross_join(x$rvus,
+                           x$gpci) |>
+    dplyr::left_join(x$rbcs,
+                     by = dplyr::join_by(hcpcs))
 
   if (rlang::has_name(x, "level_2")) {
-    res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs))
+
+    res <- dplyr::left_join(res,
+                            x$level_2,
+                     by = dplyr::join_by(hcpcs))
+
   }
 
   if (rlang::has_name(x, "descriptors")) {
-    res <- dplyr::left_join(res, x$payment,
-           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
-      dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs == cpt))
+
+    res <- dplyr::left_join(res,
+                            x$payment,
+           by = dplyr::join_by(hcpcs,
+                               mod,
+                               status,
+                               mac,
+                               locality)) |>
+      dplyr::left_join(x$descriptors,
+           by = dplyr::join_by(hcpcs == cpt))
+
   }
 
   res |>
@@ -225,18 +248,19 @@ hcpcs_search <- function(hcpcs,
     fnpar = nonpar_amount(fpar),
     nnpar = nonpar_amount(npar),
     flim  = limiting_charge(fpar),
-    nlim  = limiting_charge(npar),
-    fpar_opps = ((wrvu * wgpci) + (fprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
-    npar_opps  = ((wrvu * wgpci) + (nprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
-    fnpar_opps = nonpar_amount(fpar_opps),
-    nnpar_opps = nonpar_amount(npar_opps),
-    flim_opps  = limiting_charge(fpar_opps),
-    nlim_opps  = limiting_charge(npar_opps)) |>
+    nlim  = limiting_charge(npar)) |>
     cols_amounts() |>
     case_cpt_category(hcpcs) |>
     case_hcpcs_level(hcpcs) |>
     case_cpt_section(hcpcs) |>
     case_hcpcs_section(hcpcs)
+
+    # fpar_opps = ((wrvu * wgpci) + (fprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
+    # npar_opps  = ((wrvu * wgpci) + (nprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
+    # fnpar_opps = nonpar_amount(fpar_opps),
+    # nnpar_opps = nonpar_amount(npar_opps),
+    # flim_opps  = limiting_charge(fpar_opps),
+    # nlim_opps  = limiting_charge(npar_opps)
 
 }
 
@@ -260,7 +284,7 @@ cols_amounts <- function(df) {
             'locality',
             'area' = 'name',
             'counties',
-            'two_macs',
+            # 'two_macs',
             'wgpci',
             'pgpci',
             'mgpci',
@@ -318,18 +342,18 @@ cols_amounts <- function(df) {
             'procnote',
             'betos',
             'tos',
-            'date_added',
-            'date_action',
-            'date_ended',
+            'category',
+            'subcategory',
+            'family',
+            'procedure'
+            # 'date_added',
+            # 'date_action',
+            # 'date_ended',
             # 'action',
             # 'rbcs',
             # 'cat.id',
             # 'sub.id',
             # 'fam.id',
-            'category',
-            'subcategory',
-            'family',
-            'major'
             # 'date_hcpcs_add',
             # 'date_hcpcs_end',
             # 'date_rbcs_assign'

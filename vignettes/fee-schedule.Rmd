@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
+library(janitor)
 library(gt)
 ```
 
@@ -34,7 +35,11 @@ hcpcs_search(
   state = "GA", 
   locality = "99",
   mac = "10212") |> 
-  dplyr::mutate(date_hcpcs_end = NULL, two_macs = NULL) |> 
+  janitor::remove_empty(which = c("rows", "cols")) |>
+  dplyr::mutate(
+    date_hcpcs_end = NULL, 
+    two_macs = NULL
+    ) |> 
   dplyr::rowwise() |>
   dplyr::mutate(clin_descs = purrr::map(clin_descs, ~paste0("* ", ., collapse = "\n"))) |>
   tidyr::unnest(cols = clin_descs) |>
@@ -49,7 +54,7 @@ hcpcs_search(
     heading.title.font.size = px(20),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
-    table.font.color = "#0B0B45",
+    # table.font.color = "#0B0B45",
     footnotes.font.size = px(12))
 ```
 
