@@ -90,7 +90,6 @@ assigned to a 6-character RBCS taxonomy code.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-rbcs(hcpcs = "11646")
-\dontshow{\}) # examplesIf}
+rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646")) |>
+dplyr::glimpse()
 }

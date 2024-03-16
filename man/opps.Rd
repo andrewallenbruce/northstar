@@ -23,7 +23,7 @@ only contains the OPPS-based payment caps. Carrier prices cannot exceed the
 OPPS-based payment caps.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-opps(hcpcs = "70170")
-\dontshow{\}) # examplesIf}
+opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
+     mac      = "01112",
+     locality = "05")
 }

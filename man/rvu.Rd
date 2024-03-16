@@ -16,7 +16,6 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 2024 National Physician Fee Schedule Relative Value File
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-rvu(hcpcs = "11646")
-\dontshow{\}) # examplesIf}
+rvu(c("A0021", "V5362", "J9264", "G8916")) |>
+dplyr::glimpse()
 }

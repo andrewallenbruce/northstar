@@ -16,7 +16,6 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 2024 Healthcare Common Procedure Coding System (HCPCS)
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-level2(hcpcs = c("39503", "43116", "33935", "11646"))
-\dontshow{\}) # examplesIf}
+level2(c("A0021", "V5362", "J9264", "G8916")) |>
+dplyr::glimpse()
 }

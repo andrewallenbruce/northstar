@@ -197,6 +197,7 @@ hcpcs_search <- function(hcpcs,
             locality  = locality,
             mac       = mac)
 
+
   ds <- descriptors(hcpcs = hcpcs) |>
     tidyr::nest(clinician_descriptors = clinician_descriptor)
 

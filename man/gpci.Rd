@@ -20,7 +20,8 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 2024 Geographic Practice Cost Indices
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-gpci(state = "GA", locality = "01", mac = "10212")
-\dontshow{\}) # examplesIf}
+gpci(state    = "GA",
+     locality = "01",
+     mac      = "10212") |>
+dplyr::glimpse()
 }

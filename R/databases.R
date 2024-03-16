@@ -1,8 +1,9 @@
 #' 2024 National Physician Fee Schedule Relative Value File
 #' @param hcpcs description
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' rvu(hcpcs = "11646")
+#' @examples
+#' rvu(c("A0021", "V5362", "J9264", "G8916")) |>
+#' dplyr::glimpse()
 #' @autoglobal
 #' @export
 rvu <- function(hcpcs = NULL) {
@@ -21,10 +22,11 @@ rvu <- function(hcpcs = NULL) {
 #' @param mac description
 #' @param locality description
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#' @examples
 #' pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
 #'     locality = "01",
-#'     mac      = "10212")
+#'     mac      = "10212") |>
+#' dplyr::glimpse()
 #' @autoglobal
 #' @export
 pfs <- function(hcpcs    = NULL,
@@ -55,8 +57,11 @@ pfs <- function(hcpcs    = NULL,
 #' @param state description
 #' @param locality description
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' gpci(state = "GA", locality = "01", mac = "10212")
+#' @examples
+#' gpci(state    = "GA",
+#'      locality = "01",
+#'      mac      = "10212") |>
+#' dplyr::glimpse()
 #' @export
 #' @autoglobal
 gpci <- function(mac      = NULL,
@@ -76,8 +81,9 @@ gpci <- function(mac      = NULL,
 #' 2024 Healthcare Common Procedure Coding System (HCPCS)
 #' @param hcpcs description
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' level2(hcpcs = c("39503", "43116", "33935", "11646"))
+#' @examples
+#' level2(c("A0021", "V5362", "J9264", "G8916")) |>
+#' dplyr::glimpse()
 #' @export
 #' @autoglobal
 level2 <- function(hcpcs = NULL) {
@@ -94,8 +100,8 @@ level2 <- function(hcpcs = NULL) {
 #' 2023 CPT Descriptors (Clinician & Consumer-Friendly)
 #' @param hcpcs description
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' descriptors(hcpcs = c("39503", "43116", "33935", "11646"))
+#' @examples
+#' descriptors(c("39503", "43116", "33935", "11646"))
 #' @export
 #' @autoglobal
 descriptors <- function(hcpcs = NULL) {
@@ -173,8 +179,9 @@ descriptors <- function(hcpcs = NULL) {
 #' |`date_hcpcs_end`    |Date HCPCS Code was no longer effective      |
 #' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
 #'
-#' @examplesIf interactive()
-#' rbcs(hcpcs = "11646")
+#' @examples
+#' rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646")) |>
+#' dplyr::glimpse()
 #' @export
 #' @autoglobal
 rbcs <- function(hcpcs       = NULL,
@@ -208,12 +215,14 @@ rbcs <- function(hcpcs       = NULL,
 #' @param mac description
 #' @param locality description
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' opps(hcpcs = "70170")
+#' @examples
+#' opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
+#'      mac      = "01112",
+#'      locality = "05")
 #' @export
 #' @autoglobal
-opps <- function(hcpcs = NULL,
-                 mac = NULL,
+opps <- function(hcpcs    = NULL,
+                 mac      = NULL,
                  locality = NULL) {
 
   op <- pins::pin_read(mount_board(), "opps")
@@ -239,11 +248,19 @@ opps <- function(hcpcs = NULL,
 #'
 #' Last Updated 2022-12-08
 #'
+#' @param coverage Coverage level; `"Full"`, `"Restricted"`, `"None"`, `"Unknown"`
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' ncd()
+#' @examples
+#' ncd(coverage = "Unknown")
 #' @export
 #' @autoglobal
-ncd <- function() {
-  pins::pin_read(mount_board(), "ncd")
+ncd <- function(coverage = NULL) {
+
+  ncd <- pins::pin_read(mount_board(), "ncd")
+
+  if (!is.null(coverage)) {
+    coverage <- rlang::arg_match(coverage, c("Full", "Restricted", "None", "Unknown"))
+    ncd      <- vctrs::vec_slice(ncd, ncd$coverage == coverage)
+    }
+  return(ncd)
 }

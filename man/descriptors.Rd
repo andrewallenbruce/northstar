@@ -16,7 +16,5 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 2023 CPT Descriptors (Clinician & Consumer-Friendly)
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-descriptors(hcpcs = c("39503", "43116", "33935", "11646"))
-\dontshow{\}) # examplesIf}
+descriptors(c("39503", "43116", "33935", "11646"))
 }

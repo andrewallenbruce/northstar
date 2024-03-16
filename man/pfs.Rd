@@ -20,9 +20,8 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 2024 Physician Fee Schedule Payment Amount File
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
     locality = "01",
-    mac      = "10212")
-\dontshow{\}) # examplesIf}
+    mac      = "10212") |>
+dplyr::glimpse()
 }

@@ -4,7 +4,10 @@
 \alias{ncd}
 \title{NCD Download Database}
 \usage{
-ncd()
+ncd(coverage = NULL)
+}
+\arguments{
+\item{coverage}{Coverage level; \code{"Full"}, \code{"Restricted"}, \code{"None"}, \code{"Unknown"}}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -13,7 +16,5 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 Last Updated 2022-12-08
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-ncd()
-\dontshow{\}) # examplesIf}
+ncd(coverage = "Unknown")
 }
