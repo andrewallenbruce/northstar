@@ -37,8 +37,10 @@ hcpcs_search(
   mac = "10212") |> 
   janitor::remove_empty(which = c("rows", "cols")) |>
   dplyr::rowwise() |>
-  dplyr::mutate(clin_descs = purrr::map(clin_descs, ~paste0("* ", ., collapse = "\n"))) |>
-  tidyr::unnest(cols = clin_descs) |>
+  dplyr::mutate(
+    description_clinician = purrr::map(
+      description_clinician, ~paste0("* ", ., collapse = "\n"))) |>
+  tidyr::unnest(cols = description_clinician) |>
   dplyr::ungroup() |> 
   northstar:::display_long() |>
   gt() |>
@@ -55,16 +57,16 @@ hcpcs_search(
 
 
 ```{r}
-opps(hcpcs = "70170", 
-     mac = "10212", 
+opps(hcpcs    = "70170", 
+     mac      = "10212", 
      locality = "01") |> 
   glimpse()
 ```
 
 
 ```{r}
-hcpcs_search(hcpcs = "70170", 
-             state = "GA", 
+hcpcs_search(hcpcs    = "70170", 
+             state    = "GA", 
              locality = "01") |> 
   glimpse()
 ```

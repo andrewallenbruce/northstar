@@ -6,8 +6,6 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of **northstar** is to …
-
 ## :package: Installation
 
 You can install **northstar** from [GitHub](https://github.com/) with:
@@ -18,8 +16,6 @@ pak::pak("andrewallenbruce/northstar")
 ```
 
 ## :beginner: Usage
-
-**Fee Schedule Calculation**
 
 ``` r
 library(northstar)
@@ -37,75 +33,62 @@ hcpcs_search(hcpcs    = "11646",
 ```
 
     > Rows: 1
-    > Columns: 68
-    > $ hcpcs              <chr> "11646"
-    > $ cpt_section        <chr> "Surgery"
-    > $ hcpcs_level        <chr> "I"
-    > $ cpt_category       <chr> "I"
-    > $ description        <chr> "Exc f/e/e/n/l mal+mrg >4 cm"
-    > $ cons_desc          <chr> "Removal of cancer skin growth of face, ears, eyeli…
-    > $ clin_descs         <list> [<tbl_df[10 x 1]>]
-    > $ status             <chr> "A"
-    > $ mac                <chr> "10212"
-    > $ state              <chr> "GA"
-    > $ locality           <chr> "99"
-    > $ area               <chr> "REST OF GEORGIA"
-    > $ counties           <chr> "ALL OTHER COUNTIES"
-    > $ two_macs           <lgl> FALSE
-    > $ wgpci              <dbl> 1
-    > $ pgpci              <dbl> 0.883
-    > $ mgpci              <dbl> 1.125
-    > $ wrvu               <dbl> 6.26
-    > $ nonfac_prvu        <dbl> 7.92
-    > $ fac_prvu           <dbl> 4.36
-    > $ mrvu               <dbl> 0.99
-    > $ cf                 <dbl> 32.744
-    > $ fac_par            <dbl> 367.5065
-    > $ nonfac_par         <dbl> 470.4366
-    > $ fac_nonpar         <dbl> 349.1312
-    > $ nonfac_nonpar      <dbl> 446.9148
-    > $ fac_limit          <dbl> 401.5009
-    > $ nonfac_limit       <dbl> 513.952
-    > $ opps               <chr> "9"
-    > $ nonfac_prvu_opps   <dbl> 0
-    > $ fac_prvu_opps      <dbl> 0
-    > $ mrvu_opps          <dbl> 0
-    > $ fac_par_opps       <dbl> 241.4461
-    > $ nonfac_par_opps    <dbl> 241.4461
-    > $ fac_nonpar_opps    <dbl> 229.3738
-    > $ nonfac_nonpar_opps <dbl> 229.3738
-    > $ fac_limit_opps     <dbl> 263.7798
-    > $ nonfac_limit_opps  <dbl> 263.7798
-    > $ mult_surg          <chr> "0"
-    > $ flat_vis           <dbl> 0
-    > $ nonfac_therapy     <dbl> 2
-    > $ fac_therapy        <dbl> 0
-    > $ global             <chr> "010"
-    > $ op_ind             <dbl> 1
-    > $ op_pre             <dbl> 0.1
-    > $ op_intra           <dbl> 0.8
-    > $ op_post            <dbl> 0.1
-    > $ pctc               <chr> "0"
-    > $ mult_proc          <chr> "2"
-    > $ surg_bilat         <chr> "0"
-    > $ surg_asst          <chr> "1"
-    > $ surg_co            <chr> "0"
-    > $ surg_team          <chr> "0"
-    > $ supvis             <chr> "09"
-    > $ dximg              <chr> "99"
-    > $ rare               <chr> "00"
-    > $ unused             <int> 0
-    > $ rbcs               <chr> "PS038O"
-    > $ cat.id             <chr> "P"
-    > $ sub.id             <chr> "PS"
-    > $ fam.id             <chr> "038"
-    > $ category           <chr> "Procedure"
-    > $ subcategory        <chr> "Skin"
-    > $ family             <chr> "Skin Lesion Excision"
-    > $ major              <chr> "Other"
-    > $ date_hcpcs_add     <date> 1984-01-01
-    > $ date_hcpcs_end     <date> 9999-12-31
-    > $ date_rbcs_assign   <date> 2014-01-01
+    > Columns: 55
+    > $ hcpcs                 <chr> "11646"
+    > $ level                 <chr> "1"
+    > $ category              <chr> "1"
+    > $ section               <chr> "Surgery [10004-69990]"
+    > $ rbcs_cat              <chr> "Procedure"
+    > $ rbcs_sub              <chr> "Skin"
+    > $ rbcs_fam              <chr> "Skin Lesion Excision"
+    > $ rbcs_pro              <chr> "Other"
+    > $ description_rvu       <chr> "Exc f/e/e/n/l mal+mrg >4 cm"
+    > $ description_consumer  <chr> "Removal of cancer skin growth of face, ears, ey…
+    > $ description_clinician <list> [<tbl_df[10 x 1]>]
+    > $ mod                   <chr> NA
+    > $ status                <chr> "A"
+    > $ mac                   <chr> "10212"
+    > $ state                 <chr> "GA"
+    > $ locality              <chr> "99"
+    > $ area                  <chr> "REST OF GEORGIA"
+    > $ wgpci                 <dbl> 1
+    > $ pgpci                 <dbl> 0.883
+    > $ mgpci                 <dbl> 1.125
+    > $ wrvu                  <dbl> 6.26
+    > $ nonfac_prvu           <dbl> 7.92
+    > $ fac_prvu              <dbl> 4.36
+    > $ mrvu                  <dbl> 0.99
+    > $ cf                    <dbl> 32.744
+    > $ fac_par               <dbl> 367.5065
+    > $ nonfac_par            <dbl> 470.4366
+    > $ fac_nonpar            <dbl> 349.1312
+    > $ nonfac_nonpar         <dbl> 446.9148
+    > $ fac_limit             <dbl> 401.5009
+    > $ nonfac_limit          <dbl> 513.952
+    > $ opps                  <chr> "9"
+    > $ nonfac_prvu_opps      <dbl> 0
+    > $ fac_prvu_opps         <dbl> 0
+    > $ mrvu_opps             <dbl> 0
+    > $ mult_surg             <chr> "0"
+    > $ mult_proc             <chr> "2"
+    > $ flat_vis              <dbl> 0
+    > $ nonfac_therapy        <dbl> 2
+    > $ fac_therapy           <dbl> 0
+    > $ global                <chr> "010"
+    > $ op_ind                <dbl> 1
+    > $ op_pre                <dbl> 0.1
+    > $ op_intra              <dbl> 0.8
+    > $ op_post               <dbl> 0.1
+    > $ pctc                  <chr> "0"
+    > $ surg_bilat            <chr> "0"
+    > $ surg_asst             <chr> "1"
+    > $ surg_co               <chr> "0"
+    > $ surg_team             <chr> "0"
+    > $ supvis                <chr> "09"
+    > $ dximg                 <chr> "99"
+    > $ endo                  <chr> NA
+    > $ rare                  <chr> "00"
+    > $ unused                <int> 0
 
 ``` r
 rvu(hcpcs = "V5299") |> glimpse()
@@ -198,12 +181,16 @@ calculate_amounts(
 )
 ```
 
-    > Facility:
-    > Participating Amount    = $367.51
-    > Non-Particpating Amount = $349.13
-    > Limiting Charge         = $401.50
+    > Facility Amounts:
     > 
-    > Non-Facility:
-    > Participating Amount    = $470.44
-    > Non-Particpating Amount = $446.91
-    > Limiting Charge         = $513.95
+    > RVU Total ............ 11.22
+    > Participating ........ $367.51
+    > Non-Particpating ..... $349.13
+    > Limiting Charge ...... $401.50
+    > 
+    > Non-Facility Amounts:
+    > 
+    > RVU Total ............ 14.37
+    > Participating ........ $470.44
+    > Non-Particpating ..... $446.91
+    > Limiting Charge ...... $513.95

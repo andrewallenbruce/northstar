@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-labeling.R
 \name{case_section_hcpcs}
 \alias{case_section_hcpcs}
-\title{Add CPT Section Labels}
+\title{Add HCPCS Section Labels}
 \usage{
 case_section_hcpcs(df, col)
 }
@@ -15,7 +15,7 @@ case_section_hcpcs(df, col)
 A \link[tibble:tibble-package]{tibble} with a \code{hcpcs_section} column
 }
 \description{
-Add CPT Section Labels
+Add HCPCS Section Labels
 }
 \examples{
 x <- c("39503", "99215", "99140",

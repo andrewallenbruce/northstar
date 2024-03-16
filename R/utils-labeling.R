@@ -14,7 +14,7 @@
 case_section_cpt <- function(df, col) {
 
   df |>
-    dplyr::mutate(section_cpt = dplyr::case_match(
+    dplyr::mutate(section = dplyr::case_match(
       {{ col }},
       as.character(c(99202:99499)) ~ "E&M [99202-99499]",
       as.character(c(stringr::str_pad(100:1999, width = 5, pad = "0"), 99100:99140)) ~ "Anesthesiology [00100-01999, 99100-99140]",
@@ -25,7 +25,7 @@ case_section_cpt <- function(df, col) {
       .after = {{ col }})
 }
 
-#' Add CPT Section Labels
+#' Add HCPCS Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
 #' @return A [tibble][tibble::tibble-package] with a `hcpcs_section` column
@@ -41,7 +41,7 @@ case_section_cpt <- function(df, col) {
 case_section_hcpcs <- function(df, col) {
 
   df |>
-    dplyr::mutate(section_hcpcs = dplyr::case_match(
+    dplyr::mutate(section = dplyr::case_match(
       substr({{ col }}, 1, 1),
       "A" ~ "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
       "B" ~ "Enteral and Parenteral Therapy",
@@ -81,8 +81,8 @@ case_level <- function(df, col) {
   df |>
     dplyr::rowwise() |>
     dplyr::mutate(level = dplyr::case_when(
-      is_level_I({{ col }}) ~ "I",
-      is_level_II({{ col }}) ~ "II"),
+      is_level_I({{ col }}) ~ "1",
+      is_level_II({{ col }}) ~ "2"),
       .after = {{ col }}) |>
     dplyr::ungroup()
 }
@@ -103,10 +103,10 @@ case_category <- function(df, col) {
 
   df |>
     dplyr::rowwise() |>
-    dplyr::mutate(cpt_category = dplyr::case_when(
-      is_category_I({{ col }}) ~ "I",
-      is_category_II({{ col }}) ~ "II",
-      is_category_III({{ col }}) ~ "III"),
+    dplyr::mutate(category = dplyr::case_when(
+      is_category_I({{ col }}) ~ "1",
+      is_category_II({{ col }}) ~ "2",
+      is_category_III({{ col }}) ~ "3"),
       .after = {{ col }}) |>
     dplyr::ungroup()
 }

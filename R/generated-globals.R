@@ -2,6 +2,8 @@
 
 utils::globalVariables(c(
   # <hcpcs_search>
+  "category",
+  # <hcpcs_search>
   "cf",
   # <hcpcs_search>
   "clinician_descriptor",
@@ -9,6 +11,8 @@ utils::globalVariables(c(
   "cpt",
   # <col_lb>
   "description",
+  # <hcpcs_search>
+  "family",
   # <hcpcs_search>
   "fpar",
   # <hcpcs_search>
@@ -34,9 +38,13 @@ utils::globalVariables(c(
   # <hcpcs_search>
   "pgpci",
   # <hcpcs_search>
+  "procedure",
+  # <hcpcs_search>
   "status",
   # <case_status>
   "status_description",
+  # <hcpcs_search>
+  "subcategory",
   # <col_lb>
   "var",
   # <hcpcs_search>
