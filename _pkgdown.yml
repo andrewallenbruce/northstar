@@ -2,17 +2,7 @@ url: https://andrewallenbruce.github.io/northstar/
 template:
   bootstrap: 5
   bslib:
-      bg: '#F9F7F7'
-      fg: '#112D4E'
-      primary: '#3F72AF'
-      text-muted: '#FFFFFF'
-      base_font:
-        google: Roboto
-      heading_font:
-        google: Roboto Slab
-      code_font:
-        google: JetBrains Mono
-  navbar:
-    bg: none
-    type: light
+    base_font: {google: "Roboto"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "JetBrains Mono"}
 
