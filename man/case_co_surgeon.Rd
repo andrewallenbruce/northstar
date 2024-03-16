@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-labeling.R
 \name{case_co_surgeon}
 \alias{case_co_surgeon}
-\title{Add Co Surgeons Descriptions}
+\title{Add Co-Surgeons Descriptions}
 \usage{
 case_co_surgeon(df, col)
 }

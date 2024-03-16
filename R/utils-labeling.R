@@ -291,7 +291,7 @@ case_multproc <- function(df, col) {
     .after = {{ col }})
 }
 
-#' Add Co Surgeons Descriptions
+#' Add Co-Surgeons Descriptions
 #'
 #' Modifier 62: Services for which two surgeons,
 #' each in a different specialty, may be paid.
