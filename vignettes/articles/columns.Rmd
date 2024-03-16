@@ -54,12 +54,17 @@ gt_marks <- function(gt_tbl, cols) {
       .locations = gt::cells_body(
         columns = {{ cols }}))
 }
+
+modtitle <- "For **Diagnostic Tests**, a blank in this field denotes the **Global Service** & the following Modifiers identify the components:"
+
+f53 <- "Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use)."
+
+fmod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
 ```
 
 ```{r pkgs, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
-library(gluedown)
 library(gt)
 ```
 
@@ -82,10 +87,7 @@ The Medicare physician fee schedule amounts are adjusted to reflect the variatio
 
 ```{r}
 northstar:::col_lb("md", "rvu") |> 
-  gt(
-    rowname_col = "var"
-    # groupname_col = "var"
-    ) |>
+  gt(rowname_col = "var") |>
   gt_style()
 ```
 
@@ -93,47 +95,22 @@ northstar:::col_lb("md", "rvu") |>
 ## Modifier
 
 ```{r}
-f53 <- "Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use)."
-
-fmod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
-
-modifiers <- dplyr::tibble(
-  mod = c("26", "TC", "53"),
-  name = c("Professional Component", "Technical Component", "Discontinued Procedure"),
-  description = c(
-    "Certain procedures are a combination of a physician or other qualified health care professional component and a technical component. When the physician or other qualified health care professional component is reported separately, the service may be identified by adding modifier 26 to the usual procedure number.",
-    "Under certain circumstances, a charge may be made for the technical component alone. Under those circumstances the technical component charge is identified by adding modifier TC to the usual procedure number. Technical component charges are institutional charges and not billed separately by physicians; however, portable x-ray suppliers only bill for technical component and should utilize modifier TC. The charge data from portable x-ray suppliers will then be used to build customary and prevailing profiles.",
-    "Under certain circumstances, the physician or other qualified health care professional may elect to terminate a surgical or diagnostic procedure. Due to extenuating circumstances or those that threaten the well being of the patient, it may be necessary to indicate that a surgical or diagnostic procedure was started but discontinued. This circumstance may be reported by adding modifier 53 to the code reported by the individual for the discontinued procedure."
-  )
-)
-
-modifiers |> 
+dplyr::tibble(mod = c("26", "TC", "53")) |> 
+  case_modifier(mod) |>
   gt(rowname_col = "mod") |> 
-  tab_header(title = md("For **Diagnostic Tests**, a blank in this field denotes the **Global Service** & the following Modifiers identify the components:")) |> 
+  tab_header(title = md(modtitle)) |> 
   tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
   tab_footnote(fmod) |> 
   gt_style()
-```
-
-```{r}
-pctc_hcpcs <- rvu() |> 
-  filter(!is.na(mod), global != "XXX") |> 
-  count(hcpcs, sort = TRUE) |> 
-  pull(hcpcs)
-
-hcpcs_search(hcpcs = pctc_hcpcs, state = "GA", locality = "01")
 ```
 
 
 ## Status
 
 ```{r}
-stat <- northstar:::status_codes()
-
-dplyr::tibble(code = sort(
-  c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))) |> 
-  dplyr::mutate(ref = stat[code]) |>
-  tidyr::unnest_wider(col = ref) |>
+dplyr::tibble(
+  code = sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))) |> 
+  case_status(code) |> 
   gt(rowname_col = "code") |> 
   tab_header(title = md("Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment.")) |> 
   tab_style(
@@ -148,21 +125,10 @@ dplyr::tibble(code = sort(
 ## Global
 
 ```{r}
-glob_days <- dplyr::tibble(
-  global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"),
-  description = c(
-    "Endoscopic or minor procedure with related preoperative and postoperative relative values on the day of the procedure only included in the fee schedule payment amount<br><br>Evaluation and Management services on the day of the procedure generally not payable.",
-    "Minor procedure with preoperative relative values on the day of the procedure and postoperative relative values during a 10-day postoperative period included in the fee schedule amount<br><br>Evaluation and Management services on the day of the procedure and during the 10-day postoperative period generally not payable.",
-    "Major surgery with a 1-day preoperative period and 90-day postoperative period included in the fee schedule amount.",
-    "Maternity codes; usual global period does not apply.",
-    "Global concept does not apply.",
-    "Carrier determines whether the global concept applies and establishes postoperative period, if appropriate, at time of pricing.",
-    "Code is related to another service and is always included in the global period of the other service."
-  )
-)
-
-glob_days |> 
+dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")) |> 
+  case_global(global) |>
   gt(rowname_col = "global") |> 
+  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style()
 ```
 
@@ -170,50 +136,10 @@ glob_days |>
 ## PCTC
 
 ```{r}
-pctc_codes <- dplyr::tibble(code = 0:9)
-
-pctc_label <- c(
-  "0" = "Physician Services",
-  "1" = "Diagnostic Tests for Radiology Services",
-  "2" = "Professional Component Only",
-  "3" = "Technical Component Only",
-  "4" = "Global Test Only",
-  "5" = "Incident To",
-  "6" = "Laboratory Physician Interpretation",
-  "7" = "Physical Therapy Service",
-  "8" = "Physician Interpretation",
-  "9" = "Not Applicable"
-)
-
-pctc_desc <- c(
-  "0" = "Modifiers 26 and TC <b><u>cannot</u></b> be used since Physician Services cannot be split into Professional and Technical components.<br><br>Examples: Visits, Consultations, Surgical Procedures.<br><br>RVU Components: **PW**, **PE**, **MP**.",
-  
-  "1" = "Modifiers 26 and TC <b><u>can</u></b> be used with these codes.<br><br>Examples: Pulmonary Function Tests, Therapeutic Radiology Procedures, e.g., Radiation Therapy.<br><br>These codes have both a Professional and Technical component.<br><br>Total RVUs for codes reported with a 26 modifier include values for physician work, practice expense, and malpractice expense.<br><br>Total RVUs for codes reported with a TC modifier include values for practice expense and malpractice expense only.<br><br>Total RVUs for codes reported without a modifier include values for physician work, practice expense, and malpractice expense.",
-  
-  "2" = "Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Stand-alone codes that describe the physician work portion of selected diagnostic tests for which there is an associated code that describes the technical component of the diagnostic test only and another associated code that describes the global test.<br><br>Example Code: **93010**: *Electrocardiogram; Interpretation and Report.*<br><br>RVU Components: **PW**, **PE**, **MP**.",
-  
-  "3" = "Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Stand-alone codes that describe the technical component (i.e., staff and equipment costs) of selected diagnostic tests for which there is an associated code that describes the professional component of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and therefore do not have a related professional 
-code.<br><br>Example Code: **93005** *Electrocardiogram; Tracing Only, without interpretation and report*.<br><br>RVU Components: **PE** and **MP** only.",
-
-  "4" = "Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Stand-alone codes that describe selected diagnostic tests for which there are associated codes that describe *(a)* the professional component of the test only, and *(b)* the technical component of the test only.<br><br>RVU Components: **PW**, **PE**, **MP**.<br><br>Total RVUs = Sum of the total RVUs for the professional and technical components only codes combined.",
-
-  "5" = "Modifiers 26 and TC <b><u>cannot</u></b> be used with these codes.<br><br>Services covered <b><u>incident to</u></b> a physician's service when they are provided by auxiliary personnel employed by the physician and working under his or her direct personal supervision.<br><br>Payment may not be made by carriers for these services when they are provided to hospital inpatients or patients in a hospital outpatient department.",
-
-  "6" = "Modifier TC <b><u>cannot</u></b> be used with these codes.<br><br>Clinical laboratory codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of the tests is paid for under the lab fee schedule. <br><br>RVU Components: **PW**, **PE**, **MP**.",
-
-  "7" = "Payment may not be made if the service is provided to either a patient in a hospital outpatient department or to an inpatient of the hospital by an independently practicing physical or occupational therapist.",
-
-  "8" = "Identifies the professional component of clinical laboratory codes for which separate payment may be made only if the physician interprets an abnormal smear for hospital inpatient. This applies to CPT codes 88141, 85060 and HCPCS code P3001-26. No TC billing is recognized because payment for the underlying clinical laboratory test is made to the hospital, generally through the PPS rate. No payment is recognized for CPT codes 88141, 85060 or HCPCS code P3001-26 furnished to hospital outpatients or non-hospital patients. The physician interpretation is paid through the clinical laboratory fee schedule payment for the clinical laboratory test.",
-
-  "9" = "Concept of a professional/technical component does not apply."
-)
-
-pctc_codes |> 
-  dplyr::mutate(
-    category = pctc_label[as.character(code)],
-    description = pctc_desc[as.character(code)]
-    ) |> 
+dplyr::tibble(code = as.character(0:9)) |> 
+  case_pctc(code) |> 
   gt(rowname_col = "code") |> 
+  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style()
 ```
 
@@ -221,28 +147,28 @@ pctc_codes |>
 ## Multiple Procedure
 
 ```{r}
-mult_codes <- dplyr::tibble(code = c(0:7, 9))
-
-mult_look <- c(
-  "0" = "No payment adjustment rules.<br><br>If the procedure is reported on the same day as another procedure, base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount for the procedure.",
-  "1" = "Standard payment adjustment rules.<br><br>If the procedure is reported on the same day as another procedure that has an indicator of 1, 2 or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 25%, 25%, 25%, and by report).<br><br>Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.",
-  "2" = "Standard payment adjustment rules.<br><br>If the procedure is reported on the same day as another procedure with an indicator of 1, 2 or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 50%, 50%, 50% and by report).<br><br>Base the payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.",
-  "3" = "Special rules for Multiple Endoscopic Procedures apply if procedure is billed with another endoscopy in the same family (i.e., another endoscopy that has the same base procedure).<br><br>The base procedure for each code with this indicator is identified in the Endobase field.<br><br>Apply the multiple endoscopy rules to a family before ranking the family with the other procedures performed on the same day.<br><br><b>Example:</b> Multiple endoscopies in the same family are reported on the same day as endoscopies in another family or on the same day as a non-endoscopic procedure.<br><br>If an endoscopic procedure is reported with only its base procedure, do not pay separately for the base procedure. Payment for the base procedure is included in the payment for the other endoscopy.",
-  "4" = "Special rules for the technical component (TC) of diagnostic imaging procedures apply if procedure is billed with another diagnostic imaging procedure in the same family (per the diagnostic imaging family indicator).<br><br>If the procedure is reported in the same session on the same day as another procedure with the same family indicator, rank the procedures by fee schedule amount for the TC. Pay 100% for the highest priced procedure, and 50% for each subsequent procedure. Base the payment for subsequent procedures on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.<br><br>Subject to 50% reduction of the TC diagnostic imaging. Subject to 5% reduction of the PC of diagnostic imaging.",
-  "5" = "Subject to 50% of the practice expense component for certain therapy services.",
-  "6" = "Subject to 25% reduction of the second highest and subsequent procedures to the TC of diagnostic cardiovascular services.",
-  "7" = "Subject to 20% reduction of the second highest and subsequent procedures to the TC of diagnostic ophthalmology services.",
-  "9" = "Concept does not apply"
-)
-
-mult_codes |> 
-  mutate(description = mult_look[as.character(code)]) |> 
+dplyr::tibble(code = as.character(c(0:7, 9))) |> 
+  case_multproc(code) |>
   gt(rowname_col = "code") |>
+  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style()
 ```
 
 
-# Geographic Practice Cost Indices by State & Medicare Locality
+## Diagnostic Imaging Family
+
+```{r}
+dplyr::tibble(
+  dximg = stringr::str_pad(c(1:11, 88, 99), 
+                           width = "2", pad = "0")) |>
+  case_imaging(dximg) |> 
+  gt(rowname_col = "dximg") |>
+  gt_style()
+```
+
+
+
+# Geographic Practice Cost Indices
 
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 

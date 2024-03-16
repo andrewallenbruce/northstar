@@ -50,13 +50,14 @@ hcpcs_search(
     heading.title.font.size = px(20),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
-    # table.font.color = "#0B0B45",
     footnotes.font.size = px(12))
 ```
 
 
 ```{r}
-opps(hcpcs = "70170", mac = "10212", locality = "01") |> 
+opps(hcpcs = "70170", 
+     mac = "10212", 
+     locality = "01") |> 
   glimpse()
 ```
 
@@ -145,18 +146,16 @@ pfs(hcpcs    = "11646",
 
 
 ```{r}
-descriptors(hcpcs = "11646") |> 
-  tidyr::nest(clinician_descriptors = clinician_descriptor) |> 
-  glimpse()
+descriptors(hcpcs = "11646")
 ```
 
 
 
 ```{r}
-level2(hcpcs = "V5299") |>   glimpse()
+level2(hcpcs = "V5299") |> glimpse()
 ```
 
 ```{r}
-rbcs(hcpcs = "V5299") |>   glimpse()
+rbcs(hcpcs = "V5299") |> glimpse()
 ```
 
