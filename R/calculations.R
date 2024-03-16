@@ -250,10 +250,10 @@ hcpcs_search <- function(hcpcs,
     flim  = limiting_charge(fpar),
     nlim  = limiting_charge(npar)) |>
     cols_amounts() |>
-    case_cpt_category(hcpcs) |>
-    case_hcpcs_level(hcpcs) |>
-    case_cpt_section(hcpcs) |>
-    case_hcpcs_section(hcpcs)
+    case_category(hcpcs) |>
+    case_level(hcpcs) |>
+    case_section_cpt(hcpcs) |>
+    case_section_hcpcs(hcpcs)
 
     # fpar_opps = ((wrvu * wgpci) + (fprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,
     # npar_opps  = ((wrvu * wgpci) + (nprvu_opps * pgpci) + (mrvu_opps * mgpci)) * cf,

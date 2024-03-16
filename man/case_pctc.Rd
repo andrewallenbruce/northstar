@@ -12,7 +12,7 @@ case_pctc(df, col)
 \item{col}{column of PCTC indicators}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with an \code{pctc_description} column
+A \link[tibble:tibble-package]{tibble} with a \code{pctc_description} column
 }
 \description{
 Add PCTC Indicator Descriptions

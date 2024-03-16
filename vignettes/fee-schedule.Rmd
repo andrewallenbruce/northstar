@@ -36,10 +36,6 @@ hcpcs_search(
   locality = "99",
   mac = "10212") |> 
   janitor::remove_empty(which = c("rows", "cols")) |>
-  dplyr::mutate(
-    date_hcpcs_end = NULL, 
-    two_macs = NULL
-    ) |> 
   dplyr::rowwise() |>
   dplyr::mutate(clin_descs = purrr::map(clin_descs, ~paste0("* ", ., collapse = "\n"))) |>
   tidyr::unnest(cols = clin_descs) |>

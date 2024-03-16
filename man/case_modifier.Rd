@@ -18,6 +18,6 @@ A \link[tibble:tibble-package]{tibble} with an \code{mod_description} column
 Add Modifier Indicator Descriptions
 }
 \examples{
-dplyr::tibble(mod = c("26", "TC", "53")) |> case_modifier(mod)
+dplyr::tibble(mod = c(26, "TC", 53)) |> case_modifier(mod)
 }
 \keyword{internal}

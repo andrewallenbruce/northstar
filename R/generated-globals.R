@@ -21,16 +21,22 @@ utils::globalVariables(c(
   "mgpci",
   # <hcpcs_search>
   "mod",
+  # <case_modifier>
+  "mod_description",
   # <hcpcs_search>
   "mrvu",
   # <hcpcs_search>
   "npar",
   # <hcpcs_search>
   "nprvu",
+  # <case_pctc>
+  "pctc_description",
   # <hcpcs_search>
   "pgpci",
   # <hcpcs_search>
   "status",
+  # <case_status>
+  "status_description",
   # <col_lb>
   "var",
   # <hcpcs_search>
