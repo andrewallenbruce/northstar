@@ -75,25 +75,25 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with an <code>pctc_description</code> column</p>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with a <code>pctc_description</code> column</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>pctc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">case_pctc</span><span class="op">(</span><span class="va">pctc</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    pctc  pctc_description$label                  $description                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    pctc  pctc_label                              pctc_description               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0     Physician Service                       PCTC concept does not apply. C…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0     Physician Service                       PCTC does not apply.           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1     Diagnostic Tests for Radiology Services Have both a PC and TC. Mods 26…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2     Professional Component Only             Standalone codes, describe phy…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 3     Technical Component Only                Standalone codes that describe…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 4     Global Test Only                        Standalone codes that describe…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 5     Incident To                             Services covered incident to a…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 6     Laboratory Physician Interpretation     Clinical laboratory codes for …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 7     Physical Therapy                        Payment may not be made if the…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 8     Physician Interpretation                Identifies PC of Clinical Labo…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 9     Not Applicable                          PCTC Concept does not apply    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2     Professional Component Only             Standalone code. Describes PC …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 3     Technical Component Only                Standalone code. Mods 26/TC ca…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 4     Global Test Only                        Standalone code. Describes dia…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 5     Incident To                             Services provided by personnel…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 6     Lab Physician Interpretation            Clinical Lab codes for which s…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 7     Physical Therapy                        Payment may not be made if pro…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 8     Physician Interpretation                Identifies PC of Clinical Lab …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 9     <span style="color: #BB0000;">NA</span>                                      <span style="color: #BB0000;">NA</span>                             </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
