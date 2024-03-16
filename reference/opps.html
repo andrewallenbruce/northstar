@@ -95,9 +95,19 @@ OPPS-based payment caps.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">opps</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"70170"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opps</span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"70170"</span>, <span class="st">"71550"</span>, <span class="st">"0689T"</span>, <span class="st">"75898"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>     mac      <span class="op">=</span> <span class="st">"01112"</span>,</span></span>
+<span class="r-in"><span>     locality <span class="op">=</span> <span class="st">"05"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs mod   procstat mac   locality fac_price nonfac_price</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0689T TC    C        01112 05            122.         122.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 70170 <span style="color: #BB0000;">NA</span>    C        01112 05            347.         347.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 70170 TC    C        01112 05            331.         331.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 71550 <span style="color: #BB0000;">NA</span>    A        01112 05            407.         407.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 71550 TC    A        01112 05            330.         330.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 75898 <span style="color: #BB0000;">NA</span>    C        01112 05           <span style="text-decoration: underline;">4</span>405.        <span style="text-decoration: underline;">4</span>405.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 75898 TC    C        01112 05           <span style="text-decoration: underline;">4</span>309.        <span style="text-decoration: underline;">4</span>309.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -147,9 +147,22 @@ assigned to a 6-character RBCS taxonomy code.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">rbcs</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rbcs</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>, <span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11646", "33935", "39503", "43116", "J9264"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PS038O", "PC000M", "PO000M", "PG000M", "RH002N"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ cat.id           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "P", "P", "R"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ sub.id           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PS", "PC", "PO", "PG", "RH"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ fam.id           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "038", "000", "000", "000", "002"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ category         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Procedure", "Procedure", "Procedure", "Procedure", "…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ subcategory      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin", "Cardiovascular", "Other Organ Systems", "Dig…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ family           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin Lesion Excision", "No RBCS Family", "No RBCS Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ procedure        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Other", "Major", "Major", "Major", "Non-Procedure"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_hcpcs_add   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1984-01-01, 1986-01-01, 1984-01-01, 1995-01-01, 2006-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_hcpcs_end   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 9999-12-31, 9999-12-31, 9999-12-31, 9999-12-31, 9999-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_rbcs_assign <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2014-01-01, 2014-01-01, 2014-01-01, 2014-01-01, 2014-…</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

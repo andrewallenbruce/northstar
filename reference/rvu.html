@@ -78,9 +78,38 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">rvu</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rvu</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0021", "G8916", "J9264", "V5362"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Outside state ambulance serv", "Pt w iv ab given on time"…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ mod         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ status      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I", "X", "E", "N"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ wrvu        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ nprvu       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ fprvu       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ mrvu        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ cf          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 32.744, 32.744, 32.744, 32.744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ nprvu_opps  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ fprvu_opps  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ mrvu_opps   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ global      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "XXX", "XXX", "XXX", "XXX"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ op_ind      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ op_pre      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ op_intra    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ op_post     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ pctc        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ mult_proc   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ surg_bilat  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ surg_asst   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ surg_co     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ surg_team   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "9", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ endo        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ supvis      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "09", "09", "09", "01"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ dximg       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99", "99", "99", "99"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ unused      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ rare        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00", "00", "00", "00"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
