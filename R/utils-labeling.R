@@ -1,3 +1,53 @@
+#' Add HCPCS Level I & II Section Labels
+#' @param df data frame
+#' @param col column of HCPCS codes to match on
+#' @return A [tibble][tibble::tibble-package] with a `cpt_section` column
+#' @examples
+#' x <- c("39503", "99215", "99140",
+#'        "69990", "70010", "0222U",
+#'        "V5299", "7010F", "0074T")
+#'
+#' dplyr::tibble(hcpcs = x) |>
+#' case_section(hcpcs)
+#' @export
+#' @autoglobal
+case_section <- function(df, col) {
+
+  df |>
+    dplyr::mutate(section = dplyr::case_match(
+      {{ col }},
+      as.character(c(99202:99499)) ~ "E&M [99202-99499]",
+      as.character(c(stringr::str_pad(100:1999, width = 5, pad = "0"), 99100:99140)) ~ "Anesthesiology [00100-01999, 99100-99140]",
+      as.character(c(10004:69990)) ~ "Surgery [10004-69990]",
+      as.character(c(70010:79999)) ~ "Radiology [70010-79999]",
+      as.character(c(80047:89398, stringr::str_pad(paste0(1:222, "U"), width = 5, pad = "0"))) ~ "Path & Lab [80047-89398, 0001U-0222U]",
+      as.character(c(90281:99199, 99500:99607)) ~ "Medicine [90281-99199, 99500-99607]",
+      .default = NA_character_
+      )) |>
+    dplyr::mutate(section = dplyr::case_match(
+      substr({{ col }}, 1, 1),
+      "A" ~ "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
+      "B" ~ "Enteral and Parenteral Therapy",
+      "C" ~ "Temporary Hospital Outpatient Prospective Payment System",
+      "D" ~ "Dental Procedures",
+      "E" ~ "Durable Medical Equipment",
+      "G" ~ "Temporary Procedures & Professional Services",
+      "H" ~ "Rehabilitative Services",
+      "J" ~ "Drugs Administered Other Than Oral Method, Chemotherapy Drugs",
+      "K" ~ "Temporary Codes for Durable Medical Equipment Regional Carriers",
+      "L" ~ "Orthotic/Prosthetic Procedures",
+      "M" ~ "Medical Services",
+      "P" ~ "Pathology and Laboratory",
+      "Q" ~ "Temporary Codes",
+      "R" ~ "Diagnostic Radiology Services",
+      "S" ~ "Private Payer Codes",
+      "T" ~ "State Medicaid Agency Codes",
+      "V" ~ "Vision/Hearing Services",
+      .default = section
+    ),
+    .after = {{ col }})
+}
+
 #' Add CPT Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
@@ -21,7 +71,9 @@ case_section_cpt <- function(df, col) {
       as.character(c(10004:69990)) ~ "Surgery [10004-69990]",
       as.character(c(70010:79999)) ~ "Radiology [70010-79999]",
       as.character(c(80047:89398, stringr::str_pad(paste0(1:222, "U"), width = 5, pad = "0"))) ~ "Path & Lab [80047-89398, 0001U-0222U]",
-      as.character(c(90281:99199, 99500:99607)) ~ "Medicine [90281-99199, 99500-99607]"),
+      as.character(c(90281:99199, 99500:99607)) ~ "Medicine [90281-99199, 99500-99607]",
+      .default = NA_character_
+      ),
       .after = {{ col }})
 }
 
@@ -439,52 +491,299 @@ case_pctc <- function(df, col) {
     tidyr::unpack(cols = pctc_description)
 }
 
-#' Add Status Code Descriptions
+#' Replace Status Codes with Labels, Add Descriptions
 #'
 #' @param df data frame
 #' @param col column of Status Codes
+#' @param desc add Descriptions
 #' @return A [tibble][tibble::tibble-package] with an `status_description` column
 #' @examples
 #' dplyr::tibble(status = LETTERS) |> case_status(status)
 #' @export
 #' @autoglobal
-case_status <- function(df, col) {
+case_status <- function(df, col, desc = FALSE) {
+
+  if (desc) {
+
+  df <- dplyr::mutate(df,
+      status_desc = dplyr::case_match({{ col }},
+      "A" ~ "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD.",
+      "B" ~ "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident.",
+      "C" ~ "Carriers establish RVUs and payment following documentation review.",
+      "D" ~ "Deleted effective with beginning of year.",
+      "E" ~ "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures.",
+      "F" ~ "Not subject to 90 day grace period"),
+      "G" ~ "Another code used for payment. Subject to a 90 day grace period.",
+      "H" ~ "Had TC/26 mod in previous year, TC/26 component now deleted.",
+      "I" ~ "Another code used for payment. Not subject to a 90-day grace period.",
+      "J" ~ "No RVUs or payment amounts. Only identifies anesthesia services.",
+      "M" ~ "Used for reporting purposes only.",
+      "N" ~ "Not covered by Medicare.",
+      "P" ~ "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision.",
+      "R" ~ "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes.",
+      "T" ~ "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment.",
+      "X" ~ "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made.",
+      .after = {{ col }})
+  }
 
   df |>
-    dplyr::mutate(status_description = dplyr::case_match(
-      {{ col }},
-    "A" ~ dplyr::tibble(status_label       = "Active",
-                        status_description = "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD."),
-    "B" ~ dplyr::tibble(status_label       = "Payment Bundled",
-                        status_description = "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident."),
-    "C" ~ dplyr::tibble(status_label       = "Carrier Priced",
-                        status_description = "Carriers establish RVUs and payment following documentation review."),
-    "D" ~ dplyr::tibble(status_label       = "Deleted Codes",
-                        status_description = "Deleted effective with beginning of year."),
-    "E" ~ dplyr::tibble(status_label       = "Regulatory Exclusion",
-                        status_description = "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures."),
-    "F" ~ dplyr::tibble(status_label       = "Deleted/Discontinued",
-                        status_description = "Not subject to 90 day grace period"),
-    "G" ~ dplyr::tibble(status_label       = "Not Valid for Medicare",
-                        status_description = "Another code used for payment. Subject to a 90 day grace period."),
-    "H" ~ dplyr::tibble(status_label       = "Deleted Modifier",
-                        status_description = "Had TC/26 mod in previous year, TC/26 component now deleted."),
-    "I" ~ dplyr::tibble(status_label       = "Not Valid for Medicare",
-                        status_description = "Another code used for payment. Not subject to a 90-day grace period."),
-    "J" ~ dplyr::tibble(status_label       = "Anesthesia Service",
-                        status_description = "No RVUs or payment amounts. Only identifies anesthesia services."),
-    "M" ~ dplyr::tibble(status_label       = "Measurement Code",
-                        status_description = "Used for reporting purposes only."),
-    "N" ~ dplyr::tibble(status_label       = "Restricted Coverage",
-                        status_description = "Not covered by Medicare."),
-    "P" ~ dplyr::tibble(status_label       = "Non-Covered Service",
-                        status_description = "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision."),
-    "R" ~ dplyr::tibble(status_label       = "Bundled/Excluded Code",
-                        status_description = "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes."),
-    "T" ~ dplyr::tibble(status_label       = "Injections",
-                        status_description = "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment."),
-    "X" ~ dplyr::tibble(status_label       = "Statutory Exclusion",
-                        status_description = "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made.")
-    ), .after = {{ col }}) |>
-    tidyr::unpack(cols = status_description)
+    dplyr::mutate({{ col }} := dplyr::case_match({{ col }},
+    "A" ~ "Active",
+    "B" ~ "Payment Bundle",
+    "C" ~ "Carrier Priced",
+    "D" ~ "Deleted Codes",
+    "E" ~ "Regulatory Exclusion",
+    "F" ~ "Deleted/Discontinued",
+    "G" ~ "Not Valid for Medicare",
+    "H" ~ "Deleted Modifier",
+    "I" ~ "Not Valid for Medicare",
+    "J" ~ "Anesthesia Service",
+    "M" ~ "Measurement Code",
+    "N" ~ "Restricted Coverage",
+    "P" ~ "Non-Covered Service",
+    "R" ~ "Bundled/Excluded Code",
+    "T" ~ "Injections",
+    "X" ~ "Statutory Exclusion"
+    ))
+
+}
+
+#' Replace HCPCS Level II ASC Group Indicator Descriptions
+#'
+#' @param df data frame
+#' @param col column of ASC Group indicators
+#' @return A [tibble][tibble::tibble-package] with a `asc_description` column
+#' @examples
+#' dplyr::tibble(asc_grp = c("YY", "99")) |> case_asc(asc_grp)
+#' @export
+#' @autoglobal
+case_asc <- function(df, col) {
+  dplyr::mutate(df,
+  {{ col }} := dplyr::case_match({{ col }}, "YY" ~ "Approved For ASCs"))
+}
+
+#' Replace HCPCS Level II Coverage Indicators with Descriptions
+#'
+#' @param df data frame
+#' @param col column of Coverage indicators
+#' @return A [tibble][tibble::tibble-package] with a `cov_description` column
+#' @examples
+#' dplyr::tibble(cov = c("C", "D", "I", "M", "S")) |> case_coverage(cov)
+#' @export
+#' @autoglobal
+case_coverage <- function(df, col) {
+
+  dplyr::mutate(df, {{ col }} := dplyr::case_match({{ col }},
+        "C" ~ "Carrier Judgment",
+        "D" ~ "Special Coverage Instructions Apply",
+        "I" ~ "Not Payable by Medicare",
+        "M" ~ "Not Covered by Medicare",
+        "S" ~ "Not Covered by Medicare Statute"
+        ))
+}
+
+#' Add HCPCS Level II Pricing Indicator Descriptions
+#'
+#' @param df data frame
+#' @param col column of Pricing indicators
+#' @return A [tibble][tibble::tibble-package] with a `price_description` column
+#' @examples
+#' dplyr::tibble(price = c("00", 11:13, 21:22, 31:46, 51:57, 99)) |>
+#' case_pricing(price)
+#' @export
+#' @autoglobal
+case_pricing <- function(df, col) {
+
+  df |>
+    dplyr::mutate(
+      pricing_indicator = dplyr::case_match(
+        {{ col }},
+        "00" ~ "Not Separately Priced by Part B",
+        "11" ~ "Priced with National RVUs",
+        "12" ~ "Priced with National Anesthesia Base Units",
+        c("13", "22", "46", "57") ~ "Carrier Priced",
+        "21" ~ "Price Subject to National Limitation Amount",
+        "31" ~ "Frequently Serviced DME (Subject to Floors & Ceilings)",
+        "32" ~ "Inexpensive & Routinely Purchased DME (Subject to Floors & Ceilings)",
+        "33" ~ "Oxygen & Oxygen Equipment (Subject to Floors & Ceilings)",
+        "34" ~ "DME Supplies (Subject to Floors & Ceilings)",
+        "35" ~ "Surgical dressings (Subject to Floors & Ceilings)",
+        "36" ~ "Capped Rental DME (Subject to Floors & Ceilings)",
+        "37" ~ "Ostomy, Tracheostomy & Urological Supplies (Subject to Floors & Ceilings)",
+        "38" ~ "Orthotics, prosthetics, prosthetic devices & vision services (Subject to Floors & Ceilings)",
+        "39" ~ "Parenteral & Enteral Nutrition",
+        "40" ~ "Lymphedema Compression Treatment Items",
+        "45" ~ "Customized DME Items",
+        "51" ~ "Drugs",
+        "52" ~ "Reasonable Charge",
+        "53" ~ "Statute",
+        "54" ~ "Vaccinations",
+        "55" ~ "Splints & Casts",
+        "56" ~ "IOLs Inserted in Physician Office",
+        "99" ~ "Value Not Established",
+        "11:21" ~ "Priced with National RVUs, Subject to National Limitation Amount",
+        "13:21" ~ "Carrier Priced, Subject to National Limitation Amount",
+        "57:21" ~ "Carrier Priced, Subject to National Limitation Amount"
+      ),
+      .after = {{ col }})
+}
+
+
+#' Add HCPCS Level II Multiple Pricing Indicator Descriptions
+#'
+#' @param df data frame
+#' @param col column of Multiple Pricing indicators
+#' @return A [tibble][tibble::tibble-package] with a `mult_description` column
+#' @examples
+#' dplyr::tibble(mult_pi = c(9, LETTERS[1:7])) |> case_multiple_pricing(mult_pi)
+#' @export
+#' @autoglobal
+case_multiple_pricing <- function(df, col) {
+
+  df |>
+    dplyr::mutate(
+      multiple_pricing_indicator = dplyr::case_match(
+        {{ col }},
+        "9" ~ "Not Applicable. Not Priced Separately by Part B or Value Not Established.",
+        "A" ~ "Not Applicable. Priced Under One Methodology.",
+        "B" ~ "Professional Component Priced with RVUs. Technical Component & Global Service Priced by Part B Carriers.",
+        "C" ~ "Physician Interpretation Priced with PFS RVUs. Lab Service Paid under Clinical Lab Fee Schedule.",
+        c("D", "E", "F") ~ "Not Applicable as of 1998-01-01.",
+        "G" ~ "Submitted on Claim with Blood Products - Priced Under Reasonable Charge. No Blood Products - Priced Under Clinical Lab Fee Schedule."
+      ),
+      .after = {{ col }})
+}
+
+#' Add HCPCS Level II Lab Certification Descriptions
+#'
+#' @param df data frame
+#' @param col column of Lab Certification indicators
+#' @return A [tibble][tibble::tibble-package] with a `labcert_description` column
+#' @examples
+#' x <- c("010", 100, 110, 115, 120, "110, 120, 130, 400")
+#' dplyr::tibble(labcert = x) |> case_labcert(labcert)
+#' @export
+#' @autoglobal
+case_labcert <- function(df, col) {
+
+  df |>
+    dplyr::mutate(
+      labcert_description = dplyr::case_match(
+        {{ col }},
+        "010" ~ "Histocompatibility Testing",
+        "100" ~ "Microbiology",
+        "110" ~ "Bacteriology",
+        "115" ~ "Mycobacteriology",
+        "120" ~ "Mycology",
+        "130" ~ "Parasitology",
+        "140" ~ "Virology",
+        "150" ~ "Other Microbiology",
+        "200" ~ "Diagnostic Immunology",
+        "210" ~ "Syphilis Serology",
+        "220" ~ "General Immunology",
+        "300" ~ "Chemistry",
+        "310" ~ "Routine Chemistry",
+        "320" ~ "Urinalysis",
+        "330" ~ "Endocrinology",
+        "340" ~ "Toxicology",
+        "350" ~ "Other Chemistry",
+        "400" ~ "Hematology",
+        "500" ~ "Immunohematology",
+        "510" ~ "ABO Group & RH Type",
+        "520" ~ "Antibody Detection (Transfusion)",
+        "530" ~ "Antibody Detection (Nontransfusion)",
+        "540" ~ "Antibody Identification",
+        "550" ~ "Compatibility Testing",
+        "560" ~ "Other Immunohematology",
+        "600" ~ "Pathology",
+        "610" ~ "Histopathology",
+        "620" ~ "Oral Pathology",
+        "630" ~ "Cytology",
+        "800" ~ "Radiobioassay",
+        "900" ~ "Clinical Cytogenetics",
+        "110, 120, 130, 400" ~ "Bacteriology, Mycology, Parasitology, Hematology",
+        "140, 220" ~ "Virology, General Immunology",
+        "220, 310, 900" ~ "General Immunology, Routine Chemistry, Clinical Cytogenetics",
+        "220, 400" ~ "General Immunology, Hematology",
+        "220, 610" ~ "General Immunology, Histopathology",
+        "310, 400" ~ "Routine Chemistry, Hematology",
+      ),
+      .after = {{ col }})
+}
+
+#' Add HCPCS Level II Type of Service Descriptions
+#'
+#' @param df data frame
+#' @param col column of Type of Service codes
+#' @return A [tibble][tibble::tibble-package] with a `tos_description` column
+#' @examples
+#' dplyr::tibble(tos = c(0:9, LETTERS)) |> case_tos(tos)
+#' @export
+#' @autoglobal
+case_tos <- function(df, col) {
+
+  df |>
+    dplyr::mutate(
+      type_of_service = dplyr::case_match(
+        {{ col }},
+        "1" ~ "Medical Care",
+        "2" ~ "Surgery",
+        "3" ~ "Consultation",
+        "4" ~ "Diagnostic Radiology",
+        "5" ~ "Diagnostic Laboratory",
+        "6" ~ "Therapeutic Radiology",
+        "7" ~ "Anesthesia",
+        "8" ~ "Assistant at Surgery",
+        "9" ~ "Other Medical Items or Services",
+        "0" ~ "Whole Blood Only",
+        "A" ~ "Used DME",
+        "B" ~ "High Risk Screening Mammography (exp 1998-01-01)",
+        "C" ~ "Low Risk Screening Mammography (exp 1998-01-01)",
+        "D" ~ "Ambulance",
+        "E" ~ "Enteral/Parenteral Nutrients/Supplies",
+        "F" ~ "Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "G" ~ "Immunosuppressive Drugs",
+        "H" ~ "Hospice Services (exp 1995-01-01)",
+        "I" ~ "Purchase of DME, Installment Basis (exp 1995-04-01)",
+        "J" ~ "Diabetic Shoes",
+        "K" ~ "Hearing Items and Services",
+        "L" ~ "ESRD Supplies",
+        "M" ~ "Monthly Capitation Payment for Dialysis",
+        "N" ~ "Kidney Donor",
+        "P" ~ "Lump Sum Purchase of DME, Prosthetics, Orthotics",
+        "Q" ~ "Vision Items or Services",
+        "R" ~ "Rental of DME",
+        "S" ~ "Surgical Dressings or Other Medical Supplies",
+        "T" ~ "Outpatient Mental Health Limitation",
+        "U" ~ "Occupational Therapy",
+        "V" ~ "Pneumococcal/Flu Vaccine",
+        "W" ~ "Physical Therapy",
+        "Y" ~ "Second Opinion on Elective Surgery (exp 1997-01-01)",
+        "Z" ~ "Third Opinion on Elective Surgery (exp 1997-01-01)",
+        "1:9" ~ "Medical Care, Other Medical Items or Services",
+        "1:F" ~ "Medical Care, Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "1:G:P" ~ "Medical Care, Immunosuppressive Drugs, Lump Sum Purchase of DME, Prosthetics, Orthotics",
+        "1:L" ~ "Medical Care, ESRD Supplies",
+        "1:L:P" ~ "Medical Care, ESRD Supplies, Lump Sum Purchase of DME, Prosthetics, Orthotics",
+        "1:P" ~ "Medical Care, Lump Sum Purchase of DME, Prosthetics, Orthotics",
+        "1:U:W" ~ "Medical Care, Occupational Therapy, Physical Therapy",
+        "1:W" ~ "Medical Care, Physical Therapy",
+        "2:9" ~ "Surgery, Other Medical Items or Services",
+        "2:F" ~ "Surgery, Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "4:F" ~ "Diagnostic Radiology, Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "6:F" ~ "Therapeutic Radiology, Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "9:F" ~ "Other Medical Items or Services, Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "9:F:S" ~ "Other Medical Items or Services, Ambulatory Surgical Center (Facility Usage for Surgical Services), Surgical Dressings or Other Medical Supplies",
+        "9:R" ~ "Other Medical Items or Services, Rental of DME",
+        "9:S" ~ "Other Medical Items or Services, Surgical Dressings or Other Medical Supplies",
+        "9:S:F" ~ "Other Medical Items or Services, Surgical Dressings or Other Medical Supplies, Ambulatory Surgical Center (Facility Usage for Surgical Services)",
+        "A:E:P:R" ~ "Used DME, Enteral/Parenteral Nutrients/Supplies, Lump Sum Purchase of DME, Prosthetics, Orthotics, Rental of DME",
+        "A:L:P:R" ~ "Used DME, ESRD Supplies, Lump Sum Purchase of DME, Prosthetics, Orthotics, Rental of DME",
+        "A:P:R" ~ "Used DME, Lump Sum Purchase of DME, Prosthetics, Orthotics, Rental of DME",
+        "L:P" ~ "ESRD Supplies, Lump Sum Purchase of DME, Prosthetics, Orthotics",
+        "L:S" ~ "ESRD Supplies, Surgical Dressings or Other Medical Supplies",
+        "P:R" ~ "Lump Sum Purchase of DME, Prosthetics, Orthotics, Rental of DME",
+        "P:S" ~ "Lump Sum Purchase of DME, Prosthetics, Orthotics, Surgical Dressings or Other Medical Supplies"
+      ),
+      .after = {{ col }})
 }

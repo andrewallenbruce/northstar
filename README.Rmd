@@ -38,7 +38,7 @@ library(dplyr)
 ## Return Information about HCPCS Code
 
 ```{r}
-hcpcs_search(hcpcs    = "11646", 
+hcpcs_search(hcpcs    = "33935", 
              state    = "GA", 
              locality = "99", 
              mac      = "10212") |> 

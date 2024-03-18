@@ -40,15 +40,10 @@ hcpcs_search <- function(hcpcs,
 
   rlang::check_required(hcpcs)
 
-  # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
-
-  rv <- rvu(hcpcs     = hcpcs)
+  rv <- rvu(hcpcs = hcpcs)
 
   if (vctrs::vec_is_empty(rv)) {
-    cli::cli_abort(
-      "No RVUs found for HCPCS code {.strong {.val {hcpcs}}}."
-    )
-  }
+    cli::cli_abort("No RVUs found for HCPCS code {.strong {.val {hcpcs}}}.")}
 
   gp <- gpci(state    = state,
              locality = locality,
@@ -59,17 +54,11 @@ hcpcs_search <- function(hcpcs,
             mac       = mac)
 
 
-  ds <- descriptors(hcpcs = hcpcs) |>
-    tidyr::nest(clinician_descriptors = clinician_descriptor)
+  ds <- descriptors(hcpcs = hcpcs)
 
   l2 <- level2(hcpcs = hcpcs)
 
-  rb <- rbcs(hcpcs = hcpcs) |>
-    dplyr::select(hcpcs,
-                  rbcs_cat = category,
-                  rbcs_sub = subcategory,
-                  rbcs_fam = family,
-                  rbcs_pro = procedure)
+  rb <- rbcs(hcpcs = hcpcs)
 
   x <- list(
     rvus        = if (!vctrs::vec_is_empty(rv)) rv else NULL,
@@ -81,19 +70,27 @@ hcpcs_search <- function(hcpcs,
     purrr::compact()
 
 
-  res <- dplyr::cross_join(x$rvus,
-                           x$gpci) |>
-    dplyr::left_join(x$rbcs,
-                     by = dplyr::join_by(hcpcs))
+  res <- dplyr::cross_join(x$rvus, x$gpci) |>
+    dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
 
-  if (rlang::has_name(x, "level_2")) {
+  if (all(rlang::has_name(x, c("level_2", "descriptors")))) {
+
+    res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs, description)) |>
+      dplyr::left_join(x$payment, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+      dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs == cpt)) |>
+      case_category(hcpcs) |>
+      case_section(hcpcs)
+
+  }
+
+  if (rlang::has_name(x, "level_2") & !rlang::has_name(x, "descriptors")) {
 
     res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs)) |>
       case_section_hcpcs(hcpcs)
 
   }
 
-  if (rlang::has_name(x, "descriptors")) {
+  if (rlang::has_name(x, "descriptors") & !rlang::has_name(x, "level_2")) {
 
     res <- dplyr::left_join(res,x$payment,
            by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
@@ -108,11 +105,12 @@ hcpcs_search <- function(hcpcs,
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
       npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
-      fnpar = nonpar_amount(fpar),
-      nnpar = nonpar_amount(npar),
+      fnpar = non_participating_amount(fpar),
+      nnpar = non_participating_amount(npar),
       flim  = limiting_charge(fpar),
       nlim  = limiting_charge(npar)) |>
     case_level(hcpcs) |>
+    case_status(status) |>
     cols_amounts()
 
 }
@@ -123,27 +121,22 @@ hcpcs_search <- function(hcpcs,
 cols_amounts <- function(df) {
 
   cols <- c('hcpcs',
-            'hcpcs_type',
             'level',
             'category',
-            'section',
-            'rbcs_cat',
-            'rbcs_sub',
-            'rbcs_fam',
-            'rbcs_pro',
-            'description_rvu' = 'description',
-            'description_long' = 'long_description',
-            'description_short' = 'short_description',
+            'description',
+            'description_long',
             'description_consumer' = 'consumer_descriptor',
             'description_clinician' = 'clinician_descriptors',
-            'mod',
+            'section',
+            'rbcs_category',
+            'rbcs_subcategory',
+            'rbcs_family',
+            'rbcs_procedure',
             'status',
             'mac',
             'state',
             'locality',
             'area' = 'name',
-            # 'counties',
-            # 'two_macs',
             'wgpci',
             'pgpci',
             'mgpci',
@@ -171,13 +164,13 @@ cols_amounts <- function(df) {
             'mult_surg',
             'mult_proc',
             'flat_vis',
-            'nonfac_therapy' = 'nther',
-            'fac_therapy' = 'fther',
+            'nonfac_ther' = 'nther',
+            'fac_ther' = 'fther',
             'global',
-            'op_ind',
             'op_pre',
             'op_intra',
             'op_post',
+            'mod',
             'pctc',
             'surg_bilat',
             'surg_asst',
@@ -189,18 +182,15 @@ cols_amounts <- function(df) {
             'rare',
             'unused',
             'price',
-            'mult_pi',
-            'cim',
-            'mcm',
-            'statute',
+            'mult',
             'labcert',
             'xref',
-            'cov',
-            'asc_grp',
-            'asc_dt',
-            'procnote',
+            'coverage',
+            'asc',
             'betos',
             'tos'
   )
   df |> dplyr::select(dplyr::any_of(cols))
 }
+
+# rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()

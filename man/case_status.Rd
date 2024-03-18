@@ -2,20 +2,22 @@
 % Please edit documentation in R/utils-labeling.R
 \name{case_status}
 \alias{case_status}
-\title{Add Status Code Descriptions}
+\title{Replace Status Codes with Labels, Add Descriptions}
 \usage{
-case_status(df, col)
+case_status(df, col, desc = FALSE)
 }
 \arguments{
 \item{df}{data frame}
 
 \item{col}{column of Status Codes}
+
+\item{desc}{add Descriptions}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with an \code{status_description} column
 }
 \description{
-Add Status Code Descriptions
+Replace Status Codes with Labels, Add Descriptions
 }
 \examples{
 dplyr::tibble(status = LETTERS) |> case_status(status)

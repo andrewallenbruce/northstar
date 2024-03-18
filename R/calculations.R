@@ -35,9 +35,9 @@ limiting_charge <- function(par_amount) {
 #' @param par_amount < *double* > Participating Amount
 #' @return numeric vector of Non-participating amount
 #' @examples
-#' nonpar_amount(26.35)
+#' non_participating_amount(26.35)
 #' @export
-nonpar_amount <- function(par_amount) {
+non_participating_amount <- function(par_amount) {
 
   stopifnot("`par_amount` must be numeric" = is.numeric(par_amount))
 
@@ -90,14 +90,14 @@ calculate_amounts <- function(wrvu,
     prvu   = fprvu,
     rvu    = frvus,
     par    = fpar,
-    nonpar = nonpar_amount(fpar),
+    nonpar = non_participating_amount(fpar),
     limit  = limiting_charge(fpar))
 
   n <- list(
     prvu   = nprvu,
     rvu    = nrvus,
     par    = npar,
-    nonpar = nonpar_amount(npar),
+    nonpar = non_participating_amount(npar),
     limit  = limiting_charge(npar))
 
   cli::cli_inform(c(
@@ -118,20 +118,4 @@ calculate_amounts <- function(wrvu,
     )
   )
   invisible(list(fac = f, non = n))
-
-  # glue::glue("Facility:\n",
-  #            "Participating Amount    = {gt::vec_fmt_currency(fpar)}\n",
-  #            "Non-Particpating Amount = {gt::vec_fmt_currency(fnpar)}\n",
-  #            "Limiting Charge         = {gt::vec_fmt_currency(flim)}",
-  #            "\n\n",
-  #            "Non-Facility:\n",
-  #            "Participating Amount    = {gt::vec_fmt_currency(npar)}\n",
-  #            "Non-Particpating Amount = {gt::vec_fmt_currency(nnpar)}\n",
-  #            "Limiting Charge         = {gt::vec_fmt_currency(nlim)}",
-  #            fpar  = f$par,
-  #            fnpar = f$nonpar,
-  #            flim  = f$limit,
-  #            npar  = n$par,
-  #            nnpar = n$nonpar,
-  #            nlim  = n$limit)
 }

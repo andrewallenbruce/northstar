@@ -19,7 +19,8 @@ Imports:
     rlang,
     stringr,
     tidyr,
-    vctrs
+    vctrs,
+    collapse
 Suggests:
     fontawesome,
     janitor,

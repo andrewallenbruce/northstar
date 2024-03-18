@@ -79,3 +79,12 @@ display_long <- function(df, cols = dplyr::everything()) {
   df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
     tidyr::pivot_longer({{ cols }})
 }
+
+#' Format multiple line character vector to single line
+#' @param x character vector
+#' @autoglobal
+#' @export
+#' @keywords internal
+single_line_string <- function(x) {
+  stringr::str_remove_all(x, r"(\n\s*)")
+}

@@ -11,8 +11,10 @@ rvu <- function(hcpcs = NULL) {
   rv <- pins::pin_read(mount_board(), "rvu")
 
   if (!is.null(hcpcs)) {
-    hcpcs <- unique(hcpcs)
-    rv    <- vctrs::vec_slice(rv, vctrs::vec_in(rv$hcpcs, hcpcs))
+
+    rv <- vctrs::vec_slice(rv,
+          vctrs::vec_in(rv$hcpcs,
+          collapse::funique(hcpcs)))
   }
   return(rv)
 }
@@ -33,21 +35,26 @@ pfs <- function(hcpcs    = NULL,
                 mac      = NULL,
                 locality = NULL) {
 
+  # TODO convert filter(opps == "9") rows -> opps_nf and opps_f to NA
+
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  if (!is.null(hcpcs))    {
-    hcpcs <- unique(hcpcs)
-    pmt   <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$hcpcs, hcpcs))
+  if (!is.null(hcpcs)) {
+    pmt <- vctrs::vec_slice(pmt,
+           vctrs::vec_in(pmt$hcpcs,
+           collapse::funique(hcpcs)))
   }
 
-  if (!is.null(mac))      {
-    mac <- unique(mac)
-    pmt <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$mac, mac))
+  if (!is.null(mac)) {
+    pmt <- vctrs::vec_slice(pmt,
+           vctrs::vec_in(pmt$mac,
+           collapse::funique(mac)))
   }
 
   if (!is.null(locality)) {
-    loc <- unique(locality)
-    pmt <- vctrs::vec_slice(pmt, vctrs::vec_in(pmt$locality, loc))
+    pmt <- vctrs::vec_slice(pmt,
+           vctrs::vec_in(pmt$locality,
+           collapse::funique(locality)))
   }
   return(pmt)
 }
@@ -68,32 +75,81 @@ gpci <- function(mac      = NULL,
                  state    = NULL,
                  locality = NULL) {
 
+  # TODO convert state col to character
+
   gp <- pins::pin_read(mount_board(), "gpci")
+
   gp$state <- as.character(gp$state)
 
-  if (!is.null(mac))      {gp <- vctrs::vec_slice(gp, vctrs::vec_in(gp$mac, mac))}
-  if (!is.null(state))    {gp <- vctrs::vec_slice(gp, vctrs::vec_in(gp$state, state))}
-  if (!is.null(locality)) {gp <- vctrs::vec_slice(gp, vctrs::vec_in(gp$locality, locality))}
+  if (!is.null(state)) {
+    gp <- vctrs::vec_slice(gp,
+          vctrs::vec_in(gp$state,
+          collapse::funique(state)))
+  }
+
+  if (!is.null(mac)) {
+    gp <- vctrs::vec_slice(gp,
+          vctrs::vec_in(gp$mac,
+          collapse::funique(mac)))
+  }
+
+  if (!is.null(locality)) {
+    gp <- vctrs::vec_slice(gp,
+          vctrs::vec_in(gp$locality,
+          collapse::funique(locality)))
+  }
 
   return(gp)
 }
 
 #' 2024 Healthcare Common Procedure Coding System (HCPCS)
 #' @param hcpcs description
+#' @param limit_cols description
 #' @return a [dplyr::tibble()]
 #' @examples
-#' level2(c("A0021", "V5362", "J9264", "G8916")) |>
-#' dplyr::glimpse()
+#' level2(c("A0021", "V5362", "J9264", "G8916")) |> dplyr::glimpse()
 #' @export
 #' @autoglobal
-level2 <- function(hcpcs = NULL) {
+level2 <- function(hcpcs = NULL, limit_cols = TRUE) {
 
-  l2 <- pins::pin_read(mount_board(), "hcpcs")
+  # TODO coverage = cov,
+  # TODO asc = asc_grp,
+  # TODO description = short_description
 
-  if (!is.null(hcpcs))    {
-    hcpcs <- unique(hcpcs)
-    l2    <- vctrs::vec_slice(l2, vctrs::vec_in(l2$hcpcs, hcpcs))
+  l2 <- pins::pin_read(mount_board(), "hcpcs") |>
+    dplyr::rename(description = short_description,
+                  description_long = long_description,
+                  asc = asc_grp,
+                  coverage = cov,
+                  mult = mult_pi)
+
+  if (limit_cols) {
+    l2 <- dplyr::select(l2,
+          hcpcs,
+          description,
+          description_long,
+          price,
+          mult,
+          labcert,
+          xref,
+          tos,
+          coverage,
+          asc,
+          betos)
   }
+
+  if (!is.null(hcpcs)) {
+    l2 <- vctrs::vec_slice(l2,
+          vctrs::vec_in(l2$hcpcs,
+          collapse::funique(hcpcs)))
+  }
+
+  l2 <- case_asc(l2, asc) |>
+    case_coverage(coverage) |>
+    case_pricing(price) |>
+    case_multiple_pricing(mult) |>
+    case_tos(tos)
+
   return(l2)
 }
 
@@ -108,9 +164,11 @@ descriptors <- function(hcpcs = NULL) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
-  if (!is.null(hcpcs))    {
-    hcpcs <- unique(hcpcs)
-    cpt   <- vctrs::vec_slice(cpt, vctrs::vec_in(cpt$cpt, hcpcs))
+  if (!is.null(hcpcs)) {
+    cpt <- vctrs::vec_slice(cpt,
+           vctrs::vec_in(cpt$cpt,
+           collapse::funique(hcpcs))) |>
+      tidyr::nest(clinician_descriptors = clinician_descriptor)
   }
   return(cpt)
 }
@@ -149,21 +207,23 @@ descriptors <- function(hcpcs = NULL) {
 #'
 #' @section Update Frequency: Annually
 #'
-#' @param hcpcs < *character* > HCPCS or CPT code
-#' @param rbcs < *character* > RBCS ID
-#' @param category < *character* > RBCS Category Description, e.g.
-#' + Anesthesia
-#' + DME
-#' + E&M
-#' + Imaging
-#' + Other
-#' + Procedure
-#' + Test
-#' + Treatment
-#' @param subcategory < *character* > RBCS Subcategory Description
-#' @param family < *character* > RBCS Family Description
-#' @param procedure < *character* > Whether the HCPCS code is a `"Major"`,
-#' `"Other"`, or `"Non-Procedure"` code.
+#' @param hcpcs < *character* > HCPCS code
+#' @param category < *character* > RBCS Category:
+#' + `Procedure` (n = 6920)
+#' + `Test` (n = 3015)
+#' + `DME` (n = 2971)
+#' + `Treatment` (n = 1795)
+#' + `Imaging` (n = 1097)
+#' + `E&M` (n = 695)
+#' + `Anesthesia` (n = 307)
+#' + `Other` (n = 233)
+#' @param subcategory < *character* > RBCS Subcategory (53 unique in total)
+#' @param family < *character* > RBCS Family (178 unique in total)
+#' @param procedure < *character* > Procedure Type:
+#' + `Major` (n = 3676)
+#' + `Non-Procedure` (n = 10113)
+#' + `Other` (n = 3244)
+#' @param limit_cols < *logical* > Limit Columns
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -185,22 +245,62 @@ descriptors <- function(hcpcs = NULL) {
 #' @export
 #' @autoglobal
 rbcs <- function(hcpcs       = NULL,
-                 rbcs        = NULL,
                  category    = NULL,
                  subcategory = NULL,
                  family      = NULL,
-                 procedure   = NULL) {
+                 procedure   = NULL,
+                 limit_cols  = TRUE) {
+
+  # TODO procedure = major
 
   rb <- pins::pin_read(mount_board(), "rbcs") |>
     dplyr::rename(procedure = major)
 
-  if (!is.null(hcpcs))       {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$hcpcs, hcpcs))}
-  if (!is.null(rbcs))        {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$rbcs, rbcs))}
-  if (!is.null(category))    {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$category, category))}
-  if (!is.null(subcategory)) {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$subcategory, subcategory))}
-  if (!is.null(family))      {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$family, family))}
-  if (!is.null(procedure))   {rb <- vctrs::vec_slice(rb, vctrs::vec_in(rb$procedure, procedure))}
+  if (limit_cols) {
+    rb <- dplyr::select(rb,
+          hcpcs,
+          rbcs_category    = category,
+          rbcs_subcategory = subcategory,
+          rbcs_family      = family,
+          rbcs_procedure   = procedure)
+  }
 
+  if (!is.null(hcpcs)) {
+
+    rb <- vctrs::vec_slice(rb,
+          vctrs::vec_in(rb$hcpcs,
+          collapse::funique(hcpcs)))}
+
+  if (!is.null(procedure)) {
+
+    procedure <- rlang::arg_match(procedure,
+                 c("Major", "Non-Procedure", "Other"))
+
+    rb <- vctrs::vec_slice(rb,
+          vctrs::vec_in(rb$procedure, procedure))
+
+  }
+
+  if (!is.null(category)) {
+
+    category <- rlang::arg_match(category,
+    c("Procedure", "Test", "DME", "Treatment",
+      "Imaging", "E&M", "Anesthesia", "Other"))
+
+    rb <- vctrs::vec_slice(rb,
+          vctrs::vec_in(rb$category, category))
+
+    }
+
+  if (!is.null(subcategory)) {
+    rb <- vctrs::vec_slice(rb,
+          vctrs::vec_in(rb$subcategory, subcategory))
+  }
+
+  if (!is.null(family)) {
+    rb <- vctrs::vec_slice(rb,
+          vctrs::vec_in(rb$family, family))
+    }
   return(rb)
 }
 
@@ -228,18 +328,21 @@ opps <- function(hcpcs    = NULL,
   op <- pins::pin_read(mount_board(), "opps")
 
   if (!is.null(hcpcs)) {
-    hcpcs <- unique(hcpcs)
-    op    <- vctrs::vec_slice(op, vctrs::vec_in(op$hcpcs, hcpcs))
+    op <- vctrs::vec_slice(op,
+          vctrs::vec_in(op$hcpcs,
+          collapse::funique(hcpcs)))
   }
 
-  if (!is.null(mac))      {
-    mac <- unique(mac)
-    op <- vctrs::vec_slice(op, vctrs::vec_in(op$mac, mac))
+  if (!is.null(mac)) {
+    op <- vctrs::vec_slice(op,
+          vctrs::vec_in(op$mac,
+          collapse::funique(mac)))
   }
 
   if (!is.null(locality)) {
-    loc <- unique(locality)
-    op <- vctrs::vec_slice(op, vctrs::vec_in(op$locality, loc))
+    op <- vctrs::vec_slice(op,
+          vctrs::vec_in(op$locality,
+          collapse::funique(locality)))
   }
   return(op)
 }

@@ -6,36 +6,40 @@
 \usage{
 rbcs(
   hcpcs = NULL,
-  rbcs = NULL,
   category = NULL,
   subcategory = NULL,
   family = NULL,
-  procedure = NULL
+  procedure = NULL,
+  limit_cols = TRUE
 )
 }
 \arguments{
-\item{hcpcs}{< \emph{character} > HCPCS or CPT code}
+\item{hcpcs}{< \emph{character} > HCPCS code}
 
-\item{rbcs}{< \emph{character} > RBCS ID}
-
-\item{category}{< \emph{character} > RBCS Category Description, e.g.
+\item{category}{< \emph{character} > RBCS Category:
 \itemize{
-\item Anesthesia
-\item DME
-\item E&M
-\item Imaging
-\item Other
-\item Procedure
-\item Test
-\item Treatment
+\item \code{Procedure} (n = 6920)
+\item \code{Test} (n = 3015)
+\item \code{DME} (n = 2971)
+\item \code{Treatment} (n = 1795)
+\item \code{Imaging} (n = 1097)
+\item \code{E&M} (n = 695)
+\item \code{Anesthesia} (n = 307)
+\item \code{Other} (n = 233)
 }}
 
-\item{subcategory}{< \emph{character} > RBCS Subcategory Description}
+\item{subcategory}{< \emph{character} > RBCS Subcategory (53 unique in total)}
 
-\item{family}{< \emph{character} > RBCS Family Description}
+\item{family}{< \emph{character} > RBCS Family (178 unique in total)}
 
-\item{procedure}{< \emph{character} > Whether the HCPCS code is a \code{"Major"},
-\code{"Other"}, or \code{"Non-Procedure"} code.}
+\item{procedure}{< \emph{character} > Procedure Type:
+\itemize{
+\item \code{Major} (n = 3676)
+\item \code{Non-Procedure} (n = 10113)
+\item \code{Other} (n = 3244)
+}}
+
+\item{limit_cols}{< \emph{logical} > Limit Columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

@@ -25,7 +25,7 @@ library(dplyr)
 ## Return Information about HCPCS Code
 
 ``` r
-hcpcs_search(hcpcs    = "11646", 
+hcpcs_search(hcpcs    = "33935", 
              state    = "GA", 
              locality = "99", 
              mac      = "10212") |> 
@@ -33,20 +33,19 @@ hcpcs_search(hcpcs    = "11646",
 ```
 
     > Rows: 1
-    > Columns: 55
-    > $ hcpcs                 <chr> "11646"
+    > Columns: 54
+    > $ hcpcs                 <chr> "33935"
     > $ level                 <chr> "1"
     > $ category              <chr> "1"
+    > $ description           <chr> "Transplantation heart/lung"
+    > $ description_consumer  <chr> "Transplantation of donor heart and lung"
+    > $ description_clinician <list> [<tbl_df[1 x 1]>]
     > $ section               <chr> "Surgery [10004-69990]"
-    > $ rbcs_cat              <chr> "Procedure"
-    > $ rbcs_sub              <chr> "Skin"
-    > $ rbcs_fam              <chr> "Skin Lesion Excision"
-    > $ rbcs_pro              <chr> "Other"
-    > $ description_rvu       <chr> "Exc f/e/e/n/l mal+mrg >4 cm"
-    > $ description_consumer  <chr> "Removal of cancer skin growth of face, ears, ey…
-    > $ description_clinician <list> [<tbl_df[10 x 1]>]
-    > $ mod                   <chr> NA
-    > $ status                <chr> "A"
+    > $ rbcs_category         <chr> "Procedure"
+    > $ rbcs_subcategory      <chr> "Cardiovascular"
+    > $ rbcs_family           <chr> "No RBCS Family"
+    > $ rbcs_procedure        <chr> "Major"
+    > $ status                <chr> "Bundled/Excluded Code"
     > $ mac                   <chr> "10212"
     > $ state                 <chr> "GA"
     > $ locality              <chr> "99"
@@ -54,17 +53,17 @@ hcpcs_search(hcpcs    = "11646",
     > $ wgpci                 <dbl> 1
     > $ pgpci                 <dbl> 0.883
     > $ mgpci                 <dbl> 1.125
-    > $ wrvu                  <dbl> 6.26
-    > $ nonfac_prvu           <dbl> 7.92
-    > $ fac_prvu              <dbl> 4.36
-    > $ mrvu                  <dbl> 0.99
+    > $ wrvu                  <dbl> 91.78
+    > $ nonfac_prvu           <dbl> 31.07
+    > $ fac_prvu              <dbl> 31.07
+    > $ mrvu                  <dbl> 21.24
     > $ cf                    <dbl> 32.744
-    > $ fac_par               <dbl> 367.5065
-    > $ nonfac_par            <dbl> 470.4366
-    > $ fac_nonpar            <dbl> 349.1312
-    > $ nonfac_nonpar         <dbl> 446.9148
-    > $ fac_limit             <dbl> 401.5009
-    > $ nonfac_limit          <dbl> 513.952
+    > $ fac_par               <dbl> 4685.988
+    > $ nonfac_par            <dbl> 4685.988
+    > $ fac_nonpar            <dbl> 4451.688
+    > $ nonfac_nonpar         <dbl> 4451.688
+    > $ fac_limit             <dbl> 5119.441
+    > $ nonfac_limit          <dbl> 5119.441
     > $ opps                  <chr> "9"
     > $ nonfac_prvu_opps      <dbl> 0
     > $ fac_prvu_opps         <dbl> 0
@@ -72,22 +71,22 @@ hcpcs_search(hcpcs    = "11646",
     > $ mult_surg             <chr> "0"
     > $ mult_proc             <chr> "2"
     > $ flat_vis              <dbl> 0
-    > $ nonfac_therapy        <dbl> 2
-    > $ fac_therapy           <dbl> 0
-    > $ global                <chr> "010"
-    > $ op_ind                <dbl> 1
-    > $ op_pre                <dbl> 0.1
-    > $ op_intra              <dbl> 0.8
-    > $ op_post               <dbl> 0.1
+    > $ nonfac_ther           <dbl> 2
+    > $ fac_ther              <dbl> 0
+    > $ global                <chr> "090"
+    > $ op_pre                <dbl> 0.09
+    > $ op_intra              <dbl> 0.84
+    > $ op_post               <dbl> 0.07
+    > $ mod                   <chr> NA
     > $ pctc                  <chr> "0"
     > $ surg_bilat            <chr> "0"
-    > $ surg_asst             <chr> "1"
-    > $ surg_co               <chr> "0"
-    > $ surg_team             <chr> "0"
+    > $ surg_asst             <chr> "2"
+    > $ surg_co               <chr> "1"
+    > $ surg_team             <chr> "2"
     > $ supvis                <chr> "09"
     > $ dximg                 <chr> "99"
     > $ endo                  <chr> NA
-    > $ rare                  <chr> "00"
+    > $ rare                  <chr> "10"
     > $ unused                <int> 0
 
 ``` r
