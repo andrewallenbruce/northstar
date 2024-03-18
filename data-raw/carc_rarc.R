@@ -7,7 +7,8 @@
 # The "PR" is a Claim Adjustment Group Code and the description for "32" is below.
 # The Claim Adjustment Group Codes are internal to the X12 standard.
 # These codes generally assign responsibility for the adjustment amounts.
-# The format is always two alpha characters. For convenience, the values and definitions are below:
+# The format is always two alpha characters.
+# For convenience, the values and definitions are below:
 
 library(tidyverse)
 library(rvest)

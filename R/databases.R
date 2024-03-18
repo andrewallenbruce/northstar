@@ -369,7 +369,53 @@ ncd <- function(coverage = NULL) {
   return(ncd)
 }
 
-#' Claim Adjustment Reason Codes (CARCs) and Remittance Advice Remark Codes (RARCs)
-#' @noRd
+#' CARCs & RARCs
+#'
+#' Claim Adjustment Reason Codes (CARCs) and
+#' Remittance Advice Remark Codes (RARCs)
+#'
+#' @section Claim Adjustment Reason Codes:
+#'
+#' _X12 External Code Source 139_
+#'
+#' These codes describe why a claim or service line was paid differently
+#' than it was billed and generally assign responsibility for the
+#' adjustment amounts. The format is always two alpha characters.
+#'
+#' The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12 standard.
+#'
+#' @section Remittance Advice Remark Codes:
+#'
+#' _X12 External Code Source 411_
+#'
+#' These codes provide additional explanation for an adjustment already
+#' described by a Claim Adjustment Reason Code (CARC) or convey information
+#' about remittance processing.
+#'
+#' Remittance Advice Remark Codes (RARCs) are used to provide additional
+#' explanation for an adjustment already described by a Claim Adjustment Reason
+#' Code (CARC) or to convey information about remittance processing.
+#'
+#' There are two types of RARCs, supplemental and informational. The majority
+#' of the RARCs are supplemental; these are generally referred to as RARCs
+#' without further distinction.
+#'
+#' Supplemental RARCs provide additional explanation for an adjustment already
+#' described by a CARC.
+#'
+#' The second type of RARC is informational; these RARCs  are all prefaced
+#' with `Alert:` and are often referred to as Alerts.
+#'
+#' Alerts are used to convey information about remittance processing and are
+#' never related to a specific adjustment or CARC.
+#'
+#' @return a [dplyr::tibble()]
+#' @examples
+#' carc_rarc()$group
+#' @export
 #' @autoglobal
-carc_rarc <- function() {pins::pin_read(mount_board(), "rarc_carc")}
+carc_rarc <- function() {
+
+  pins::pin_read(mount_board(), "rarc_carc")
+
+}

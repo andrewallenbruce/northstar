@@ -97,7 +97,7 @@ single_line_string <- function(x) {
 #' @param name name of output column
 #' @return A [tibble][tibble::tibble-package]
 #' @autoglobal
-#' @keyword internal
+#' @keywords internal
 #' @export
 #' @examples
 #' dplyr::tibble(id = 1:3,

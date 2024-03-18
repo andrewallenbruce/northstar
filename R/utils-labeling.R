@@ -1,16 +1,83 @@
+#' Recoding Functions
+#'
+#' @description Various recoding functions
+#'
+#' @examplesIf interactive()
+#' cd <- dplyr::tibble(
+#'       hcpcs = c("39503", "99215", "99140",
+#'                 "69990", "70010", "0222U",
+#'                 "V5299", "7010F", "0074T")
+#'
+#' cd |> case_section(hcpcs)
+#' cd |> case_section_cpt(hcpcs)
+#' cd |> case_section_hcpcs(hcpcs)
+#' cd |> case_level(hcpcs)
+#' cd |> case_category(hcpcs)
+#'
+#' # Global Days
+#' glob <- c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")
+#' dplyr::tibble(global = glob) |>
+#' case_global(global)
+#'
+#'
+#' # Diagnostic Imaging Family
+#' di <- stringr::str_pad(
+#'       c(1:11, 88, 99), width = "2", pad = "0")
+#' dplyr::tibble(dximg = di) |>
+#' case_imaging(dximg)
+#'
+#' # Physician Supervision
+#' sv <- stringr::str_pad(
+#'       c(1:6, 9, 21:22, 66, "6A", 77, "7A"), width = "2", pad = "0")
+#' dplyr::tibble(supvis = sv) |>
+#' case_supervision(supvis)
+#'
+#' # Team Surgery
+#' dplyr::tibble(surg_team = c(0:2, "9")) |>
+#' case_team(surg_team)
+#'
+#' # Bilateral Surgery
+#' dplyr::tibble(surg_bilat = c(0:3, "9")) |>
+#' case_bilateral(surg_bilat)
+#'
+#' # Multiple Procedure
+#' dplyr::tibble(mult_proc = as.character(0:9)) |>
+#' case_multproc(mult_proc)
+#'
+#' # Co-Surgeons
+#' dplyr::tibble(surg_co = c(0:2, "9")) |>
+#' case_cosurg(surg_co)
+#'
+#' # Assistant at Surgery
+#' dplyr::tibble(surg_asst = c(0:2, "9")) |>
+#' case_assistant(surg_asst)
+#'
+#' # OPPS Indicator
+#' dplyr::tibble(opps_ind = c("1", "9")) |>
+#' case_opps(opps_ind)
+#'
+#' # Modifier Indicator
+#' dplyr::tibble(mod = c(26, "TC", 53)) |>
+#' case_modifier(mod)
+#'
+#' # PCTC Indicator
+#' dplyr::tibble(pctc = as.character(0:9)) |>
+#' case_pctc(pctc)
+#'
+#' # Status Codes
+#' dplyr::tibble(status = LETTERS) |>
+#' case_status(status, desc = TRUE)
+#'
+#' @name cases
+NULL
+
 #' Add HCPCS Level I & II Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `cpt_section` column
-#' @examples
-#' x <- c("39503", "99215", "99140",
-#'        "69990", "70010", "0222U",
-#'        "V5299", "7010F", "0074T")
-#'
-#' dplyr::tibble(hcpcs = x) |>
-#' case_section(hcpcs)
+#' @return A [tibble][tibble::tibble-package] with a `section` column
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_section <- function(df, col) {
 
   df |>
@@ -51,16 +118,10 @@ case_section <- function(df, col) {
 #' Add CPT Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `cpt_section` column
-#' @examples
-#' x <- c("39503", "99215", "99140",
-#'        "69990", "70010", "0222U",
-#'        "V5299", "7010F", "0074T")
-#'
-#' dplyr::tibble(hcpcs = x) |>
-#' case_section_cpt(hcpcs)
+#' @return A [tibble][tibble::tibble-package] with a `section` column
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_section_cpt <- function(df, col) {
 
   df |>
@@ -80,16 +141,10 @@ case_section_cpt <- function(df, col) {
 #' Add HCPCS Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `hcpcs_section` column
-#' @examples
-#' x <- c("39503", "99215", "99140",
-#'        "69990", "70010", "0222U",
-#'        "V5299", "7010F", "0074T")
-#'
-#' dplyr::tibble(hcpcs = x) |>
-#' case_section_hcpcs(hcpcs)
+#' @return A [tibble][tibble::tibble-package] with a `section` column
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_section_hcpcs <- function(df, col) {
 
   df |>
@@ -119,15 +174,10 @@ case_section_hcpcs <- function(df, col) {
 #' Add HCPCS Level Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `hcpcs_level` column
-#' @examples
-#' x <- c("39503", "99215", "99140",
-#'        "69990", "70010", "0222U",
-#'        "V5299", "7010F", "0074T")
-#'
-#' dplyr::tibble(hcpcs = x) |> case_level(hcpcs)
+#' @return A [tibble][tibble::tibble-package] with a `level` column
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_level <- function(df, col) {
 
   df |>
@@ -142,15 +192,10 @@ case_level <- function(df, col) {
 #' Add CPT Category Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `cpt_category` column
-#' @examples
-#' x <- c("39503", "99215", "99140",
-#'        "69990", "70010", "0222U",
-#'        "V5299", "7010F", "0074T")
-#'
-#' dplyr::tibble(hcpcs = x) |> case_category(hcpcs)
+#' @return A [tibble][tibble::tibble-package] with a `category` column
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_category <- function(df, col) {
 
   df |>
@@ -167,13 +212,9 @@ case_category <- function(df, col) {
 #' @param df data frame
 #' @param col column of Global Days indicators
 #' @return A [tibble][tibble::tibble-package] with a `global_description` column
-#' @examples
-#' x <- c("000", "010", "090", "MMM",
-#'        "XXX", "YYY", "ZZZ")
-#'
-#' dplyr::tibble(global = x) |> case_global(global)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_global <- function(df, col) {
 
   df |>
@@ -183,8 +224,7 @@ case_global <- function(df, col) {
       "010" ~ "Minor procedure with Preoperative RVUs on the day of the procedure and Postoperative RVUs during a 10-day postoperative period included in the fee schedule amount. E&M services on the day of the procedure and during the 10-day postoperative period generally not payable.",
       "090" ~ "Major surgery with a 1-day Preoperative period and 90-day Postoperative period included in fee schedule amount.",
       "MMM" ~ "Maternity codes. Usual Global period does not apply.",
-      "XXX" ~ NA_character_,
-        # "Global concept does not apply.",
+      "XXX" ~ NA_character_, # "Global concept does not apply.",
       "YYY" ~ "Carrier determines if Global concept applies and, if appropriate, establishes Postoperative period.",
       "ZZZ" ~ "Code related to another service and is always included in Global period of other service."
     ),
@@ -199,12 +239,9 @@ case_global <- function(df, col) {
 #' @param df data frame
 #' @param col column of Diagnostic Imaging indicators
 #' @return A [tibble][tibble::tibble-package] with a `dximg_description` column
-#' @examples
-#' dplyr::tibble(dximg = stringr::str_pad(c(1:11, 88, 99),
-#'               width = "2", pad = "0")) |>
-#'               case_imaging(dximg)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_imaging <- function(df, col) {
 
   df |>
@@ -234,14 +271,9 @@ case_imaging <- function(df, col) {
 #' @param df data frame
 #' @param col column of Physician Supervision indicators
 #' @return A [tibble][tibble::tibble-package] with a `supvis_description` column
-#' @examples
-#' x <- stringr::str_pad(
-#'      c(1:6, 9, 21, 22, 66, "6A", 77, "7A"),
-#'      width = "2", pad = "0")
-#'
-#' dplyr::tibble(supvis = x) |> case_supervision(supvis)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_supervision <- function(df, col) {
 
   df |>
@@ -271,10 +303,9 @@ case_supervision <- function(df, col) {
 #' @param df data frame
 #' @param col column of Team Surgery indicators
 #' @return A [tibble][tibble::tibble-package] with a `team_description` column
-#' @examples
-#' dplyr::tibble(surg_team = c(0:2, "9")) |> case_team(surg_team)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_team <- function(df, col) {
 
   df |>
@@ -295,10 +326,9 @@ case_team <- function(df, col) {
 #' @param df data frame
 #' @param col column of Bilateral Surgery indicators
 #' @return A [tibble][tibble::tibble-package] with a `bilat_description` column
-#' @examples
-#' dplyr::tibble(surg_bilat = c(0:3, "9")) |> case_bilateral(surg_bilat)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_bilateral <- function(df, col) {
 
   df |>
@@ -320,10 +350,9 @@ case_bilateral <- function(df, col) {
 #' @param df data frame
 #' @param col column of Multiple Procedure indicators
 #' @return A [tibble][tibble::tibble-package] with a `mproc_description` column
-#' @examples
-#' dplyr::tibble(mult_proc = as.character(0:9)) |> case_multproc(mult_proc)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_multproc <- function(df, col) {
 
   df |>
@@ -350,10 +379,9 @@ case_multproc <- function(df, col) {
 #' @param df data frame
 #' @param col column of Co Surgeon indicators
 #' @return A [tibble][tibble::tibble-package] with a `cosurg_description` column
-#' @examples
-#' dplyr::tibble(surg_co = c(0:2, "9")) |> case_cosurg(surg_co)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_cosurg <- function(df, col) {
 
   df |>
@@ -381,10 +409,9 @@ case_cosurg <- function(df, col) {
 #' @param df data frame
 #' @param col column of Assistant Surgery indicators
 #' @return A [tibble][tibble::tibble-package] with a `asst_description` column
-#' @examples
-#' dplyr::tibble(surg_asst = c(0:2, "9")) |> case_assistant(surg_asst)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_assistant <- function(df, col) {
 
   df |>
@@ -403,10 +430,9 @@ case_assistant <- function(df, col) {
 #' @param df data frame
 #' @param col column of OPPS Indicator indicators
 #' @return A [tibble][tibble::tibble-package] with an `opps_description` column
-#' @examples
-#' dplyr::tibble(opps_ind = c("1", "9")) |> case_opps(opps_ind)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_opps <- function(df, col) {
 
   df |>
@@ -421,10 +447,9 @@ case_opps <- function(df, col) {
 #' @param df data frame
 #' @param col column of Modifier indicators
 #' @return A [tibble][tibble::tibble-package] with an `mod_description` column
-#' @examples
-#' dplyr::tibble(mod = c(26, "TC", 53)) |> case_modifier(mod)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_modifier <- function(df, col) {
 
   df |>
@@ -448,10 +473,9 @@ case_modifier <- function(df, col) {
 #' @param df data frame
 #' @param col column of PCTC indicators
 #' @return A [tibble][tibble::tibble-package] with a `pctc_description` column
-#' @examples
-#' dplyr::tibble(pctc = as.character(0:9)) |> case_pctc(pctc)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_pctc <- function(df, col) {
   df |>
     dplyr::mutate(pctc_description = dplyr::case_match(
@@ -496,23 +520,23 @@ case_pctc <- function(df, col) {
 #' @param df data frame
 #' @param col column of Status Codes
 #' @param desc add Descriptions
-#' @return A [tibble][tibble::tibble-package] with an `status_description` column
-#' @examples
-#' dplyr::tibble(status = LETTERS) |> case_status(status)
+#' @return A [tibble][tibble::tibble-package] with a `status_desc` column
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_status <- function(df, col, desc = FALSE) {
 
   if (desc) {
 
   df <- dplyr::mutate(df,
-      status_desc = dplyr::case_match({{ col }},
+      status_desc = dplyr::case_match(
+        {{ col }},
       "A" ~ "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD.",
       "B" ~ "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident.",
       "C" ~ "Carriers establish RVUs and payment following documentation review.",
       "D" ~ "Deleted effective with beginning of year.",
       "E" ~ "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures.",
-      "F" ~ "Not subject to 90 day grace period"),
+      "F" ~ "Not subject to 90 day grace period",
       "G" ~ "Another code used for payment. Subject to a 90 day grace period.",
       "H" ~ "Had TC/26 mod in previous year, TC/26 component now deleted.",
       "I" ~ "Another code used for payment. Not subject to a 90-day grace period.",
@@ -522,8 +546,9 @@ case_status <- function(df, col, desc = FALSE) {
       "P" ~ "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision.",
       "R" ~ "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes.",
       "T" ~ "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment.",
-      "X" ~ "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made.",
-      .after = {{ col }})
+      "X" ~ "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made."),
+      .after = {{ col }}
+      )
   }
 
   df |>
@@ -557,6 +582,7 @@ case_status <- function(df, col, desc = FALSE) {
 #' dplyr::tibble(asc_grp = c("YY", "99")) |> case_asc(asc_grp)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_asc <- function(df, col) {
   dplyr::mutate(df,
   {{ col }} := dplyr::case_match({{ col }}, "YY" ~ "Approved For ASCs"))
@@ -571,6 +597,7 @@ case_asc <- function(df, col) {
 #' dplyr::tibble(cov = c("C", "D", "I", "M", "S")) |> case_coverage(cov)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_coverage <- function(df, col) {
 
   dplyr::mutate(df, {{ col }} := dplyr::case_match({{ col }},
@@ -592,6 +619,7 @@ case_coverage <- function(df, col) {
 #' case_pricing(price)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_pricing <- function(df, col) {
 
   df |>
@@ -638,6 +666,7 @@ case_pricing <- function(df, col) {
 #' dplyr::tibble(mult_pi = c(9, LETTERS[1:7])) |> case_multiple_pricing(mult_pi)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_multiple_pricing <- function(df, col) {
 
   df |>
@@ -664,6 +693,7 @@ case_multiple_pricing <- function(df, col) {
 #' dplyr::tibble(labcert = x) |> case_labcert(labcert)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_labcert <- function(df, col) {
 
   df |>
@@ -720,6 +750,7 @@ case_labcert <- function(df, col) {
 #' dplyr::tibble(tos = c(0:9, LETTERS)) |> case_tos(tos)
 #' @export
 #' @autoglobal
+#' @rdname cases
 case_tos <- function(df, col) {
 
   df |>

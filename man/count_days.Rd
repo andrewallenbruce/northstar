@@ -27,3 +27,4 @@ dplyr::tibble(id = 1:3,
               signed = as.Date("2022-02-18")) |>
               count_days(start = dos, end = signed, provider_lag)
 }
+\keyword{internal}
