@@ -59,6 +59,8 @@ utils::globalVariables(c(
   "pgpci",
   # <level2>
   "price",
+  # <opps>
+  "procstat",
   # <case_section>
   "section",
   # <level2>

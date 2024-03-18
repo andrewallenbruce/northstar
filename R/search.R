@@ -30,7 +30,7 @@
 #'              locality = "99",
 #'              mac = "10212")
 #'
-#' hcpcs_search(hcpcs = c("39503", "43116", "33935", "11646"), state = "GA")
+#' hcpcs_search(hcpcs = c("39503", "43116", "33935", "11646", "70170"), state = "GA")
 #' @autoglobal
 #' @export
 hcpcs_search <- function(hcpcs,
@@ -53,6 +53,10 @@ hcpcs_search <- function(hcpcs,
             locality  = locality,
             mac       = mac)
 
+  op <- opps(hcpcs     = hcpcs,
+             locality  = locality,
+             mac       = mac)
+
 
   ds <- descriptors(hcpcs = hcpcs)
 
@@ -64,6 +68,7 @@ hcpcs_search <- function(hcpcs,
     rvus        = if (!vctrs::vec_is_empty(rv)) rv else NULL,
     gpci        = if (!vctrs::vec_is_empty(gp)) gp else NULL,
     payment     = if (!vctrs::vec_is_empty(fs)) fs else NULL,
+    oppscap     = if (!vctrs::vec_is_empty(op)) op else NULL,
     descriptors = if (!vctrs::vec_is_empty(ds)) ds else NULL,
     level_2     = if (!vctrs::vec_is_empty(l2)) l2 else NULL,
     rbcs        = if (!vctrs::vec_is_empty(rb)) rb else NULL) |>
@@ -71,22 +76,27 @@ hcpcs_search <- function(hcpcs,
 
 
   res <- dplyr::cross_join(x$rvus, x$gpci) |>
-    dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
+         dplyr::left_join(x$rbcs,
+         by = dplyr::join_by(hcpcs))
 
   if (all(rlang::has_name(x, c("level_2", "descriptors")))) {
 
-    res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs, description)) |>
-      dplyr::left_join(x$payment, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
-      dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs == cpt)) |>
-      case_category(hcpcs) |>
-      case_section(hcpcs)
+    res <- dplyr::left_join(res, x$level_2,
+           by = dplyr::join_by(hcpcs, description)) |>
+           dplyr::left_join(x$payment,
+           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+           dplyr::left_join(x$descriptors,
+           by = dplyr::join_by(hcpcs == cpt)) |>
+           case_category(hcpcs) |>
+           case_section(hcpcs)
 
   }
 
   if (rlang::has_name(x, "level_2") & !rlang::has_name(x, "descriptors")) {
 
-    res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs)) |>
-      case_section_hcpcs(hcpcs)
+    res <- dplyr::left_join(res, x$level_2,
+           by = dplyr::join_by(hcpcs)) |>
+           case_section_hcpcs(hcpcs)
 
   }
 
@@ -94,10 +104,17 @@ hcpcs_search <- function(hcpcs,
 
     res <- dplyr::left_join(res,x$payment,
            by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
-      dplyr::left_join(x$descriptors,
+           dplyr::left_join(x$descriptors,
            by = dplyr::join_by(hcpcs == cpt)) |>
-      case_category(hcpcs) |>
-      case_section_cpt(hcpcs)
+           case_category(hcpcs) |>
+           case_section_cpt(hcpcs)
+
+  }
+
+  if (rlang::has_name(x, "oppscap")) {
+
+    res <- dplyr::left_join(res, x$oppscap,
+           by = dplyr::join_by(hcpcs, mod, status, mac, locality))
 
   }
 
@@ -155,12 +172,8 @@ cols_amounts <- function(df) {
             'nonfac_prvu_opps' = 'nprvu_opps',
             'fac_prvu_opps' = 'fprvu_opps',
             'mrvu_opps',
-            'fac_par_opps' = 'fpar_opps',
-            'nonfac_par_opps' = 'npar_opps',
-            'fac_nonpar_opps' = 'fnpar_opps',
-            'nonfac_nonpar_opps' = 'nnpar_opps',
-            'fac_limit_opps' = 'flim_opps',
-            'nonfac_limit_opps' = 'nlim_opps',
+            'fac_par_opps' = 'fac_price',
+            'nonfac_par_opps' = 'nonfac_price',
             'mult_surg',
             'mult_proc',
             'flat_vis',

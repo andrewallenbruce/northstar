@@ -325,7 +325,8 @@ opps <- function(hcpcs    = NULL,
                  mac      = NULL,
                  locality = NULL) {
 
-  op <- pins::pin_read(mount_board(), "opps")
+  op <- pins::pin_read(mount_board(), "opps") |>
+    dplyr::rename(status = procstat)
 
   if (!is.null(hcpcs)) {
     op <- vctrs::vec_slice(op,

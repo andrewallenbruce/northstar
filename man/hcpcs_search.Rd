@@ -45,6 +45,6 @@ hcpcs_search(hcpcs = "V5299",
              locality = "99",
              mac = "10212")
 
-hcpcs_search(hcpcs = c("39503", "43116", "33935", "11646"), state = "GA")
+hcpcs_search(hcpcs = c("39503", "43116", "33935", "11646", "70170"), state = "GA")
 \dontshow{\}) # examplesIf}
 }

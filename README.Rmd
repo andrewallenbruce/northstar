@@ -29,7 +29,7 @@ pak::pak("andrewallenbruce/northstar")
 
 ## :beginner: Usage
 
-```{r example, warning=FALSE, message=FALSE}
+```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
 library(dplyr)
 ```
@@ -40,7 +40,7 @@ library(dplyr)
 ```{r}
 hcpcs_search(hcpcs    = "33935", 
              state    = "GA", 
-             locality = "99", 
+             locality = "01", 
              mac      = "10212") |> 
   glimpse()
 ```

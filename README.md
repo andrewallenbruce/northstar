@@ -27,7 +27,7 @@ library(dplyr)
 ``` r
 hcpcs_search(hcpcs    = "33935", 
              state    = "GA", 
-             locality = "99", 
+             locality = "01", 
              mac      = "10212") |> 
   glimpse()
 ```
@@ -48,22 +48,22 @@ hcpcs_search(hcpcs    = "33935",
     > $ status                <chr> "Bundled/Excluded Code"
     > $ mac                   <chr> "10212"
     > $ state                 <chr> "GA"
-    > $ locality              <chr> "99"
-    > $ area                  <chr> "REST OF GEORGIA"
+    > $ locality              <chr> "01"
+    > $ area                  <chr> "ATLANTA"
     > $ wgpci                 <dbl> 1
-    > $ pgpci                 <dbl> 0.883
-    > $ mgpci                 <dbl> 1.125
+    > $ pgpci                 <dbl> 0.997
+    > $ mgpci                 <dbl> 1.128
     > $ wrvu                  <dbl> 91.78
     > $ nonfac_prvu           <dbl> 31.07
     > $ fac_prvu              <dbl> 31.07
     > $ mrvu                  <dbl> 21.24
     > $ cf                    <dbl> 32.744
-    > $ fac_par               <dbl> 4685.988
-    > $ nonfac_par            <dbl> 4685.988
-    > $ fac_nonpar            <dbl> 4451.688
-    > $ nonfac_nonpar         <dbl> 4451.688
-    > $ fac_limit             <dbl> 5119.441
-    > $ nonfac_limit          <dbl> 5119.441
+    > $ fac_par               <dbl> 4804.053
+    > $ nonfac_par            <dbl> 4804.053
+    > $ fac_nonpar            <dbl> 4563.85
+    > $ nonfac_nonpar         <dbl> 4563.85
+    > $ fac_limit             <dbl> 5248.428
+    > $ nonfac_limit          <dbl> 5248.428
     > $ opps                  <chr> "9"
     > $ nonfac_prvu_opps      <dbl> 0
     > $ fac_prvu_opps         <dbl> 0
