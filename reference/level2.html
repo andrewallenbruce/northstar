@@ -58,12 +58,16 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">level2</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">level2</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="cn">NULL</span>, limit_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>hcpcs</dt>
+<dd><p>description</p></dd>
+
+
+<dt>limit_cols</dt>
 <dd><p>description</p></dd>
 
 </dl></div>
@@ -78,31 +82,23 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">level2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">level2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0021", "G8916", "J9264", "V5362"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ type              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "code", "code", "code", "code"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ long_description  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ambulance service, outside state per mile, transpor…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ short_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Outside state ambulance serv", "Pt w iv ab given on…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ price             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00", "00", "51", "00"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ mult_pi           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "A", "9"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ cim               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ mcm               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ statute           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, "1862(a)(7)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ labcert           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ xref              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0030", NA, NA, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ cov               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I", "C", "C", "S"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ asc_grp           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "YY", NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ asc_dt            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA, NA, 2008-01-01, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ procnote          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ betos             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O1A", "M5B", "O1E", "O1F"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ tos               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "D", "1", "1:P", "1:W"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_added        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1985-01-01, 2012-04-01, 2006-01-01, 1990-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_action       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1996-09-10, 2012-04-01, 2007-01-01, 2004-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_ended        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA, NA, NA, NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ action            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "N", "N", "N", "N"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0021", "G8916", "J9264", "V5362"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ description                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Outside state ambulance serv", "Pt w iv ab…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ description_long           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ambulance service, outside state per mile,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ price                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00", "00", "51", "00"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ pricing_indicator          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Not Separately Priced by Part B", "Not Sep…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ mult                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "A", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ multiple_pricing_indicator <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Not Applicable. Not Priced Separately by P…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ labcert                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ xref                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0030", NA, NA, NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ tos                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "D", "1", "1:P", "1:W"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ type_of_service            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ambulance", "Medical Care", "Medical Care,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ coverage                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Not Payable by Medicare", "Carrier Judgmen…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ asc                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "Approved For ASCs", NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ betos                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O1A", "M5B", "O1E", "O1F"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

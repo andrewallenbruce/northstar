@@ -66,47 +66,49 @@ meaningful categories based on the original <em>Berenson-Eggers Type of Service<
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rbcs</span><span class="op">(</span></span>
 <span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  rbcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  category <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subcategory <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  family <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  procedure <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  procedure <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  limit_cols <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>hcpcs</dt>
-<dd><p>&lt; <em>character</em> &gt; HCPCS or CPT code</p></dd>
-
-
-<dt>rbcs</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS ID</p></dd>
+<dd><p>&lt; <em>character</em> &gt; HCPCS code</p></dd>
 
 
 <dt>category</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS Category Description, e.g.</p><ul><li><p>Anesthesia</p></li>
-<li><p>DME</p></li>
-<li><p>E&amp;M</p></li>
-<li><p>Imaging</p></li>
-<li><p>Other</p></li>
-<li><p>Procedure</p></li>
-<li><p>Test</p></li>
-<li><p>Treatment</p></li>
+<dd><p>&lt; <em>character</em> &gt; RBCS Category:</p><ul><li><p><code>Procedure</code> (n = 6920)</p></li>
+<li><p><code>Test</code> (n = 3015)</p></li>
+<li><p><code>DME</code> (n = 2971)</p></li>
+<li><p><code>Treatment</code> (n = 1795)</p></li>
+<li><p><code>Imaging</code> (n = 1097)</p></li>
+<li><p><code>E&amp;M</code> (n = 695)</p></li>
+<li><p><code>Anesthesia</code> (n = 307)</p></li>
+<li><p><code>Other</code> (n = 233)</p></li>
 </ul></dd>
 
 
 <dt>subcategory</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS Subcategory Description</p></dd>
+<dd><p>&lt; <em>character</em> &gt; RBCS Subcategory (53 unique in total)</p></dd>
 
 
 <dt>family</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS Family Description</p></dd>
+<dd><p>&lt; <em>character</em> &gt; RBCS Family (178 unique in total)</p></dd>
 
 
 <dt>procedure</dt>
-<dd><p>&lt; <em>character</em> &gt; Whether the HCPCS code is a <code>"Major"</code>,
-<code>"Other"</code>, or <code>"Non-Procedure"</code> code.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Procedure Type:</p><ul><li><p><code>Major</code> (n = 3676)</p></li>
+<li><p><code>Non-Procedure</code> (n = 10113)</p></li>
+<li><p><code>Other</code> (n = 3244)</p></li>
+</ul></dd>
+
+
+<dt>limit_cols</dt>
+<dd><p>&lt; <em>logical</em> &gt; Limit Columns</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -150,19 +152,12 @@ assigned to a 6-character RBCS taxonomy code.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rbcs</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>, <span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11646", "33935", "39503", "43116", "J9264"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PS038O", "PC000M", "PO000M", "PG000M", "RH002N"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ cat.id           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "P", "P", "R"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ sub.id           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PS", "PC", "PO", "PG", "RH"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ fam.id           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "038", "000", "000", "000", "002"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ category         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Procedure", "Procedure", "Procedure", "Procedure", "…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ subcategory      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin", "Cardiovascular", "Other Organ Systems", "Dig…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ family           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin Lesion Excision", "No RBCS Family", "No RBCS Fa…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ procedure        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Other", "Major", "Major", "Major", "Non-Procedure"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_hcpcs_add   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1984-01-01, 1986-01-01, 1984-01-01, 1995-01-01, 2006-…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_hcpcs_end   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 9999-12-31, 9999-12-31, 9999-12-31, 9999-12-31, 9999-…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ date_rbcs_assign <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2014-01-01, 2014-01-01, 2014-01-01, 2014-01-01, 2014-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_category    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Procedure", "Procedure", "Procedure", "Procedure", "…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_subcategory <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin", "Cardiovascular", "Other Organ Systems", "Dig…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_family      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin Lesion Excision", "No RBCS Family", "No RBCS Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_procedure   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Other", "Major", "Major", "Major", "Non-Procedure"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

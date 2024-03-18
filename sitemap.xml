@@ -28,6 +28,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_asc.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_assistant.html</loc>
   </url>
   <url>
@@ -40,16 +43,25 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_cosurg.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_coverage.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_global.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_imaging.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_labcert.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_level.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_modifier.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_multiple_pricing.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_multproc.html</loc>
@@ -59,6 +71,12 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_pctc.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_pricing.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_section.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_section_cpt.html</loc>
@@ -74,6 +92,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_team.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_tos.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/descriptors.html</loc>
@@ -100,7 +121,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/ncd.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/nonpar_amount.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/non_participating_amount.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
@@ -116,5 +137,8 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/rvu.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/single_line_string.html</loc>
   </url>
 </urlset>
