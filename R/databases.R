@@ -368,3 +368,8 @@ ncd <- function(coverage = NULL) {
     }
   return(ncd)
 }
+
+#' Claim Adjustment Reason Codes (CARCs) and Remittance Advice Remark Codes (RARCs)
+#' @noRd
+#' @autoglobal
+carc_rarc <- function() {pins::pin_read(mount_board(), "rarc_carc")}

@@ -1,0 +1,11 @@
+file: rarc_carc.qs
+file_size: 54237
+pin_hash: 4abf5dc38c95b1ea
+type: qs
+title: CARCs & RARCs
+description: Claim Adjustment Reason Codes (CARCs) and Remittance Advice Remark Codes
+  (RARCs)
+tags: ~
+urls: ~
+created: 20240318T194306Z
+api_version: 1
