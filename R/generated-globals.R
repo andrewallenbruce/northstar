@@ -4,6 +4,7 @@ utils::globalVariables(c(
   # <case_status>
   # <case_asc>
   # <case_coverage>
+  # <count_days>
   ":=",
   # <level2>
   "asc",

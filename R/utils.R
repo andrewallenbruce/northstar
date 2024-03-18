@@ -88,3 +88,24 @@ display_long <- function(df, cols = dplyr::everything()) {
 single_line_string <- function(x) {
   stringr::str_remove_all(x, r"(\n\s*)")
 }
+
+#' Count days between two dates
+#'
+#' @param df data frame
+#' @param start date column
+#' @param end date column
+#' @param name name of output column
+#' @return A [tibble][tibble::tibble-package]
+#' @autoglobal
+#' @keyword internal
+#' @export
+#' @examples
+#' dplyr::tibble(id = 1:3,
+#'               dos = as.Date(c("2021-04-18", "2021-11-18", "2022-02-18")),
+#'               signed = as.Date("2022-02-18")) |>
+#'               count_days(start = dos, end = signed, provider_lag)
+count_days <- function(df, start, end, name) {
+  df |>
+    dplyr::mutate({{ name }} := clock::date_count_between({{ start }},
+    {{ end }}, "day"), .after = {{ end }})
+}

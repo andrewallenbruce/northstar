@@ -23,6 +23,7 @@ Imports:
     collapse
 Suggests:
     fontawesome,
+    clock,
     janitor,
     gluedown,
     gt,
