@@ -21,6 +21,6 @@ Add HCPCS Level Labels
 dplyr::tibble(
       hcpcs = c("39503", "99215", "99140",
                 "69990", "70010", "0222U",
-                "V5299", "7010F", "0074T") |>
+                "V5299", "7010F", "0074T")) |>
                 case_level(hcpcs)
 }
