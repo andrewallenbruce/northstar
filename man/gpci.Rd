@@ -4,7 +4,7 @@
 \alias{gpci}
 \title{2024 Geographic Practice Cost Indices}
 \usage{
-gpci(mac = NULL, state = NULL, locality = NULL)
+gpci(mac = NULL, state = NULL, locality = NULL, ...)
 }
 \arguments{
 \item{mac}{description}
@@ -12,6 +12,8 @@ gpci(mac = NULL, state = NULL, locality = NULL)
 \item{state}{description}
 
 \item{locality}{description}
+
+\item{...}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

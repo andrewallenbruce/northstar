@@ -10,7 +10,8 @@ rbcs(
   subcategory = NULL,
   family = NULL,
   procedure = NULL,
-  limit_cols = TRUE
+  limit_cols = TRUE,
+  ...
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ rbcs(
 }}
 
 \item{limit_cols}{< \emph{logical} > Limit Columns}
+
+\item{...}{description}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

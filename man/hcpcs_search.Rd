@@ -4,7 +4,7 @@
 \alias{hcpcs_search}
 \title{Look up Information about HCPCS Codes}
 \usage{
-hcpcs_search(hcpcs, state = NULL, locality = NULL, mac = NULL)
+hcpcs_search(hcpcs, state = NULL, locality = NULL, mac = NULL, ...)
 }
 \arguments{
 \item{hcpcs}{< \emph{character} > 5-character HCPCS Code}
@@ -14,6 +14,8 @@ hcpcs_search(hcpcs, state = NULL, locality = NULL, mac = NULL)
 \item{locality}{< \emph{character} > 2-character locality id}
 
 \item{mac}{< \emph{character} > 5-character MAC id code}
+
+\item{...}{description}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

@@ -4,7 +4,7 @@
 \alias{pfs}
 \title{2024 Physician Fee Schedule Payment Amount File}
 \usage{
-pfs(hcpcs = NULL, mac = NULL, locality = NULL)
+pfs(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
 \item{hcpcs}{description}
@@ -12,6 +12,8 @@ pfs(hcpcs = NULL, mac = NULL, locality = NULL)
 \item{mac}{description}
 
 \item{locality}{description}
+
+\item{...}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

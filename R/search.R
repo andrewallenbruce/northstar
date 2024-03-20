@@ -3,6 +3,7 @@
 #' @param state < *character* > 2-character state abbreviation
 #' @param locality < *character* > 2-character locality id
 #' @param mac < *character* > 5-character MAC id code
+#' @param ... description
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -36,7 +37,8 @@
 hcpcs_search <- function(hcpcs,
                          state = NULL,
                          locality = NULL,
-                         mac = NULL) {
+                         mac = NULL,
+                         ...) {
 
   rlang::check_required(hcpcs)
 
@@ -207,3 +209,13 @@ cols_amounts <- function(df) {
 }
 
 # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
+#
+# # nppes_pmap <- function(...) {
+#   provider::nppes(state = "KS", ...)
+# }
+#
+# names <- list(first = first_last$first,
+#               last = first_last$last)
+#
+# npi <- pmap(names, nppes_pmap) |>
+#   list_rbind()

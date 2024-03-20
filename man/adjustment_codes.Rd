@@ -4,7 +4,7 @@
 \alias{adjustment_codes}
 \title{Adjustment Codes}
 \usage{
-adjustment_codes(df = NULL, col = NULL, type = c("none", "carc", "rarc"))
+adjustment_codes(df = NULL, col = NULL, type = c("none", "carc", "rarc"), ...)
 }
 \arguments{
 \item{df}{data.frame}
@@ -12,6 +12,8 @@ adjustment_codes(df = NULL, col = NULL, type = c("none", "carc", "rarc"))
 \item{col}{column of Adjustment codes}
 
 \item{type}{type of Adjustment code; \code{"none"} (default), \code{"carc"}, \code{"rarc"}}
+
+\item{...}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

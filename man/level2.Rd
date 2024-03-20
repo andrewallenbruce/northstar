@@ -4,12 +4,14 @@
 \alias{level2}
 \title{2024 Healthcare Common Procedure Coding System (HCPCS)}
 \usage{
-level2(hcpcs = NULL, limit_cols = TRUE)
+level2(hcpcs = NULL, limit_cols = TRUE, ...)
 }
 \arguments{
 \item{hcpcs}{description}
 
 \item{limit_cols}{description}
+
+\item{...}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

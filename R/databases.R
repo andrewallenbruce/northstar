@@ -23,6 +23,7 @@ rvu <- function(hcpcs = NULL) {
 #' @param hcpcs description
 #' @param mac description
 #' @param locality description
+#' @param ... description
 #' @return a [dplyr::tibble()]
 #' @examples
 #' pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
@@ -33,7 +34,8 @@ rvu <- function(hcpcs = NULL) {
 #' @export
 pfs <- function(hcpcs    = NULL,
                 mac      = NULL,
-                locality = NULL) {
+                locality = NULL,
+                ...) {
 
   # TODO convert filter(opps == "9") rows -> opps_nf and opps_f to NA
 
@@ -63,6 +65,7 @@ pfs <- function(hcpcs    = NULL,
 #' @param mac description
 #' @param state description
 #' @param locality description
+#' @param ... description
 #' @return a [dplyr::tibble()]
 #' @examples
 #' gpci(state    = "GA",
@@ -73,7 +76,8 @@ pfs <- function(hcpcs    = NULL,
 #' @autoglobal
 gpci <- function(mac      = NULL,
                  state    = NULL,
-                 locality = NULL) {
+                 locality = NULL,
+                 ...) {
 
   # TODO convert state col to character
 
@@ -105,12 +109,15 @@ gpci <- function(mac      = NULL,
 #' 2024 Healthcare Common Procedure Coding System (HCPCS)
 #' @param hcpcs description
 #' @param limit_cols description
+#' @param ... description
 #' @return a [dplyr::tibble()]
 #' @examples
 #' level2(c("A0021", "V5362", "J9264", "G8916")) |> dplyr::glimpse()
 #' @export
 #' @autoglobal
-level2 <- function(hcpcs = NULL, limit_cols = TRUE) {
+level2 <- function(hcpcs = NULL,
+                   limit_cols = TRUE,
+                   ...) {
 
   # TODO coverage = cov,
   # TODO asc = asc_grp,
@@ -224,6 +231,7 @@ descriptors <- function(hcpcs = NULL) {
 #' + `Non-Procedure` (n = 10113)
 #' + `Other` (n = 3244)
 #' @param limit_cols < *logical* > Limit Columns
+#' @param ... description
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -249,7 +257,8 @@ rbcs <- function(hcpcs       = NULL,
                  subcategory = NULL,
                  family      = NULL,
                  procedure   = NULL,
-                 limit_cols  = TRUE) {
+                 limit_cols  = TRUE,
+                 ...) {
 
   # TODO procedure = major
 
@@ -314,6 +323,7 @@ rbcs <- function(hcpcs       = NULL,
 #' @param hcpcs description
 #' @param mac description
 #' @param locality description
+#' @param ... description
 #' @return a [dplyr::tibble()]
 #' @examples
 #' opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
@@ -323,7 +333,8 @@ rbcs <- function(hcpcs       = NULL,
 #' @autoglobal
 opps <- function(hcpcs    = NULL,
                  mac      = NULL,
-                 locality = NULL) {
+                 locality = NULL,
+                 ...) {
 
   op <- pins::pin_read(mount_board(), "opps") |>
     dplyr::rename(status = procstat)
@@ -413,6 +424,7 @@ ncd <- function(coverage = NULL) {
 #' @param df data.frame
 #' @param col column of Adjustment codes
 #' @param type type of Adjustment code; `"none"` (default), `"carc"`, `"rarc"`
+#' @param ... description
 #' @return a [dplyr::tibble()]
 #' @examples
 #' adjustment_codes()$group
@@ -423,7 +435,8 @@ ncd <- function(coverage = NULL) {
 #' @autoglobal
 adjustment_codes <- function(df   = NULL,
                              col  = NULL,
-                             type = c("none", "carc", "rarc")) {
+                             type = c("none", "carc", "rarc"),
+                             ...) {
 
   type <- match.arg(type)
 
