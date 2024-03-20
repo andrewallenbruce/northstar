@@ -20,7 +20,8 @@ Imports:
     stringr,
     tidyr,
     vctrs,
-    collapse
+    collapse,
+    httr2
 Suggests:
     fontawesome,
     clock,

@@ -70,6 +70,12 @@ utils::globalVariables(c(
   "status",
   # <level2>
   "tos",
+  # <icd10_search>
+  # <.multiple_request>
+  "V1",
+  # <icd10_search>
+  # <.multiple_request>
+  "V2",
   # <col_lb>
   "var",
   # <hcpcs_search>
