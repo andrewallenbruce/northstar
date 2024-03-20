@@ -1,0 +1,83 @@
+x <- rvest::session("https://www.nucc.org") |>
+  rvest::session_follow_link("Code Sets") |>
+  rvest::session_follow_link("Taxonomy") |>
+  rvest::session_follow_link("CSV") |>
+  rvest::html_elements("a") |>
+  rvest::html_attr("href") |>
+  stringr::str_subset("taxonomy") |>
+  stringr::str_subset("csv")
+
+x <- rvest::session(paste0("https://www.nucc.org", x)) |>
+  rvest::session_follow_link("Version")
+
+x <- x$response$url
+
+x <- data.table::fread(x) |>
+  dplyr::tibble() |>
+  janitor::clean_names() |>
+  dplyr::mutate(
+    dplyr::across(dplyr::everything(), ~ dplyr::na_if(., "")),
+    dplyr::across(dplyr::everything(), ~ stringr::str_squish(.)))
+  # dplyr::select(
+  #   taxonomy_code = code,
+  #   taxonomy_category = section,
+  #   taxonomy_grouping = grouping,
+  #   taxonomy_classification = classification,
+  #   taxonomy_specialization = specialization,
+  #   taxonomy_display_name = display_name,
+  #   taxonomy_definition = definition)
+
+x <- x |>
+  dplyr::mutate(version = as.integer(240),
+                release_date = lubridate::ymd("2024-01-01"))
+x
+# https://www.nucc.org/images/stories/CSV/nucc_taxonomy_240.csv
+# "2023-07-01"
+# "2024-01-01"
+
+info <- x |>
+  dplyr::select(code, display_name, definition, notes)
+
+long <- x |>
+  dplyr::select(code,
+                section,
+                grouping,
+                classification,
+                specialization) |>
+  dplyr::mutate(section_level = 0, .before = section) |>
+  dplyr::mutate(grouping_level = 1, .before = grouping) |>
+  dplyr::mutate(classification_level = 2, .before = classification) |>
+  dplyr::mutate(specialization_level = 3, .before = specialization) |>
+  tidyr::unite("section", section:section_level, remove = TRUE) |>
+  tidyr::unite("grouping", grouping:grouping_level, remove = TRUE) |>
+  tidyr::unite("classification", classification:classification_level, remove = TRUE, na.rm = TRUE) |>
+  tidyr::unite("specialization", specialization:specialization_level, remove = TRUE, na.rm = TRUE) |>
+  tidyr::pivot_longer(!code, names_to = "level", values_to = "description") |>
+  dplyr::filter(description != "3") |>
+  tidyr::separate_wider_delim(description, delim = "_", names = c("description", "group")) |>
+  dplyr::mutate(group = NULL, level = factor(level,
+                                             levels = c("section", "grouping", "classification", "specialization"),
+                                             labels = c("I. Section", "II. Grouping", "III. Classification", "IV. Specialization"), ordered = TRUE))
+
+longnest <- long |>
+  dplyr::left_join(info, by = "code") |>
+  tidyr::nest(hierarchy = c(level, description))
+
+# Update Pin
+board <- pins::board_folder(here::here("pins"))
+
+board |>
+  pins::pin_write(x,
+                  name = "taxonomy",
+                  title = "Provider Taxonomy Code Set",
+                  description = "NUCC Health Care Provider Taxonomy Code Set January 2024",
+                  type = "qs")
+
+board |>
+  pins::pin_write(x,
+                  name = "tax_long",
+                  title = "Provider Taxonomy Code Set",
+                  description = "NUCC Health Care Provider Taxonomy Code Set January 2024",
+                  type = "qs")
+
+board |> pins::write_board_manifest()
