@@ -119,14 +119,7 @@ icd10_search <- function(code  = NULL,
                           simplifyMatrix = TRUE)
 
 
-  if (vctrs::vec_is_empty(results[[4]])) {
-    return(NULL
-      # dplyr::tibble(
-      #   code        = NA_character_,
-      #   description = NA_character_
-      # )
-    )
-  }
+  if (vctrs::vec_is_empty(results[[4]])) {return(NULL)}
 
  results[[4]] |>
     as.data.frame() |>
@@ -134,4 +127,45 @@ icd10_search <- function(code  = NULL,
                   description = V2) |>
     dplyr::tibble()
 
+}
+
+#' Add ICD-10-CM Section Labels
+#' @param df data frame
+#' @param col column of HCPCS codes to match on
+#' @return A [tibble][tibble::tibble-package] with a `section` column
+#' @examples
+#' dplyr::tibble(code = c("F50.8", "G40.311", "Q96.8",
+#'                        "Z62.890", "R45.4", "E06.3")) |>
+#'                        case_section_icd10(code)
+#' @export
+#' @autoglobal
+case_section_icd10 <- function(df, col) {
+
+  df |>
+    dplyr::mutate(section = dplyr::case_when(
+      stringr::str_detect({{ col }}, pattern = stringr::regex("(^[A]|^[B])")) == TRUE ~ "Certain Infectious and Parasitic Diseases [A00 - B99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("(^[C]|^[D][0-4])")) == TRUE ~ "Neoplasms [C00 - D49]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[D][5-8]")) == TRUE ~ "Diseases of the Blood and Blood-Forming Organs and Certain Disorders Involving the Immune Mechanism [D50 - D89]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[E]")) == TRUE ~ "Endocrine, Nutritional and Metabolic Diseases [E00 - E89]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[F]")) == TRUE ~ "Mental, Behavioral and Neurodevelopmental Disorders [F01 - F99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[G]")) == TRUE ~ "Diseases of the Nervous System [G00 - G99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[H][0-5]\\d{1}\\.?\\d?")) == TRUE ~ "Diseases of the Eye and Adnexa [H00 - H59]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[H][6-9]\\d{1}\\.?\\d?")) == TRUE ~ "Diseases of the Ear and Mastoid Process [H60 - H95]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[I]")) == TRUE ~ "Diseases of the Circulatory System [I00 - I99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[J]")) == TRUE ~ "Diseases of the Respiratory System [J00 - J99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[K]")) == TRUE ~ "Diseases of the Digestive System [K00 - K95]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[L]")) == TRUE ~ "Diseases of the Skin and Subcutaneous Tissue [L00 - L99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[M]")) == TRUE ~ "Diseases of the Musculoskeletal System and Connective Tissue [M00 - M99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[N]")) == TRUE ~ "Diseases of the Genitourinary System [N00 - N99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[O]")) == TRUE ~ "Pregnancy, Childbirth and the Puerperium [O00 - O9A]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[P]")) == TRUE ~ "Certain Conditions Originating in the Perinatal Period [P00 - P96]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[Q]")) == TRUE ~ "Congenital Malformations, Deformations and Chromosomal Abnormalities [Q00 - Q99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[R]")) == TRUE ~ "Symptoms, Signs and Abnormal Clinical and Laboratory Findings, Not Elsewhere Classified [R00 - R99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("(^[S]|^[T])")) == TRUE ~ "Injury, Poisoning and Certain Other Consequences of External Causes [S00 - T88]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("(^[V]|^[W]|^[X]|^[Y])")) == TRUE ~ "External Causes of Morbidity [V00 - Y99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[Z]")) == TRUE ~ "Factors Influencing Health Status and Contact with Health Services [Z00 - Z99]",
+      stringr::str_detect({{ col }}, pattern = stringr::regex("^[U]")) == TRUE ~ "Codes for Special Purposes [U00 - U85]",
+      TRUE ~ "Unmatched"
+    ),
+    .after = {{ col }})
 }
