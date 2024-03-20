@@ -14,6 +14,8 @@ utils::globalVariables(c(
   "cf",
   # <descriptors>
   "clinician_descriptor",
+  # <adjustment_codes>
+  "code",
   # <level2>
   "cov",
   # <level2>
@@ -24,16 +26,26 @@ utils::globalVariables(c(
   # <col_lb>
   # <hcpcs_search>
   "description",
+  # <adjustment_codes>
+  "description.x",
+  # <adjustment_codes>
+  "description.y",
   # <level2>
   "description_long",
+  # <adjustment_codes>
+  "end_date",
   # <hcpcs_search>
   "fpar",
   # <hcpcs_search>
   "fprvu",
+  # <adjustment_codes>
+  "group",
   # <level2>
   "labcert",
   # <col_lb>
   "label",
+  # <adjustment_codes>
+  "last_modified",
   # <level2>
   "long_description",
   # <rbcs>
@@ -50,6 +62,8 @@ utils::globalVariables(c(
   "mult",
   # <level2>
   "mult_pi",
+  # <adjustment_codes>
+  "notes",
   # <hcpcs_search>
   "npar",
   # <hcpcs_search>
@@ -70,6 +84,8 @@ utils::globalVariables(c(
   "status",
   # <level2>
   "tos",
+  # <adjustment_codes>
+  "usage",
   # <icd10_search>
   # <.multiple_request>
   "V1",
