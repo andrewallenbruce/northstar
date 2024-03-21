@@ -76,6 +76,8 @@ utils::globalVariables(c(
   "price",
   # <opps>
   "procstat",
+  # <taxonomy>
+  "results",
   # <case_section>
   "section",
   # <level2>

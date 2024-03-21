@@ -24,7 +24,6 @@ opps <- read_excel(opps_xl, col_types = "text") |>
 
 opps
 
-
 # Update Pin
 board <- pins::board_folder(here::here("pins"))
 

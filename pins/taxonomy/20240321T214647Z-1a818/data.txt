@@ -1,10 +1,10 @@
 file: taxonomy.qs
-file_size: 101
-pin_hash: 28971fd5683abb7d
+file_size: 100601
+pin_hash: 1a81842c74dcf89c
 type: qs
 title: Provider Taxonomy Code Set
 description: NUCC Health Care Provider Taxonomy Code Set January 2024
 tags: ~
 urls: ~
-created: 20240321T212812Z
+created: 20240321T214647Z
 api_version: 1

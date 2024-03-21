@@ -415,24 +415,59 @@ lcd <- function() {
 #' reimbursements, while hospitals treating less severely ill patients will
 #' receive less reimbursement.
 #'
+#' @param drg description
+#' @param mdc description
+#' @param type description
+#' @param ... description
 #' @return A [tibble][tibble::tibble-package]
 #' @examplesIf interactive()
 #' msdrg()
 #' @autoglobal
 #' @export
-msdrg <- function() {
-    pins::pin_read(mount_board(), "msdrg")
+msdrg <- function(drg = NULL,
+                  mdc = NULL,
+                  type = NULL,
+                  ...) {
+
+  ms <- pins::pin_read(mount_board(), "msdrg")
+
+  if (!is.null(drg)) {
+    ms <- vctrs::vec_slice(ms,
+          vctrs::vec_in(ms$drg,
+          collapse::funique(drg)))
+  }
+
+  if (!is.null(mdc)) {
+    ms <- vctrs::vec_slice(ms,
+          vctrs::vec_in(ms$mdc,
+          collapse::funique(mdc)))
+  }
+
+  if (!is.null(type)) {
+    ms <- vctrs::vec_slice(ms, ms$drg_type == type)
+  }
+  return(ms)
 }
 
 #' Level I and II HCPCS Modifiers
 #'
+#' @param mod description
+#' @param ... description
 #' @return a [dplyr::tibble()]
 #' @examples
 #' modifiers()
 #' @export
 #' @autoglobal
-modifiers <- function() {
-  pins::pin_read(mount_board(), "modifiers")
+modifiers <- function(mod = NULL, ...) {
+
+  md <- pins::pin_read(mount_board(), "modifiers")
+
+  if (!is.null(mod)) {
+    md <- vctrs::vec_slice(md,
+          vctrs::vec_in(md$mod,
+          collapse::funique(mod)))
+  }
+  return(md)
 }
 
 #' Adjustment Codes

@@ -4,7 +4,16 @@
 \alias{msdrg}
 \title{Medicare Severity Diagnosis-Related Groups (MS-DRG)}
 \usage{
-msdrg()
+msdrg(drg = NULL, mdc = NULL, type = NULL, ...)
+}
+\arguments{
+\item{drg}{description}
+
+\item{mdc}{description}
+
+\item{type}{description}
+
+\item{...}{description}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

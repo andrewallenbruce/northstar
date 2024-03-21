@@ -7,10 +7,12 @@
 \href{https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57}{National Uniform Claim Committee}
 }
 \usage{
-taxonomy(shape = c("wide", "long"))
+taxonomy(shape = c("wide", "long"), code = NULL)
 }
 \arguments{
 \item{shape}{shape of the data frame returned, 'wide' or 'long'}
+
+\item{code}{vector of taxonomy codes to filter}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:

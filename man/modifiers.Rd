@@ -4,7 +4,12 @@
 \alias{modifiers}
 \title{Level I and II HCPCS Modifiers}
 \usage{
-modifiers()
+modifiers(mod = NULL, ...)
+}
+\arguments{
+\item{mod}{description}
+
+\item{...}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

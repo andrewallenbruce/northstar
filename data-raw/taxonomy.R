@@ -72,7 +72,7 @@ longnest <- long |>
 board <- pins::board_folder(here::here("pins"))
 
 board |>
-  pins::pin_write(x,
+  pins::pin_write(taxonomy,
                   name = "taxonomy",
                   title = "Provider Taxonomy Code Set",
                   description = "NUCC Health Care Provider Taxonomy Code Set January 2024",
@@ -86,3 +86,6 @@ board |>
                   type = "qs")
 
 board |> pins::write_board_manifest()
+
+# pins::pin_search(board)
+# pins::pin_delete(board, "tax_long")

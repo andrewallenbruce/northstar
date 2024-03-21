@@ -109,6 +109,7 @@
 #' [National Uniform Claim Committee](https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57)
 #'
 #' @param shape shape of the data frame returned, 'wide' or 'long'
+#' @param code vector of taxonomy codes to filter
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -118,16 +119,22 @@
 #' taxonomy("long")
 #' @autoglobal
 #' @export
-taxonomy <- function(shape = c('wide', 'long')) {
+taxonomy <- function(shape = c('wide', 'long'), code = NULL) {
 
   shape <- match.arg(shape)
 
   if (shape == 'wide') {
-    results <- pins::pin_read(mount_board(), "taxonomy")
+    txn <- pins::pin_read(mount_board(), "taxonomy")
   }
 
   if (shape == 'long') {
-    results <- pins::pin_read(mount_board(), "tax_long")
+    txn <- pins::pin_read(mount_board(), "taxlong")
+  }
+
+  if (!is.null(code)) {
+    txn <- vctrs::vec_slice(txn,
+           vctrs::vec_in(txn$code,
+           collapse::funique(code)))
   }
 
   return(results)
