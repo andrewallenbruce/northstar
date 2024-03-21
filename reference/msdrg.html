@@ -111,21 +111,40 @@ receive less reimbursement.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">msdrg</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 761 × 6</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">msdrg</span><span class="op">(</span>drg <span class="op">=</span> <span class="st">"011"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   drg   drg_description                mdc   mdc_description drg_type drg_abbrev</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 011   TRACHEOSTOMY FOR FACE,MOUTH &amp;… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">msdrg</span><span class="op">(</span>mdc <span class="op">=</span> <span class="st">"24"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   drg   drg_description                mdc   mdc_description drg_type drg_abbrev</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 955   CRANIOTOMY FOR MULTIPLE SIGNI… 24    Multiple Signi… Surgical P         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 956   LIMB REATTACHMENT, HIP AND FE… 24    Multiple Signi… Surgical P         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 957   OTHER O.R. PROCEDURES FOR MUL… 24    Multiple Signi… Surgical P         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 958   OTHER O.R. PROCEDURES FOR MUL… 24    Multiple Signi… Surgical P         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 959   OTHER O.R. PROCEDURES FOR MUL… 24    Multiple Signi… Surgical P         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 963   OTHER MULTIPLE SIGNIFICANT TR… 24    Multiple Signi… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 964   OTHER MULTIPLE SIGNIFICANT TR… 24    Multiple Signi… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 965   OTHER MULTIPLE SIGNIFICANT TR… 24    Multiple Signi… Medical  M         </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">msdrg</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"Medical"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 368 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    drg   drg_description               mdc   mdc_description drg_type drg_abbrev</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 001   HEART TRANSPLANT OR IMPLANT … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 002   HEART TRANSPLANT OR IMPLANT … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 003   ECMO OR TRACHEOSTOMY WITH MV… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 004   TRACHEOSTOMY WITH MV &gt;96 HOU… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 005   LIVER TRANSPLANT WITH MCC OR… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 006   LIVER TRANSPLANT WITHOUT MCC  <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 007   LUNG TRANSPLANT               <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 008   SIMULTANEOUS PANCREAS AND KI… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 010   PANCREAS TRANSPLANT           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 011   TRACHEOSTOMY FOR FACE,MOUTH … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>              Surgical P         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 751 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 052   SPINAL DISORDERS AND INJURIE… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 053   SPINAL DISORDERS AND INJURIE… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 054   NERVOUS SYSTEM NEOPLASMS WIT… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 055   NERVOUS SYSTEM NEOPLASMS WIT… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 056   DEGENERATIVE NERVOUS SYSTEM … 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 057   DEGENERATIVE NERVOUS SYSTEM … 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 058   MULTIPLE SCLEROSIS AND CEREB… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 059   MULTIPLE SCLEROSIS AND CEREB… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 060   MULTIPLE SCLEROSIS AND CEREB… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 061   ISCHEMIC STROKE, PRECEREBRAL… 01    Diseases and D… Medical  M         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 358 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
