@@ -4,8 +4,12 @@ gpci:
 - gpci/20240305T074723Z-2c2a4/
 hcpcs:
 - hcpcs/20240311T071522Z-1cf0e/
+lcd:
+- lcd/20240321T172123Z-6cbb4/
 modifiers:
 - modifiers/20240321T014144Z-fa54b/
+msdrg:
+- msdrg/20240321T154706Z-c6366/
 ncd:
 - ncd/20240316T065817Z-33d30/
 opps:

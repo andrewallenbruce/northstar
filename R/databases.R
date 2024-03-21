@@ -37,7 +37,8 @@ pfs <- function(hcpcs    = NULL,
                 locality = NULL,
                 ...) {
 
-  # TODO convert filter(opps == "9") rows -> opps_nf and opps_f to NA
+  # TODO convert filter(opps == "9")
+  # rows -> opps_nf and opps_f to NA
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
@@ -364,7 +365,7 @@ opps <- function(hcpcs    = NULL,
 #' Last Updated 2022-12-08
 #'
 #' @param coverage Coverage level; `"Full"`, `"Restricted"`, `"None"`, `"Unknown"`
-#' @return a [dplyr::tibble()]
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' ncd(coverage = "Unknown")
 #' @export
@@ -377,20 +378,61 @@ ncd <- function(coverage = NULL) {
 
     coverage <- rlang::arg_match(coverage, c("Full", "Restricted", "None", "Unknown"))
 
-    ncd      <- vctrs::vec_slice(ncd, ncd$coverage == coverage)
+    ncd <- vctrs::vec_slice(ncd, ncd$coverage == coverage)
   }
   return(ncd)
+}
+
+#' LCD Download Database
+#'
+#' Last Updated 2023-04-27
+#'
+#' @return a [tibble][tibble::tibble-package]
+#' @examplesIf interactive()
+#' lcd()
+#' @export
+#' @autoglobal
+lcd <- function() {
+  pins::pin_read(mount_board(), "lcd")
+}
+
+#' Medicare Severity Diagnosis-Related Groups (MS-DRG)
+#'
+#' The Medicare Severity Diagnosis-Related Group (MS-DRG) is a classification
+#' system used by the Centers for Medicare and Medicaid Services (CMS) to group
+#' patients with similar clinical characteristics and resource utilization into
+#' a single payment category.
+#'
+#' The system is primarily used for Medicare reimbursement purposes, but it is
+#' also adopted by many other payers as a basis for payment determination.
+#'
+#' MS-DRGs are based on the principal diagnosis, up to 24 additional diagnoses,
+#' and up to 25 procedures performed during the stay. In a small number of
+#' MS-DRGs, classification is also based on the age, sex, and discharge status
+#' of the patient.
+#'
+#' Hospitals serving more severely ill patients receive increased
+#' reimbursements, while hospitals treating less severely ill patients will
+#' receive less reimbursement.
+#'
+#' @return A [tibble][tibble::tibble-package]
+#' @examplesIf interactive()
+#' msdrg()
+#' @autoglobal
+#' @export
+msdrg <- function() {
+    pins::pin_read(mount_board(), "msdrg")
 }
 
 #' Level I and II HCPCS Modifiers
 #'
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#' @examples
 #' modifiers()
 #' @export
 #' @autoglobal
 modifiers <- function() {
-    pins::pin_read(mount_board(), "modifiers")
+  pins::pin_read(mount_board(), "modifiers")
 }
 
 #' Adjustment Codes

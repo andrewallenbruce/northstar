@@ -1,0 +1,10 @@
+file: lcd.qs
+file_size: 56213
+pin_hash: 6cbb466a6d117e66
+type: qs
+title: 'LCD Download Database Last Updated: 2023-04-27'
+description: ~
+tags: ~
+urls: ~
+created: 20240321T172123Z
+api_version: 1

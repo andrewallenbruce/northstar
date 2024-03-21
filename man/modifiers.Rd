@@ -13,7 +13,5 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 Level I and II HCPCS Modifiers
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 modifiers()
-\dontshow{\}) # examplesIf}
 }

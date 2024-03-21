@@ -10,7 +10,7 @@ ncd(coverage = NULL)
 \item{coverage}{Coverage level; \code{"Full"}, \code{"Restricted"}, \code{"None"}, \code{"Unknown"}}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Last Updated 2022-12-08
