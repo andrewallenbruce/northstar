@@ -61,7 +61,7 @@ Taxonomy code set</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">taxonomy</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wide"</span>, <span class="st">"long"</span><span class="op">)</span>, code <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">taxonomy</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wide"</span>, <span class="st">"long"</span><span class="op">)</span>, code <span class="op">=</span> <span class="cn">NULL</span>, unnest <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,6 +76,14 @@ Taxonomy code set</p>
 
 <dt>code</dt>
 <dd><p>vector of taxonomy codes to filter</p></dd>
+
+
+<dt>unnest</dt>
+<dd><p>unnest the hierarchy column, default is <code>FALSE</code></p></dd>
+
+
+<dt>...</dt>
+<dd><p>Empty</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -198,9 +206,11 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"wide"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"wide"</span>, code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"207K00000X"</span>, <span class="st">"193200000X"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"long"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"long"</span>, code <span class="op">=</span> <span class="st">"207K00000X"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"long"</span>, code <span class="op">=</span> <span class="st">"207K00000X"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
