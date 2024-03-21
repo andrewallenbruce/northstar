@@ -180,13 +180,13 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
     <h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a></h2>
     
 
-<ul><li><p><code>taxonomy_code</code>: Provider Taxonomy Code</p></li>
-<li><p><code>taxonomy_category</code>: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy</p></li>
-<li><p><code>taxonomy_grouping</code>: Level I, Provider Grouping</p></li>
-<li><p><code>taxonomy_classification</code>: Level II, Classification</p></li>
-<li><p><code>taxonomy_specialization</code>: Level III, Area of Specialization</p></li>
-<li><p><code>taxonomy_display_name</code>: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.</p></li>
-<li><p><code>taxonomy_definition</code>: Definition of Taxonomy</p></li>
+<ul><li><p><code>code</code>: Provider Taxonomy Code</p></li>
+<li><p><code>category</code>: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy</p></li>
+<li><p><code>grouping</code>: Level I, Provider Grouping</p></li>
+<li><p><code>classification</code>: Level II, Classification</p></li>
+<li><p><code>specialization</code>: Level III, Area of Specialization</p></li>
+<li><p><code>display_name</code>: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.</p></li>
+<li><p><code>definition</code>: Definition of Taxonomy</p></li>
 <li><p><code>version</code>: Three digit version of the code set. The first two digits indicate the year and the third digit indicates either the first release of the year ("0") or the second release of the year ("1").</p></li>
 <li><p><code>release_date</code>: Date the version of the code set was released</p></li>
 </ul></div>
@@ -194,7 +194,9 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"wide"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy</span><span class="op">(</span><span class="st">"long"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
