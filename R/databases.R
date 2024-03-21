@@ -382,6 +382,17 @@ ncd <- function(coverage = NULL) {
   return(ncd)
 }
 
+#' Level I and II HCPCS Modifiers
+#'
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' modifiers()
+#' @export
+#' @autoglobal
+modifiers <- function() {
+    pins::pin_read(mount_board(), "modifiers")
+}
+
 #' Adjustment Codes
 #'
 #' Claim Adjustment Reason Codes (CARCs) and
