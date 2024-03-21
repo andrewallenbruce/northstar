@@ -18,7 +18,5 @@ a \link[tibble:tibble-package]{tibble}
 Last Updated 2023-04-27
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-lcd(hcpcs = "A4555", "E0766")
-\dontshow{\}) # examplesIf}
+lcd(hcpcs = c("A4555", "E0766"))
 }

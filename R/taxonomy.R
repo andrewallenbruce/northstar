@@ -115,7 +115,7 @@
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
-#' @examplesIf interactive()
+#' @examples
 #' taxonomy("wide", code = c("207K00000X", "193200000X"))
 #'
 #' taxonomy("long", code = "207K00000X")

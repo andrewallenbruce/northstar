@@ -385,7 +385,11 @@ opps <- function(hcpcs    = NULL,
 #' @param ... description
 #' @return A [tibble][tibble::tibble-package]
 #' @examples
-#' msdrg()
+#' msdrg(drg = "011")
+#'
+#' msdrg(mdc = "24")
+#'
+#' msdrg(type = "Medical")
 #' @autoglobal
 #' @export
 msdrg <- function(drg = NULL,

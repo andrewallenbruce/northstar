@@ -151,11 +151,9 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 taxonomy("wide", code = c("207K00000X", "193200000X"))
 
 taxonomy("long", code = "207K00000X")
 
 taxonomy("long", code = "207K00000X", unnest = TRUE)
-\dontshow{\}) # examplesIf}
 }

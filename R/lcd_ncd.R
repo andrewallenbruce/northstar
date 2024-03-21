@@ -28,8 +28,8 @@ ncd <- function(coverage = NULL) {
 #' @param hcpcs vector of HCPCS codes
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
-#' @examplesIf interactive()
-#' lcd(hcpcs = "A4555", "E0766")
+#' @examples
+#' lcd(hcpcs = c("A4555", "E0766"))
 #' @export
 #' @autoglobal
 lcd <- function(hcpcs = NULL,

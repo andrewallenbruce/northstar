@@ -38,5 +38,9 @@ reimbursements, while hospitals treating less severely ill patients will
 receive less reimbursement.
 }
 \examples{
-msdrg()
+msdrg(drg = "011")
+
+msdrg(mdc = "24")
+
+msdrg(type = "Medical")
 }
