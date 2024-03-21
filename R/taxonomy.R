@@ -95,13 +95,13 @@
 #' taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
 #'
 #' @section Description:
-#' + `taxonomy_code`: Provider Taxonomy Code
-#' + `taxonomy_category`: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
-#' + `taxonomy_grouping`: Level I, Provider Grouping
-#' + `taxonomy_classification`: Level II, Classification
-#' + `taxonomy_specialization`: Level III, Area of Specialization
-#' + `taxonomy_display_name`: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
-#' + `taxonomy_definition`: Definition of Taxonomy
+#' + `code`: Provider Taxonomy Code
+#' + `category`: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
+#' + `grouping`: Level I, Provider Grouping
+#' + `classification`: Level II, Classification
+#' + `specialization`: Level III, Area of Specialization
+#' + `display_name`: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
+#' + `definition`: Definition of Taxonomy
 #' + `version`: Three digit version of the code set. The first two digits indicate the year and the third digit indicates either the first release of the year ("0") or the second release of the year ("1").
 #' + `release_date`: Date the version of the code set was released
 #'
@@ -113,16 +113,22 @@
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' @examplesIf interactive()
-#' taxonomy()
+#' taxonomy("wide")
+#'
+#' taxonomy("long")
 #' @autoglobal
 #' @export
 taxonomy <- function(shape = c('wide', 'long')) {
 
   shape <- match.arg(shape)
 
-  if (shape == 'wide') {return(pins::pin_read(mount_board(), "taxonomy"))}
+  if (shape == 'wide') {
+    results <- pins::pin_read(mount_board(), "taxonomy")
+  }
 
-  if (shape == 'long') {return(pins::pin_read(mount_board(), "tax_long"))}
+  if (shape == 'long') {
+    results <- pins::pin_read(mount_board(), "tax_long")
+  }
 
   return(results)
 }

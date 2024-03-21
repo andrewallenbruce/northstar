@@ -132,13 +132,13 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
 \section{Description}{
 
 \itemize{
-\item \code{taxonomy_code}: Provider Taxonomy Code
-\item \code{taxonomy_category}: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
-\item \code{taxonomy_grouping}: Level I, Provider Grouping
-\item \code{taxonomy_classification}: Level II, Classification
-\item \code{taxonomy_specialization}: Level III, Area of Specialization
-\item \code{taxonomy_display_name}: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
-\item \code{taxonomy_definition}: Definition of Taxonomy
+\item \code{code}: Provider Taxonomy Code
+\item \code{category}: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
+\item \code{grouping}: Level I, Provider Grouping
+\item \code{classification}: Level II, Classification
+\item \code{specialization}: Level III, Area of Specialization
+\item \code{display_name}: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
+\item \code{definition}: Definition of Taxonomy
 \item \code{version}: Three digit version of the code set. The first two digits indicate the year and the third digit indicates either the first release of the year ("0") or the second release of the year ("1").
 \item \code{release_date}: Date the version of the code set was released
 }
@@ -146,6 +146,8 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-taxonomy()
+taxonomy("wide")
+
+taxonomy("long")
 \dontshow{\}) # examplesIf}
 }

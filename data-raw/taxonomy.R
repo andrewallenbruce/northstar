@@ -12,33 +12,35 @@ x <- rvest::session(paste0("https://www.nucc.org", x)) |>
 
 x <- x$response$url
 
-x <- data.table::fread(x) |>
+taxonomy <- data.table::fread(x) |>
   dplyr::tibble() |>
   janitor::clean_names() |>
   dplyr::mutate(
     dplyr::across(dplyr::everything(), ~ dplyr::na_if(., "")),
-    dplyr::across(dplyr::everything(), ~ stringr::str_squish(.)))
-  # dplyr::select(
-  #   taxonomy_code = code,
-  #   taxonomy_category = section,
-  #   taxonomy_grouping = grouping,
-  #   taxonomy_classification = classification,
-  #   taxonomy_specialization = specialization,
-  #   taxonomy_display_name = display_name,
-  #   taxonomy_definition = definition)
-
-x <- x |>
-  dplyr::mutate(version = as.integer(240),
+    dplyr::across(dplyr::everything(), ~ stringr::str_squish(.))) |>
+  dplyr::mutate(version = as.character(240),
                 release_date = lubridate::ymd("2024-01-01"))
-x
+taxonomy <- taxonomy |>
+  dplyr::select(
+    code,
+    display_name,
+    section,
+    grouping,
+    classification,
+    specialization,
+    definition,
+    notes,
+    version,
+    release_date
+    )
 # https://www.nucc.org/images/stories/CSV/nucc_taxonomy_240.csv
 # "2023-07-01"
 # "2024-01-01"
 
-info <- x |>
+info <- taxonomy |>
   dplyr::select(code, display_name, definition, notes)
 
-long <- x |>
+long <- taxonomy |>
   dplyr::select(code,
                 section,
                 grouping,
@@ -55,13 +57,16 @@ long <- x |>
   tidyr::pivot_longer(!code, names_to = "level", values_to = "description") |>
   dplyr::filter(description != "3") |>
   tidyr::separate_wider_delim(description, delim = "_", names = c("description", "group")) |>
-  dplyr::mutate(group = NULL, level = factor(level,
-                                             levels = c("section", "grouping", "classification", "specialization"),
-                                             labels = c("I. Section", "II. Grouping", "III. Classification", "IV. Specialization"), ordered = TRUE))
+  dplyr::mutate(group = NULL,
+                level = factor(level,
+                               levels = c("section", "grouping", "classification", "specialization"),
+                               labels = c("I. Section", "II. Grouping", "III. Classification", "IV. Specialization"),
+                               ordered = TRUE))
 
 longnest <- long |>
   dplyr::left_join(info, by = "code") |>
-  tidyr::nest(hierarchy = c(level, description))
+  tidyr::nest(hierarchy = c(level, description)) |>
+  dplyr::select(code, display_name, hierarchy, definition, notes)
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))
@@ -74,8 +79,8 @@ board |>
                   type = "qs")
 
 board |>
-  pins::pin_write(x,
-                  name = "tax_long",
+  pins::pin_write(longnest,
+                  name = "taxlong",
                   title = "Provider Taxonomy Code Set",
                   description = "NUCC Health Care Provider Taxonomy Code Set January 2024",
                   type = "qs")
