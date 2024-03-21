@@ -40,6 +40,8 @@ utils::globalVariables(c(
   "fprvu",
   # <adjustment_codes>
   "group",
+  # <taxonomy>
+  "hierarchy",
   # <level2>
   "labcert",
   # <col_lb>
@@ -76,8 +78,6 @@ utils::globalVariables(c(
   "price",
   # <opps>
   "procstat",
-  # <taxonomy>
-  "results",
   # <case_section>
   "section",
   # <level2>

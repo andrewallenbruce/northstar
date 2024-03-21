@@ -18,5 +18,5 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 Level I and II HCPCS Modifiers
 }
 \examples{
-modifiers()
+modifiers(mod = c("25", "59"))
 }

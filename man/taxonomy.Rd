@@ -7,12 +7,16 @@
 \href{https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57}{National Uniform Claim Committee}
 }
 \usage{
-taxonomy(shape = c("wide", "long"), code = NULL)
+taxonomy(shape = c("wide", "long"), code = NULL, unnest = FALSE, ...)
 }
 \arguments{
 \item{shape}{shape of the data frame returned, 'wide' or 'long'}
 
 \item{code}{vector of taxonomy codes to filter}
+
+\item{unnest}{unnest the hierarchy column, default is \code{FALSE}}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:
@@ -148,8 +152,10 @@ taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-taxonomy("wide")
+taxonomy("wide", code = c("207K00000X", "193200000X"))
 
-taxonomy("long")
+taxonomy("long", code = "207K00000X")
+
+taxonomy("long", code = "207K00000X", unnest = TRUE)
 \dontshow{\}) # examplesIf}
 }

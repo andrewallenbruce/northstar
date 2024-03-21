@@ -110,16 +110,23 @@
 #'
 #' @param shape shape of the data frame returned, 'wide' or 'long'
 #' @param code vector of taxonomy codes to filter
+#' @param unnest unnest the hierarchy column, default is `FALSE`
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' @examplesIf interactive()
-#' taxonomy("wide")
+#' taxonomy("wide", code = c("207K00000X", "193200000X"))
 #'
-#' taxonomy("long")
+#' taxonomy("long", code = "207K00000X")
+#'
+#' taxonomy("long", code = "207K00000X", unnest = TRUE)
 #' @autoglobal
 #' @export
-taxonomy <- function(shape = c('wide', 'long'), code = NULL) {
+taxonomy <- function(shape = c('wide', 'long'),
+                     code = NULL,
+                     unnest = FALSE,
+                     ...) {
 
   shape <- match.arg(shape)
 
@@ -137,5 +144,8 @@ taxonomy <- function(shape = c('wide', 'long'), code = NULL) {
            collapse::funique(code)))
   }
 
-  return(results)
+  if (shape == 'long' && unnest == TRUE) {
+    txn <- tidyr::unnest(txn, cols = c(hierarchy))
+  }
+  return(txn)
 }

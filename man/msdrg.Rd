@@ -38,7 +38,5 @@ reimbursements, while hospitals treating less severely ill patients will
 receive less reimbursement.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 msdrg()
-\dontshow{\}) # examplesIf}
 }
