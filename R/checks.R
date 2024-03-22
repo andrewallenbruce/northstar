@@ -1,9 +1,14 @@
 #' Check if string is valid length of a HCPCS code
 #' @param x string
+#' @param arg string
+#' @param call string
 #' @return boolean
-#' @examplesIf interactive()
+#' @examples
 #' is_valid_length("11646")
-#' @noRd
+#'
+#' try(is_valid_length("1164"))
+#'
+#' @export
 #' @autoglobal
 is_valid_length <- function(x,
                             arg = rlang::caller_arg(x),
@@ -35,10 +40,15 @@ is_valid_length <- function(x,
 #' suppliers other than physicians.
 #'
 #' @param x string
+#' @param arg string
+#' @param call string
 #' @return boolean
-#' @examplesIf interactive()
-#' is_level_II("E8015")
-#' @noRd
+#' @examples
+#' is_level_I("11646")
+#'
+#' try(is_level_I("E8015"))
+#'
+#' @export
 #' @autoglobal
 is_level_I <- function(x,
                        arg = rlang::caller_arg(x),
@@ -69,10 +79,14 @@ is_level_I <- function(x,
 #' identified using 5 numeric digits.
 #'
 #' @param x string
+#' @param arg string
+#' @param call string
 #' @return boolean
-#' @examplesIf interactive()
+#' @examples
 #' is_level_II("E8015")
-#' @noRd
+#'
+#' try(is_level_II("11646"))
+#' @export
 #' @autoglobal
 is_level_II <- function(x,
                         arg = rlang::caller_arg(x),
@@ -84,10 +98,14 @@ is_level_II <- function(x,
 
 #' Check if code is HCPCS Level 1 Category I (CPT)
 #' @param x string
+#' @param arg string
+#' @param call string
 #' @return boolean
-#' @examplesIf interactive()
+#' @examples
 #' is_category_I("11646")
-#' @noRd
+#'
+#' try(is_category_I("1164F"))
+#' @export
 #' @autoglobal
 is_category_I <- function(x,
                           arg = rlang::caller_arg(x),
@@ -128,10 +146,14 @@ is_category_I <- function(x,
 #' + Not to be used as a substitute for Category I codes
 #'
 #' @param x string
+#' @param arg string
+#' @param call string
 #' @return boolean
-#' @examplesIf interactive()
+#' @examples
 #' is_category_II("1164F")
-#' @noRd
+#'
+#' try(is_category_II("11646"))
+#' @export
 #' @autoglobal
 is_category_II <- function(x,
                           arg = rlang::caller_arg(x),
@@ -148,10 +170,14 @@ is_category_II <- function(x,
 #' services, procedures, and service paradigms.
 #'
 #' @param x string
+#' @param arg string
+#' @param call string
 #' @return boolean
-#' @examplesIf interactive()
+#' @examples
 #' is_category_III("0074T")
-#' @noRd
+#'
+#' try(is_category_III("11646"))
+#' @export
 #' @autoglobal
 is_category_III <- function(x,
                            arg = rlang::caller_arg(x),

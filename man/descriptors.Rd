@@ -7,10 +7,10 @@
 descriptors(hcpcs = NULL)
 }
 \arguments{
-\item{hcpcs}{description}
+\item{hcpcs}{5-digit Level I, Category I HCPCS code}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 2023 CPT Descriptors (Clinician & Consumer-Friendly)

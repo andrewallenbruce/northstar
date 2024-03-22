@@ -7,16 +7,16 @@
 pfs(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{description}
+\item{hcpcs}{5-digit HCPCS code}
 
-\item{mac}{description}
+\item{mac}{5-digit Medicare Administrative Contractor (MAC) code}
 
-\item{locality}{description}
+\item{locality}{2-digit locality ID}
 
-\item{...}{description}
+\item{...}{Empty}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 2024 Physician Fee Schedule Payment Amount File

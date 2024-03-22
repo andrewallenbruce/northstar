@@ -7,10 +7,10 @@
 rvu(hcpcs = NULL)
 }
 \arguments{
-\item{hcpcs}{description}
+\item{hcpcs}{5-digit HCPCS code}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 2024 National Physician Fee Schedule Relative Value File

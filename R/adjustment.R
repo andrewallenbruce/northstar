@@ -2,7 +2,7 @@
 #'
 #' CARC and RARC Codes
 #'
-#' @section Claim Adjustment Reason Codes:
+#' @details Claim Adjustment Reason Codes:
 #'
 #' _X12 External Code Source 139_
 #'
@@ -10,42 +10,36 @@
 #' than it was billed and generally assign responsibility for the
 #' adjustment amounts.
 #'
-#' The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12
-#' standard. The format is always two alpha characters:
-#' - CO: Contractual Obligations
-#' - CR: Corrections and Reversals
-#' - OA: Other Adjustments
-#' - PI: Payer Initiated Reductions
-#' - PR: Patient Responsibility
+#' The Claim Adjustment *Group Codes* are internal to the X12 standard.
+#' The format is always two alpha characters:
+#' - **CO**: Contractual Obligations
+#' - **CR**: Corrections and Reversals
+#' - **OA**: Other Adjustments
+#' - **PI**: Payer Initiated Reductions
+#' - **PR**: Patient Responsibility
 #'
-#' @section Remittance Advice Remark Codes:
+#' @details Remittance Advice Remark Codes:
 #'
 #' _X12 External Code Source 411_
-#'
-#' These codes provide additional explanation for an adjustment already
-#' described by a Claim Adjustment Reason Code (CARC) or convey information
-#' about remittance processing.
 #'
 #' Remittance Advice Remark Codes (RARCs) are used to provide additional
 #' explanation for an adjustment already described by a Claim Adjustment Reason
 #' Code (CARC) or to convey information about remittance processing.
 #'
-#' There are two types of RARCs, supplemental and informational. The majority
-#' of the RARCs are supplemental; these are generally referred to as RARCs
-#' without further distinction.
+#' There are two types of RARCs: **Supplemental** and **Informational**:
 #'
-#' Supplemental RARCs provide additional explanation for an adjustment already
-#' described by a CARC.
+#' The majority of RARCs are *supplemental* and, as such, are generally referred
+#' to as RARCs without further distinction. Supplemental RARCs provide additional
+#' explanation for an adjustment already described by a CARC.
 #'
-#' The second type of RARC is informational; these RARCs are all prefaced
-#' with `Alert:` and are often referred to as Alerts.
+#' The second type is *informational*; these are all prefaced with `Alert:` and
+#' are referred to as Alerts. They are used to convey information about
+#' remittance processing and are *never* related to a specific adjustment or CARC.
 #'
-#' Alerts are used to convey information about remittance processing and are
-#' never related to a specific adjustment or CARC.
-#' @param df data.frame
-#' @param col column of Adjustment codes to match on
-#' @param type type of Adjustment code; `all` (default), `carc`, `rarc`
-#' @param action action to take; `review` (default), `join`
+#' @param df < *df* > data.frame
+#' @param col < *chr* > column of Adjustment codes to match on
+#' @param type < *chr* > type of Adjustment code; `all` (default), `carc`, `rarc`
+#' @param action < *chr* > action to take; `review` (default), `join`
 #' @param ... Empty
 #' @return a [dplyr::tibble()]
 #' @examples

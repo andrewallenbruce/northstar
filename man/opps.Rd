@@ -16,7 +16,7 @@ opps(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 \item{...}{description}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Contains the payment amounts after the application of the OPPS-based payment

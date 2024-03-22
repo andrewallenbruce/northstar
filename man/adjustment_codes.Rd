@@ -13,13 +13,13 @@ adjustment_codes(
 )
 }
 \arguments{
-\item{df}{data.frame}
+\item{df}{< \emph{df} > data.frame}
 
-\item{col}{column of Adjustment codes to match on}
+\item{col}{< \emph{chr} > column of Adjustment codes to match on}
 
-\item{type}{type of Adjustment code; \code{all} (default), \code{carc}, \code{rarc}}
+\item{type}{< \emph{chr} > type of Adjustment code; \code{all} (default), \code{carc}, \code{rarc}}
 
-\item{action}{action to take; \code{review} (default), \code{join}}
+\item{action}{< \emph{chr} > action to take; \code{review} (default), \code{join}}
 
 \item{...}{Empty}
 }
@@ -29,8 +29,8 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 \description{
 CARC and RARC Codes
 }
-\section{Claim Adjustment Reason Codes}{
-
+\details{
+Claim Adjustment Reason Codes:
 
 \emph{X12 External Code Source 139}
 
@@ -38,44 +38,34 @@ These codes describe why a claim or service line was paid differently
 than it was billed and generally assign responsibility for the
 adjustment amounts.
 
-The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12
-standard. The format is always two alpha characters:
+The Claim Adjustment \emph{Group Codes} are internal to the X12 standard.
+The format is always two alpha characters:
 \itemize{
-\item CO: Contractual Obligations
-\item CR: Corrections and Reversals
-\item OA: Other Adjustments
-\item PI: Payer Initiated Reductions
-\item PR: Patient Responsibility
-}
+\item \strong{CO}: Contractual Obligations
+\item \strong{CR}: Corrections and Reversals
+\item \strong{OA}: Other Adjustments
+\item \strong{PI}: Payer Initiated Reductions
+\item \strong{PR}: Patient Responsibility
 }
 
-\section{Remittance Advice Remark Codes}{
-
+Remittance Advice Remark Codes:
 
 \emph{X12 External Code Source 411}
-
-These codes provide additional explanation for an adjustment already
-described by a Claim Adjustment Reason Code (CARC) or convey information
-about remittance processing.
 
 Remittance Advice Remark Codes (RARCs) are used to provide additional
 explanation for an adjustment already described by a Claim Adjustment Reason
 Code (CARC) or to convey information about remittance processing.
 
-There are two types of RARCs, supplemental and informational. The majority
-of the RARCs are supplemental; these are generally referred to as RARCs
-without further distinction.
+There are two types of RARCs: \strong{Supplemental} and \strong{Informational}:
 
-Supplemental RARCs provide additional explanation for an adjustment already
-described by a CARC.
+The majority of RARCs are \emph{supplemental} and, as such, are generally referred
+to as RARCs without further distinction. Supplemental RARCs provide additional
+explanation for an adjustment already described by a CARC.
 
-The second type of RARC is informational; these RARCs are all prefaced
-with \verb{Alert:} and are often referred to as Alerts.
-
-Alerts are used to convey information about remittance processing and are
-never related to a specific adjustment or CARC.
+The second type is \emph{informational}; these are all prefaced with \verb{Alert:} and
+are referred to as Alerts. They are used to convey information about
+remittance processing and are \emph{never} related to a specific adjustment or CARC.
 }
-
 \examples{
 adjustment_codes()$group
 

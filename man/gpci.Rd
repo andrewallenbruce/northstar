@@ -7,16 +7,16 @@
 gpci(mac = NULL, state = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{mac}{description}
+\item{mac}{5-digit Medicare Administrative Contractor (MAC) code}
 
-\item{state}{description}
+\item{state}{2-character State abbreviation}
 
-\item{locality}{description}
+\item{locality}{2-digit locality ID}
 
-\item{...}{description}
+\item{...}{Empty}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 2024 Geographic Practice Cost Indices

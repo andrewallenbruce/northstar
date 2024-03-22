@@ -22,7 +22,7 @@ taxonomy(shape = c("wide", "long"), code = NULL, unnest = FALSE, ...)
 A \link[tibble:tibble-package]{tibble} with the columns:
 }
 \description{
-\code{taxonomy_codes()} returns a \code{\link[=tibble]{tibble()}} of the current Health Care Provider
+\code{taxonomy()} returns a \code{\link[=tibble]{tibble()}} of the current Health Care Provider
 Taxonomy code set
 }
 \details{

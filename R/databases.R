@@ -1,6 +1,7 @@
 #' 2024 National Physician Fee Schedule Relative Value File
-#' @param hcpcs description
-#' @return a [dplyr::tibble()]
+#'
+#' @param hcpcs 5-digit HCPCS code
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' rvu(c("A0021", "V5362", "J9264", "G8916")) |>
 #' dplyr::glimpse()
@@ -20,11 +21,12 @@ rvu <- function(hcpcs = NULL) {
 }
 
 #' 2024 Physician Fee Schedule Payment Amount File
-#' @param hcpcs description
-#' @param mac description
-#' @param locality description
-#' @param ... description
-#' @return a [dplyr::tibble()]
+#'
+#' @param hcpcs 5-digit HCPCS code
+#' @param mac 5-digit Medicare Administrative Contractor (MAC) code
+#' @param locality 2-digit locality ID
+#' @param ... Empty
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
 #'     locality = "01",
@@ -63,11 +65,12 @@ pfs <- function(hcpcs    = NULL,
 }
 
 #' 2024 Geographic Practice Cost Indices
-#' @param mac description
-#' @param state description
-#' @param locality description
-#' @param ... description
-#' @return a [dplyr::tibble()]
+#'
+#' @param mac 5-digit Medicare Administrative Contractor (MAC) code
+#' @param state 2-character State abbreviation
+#' @param locality 2-digit locality ID
+#' @param ... Empty
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' gpci(state    = "GA",
 #'      locality = "01",
@@ -108,10 +111,10 @@ gpci <- function(mac      = NULL,
 }
 
 #' 2024 Healthcare Common Procedure Coding System (HCPCS)
-#' @param hcpcs description
-#' @param limit_cols description
-#' @param ... description
-#' @return a [dplyr::tibble()]
+#' @param hcpcs 5-digit Level II HCPCS code
+#' @param limit_cols limit the number of columns returned
+#' @param ... Empty
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' level2(c("A0021", "V5362", "J9264", "G8916")) |> dplyr::glimpse()
 #' @export
@@ -162,8 +165,8 @@ level2 <- function(hcpcs = NULL,
 }
 
 #' 2023 CPT Descriptors (Clinician & Consumer-Friendly)
-#' @param hcpcs description
-#' @return a [dplyr::tibble()]
+#' @param hcpcs 5-digit Level I, Category I HCPCS code
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' descriptors(c("39503", "43116", "33935", "11646"))
 #' @export
@@ -325,7 +328,7 @@ rbcs <- function(hcpcs       = NULL,
 #' @param mac description
 #' @param locality description
 #' @param ... description
-#' @return a [dplyr::tibble()]
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
 #'      mac      = "01112",
@@ -421,7 +424,7 @@ msdrg <- function(drg = NULL,
 #'
 #' @param mod description
 #' @param ... description
-#' @return a [dplyr::tibble()]
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' modifiers(mod = c("25", "59"))
 #' @export

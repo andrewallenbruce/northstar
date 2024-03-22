@@ -12,7 +12,7 @@ modifiers(mod = NULL, ...)
 \item{...}{description}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Level I and II HCPCS Modifiers

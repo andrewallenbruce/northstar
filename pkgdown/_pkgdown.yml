@@ -76,12 +76,6 @@ reference:
   - modifiers
   - taxonomy
 
-- title: Labelling Functions
-  desc: >
-    Utilities to label Codeset outputs.
-  contents:
-  - starts_with("case_")
-
 - title: Calculations
   desc: >
     Functions to calculate Fee Schedule Amounts.
@@ -89,3 +83,20 @@ reference:
   - limiting_charge
   - non_participating_amount
   - calculate_amounts
+
+- title: Checkers
+  desc: >
+    Functions to valid inputs.
+  contents:
+  - is_valid_length
+  - is_level_I
+  - is_level_II
+  - is_category_I
+  - is_category_II
+  - is_category_III
+
+- title: Labelling Functions
+  desc: >
+    Utilities to label Codeset outputs.
+  contents:
+  - starts_with("case_")

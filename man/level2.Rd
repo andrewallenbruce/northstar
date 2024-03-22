@@ -7,14 +7,14 @@
 level2(hcpcs = NULL, limit_cols = TRUE, ...)
 }
 \arguments{
-\item{hcpcs}{description}
+\item{hcpcs}{5-digit Level II HCPCS code}
 
-\item{limit_cols}{description}
+\item{limit_cols}{limit the number of columns returned}
 
-\item{...}{description}
+\item{...}{Empty}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 2024 Healthcare Common Procedure Coding System (HCPCS)
