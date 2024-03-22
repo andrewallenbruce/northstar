@@ -44,6 +44,8 @@ navbar:
       menu:
       - text: Dictionary
         href: articles/columns.html
+      - text: Calculations
+        href: articles/calculations.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
@@ -83,15 +85,16 @@ reference:
 
 - title: Calculations
   desc: >
-    Functions to calculate Fee Schedule Amounts.
+    Functions to calculate various metrics.
   contents:
   - limiting_charge
   - non_participating_amount
   - calculate_amounts
+  - count_days
 
 - title: Checkers
   desc: >
-    Functions to valid inputs.
+    Functions to validate inputs.
   contents:
   - is_valid_length
   - is_level_I

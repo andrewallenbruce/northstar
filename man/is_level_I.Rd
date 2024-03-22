@@ -35,6 +35,6 @@ suppliers other than physicians.
 \examples{
 is_level_I("11646")
 
-try(is_level_I("E8015"))
+is_level_I("E8015")
 
 }

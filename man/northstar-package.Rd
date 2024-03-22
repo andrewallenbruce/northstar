@@ -4,7 +4,7 @@
 \name{northstar-package}
 \alias{northstar}
 \alias{northstar-package}
-\title{northstar: Revenue Integrity Tools}
+\title{northstar: Tidy Revenue Integrity Tools}
 \description{
 Revenue integrity tools.
 }
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Andrew Bruce \email{andrewbruce.himni@gmail.com} [copyright holder]
+\strong{Maintainer}: Andrew Bruce \email{andrew.bruce@northstarrevenueintegrity.com} [copyright holder]
 
 }
 \keyword{internal}

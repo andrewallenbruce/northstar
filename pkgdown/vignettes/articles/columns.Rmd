@@ -92,7 +92,7 @@ northstar:::col_lb("md", "rvu") |>
 ```
 
 
-## Modifier
+## Modifier (26/TC/53)
 
 ```{r}
 dplyr::tibble(mod = c("26", "TC", "53")) |> 
@@ -108,10 +108,12 @@ dplyr::tibble(mod = c("26", "TC", "53")) |>
 ## Status
 
 ```{r}
-dplyr::tibble(
-  code = sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))) |> 
-  case_status(code) |> 
-  gt(rowname_col = "code") |> 
+x <- sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))
+
+dplyr::tibble(status_code = x, 
+              code = x) |> 
+  case_status(code, desc = TRUE) |> 
+  gt(rowname_col = "status_code") |> 
   tab_header(title = md("Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment.")) |> 
   tab_style(
     style = cell_fill(color = "yellow", alpha = 0.3),
@@ -144,7 +146,7 @@ dplyr::tibble(code = as.character(0:9)) |>
 ```
 
 
-## Multiple Procedure
+## Multiple Procedures
 
 ```{r}
 dplyr::tibble(code = as.character(c(0:7, 9))) |> 
@@ -158,11 +160,12 @@ dplyr::tibble(code = as.character(c(0:7, 9))) |>
 ## Diagnostic Imaging Family
 
 ```{r}
-dplyr::tibble(
-  dximg = stringr::str_pad(c(1:11, 88, 99), 
-                           width = "2", pad = "0")) |>
+img <- stringr::str_pad(c(1:11, 88, 99), width = "2", pad = "0")
+
+dplyr::tibble(dximg = img) |>
   case_imaging(dximg) |> 
   gt(rowname_col = "dximg") |>
+  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style()
 ```
 
@@ -173,10 +176,18 @@ dplyr::tibble(
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 
 ```{r}
+note <- "**Note**: The *Further Continuing Appropriations and Other Extensions Act, 2024* (Section 501) extended the 1.0 Work GPCI floor through January 19, 2024. Therefore, the Work GPCIs for 2023 reflect the 1.0 Work GPCI floor. Work GPCIs for 2024 are shown both with and without a 1.0 floor and Work GPCIs for 2025 do not reflect a 1.0 floor."
+
+alaska <- "Work GPCI reflects a 1.5 floor in Alaska established by [**MIPPA**](https://en.wikipedia.org/wiki/Medicare_Improvements_for_Patients_and_Providers_Act_of_2008)."
+
+frontier <- "PE GPCI reflects a 1.0 floor for Frontier States established by the ACA."
+
+macas <- "MAC assignments as of November 22, 2023"
+
 gpci() |> 
   select(-counties) |> 
-  gt(rowname_col   = "mac", 
-     groupname_col = "state") |> 
+  gt(rowname_col     = "mac", 
+     groupname_col   = "state") |> 
   tab_stubhead(label = "State | MAC") |> 
   cols_label(
     mac      = "MAC",
@@ -187,30 +198,21 @@ gpci() |>
     pgpci    = "Practice",
     mgpci    = "Malpractice",
     two_macs = "Two MACs") |> 
-  cols_merge(
-    columns = c(locality, name),
-    pattern = "<b>{1}</b><< {2}>>") |> 
+  cols_merge(columns = c(locality, name),
+             pattern = "<b>{1}</b><< {2}>>") |> 
   cols_align(align = "left") |> 
-  opt_all_caps() |>
-  fmt_number(
-    decimals = 3, 
-    drop_trailing_zeros = TRUE) |> 
-  tab_footnote(
-    footnote = "MAC assignments as of November 22, 2023",
-    locations = cells_stubhead()) |> 
-  tab_footnote(
-    footnote = md("Work GPCI reflects a 1.5 floor in Alaska established by [**MIPPA**](https://en.wikipedia.org/wiki/Medicare_Improvements_for_Patients_and_Providers_Act_of_2008)."),
-    cells_body(columns = locality, rows = 1)) |> 
-  tab_footnote(
-    footnote = "PE GPCI reflects a 1.0 floor for Frontier States established by the ACA.",
-    cells_body(
-      columns = locality, 
-      rows = c(68, 70, 81, 91, 109))) |> 
-  tab_footnote(
-    footnote = md("**Note**: The *Further Continuing Appropriations and Other Extensions Act, 2024* (Section 501) extended the 1.0 Work GPCI floor through January 19, 2024. Therefore, the Work GPCIs for 2023 reflect the 1.0 Work GPCI floor. Work GPCIs for 2024 are shown both with and without a 1.0 floor and Work GPCIs for 2025 do not reflect a 1.0 floor.")) |>
-  tab_style(
-    style = cell_text(align = "center", size = px(14)),
-    locations = cells_stub()) |> 
+  fmt_number(decimals = 3, 
+             drop_trailing_zeros = TRUE) |> 
+  tab_footnote(footnote = macas,
+               locations = cells_stubhead()) |> 
+  tab_footnote(footnote = md(alaska),
+               cells_body(columns = locality, rows = 1)) |> 
+  tab_footnote(footnote = frontier,
+               cells_body(columns = locality, 
+                          rows = c(68, 70, 81, 91, 109))) |> 
+  tab_footnote(footnote = md(note)) |>
+  tab_style(style = cell_text(align = "center", size = px(14)),
+            locations = cells_stub()) |> 
   tab_options(
     table.font.size            = px(14),
     table.width                = pct(100),

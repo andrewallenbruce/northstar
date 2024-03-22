@@ -22,5 +22,5 @@ Check if code is HCPCS Level 1 Category I (CPT)
 \examples{
 is_category_I("11646")
 
-try(is_category_I("1164F"))
+is_category_I("1164F")
 }

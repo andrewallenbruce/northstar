@@ -23,5 +23,5 @@ services, procedures, and service paradigms.
 \examples{
 is_category_III("0074T")
 
-try(is_category_III("11646"))
+is_category_III("11646")
 }

@@ -46,7 +46,7 @@ is_valid_length <- function(x,
 #' @examples
 #' is_level_I("11646")
 #'
-#' try(is_level_I("E8015"))
+#' is_level_I("E8015")
 #'
 #' @export
 #' @autoglobal
@@ -85,7 +85,7 @@ is_level_I <- function(x,
 #' @examples
 #' is_level_II("E8015")
 #'
-#' try(is_level_II("11646"))
+#' is_level_II("11646")
 #' @export
 #' @autoglobal
 is_level_II <- function(x,
@@ -104,7 +104,7 @@ is_level_II <- function(x,
 #' @examples
 #' is_category_I("11646")
 #'
-#' try(is_category_I("1164F"))
+#' is_category_I("1164F")
 #' @export
 #' @autoglobal
 is_category_I <- function(x,
@@ -152,7 +152,7 @@ is_category_I <- function(x,
 #' @examples
 #' is_category_II("1164F")
 #'
-#' try(is_category_II("11646"))
+#' is_category_II("11646")
 #' @export
 #' @autoglobal
 is_category_II <- function(x,
@@ -176,7 +176,7 @@ is_category_II <- function(x,
 #' @examples
 #' is_category_III("0074T")
 #'
-#' try(is_category_III("11646"))
+#' is_category_III("11646")
 #' @export
 #' @autoglobal
 is_category_III <- function(x,

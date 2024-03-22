@@ -39,5 +39,5 @@ identified using 5 numeric digits.
 \examples{
 is_level_II("E8015")
 
-try(is_level_II("11646"))
+is_level_II("11646")
 }

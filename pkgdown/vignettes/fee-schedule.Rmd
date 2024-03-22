@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
+library(tidyr)
+library(purrr)
 library(janitor)
 library(gt)
 ```
@@ -31,21 +33,18 @@ library(gt)
 
 ```{r}
 hcpcs_search(
-  hcpcs = "39503", 
-  state = "GA", 
+  hcpcs    = "39503", 
+  state    = "GA", 
   locality = "99",
-  mac = "10212") |> 
-  janitor::remove_empty(which = c("rows", "cols")) |>
-  dplyr::rowwise() |>
-  dplyr::mutate(
-    description_clinician = purrr::map(
-      description_clinician, ~paste0("* ", ., collapse = "\n"))) |>
-  tidyr::unnest(cols = description_clinician) |>
-  dplyr::ungroup() |> 
+  mac      = "10212") |> 
+  remove_empty(which = c("rows", "cols")) |>
+  rowwise() |>
+  mutate(description_clinician = map(description_clinician, ~paste0("* ", ., collapse = "\n"))) |>
+  unnest(cols = description_clinician) |>
+  ungroup() |> 
   northstar:::display_long() |>
   gt() |>
   fmt_markdown() |> 
-  opt_table_font(font = google_font(name = "Jetbrains Mono")) |>
   tab_options(
     column_labels.hidden = TRUE,
     table.width = pct(75),
@@ -72,59 +71,6 @@ hcpcs_search(hcpcs    = "70170",
 ```
 
 
-# Physician Fee Schedule Amount Calculation
-<br>
-
-|          |                                                   |
-|----------|---------------------------------------------------|
-| $RVU_w$  | *Work* Relative Value Unit                        |
-| $GPCI_w$ | *Work* Geographic Practice Cost Index             |
-| $RVU_p$  | *Practice Expense* Relative Value Unit            |
-| $GPCI_p$ | *Practice Expense* Geographic Practice Cost Index |
-| $RVU_m$  | *Malpractice* Relative Value Unit                 |
-| $GPCI_m$ | *Malpractice* Geographic Practice Cost Index      |
-| $CF$     | Conversion Factor                                 |
-
-<br>
-
-The __Participating amount__ is calculated as follows:
-
-<br><br>
-
-$$x = [(RVU_w \times GPCI_w) + (RVU_p \times GPCI_p) + (RVU_m \times GPCI_m)] \times CF$$
-
-<br>
-
-The __Non-participating amount__ is calculated as follows:
-
-<br>
-
-$$ y = 0.95x$$
-
-<br>
-
-The __Limiting charge__ is calculated as follows:
-
-<br>
-
-$$ z = 0.95(1.15x)$$
-
-<br>
-
-
-```{r}
-calculate_amounts(
-  wrvu  = 6.26,
-  nprvu = 7.92,
-  fprvu = 4.36,
-  mrvu  = 0.99,
-  cf    = 32.744,
-  wgpci = 1,
-  pgpci = 0.883,
-  mgpci = 1.125
-)
-```
-
 ## Data Sources
 
 ```{r}
@@ -134,21 +80,22 @@ rvu(hcpcs = "11646") |>
 
 ```{r}
 gpci(state    = "GA",
-     locality = "99",
+     locality = "01",
      mac      = "10212") |> 
   glimpse()
 ```
 
 ```{r}
 pfs(hcpcs    = "11646", 
-    locality = "99",
+    locality = "01",
     mac      = "10212") |> 
   glimpse()
 ```
 
 
 ```{r}
-descriptors(hcpcs = "11646")
+descriptors(hcpcs = "11646") |> 
+  glimpse()
 ```
 
 

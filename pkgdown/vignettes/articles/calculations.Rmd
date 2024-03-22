@@ -1,0 +1,78 @@
+---
+title: "Fee Schedule Calculations"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = FALSE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 600, 
+  out.width = "100%",
+  fig.height = 14,
+  fig.width = 10
+)
+options(scipen = 999)
+```
+
+
+```{r pkgs, message=FALSE, warning=FALSE}
+library(northstar)
+library(dplyr)
+library(gt)
+```
+
+# Physician Fee Schedule Amount Calculation
+
+|          |                                                   |
+|----------|---------------------------------------------------|
+| $RVU_w$  | *Work* Relative Value Unit                        |
+| $GPCI_w$ | *Work* Geographic Practice Cost Index             |
+| $RVU_p$  | *Practice Expense* Relative Value Unit            |
+| $GPCI_p$ | *Practice Expense* Geographic Practice Cost Index |
+| $RVU_m$  | *Malpractice* Relative Value Unit                 |
+| $GPCI_m$ | *Malpractice* Geographic Practice Cost Index      |
+| $CF$     | Conversion Factor                                 |
+
+<br>
+
+The __Participating amount__ is calculated as follows:
+
+<br><br>
+
+$$x = [(RVU_w \times GPCI_w) + (RVU_p \times GPCI_p) + (RVU_m \times GPCI_m)] \times CF$$
+
+<br>
+
+The __Non-participating amount__ is calculated as follows:
+
+<br>
+
+$$ y = 0.95x$$
+
+<br>
+
+The __Limiting charge__ is calculated as follows:
+
+<br>
+
+$$ z = 0.95(1.15x)$$
+
+<br>
+
+```{r}
+calculate_amounts(
+  wrvu  = 6.26,
+  nprvu = 7.92,
+  fprvu = 4.36,
+  mrvu  = 0.99,
+  cf    = 32.744,
+  wgpci = 1,
+  pgpci = 0.883,
+  mgpci = 1.125
+)
+```

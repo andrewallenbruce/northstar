@@ -48,15 +48,16 @@ non_participating_amount <- function(par_amount) {
 #'
 #' ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 #'
-#' @param wrvu < *double* > Work RVU
-#' @param fprvu < *double* > Facility Practice Expense RVU
-#' @param nprvu < *double* > Non-Facility Practice Expense RVU
-#' @param mrvu < *double* > Malpractice RVU
-#' @param wgpci < *double* > Work GPCI
-#' @param pgpci < *double* > Practice Expense GPCI
-#' @param mgpci < *double* > Malpractice GPCI
-#' @param cf < *double* > Conversion Factor, default is `32.7442`
-#' @return **Facility** & **Non-Facility** Participating, Non-Participating & Limiting Charge Amounts
+#' @param wrvu *<dbl>* Work RVU
+#' @param fprvu *<dbl>* Facility Practice Expense RVU
+#' @param nprvu *<dbl>* Non-Facility Practice Expense RVU
+#' @param mrvu *<dbl>* Malpractice RVU
+#' @param wgpci *<dbl>* Work GPCI
+#' @param pgpci *<dbl>* Practice Expense GPCI
+#' @param mgpci *<dbl>* Malpractice GPCI
+#' @param cf *<dbl>* Conversion Factor, default is `32.7442`
+#' @returns A list (invisibly) of the Participating, Non-Participating &
+#'    Limiting Charge Amounts for both Facility & Non-Facility RVUs
 #' @examples
 #' calculate_amounts(wrvu  = 6.26,
 #'                   nprvu = 7.92,
@@ -118,4 +119,24 @@ calculate_amounts <- function(wrvu,
     )
   )
   invisible(list(fac = f, non = n))
+}
+
+#' Count days between two dates
+#'
+#' @param df *<df>* data.frame
+#' @param start bare date column name
+#' @param end bare date column name
+#' @param name bare name of days output column
+#' @return A [tibble][tibble::tibble-package]
+#' @autoglobal
+#' @export
+#' @examples
+#' dplyr::tibble(dos = as.Date(c("2021-04-18", "2021-11-18", "2022-02-18")),
+#'               signed = as.Date("2022-02-18")) |>
+#'               count_days(start = dos,
+#'               end = signed,
+#'               provider_lag)
+count_days <- function(df, start, end, name) {
+  df |> dplyr::mutate({{ name }} := clock::date_count_between(
+    {{ start }}, {{ end }}, "day"), .after = {{ end }})
 }

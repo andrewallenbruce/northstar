@@ -49,5 +49,5 @@ Category II codes are:
 \examples{
 is_category_II("1164F")
 
-try(is_category_II("11646"))
+is_category_II("11646")
 }
