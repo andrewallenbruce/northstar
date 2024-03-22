@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">northstar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,19 +95,19 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>df</dt>
-<dd><p>data.frame</p></dd>
+<dd><p>&lt; <em>df</em> &gt; data.frame</p></dd>
 
 
 <dt>col</dt>
-<dd><p>column of Adjustment codes to match on</p></dd>
+<dd><p>&lt; <em>chr</em> &gt; column of Adjustment codes to match on</p></dd>
 
 
 <dt>type</dt>
-<dd><p>type of Adjustment code; <code>all</code> (default), <code>carc</code>, <code>rarc</code></p></dd>
+<dd><p>&lt; <em>chr</em> &gt; type of Adjustment code; <code>all</code> (default), <code>carc</code>, <code>rarc</code></p></dd>
 
 
 <dt>action</dt>
-<dd><p>action to take; <code>review</code> (default), <code>join</code></p></dd>
+<dd><p>&lt; <em>chr</em> &gt; action to take; <code>review</code> (default), <code>join</code></p></dd>
 
 
 <dt>...</dt>
@@ -123,42 +123,30 @@
 
     </div>
     <div class="section level2">
-    <h2 id="claim-adjustment-reason-codes">Claim Adjustment Reason Codes<a class="anchor" aria-label="anchor" href="#claim-adjustment-reason-codes"></a></h2>
-    
-
-
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Claim Adjustment Reason Codes:</p>
 <p><em>X12 External Code Source 139</em></p>
 <p>These codes describe why a claim or service line was paid differently
 than it was billed and generally assign responsibility for the
 adjustment amounts.</p>
-<p>The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12
-standard. The format is always two alpha characters:</p><ul><li><p>CO: Contractual Obligations</p></li>
-<li><p>CR: Corrections and Reversals</p></li>
-<li><p>OA: Other Adjustments</p></li>
-<li><p>PI: Payer Initiated Reductions</p></li>
-<li><p>PR: Patient Responsibility</p></li>
-</ul></div>
-    <div class="section level2">
-    <h2 id="remittance-advice-remark-codes">Remittance Advice Remark Codes<a class="anchor" aria-label="anchor" href="#remittance-advice-remark-codes"></a></h2>
-    
-
-
+<p>The Claim Adjustment <em>Group Codes</em> are internal to the X12 standard.
+The format is always two alpha characters:</p><ul><li><p><strong>CO</strong>: Contractual Obligations</p></li>
+<li><p><strong>CR</strong>: Corrections and Reversals</p></li>
+<li><p><strong>OA</strong>: Other Adjustments</p></li>
+<li><p><strong>PI</strong>: Payer Initiated Reductions</p></li>
+<li><p><strong>PR</strong>: Patient Responsibility</p></li>
+</ul><p>Remittance Advice Remark Codes:</p>
 <p><em>X12 External Code Source 411</em></p>
-<p>These codes provide additional explanation for an adjustment already
-described by a Claim Adjustment Reason Code (CARC) or convey information
-about remittance processing.</p>
 <p>Remittance Advice Remark Codes (RARCs) are used to provide additional
 explanation for an adjustment already described by a Claim Adjustment Reason
 Code (CARC) or to convey information about remittance processing.</p>
-<p>There are two types of RARCs, supplemental and informational. The majority
-of the RARCs are supplemental; these are generally referred to as RARCs
-without further distinction.</p>
-<p>Supplemental RARCs provide additional explanation for an adjustment already
-described by a CARC.</p>
-<p>The second type of RARC is informational; these RARCs are all prefaced
-with <code>Alert:</code> and are often referred to as Alerts.</p>
-<p>Alerts are used to convey information about remittance processing and are
-never related to a specific adjustment or CARC.</p>
+<p>There are two types of RARCs: <strong>Supplemental</strong> and <strong>Informational</strong>:</p>
+<p>The majority of RARCs are <em>supplemental</em> and, as such, are generally referred
+to as RARCs without further distinction. Supplemental RARCs provide additional
+explanation for an adjustment already described by a CARC.</p>
+<p>The second type is <em>informational</em>; these are all prefaced with <code>Alert:</code> and
+are referred to as Alerts. They are used to convey information about
+remittance processing and are <em>never</em> related to a specific adjustment or CARC.</p>
     </div>
 
     <div class="section level2">
