@@ -1,7 +1,6 @@
 #' Adjustment Codes
 #'
-#' Claim Adjustment Reason Codes (CARCs) and
-#' Remittance Advice Remark Codes (RARCs)
+#' CARC and RARC Codes
 #'
 #' @section Claim Adjustment Reason Codes:
 #'
@@ -9,9 +8,15 @@
 #'
 #' These codes describe why a claim or service line was paid differently
 #' than it was billed and generally assign responsibility for the
-#' adjustment amounts. The format is always two alpha characters.
+#' adjustment amounts.
 #'
-#' The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12 standard.
+#' The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12
+#' standard. The format is always two alpha characters:
+#' - CO: Contractual Obligations
+#' - CR: Corrections and Reversals
+#' - OA: Other Adjustments
+#' - PI: Payer Initiated Reductions
+#' - PR: Patient Responsibility
 #'
 #' @section Remittance Advice Remark Codes:
 #'
@@ -40,27 +45,43 @@
 #' @param df data.frame
 #' @param col column of Adjustment codes to match on
 #' @param type type of Adjustment code; `all` (default), `carc`, `rarc`
-#' @param ... description
+#' @param action action to take; `review` (default), `join`
+#' @param ... Empty
 #' @return a [dplyr::tibble()]
 #' @examples
 #' adjustment_codes()$group
 #'
+#' adjustment_codes(type = "carc",
+#'                  action = "review") |>
+#'                  head()
+#'
+#' adjustment_codes(type = "rarc",
+#'                  action = "review") |>
+#'                  head()
+#'
 #' dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
-#' adjustment_codes(type = "carc", col = "code")
+#' adjustment_codes(col = "code",
+#'                  type = "carc",
+#'                  action = "join")
 #' @export
 #' @autoglobal
 adjustment_codes <- function(df   = NULL,
                              col  = NULL,
                              type = c("all", "carc", "rarc"),
+                             action = c("review", "join"),
                              ...) {
 
   type <- match.arg(type)
 
+  action <- match.arg(action)
+
   adj <- pins::pin_read(mount_board(), "rarc_carc")
 
   if (type == "all") {return(adj)}
+  if (type == "carc" && action == "review") {adj$rarc <- NULL; return(adj)}
+  if (type == "rarc" && action == "review") {return(adj$rarc)}
 
-  if (type == "carc") {
+  if (type == "carc" && action == "join") {
 
     adj$carc <- dplyr::select(adj$carc, -c(usage:end_date))
 
@@ -69,15 +90,18 @@ adjustment_codes <- function(df   = NULL,
                                   delim = "-",
                                   names = c("group", "code"),
                                   too_few = "align_start") |>
-      dplyr::left_join(adj$group, by = dplyr::join_by(group == code)) |>
-      dplyr::left_join(adj$carc, by = dplyr::join_by(code == code)) |>
-      tidyr::unite("adj_code", group, code, sep = "-", na.rm = TRUE) |>
-      dplyr::rename(group = description.x, description = description.y)
-  }
+      dplyr::left_join(adj$group,
+                       by = dplyr::join_by(group == code)) |>
+      dplyr::left_join(adj$carc,
+                       by = dplyr::join_by(code == code)) |>
+      tidyr::unite("adj_code",
+                   group,
+                   code,
+                   sep = "-",
+                   na.rm = TRUE) |>
+      dplyr::rename(group = description.x,
+                    description = description.y)
 
-  if (type == "rarc") {
-
-    adj$rarc <- dplyr::select(adj$rarc, -c(notes:last_modified))
   }
   return(adj)
 }

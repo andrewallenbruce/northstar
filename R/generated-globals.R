@@ -46,8 +46,6 @@ utils::globalVariables(c(
   "labcert",
   # <col_lb>
   "label",
-  # <adjustment_codes>
-  "last_modified",
   # <level2>
   "long_description",
   # <rbcs>
@@ -64,8 +62,6 @@ utils::globalVariables(c(
   "mult",
   # <level2>
   "mult_pi",
-  # <adjustment_codes>
-  "notes",
   # <hcpcs_search>
   "npar",
   # <hcpcs_search>

@@ -4,7 +4,13 @@
 \alias{adjustment_codes}
 \title{Adjustment Codes}
 \usage{
-adjustment_codes(df = NULL, col = NULL, type = c("all", "carc", "rarc"), ...)
+adjustment_codes(
+  df = NULL,
+  col = NULL,
+  type = c("all", "carc", "rarc"),
+  action = c("review", "join"),
+  ...
+)
 }
 \arguments{
 \item{df}{data.frame}
@@ -13,14 +19,15 @@ adjustment_codes(df = NULL, col = NULL, type = c("all", "carc", "rarc"), ...)
 
 \item{type}{type of Adjustment code; \code{all} (default), \code{carc}, \code{rarc}}
 
-\item{...}{description}
+\item{action}{action to take; \code{review} (default), \code{join}}
+
+\item{...}{Empty}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-Claim Adjustment Reason Codes (CARCs) and
-Remittance Advice Remark Codes (RARCs)
+CARC and RARC Codes
 }
 \section{Claim Adjustment Reason Codes}{
 
@@ -29,9 +36,17 @@ Remittance Advice Remark Codes (RARCs)
 
 These codes describe why a claim or service line was paid differently
 than it was billed and generally assign responsibility for the
-adjustment amounts. The format is always two alpha characters.
+adjustment amounts.
 
-The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12 standard.
+The Claim Adjustment Group Codes (e.g., PR, OA) are internal to the X12
+standard. The format is always two alpha characters:
+\itemize{
+\item CO: Contractual Obligations
+\item CR: Corrections and Reversals
+\item OA: Other Adjustments
+\item PI: Payer Initiated Reductions
+\item PR: Patient Responsibility
+}
 }
 
 \section{Remittance Advice Remark Codes}{
@@ -64,6 +79,16 @@ never related to a specific adjustment or CARC.
 \examples{
 adjustment_codes()$group
 
+adjustment_codes(type = "carc",
+                 action = "review") |>
+                 head()
+
+adjustment_codes(type = "rarc",
+                 action = "review") |>
+                 head()
+
 dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
-adjustment_codes(type = "carc", col = "code")
+adjustment_codes(col = "code",
+                 type = "carc",
+                 action = "join")
 }
