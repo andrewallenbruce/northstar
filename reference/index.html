@@ -18,25 +18,50 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/fee-schedule.html">Getting started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/columns.html">Columns</a>
-    <a class="dropdown-item" href="../articles/fee-schedule.html">Fee Schedule</a>
+    <a class="dropdown-item" href="../articles/columns.html">Dictionary</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/andrewallenbruce/northstar/" aria-label="github">
+  <a class="nav-link" href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+    
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">
+    <span class="far fa far fa-newspaper fa-lg"></span>
+     
+    
+  </a>
+</li>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/andrewallenbruce/northstar">
     <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li class="nav-item">
+  <a class="external-link nav-link" href="http://twitter.com/aabrucehimni">
+    <span class="fab fa fab fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://www.linkedin.com/in/andybruce1/">
+    <span class="fas fa fas fa-linkedin fa-lg"></span>
      
   </a>
 </li>
@@ -51,9 +76,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="medical-codesets">Medical Codesets<a class="anchor" aria-label="anchor" href="#medical-codesets"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Medical Coding &amp; Billing Codesets.</p>
 
       
     </div><div id="" class="section level2">
@@ -68,10 +93,86 @@
         <dd>Adjustment Codes</dd>
       </dl><dl><dt>
           
-          <code><a href="calculate_amounts.html">calculate_amounts()</a></code> 
+          <code><a href="icd10_search.html">icd10_search()</a></code> 
         </dt>
-        <dd>Calculate Physician Fee Schedule Payment Amounts</dd>
+        <dd>Search the NLM's ICD-10-CM API</dd>
       </dl><dl><dt>
+          
+          <code><a href="hcpcs_search.html">hcpcs_search()</a></code> 
+        </dt>
+        <dd>Look up Information about HCPCS Codes</dd>
+      </dl><dl><dt>
+          
+          <code><a href="lcd.html">lcd()</a></code> 
+        </dt>
+        <dd>LCD Download Database</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ncd.html">ncd()</a></code> 
+        </dt>
+        <dd>NCD Download Database</dd>
+      </dl><dl><dt>
+          
+          <code><a href="rvu.html">rvu()</a></code> 
+        </dt>
+        <dd>2024 National Physician Fee Schedule Relative Value File</dd>
+      </dl><dl><dt>
+          
+          <code><a href="pfs.html">pfs()</a></code> 
+        </dt>
+        <dd>2024 Physician Fee Schedule Payment Amount File</dd>
+      </dl><dl><dt>
+          
+          <code><a href="gpci.html">gpci()</a></code> 
+        </dt>
+        <dd>2024 Geographic Practice Cost Indices</dd>
+      </dl><dl><dt>
+          
+          <code><a href="level2.html">level2()</a></code> 
+        </dt>
+        <dd>2024 Healthcare Common Procedure Coding System (HCPCS)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="descriptors.html">descriptors()</a></code> 
+        </dt>
+        <dd>2023 CPT Descriptors (Clinician &amp; Consumer-Friendly)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="rbcs.html">rbcs()</a></code> 
+        </dt>
+        <dd>Restructured BETOS Classification for HCPCS</dd>
+      </dl><dl><dt>
+          
+          <code><a href="opps.html">opps()</a></code> 
+        </dt>
+        <dd>OPPSCAP</dd>
+      </dl><dl><dt>
+          
+          <code><a href="msdrg.html">msdrg()</a></code> 
+        </dt>
+        <dd>Medicare Severity Diagnosis-Related Groups (MS-DRG)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="modifiers.html">modifiers()</a></code> 
+        </dt>
+        <dd>Level I and II HCPCS Modifiers</dd>
+      </dl><dl><dt>
+          
+          <code><a href="taxonomy.html">taxonomy()</a></code> 
+        </dt>
+        <dd>NUCC Provider Taxonomy Code Set</dd>
+      </dl></div><div class="section level2">
+      <h2 id="labelling-functions">Labelling Functions<a class="anchor" aria-label="anchor" href="#labelling-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>Utilities to label Codeset outputs.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="case_asc.html">case_asc()</a></code> 
         </dt>
@@ -191,56 +292,22 @@
           <code><a href="cases.html">case_coverage()</a></code> 
         </dt>
         <dd>Replace HCPCS Level II Coverage Indicators with Descriptions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="descriptors.html">descriptors()</a></code> 
-        </dt>
-        <dd>2023 CPT Descriptors (Clinician &amp; Consumer-Friendly)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="gpci.html">gpci()</a></code> 
-        </dt>
-        <dd>2024 Geographic Practice Cost Indices</dd>
-      </dl><dl><dt>
-          
-          <code><a href="hcpcs_search.html">hcpcs_search()</a></code> 
-        </dt>
-        <dd>Look up Information about HCPCS Codes</dd>
-      </dl><dl><dt>
-          
-          <code><a href="icd10_search.html">icd10_search()</a></code> 
-        </dt>
-        <dd>Search the NLM's ICD-10-CM API</dd>
-      </dl><dl><dt>
-          
-          <code><a href="lcd.html">lcd()</a></code> 
-        </dt>
-        <dd>LCD Download Database</dd>
-      </dl><dl><dt>
-          
-          <code><a href="level2.html">level2()</a></code> 
-        </dt>
-        <dd>2024 Healthcare Common Procedure Coding System (HCPCS)</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="calculations">Calculations<a class="anchor" aria-label="anchor" href="#calculations"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions to calculate Fee Schedule Amounts.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="limiting_charge.html">limiting_charge()</a></code> 
         </dt>
         <dd>Calculate Limiting Charge</dd>
-      </dl><dl><dt>
-          
-          <code><a href="modifiers.html">modifiers()</a></code> 
-        </dt>
-        <dd>Level I and II HCPCS Modifiers</dd>
-      </dl><dl><dt>
-          
-          <code><a href="msdrg.html">msdrg()</a></code> 
-        </dt>
-        <dd>Medicare Severity Diagnosis-Related Groups (MS-DRG)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ncd.html">ncd()</a></code> 
-        </dt>
-        <dd>NCD Download Database</dd>
       </dl><dl><dt>
           
           <code><a href="non_participating_amount.html">non_participating_amount()</a></code> 
@@ -248,31 +315,12 @@
         <dd>Calculate Non-Participating Amount</dd>
       </dl><dl><dt>
           
-          <code><a href="opps.html">opps()</a></code> 
+          <code><a href="calculate_amounts.html">calculate_amounts()</a></code> 
         </dt>
-        <dd>OPPSCAP</dd>
-      </dl><dl><dt>
-          
-          <code><a href="pfs.html">pfs()</a></code> 
-        </dt>
-        <dd>2024 Physician Fee Schedule Payment Amount File</dd>
-      </dl><dl><dt>
-          
-          <code><a href="rbcs.html">rbcs()</a></code> 
-        </dt>
-        <dd>Restructured BETOS Classification for HCPCS</dd>
-      </dl><dl><dt>
-          
-          <code><a href="rvu.html">rvu()</a></code> 
-        </dt>
-        <dd>2024 National Physician Fee Schedule Relative Value File</dd>
-      </dl><dl><dt>
-          
-          <code><a href="taxonomy.html">taxonomy()</a></code> 
-        </dt>
-        <dd>NUCC Provider Taxonomy Code Set</dd>
+        <dd>Calculate Physician Fee Schedule Payment Amounts</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
