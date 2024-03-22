@@ -2,6 +2,11 @@ url: https://andrewallenbruce.github.io/northstar/
 
 template:
   bootstrap: 5
+  bslib:
+    font_scale: 1.1
+    base_font: {google: "IBM Plex Sans"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "Fira Code"}
 
 home:
   title: northstar • Tidy Healthcare Revenue Integrity Tools
