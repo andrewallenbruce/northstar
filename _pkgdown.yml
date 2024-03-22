@@ -1,4 +1,91 @@
 url: https://andrewallenbruce.github.io/northstar/
+
 template:
   bootstrap: 5
 
+home:
+  title: northstar • Tidy Healthcare Revenue Integrity Tools
+  description: >
+    Tidy tools for wrangling and analyzing healthcare revenue cycles.
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    right:
+    - home
+    - news
+    - github
+    - twitter
+    - linkedin
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      text: ""
+      href: index.html
+    intro:
+      icon: ~
+      text: Getting started
+      href: articles/fee-schedule.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Dictionary
+        href: articles/columns.html
+    news:
+      icon: far fa-newspaper fa-lg
+      href: news/index.html
+      text: ""
+      title: "Changelog"
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/andrewallenbruce/northstar
+    linkedin:
+      icon: fas fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/andybruce1/
+    twitter:
+      icon: fab fa-twitter fa-lg
+      href: http://twitter.com/aabrucehimni
+
+reference:
+
+- title: Medical Codesets
+  desc: >
+    Medical Coding & Billing Codesets.
+  contents:
+  - adjustment_codes
+  - icd10_search
+  - hcpcs_search
+  - lcd
+  - ncd
+  - rvu
+  - pfs
+  - gpci
+  - level2
+  - descriptors
+  - rbcs
+  - opps
+  - msdrg
+  - modifiers
+  - taxonomy
+
+- title: Labelling Functions
+  desc: >
+    Utilities to label Codeset outputs.
+  contents:
+  - starts_with("case_")
+
+- title: Calculations
+  desc: >
+    Functions to calculate Fee Schedule Amounts.
+  contents:
+  - limiting_charge
+  - non_participating_amount
+  - calculate_amounts

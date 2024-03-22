@@ -1,6 +1,6 @@
 #' NUCC Provider Taxonomy Code Set
 #'
-#' `taxonomy_codes()` returns a [tibble()] of the current Health Care Provider
+#' `taxonomy()` returns a [tibble()] of the current Health Care Provider
 #' Taxonomy code set
 #'
 #' __Update Frequency__: _Biannually_
