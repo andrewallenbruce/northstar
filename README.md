@@ -1,10 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# northstar <img src="man/figures/logo.png" align="right" height="200" />
+# northstar <img src="man/figures/logo.png" align="right" height="150" />
 
 <!-- badges: start -->
 <!-- badges: end -->
+
+> Tidy Healthcare Revenue Integrity Tools
+
+<br>
 
 ## :package: Installation
 
