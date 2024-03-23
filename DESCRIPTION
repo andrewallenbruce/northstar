@@ -13,25 +13,26 @@ Depends:
     R (>= 4.1.0)
 Imports:
     cli,
+    collapse,
     dplyr,
+    httr2,
     pins,
     purrr,
     rlang,
     stringr,
     tidyr,
-    vctrs,
-    collapse,
-    httr2
+    vctrs
 Suggests:
-    fontawesome,
     clock,
-    janitor,
+    fontawesome,
     gluedown,
     gt,
+    janitor,
     knitr,
     qs,
     rmarkdown,
-    roxyglobals
+    roxyglobals,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Config/roxyglobals/filename: generated-globals.R
@@ -40,3 +41,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
 RoxygenNote: 7.3.1
+Config/testthat/edition: 3

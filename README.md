@@ -4,6 +4,9 @@
 # northstar <img src="man/figures/logo.png" align="right" height="150" />
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
 <!-- badges: end -->
 
 > Tidy Healthcare Revenue Integrity Tools
@@ -198,3 +201,20 @@ calculate_amounts(
     > Participating ........ $470.44
     > Non-Particpating ..... $446.91
     > Limiting Charge ...... $513.95
+
+------------------------------------------------------------------------
+
+## :balance_scale: Code of Conduct
+
+Please note that the `northstar` project is released with a [Contributor
+Code of
+Conduct](https://andrewallenbruce.github.io/northstar/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+<br>
+
+## :classical_building: Governance
+
+This project is primarily maintained by [Andrew
+Bruce](https://github.com/andrewallenbruce). Other authors may
+occasionally assist with some of these duties.

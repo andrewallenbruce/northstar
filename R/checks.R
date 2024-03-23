@@ -48,6 +48,8 @@ is_valid_length <- function(x,
 #'
 #' is_level_I("E8015")
 #'
+#' purrr::map_vec(c("11646", "E8015"), is_level_I)
+#'
 #' @export
 #' @autoglobal
 is_level_I <- function(x,

@@ -37,4 +37,6 @@ is_level_I("11646")
 
 is_level_I("E8015")
 
+purrr::map_vec(c("11646", "E8015"), is_level_I)
+
 }
