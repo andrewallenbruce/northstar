@@ -2,7 +2,7 @@
 % Please edit documentation in R/lcd_ncd.R
 \name{lcd}
 \alias{lcd}
-\title{LCD Download Database}
+\title{Local Coverage Determinations}
 \usage{
 lcd(hcpcs = NULL, ...)
 }
@@ -15,7 +15,7 @@ lcd(hcpcs = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Last Updated 2023-04-27
+Database Last Updated 2023-04-27
 }
 \examples{
 lcd(hcpcs = c("A4555", "E0766"))

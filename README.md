@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# northstar
+# northstar <img src="man/figures/logo.png" align="right" height="200" />
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -90,7 +90,8 @@ hcpcs_search(hcpcs    = "33935",
     > $ unused                <int> 0
 
 ``` r
-rvu(hcpcs = "V5299") |> glimpse()
+rvu(hcpcs = "V5299") |> 
+  glimpse()
 ```
 
     > Rows: 1

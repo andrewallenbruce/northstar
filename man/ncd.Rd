@@ -2,7 +2,7 @@
 % Please edit documentation in R/lcd_ncd.R
 \name{ncd}
 \alias{ncd}
-\title{NCD Download Database}
+\title{National Coverage Determinations}
 \usage{
 ncd(coverage = NULL)
 }
@@ -13,7 +13,7 @@ ncd(coverage = NULL)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Last Updated 2022-12-08
+Database Last Updated 2022-12-08
 }
 \examples{
 ncd(coverage = "Unknown")

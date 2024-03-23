@@ -6,6 +6,8 @@
 \alias{northstar-package}
 \title{northstar: Tidy Revenue Integrity Tools}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Revenue integrity tools.
 }
 \seealso{

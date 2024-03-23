@@ -1,6 +1,6 @@
-#' NCD Download Database
+#' National Coverage Determinations
 #'
-#' Last Updated 2022-12-08
+#' Database Last Updated 2022-12-08
 #'
 #' @param coverage Coverage level; `"Full"`, `"Restricted"`, `"None"`, `"Unknown"`
 #' @return a [tibble][tibble::tibble-package]
@@ -21,9 +21,9 @@ ncd <- function(coverage = NULL) {
   return(ncd)
 }
 
-#' LCD Download Database
+#' Local Coverage Determinations
 #'
-#' Last Updated 2023-04-27
+#' Database Last Updated 2023-04-27
 #'
 #' @param hcpcs vector of HCPCS codes
 #' @param ... Empty
