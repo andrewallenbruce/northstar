@@ -17,6 +17,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
+[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
+[![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
+[![License: Apache License (>= 2)](https://img.shields.io/badge/license-Apache License (>= 2)-blue.svg)](https://cran.r-project.org/web/licenses/Apache License (>= 2))
+[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
 <!-- badges: end -->
 
 > Tidy Healthcare Revenue Integrity Tools
@@ -34,13 +39,13 @@ pak::pak("andrewallenbruce/northstar")
 
 ## :beginner: Usage
 
-```{r setup, warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE}
 library(northstar)
 library(dplyr)
 ```
 
 
-## Return Information about HCPCS Code
+## Search HCPCS Codes
 
 ```{r}
 hcpcs_search(hcpcs    = "33935", 
@@ -50,28 +55,17 @@ hcpcs_search(hcpcs    = "33935",
   glimpse()
 ```
 
-
-
-```{r}
-rvu(hcpcs = "V5299") |> 
-  glimpse()
-```
+## Search ICD-10 Codes
 
 ```{r}
-gpci(state    = "GA",
-     locality = "01",
-     mac      = "10212") |> 
-  glimpse()
+icd10_search(code  = "T38.0X1A", 
+             field = "code") |> 
+  case_section_icd10(code) |> 
+  dplyr::glimpse()
 ```
 
 
-```{r}
-pfs(hcpcs    = "11646", 
-    mac      = "10212",
-    locality = "99") |> 
-  glimpse()
-```
-
+## Physician Fee Schedule Calculation
 
 ```{r}
 calculate_amounts(

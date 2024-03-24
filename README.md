@@ -7,6 +7,14 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
+[![Code
+size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
+[![Last
+commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
+[![License: Apache License (\>=
+2)](https://img.shields.io/badge/license-Apache%20License%20(%3E=%202)-blue.svg)](https://cran.r-project.org/web/licenses/Apache%20License%20(%3E=%202))
+[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
 <!-- badges: end -->
 
 > Tidy Healthcare Revenue Integrity Tools
@@ -29,7 +37,7 @@ library(northstar)
 library(dplyr)
 ```
 
-## Return Information about HCPCS Code
+## Search HCPCS Codes
 
 ``` r
 hcpcs_search(hcpcs    = "33935", 
@@ -96,84 +104,22 @@ hcpcs_search(hcpcs    = "33935",
     > $ rare                  <chr> "10"
     > $ unused                <int> 0
 
+## Search ICD-10 Codes
+
 ``` r
-rvu(hcpcs = "V5299") |> 
-  glimpse()
+icd10_search(code  = "T38.0X1A", 
+             field = "code") |> 
+  case_section_icd10(code) |> 
+  dplyr::glimpse()
 ```
 
     > Rows: 1
-    > Columns: 28
-    > $ hcpcs       <chr> "V5299"
-    > $ description <chr> "Hearing service"
-    > $ mod         <chr> NA
-    > $ status      <chr> "R"
-    > $ wrvu        <dbl> 0
-    > $ nprvu       <dbl> 0
-    > $ fprvu       <dbl> 0
-    > $ mrvu        <dbl> 0
-    > $ cf          <dbl> 32.744
-    > $ nprvu_opps  <dbl> 0
-    > $ fprvu_opps  <dbl> 0
-    > $ mrvu_opps   <dbl> 0
-    > $ global      <chr> "XXX"
-    > $ op_ind      <dbl> 0
-    > $ op_pre      <dbl> 0
-    > $ op_intra    <dbl> 0
-    > $ op_post     <dbl> 0
-    > $ pctc        <chr> "0"
-    > $ mult_proc   <chr> "0"
-    > $ surg_bilat  <chr> "0"
-    > $ surg_asst   <chr> "0"
-    > $ surg_co     <chr> "0"
-    > $ surg_team   <chr> "0"
-    > $ endo        <chr> NA
-    > $ supvis      <chr> "09"
-    > $ dximg       <chr> "99"
-    > $ unused      <int> 0
-    > $ rare        <chr> "00"
+    > Columns: 3
+    > $ code        <chr> "T38.0X1A"
+    > $ section     <chr> "Injury, Poisoning and Certain Other Consequences of Exter…
+    > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
 
-``` r
-gpci(state    = "GA",
-     locality = "01",
-     mac      = "10212") |> 
-  glimpse()
-```
-
-    > Rows: 1
-    > Columns: 9
-    > $ mac      <chr> "10212"
-    > $ state    <chr> "GA"
-    > $ locality <chr> "01"
-    > $ name     <chr> "ATLANTA"
-    > $ wgpci    <dbl> 1
-    > $ pgpci    <dbl> 0.997
-    > $ mgpci    <dbl> 1.128
-    > $ counties <chr> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYETTE, FO…
-    > $ two_macs <lgl> FALSE
-
-``` r
-pfs(hcpcs    = "11646", 
-    mac      = "10212",
-    locality = "99") |> 
-  glimpse()
-```
-
-    > Rows: 1
-    > Columns: 14
-    > $ mac       <chr> "10212"
-    > $ locality  <chr> "99"
-    > $ hcpcs     <chr> "11646"
-    > $ mod       <chr> NA
-    > $ status    <chr> "A"
-    > $ mult_surg <chr> "0"
-    > $ flat_vis  <dbl> 0
-    > $ nther     <dbl> 2
-    > $ fther     <dbl> 0
-    > $ fee_nf    <dbl> 470.44
-    > $ fee_f     <dbl> 367.51
-    > $ opps      <chr> "9"
-    > $ opps_nf   <dbl> 0
-    > $ opps_f    <dbl> 0
+## Physician Fee Schedule Calculation
 
 ``` r
 calculate_amounts(

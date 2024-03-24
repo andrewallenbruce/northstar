@@ -4,6 +4,8 @@ gpci:
 - gpci/20240305T074723Z-2c2a4/
 hcpcs:
 - hcpcs/20240311T071522Z-1cf0e/
+icd10cm:
+- icd10cm/20240324T022634Z-b52f8/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 modifiers:
