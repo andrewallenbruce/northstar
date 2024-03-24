@@ -135,7 +135,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="return-information-about-hcpcs-code">Return Information about HCPCS Code<a class="anchor" aria-label="anchor" href="#return-information-about-hcpcs-code"></a>
+<h2 id="search-hcpcs-codes">Search HCPCS Codes<a class="anchor" aria-label="anchor" href="#search-hcpcs-codes"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/hcpcs_search.html">hcpcs_search</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"33935"</span>, </span>
@@ -199,77 +199,25 @@
 <span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> endo                  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
 <span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rare                  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10"</span></span>
 <span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> unused                <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="search-icd-10-codes">Search ICD-10 Codes<a class="anchor" aria-label="anchor" href="#search-icd-10-codes"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10_search.html">icd10_search</a></span><span class="op">(</span>code  <span class="op">=</span> <span class="st">"T38.0X1A"</span>, </span>
+<span>             field <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="reference/case_section_icd10.html">case_section_icd10</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">28</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"V5299"</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Hearing service"</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod         <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"R"</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu        <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cf          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">32.744</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fprvu_opps  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mrvu_opps   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> global      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"XXX"</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_ind      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_pre      <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_intra    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> op_post     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pctc        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_proc   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_bilat  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_asst   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_co     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> surg_team   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> endo        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> supvis      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"09"</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> dximg       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> unused      <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rare        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"00"</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">3</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> code        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"T38.0X1A"</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> section     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Injury, Poisoning and Certain Other Consequences of Exter…</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="st">&gt; $ description &lt;chr&gt; "</span>Poisoning by glucocorticoids and synthetic analogues, acc…</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="physician-fee-schedule-calculation">Physician Fee Schedule Calculation<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-calculation"></a>
+</h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/gpci.html">gpci</a></span><span class="op">(</span>state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
-<span>     locality <span class="op">=</span> <span class="st">"01"</span>,</span>
-<span>     mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">9</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"GA"</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"01"</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> name     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ATLANTA"</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> wgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> pgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">0.997</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mgpci    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">1.128</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYETTE, FO…</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="st">&gt; $ two_macs &lt;lgl&gt; FALSE</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pfs.html">pfs</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
-<span>    mac      <span class="op">=</span> <span class="st">"10212"</span>,</span>
-<span>    locality <span class="op">=</span> <span class="st">"99"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">14</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"99"</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"11646"</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mod       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="cn">NA</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"A"</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mult_surg <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"0"</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> flat_vis  <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> nther     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fther     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_nf    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">470.44</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> fee_f     <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="fl">367.51</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"9"</span></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps_nf   <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> opps_f    <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="dv">0</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calculate_amounts.html">calculate_amounts</a></span><span class="op">(</span></span>
 <span>  wrvu  <span class="op">=</span> <span class="fl">6.26</span>,</span>
 <span>  nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span>
@@ -280,19 +228,19 @@
 <span>  pgpci <span class="op">=</span> <span class="fl">0.883</span>,</span>
 <span>  mgpci <span class="op">=</span> <span class="fl">1.125</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility Amounts<span class="sc">:</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="er">&gt;</span> </span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">11.22</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">367.51</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">349.13</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">401.50</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="sc">&gt;</span> </span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility Amounts<span class="sc">:</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="er">&gt;</span> </span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">14.37</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">470.44</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">446.91</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">513.95</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility Amounts<span class="sc">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="er">&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">11.22</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">367.51</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">349.13</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">401.50</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility Amounts<span class="sc">:</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="er">&gt;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">14.37</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">470.44</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">446.91</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">513.95</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -350,6 +298,11 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master" class="external-link"><img src="https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.codefactor.io/repository/github/andrewallenbruce/northstar" class="external-link"><img src="https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge" alt="CodeFactor"></a></li>
+<li><a href="https://github.com/andrewallenbruce/northstar" class="external-link"><img src="https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg" alt="Code size"></a></li>
+<li><a href="https://github.com/andrewallenbruce/northstar/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg" alt="Last commit"></a></li>
+<li><a href="https://cran.r-project.org/web/licenses/Apache%20License%20(%3E=%202)" class="external-link"><img src="https://img.shields.io/badge/license-Apache%20License%20(%3E=%202)-blue.svg" alt="License: Apache License (&gt;= 2)"></a></li>
+<li><a href="https://github.com/andrewallenbruce/northstar" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.0.2-red.svg" alt="Version"></a></li>
 </ul>
 </div>
 
