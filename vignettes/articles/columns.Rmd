@@ -6,7 +6,7 @@ title: "Columns"
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE,
-  message   = TRUE, 
+  message   = FALSE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
@@ -14,59 +14,17 @@ knitr::opts_chunk$set(
   out.width = "100%"
   )
 
-gt_style <- function(gt_tbl) {
-  gt_tbl |> 
-    # opt_all_caps() |>
-    fmt_markdown() |> 
-    fmt_integer() |> 
-    cols_align("left") |> 
-    tab_style(
-    style = cell_text(align = "center", 
-                      size = px(18),
-                      weight = "bold"),
-    locations = cells_stub()) |> 
-    tab_options(
-      column_labels.hidden       = TRUE,
-      table.font.size            = px(14),
-      table.width                = pct(100),
-      heading.align = "left",
-      heading.title.font.size    = px(16),
-      heading.subtitle.font.size = px(16),
-      source_notes.font.size     = px(16),
-      row_group.as_column        = TRUE,
-      row_group.font.size        = px(24)
-    )
-}
-
-gt_marks <- function(gt_tbl, cols) {
-
-  gt_tbl |>
-    gt::text_case_when(
-      x == TRUE ~ gt::html(
-        fontawesome::fa("check",
-                        prefer_type = "solid",
-                        fill = "red")),
-      x == FALSE ~ gt::html(
-        fontawesome::fa("xmark",
-                        prefer_type = "solid",
-                        fill = "white")),
-      .default = NA,
-      .locations = gt::cells_body(
-        columns = {{ cols }}))
-}
-
 modtitle <- "For **Diagnostic Tests**, a blank in this field denotes the **Global Service** & the following Modifiers identify the components:"
 
 f53 <- "Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use)."
 
 fmod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
-```
 
-```{r pkgs, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
 library(gt)
 ```
+
 
 # PFS Payment Amount File
 
@@ -75,7 +33,7 @@ This file contains locality-specific physician fee schedule payment amounts for 
 ```{r}
 northstar:::col_lb("md", "pfs") |> 
   gt(rowname_col = "var") |>
-  gt_style()
+  northstar:::gt_style(tablign = "right")
 ```
 
 
@@ -88,7 +46,7 @@ The Medicare physician fee schedule amounts are adjusted to reflect the variatio
 ```{r}
 northstar:::col_lb("md", "rvu") |> 
   gt(rowname_col = "var") |>
-  gt_style()
+  northstar:::gt_style(tablign = "left")
 ```
 
 
@@ -101,7 +59,7 @@ dplyr::tibble(mod = c("26", "TC", "53")) |>
   tab_header(title = md(modtitle)) |> 
   tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
   tab_footnote(fmod) |> 
-  gt_style()
+  northstar:::gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -110,28 +68,27 @@ dplyr::tibble(mod = c("26", "TC", "53")) |>
 ```{r}
 x <- sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))
 
+stnote <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
+
 dplyr::tibble(status_code = x, 
               code = x) |> 
   case_status(code, desc = TRUE) |> 
   gt(rowname_col = "status_code") |> 
-  tab_header(title = md("Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment.")) |> 
-  tab_style(
-    style = cell_fill(color = "yellow", alpha = 0.3),
-    locations = cells_body(
-      columns = everything(),
-      rows = c(1, 12, 13))) |> 
-  gt_style()
+  tab_header(title = md(stnote)) |> 
+  tab_style(style = cell_fill(color = "yellow", alpha = 0.3),
+            locations = cells_body(columns = everything(), rows = c(1, 12, 13))) |> 
+  northstar:::gt_style(tablign = "center", tabsize = 18)
 ```
 
 
-## Global
+## Global Days
 
 ```{r}
 dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")) |> 
   case_global(global) |>
   gt(rowname_col = "global") |> 
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style()
+  northstar:::gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -142,7 +99,7 @@ dplyr::tibble(code = as.character(0:9)) |>
   case_pctc(code) |> 
   gt(rowname_col = "code") |> 
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style()
+  northstar:::gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -153,7 +110,7 @@ dplyr::tibble(code = as.character(c(0:7, 9))) |>
   case_multproc(code) |>
   gt(rowname_col = "code") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style()
+  northstar:::gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -166,7 +123,7 @@ dplyr::tibble(dximg = img) |>
   case_imaging(dximg) |> 
   gt(rowname_col = "dximg") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style()
+  northstar:::gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -193,12 +150,12 @@ gpci() |>
     mac      = "MAC",
     state    = "State",
     locality = "Locality",
-    name     = "Name",
+    area     = "Area",
     wgpci    = "Work",
     pgpci    = "Practice",
     mgpci    = "Malpractice",
     two_macs = "Two MACs") |> 
-  cols_merge(columns = c(locality, name),
+  cols_merge(columns = c(locality, area),
              pattern = "<b>{1}</b><< {2}>>") |> 
   cols_align(align = "left") |> 
   fmt_number(decimals = 3, 
@@ -211,16 +168,7 @@ gpci() |>
                cells_body(columns = locality, 
                           rows = c(68, 70, 81, 91, 109))) |> 
   tab_footnote(footnote = md(note)) |>
-  tab_style(style = cell_text(align = "center", size = px(14)),
-            locations = cells_stub()) |> 
-  tab_options(
-    table.font.size            = px(14),
-    table.width                = pct(100),
-    heading.title.font.size    = px(16),
-    heading.subtitle.font.size = px(16),
-    heading.align              = "left",
-    source_notes.font.size     = px(16),
-    row_group.as_column        = TRUE) |> 
+  northstar:::gt_style(tablign = "center", tabsize = 14) |> 
   gt_marks(cols = c(two_macs))
 ```
 

@@ -7,20 +7,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE,
-  message   = TRUE, 
+  message   = FALSE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
   dpi       = 600, 
   out.width = "100%"
   )
-```
 
-```{r setup, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
 library(tidyr)
@@ -29,7 +27,7 @@ library(janitor)
 library(gt)
 ```
 
-## Look Up HCPCS Code
+# HCPCS
 
 ```{r}
 hcpcs_search(
@@ -45,26 +43,11 @@ hcpcs_search(
   ungroup() |> 
   display_long() |>
   gt(rowname_col = "name") |>
-  fmt_markdown() |> 
-  tab_options(
-    column_labels.hidden = TRUE,
-    table.width = pct(75),
-    heading.title.font.size = px(20),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    footnotes.font.size = px(12))
+  northstar:::gt_style(tablign = "right", tabsize = 14)
 ```
 
 
-```{r}
-opps(hcpcs    = "70170", 
-     mac      = "10212", 
-     locality = "01") |> 
-  glimpse()
-```
-
-
-```{r}
+```{r echo=FALSE, eval=FALSE}
 hcpcs_search(hcpcs    = "70170", 
              state    = "GA", 
              locality = "01") |> 
@@ -72,40 +55,12 @@ hcpcs_search(hcpcs    = "70170",
 ```
 
 
-## Data Sources
+# ICD-10-CM
 
 ```{r}
-rvu(hcpcs = "11646") |> 
-  glimpse()
-```
-
-```{r}
-gpci(state    = "GA",
-     locality = "01",
-     mac      = "10212") |> 
-  glimpse()
-```
-
-```{r}
-pfs(hcpcs    = "11646", 
-    locality = "01",
-    mac      = "10212") |> 
-  glimpse()
-```
-
-
-```{r}
-descriptors(hcpcs = "11646") |> 
-  glimpse()
-```
-
-
-
-```{r}
-level2(hcpcs = "V5299") |> glimpse()
-```
-
-```{r}
-rbcs(hcpcs = "V5299") |> glimpse()
+icd10cm(code = "F50.82") |> 
+  display_long() |>
+  gt(rowname_col = "name") |>
+  northstar:::gt_style(tablign = "right", tabsize = 14)
 ```
 

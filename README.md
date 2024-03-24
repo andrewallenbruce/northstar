@@ -5,6 +5,8 @@
 
 > Tidy Healthcare Revenue Integrity Tools
 
+<br>
+
 <!-- badges: start -->
 
 [![Codecov test
@@ -15,7 +17,7 @@ size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northst
 [![Last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
 <br>
-[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
+[![Version](https://img.shields.io/badge/version-0.0.4-red.svg)](https://github.com/andrewallenbruce/northstar)
 
 <!-- badges: end -->
 
