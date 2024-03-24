@@ -127,6 +127,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/icd10_search.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/icd10cm.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/index.html</loc>
   </url>
   <url>
@@ -143,6 +146,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_level_II.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_icd.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_length.html</loc>

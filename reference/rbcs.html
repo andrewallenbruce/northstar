@@ -78,7 +78,7 @@ meaningful categories based on the original Berenson-Eggers Type of Service
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Restructured BETOS Classification for HCPCS</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/R/databases.R" class="external-link"><code>R/databases.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/R/rbcs.R" class="external-link"><code>R/rbcs.R</code></a></small>
       <div class="d-none name"><code>rbcs.Rd</code></div>
     </div>
 
@@ -104,11 +104,11 @@ meaningful categories based on the original <em>Berenson-Eggers Type of Service<
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>hcpcs</dt>
-<dd><p>&lt; <em>character</em> &gt; HCPCS code</p></dd>
+<dd><p><em><chr></chr></em> vector of 5-digit HCPCS codes</p></dd>
 
 
 <dt>category</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS Category:</p><ul><li><p><code>Procedure</code> (n = 6920)</p></li>
+<dd><p><em><chr></chr></em> vector of RBCS categories:</p><ul><li><p><code>Procedure</code> (n = 6920)</p></li>
 <li><p><code>Test</code> (n = 3015)</p></li>
 <li><p><code>DME</code> (n = 2971)</p></li>
 <li><p><code>Treatment</code> (n = 1795)</p></li>
@@ -120,33 +120,33 @@ meaningful categories based on the original <em>Berenson-Eggers Type of Service<
 
 
 <dt>subcategory</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS Subcategory (53 unique in total)</p></dd>
+<dd><p><em><chr></chr></em> vector of RBCS subcategories (53 unique in total)</p></dd>
 
 
 <dt>family</dt>
-<dd><p>&lt; <em>character</em> &gt; RBCS Family (178 unique in total)</p></dd>
+<dd><p><em><chr></chr></em> vector of RBCS families (178 unique in total)</p></dd>
 
 
 <dt>procedure</dt>
-<dd><p>&lt; <em>character</em> &gt; Procedure Type:</p><ul><li><p><code>Major</code> (n = 3676)</p></li>
+<dd><p><em><chr></chr></em> Procedure Type:</p><ul><li><p><code>Major</code> (n = 3676)</p></li>
 <li><p><code>Non-Procedure</code> (n = 10113)</p></li>
 <li><p><code>Other</code> (n = 3244)</p></li>
 </ul></dd>
 
 
 <dt>limit_cols</dt>
-<dd><p>&lt; <em>logical</em> &gt; Limit Columns</p></dd>
+<dd><p><em><lgl></lgl></em> Limit Columns, default is <code>TRUE</code></p></dd>
 
 
 <dt>...</dt>
-<dd><p>description</p></dd>
+<dd><p>Empty</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Column</strong></td><td><strong>Description</strong></td></tr><tr><td><code>hcpcs</code></td><td>HCPCS or CPT code</td></tr><tr><td><code>rbcs</code></td><td>RBCS Identifier</td></tr><tr><td><code>category</code></td><td>RBCS Category</td></tr><tr><td><code>subcategory</code></td><td>RBCS Subcategory</td></tr><tr><td><code>family</code></td><td>RBCS Family</td></tr><tr><td><code>procedure</code></td><td>RBCS Major Procedure Indicator</td></tr><tr><td><code>date_hcpcs_add</code></td><td>Date HCPCS Code was added</td></tr><tr><td><code>date_hcpcs_end</code></td><td>Date HCPCS Code was no longer effective</td></tr><tr><td><code>date_rbcs_assign</code></td><td>Earliest Date that the RBCS ID was effective</td></tr></table></div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Column</strong></td><td><strong>Description</strong></td></tr><tr><td><code>hcpcs</code></td><td>HCPCS or CPT code</td></tr><tr><td><code>rbcs</code></td><td>RBCS Identifier</td></tr><tr><td><code>rbcs_category</code></td><td>RBCS Category</td></tr><tr><td><code>rbcs_subcategory</code></td><td>RBCS Subcategory</td></tr><tr><td><code>rbcs_family</code></td><td>RBCS Family</td></tr><tr><td><code>rbcs_procedure</code></td><td>RBCS Major Procedure Indicator</td></tr><tr><td><code>date_hcpcs_add</code></td><td>Date HCPCS Code was added</td></tr><tr><td><code>date_hcpcs_end</code></td><td>Date HCPCS Code was no longer effective</td></tr><tr><td><code>date_rbcs_assign</code></td><td>Earliest Date that the RBCS ID was effective</td></tr></table></div>
     <div class="section level2">
     <h2 id="from-betos-to-rbcs">From BETOS to RBCS<a class="anchor" aria-label="anchor" href="#from-betos-to-rbcs"></a></h2>
     
@@ -180,15 +180,15 @@ assigned to a 6-character RBCS taxonomy code.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rbcs</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>, <span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11646", "33935", "39503", "43116", "J9264"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_category    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Procedure", "Procedure", "Procedure", "Procedure", "…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_subcategory <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin", "Cardiovascular", "Other Organ Systems", "Dig…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_family      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Skin Lesion Excision", "No RBCS Family", "No RBCS Fa…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ rbcs_procedure   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Other", "Major", "Major", "Major", "Non-Procedure"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rbcs</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>, <span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs rbcs_category rbcs_subcategory           rbcs_family      rbcs_procedure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11646 Procedure     Skin                       Skin Lesion Exc… Other         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 33935 Procedure     Cardiovascular             No RBCS Family   Major         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 39503 Procedure     Other Organ Systems        No RBCS Family   Major         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 43116 Procedure     Digestive/Gastrointestinal No RBCS Family   Major         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> J9264 Treatment     Chemotherapy               Chemotherapeuti… Non-Procedure </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
