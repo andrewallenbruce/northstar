@@ -49,6 +49,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_category.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter_cpt.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter_icd10.html</loc>
   </url>
   <url>
@@ -86,9 +89,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_section.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_section_cpt.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_section_hcpcs.html</loc>
