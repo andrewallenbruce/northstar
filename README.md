@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# northstar <img src="man/figures/logo.png" align="right" height="150" />
+# northstar <img src="man/figures/logo.png" align="right" height="175" />
 
 > Tidy Healthcare Revenue Integrity Tools
 
@@ -40,69 +40,12 @@ library(dplyr)
 ### HCPCS
 
 ``` r
-hcpcs_search(hcpcs    = "33935", 
-             state    = "GA", 
-             locality = "01", 
-             mac      = "10212") |> 
-  glimpse()
+# hcpcs_search(hcpcs    = "33935", 
+#              state    = "GA", 
+#              locality = "01", 
+#              mac      = "10212") |> 
+#   glimpse()
 ```
-
-    > Rows: 1
-    > Columns: 54
-    > $ hcpcs                 <chr> "33935"
-    > $ level                 <chr> "1"
-    > $ category              <chr> "1"
-    > $ description           <chr> "Transplantation heart/lung"
-    > $ description_consumer  <chr> "Transplantation of donor heart and lung"
-    > $ description_clinician <list> [<tbl_df[1 x 1]>]
-    > $ section               <chr> "Surgery [10004-69990]"
-    > $ rbcs_category         <chr> "Procedure"
-    > $ rbcs_subcategory      <chr> "Cardiovascular"
-    > $ rbcs_family           <chr> "No RBCS Family"
-    > $ rbcs_procedure        <chr> "Major"
-    > $ status                <chr> "Bundled/Excluded Code"
-    > $ mac                   <chr> "10212"
-    > $ state                 <chr> "GA"
-    > $ locality              <chr> "01"
-    > $ area                  <chr> "ATLANTA"
-    > $ wgpci                 <dbl> 1
-    > $ pgpci                 <dbl> 0.997
-    > $ mgpci                 <dbl> 1.128
-    > $ wrvu                  <dbl> 91.78
-    > $ nonfac_prvu           <dbl> 31.07
-    > $ fac_prvu              <dbl> 31.07
-    > $ mrvu                  <dbl> 21.24
-    > $ cf                    <dbl> 32.744
-    > $ fac_par               <dbl> 4804.053
-    > $ nonfac_par            <dbl> 4804.053
-    > $ fac_nonpar            <dbl> 4563.85
-    > $ nonfac_nonpar         <dbl> 4563.85
-    > $ fac_limit             <dbl> 5248.428
-    > $ nonfac_limit          <dbl> 5248.428
-    > $ opps                  <chr> "9"
-    > $ nonfac_prvu_opps      <dbl> 0
-    > $ fac_prvu_opps         <dbl> 0
-    > $ mrvu_opps             <dbl> 0
-    > $ mult_surg             <chr> "0"
-    > $ mult_proc             <chr> "2"
-    > $ flat_vis              <dbl> 0
-    > $ nonfac_ther           <dbl> 2
-    > $ fac_ther              <dbl> 0
-    > $ global                <chr> "090"
-    > $ op_pre                <dbl> 0.09
-    > $ op_intra              <dbl> 0.84
-    > $ op_post               <dbl> 0.07
-    > $ mod                   <chr> NA
-    > $ pctc                  <chr> "0"
-    > $ surg_bilat            <chr> "0"
-    > $ surg_asst             <chr> "2"
-    > $ surg_co               <chr> "1"
-    > $ surg_team             <chr> "2"
-    > $ supvis                <chr> "09"
-    > $ dximg                 <chr> "99"
-    > $ endo                  <chr> NA
-    > $ rare                  <chr> "10"
-    > $ unused                <int> 0
 
 ### ICD-10-CM
 

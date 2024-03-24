@@ -1,0 +1,13 @@
+file: opps.qs
+file_size: 92660
+pin_hash: d081c22445a417ae
+type: qs
+title: PFS OPPSCAP 2024
+description: OPPSCAP contains the payment amounts after the application of the OPPS-based
+  payment caps, except for carrier priced codes. For carrier price codes, the field
+  only contains the OPPS-based payment caps. Carrier prices cannot exceed the OPPS-based
+  payment caps.
+tags: ~
+urls: ~
+created: 20240324T141145Z
+api_version: 1

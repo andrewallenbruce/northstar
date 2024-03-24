@@ -23,11 +23,13 @@ opps <- read_excel(opps_xl, col_types = "text") |>
     mod,
     status = procstat,
     mac = carrier,
+    locality,
     fpymt_opps = facility_price,
     nfpymt_opps = non_facilty_price)
 
 opps |>
-  count(status)
+  count(status) |>
+  case_status(status)
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))

@@ -126,10 +126,10 @@ hcpcs_search <- function(hcpcs,
       fnpar = non_participating_amount(fpar),
       nnpar = non_participating_amount(npar),
       flim  = limiting_charge(fpar),
-      nlim  = limiting_charge(npar)) |>
+      nlim  = limiting_charge(npar)) # |>
     # case_level(hcpcs) |>
     # case_status(status) |>
-    cols_amounts()
+    # cols_amounts()
 }
 
 #' @param df data frame

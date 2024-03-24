@@ -7,24 +7,17 @@ utils::globalVariables(c(
   # <case_coverage>
   ":=",
   # <level2>
-  "asc",
-  # <level2>
   "asc_grp",
   # <hcpcs_search>
   "cf",
-  # <descriptors>
-  "clinician_descriptor",
   # <adjustment_codes>
   "code",
   # <icd10cm>
   "codes",
   # <level2>
   "cov",
-  # <level2>
-  "coverage",
   # <hcpcs_search>
   "cpt",
-  # <level2>
   # <icd_sections>
   # <col_lb>
   # <hcpcs_search>
@@ -33,8 +26,6 @@ utils::globalVariables(c(
   "description.x",
   # <adjustment_codes>
   "description.y",
-  # <level2>
-  "description_long",
   # <adjustment_codes>
   "end_date",
   # <calculate_amounts>
@@ -63,8 +54,6 @@ utils::globalVariables(c(
   "mod_description",
   # <hcpcs_search>
   "mrvu",
-  # <level2>
-  "mult",
   # <level2>
   "mult_pi",
   # <icd_sections>

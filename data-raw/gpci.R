@@ -50,6 +50,9 @@ states <- dplyr::tibble(
 
 states |> print(n = Inf)
 
+states[1, 2] <- "ALASKA"
+states[2, 2] <- "ALABAMA"
+
 states[8, 2] <- "DISTRICT OF COLUMBIA"
 states[9, 2] <- "DELAWARE"
 states[48, 2] <- "VIRGINIA"
@@ -62,10 +65,14 @@ locco <- locco |>
          state = as.character(state))
 
 gpci <- gpci |>
-  left_join(locco,
-            by = join_by(mac, state, locality),
-            relationship = "many-to-many") |>
-  select(-fee_schedule_area)
+  left_join(locco) |>
+  select(-fee_schedule_area) |>
+  print(n = Inf)
+
+
+gpci <- gpci()
+
+gpci$state <- as.character(gpci$state)
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))

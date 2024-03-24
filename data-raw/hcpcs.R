@@ -36,6 +36,15 @@ two <- read_excel(level2, col_types = "text") |>
 two |>
   count(action) |> print(n = Inf)
 
+
+two <- pins::pin_read(mount_board(), "hcpcs") |>
+  dplyr::rename(description_short = short_description,
+                description_long = long_description,
+                asc = asc_grp,
+                coverage = cov,
+                multi_price = mult_pi)
+
+
 board <- pins::board_folder(here::here("pins"))
 
 board |>

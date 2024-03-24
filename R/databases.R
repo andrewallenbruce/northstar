@@ -39,9 +39,6 @@ pfs <- function(hcpcs    = NULL,
                 locality = NULL,
                 ...) {
 
-  # TODO convert filter(opps == "9")
-  # rows -> opps_nf and opps_f to NA
-
   pmt <- pins::pin_read(mount_board(), "pymt")
 
   if (!is.null(hcpcs)) {
@@ -83,11 +80,7 @@ gpci <- function(mac      = NULL,
                  locality = NULL,
                  ...) {
 
-  # TODO convert state col to character
-
   gp <- pins::pin_read(mount_board(), "gpci")
-
-  gp$state <- as.character(gp$state)
 
   if (!is.null(state)) {
     gp <- vctrs::vec_slice(gp,
@@ -122,29 +115,20 @@ level2 <- function(hcpcs = NULL,
                    limit_cols = TRUE,
                    ...) {
 
-  # TODO coverage = cov,
-  # TODO asc = asc_grp,
-  # TODO description = short_description
-
-  l2 <- pins::pin_read(mount_board(), "hcpcs") |>
-    dplyr::rename(description = short_description,
-                  description_long = long_description,
-                  asc = asc_grp,
-                  coverage = cov,
-                  mult = mult_pi)
+  l2 <- pins::pin_read(mount_board(), "hcpcs")
 
   if (limit_cols) {
     l2 <- dplyr::select(l2,
           hcpcs,
-          description,
-          description_long,
+          short_description,
+          long_description,
           price,
-          mult,
+          mult_pi,
           labcert,
           xref,
           tos,
-          coverage,
-          asc,
+          cov,
+          asc_grp,
           betos)
   }
 
@@ -154,11 +138,11 @@ level2 <- function(hcpcs = NULL,
           collapse::funique(hcpcs)))
   }
 
-  l2 <- case_asc(l2, asc) |>
-    case_coverage(coverage) |>
-    case_pricing(price) |>
-    case_multiple_pricing(mult) |>
-    case_tos(tos)
+  # l2 <- case_asc(l2, asc) |>
+  #   case_coverage(coverage) |>
+  #   case_pricing(price) |>
+  #   case_multiple_pricing(mult) |>
+  #   case_tos(tos)
 
   return(l2)
 }
@@ -172,16 +156,11 @@ level2 <- function(hcpcs = NULL,
 #' @autoglobal
 descriptors <- function(hcpcs = NULL) {
 
-  # TODO tidyr::nest(clinician_descriptors = clinician_descriptor)
-  # TODO rename description_consumer = consumer_descriptor
-  # TODO rename description_clinician = clinician_descriptor
-
-  cpt <- pins::pin_read(mount_board(), "cpt_descriptors") |>
-    tidyr::nest(clinician_descriptors = clinician_descriptor)
+  cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
   if (!is.null(hcpcs)) {
     cpt <- vctrs::vec_slice(cpt,
-           vctrs::vec_in(cpt$cpt,
+           vctrs::vec_in(cpt$hcpcs,
            collapse::funique(hcpcs)))
   }
   return(cpt)
@@ -200,7 +179,7 @@ descriptors <- function(hcpcs = NULL) {
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' opps(hcpcs = "71550", mac = "01112", locality = "05")
+#' opps(hcpcs = "71550", mac = "01112")
 #' @export
 #' @autoglobal
 opps <- function(hcpcs    = NULL,
