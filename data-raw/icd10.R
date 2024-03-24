@@ -84,30 +84,38 @@ board |>
 board |> pins::write_board_manifest()
 
 
-dplyr::tibble(
-  ch = 1:22,
-  regex = c(
-    "^[A-B]",
-    "(^[C]|^[D][0-4])",
-    "^[D][5-8]",
-    "^[E]",
-    "^[F]",
-    "^[G]",
-    "^[H][0-5]\\d{1}\\.?\\d?",
-    "^[H][6-9]\\d{1}\\.?\\d?",
-    "^[I]",
-    "^[J]",
-    "^[K]",
-    "^[L]",
-    "^[M]",
-    "^[N]",
-    "^[O]",
-    "^[P]",
-    "^[Q]",
-    "^[R]",
-    "^[S-T]",
-    "^[V-Y]",
-    "^[Z]",
-    "^[U]"
-  )
-)
+# Sections
+icd10cm_sections <- icd10cm() |>
+  unnest(codes) |>
+  select(order, valid, code, description) |>
+  filter(valid == 0, stringr::str_length(code) == 3L) |>
+  mutate(start = order,
+         end = lead(order),
+         end = if_else(order == 97295, 97296, end),
+         end = as.integer(end),
+         n = end - start,
+         regex = paste0("^[", code, "]")) |>
+  select(section = code,
+         description,
+         start,
+         end,
+         n,
+         regex)
+
+# Update Pin
+board <- pins::board_folder(here::here("pins"))
+
+board |>
+  pins::pin_write(icd10cm_sections,
+                  name = "icd_sections",
+                  title = "2024 ICD-10-CM Sections",
+                  description = "2024 ICD-10-CM Sections",
+                  type = "qs")
+
+board |> pins::write_board_manifest()
+
+# Subsections
+icd10cm() |>
+  unnest(codes) |>
+  select(order, valid, code, description) |>
+  filter(valid == 0, stringr::str_length(code) > 3L)

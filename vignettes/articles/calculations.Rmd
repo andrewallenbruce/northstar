@@ -104,7 +104,7 @@ pracma::dot(
 
 
 ```{r, results='asis'}
-calculate_amounts(
+x <- calculate_amounts(
   wrvu  = 6.26,
   nprvu = 7.92,
   fprvu = 4.36,
@@ -114,4 +114,6 @@ calculate_amounts(
   pgpci = 0.883,
   mgpci = 1.125
 )
+
+x
 ```

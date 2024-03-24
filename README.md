@@ -15,27 +15,8 @@ coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/b
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
 <br> [![Last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
-<br> \[![License: Apache License (\>=
-2)](https://img.shields.io/badge/license-Apache%20License%20(%3E=%202)-blue.svg)\]
 <br>
 [![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
-
-``` r
-badges <- data.frame(
-  x = c(
-  "[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)",
-  "[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)",
-  "[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)",
-  "[![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)",
-  "[![License: Apache License (>= 2)](https://img.shields.io/badge/license-Apache License (>= 2)-blue.svg)]",
-  "[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)")
-)
-
-colnames(badges) <- NULL
-
-tinytable::tt(badges) |> 
-  print("markdown")
-```
 
 <!-- badges: end -->
 
@@ -129,14 +110,14 @@ hcpcs_search(hcpcs    = "33935",
 ``` r
 icd10_search(code  = "T38.0X1A", 
              field = "code") |> 
-  case_section_icd10(code) |> 
+  case_chapter_icd10(code) |> 
   dplyr::glimpse()
 ```
 
     > Rows: 1
     > Columns: 3
     > $ code        <chr> "T38.0X1A"
-    > $ section     <chr> "Injury, Poisoning and Certain Other Consequences of Exter…
+    > $ chapter     <chr> "Injury, poisoning and certain other consequences of exter…
     > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
 
 ``` r
@@ -145,13 +126,11 @@ icd10cm(code = "T38.0X1A") |>
 ```
 
     > Rows: 1
-    > Columns: 10
-    > $ chapter      <int> NA
-    > $ abbreviation <chr> NA
-    > $ section      <chr> "Injury, Poisoning and Certain Other Consequences of Exte…
-    > $ start        <chr> NA
-    > $ end          <chr> NA
-    > $ range        <chr> NA
+    > Columns: 8
+    > $ chapter      <int> 19
+    > $ abbreviation <chr> "INJ"
+    > $ section      <chr> "Injury, poisoning and certain other consequences of exte…
+    > $ range        <chr> "S00 - T88"
     > $ order        <int> 75443
     > $ valid        <int> 1
     > $ code         <chr> "T38.0X1A"
@@ -194,8 +173,6 @@ Please note that the `northstar` project is released with a [Contributor
 Code of
 Conduct](https://andrewallenbruce.github.io/northstar/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
-
-<br>
 
 ## :classical_building: Governance
 

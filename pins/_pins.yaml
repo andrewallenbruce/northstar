@@ -6,6 +6,8 @@ hcpcs:
 - hcpcs/20240311T071522Z-1cf0e/
 icd10cm:
 - icd10cm/20240324T071822Z-a71e4/
+icd_sections:
+- icd_sections/20240324T084652Z-6a046/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 modifiers:

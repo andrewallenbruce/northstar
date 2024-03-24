@@ -151,43 +151,111 @@ icd10cm <- function(code = NULL) {
   return(icd)
 }
 
-#' Add ICD-10-CM Section Labels
+#' Add ICD-10-CM Chapter Labels
 #' @param df data frame
-#' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `section` column
+#' @param col column of ICD-10-CM codes to match on
+#' @return A [tibble][tibble::tibble-package] with a `chapter` column
 #' @examples
-#' dplyr::tibble(code = c("F50.8", "G40.311", "Q96.8",
-#'                        "Z62.890", "R45.4", "E06.3")) |>
-#'                        case_section_icd10(code)
+#' dplyr::tibble(
+#' code = c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4", "E06.3")) |>
+#' case_chapter_icd10(code)
 #' @export
 #' @autoglobal
-case_section_icd10 <- function(df, col) {
+case_chapter_icd10 <- function(df, col) {
+
+  ch <- icd10_chapter_regex()
 
   df |>
-    dplyr::mutate(section = dplyr::case_when(
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[A-B]")) == TRUE ~ "Certain Infectious And Parasitic Diseases",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("(^[C]|^[D][0-4])")) == TRUE ~ "Neoplasms",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[D][5-8]")) == TRUE ~ "Diseases Of The Blood And Blood-Forming Organs And Certain Disorders Involving The Immune Mechanism",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[E]")) == TRUE ~ "Endocrine, Nutritional And Metabolic Diseases",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[F]")) == TRUE ~ "Mental, Behavioral And Neurodevelopmental Disorders",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[G]")) == TRUE ~ "Diseases Of The Nervous System",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[H][0-5]\\d{1}\\.?\\d?")) == TRUE ~ "Diseases Of The Eye And Adnexa",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[H][6-9]\\d{1}\\.?\\d?")) == TRUE ~ "Diseases Of The Ear And Mastoid Process",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[I]")) == TRUE ~ "Diseases Of The Circulatory System",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[J]")) == TRUE ~ "Diseases Of The Respiratory System",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[K]")) == TRUE ~ "Diseases Of The Digestive System",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[L]")) == TRUE ~ "Diseases Of The Skin And Subcutaneous Tissue",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[M]")) == TRUE ~ "Diseases Of The Musculoskeletal System And Connective Tissue",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[N]")) == TRUE ~ "Diseases Of The Genitourinary System",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[O]")) == TRUE ~ "Pregnancy, Childbirth And The Puerperium",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[P]")) == TRUE ~ "Certain Conditions Originating In The Perinatal Period",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[Q]")) == TRUE ~ "Congenital Malformations, Deformations And Chromosomal Abnormalities",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[R]")) == TRUE ~ "Symptoms, Signs and Abnormal Clinical and Laboratory Findings, Not Elsewhere Classified",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[S-T]")) == TRUE ~ "Injury, Poisoning and Certain Other Consequences of External Causes",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[V-Y]")) == TRUE ~ "External Causes Of Morbidity",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[Z]")) == TRUE ~ "Factors Influencing Health Status And Contact With Health Services",
-      stringr::str_detect({{ col }}, pattern = stringr::regex("^[U]")) == TRUE ~ "Codes For Special Purposes",
+    dplyr::mutate(chapter = dplyr::case_when(
+      stringr::str_detect({{ col }}, stringr::regex(ch[1, ]$regex)) == TRUE ~ ch[1, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[2, ]$regex)) == TRUE ~ ch[2, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[3, ]$regex)) == TRUE ~ ch[3, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[4, ]$regex)) == TRUE ~ ch[4, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[5, ]$regex)) == TRUE ~ ch[5, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[6, ]$regex)) == TRUE ~ ch[6, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[7, ]$regex)) == TRUE ~ ch[7, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[8, ]$regex)) == TRUE ~ ch[8, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[9, ]$regex)) == TRUE ~ ch[9, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[10, ]$regex)) == TRUE ~ ch[10, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[11, ]$regex)) == TRUE ~ ch[11, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[12, ]$regex)) == TRUE ~ ch[12, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[13, ]$regex)) == TRUE ~ ch[13, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[14, ]$regex)) == TRUE ~ ch[14, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[15, ]$regex)) == TRUE ~ ch[15, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[16, ]$regex)) == TRUE ~ ch[16, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[17, ]$regex)) == TRUE ~ ch[17, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[18, ]$regex)) == TRUE ~ ch[18, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[19, ]$regex)) == TRUE ~ ch[19, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[20, ]$regex)) == TRUE ~ ch[20, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[21, ]$regex)) == TRUE ~ ch[21, ]$chapter,
+      stringr::str_detect({{ col }}, stringr::regex(ch[22, ]$regex)) == TRUE ~ ch[22, ]$chapter,
       TRUE ~ "Unmatched"
     ),
     .after = {{ col }})
+}
+
+
+#' ICD-10-CM Chapter Labels and Regexes
+#' @examples
+#' icd10_chapter_regex()
+#' @noRd
+#' @autoglobal
+icd10_chapter_regex <- function() {
+  dplyr::tibble(
+    chapter = c(
+      "Certain infectious and parasitic diseases",
+      "Neoplasms",
+      "Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism",
+      "Endocrine, nutritional and metabolic diseases",
+      "Mental, behavioral and neurodevelopmental disorders",
+      "Diseases of the nervous system",
+      "Diseases of the eye and adnexa",
+      "Diseases of the ear and mastoid process",
+      "Diseases of the circulatory system",
+      "Diseases of the respiratory system",
+      "Diseases of the digestive system",
+      "Diseases of the skin and subcutaneous tissue",
+      "Diseases of the musculoskeletal system and connective tissue",
+      "Diseases of the genitourinary system",
+      "Pregnancy, childbirth and the puerperium",
+      "Certain conditions originating in the perinatal period",
+      "Congenital malformations, deformations and chromosomal abnormalities",
+      "Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified",
+      "Injury, poisoning and certain other consequences of external causes",
+      "External causes of morbidity",
+      "Factors influencing health status and contact with health services",
+      "Codes for special purposes"
+    ),
+    regex = c(
+      "^[A-B]",
+      "(^[C]|^[D][0-4])",
+      "^[D][5-8]",
+      "^[E]",
+      "^[F]",
+      "^[G]",
+      "^[H][0-5]",
+      "^[H][6-9]",
+      "^[I]",
+      "^[J]",
+      "^[K]",
+      "^[L]",
+      "^[M]",
+      "^[N]",
+      "^[O]",
+      "^[P]",
+      "^[Q]",
+      "^[R]",
+      "^[S-T]",
+      "^[V-Y]",
+      "^[Z]",
+      "^[U]"
+    ),
+  )
+}
+
+#' ICD-10-CM Section Labels and Regexes
+#' @noRd
+#' @autoglobal
+icd10_sections <- function() {
+  pins::pin_read(mount_board(), "icd_sections")
 }
