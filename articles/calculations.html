@@ -125,27 +125,14 @@
 <div class="section level2">
 <h2 id="physician-fee-schedule-amount-calculation">Physician Fee Schedule Amount Calculation<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-amount-calculation"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span><span class="va">Variables</span>,  <span class="op">~</span><span class="va">Descriptions</span>,</span>
-<span>  <span class="st">"$RVU_w$"</span>,   <span class="st">"Relative Value Unit (Physician Work)"</span>,</span>
-<span>  <span class="st">"$GPCI_w$"</span>,  <span class="st">"Geographic Practice Cost Index (Physician Work)"</span>,</span>
-<span>  <span class="st">"$RVU_p$"</span>,   <span class="st">"Relative Value Unit (Practice Expense)"</span>,</span>
-<span>  <span class="st">"$GPCI_p$"</span>,  <span class="st">"Geographic Practice Cost Index (Practice Expense)"</span>,</span>
-<span>  <span class="st">"$RVU_m$"</span>,   <span class="st">"Relative Value Unit (Malpractice)"</span>,</span>
-<span>  <span class="st">"$GPCI_m$"</span>,  <span class="st">"Geographic Practice Cost Index (Malpractice)"</span>,</span>
-<span>  <span class="st">"$CF$"</span>,      <span class="st">"Conversion Factor"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tinytable/man/tt.html" class="external-link">tt</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Physician Fee Schedule Variables"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tinytable/man/format_tt.html" class="external-link">format_tt</a></span><span class="op">(</span>markdown <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tinytable/man/style_tt.html" class="external-link">style_tt</a></span><span class="op">(</span>bootstrap_class <span class="op">=</span> <span class="st">"table table-hover"</span><span class="op">)</span></span></code></pre></div>
  
 
   
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_daud5dy6o82z4i79pin3</title>
+<title>tinytable_n5h311mh5vf11ph0zxlv</title>
 <style>
-.table td.tinytable_css_6dt0jzsnbnlqbb44hxg8, .table th.tinytable_css_6dt0jzsnbnlqbb44hxg8 {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_elow61t2srakr1rrp2u0, .table th.tinytable_css_elow61t2srakr1rrp2u0 {    border-bottom: solid 0.1em #d3d8dc; }
     </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     MathJax = {
@@ -157,7 +144,7 @@
       }
     };
     </script><div class="container">
-      <table class="table table table-hover" id="tinytable_daud5dy6o82z4i79pin3" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table table-hover" id="tinytable_n5h311mh5vf11ph0zxlv" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead>
 <caption>Physician Fee Schedule Variables</caption>
               <tr>
@@ -199,12 +186,12 @@
 </div>
 
     <script>
-      function styleCell_tinytable_6s5itlwd9xhpvne5e7gq(i, j, css_id) {
-        var table = document.getElementById("tinytable_daud5dy6o82z4i79pin3");
+      function styleCell_tinytable_xfk10p031fq18y0pkblg(i, j, css_id) {
+        var table = document.getElementById("tinytable_n5h311mh5vf11ph0zxlv");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_daud5dy6o82z4i79pin3');
+        var table = document.getElementById('tinytable_n5h311mh5vf11ph0zxlv');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -212,8 +199,8 @@
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_6s5itlwd9xhpvne5e7gq(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_daud5dy6o82z4i79pin3");
+      function spanCell_tinytable_xfk10p031fq18y0pkblg(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_n5h311mh5vf11ph0zxlv");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -240,27 +227,17 @@
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_6s5itlwd9xhpvne5e7gq(0, 0, 'tinytable_css_6dt0jzsnbnlqbb44hxg8') })
-window.addEventListener('load', function () { styleCell_tinytable_6s5itlwd9xhpvne5e7gq(0, 1, 'tinytable_css_6dt0jzsnbnlqbb44hxg8') })
+window.addEventListener('load', function () { styleCell_tinytable_xfk10p031fq18y0pkblg(0, 0, 'tinytable_css_elow61t2srakr1rrp2u0') })
+window.addEventListener('load', function () { styleCell_tinytable_xfk10p031fq18y0pkblg(0, 1, 'tinytable_css_elow61t2srakr1rrp2u0') })
     </script><p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span><span class="va">Formulas</span>,                                         <span class="op">~</span><span class="va">Results</span>,</span>
-<span>  <span class="st">"$RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$"</span>, <span class="st">"Total RVUs"</span>,</span>
-<span>  <span class="st">"$\\text{Total RVUs} * CF$"</span>,                       <span class="st">"Participating Fee"</span>,</span>
-<span>  <span class="st">"$\\text{Participating Fee} * 0.95$"</span>,              <span class="st">"Non-Participating Fee"</span>,</span>
-<span>  <span class="st">"$(\\text{Participating Fee} * 1.15) * 0.95$"</span>,     <span class="st">"Limiting Charge"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tinytable/man/tt.html" class="external-link">tt</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Physician Fee Schedule Formulas"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tinytable/man/format_tt.html" class="external-link">format_tt</a></span><span class="op">(</span>markdown <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tinytable/man/style_tt.html" class="external-link">style_tt</a></span><span class="op">(</span>bootstrap_class <span class="op">=</span> <span class="st">"table table-hover"</span><span class="op">)</span></span></code></pre></div>
  
 
   
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_71w8yau8bnfw62jcuvja</title>
+<title>tinytable_vi1kvwglap3lpyq32h5n</title>
 <style>
-.table td.tinytable_css_e9lk2qanm4fa0t8k79u6, .table th.tinytable_css_e9lk2qanm4fa0t8k79u6 {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_s23woycn44c0zy2h57qd, .table th.tinytable_css_s23woycn44c0zy2h57qd {    border-bottom: solid 0.1em #d3d8dc; }
     </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     MathJax = {
@@ -272,7 +249,7 @@ window.addEventListener('load', function () { styleCell_tinytable_6s5itlwd9xhpvn
       }
     };
     </script><div class="container">
-      <table class="table table table-hover" id="tinytable_71w8yau8bnfw62jcuvja" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table table-hover" id="tinytable_vi1kvwglap3lpyq32h5n" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead>
 <caption>Physician Fee Schedule Formulas</caption>
               <tr>
@@ -302,12 +279,12 @@ window.addEventListener('load', function () { styleCell_tinytable_6s5itlwd9xhpvn
 </div>
 
     <script>
-      function styleCell_tinytable_56oesgeb2yxenhq0ebim(i, j, css_id) {
-        var table = document.getElementById("tinytable_71w8yau8bnfw62jcuvja");
+      function styleCell_tinytable_1rhrij7kngvhm5p4nmjn(i, j, css_id) {
+        var table = document.getElementById("tinytable_vi1kvwglap3lpyq32h5n");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_71w8yau8bnfw62jcuvja');
+        var table = document.getElementById('tinytable_vi1kvwglap3lpyq32h5n');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -315,8 +292,8 @@ window.addEventListener('load', function () { styleCell_tinytable_6s5itlwd9xhpvn
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_56oesgeb2yxenhq0ebim(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_71w8yau8bnfw62jcuvja");
+      function spanCell_tinytable_1rhrij7kngvhm5p4nmjn(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_vi1kvwglap3lpyq32h5n");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -343,15 +320,15 @@ window.addEventListener('load', function () { styleCell_tinytable_6s5itlwd9xhpvn
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_56oesgeb2yxenhq0ebim(0, 0, 'tinytable_css_e9lk2qanm4fa0t8k79u6') })
-window.addEventListener('load', function () { styleCell_tinytable_56oesgeb2yxenhq0ebim(0, 1, 'tinytable_css_e9lk2qanm4fa0t8k79u6') })
-    </script><p>As there is a corresponding GPCI value for each of the three
+window.addEventListener('load', function () { styleCell_tinytable_1rhrij7kngvhm5p4nmjn(0, 0, 'tinytable_css_s23woycn44c0zy2h57qd') })
+window.addEventListener('load', function () { styleCell_tinytable_1rhrij7kngvhm5p4nmjn(0, 1, 'tinytable_css_s23woycn44c0zy2h57qd') })
+    </script><p><br></p>
+<p>As there is a corresponding GPCI value for each of the three
 components of an RVU, the formula is essentially the <a href="https://www.toppr.com/guides/maths-formulas/dot-product-formula/" class="external-link">dot
 product</a> of the RVU and GPCI vectors, multiplied by the Conversion
 Factor:</p>
-<p><span class="math display">\[ RVU \cdot GPCI = RVU_w(GPCI_w) +
-RVU_p(GPCI_p) + RVU_m(GPCI_m)\]</span></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>$ RVU GPCI = RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wrvu</span>  <span class="op">=</span> <span class="fl">6.26</span>   <span class="co"># Work RVU</span></span>
 <span><span class="va">wgpci</span> <span class="op">=</span> <span class="fl">1</span>      <span class="co"># Work GPCI</span></span>
 <span></span>
@@ -366,19 +343,24 @@ RVU_p(GPCI_p) + RVU_m(GPCI_m)\]</span></p>
 <span><span class="va">rvus</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">wrvu</span> <span class="op">*</span> <span class="va">wgpci</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">prvu</span> <span class="op">*</span> <span class="va">pgpci</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">mrvu</span> <span class="op">*</span> <span class="va">mgpci</span><span class="op">)</span></span>
 <span><span class="va">rvus</span> <span class="co"># Total RVUs</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 11.22363</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvus</span> <span class="op">*</span> <span class="va">cf</span> <span class="co"># Participating Fee</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 367.5065</span></span></code></pre>
+<p><br></p>
 <p>Using base r’s matrix multiplication infix operator</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">prvu</span>, <span class="va">mrvu</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 11.22363</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p><br></p>
+<p>Using the <code>dot()</code> function from the <code>{pracma}</code>
+package</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pracma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pracma/man/dot.html" class="external-link">dot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">prvu</span>, <span class="va">mrvu</span><span class="op">)</span>, </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 11.22363</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calculate_amounts.html">calculate_amounts</a></span><span class="op">(</span></span>
 <span>  wrvu  <span class="op">=</span> <span class="fl">6.26</span>,</span>
 <span>  nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span>

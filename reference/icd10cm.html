@@ -106,12 +106,10 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">icd10cm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"H00.019"</span>, <span class="st">"D50.1"</span>, <span class="st">"C4A.70"</span>, <span class="st">"Z20.818"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ chapter      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 3, 7, 21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ abbreviation <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ONC", "BLOOD", "EYE", "STAT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ section      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Neoplasms", "Diseases Of The Blood And Blood-Forming Org…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ start        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "C00", "D50", "H00", "Z00"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ end          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "D49", "D89", "H59", "Z99"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ section      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Neoplasms", "Diseases of the blood and blood-forming org…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ range        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "C00 - D49", "D50 - D89", "H00 - H59", "Z00 - Z99"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ order        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1599, 3421, 7045, 95793</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ valid        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1</span>
