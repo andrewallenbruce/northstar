@@ -16,6 +16,8 @@ utils::globalVariables(c(
   "clinician_descriptor",
   # <adjustment_codes>
   "code",
+  # <icd10cm>
+  "codes",
   # <level2>
   "cov",
   # <level2>

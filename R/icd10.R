@@ -129,6 +129,28 @@ icd10_search <- function(code  = NULL,
 
 }
 
+#' 2024 National Physician Fee Schedule Relative Value File
+#'
+#' @param code ICD-10-CM code
+#' @return a [tibble][tibble::tibble-package]
+#' @examples
+#' icd10cm(c("H00.019", "D50.1", "C4A.70", "Z20.818")) |> dplyr::glimpse()
+#' @autoglobal
+#' @export
+icd10cm <- function(code = NULL) {
+
+  icd <- pins::pin_read(mount_board(), "icd10cm")
+
+  if (!is.null(code)) {
+
+    icd <- tidyr::unnest(icd, codes)
+    icd <- vctrs::vec_slice(icd,
+           vctrs::vec_in(icd$code,
+           collapse::funique(code)))
+  }
+  return(icd)
+}
+
 #' Add ICD-10-CM Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on

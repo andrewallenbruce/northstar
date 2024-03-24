@@ -106,7 +106,6 @@ gpci <- function(mac      = NULL,
           vctrs::vec_in(gp$locality,
           collapse::funique(locality)))
   }
-
   return(gp)
 }
 
@@ -173,148 +172,19 @@ level2 <- function(hcpcs = NULL,
 #' @autoglobal
 descriptors <- function(hcpcs = NULL) {
 
-  cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
+  # TODO tidyr::nest(clinician_descriptors = clinician_descriptor)
+  # TODO rename description_consumer = consumer_descriptor
+  # TODO rename description_clinician = clinician_descriptor
+
+  cpt <- pins::pin_read(mount_board(), "cpt_descriptors") |>
+    tidyr::nest(clinician_descriptors = clinician_descriptor)
 
   if (!is.null(hcpcs)) {
     cpt <- vctrs::vec_slice(cpt,
            vctrs::vec_in(cpt$cpt,
-           collapse::funique(hcpcs))) |>
-      tidyr::nest(clinician_descriptors = clinician_descriptor)
+           collapse::funique(hcpcs)))
   }
   return(cpt)
-}
-
-#' Restructured BETOS Classification for HCPCS
-#'
-#' @description
-#'
-#' [rbcs()] allows the user to group HCPCS codes into clinically
-#' meaningful categories based on the original _Berenson-Eggers Type of Service_
-#' (BETOS) classification.
-#'
-#' @section From BETOS to RBCS:
-#'
-#' The Restructured BETOS Classification System (RBCS) is a taxonomy that allows
-#' researchers to group Medicare Part B healthcare service codes into clinically
-#' meaningful categories and subcategories.
-#'
-#' Based on the original Berenson-Eggers Type of Service (BETOS) classification
-#' created in the 1980s, it includes notable updates such as Part B non-physician
-#' services and undergoes annual updates by a technical expert panel of
-#' researchers and clinicians.
-#'
-#' The general framework for grouping service codes into the new RBCS taxonomy
-#' largely follows the same structure of BETOS. Like BETOS, the RBCS groups
-#' HCPCS codes into categories, subcategories, and families – with categories
-#' as the most aggregate level and families as the more granular level.
-#'
-#' All Medicare Part B service codes, including non-physician services, are
-#' assigned to a 6-character RBCS taxonomy code.
-#'
-#' @section Links:
-#'
-#' + [Restructured BETOS Classification System](https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system)
-#' + [RBCS Data Dictionary](https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary)
-#'
-#' @section Update Frequency: Annually
-#'
-#' @param hcpcs < *character* > HCPCS code
-#' @param category < *character* > RBCS Category:
-#' + `Procedure` (n = 6920)
-#' + `Test` (n = 3015)
-#' + `DME` (n = 2971)
-#' + `Treatment` (n = 1795)
-#' + `Imaging` (n = 1097)
-#' + `E&M` (n = 695)
-#' + `Anesthesia` (n = 307)
-#' + `Other` (n = 233)
-#' @param subcategory < *character* > RBCS Subcategory (53 unique in total)
-#' @param family < *character* > RBCS Family (178 unique in total)
-#' @param procedure < *character* > Procedure Type:
-#' + `Major` (n = 3676)
-#' + `Non-Procedure` (n = 10113)
-#' + `Other` (n = 3244)
-#' @param limit_cols < *logical* > Limit Columns
-#' @param ... description
-#'
-#' @return A [tibble][tibble::tibble-package] with the columns:
-#'
-#' |**Column**          |**Description**                              |
-#' |:-------------------|:--------------------------------------------|
-#' |`hcpcs`             |HCPCS or CPT code                            |
-#' |`rbcs`              |RBCS Identifier                              |
-#' |`category`          |RBCS Category                                |
-#' |`subcategory`       |RBCS Subcategory                             |
-#' |`family`            |RBCS Family                                  |
-#' |`procedure`         |RBCS Major Procedure Indicator               |
-#' |`date_hcpcs_add`    |Date HCPCS Code was added                    |
-#' |`date_hcpcs_end`    |Date HCPCS Code was no longer effective      |
-#' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
-#'
-#' @examples
-#' rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646")) |>
-#' dplyr::glimpse()
-#' @export
-#' @autoglobal
-rbcs <- function(hcpcs       = NULL,
-                 category    = NULL,
-                 subcategory = NULL,
-                 family      = NULL,
-                 procedure   = NULL,
-                 limit_cols  = TRUE,
-                 ...) {
-
-  # TODO procedure = major
-
-  rb <- pins::pin_read(mount_board(), "rbcs") |>
-    dplyr::rename(procedure = major)
-
-  if (limit_cols) {
-    rb <- dplyr::select(rb,
-          hcpcs,
-          rbcs_category    = category,
-          rbcs_subcategory = subcategory,
-          rbcs_family      = family,
-          rbcs_procedure   = procedure)
-  }
-
-  if (!is.null(hcpcs)) {
-
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$hcpcs,
-          collapse::funique(hcpcs)))}
-
-  if (!is.null(procedure)) {
-
-    procedure <- rlang::arg_match(procedure,
-                 c("Major", "Non-Procedure", "Other"))
-
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$procedure, procedure))
-
-  }
-
-  if (!is.null(category)) {
-
-    category <- rlang::arg_match(category,
-    c("Procedure", "Test", "DME", "Treatment",
-      "Imaging", "E&M", "Anesthesia", "Other"))
-
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$category, category))
-
-    }
-
-  if (!is.null(subcategory)) {
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$subcategory, subcategory))
-  }
-
-  if (!is.null(family)) {
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$family, family))
-    }
-  return(rb)
 }
 
 #' OPPSCAP
@@ -324,10 +194,10 @@ rbcs <- function(hcpcs       = NULL,
 #' only contains the OPPS-based payment caps. Carrier prices cannot exceed the
 #' OPPS-based payment caps.
 #'
-#' @param hcpcs description
-#' @param mac description
-#' @param locality description
-#' @param ... description
+#' @param hcpcs *<chr>* vector of 5-digit HCPCS codes
+#' @param mac *<chr>* vector of 5-digit Medicare Administrative Contractor (MAC) codes
+#' @param locality *<chr>* vector of 2-digit locality IDs
+#' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
@@ -363,67 +233,10 @@ opps <- function(hcpcs    = NULL,
   return(op)
 }
 
-#' Medicare Severity Diagnosis-Related Groups (MS-DRG)
-#'
-#' The Medicare Severity Diagnosis-Related Group (MS-DRG) is a classification
-#' system used by the Centers for Medicare and Medicaid Services (CMS) to group
-#' patients with similar clinical characteristics and resource utilization into
-#' a single payment category.
-#'
-#' The system is primarily used for Medicare reimbursement purposes, but it is
-#' also adopted by many other payers as a basis for payment determination.
-#'
-#' MS-DRGs are based on the principal diagnosis, up to 24 additional diagnoses,
-#' and up to 25 procedures performed during the stay. In a small number of
-#' MS-DRGs, classification is also based on the age, sex, and discharge status
-#' of the patient.
-#'
-#' Hospitals serving more severely ill patients receive increased
-#' reimbursements, while hospitals treating less severely ill patients will
-#' receive less reimbursement.
-#'
-#' @param drg description
-#' @param mdc description
-#' @param type description
-#' @param ... description
-#' @return A [tibble][tibble::tibble-package]
-#' @examples
-#' msdrg(drg = "011")
-#'
-#' msdrg(mdc = "24")
-#'
-#' msdrg(type = "Medical")
-#' @autoglobal
-#' @export
-msdrg <- function(drg = NULL,
-                  mdc = NULL,
-                  type = NULL,
-                  ...) {
-
-  ms <- pins::pin_read(mount_board(), "msdrg")
-
-  if (!is.null(drg)) {
-    ms <- vctrs::vec_slice(ms,
-          vctrs::vec_in(ms$drg,
-          collapse::funique(drg)))
-  }
-
-  if (!is.null(mdc)) {
-    ms <- vctrs::vec_slice(ms,
-          vctrs::vec_in(ms$mdc,
-          collapse::funique(mdc)))
-  }
-
-  if (!is.null(type)) {
-    ms <- vctrs::vec_slice(ms, ms$drg_type == type)
-  }
-  return(ms)
-}
-
 #' Level I and II HCPCS Modifiers
 #'
-#' @param mod description
-#' @param ... description
+#' @param mod *<chr>* 2-digit HCPCS modifier
+#' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' modifiers(mod = c("25", "59"))

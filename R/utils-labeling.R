@@ -64,10 +64,10 @@ case_section_cpt <- function(df, col) {
   df |>
     dplyr::mutate(section = dplyr::case_match(
       {{ col }},
-      as.character(c(99202:99499)) ~ "E&M [99202-99499]",
+      as.character(99202:99499) ~ "E&M [99202-99499]",
       as.character(c(stringr::str_pad(100:1999, width = 5, pad = "0"), 99100:99140)) ~ "Anesthesiology [00100-01999, 99100-99140]",
-      as.character(c(10004:69990)) ~ "Surgery [10004-69990]",
-      as.character(c(70010:79999)) ~ "Radiology [70010-79999]",
+      as.character(10004:69990) ~ "Surgery [10004-69990]",
+      as.character(70010:79999) ~ "Radiology [70010-79999]",
       as.character(c(80047:89398, stringr::str_pad(paste0(1:222, "U"), width = 5, pad = "0"))) ~ "Path & Lab [80047-89398, 0001U-0222U]",
       as.character(c(90281:99199, 99500:99607)) ~ "Medicine [90281-99199, 99500-99607]",
       .default = NA_character_

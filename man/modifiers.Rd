@@ -7,9 +7,9 @@
 modifiers(mod = NULL, ...)
 }
 \arguments{
-\item{mod}{description}
+\item{mod}{\emph{\if{html}{\out{<chr>}}} 2-digit HCPCS modifier}
 
-\item{...}{description}
+\item{...}{Empty}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
