@@ -25,6 +25,7 @@ utils::globalVariables(c(
   # <hcpcs_search>
   "cpt",
   # <level2>
+  # <icd_sections>
   # <col_lb>
   # <hcpcs_search>
   "description",
@@ -66,6 +67,8 @@ utils::globalVariables(c(
   "mult",
   # <level2>
   "mult_pi",
+  # <icd_sections>
+  "n",
   # <calculate_amounts>
   "nonfacility",
   # <hcpcs_search>
@@ -80,6 +83,7 @@ utils::globalVariables(c(
   "price",
   # <opps>
   "procstat",
+  # <icd_sections>
   # <case_section>
   "section",
   # <level2>

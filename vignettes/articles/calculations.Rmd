@@ -103,8 +103,8 @@ pracma::dot(
 
 
 
-```{r, results='asis'}
-x <- calculate_amounts(
+```{r}
+calculate_amounts(
   wrvu  = 6.26,
   nprvu = 7.92,
   fprvu = 4.36,
@@ -112,8 +112,8 @@ x <- calculate_amounts(
   cf    = 32.744,
   wgpci = 1,
   pgpci = 0.883,
-  mgpci = 1.125
-)
-
-x
+  mgpci = 1.125) |> 
+  tt() |> 
+  format_tt(markdown = TRUE) |> 
+  style_tt(bootstrap_class = "table table-hover")
 ```

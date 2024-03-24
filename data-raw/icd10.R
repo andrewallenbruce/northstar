@@ -47,27 +47,24 @@ icd10cm <- read_fwf(
   mutate(code   = add_dot(code))
 
 icd10cm <- icd10cm |>
-  case_section_icd10(code) |>
-  mutate(section = stringr::str_to_sentence(section)) |>
-  select(order, valid, code, description, section)
+  case_chapter_icd10(code) |>
+  select(order, valid, code, description, chapter)
 
 chapters <- icd10us::icd10cm_chapters |>
-  select(chapter      = chapter_num,
-         abbreviation = chapter_abbr,
-         section      = chapter_desc,
-         start        = code_start,
-         end          = code_end) |>
-  mutate(range        = paste0(start, " - ", end),
-         # section      = stringr::str_to_title(section),
-         chapter      = as.integer(chapter)) |>
+  select(ch = chapter_num,
+         abbrev = chapter_abbr,
+         chapter = chapter_desc,
+         start = code_start,
+         end = code_end) |>
+  mutate(range = paste0(start, " - ", end),
+         ch = as.integer(ch)) |>
   select(-start, -end)
 
 
 icd_join <- icd10cm |>
-  # filter(code  == "T38.0X1A")
-  left_join(chapters) |>
+  left_join(chapters, by = join_by(chapter)) |>
   nest(codes = c(order, valid, code, description)) |>
-  select(chapter, abbreviation, section, range, codes)
+  select(ch, abbrev, chapter, range, codes)
 
 fs::file_delete(fs::path("data-raw", c("icd10cm-order-2024.txt", "2024_Code_Descriptions.zip")))
 

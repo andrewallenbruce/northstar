@@ -7,7 +7,7 @@
 icd10cm(code = NULL)
 }
 \arguments{
-\item{code}{ICD-10-CM code}
+\item{code}{vector of ICD-10-CM codes}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -16,5 +16,6 @@ a \link[tibble:tibble-package]{tibble}
 2024 National Physician Fee Schedule Relative Value File
 }
 \examples{
-icd10cm(c("H00.019", "D50.1", "C4A.70", "Z20.818")) |> dplyr::glimpse()
+icd10cm(c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
+          "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818"))
 }

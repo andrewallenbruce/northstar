@@ -131,10 +131,11 @@ icd10_search <- function(code  = NULL,
 
 #' 2024 National Physician Fee Schedule Relative Value File
 #'
-#' @param code ICD-10-CM code
+#' @param code vector of ICD-10-CM codes
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' icd10cm(c("H00.019", "D50.1", "C4A.70", "Z20.818")) |> dplyr::glimpse()
+#' icd10cm(c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
+#'           "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818"))
 #' @autoglobal
 #' @export
 icd10cm <- function(code = NULL) {
@@ -156,9 +157,10 @@ icd10cm <- function(code = NULL) {
 #' @param col column of ICD-10-CM codes to match on
 #' @return A [tibble][tibble::tibble-package] with a `chapter` column
 #' @examples
-#' dplyr::tibble(
-#' code = c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4", "E06.3")) |>
-#' case_chapter_icd10(code)
+#' dplyr::tibble(code = c(
+#'               "F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
+#'               "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818")) |>
+#'               case_chapter_icd10(code)
 #' @export
 #' @autoglobal
 case_chapter_icd10 <- function(df, col) {
@@ -254,8 +256,24 @@ icd10_chapter_regex <- function() {
 }
 
 #' ICD-10-CM Section Labels and Regexes
-#' @noRd
+#' @param code vector of ICD-10-CM codes
+#' @return a [tibble][tibble::tibble-package]
+#' @examples
+#' icd_sections(c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
+#'                "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818"))
+#' @export
 #' @autoglobal
-icd10_sections <- function() {
-  pins::pin_read(mount_board(), "icd_sections")
+icd_sections <- function(code = NULL) {
+
+  sect <- pins::pin_read(mount_board(), "icd_sections")
+
+  if (!is.null(code)) {
+
+    sect <- dplyr::tibble(
+      code    = code,
+      section = substr(code, 1, 3)) |>
+      dplyr::left_join(sect, dplyr::join_by(section)) |>
+      dplyr::select(code, section, description, n)
+  }
+  return(sect)
 }
