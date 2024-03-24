@@ -16,9 +16,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/IBM_Plex_Sans-0.4.9/font.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Atkinson_Hyperlegible-0.4.9/font.css" rel="stylesheet">
 <link href="deps/Fira_Code-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
@@ -206,28 +205,28 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"T38.0X1A"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">8</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">16</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> ch          <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">19</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> abbrev      <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"INJ"</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> chapter     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Injury, poisoning and certain other consequences of exter…</span></span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="st">&gt; $ range       &lt;chr&gt; "</span>S00 <span class="sc">-</span> T88<span class="st">"</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="st">&gt; $ order       &lt;int&gt; 75443</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="st">&gt; $ valid       &lt;int&gt; 1</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="st">&gt; $ code        &lt;chr&gt; "</span>T38<span class="fl">.0</span>X1A<span class="st">"</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="st">&gt; $ description &lt;chr&gt; "</span>Poisoning by glucocorticoids and synthetic analogues, acc…</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">icd_sections</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"T38.0X1A"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">4</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> code        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"T38.0X1A"</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> section     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"T38"</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Poisoning by, adverse effect of and underdosing of hormon…</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="st">&gt; $ n           &lt;int&gt; 336</span></span></code></pre></div>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="st">&gt; $ ch_start    &lt;int&gt; 30990</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="st">&gt; $ ch_end      &lt;int&gt; 84933</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="st">&gt; $ ch_codes    &lt;int&gt; 53943</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="st">&gt; $ ch_sc       &lt;int&gt; 171</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="st">&gt; $ section     &lt;chr&gt; "</span>Poisoning by, adverse effect of and underdosing of hormon…</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> order       <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">75443</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> valid       <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> code        <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"T38.0X1A"</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Poisoning by glucocorticoids and synthetic analogues, acc…</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="st">&gt; $ sc_start    &lt;int&gt; 75439</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="st">&gt; $ sc_end      &lt;int&gt; 75774</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="st">&gt; $ sc_codes    &lt;int&gt; 335</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="physician-fee-schedule">Physician Fee Schedule<a class="anchor" aria-label="anchor" href="#physician-fee-schedule"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/calculate_amounts.html">calculate_amounts</a></span><span class="op">(</span></span>
 <span>  wrvu  <span class="op">=</span> <span class="fl">6.26</span>,</span>
 <span>  nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span>
@@ -238,19 +237,19 @@
 <span>  pgpci <span class="op">=</span> <span class="fl">0.883</span>,</span>
 <span>  mgpci <span class="op">=</span> <span class="fl">1.125</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility Amounts<span class="sc">:</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="er">&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">11.22</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">367.51</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">349.13</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">401.50</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="sc">&gt;</span> </span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility Amounts<span class="sc">:</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="er">&gt;</span> </span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">14.37</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">470.44</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">446.91</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">513.95</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Facility Amounts<span class="sc">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="er">&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">11.22</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">367.51</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">349.13</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">401.50</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="er">&gt;</span> Non<span class="sc">-</span>Facility Amounts<span class="sc">:</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="er">&gt;</span> </span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="er">&gt;</span> RVU Total ............ <span class="fl">14.37</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="sc">&gt;</span> Participating ........ <span class="sc">$</span><span class="fl">470.44</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="sc">&gt;</span> Non<span class="sc">-</span>Particpating ..... <span class="sc">$</span><span class="fl">446.91</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="sc">&gt;</span> Limiting Charge ...... <span class="sc">$</span><span class="fl">513.95</span></span></code></pre></div>
 <hr>
 </div>
 </div>
