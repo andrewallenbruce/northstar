@@ -125,10 +125,21 @@ OPPS-based payment caps.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opps</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"71550"</span>, mac <span class="op">=</span> <span class="st">"01112"</span>, locality <span class="op">=</span> <span class="st">"05"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `locality`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vctrs::vec_slice(op, vctrs::vec_in(op$locality, collapse::funique(locality))):</span> Can't subset elements with `i`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Logical subscript `i` must be size 1 or 58, not 0.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opps</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"71550"</span>, mac <span class="op">=</span> <span class="st">"01112"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 58 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hcpcs mod   status mac   locality fpymt_opps nfpymt_opps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 05             407.        407.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 09             412.        412.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 17             346.        346.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 18             350.        350.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 51             379.        379.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 52             407.        407.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 53             379.        379.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 54             323.        323.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 55             323.        323.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 71550 <span style="color: #BB0000;">NA</span>    A      01112 56             323.        323.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 48 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
