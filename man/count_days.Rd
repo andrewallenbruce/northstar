@@ -7,7 +7,7 @@
 count_days(df, start, end, name)
 }
 \arguments{
-\item{df}{\emph{\if{html}{\out{<df>}}} data.frame}
+\item{df}{\emph{< df >} data.frame}
 
 \item{start}{bare date column name}
 

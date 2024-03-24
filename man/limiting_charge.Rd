@@ -7,7 +7,7 @@
 limiting_charge(par_amount)
 }
 \arguments{
-\item{par_amount}{< \emph{double} > Participating Amount}
+\item{par_amount}{\emph{< dbl >} Participating Amount}
 }
 \value{
 numeric vector of Limiting Charge Amount

@@ -15,7 +15,7 @@
 #' of 1.0925. The result is the Medicare limiting charge for that service for
 #' that locality to which the fee schedule amount applies.
 #'
-#' @param par_amount < *double* > Participating Amount
+#' @param par_amount *< dbl >* Participating Amount
 #' @return numeric vector of Limiting Charge Amount
 #' @examples
 #' limiting_charge(26.35)
@@ -32,7 +32,7 @@ limiting_charge <- function(par_amount) {
 #' The payment amount for Non-participating physicians is 95% of the payment
 #' amount for Participating physicians (i.e., the fee schedule amount).
 #'
-#' @param par_amount < *double* > Participating Amount
+#' @param par_amount *< dbl >* Participating Amount
 #' @return numeric vector of Non-participating amount
 #' @examples
 #' non_participating_amount(26.35)
@@ -48,14 +48,14 @@ non_participating_amount <- function(par_amount) {
 #'
 #' ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 #'
-#' @param wrvu *<dbl>* Work RVU
-#' @param fprvu *<dbl>* Facility Practice Expense RVU
-#' @param nprvu *<dbl>* Non-Facility Practice Expense RVU
-#' @param mrvu *<dbl>* Malpractice RVU
-#' @param wgpci *<dbl>* Work GPCI
-#' @param pgpci *<dbl>* Practice Expense GPCI
-#' @param mgpci *<dbl>* Malpractice GPCI
-#' @param cf *<dbl>* Conversion Factor, default is `32.7442`
+#' @param wrvu *< dbl >* Work RVU
+#' @param fprvu *< dbl >* Facility Practice Expense RVU
+#' @param nprvu *< dbl >* Non-Facility Practice Expense RVU
+#' @param mrvu *< dbl >* Malpractice RVU
+#' @param wgpci *< dbl >* Work GPCI
+#' @param pgpci *< dbl >* Practice Expense GPCI
+#' @param mgpci *< dbl >* Malpractice GPCI
+#' @param cf *< dbl >* Conversion Factor, default is `32.7442`
 #' @returns A list (invisibly) of the Participating, Non-Participating &
 #'    Limiting Charge Amounts for both Facility & Non-Facility RVUs
 #' @examples
@@ -118,12 +118,38 @@ calculate_amounts <- function(wrvu,
     "Limiting Charge ...... {.strong {.val {rlang::sym(gt::vec_fmt_currency(n$limit))}}}"
     )
   )
-  invisible(list(fac = f, non = n))
+
+  tb <- dplyr::tibble(
+    facility    = dplyr::tibble(
+      prvu      = f$prvu,
+      rvu       = f$rvu,
+      gpci      = f$gpci,
+      par       = f$par,
+      nonpar    = f$nonpar,
+      limit     = f$limit),
+    nonfacility = dplyr::tibble(
+      prvu      = n$prvu,
+      rvu       = n$rvu,
+      gpci      = n$gpci,
+      par       = n$par,
+      nonpar    = n$nonpar,
+      limit     = n$limit)) |>
+    tidyr::unpack(
+      cols      = c(facility, nonfacility),
+      names_sep = "_")
+
+  tb <- tidyr::pivot_longer(
+    tb,
+    cols      = names(tb),
+    names_to  = "component",
+    values_to = "value")
+
+  invisible(tb)
 }
 
 #' Count days between two dates
 #'
-#' @param df *<df>* data.frame
+#' @param df *< df >* data.frame
 #' @param start bare date column name
 #' @param end bare date column name
 #' @param name bare name of days output column

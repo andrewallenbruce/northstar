@@ -9,7 +9,7 @@ display_long(df, cols = dplyr::everything())
 \arguments{
 \item{df}{data frame}
 
-\item{cols}{columns to pivot long, default is \code{\link[dplyr:reexports]{dplyr::everything()}}}
+\item{cols}{vector of columns to pivot long, default is \code{\link[dplyr:reexports]{dplyr::everything()}}}
 }
 \description{
 Pivot data frame to long format for easy printing

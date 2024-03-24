@@ -7,21 +7,21 @@
 calculate_amounts(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf = 32.7442)
 }
 \arguments{
-\item{wrvu}{\emph{\if{html}{\out{<dbl>}}} Work RVU}
+\item{wrvu}{\emph{< dbl >} Work RVU}
 
-\item{fprvu}{\emph{\if{html}{\out{<dbl>}}} Facility Practice Expense RVU}
+\item{fprvu}{\emph{< dbl >} Facility Practice Expense RVU}
 
-\item{nprvu}{\emph{\if{html}{\out{<dbl>}}} Non-Facility Practice Expense RVU}
+\item{nprvu}{\emph{< dbl >} Non-Facility Practice Expense RVU}
 
-\item{mrvu}{\emph{\if{html}{\out{<dbl>}}} Malpractice RVU}
+\item{mrvu}{\emph{< dbl >} Malpractice RVU}
 
-\item{wgpci}{\emph{\if{html}{\out{<dbl>}}} Work GPCI}
+\item{wgpci}{\emph{< dbl >} Work GPCI}
 
-\item{pgpci}{\emph{\if{html}{\out{<dbl>}}} Practice Expense GPCI}
+\item{pgpci}{\emph{< dbl >} Practice Expense GPCI}
 
-\item{mgpci}{\emph{\if{html}{\out{<dbl>}}} Malpractice GPCI}
+\item{mgpci}{\emph{< dbl >} Malpractice GPCI}
 
-\item{cf}{\emph{\if{html}{\out{<dbl>}}} Conversion Factor, default is \code{32.7442}}
+\item{cf}{\emph{< dbl >} Conversion Factor, default is \code{32.7442}}
 }
 \value{
 A list (invisibly) of the Participating, Non-Participating &

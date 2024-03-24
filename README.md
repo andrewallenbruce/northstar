@@ -7,14 +7,35 @@
 
 <!-- badges: start -->
 
-|                                                                                                                                                                                      |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)       |
-| [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)                |
-| [![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)                                      |
-| [![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)                             |
-| \[![License: Apache License (\>= 2)](https://img.shields.io/badge/license-Apache%20License%20(%3E=%202)-blue.svg)\](<https://cran.r-project.org/web/licenses/Apache> License (\>= 2) |
-| [![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)                                                              |
+[![Codecov test
+coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
+<br>
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
+<br> [![Code
+size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
+<br> [![Last
+commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
+<br> \[![License: Apache License (\>=
+2)](https://img.shields.io/badge/license-Apache%20License%20(%3E=%202)-blue.svg)\]
+<br>
+[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
+
+``` r
+badges <- data.frame(
+  x = c(
+  "[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)",
+  "[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)",
+  "[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)",
+  "[![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)",
+  "[![License: Apache License (>= 2)](https://img.shields.io/badge/license-Apache License (>= 2)-blue.svg)]",
+  "[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)")
+)
+
+colnames(badges) <- NULL
+
+tinytable::tt(badges) |> 
+  print("markdown")
+```
 
 <!-- badges: end -->
 
@@ -117,6 +138,24 @@ icd10_search(code  = "T38.0X1A",
     > $ code        <chr> "T38.0X1A"
     > $ section     <chr> "Injury, Poisoning and Certain Other Consequences of Exter…
     > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
+
+``` r
+icd10cm(code = "T38.0X1A") |> 
+  dplyr::glimpse()
+```
+
+    > Rows: 1
+    > Columns: 10
+    > $ chapter      <int> NA
+    > $ abbreviation <chr> NA
+    > $ section      <chr> "Injury, Poisoning and Certain Other Consequences of Exte…
+    > $ start        <chr> NA
+    > $ end          <chr> NA
+    > $ range        <chr> NA
+    > $ order        <int> 75443
+    > $ valid        <int> 1
+    > $ code         <chr> "T38.0X1A"
+    > $ description  <chr> "Poisoning by glucocorticoids and synthetic analogues, ac…
 
 ## Physician Fee Schedule Calculation
 

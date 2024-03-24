@@ -36,6 +36,8 @@ utils::globalVariables(c(
   "description_long",
   # <adjustment_codes>
   "end_date",
+  # <calculate_amounts>
+  "facility",
   # <hcpcs_search>
   "fpar",
   # <hcpcs_search>
@@ -64,6 +66,8 @@ utils::globalVariables(c(
   "mult",
   # <level2>
   "mult_pi",
+  # <calculate_amounts>
+  "nonfacility",
   # <hcpcs_search>
   "npar",
   # <hcpcs_search>

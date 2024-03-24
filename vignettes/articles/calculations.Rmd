@@ -5,16 +5,16 @@ output: html_document
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = FALSE,
-  echo      = TRUE, 
-  message   = FALSE, 
-  warning   = FALSE,
-  error     = TRUE,
-  comment   = "#>",
-  dpi       = 600, 
-  out.width = "100%",
+  collapse   = FALSE,
+  echo       = TRUE, 
+  message    = FALSE, 
+  warning    = FALSE,
+  error      = TRUE,
+  comment    = "#>",
+  dpi        = 600, 
+  out.width  = "100%",
   fig.height = 14,
-  fig.width = 10
+  fig.width  = 10
 )
 options(scipen = 999)
 ```
@@ -28,7 +28,7 @@ library(tinytable)
 
 # Physician Fee Schedule Amount Calculation
 
-```{r}
+```{r echo=FALSE}
 dplyr::tribble(
   ~Variables,  ~Descriptions,
   "$RVU_w$",   "Relative Value Unit (Physician Work)",
@@ -45,7 +45,7 @@ dplyr::tribble(
 
 <br>
 
-```{r}
+```{r echo=FALSE}
 dplyr::tribble(
   ~Formulas,                                         ~Results,
   "$RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$", "Total RVUs",
@@ -57,9 +57,11 @@ dplyr::tribble(
   style_tt(bootstrap_class = "table table-hover")
 ```
 
+<br>
+
 As there is a corresponding GPCI value for each of the three components of an RVU, the formula is essentially the [dot product](https://www.toppr.com/guides/maths-formulas/dot-product-formula/) of the RVU and GPCI vectors, multiplied by the Conversion Factor:
 
-$$ RVU \cdot GPCI = RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$$
+$ RVU \cdot GPCI = RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$
 
 ```{r}
 wrvu  = 6.26   # Work RVU
@@ -79,11 +81,17 @@ rvus # Total RVUs
 rvus * cf # Participating Fee
 ```
 
+<br>
+
 Using base r's matrix multiplication infix operator
 
 ```{r}
 as.vector(c(wrvu, prvu, mrvu) %*% c(wgpci, pgpci, mgpci))
 ```
+
+<br>
+
+Using the `dot()` function from the `{pracma}` package
 
 ```{r}
 pracma::dot(
@@ -91,7 +99,11 @@ pracma::dot(
   c(wgpci, pgpci, mgpci))
 ```
 
-```{r}
+<br>
+
+
+
+```{r, results='asis'}
 calculate_amounts(
   wrvu  = 6.26,
   nprvu = 7.92,

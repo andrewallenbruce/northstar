@@ -70,7 +70,7 @@ invert_named <- function(x) {
 
 #' Pivot data frame to long format for easy printing
 #' @param df data frame
-#' @param cols columns to pivot long, default is [dplyr::everything()]
+#' @param cols vector of columns to pivot long, default is [dplyr::everything()]
 #' @autoglobal
 #' @export
 #' @keywords internal
