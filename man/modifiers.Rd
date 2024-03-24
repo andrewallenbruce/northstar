@@ -15,7 +15,13 @@ modifiers(mod = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Level I and II HCPCS Modifiers
+A modifier provides the means to report or indicate that a service or
+procedure that has been performed has been altered by some specific
+circumstance but not changed in its definition or code.
+}
+\details{
+Modifiers also enable health care professionals to effectively respond to
+payment policy requirements established by other entities.
 }
 \examples{
 modifiers(mod = c("25", "59"))

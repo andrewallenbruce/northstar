@@ -25,7 +25,5 @@ only contains the OPPS-based payment caps. Carrier prices cannot exceed the
 OPPS-based payment caps.
 }
 \examples{
-opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
-     mac      = "01112",
-     locality = "05")
+opps(hcpcs = "71550", mac = "01112", locality = "05")
 }

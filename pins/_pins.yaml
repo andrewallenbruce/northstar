@@ -1,5 +1,5 @@
 cpt_descriptors:
-- cpt_descriptors/20240304T194107Z-f2132/
+- cpt_descriptors/20240324T135528Z-36949/
 gpci:
 - gpci/20240305T074723Z-2c2a4/
 hcpcs:
@@ -11,13 +11,13 @@ icd_sections:
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 modifiers:
-- modifiers/20240321T014144Z-fa54b/
+- modifiers/20240324T134432Z-95a0c/
 msdrg:
 - msdrg/20240321T154706Z-c6366/
 ncd:
 - ncd/20240316T065817Z-33d30/
 opps:
-- opps/20240311T152111Z-3d184/
+- opps/20240324T114534Z-55d92/
 pymt:
 - pymt/20240308T221947Z-6eb3c/
 rarc_carc:

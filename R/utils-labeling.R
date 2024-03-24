@@ -50,19 +50,19 @@ case_section <- function(df, col) {
 #' Add CPT Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `section` column
+#' @return A [tibble][tibble::tibble-package] with a `chapter` column
 #' @examples
 #' dplyr::tibble(
 #'       hcpcs = c("39503", "99215", "99140",
 #'                 "69990", "70010", "0222U",
 #'                 "V5299", "7010F", "0074T")) |>
-#'                 case_section_cpt(hcpcs)
+#'                 case_chapter_cpt(hcpcs)
 #' @export
 #' @autoglobal
-case_section_cpt <- function(df, col) {
+case_chapter_cpt <- function(df, col) {
 
   df |>
-    dplyr::mutate(section = dplyr::case_match(
+    dplyr::mutate(chapter = dplyr::case_match(
       {{ col }},
       as.character(99202:99499) ~ "E&M [99202-99499]",
       as.character(c(stringr::str_pad(100:1999, width = 5, pad = "0"), 99100:99140)) ~ "Anesthesiology [00100-01999, 99100-99140]",

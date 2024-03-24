@@ -18,11 +18,16 @@ opps <- read_excel(opps_xl, col_types = "text") |>
     facility_price),
     readr::parse_number)) |>
   filter(hcpcs != "\u001a") |>
-  rename(mac = carrier,
-         fac_price = facility_price,
-         nonfac_price = non_facilty_price)
+  select(
+    hcpcs,
+    mod,
+    status = procstat,
+    mac = carrier,
+    fpymt_opps = facility_price,
+    nfpymt_opps = non_facilty_price)
 
-opps
+opps |>
+  count(status)
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))

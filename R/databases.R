@@ -200,9 +200,7 @@ descriptors <- function(hcpcs = NULL) {
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' opps(hcpcs    = c("70170", "71550", "0689T", "75898"),
-#'      mac      = "01112",
-#'      locality = "05")
+#' opps(hcpcs = "71550", mac = "01112", locality = "05")
 #' @export
 #' @autoglobal
 opps <- function(hcpcs    = NULL,
@@ -210,8 +208,7 @@ opps <- function(hcpcs    = NULL,
                  locality = NULL,
                  ...) {
 
-  op <- pins::pin_read(mount_board(), "opps") |>
-    dplyr::rename(status = procstat)
+  op <- pins::pin_read(mount_board(), "opps")
 
   if (!is.null(hcpcs)) {
     op <- vctrs::vec_slice(op,
@@ -234,6 +231,13 @@ opps <- function(hcpcs    = NULL,
 }
 
 #' Level I and II HCPCS Modifiers
+#'
+#' A modifier provides the means to report or indicate that a service or
+#' procedure that has been performed has been altered by some specific
+#' circumstance but not changed in its definition or code.
+#'
+#' Modifiers also enable health care professionals to effectively respond to
+#' payment policy requirements established by other entities.
 #'
 #' @param mod *<chr>* 2-digit HCPCS modifier
 #' @param ... Empty

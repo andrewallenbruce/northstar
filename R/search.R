@@ -89,16 +89,16 @@ hcpcs_search <- function(hcpcs,
            by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
            dplyr::left_join(x$descriptors,
            by = dplyr::join_by(hcpcs == cpt)) |>
-           case_category(hcpcs) |>
-           case_section(hcpcs)
+           case_category(hcpcs) # |>
+           # case_section(hcpcs)
 
   }
 
   if (rlang::has_name(x, "level_2") & !rlang::has_name(x, "descriptors")) {
 
     res <- dplyr::left_join(res, x$level_2,
-           by = dplyr::join_by(hcpcs)) |>
-           case_section_hcpcs(hcpcs)
+           by = dplyr::join_by(hcpcs)) # |>
+           # case_section_hcpcs(hcpcs)
 
   }
 
@@ -108,8 +108,8 @@ hcpcs_search <- function(hcpcs,
            by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
            dplyr::left_join(x$descriptors,
            by = dplyr::join_by(hcpcs == cpt)) |>
-           case_category(hcpcs) |>
-           case_section_cpt(hcpcs)
+           case_category(hcpcs) # |>
+           # case_section_cpt(hcpcs)
 
   }
 
@@ -119,7 +119,6 @@ hcpcs_search <- function(hcpcs,
            by = dplyr::join_by(hcpcs, mod, status, mac, locality))
 
   }
-
   res |>
     dplyr::mutate(
       fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
@@ -128,10 +127,9 @@ hcpcs_search <- function(hcpcs,
       nnpar = non_participating_amount(npar),
       flim  = limiting_charge(fpar),
       nlim  = limiting_charge(npar)) |>
-    case_level(hcpcs) |>
-    case_status(status) |>
+    # case_level(hcpcs) |>
+    # case_status(status) |>
     cols_amounts()
-
 }
 
 #' @param df data frame
