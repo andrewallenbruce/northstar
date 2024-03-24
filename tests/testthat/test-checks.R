@@ -1,6 +1,5 @@
-
-
 test_that("validation checks works", {
+
   expect_equal(is_valid_length("11646"), "11646")
   expect_error(is_valid_length("1164"))
 

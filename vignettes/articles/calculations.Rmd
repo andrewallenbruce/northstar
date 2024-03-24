@@ -23,46 +23,73 @@ options(scipen = 999)
 ```{r pkgs, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
-library(gt)
+library(tinytable)
 ```
 
 # Physician Fee Schedule Amount Calculation
 
-|          |                                                   |
-|----------|---------------------------------------------------|
-| $RVU_w$  | *Work* Relative Value Unit                        |
-| $GPCI_w$ | *Work* Geographic Practice Cost Index             |
-| $RVU_p$  | *Practice Expense* Relative Value Unit            |
-| $GPCI_p$ | *Practice Expense* Geographic Practice Cost Index |
-| $RVU_m$  | *Malpractice* Relative Value Unit                 |
-| $GPCI_m$ | *Malpractice* Geographic Practice Cost Index      |
-| $CF$     | Conversion Factor                                 |
+```{r}
+dplyr::tribble(
+  ~Variables,  ~Descriptions,
+  "$RVU_w$",   "Relative Value Unit (Physician Work)",
+  "$GPCI_w$",  "Geographic Practice Cost Index (Physician Work)",
+  "$RVU_p$",   "Relative Value Unit (Practice Expense)",
+  "$GPCI_p$",  "Geographic Practice Cost Index (Practice Expense)",
+  "$RVU_m$",   "Relative Value Unit (Malpractice)",
+  "$GPCI_m$",  "Geographic Practice Cost Index (Malpractice)",
+  "$CF$",      "Conversion Factor") |> 
+  tt(caption = "Physician Fee Schedule Variables") |> 
+  format_tt(markdown = TRUE) |> 
+  style_tt(bootstrap_class = "table table-hover")
+```
 
 <br>
 
-The __Participating amount__ is calculated as follows:
+```{r}
+dplyr::tribble(
+  ~Formulas,                                         ~Results,
+  "$RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$", "Total RVUs",
+  "$\\text{Total RVUs} * CF$",                       "Participating Fee",
+  "$\\text{Participating Fee} * 0.95$",              "Non-Participating Fee",
+  "$(\\text{Participating Fee} * 1.15) * 0.95$",     "Limiting Charge") |> 
+  tt(caption = "Physician Fee Schedule Formulas") |> 
+  format_tt(markdown = TRUE) |> 
+  style_tt(bootstrap_class = "table table-hover")
+```
 
-<br><br>
+As there is a corresponding GPCI value for each of the three components of an RVU, the formula is essentially the [dot product](https://www.toppr.com/guides/maths-formulas/dot-product-formula/) of the RVU and GPCI vectors, multiplied by the Conversion Factor:
 
-$$x = [(RVU_w \times GPCI_w) + (RVU_p \times GPCI_p) + (RVU_m \times GPCI_m)] \times CF$$
+$$ RVU \cdot GPCI = RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$$
 
-<br>
+```{r}
+wrvu  = 6.26   # Work RVU
+wgpci = 1      # Work GPCI
 
-The __Non-participating amount__ is calculated as follows:
+pgpci = 0.883  # Practice GPCI
+prvu  = 4.36   # Practice RVU
 
-<br>
+mrvu  = 0.99   # Malpractice RVU
+mgpci = 1.125  # Malpractice GPCI
 
-$$ y = 0.95x$$
+cf    = 32.744 # Conversion Factor
 
-<br>
+rvus <- (wrvu * wgpci) + (prvu * pgpci) + (mrvu * mgpci)
+rvus # Total RVUs
 
-The __Limiting charge__ is calculated as follows:
+rvus * cf # Participating Fee
+```
 
-<br>
+Using base r's matrix multiplication infix operator
 
-$$ z = 0.95(1.15x)$$
+```{r}
+as.vector(c(wrvu, prvu, mrvu) %*% c(wgpci, pgpci, mgpci))
+```
 
-<br>
+```{r}
+pracma::dot(
+  c(wrvu, prvu, mrvu), 
+  c(wgpci, pgpci, mgpci))
+```
 
 ```{r}
 calculate_amounts(

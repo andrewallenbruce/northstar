@@ -24,6 +24,8 @@ Imports:
     vctrs
 Suggests:
     clock,
+    pracma,
+    tinytable,
     fontawesome,
     gluedown,
     gt,
