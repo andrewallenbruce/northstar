@@ -90,7 +90,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>code</dt>
-<dd><p>ICD-10-CM code</p></dd>
+<dd><p>vector of ICD-10-CM codes</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -104,17 +104,21 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">icd10cm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"H00.019"</span>, <span class="st">"D50.1"</span>, <span class="st">"C4A.70"</span>, <span class="st">"Z20.818"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ chapter      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 3, 7, 21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ abbreviation <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ONC", "BLOOD", "EYE", "STAT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ section      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Neoplasms", "Diseases of the blood and blood-forming org…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ range        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "C00 - D49", "D50 - D89", "H00 - H59", "Z00 - Z99"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ order        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1599, 3421, 7045, 95793</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ valid        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ code         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "C4A.70", "D50.1", "H00.019", "Z20.818"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ description  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Merkel cell carcinoma of unspecified lower limb, includi…</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">icd10cm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F50.8"</span>, <span class="st">"G40.311"</span>, <span class="st">"Q96.8"</span>, <span class="st">"Z62.890"</span>, <span class="st">"R45.4"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"E06.3"</span>, <span class="st">"H00.019"</span>, <span class="st">"D50.1"</span>, <span class="st">"C4A.70"</span>, <span class="st">"Z20.818"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       ch abbrev chapter                      range order valid code  description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     2 ONC    Neoplasms                    C00 …  <span style="text-decoration: underline;">1</span>599     1 C4A.… Merkel cel…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     3 BLOOD  Diseases of the blood and b… D50 …  <span style="text-decoration: underline;">3</span>421     1 D50.1 Sideropeni…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     4 METAB  Endocrine, nutritional and … E00 …  <span style="text-decoration: underline;">3</span>868     1 E06.3 Autoimmune…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     5 PSYCH  Mental, behavioral and neur… F01 …  <span style="text-decoration: underline;">5</span>946     0 F50.8 Other eati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     6 NEURO  Diseases of the nervous sys… G00 …  <span style="text-decoration: underline;">6</span>329     1 G40.… Generalize…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     7 EYE    Diseases of the eye and adn… H00 …  <span style="text-decoration: underline;">7</span>045     1 H00.… Hordeolum …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    17 CONG   Congenital malformations, d… Q00 … <span style="text-decoration: underline;">30</span>028     1 Q96.8 Other vari…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    18 SYMP   Symptoms, signs and abnorma… R00 … <span style="text-decoration: underline;">30</span>559     1 R45.4 Irritabili…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    21 STAT   Factors influencing health … Z00 … <span style="text-decoration: underline;">95</span>793     1 Z20.… Contact wi…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    21 STAT   Factors influencing health … Z00 … <span style="text-decoration: underline;">96</span>381     1 Z62.… Parent-chi…</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
