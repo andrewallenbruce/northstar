@@ -7,7 +7,7 @@ utils::globalVariables(c(
   # <case_coverage>
   ":=",
   # <level2>
-  "asc_grp",
+  "asc",
   # <hcpcs_search>
   "cf",
   # <adjustment_codes>
@@ -15,17 +15,18 @@ utils::globalVariables(c(
   # <icd10cm>
   "codes",
   # <level2>
-  "cov",
-  # <hcpcs_search>
-  "cpt",
+  "coverage",
   # <icd_sections>
   # <col_lb>
-  # <hcpcs_search>
   "description",
   # <adjustment_codes>
   "description.x",
   # <adjustment_codes>
   "description.y",
+  # <level2>
+  "description_long",
+  # <level2>
+  "description_short",
   # <adjustment_codes>
   "end_date",
   # <calculate_amounts>
@@ -34,6 +35,8 @@ utils::globalVariables(c(
   "fpar",
   # <hcpcs_search>
   "fprvu",
+  # <hcpcs_search>
+  "frvus",
   # <adjustment_codes>
   "group",
   # <taxonomy>
@@ -42,8 +45,6 @@ utils::globalVariables(c(
   "labcert",
   # <col_lb>
   "label",
-  # <level2>
-  "long_description",
   # <rbcs>
   "major",
   # <hcpcs_search>
@@ -55,7 +56,7 @@ utils::globalVariables(c(
   # <hcpcs_search>
   "mrvu",
   # <level2>
-  "mult_pi",
+  "multi_price",
   # <icd_sections>
   "n",
   # <calculate_amounts>
@@ -64,6 +65,10 @@ utils::globalVariables(c(
   "npar",
   # <hcpcs_search>
   "nprvu",
+  # <hcpcs_search>
+  "nrvus",
+  # <hcpcs_search>
+  "pctc",
   # <case_pctc>
   "pctc_description",
   # <hcpcs_search>
@@ -73,8 +78,6 @@ utils::globalVariables(c(
   # <icd_sections>
   # <case_section>
   "section",
-  # <level2>
-  "short_description",
   # <hcpcs_search>
   "status",
   # <level2>

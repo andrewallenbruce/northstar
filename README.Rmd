@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# northstar <img src="man/figures/logo.png" align="right" height="175" />
+# northstar <img src="man/figures/logo.png" align="right" height="200" />
 
 > Tidy Healthcare Revenue Integrity Tools
 
@@ -49,11 +49,11 @@ library(dplyr)
 ### HCPCS
 
 ```{r}
-# hcpcs_search(hcpcs    = "33935", 
-#              state    = "GA", 
-#              locality = "01", 
-#              mac      = "10212") |> 
-#   glimpse()
+hcpcs_search(hcpcs    = "33935",
+             state    = "GA",
+             locality = "01",
+             mac      = "10212") |>
+  glimpse()
 ```
 
 ### ICD-10-CM

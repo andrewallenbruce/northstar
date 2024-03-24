@@ -37,17 +37,6 @@ img {
     color: rgb(3, 153, 3) !important;
 }
 
-.me-auto {
-    color: red !important;
-    animation: color-change 5s infinite !important;
-}
-
-@keyframes color-change {
-  0% { color: #9370DB; }
-  50% { color: #00BFFF; }
-  100% { color: #9370DB; }
-}
-
 .active .nav-link {
   color: rgb(3, 153, 3) !important;
 }
@@ -71,7 +60,7 @@ dd > p:nth-child(2) {
 }
 
 .row > main {
-  max-width: 100%;
+  max-width: 75%;
 }
 
 @media only screen and (min-width: 640px) {

@@ -84,52 +84,43 @@ hcpcs_search <- function(hcpcs,
   if (all(rlang::has_name(x, c("level_2", "descriptors")))) {
 
     res <- dplyr::left_join(res, x$level_2,
-           by = dplyr::join_by(hcpcs, description)) |>
+                            by = dplyr::join_by(hcpcs)) |>
            dplyr::left_join(x$payment,
-           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+                            by = dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)) |>
            dplyr::left_join(x$descriptors,
-           by = dplyr::join_by(hcpcs == cpt)) |>
-           case_category(hcpcs) # |>
-           # case_section(hcpcs)
+                            by = dplyr::join_by(hcpcs))
 
   }
 
   if (rlang::has_name(x, "level_2") & !rlang::has_name(x, "descriptors")) {
 
-    res <- dplyr::left_join(res, x$level_2,
-           by = dplyr::join_by(hcpcs)) # |>
-           # case_section_hcpcs(hcpcs)
+    res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs))
 
   }
 
   if (rlang::has_name(x, "descriptors") & !rlang::has_name(x, "level_2")) {
 
-    res <- dplyr::left_join(res,x$payment,
-           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
-           dplyr::left_join(x$descriptors,
-           by = dplyr::join_by(hcpcs == cpt)) |>
-           case_category(hcpcs) # |>
-           # case_section_cpt(hcpcs)
+    res <- dplyr::left_join(res,x$payment, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+           dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs))
 
   }
 
   if (rlang::has_name(x, "oppscap")) {
 
-    res <- dplyr::left_join(res, x$oppscap,
-           by = dplyr::join_by(hcpcs, mod, status, mac, locality))
+    res <- dplyr::left_join(res, x$oppscap, by = dplyr::join_by(hcpcs, mod, status, mac, locality))
+ }
 
-  }
   res |>
     dplyr::mutate(
-      fpar  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)) * cf,
-      npar  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)) * cf,
-      fnpar = non_participating_amount(fpar),
-      nnpar = non_participating_amount(npar),
-      flim  = limiting_charge(fpar),
-      nlim  = limiting_charge(npar)) # |>
-    # case_level(hcpcs) |>
-    # case_status(status) |>
-    # cols_amounts()
+      frvus  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)),
+      nrvus  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)),
+      fpar   = frvus * cf,
+      npar   = nrvus * cf,
+      fnpar  = non_participating_amount(fpar),
+      nfnpar = non_participating_amount(npar),
+      flim   = limiting_charge(fpar),
+      nlim   = limiting_charge(npar)) |>
+    cols_amounts()
 }
 
 #' @param df data frame
@@ -138,13 +129,13 @@ hcpcs_search <- function(hcpcs,
 cols_amounts <- function(df) {
 
   cols <- c('hcpcs',
-            'level',
-            'category',
+            # 'level',
+            # 'category',
             'description',
             'description_long',
-            'description_consumer' = 'consumer_descriptor',
-            'description_clinician' = 'clinician_descriptors',
-            'section',
+            'description_consumer',
+            'descriptions_clinician',
+            # 'section',
             'rbcs_category',
             'rbcs_subcategory',
             'rbcs_family',
@@ -154,31 +145,35 @@ cols_amounts <- function(df) {
             'state',
             'locality',
             'area' = 'name',
+            'counties',
             'wgpci',
             'pgpci',
             'mgpci',
             'wrvu',
-            'nonfac_prvu' = 'nprvu',
-            'fac_prvu' = 'fprvu',
+            'nprvu',
+            'fprvu',
             'mrvu',
             'cf',
-            'fac_par' = 'fpar',
-            'nonfac_par' = 'npar',
-            'fac_nonpar' = 'fnpar',
-            'nonfac_nonpar' = 'nnpar',
-            'fac_limit' = 'flim',
-            'nonfac_limit' = 'nlim',
+            'f_fee',
+            'nf_fee',
+            'fpar',
+            'npar',
+            'fnpar',
+            'nfnpar',
+            'flim',
+            'nlim',
             'opps',
-            'nonfac_prvu_opps' = 'nprvu_opps',
-            'fac_prvu_opps' = 'fprvu_opps',
+            'opps_nf',
+            'opps_f',
+            'nprvu_opps',
+            'fprvu_opps',
             'mrvu_opps',
-            'fac_par_opps' = 'fac_price',
-            'nonfac_par_opps' = 'nonfac_price',
+            'fpymt_opps',
+            'nfpymt_opps',
             'mult_surg',
             'mult_proc',
-            'flat_vis',
-            'nonfac_ther' = 'nther',
-            'fac_ther' = 'fther',
+            'nther',
+            'fther',
             'global',
             'op_pre',
             'op_intra',

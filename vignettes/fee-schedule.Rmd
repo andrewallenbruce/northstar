@@ -39,11 +39,12 @@ hcpcs_search(
   mac      = "10212") |> 
   remove_empty(which = c("rows", "cols")) |>
   rowwise() |>
-  mutate(description_clinician = map(description_clinician, ~paste0("* ", ., collapse = "\n"))) |>
-  unnest(cols = description_clinician) |>
+  mutate(descriptions_clinician = map(
+    descriptions_clinician, ~paste0("* ", ., collapse = "\n"))) |>
+  unnest(cols = descriptions_clinician) |>
   ungroup() |> 
-  northstar:::display_long() |>
-  gt() |>
+  display_long() |>
+  gt(rowname_col = "name") |>
   fmt_markdown() |> 
   tab_options(
     column_labels.hidden = TRUE,

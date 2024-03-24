@@ -108,7 +108,7 @@ mods <- dplyr::tribble(
   "XS", "Separate Structure, A Service That Is Distinct Because It Was Performed On A Separate Organ/Structure (subset of 59)",
   "XU", "Unusual Non-Overlapping Service, The Use Of A Service That Is Distinct Because It Does Not Overlap Usual Components Of The Main Service (subset of 59)"
 ) |>
-  distinct(mod, .keep_all = TRUE)
+  dplyr::distinct(mod, .keep_all = TRUE)
 
 modefs <- dplyr::tribble(
   ~mod,  ~definition,
@@ -164,7 +164,29 @@ modefs <- dplyr::tribble(
 )
 
 mods <- mods |>
-  left_join(modefs)
+  dplyr::left_join(modefs)
+
+mods_l2 <- pins::pin_read(mount_board(), "hcpcs") |>
+  dplyr::filter(type == "mod") |>
+  dplyr::select(-c(type,
+                   cim,
+                   mcm,
+                   procnote,
+                   date_added,
+                   date_action,
+                   date_ended,
+                   action,
+                   xref,
+                   description_short,
+                   coverage)) |>
+  janitor::remove_empty() |>
+  dplyr::mutate(description_long = stringr::str_squish(description_long)) |>
+  dplyr::select(mod = hcpcs, label = description_long)
+
+
+mods <- vctrs::vec_rbind(mods,
+                         mods_l2) |>
+  dplyr::distinct(mod, label, .keep_all = TRUE)
 
 # Update Pin
 board <- pins::board_folder(here::here("pins"))

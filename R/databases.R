@@ -120,15 +120,15 @@ level2 <- function(hcpcs = NULL,
   if (limit_cols) {
     l2 <- dplyr::select(l2,
           hcpcs,
-          short_description,
-          long_description,
+          description_short,
+          description_long,
           price,
-          mult_pi,
+          multi_price,
           labcert,
           xref,
           tos,
-          cov,
-          asc_grp,
+          coverage,
+          asc,
           betos)
   }
 
