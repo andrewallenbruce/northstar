@@ -9,11 +9,10 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
-<br>
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
 <br> [![Code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
-<br> [![Last
+[![Last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
 <br>
 [![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
@@ -38,7 +37,7 @@ library(northstar)
 library(dplyr)
 ```
 
-## Search HCPCS Codes
+### HCPCS
 
 ``` r
 hcpcs_search(hcpcs    = "33935", 
@@ -105,38 +104,35 @@ hcpcs_search(hcpcs    = "33935",
     > $ rare                  <chr> "10"
     > $ unused                <int> 0
 
-## Search ICD-10 Codes
+### ICD-10-CM
 
 ``` r
-icd10_search(code  = "T38.0X1A", 
-             field = "code") |> 
-  case_chapter_icd10(code) |> 
-  dplyr::glimpse()
-```
-
-    > Rows: 1
-    > Columns: 3
-    > $ code        <chr> "T38.0X1A"
-    > $ chapter     <chr> "Injury, poisoning and certain other consequences of exter…
-    > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
-
-``` r
-icd10cm(code = "T38.0X1A") |> 
-  dplyr::glimpse()
+icd10cm(code = "T38.0X1A") |> glimpse()
 ```
 
     > Rows: 1
     > Columns: 8
-    > $ chapter      <int> 19
-    > $ abbreviation <chr> "INJ"
-    > $ section      <chr> "Injury, poisoning and certain other consequences of exte…
-    > $ range        <chr> "S00 - T88"
-    > $ order        <int> 75443
-    > $ valid        <int> 1
-    > $ code         <chr> "T38.0X1A"
-    > $ description  <chr> "Poisoning by glucocorticoids and synthetic analogues, ac…
+    > $ ch          <int> 19
+    > $ abbrev      <chr> "INJ"
+    > $ chapter     <chr> "Injury, poisoning and certain other consequences of exter…
+    > $ range       <chr> "S00 - T88"
+    > $ order       <int> 75443
+    > $ valid       <int> 1
+    > $ code        <chr> "T38.0X1A"
+    > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
 
-## Physician Fee Schedule Calculation
+``` r
+icd_sections(code = "T38.0X1A") |> glimpse()
+```
+
+    > Rows: 1
+    > Columns: 4
+    > $ code        <chr> "T38.0X1A"
+    > $ section     <chr> "T38"
+    > $ description <chr> "Poisoning by, adverse effect of and underdosing of hormon…
+    > $ n           <int> 336
+
+### Physician Fee Schedule
 
 ``` r
 calculate_amounts(

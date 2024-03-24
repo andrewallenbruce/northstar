@@ -19,28 +19,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master) <br>
+[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar) <br>
-[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar) <br>
+[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
 [![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master) <br>
 [![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
-
-```{r eval=FALSE, results='asis', echo=FALSE}
-badges <- data.frame(
-  x = c(
-  "[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)",
-  "[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)",
-  "[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)",
-  "[![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)",
-  "[![License: Apache License (>= 2)](https://img.shields.io/badge/license-Apache License (>= 2)-blue.svg)]",
-  "[![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)")
-)
-
-colnames(badges) <- NULL
-
-tinytable::tt(badges) |> 
-  print("markdown")
-```
 
 <!-- badges: end -->
 
@@ -57,13 +40,13 @@ pak::pak("andrewallenbruce/northstar")
 
 ## :beginner: Usage
 
-```{r warning=FALSE, message=FALSE}
+```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
 library(dplyr)
 ```
 
 
-## Search HCPCS Codes
+### HCPCS
 
 ```{r}
 hcpcs_search(hcpcs    = "33935", 
@@ -73,23 +56,19 @@ hcpcs_search(hcpcs    = "33935",
   glimpse()
 ```
 
-## Search ICD-10 Codes
+### ICD-10-CM
 
 ```{r}
-icd10_search(code  = "T38.0X1A", 
-             field = "code") |> 
-  case_chapter_icd10(code) |> 
-  dplyr::glimpse()
+icd10cm(code = "T38.0X1A") |> glimpse()
+```
+
+```{r}
+icd_sections(code = "T38.0X1A") |> glimpse()
 ```
 
 
-```{r}
-icd10cm(code = "T38.0X1A") |> 
-  dplyr::glimpse()
-```
 
-
-## Physician Fee Schedule Calculation
+### Physician Fee Schedule
 
 ```{r}
 calculate_amounts(

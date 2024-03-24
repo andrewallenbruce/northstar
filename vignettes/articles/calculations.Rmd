@@ -17,10 +17,7 @@ knitr::opts_chunk$set(
   fig.width  = 10
 )
 options(scipen = 999)
-```
 
-
-```{r pkgs, message=FALSE, warning=FALSE}
 library(northstar)
 library(dplyr)
 library(tinytable)
@@ -47,11 +44,11 @@ dplyr::tribble(
 
 ```{r echo=FALSE}
 dplyr::tribble(
-  ~Formulas,                                         ~Results,
+  ~Formula,                                          ~Result,
   "$RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$", "Total RVUs",
-  "$\\text{Total RVUs} * CF$",                       "Participating Fee",
-  "$\\text{Participating Fee} * 0.95$",              "Non-Participating Fee",
-  "$(\\text{Participating Fee} * 1.15) * 0.95$",     "Limiting Charge") |> 
+  "$\\text{Total RVUs} \\times CF$",                 "Participating Fee",
+  "$\\text{Participating Fee} \\times 0.95$",        "Non-Participating Fee",
+  "$\\text{Participating Fee} \\times 1.0925$",      "Limiting Charge") |> 
   tt(caption = "Physician Fee Schedule Formulas") |> 
   format_tt(markdown = TRUE) |> 
   style_tt(bootstrap_class = "table table-hover")
@@ -61,7 +58,11 @@ dplyr::tribble(
 
 As there is a corresponding GPCI value for each of the three components of an RVU, the formula is essentially the [dot product](https://www.toppr.com/guides/maths-formulas/dot-product-formula/) of the RVU and GPCI vectors, multiplied by the Conversion Factor:
 
-$ RVU \cdot GPCI = RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m)$
+<br>
+
+$$ RVU \cdot GPCI = RVU_w(GPCI_w) + RVU_p(GPCI_p) + RVU_m(GPCI_m) $$
+
+<br>
 
 ```{r}
 wrvu  = 6.26   # Work RVU
