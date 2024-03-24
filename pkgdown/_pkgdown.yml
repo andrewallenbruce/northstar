@@ -68,6 +68,7 @@ reference:
     Medical Coding & Billing Codesets.
   contents:
   - adjustment_codes
+  - icd10cm
   - icd10_search
   - hcpcs_search
   - lcd
@@ -96,12 +97,7 @@ reference:
   desc: >
     Functions to validate inputs.
   contents:
-  - is_valid_length
-  - is_level_I
-  - is_level_II
-  - is_category_I
-  - is_category_II
-  - is_category_III
+  - starts_with("is_")
 
 - title: Labelling Functions
   desc: >
