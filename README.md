@@ -111,26 +111,23 @@ icd10cm(code = "T38.0X1A") |> glimpse()
 ```
 
     > Rows: 1
-    > Columns: 8
+    > Columns: 16
     > $ ch          <int> 19
     > $ abbrev      <chr> "INJ"
     > $ chapter     <chr> "Injury, poisoning and certain other consequences of exter…
     > $ range       <chr> "S00 - T88"
+    > $ ch_start    <int> 30990
+    > $ ch_end      <int> 84933
+    > $ ch_codes    <int> 53943
+    > $ ch_sc       <int> 171
+    > $ section     <chr> "Poisoning by, adverse effect of and underdosing of hormon…
     > $ order       <int> 75443
     > $ valid       <int> 1
     > $ code        <chr> "T38.0X1A"
     > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
-
-``` r
-icd_sections(code = "T38.0X1A") |> glimpse()
-```
-
-    > Rows: 1
-    > Columns: 4
-    > $ code        <chr> "T38.0X1A"
-    > $ section     <chr> "T38"
-    > $ description <chr> "Poisoning by, adverse effect of and underdosing of hormon…
-    > $ n           <int> 336
+    > $ sc_start    <int> 75439
+    > $ sc_end      <int> 75774
+    > $ sc_codes    <int> 335
 
 ### Physician Fee Schedule
 

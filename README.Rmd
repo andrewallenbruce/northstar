@@ -62,10 +62,6 @@ hcpcs_search(hcpcs    = "33935",
 icd10cm(code = "T38.0X1A") |> glimpse()
 ```
 
-```{r}
-icd_sections(code = "T38.0X1A") |> glimpse()
-```
-
 
 
 ### Physician Fee Schedule

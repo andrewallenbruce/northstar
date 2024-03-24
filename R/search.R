@@ -47,18 +47,11 @@ hcpcs_search <- function(hcpcs,
   if (vctrs::vec_is_empty(rv)) {
     cli::cli_abort("No RVUs found for HCPCS code {.strong {.val {hcpcs}}}.")}
 
-  gp <- gpci(state    = state,
-             locality = locality,
-             mac      = mac)
+  gp <- gpci(state = state, locality = locality, mac = mac)
 
-  fs <- pfs(hcpcs     = hcpcs,
-            locality  = locality,
-            mac       = mac)
+  fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
 
-  op <- opps(hcpcs     = hcpcs,
-             locality  = locality,
-             mac       = mac)
-
+  op <- opps(hcpcs = hcpcs, locality = locality, mac = mac)
 
   ds <- descriptors(hcpcs = hcpcs)
 
@@ -84,11 +77,11 @@ hcpcs_search <- function(hcpcs,
   if (all(rlang::has_name(x, c("level_2", "descriptors")))) {
 
     res <- dplyr::left_join(res, x$level_2,
-                            by = dplyr::join_by(hcpcs)) |>
+           by = dplyr::join_by(hcpcs)) |>
            dplyr::left_join(x$payment,
-                            by = dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)) |>
+           by = dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)) |>
            dplyr::left_join(x$descriptors,
-                            by = dplyr::join_by(hcpcs))
+           by = dplyr::join_by(hcpcs))
 
   }
 
@@ -100,14 +93,17 @@ hcpcs_search <- function(hcpcs,
 
   if (rlang::has_name(x, "descriptors") & !rlang::has_name(x, "level_2")) {
 
-    res <- dplyr::left_join(res,x$payment, by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
-           dplyr::left_join(x$descriptors, by = dplyr::join_by(hcpcs))
+    res <- dplyr::left_join(res,x$payment,
+           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+           dplyr::left_join(x$descriptors,
+           by = dplyr::join_by(hcpcs))
 
   }
 
   if (rlang::has_name(x, "oppscap")) {
 
-    res <- dplyr::left_join(res, x$oppscap, by = dplyr::join_by(hcpcs, mod, status, mac, locality))
+    res <- dplyr::left_join(res, x$oppscap,
+           by = dplyr::join_by(hcpcs, mod, status, mac, locality))
  }
 
   res |>
@@ -129,13 +125,10 @@ hcpcs_search <- function(hcpcs,
 cols_amounts <- function(df) {
 
   cols <- c('hcpcs',
-            # 'level',
-            # 'category',
             'description',
             'description_long',
             'description_consumer',
             'descriptions_clinician',
-            # 'section',
             'rbcs_category',
             'rbcs_subcategory',
             'rbcs_family',
@@ -144,7 +137,7 @@ cols_amounts <- function(df) {
             'mac',
             'state',
             'locality',
-            'area' = 'name',
+            'area',
             'counties',
             'wgpci',
             'pgpci',

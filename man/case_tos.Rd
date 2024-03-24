@@ -12,7 +12,7 @@ case_tos(df, col)
 \item{col}{column of Type of Service codes}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with a \code{tos_description} column
+A \link[tibble:tibble-package]{tibble} with a \code{type_of_service} column
 }
 \description{
 Add HCPCS Level II Type of Service Descriptions

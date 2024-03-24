@@ -12,7 +12,7 @@ case_multiple_pricing(df, col)
 \item{col}{column of Multiple Pricing indicators}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with a \code{mult_description} column
+A \link[tibble:tibble-package]{tibble} with a \code{multiple_pricing_indicator} column
 }
 \description{
 Add HCPCS Level II Multiple Pricing Indicator Descriptions

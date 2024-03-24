@@ -11,8 +11,8 @@
 #' @export
 #' @autoglobal
 is_valid_icd <- function(x,
-                            arg = rlang::caller_arg(x),
-                            call = rlang::caller_env()) {
+                         arg = rlang::caller_arg(x),
+                         call = rlang::caller_env()) {
 
   if (stringr::str_length(x) < 3L || stringr::str_length(x) > 7L) {
     cli::cli_abort(c(

@@ -4,8 +4,8 @@ template:
   bootstrap: 5
   bslib:
     font_scale: 1.1
-    base_font: {google: "IBM Plex Sans"}
-    heading_font: {google: "Roboto Slab"}
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Atkinson Hyperlegible"}
     code_font: {google: "Fira Code"}
 
 home:

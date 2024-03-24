@@ -1,19 +1,19 @@
 #' Add HCPCS Level I & II Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `section` column
+#' @return A [tibble][tibble::tibble-package] with a `chapter` column
 #' @examples
 #' dplyr::tibble(
 #' hcpcs = c("39503", "99215", "99140",
 #'           "69990", "70010", "0222U",
 #'           "V5299", "7010F", "0074T")) |>
-#'           case_section(hcpcs)
+#'           case_chapter(hcpcs)
 #' @export
 #' @autoglobal
-case_section <- function(df, col) {
+case_chapter <- function(df, col) {
 
   df |>
-    dplyr::mutate(section = dplyr::case_match(
+    dplyr::mutate(chapter = dplyr::case_match(
       {{ col }},
       as.character(c(99202:99499)) ~ "E&M [99202-99499]",
       as.character(c(stringr::str_pad(100:1999, width = 5, pad = "0"), 99100:99140)) ~ "Anesthesiology [00100-01999, 99100-99140]",
@@ -23,7 +23,7 @@ case_section <- function(df, col) {
       as.character(c(90281:99199, 99500:99607)) ~ "Medicine [90281-99199, 99500-99607]",
       .default = NA_character_
       )) |>
-    dplyr::mutate(section = dplyr::case_match(
+    dplyr::mutate(chapter = dplyr::case_match(
       substr({{ col }}, 1, 1),
       "A" ~ "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
       "B" ~ "Enteral and Parenteral Therapy",
@@ -42,7 +42,7 @@ case_section <- function(df, col) {
       "S" ~ "Private Payer Codes",
       "T" ~ "State Medicaid Agency Codes",
       "V" ~ "Vision/Hearing Services",
-      .default = section
+      .default = chapter
     ),
     .after = {{ col }})
 }
@@ -78,19 +78,19 @@ case_chapter_cpt <- function(df, col) {
 #' Add HCPCS Section Labels
 #' @param df data frame
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `section` column
+#' @return A [tibble][tibble::tibble-package] with a `chapter` column
 #' @examples
 #' dplyr::tibble(
 #'       hcpcs = c("39503", "99215", "99140",
 #'                 "69990", "70010", "0222U",
 #'                 "V5299", "7010F", "0074T")) |>
-#'                 case_section_hcpcs(hcpcs)
+#'                 case_chapter_hcpcs(hcpcs)
 #' @export
 #' @autoglobal
-case_section_hcpcs <- function(df, col) {
+case_chapter_hcpcs <- function(df, col) {
 
   df |>
-    dplyr::mutate(section = dplyr::case_match(
+    dplyr::mutate(chapter = dplyr::case_match(
       substr({{ col }}, 1, 1),
       "A" ~ "Transportation, Medical & Surgical Supplies, Miscellaneous & Experimental",
       "B" ~ "Enteral and Parenteral Therapy",
@@ -638,7 +638,7 @@ case_pricing <- function(df, col) {
 #'
 #' @param df data frame
 #' @param col column of Multiple Pricing indicators
-#' @return A [tibble][tibble::tibble-package] with a `mult_description` column
+#' @return A [tibble][tibble::tibble-package] with a `multiple_pricing_indicator` column
 #' @examples
 #' dplyr::tibble(mult_pi = c(9, LETTERS[1:7])) |> case_multiple_pricing(mult_pi)
 #' @export
@@ -720,7 +720,7 @@ case_labcert <- function(df, col) {
 #'
 #' @param df data frame
 #' @param col column of Type of Service codes
-#' @return A [tibble][tibble::tibble-package] with a `tos_description` column
+#' @return A [tibble][tibble::tibble-package] with a `type_of_service` column
 #' @examples
 #' dplyr::tibble(tos = c(0:9, LETTERS)) |> case_tos(tos)
 #' @export

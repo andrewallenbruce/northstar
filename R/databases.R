@@ -80,7 +80,8 @@ gpci <- function(mac      = NULL,
                  locality = NULL,
                  ...) {
 
-  gp <- pins::pin_read(mount_board(), "gpci")
+  gp <- pins::pin_read(mount_board(), "gpci") |>
+    dplyr::rename(area = name)
 
   if (!is.null(state)) {
     gp <- vctrs::vec_slice(gp,

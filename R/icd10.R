@@ -149,7 +149,9 @@ icd10cm <- function(code = NULL) {
 
   if (!is.null(code)) {
 
-    icd <- tidyr::unnest(icd, codes)
+    icd <- tidyr::unnest(icd, sections) |>
+      tidyr::unnest(codes)
+
     icd <- vctrs::vec_slice(icd,
            vctrs::vec_in(icd$code,
            collapse::funique(code)))
