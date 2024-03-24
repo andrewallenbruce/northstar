@@ -69,7 +69,6 @@ reference:
   contents:
   - adjustment_codes
   - icd10cm
-  - icd_sections
   - icd10_search
   - hcpcs_search
   - lcd

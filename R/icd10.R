@@ -129,7 +129,12 @@ icd10_search <- function(code  = NULL,
 
 }
 
-#' 2024 National Physician Fee Schedule Relative Value File
+#' 2024 ICD-10-CM Codes
+#'
+#' ICD-10-CM (International Classification of Diseases, 10th Revision,
+#' Clinical Modification) is a medical coding system for classifying
+#' diagnoses and reasons for visits in U.S. health care settings.
+#'
 #'
 #' @param code vector of ICD-10-CM codes
 #' @return a [tibble][tibble::tibble-package]
@@ -253,27 +258,4 @@ icd10_chapter_regex <- function() {
       "^[U]"
     ),
   )
-}
-
-#' ICD-10-CM Section Labels and Regexes
-#' @param code vector of ICD-10-CM codes
-#' @return a [tibble][tibble::tibble-package]
-#' @examples
-#' icd_sections(c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
-#'                "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818"))
-#' @export
-#' @autoglobal
-icd_sections <- function(code = NULL) {
-
-  sect <- pins::pin_read(mount_board(), "icd_sections")
-
-  if (!is.null(code)) {
-
-    sect <- dplyr::tibble(
-      code    = code,
-      section = substr(code, 1, 3)) |>
-      dplyr::left_join(sect, dplyr::join_by(section)) |>
-      dplyr::select(code, section, description, n)
-  }
-  return(sect)
 }

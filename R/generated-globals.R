@@ -16,7 +16,6 @@ utils::globalVariables(c(
   "codes",
   # <level2>
   "coverage",
-  # <icd_sections>
   # <col_lb>
   "description",
   # <adjustment_codes>
@@ -57,8 +56,6 @@ utils::globalVariables(c(
   "mrvu",
   # <level2>
   "multi_price",
-  # <icd_sections>
-  "n",
   # <calculate_amounts>
   "nonfacility",
   # <hcpcs_search>
@@ -75,7 +72,6 @@ utils::globalVariables(c(
   "pgpci",
   # <level2>
   "price",
-  # <icd_sections>
   # <case_section>
   "section",
   # <hcpcs_search>

@@ -2,7 +2,7 @@
 % Please edit documentation in R/icd10.R
 \name{icd10cm}
 \alias{icd10cm}
-\title{2024 National Physician Fee Schedule Relative Value File}
+\title{2024 ICD-10-CM Codes}
 \usage{
 icd10cm(code = NULL)
 }
@@ -13,7 +13,9 @@ icd10cm(code = NULL)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-2024 National Physician Fee Schedule Relative Value File
+ICD-10-CM (International Classification of Diseases, 10th Revision,
+Clinical Modification) is a medical coding system for classifying
+diagnoses and reasons for visits in U.S. health care settings.
 }
 \examples{
 icd10cm(c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",

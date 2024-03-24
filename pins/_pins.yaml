@@ -5,9 +5,7 @@ gpci:
 hcpcs:
 - hcpcs/20240324T143027Z-37b59/
 icd10cm:
-- icd10cm/20240324T092935Z-07b28/
-icd_sections:
-- icd_sections/20240324T084652Z-6a046/
+- icd10cm/20240324T182106Z-de032/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 modifiers:
