@@ -136,11 +136,12 @@
 <span>  mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>description_clinician <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">description_clinician</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">.</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">description_clinician</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>descriptions_clinician <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span>
+<span>    <span class="va">descriptions_clinician</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">.</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">descriptions_clinician</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">northstar</span><span class="fu">:::</span><span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_markdown.html" class="external-link">fmt_markdown</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
 <span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -149,10 +150,853 @@
 <span>    heading.subtitle.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
 <span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
 <span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't select columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `short_description` doesn't exist.</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div id="exsvxwixqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#exsvxwixqe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#exsvxwixqe thead, #exsvxwixqe tbody, #exsvxwixqe tfoot, #exsvxwixqe tr, #exsvxwixqe td, #exsvxwixqe th {
+  border-style: none;
+}
+
+#exsvxwixqe p {
+  margin: 0;
+  padding: 0;
+}
+
+#exsvxwixqe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 75%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#exsvxwixqe .gt_title {
+  color: #333333;
+  font-size: 20px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#exsvxwixqe .gt_subtitle {
+  color: #333333;
+  font-size: 14px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#exsvxwixqe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#exsvxwixqe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#exsvxwixqe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#exsvxwixqe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#exsvxwixqe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#exsvxwixqe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#exsvxwixqe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#exsvxwixqe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#exsvxwixqe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#exsvxwixqe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#exsvxwixqe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#exsvxwixqe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#exsvxwixqe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#exsvxwixqe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#exsvxwixqe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#exsvxwixqe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#exsvxwixqe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#exsvxwixqe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#exsvxwixqe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#exsvxwixqe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_footnote {
+  margin: 0px;
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#exsvxwixqe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#exsvxwixqe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#exsvxwixqe .gt_left {
+  text-align: left;
+}
+
+#exsvxwixqe .gt_center {
+  text-align: center;
+}
+
+#exsvxwixqe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#exsvxwixqe .gt_font_normal {
+  font-weight: normal;
+}
+
+#exsvxwixqe .gt_font_bold {
+  font-weight: bold;
+}
+
+#exsvxwixqe .gt_font_italic {
+  font-style: italic;
+}
+
+#exsvxwixqe .gt_super {
+  font-size: 65%;
+}
+
+#exsvxwixqe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#exsvxwixqe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#exsvxwixqe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#exsvxwixqe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#exsvxwixqe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#exsvxwixqe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#exsvxwixqe .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>hcpcs</p>
+</div></th>
+<td headers="stub_1_1 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>39503</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>description</p>
+</div></th>
+<td headers="stub_1_2 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Repair of diaphragm hernia</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>description_consumer</p>
+</div></th>
+<td headers="stub_1_3 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Repair of congenital defect of muscle separating chest and abdominal cavities, neonate</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>descriptions_clinician</p>
+</div></th>
+<td headers="stub_1_4 value" class="gt_row gt_left"><div class="gt_from_md"><ul>
+<li>Repair of neonatal diaphragmatic hernia</li>
+<li>Repair of neonatal diaphragmatic hernia with creation of ventral hernia</li>
+<li>Repair of neonatal diaphragmatic hernia with insertion of chest tube</li>
+<li>Repair of neonatal diaphragmatic hernia with insertion of chest tube and creation of ventral hernia</li>
+</ul></div></td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>rbcs_category</p>
+</div></th>
+<td headers="stub_1_5 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Procedure</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>rbcs_subcategory</p>
+</div></th>
+<td headers="stub_1_6 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Other Organ Systems</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>rbcs_family</p>
+</div></th>
+<td headers="stub_1_7 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>No RBCS Family</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>rbcs_procedure</p>
+</div></th>
+<td headers="stub_1_8 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Major</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>status</p>
+</div></th>
+<td headers="stub_1_9 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>A</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>mac</p>
+</div></th>
+<td headers="stub_1_10 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>10212</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>state</p>
+</div></th>
+<td headers="stub_1_11 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>GA</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>locality</p>
+</div></th>
+<td headers="stub_1_12 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>99</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>area</p>
+</div></th>
+<td headers="stub_1_13 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>REST OF GEORGIA</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>counties</p>
+</div></th>
+<td headers="stub_1_14 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>ALL OTHER COUNTIES</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>wgpci</p>
+</div></th>
+<td headers="stub_1_15 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>1</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>pgpci</p>
+</div></th>
+<td headers="stub_1_16 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0.883</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>mgpci</p>
+</div></th>
+<td headers="stub_1_17 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>1.125</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>wrvu</p>
+</div></th>
+<td headers="stub_1_18 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>108.91</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>nprvu</p>
+</div></th>
+<td headers="stub_1_19 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>35.14</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>fprvu</p>
+</div></th>
+<td headers="stub_1_20 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>35.14</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>mrvu</p>
+</div></th>
+<td headers="stub_1_21 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>26.95</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>cf</p>
+</div></th>
+<td headers="stub_1_22 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>32.744</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>f_fee</p>
+</div></th>
+<td headers="stub_1_23 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5574.94</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>nf_fee</p>
+</div></th>
+<td headers="stub_1_24 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5574.94</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>fpar</p>
+</div></th>
+<td headers="stub_1_25 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5574.90732328</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>npar</p>
+</div></th>
+<td headers="stub_1_26 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5574.90732328</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>fnpar</p>
+</div></th>
+<td headers="stub_1_27 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5296.161957116</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>nfnpar</p>
+</div></th>
+<td headers="stub_1_28 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5296.161957116</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>flim</p>
+</div></th>
+<td headers="stub_1_29 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>6090.5862506834</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>nlim</p>
+</div></th>
+<td headers="stub_1_30 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>6090.5862506834</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>opps</p>
+</div></th>
+<td headers="stub_1_31 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>9</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>nprvu_opps</p>
+</div></th>
+<td headers="stub_1_32 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>fprvu_opps</p>
+</div></th>
+<td headers="stub_1_33 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>mrvu_opps</p>
+</div></th>
+<td headers="stub_1_34 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>mult_surg</p>
+</div></th>
+<td headers="stub_1_35 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>2</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>mult_proc</p>
+</div></th>
+<td headers="stub_1_36 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>2</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_37" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>nther</p>
+</div></th>
+<td headers="stub_1_37 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_38" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>fther</p>
+</div></th>
+<td headers="stub_1_38 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_39" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>global</p>
+</div></th>
+<td headers="stub_1_39 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>090</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_40" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>op_pre</p>
+</div></th>
+<td headers="stub_1_40 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0.09</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_41" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>op_intra</p>
+</div></th>
+<td headers="stub_1_41 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0.84</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_42" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>op_post</p>
+</div></th>
+<td headers="stub_1_42 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0.07</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_43" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>surg_bilat</p>
+</div></th>
+<td headers="stub_1_43 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_44" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>surg_asst</p>
+</div></th>
+<td headers="stub_1_44 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>2</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_45" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>surg_co</p>
+</div></th>
+<td headers="stub_1_45 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>1</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_46" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>surg_team</p>
+</div></th>
+<td headers="stub_1_46 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_47" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>supvis</p>
+</div></th>
+<td headers="stub_1_47 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>09</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_48" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>dximg</p>
+</div></th>
+<td headers="stub_1_48 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>99</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_49" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>rare</p>
+</div></th>
+<td headers="stub_1_49 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>10</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_50" scope="row" class="gt_row gt_left gt_stub"><div class="gt_from_md">
+<p>unused</p>
+</div></th>
+<td headers="stub_1_50 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+</tbody></table>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/opps.html">opps</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"70170"</span>, </span>
 <span>     mac      <span class="op">=</span> <span class="st">"10212"</span>, </span>
 <span>     locality <span class="op">=</span> <span class="st">"01"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -166,19 +1010,74 @@
 <span><span class="co">#&gt; $ locality    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01", "01"</span></span>
 <span><span class="co">#&gt; $ fpymt_opps  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 246.96, 232.81</span></span>
 <span><span class="co">#&gt; $ nfpymt_opps <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 246.96, 232.81</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hcpcs_search.html">hcpcs_search</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"70170"</span>, </span>
 <span>             state    <span class="op">=</span> <span class="st">"GA"</span>, </span>
 <span>             locality <span class="op">=</span> <span class="st">"01"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't select columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `short_description` doesn't exist.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Rows: 3</span></span>
+<span><span class="co">#&gt; Columns: 56</span></span>
+<span><span class="co">#&gt; $ hcpcs                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "70170", "70170", "70170"</span></span>
+<span><span class="co">#&gt; $ description            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "X-ray exam of tear duct", "X-ray exam of tear …</span></span>
+<span><span class="co">#&gt; $ description_consumer   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Review by radiologist of tear drainage structu…</span></span>
+<span><span class="co">#&gt; $ descriptions_clinician <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;tbl_df[1 x 1]&gt;], [&lt;tbl_df[1 x 1]&gt;], [&lt;tbl_df[…</span></span>
+<span><span class="co">#&gt; $ rbcs_category          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Imaging", "Imaging", "Imaging"</span></span>
+<span><span class="co">#&gt; $ rbcs_subcategory       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Standard X-ray", "Standard X-ray", "Standard …</span></span>
+<span><span class="co">#&gt; $ rbcs_family            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "No RBCS Family", "No RBCS Family", "No RBCS Fa…</span></span>
+<span><span class="co">#&gt; $ rbcs_procedure         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-Procedure", "Non-Procedure", "Non-Procedur…</span></span>
+<span><span class="co">#&gt; $ status                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "C", "C", "A"</span></span>
+<span><span class="co">#&gt; $ mac                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10212", "10212", "10212"</span></span>
+<span><span class="co">#&gt; $ state                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA", "GA", "GA"</span></span>
+<span><span class="co">#&gt; $ locality               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01", "01", "01"</span></span>
+<span><span class="co">#&gt; $ area                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ATLANTA", "ATLANTA", "ATLANTA"</span></span>
+<span><span class="co">#&gt; $ counties               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLA…</span></span>
+<span><span class="co">#&gt; $ wgpci                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1, 1, 1</span></span>
+<span><span class="co">#&gt; $ pgpci                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.997, 0.997, 0.997</span></span>
+<span><span class="co">#&gt; $ mgpci                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.128, 1.128, 1.128</span></span>
+<span><span class="co">#&gt; $ wrvu                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.0, 0.0, 0.3</span></span>
+<span><span class="co">#&gt; $ nprvu                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00, 0.00, 0.11</span></span>
+<span><span class="co">#&gt; $ fprvu                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00, 0.00, 0.11</span></span>
+<span><span class="co">#&gt; $ mrvu                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00, 0.00, 0.02</span></span>
+<span><span class="co">#&gt; $ cf                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 32.744, 32.744, 32.744</span></span>
+<span><span class="co">#&gt; $ f_fee                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, 14.15</span></span>
+<span><span class="co">#&gt; $ nf_fee                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, 14.15</span></span>
+<span><span class="co">#&gt; $ fpar                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00000, 0.00000, 14.15294</span></span>
+<span><span class="co">#&gt; $ npar                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00000, 0.00000, 14.15294</span></span>
+<span><span class="co">#&gt; $ fnpar                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00000, 0.00000, 13.44529</span></span>
+<span><span class="co">#&gt; $ nfnpar                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00000, 0.00000, 13.44529</span></span>
+<span><span class="co">#&gt; $ flim                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00000, 0.00000, 15.46209</span></span>
+<span><span class="co">#&gt; $ nlim                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.00000, 0.00000, 15.46209</span></span>
+<span><span class="co">#&gt; $ opps                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "9"</span></span>
+<span><span class="co">#&gt; $ opps_nf                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ opps_f                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ nprvu_opps             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.23, 7.12, 0.00</span></span>
+<span><span class="co">#&gt; $ fprvu_opps             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 7.23, 7.12, 0.00</span></span>
+<span><span class="co">#&gt; $ mrvu_opps              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.03, 0.01, 0.00</span></span>
+<span><span class="co">#&gt; $ fpymt_opps             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 246.96, 232.81, NA</span></span>
+<span><span class="co">#&gt; $ nfpymt_opps            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 246.96, 232.81, NA</span></span>
+<span><span class="co">#&gt; $ mult_surg              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "0"</span></span>
+<span><span class="co">#&gt; $ mult_proc              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0"</span></span>
+<span><span class="co">#&gt; $ nther                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, 0</span></span>
+<span><span class="co">#&gt; $ fther                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA, NA, 0</span></span>
+<span><span class="co">#&gt; $ global                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "XXX", "XXX", "XXX"</span></span>
+<span><span class="co">#&gt; $ op_pre                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0</span></span>
+<span><span class="co">#&gt; $ op_intra               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0</span></span>
+<span><span class="co">#&gt; $ op_post                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 0</span></span>
+<span><span class="co">#&gt; $ mod                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "TC", "26"</span></span>
+<span><span class="co">#&gt; $ surg_bilat             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0"</span></span>
+<span><span class="co">#&gt; $ surg_asst              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0"</span></span>
+<span><span class="co">#&gt; $ surg_co                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0"</span></span>
+<span><span class="co">#&gt; $ surg_team              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "0", "0", "0"</span></span>
+<span><span class="co">#&gt; $ supvis                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "09", "03", "09"</span></span>
+<span><span class="co">#&gt; $ dximg                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99", "99", "99"</span></span>
+<span><span class="co">#&gt; $ endo                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ rare                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01", "01", "00"</span></span>
+<span><span class="co">#&gt; $ unused                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="data-sources">Data Sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rvu.html">rvu</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 1</span></span>
@@ -211,7 +1110,7 @@
 <span><span class="co">#&gt; $ dximg       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "99"</span></span>
 <span><span class="co">#&gt; $ unused      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
 <span><span class="co">#&gt; $ rare        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gpci.html">gpci</a></span><span class="op">(</span>state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
 <span>     locality <span class="op">=</span> <span class="st">"01"</span>,</span>
 <span>     mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -227,7 +1126,7 @@
 <span><span class="co">#&gt; $ mgpci    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.128</span></span>
 <span><span class="co">#&gt; $ counties <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYETTE, FO…</span></span>
 <span><span class="co">#&gt; $ two_macs <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pfs.html">pfs</a></span><span class="op">(</span>hcpcs    <span class="op">=</span> <span class="st">"11646"</span>, </span>
 <span>    locality <span class="op">=</span> <span class="st">"01"</span>,</span>
 <span>    mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -248,7 +1147,7 @@
 <span><span class="co">#&gt; $ opps      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9"</span></span>
 <span><span class="co">#&gt; $ opps_nf   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA</span></span>
 <span><span class="co">#&gt; $ opps_f    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> NA</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/descriptors.html">descriptors</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"11646"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 1</span></span>
@@ -258,12 +1157,22 @@
 <span><span class="co">#&gt; $ range                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "10004 - 69990"</span></span>
 <span><span class="co">#&gt; $ description_consumer   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Removal of cancer skin growth of face, ears, e…</span></span>
 <span><span class="co">#&gt; $ descriptions_clinician <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;tbl_df[10 x 1]&gt;]</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/level2.html">level2</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't select columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `short_description` doesn't exist.</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 11</span></span>
+<span><span class="co">#&gt; $ hcpcs             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "V5299"</span></span>
+<span><span class="co">#&gt; $ description_short <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hearing service"</span></span>
+<span><span class="co">#&gt; $ description_long  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hearing service, miscellaneous"</span></span>
+<span><span class="co">#&gt; $ price             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "13"</span></span>
+<span><span class="co">#&gt; $ multi_price       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A"</span></span>
+<span><span class="co">#&gt; $ labcert           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ xref              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ tos               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K"</span></span>
+<span><span class="co">#&gt; $ coverage          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "D"</span></span>
+<span><span class="co">#&gt; $ asc               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ betos             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O1F"</span></span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rbcs.html">rbcs</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"V5299"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 1</span></span>
 <span><span class="co">#&gt; Columns: 5</span></span>

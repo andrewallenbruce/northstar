@@ -113,8 +113,19 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">level2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dplyr::select(l2, hcpcs, short_description, long_description,     price, mult_pi, labcert, xref, tos, cov, asc_grp, betos):</span> Can't select columns that don't exist.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Column `short_description` doesn't exist.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ hcpcs             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0021", "G8916", "J9264", "V5362"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ description_short <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Outside state ambulance serv", "Pt w iv ab given on…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ description_long  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ambulance service, outside state per mile, transpor…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ price             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00", "00", "51", "00"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ multi_price       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9", "9", "A", "9"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ labcert           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ xref              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A0030", NA, NA, NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ tos               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "D", "1", "1:P", "1:W"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ coverage          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I", "C", "C", "S"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ asc               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "YY", NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ betos             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O1A", "M5B", "O1E", "O1F"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
