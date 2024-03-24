@@ -3,7 +3,24 @@
 
 # northstar <img src="man/figures/logo.png" align="right" height="150" />
 
+> Tidy Healthcare Revenue Integrity Tools
+
 <!-- badges: start -->
+
+    > 
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    > | [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master) |
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    > | [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)          |
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    > | [![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)                                |
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    > | [![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)                       |
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    > | [![License: Apache License (>= 2)](https://img.shields.io/badge/license-Apache License (>= 2)-blue.svg)](https://cran.r-project.org/web/licenses/Apache License (>= 2)         |
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    > | [![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)                                                        |
+    > +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
@@ -16,8 +33,6 @@ commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg
 2)](https://img.shields.io/badge/license-Apache%20License%20(%3E=%202)-blue.svg)](https://cran.r-project.org/web/licenses/Apache%20License%20(%3E=%202))
 [![Version](https://img.shields.io/badge/devel%20version-0.0.2-red.svg)](https://github.com/andrewallenbruce/northstar)
 <!-- badges: end -->
-
-> Tidy Healthcare Revenue Integrity Tools
 
 <br>
 
