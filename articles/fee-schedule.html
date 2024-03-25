@@ -132,18 +132,26 @@
 <span>    <span class="va">descriptions_clinician</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">.</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">descriptions_clinician</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">unite</span><span class="op">(</span><span class="st">'rbcs'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rbcs_procedure</span>, <span class="va">rbcs_category</span>, <span class="va">rbcs_subcategory</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_multproc.html">case_multproc</a></span><span class="op">(</span><span class="va">mult_proc</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_global.html">case_global</a></span><span class="op">(</span><span class="va">global</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_cosurg.html">case_cosurg</a></span><span class="op">(</span><span class="va">surg_co</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_assistant.html">case_assistant</a></span><span class="op">(</span><span class="va">surg_asst</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>HCPCS <span class="op">=</span> <span class="va">hcpcs</span>,</span>
-<span>         Description <span class="op">=</span> <span class="va">description</span>, </span>
-<span>         Consumer <span class="op">=</span> <span class="va">description_consumer</span>, </span>
+<span>  <span class="fu"><a href="../reference/case_status.html">case_status</a></span><span class="op">(</span><span class="va">status</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_supervision.html">case_supervision</a></span><span class="op">(</span><span class="va">supvis</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_bilateral.html">case_bilateral</a></span><span class="op">(</span><span class="va">surg_bilat</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_team.html">case_team</a></span><span class="op">(</span><span class="va">surg_team</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_imaging.html">case_imaging</a></span><span class="op">(</span><span class="va">dximg</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_pctc.html">case_pctc</a></span><span class="op">(</span><span class="va">pctc</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_opps.html">case_opps</a></span><span class="op">(</span><span class="va">opps</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/case_chapter_cpt.html">case_chapter_cpt</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/case_category.html">case_category</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>CPT <span class="op">=</span> <span class="va">hcpcs</span>,</span>
+<span>         Description <span class="op">=</span> <span class="va">description</span>,</span>
+<span>         Consumer <span class="op">=</span> <span class="va">description_consumer</span>,</span>
 <span>         Clinician <span class="op">=</span> <span class="va">descriptions_clinician</span>,</span>
 <span>         Chapter <span class="op">=</span> <span class="va">chapter</span>,</span>
 <span>         Range <span class="op">=</span> <span class="va">range</span>,</span>
-<span>         RBCS <span class="op">=</span> <span class="va">rbcs</span>, </span>
+<span>         <span class="co"># RBCS = rbcs,</span></span>
 <span>         Status <span class="op">=</span> <span class="va">status</span>,</span>
 <span>         MAC <span class="op">=</span> <span class="va">mac</span>,</span>
 <span>         State <span class="op">=</span> <span class="va">state</span>,</span>
@@ -154,16 +162,16 @@
 <span>         <span class="st">"Practice GPCI"</span> <span class="op">=</span> <span class="va">pgpci</span>,</span>
 <span>         <span class="st">"Malpractice GPCI"</span> <span class="op">=</span> <span class="va">mgpci</span>,</span>
 <span>         <span class="st">"Work RVU"</span> <span class="op">=</span> <span class="va">wrvu</span>,</span>
-<span>         <span class="st">"Non-Facility Practice RVU"</span> <span class="op">=</span> <span class="va">nprvu</span>,</span>
+<span>         <span class="st">"Non-Facility Practice RVU"</span> <span class="op">=</span> <span class="va">nfprvu</span>,</span>
 <span>         <span class="st">"Facility Practice RVU"</span> <span class="op">=</span> <span class="va">fprvu</span>,</span>
 <span>         <span class="st">"Malpractice RVU"</span> <span class="op">=</span> <span class="va">mrvu</span>,</span>
 <span>         <span class="st">"Conversion Factor"</span> <span class="op">=</span> <span class="va">cf</span>,</span>
-<span>         <span class="st">"Total Facility RVU"</span> <span class="op">=</span> <span class="va">frvus</span>,</span>
-<span>         <span class="st">"Total Non-Facility RVU"</span> <span class="op">=</span> <span class="va">nrvus</span>,</span>
-<span>         <span class="st">"Facility Participating Fee"</span> <span class="op">=</span> <span class="va">fpar</span>,</span>
-<span>         <span class="st">"Non-Facility Participating Fee"</span> <span class="op">=</span> <span class="va">npar</span>,</span>
-<span>         <span class="st">"Facility Non-Participating Fee"</span> <span class="op">=</span> <span class="va">fnpar</span>,</span>
-<span>         <span class="st">"Non-Facility Non-Participating Fee"</span> <span class="op">=</span> <span class="va">nfnpar</span>,</span>
+<span>         <span class="st">"Total Facility RVUs"</span> <span class="op">=</span> <span class="va">frvus</span>,</span>
+<span>         <span class="st">"Total Non-Facility RVUs"</span> <span class="op">=</span> <span class="va">nrvus</span>,</span>
+<span>         <span class="st">"Facility PAR Fee"</span> <span class="op">=</span> <span class="va">fpar</span>,</span>
+<span>         <span class="st">"Non-Facility PAR Fee"</span> <span class="op">=</span> <span class="va">npar</span>,</span>
+<span>         <span class="st">"Facility NON-PAR Fee"</span> <span class="op">=</span> <span class="va">fnpar</span>,</span>
+<span>         <span class="st">"Non-Facility NON-PAR Fee"</span> <span class="op">=</span> <span class="va">nfnpar</span>,</span>
 <span>         <span class="st">"Facility Limiting Charge"</span> <span class="op">=</span> <span class="va">flim</span>,</span>
 <span>         <span class="st">"Non-Facility Limiting Charge"</span> <span class="op">=</span> <span class="va">nlim</span>,</span>
 <span>         <span class="st">"Multiple Procedures"</span> <span class="op">=</span> <span class="va">mproc_description</span>,</span>
@@ -173,30 +181,31 @@
 <span>         <span class="st">"Postoperative"</span> <span class="op">=</span> <span class="va">op_post</span>,</span>
 <span>         <span class="st">"Assistant at Surgery"</span> <span class="op">=</span> <span class="va">asst_description</span>,</span>
 <span>         <span class="st">"Co-Surgeons"</span> <span class="op">=</span> <span class="va">cosurg_description</span>,</span>
-<span>         <span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/case_status.html">case_status</a></span><span class="op">(</span><span class="va">Status</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>         <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">northstar</span><span class="fu">:::</span><span class="fu">gt_style</span><span class="op">(</span>tablign <span class="op">=</span> <span class="st">"right"</span>, tabsize <span class="op">=</span> <span class="fl">14</span><span class="op">)</span></span></code></pre></div>
-<div id="gdjkoimkzc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>tablign <span class="op">=</span> <span class="st">"right"</span>, tabsize <span class="op">=</span> <span class="fl">16</span>, tabwt <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">sub_missing</span><span class="op">(</span>missing_text <span class="op">=</span> <span class="st">"Concept Does Not Apply"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">fmt_markdown</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="hgmhlkztdk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gdjkoimkzc table {
+#hgmhlkztdk table {
   font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gdjkoimkzc thead, #gdjkoimkzc tbody, #gdjkoimkzc tfoot, #gdjkoimkzc tr, #gdjkoimkzc td, #gdjkoimkzc th {
+#hgmhlkztdk thead, #hgmhlkztdk tbody, #hgmhlkztdk tfoot, #hgmhlkztdk tr, #hgmhlkztdk td, #hgmhlkztdk th {
   border-style: none;
 }
 
-#gdjkoimkzc p {
+#hgmhlkztdk p {
   margin: 0;
   padding: 0;
 }
 
-#gdjkoimkzc .gt_table {
+#hgmhlkztdk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -222,12 +231,12 @@
   border-left-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_caption {
+#hgmhlkztdk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gdjkoimkzc .gt_title {
+#hgmhlkztdk .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -239,7 +248,7 @@
   border-bottom-width: 0;
 }
 
-#gdjkoimkzc .gt_subtitle {
+#hgmhlkztdk .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -251,7 +260,7 @@
   border-top-width: 0;
 }
 
-#gdjkoimkzc .gt_heading {
+#hgmhlkztdk .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -263,13 +272,13 @@
   border-right-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_bottom_border {
+#hgmhlkztdk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_col_headings {
+#hgmhlkztdk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -284,7 +293,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_col_heading {
+#hgmhlkztdk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -304,7 +313,7 @@
   overflow-x: hidden;
 }
 
-#gdjkoimkzc .gt_column_spanner_outer {
+#hgmhlkztdk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -316,15 +325,15 @@
   padding-right: 4px;
 }
 
-#gdjkoimkzc .gt_column_spanner_outer:first-child {
+#hgmhlkztdk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gdjkoimkzc .gt_column_spanner_outer:last-child {
+#hgmhlkztdk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gdjkoimkzc .gt_column_spanner {
+#hgmhlkztdk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -336,11 +345,11 @@
   width: 100%;
 }
 
-#gdjkoimkzc .gt_spanner_row {
+#hgmhlkztdk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gdjkoimkzc .gt_group_heading {
+#hgmhlkztdk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -366,7 +375,7 @@
   text-align: left;
 }
 
-#gdjkoimkzc .gt_empty_group_heading {
+#hgmhlkztdk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -381,15 +390,15 @@
   vertical-align: middle;
 }
 
-#gdjkoimkzc .gt_from_md > :first-child {
+#hgmhlkztdk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gdjkoimkzc .gt_from_md > :last-child {
+#hgmhlkztdk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gdjkoimkzc .gt_row {
+#hgmhlkztdk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -408,7 +417,7 @@
   overflow-x: hidden;
 }
 
-#gdjkoimkzc .gt_stub {
+#hgmhlkztdk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -421,7 +430,7 @@
   padding-right: 5px;
 }
 
-#gdjkoimkzc .gt_stub_row_group {
+#hgmhlkztdk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -435,15 +444,15 @@
   vertical-align: top;
 }
 
-#gdjkoimkzc .gt_row_group_first td {
+#hgmhlkztdk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gdjkoimkzc .gt_row_group_first th {
+#hgmhlkztdk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gdjkoimkzc .gt_summary_row {
+#hgmhlkztdk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -453,16 +462,16 @@
   padding-right: 5px;
 }
 
-#gdjkoimkzc .gt_first_summary_row {
+#hgmhlkztdk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_first_summary_row.thick {
+#hgmhlkztdk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gdjkoimkzc .gt_last_summary_row {
+#hgmhlkztdk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -472,7 +481,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_grand_summary_row {
+#hgmhlkztdk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -482,7 +491,7 @@
   padding-right: 5px;
 }
 
-#gdjkoimkzc .gt_first_grand_summary_row {
+#hgmhlkztdk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -492,7 +501,7 @@
   border-top-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_last_grand_summary_row_top {
+#hgmhlkztdk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -502,11 +511,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_striped {
+#hgmhlkztdk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gdjkoimkzc .gt_table_body {
+#hgmhlkztdk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -515,7 +524,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_footnotes {
+#hgmhlkztdk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -529,7 +538,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_footnote {
+#hgmhlkztdk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -538,7 +547,7 @@
   padding-right: 5px;
 }
 
-#gdjkoimkzc .gt_sourcenotes {
+#hgmhlkztdk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -552,7 +561,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gdjkoimkzc .gt_sourcenote {
+#hgmhlkztdk .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -560,96 +569,104 @@
   padding-right: 5px;
 }
 
-#gdjkoimkzc .gt_left {
+#hgmhlkztdk .gt_left {
   text-align: left;
 }
 
-#gdjkoimkzc .gt_center {
+#hgmhlkztdk .gt_center {
   text-align: center;
 }
 
-#gdjkoimkzc .gt_right {
+#hgmhlkztdk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gdjkoimkzc .gt_font_normal {
+#hgmhlkztdk .gt_font_normal {
   font-weight: normal;
 }
 
-#gdjkoimkzc .gt_font_bold {
+#hgmhlkztdk .gt_font_bold {
   font-weight: bold;
 }
 
-#gdjkoimkzc .gt_font_italic {
+#hgmhlkztdk .gt_font_italic {
   font-style: italic;
 }
 
-#gdjkoimkzc .gt_super {
+#hgmhlkztdk .gt_super {
   font-size: 65%;
 }
 
-#gdjkoimkzc .gt_footnote_marks {
+#hgmhlkztdk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gdjkoimkzc .gt_asterisk {
+#hgmhlkztdk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gdjkoimkzc .gt_indent_1 {
+#hgmhlkztdk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gdjkoimkzc .gt_indent_2 {
+#hgmhlkztdk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gdjkoimkzc .gt_indent_3 {
+#hgmhlkztdk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gdjkoimkzc .gt_indent_4 {
+#hgmhlkztdk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gdjkoimkzc .gt_indent_5 {
+#hgmhlkztdk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>HCPCS</p>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>CPT</p>
 </div></th>
 <td headers="stub_1_1 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>39503</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Description</p>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>category</p>
 </div></th>
 <td headers="stub_1_2 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>1</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Description</p>
+</div></th>
+<td headers="stub_1_3 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>Repair of diaphragm hernia</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Consumer</p>
 </div></th>
-<td headers="stub_1_3 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_4 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>Repair of congenital defect of muscle separating chest and abdominal cavities, neonate</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Clinician</p>
 </div></th>
-<td headers="stub_1_4 value" class="gt_row gt_left"><div class="gt_from_md"><ul>
+<td headers="stub_1_5 value" class="gt_row gt_left"><div class="gt_from_md"><ul>
 <li>Repair of neonatal diaphragmatic hernia</li>
 <li>Repair of neonatal diaphragmatic hernia with creation of ventral hernia</li>
 <li>Repair of neonatal diaphragmatic hernia with insertion of chest tube</li>
@@ -657,31 +674,23 @@
 </ul></div></td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Chapter</p>
-</div></th>
-<td headers="stub_1_5 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>Surgery</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Range</p>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>rbcs_category</p>
 </div></th>
 <td headers="stub_1_6 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>10004 - 69990</p>
+<p>Major Procedure</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>RBCS</p>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>rbcs_family</p>
 </div></th>
 <td headers="stub_1_7 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>Major Procedure Other Organ Systems</p>
+<p>Other Organ Systems</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Status</p>
 </div></th>
 <td headers="stub_1_8 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -689,7 +698,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>MAC</p>
 </div></th>
 <td headers="stub_1_9 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -697,7 +706,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>State</p>
 </div></th>
 <td headers="stub_1_10 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -705,7 +714,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Locality</p>
 </div></th>
 <td headers="stub_1_11 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -713,7 +722,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Area</p>
 </div></th>
 <td headers="stub_1_12 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -721,7 +730,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Counties</p>
 </div></th>
 <td headers="stub_1_13 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -729,7 +738,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Work GPCI</p>
 </div></th>
 <td headers="stub_1_14 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -737,7 +746,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Practice GPCI</p>
 </div></th>
 <td headers="stub_1_15 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -745,7 +754,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Malpractice GPCI</p>
 </div></th>
 <td headers="stub_1_16 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -753,7 +762,7 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Work RVU</p>
 </div></th>
 <td headers="stub_1_17 value" class="gt_row gt_left"><div class="gt_from_md">
@@ -761,155 +770,399 @@
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Non-Facility Practice RVU</p>
+<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility Practice RVU</p>
 </div></th>
 <td headers="stub_1_18 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>35.14</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Facility Practice RVU</p>
-</div></th>
-<td headers="stub_1_19 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>35.14</p>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Malpractice RVU</p>
 </div></th>
-<td headers="stub_1_20 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_19 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>26.95</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Conversion Factor</p>
 </div></th>
-<td headers="stub_1_21 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>32.744</p>
+<td headers="stub_1_20 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>32.7442</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Total Facility RVU</p>
+<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>f_fee</p>
+</div></th>
+<td headers="stub_1_21 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>5574.94</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>nf_fee</p>
 </div></th>
 <td headers="stub_1_22 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>170.25737</p>
+<p>5574.94</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Total Non-Facility RVU</p>
+<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Total Facility RVUs</p>
 </div></th>
 <td headers="stub_1_23 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>170.25737</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Facility Participating Fee</p>
+<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Total Non-Facility RVUs</p>
 </div></th>
 <td headers="stub_1_24 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>5574.90732328</p>
+<p>170.25737</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Non-Facility Participating Fee</p>
+<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility PAR Fee</p>
 </div></th>
 <td headers="stub_1_25 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>5574.90732328</p>
+<p>5574.941374754</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Facility Non-Participating Fee</p>
+<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility PAR Fee</p>
 </div></th>
 <td headers="stub_1_26 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>5296.161957116</p>
+<p>5574.941374754</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Non-Facility Non-Participating Fee</p>
+<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility NON-PAR Fee</p>
 </div></th>
 <td headers="stub_1_27 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>5296.161957116</p>
+<p>5296.1943060163</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Facility Limiting Charge</p>
+<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility NON-PAR Fee</p>
 </div></th>
 <td headers="stub_1_28 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>6090.5862506834</p>
+<p>5296.1943060163</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Non-Facility Limiting Charge</p>
+<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility Limiting Charge</p>
 </div></th>
 <td headers="stub_1_29 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>6090.5862506834</p>
+<p>6090.62345191875</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Multiple Procedures</p>
+<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility Limiting Charge</p>
 </div></th>
 <td headers="stub_1_30 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>6090.62345191875</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>opps</p>
+</div></th>
+<td headers="stub_1_31 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>9</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>opps_description</p>
+</div></th>
+<td headers="stub_1_32 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Not Subject to OPPS Payment Cap</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>fprvu_opps</p>
+</div></th>
+<td headers="stub_1_33 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>mrvu_opps</p>
+</div></th>
+<td headers="stub_1_34 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>mult_surg</p>
+</div></th>
+<td headers="stub_1_35 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>2</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>mult_proc</p>
+</div></th>
+<td headers="stub_1_36 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>2</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_37" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Multiple Procedures</p>
+</div></th>
+<td headers="stub_1_37 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>Standard adjustment. If reported on the same day as another procedure with an indicator of 1, 2, or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 50%, 50%, 50% and by report). Base payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_38" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>nther</p>
+</div></th>
+<td headers="stub_1_38 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_39" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>fther</p>
+</div></th>
+<td headers="stub_1_39 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_40" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>global</p>
+</div></th>
+<td headers="stub_1_40 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>090</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_41" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Global Days</p>
 </div></th>
-<td headers="stub_1_31 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_41 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>Major surgery with a 1-day Preoperative period and 90-day Postoperative period included in fee schedule amount.</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_42" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>op_ind</p>
+</div></th>
+<td headers="stub_1_42 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>1</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_43" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Preoperative</p>
 </div></th>
-<td headers="stub_1_32 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_43 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>0.09</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_44" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Intraoperative</p>
 </div></th>
-<td headers="stub_1_33 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_44 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>0.84</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_45" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Postoperative</p>
 </div></th>
-<td headers="stub_1_34 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_45 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>0.07</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_46" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>pctc</p>
+</div></th>
+<td headers="stub_1_46 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_47" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>pctc_label</p>
+</div></th>
+<td headers="stub_1_47 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Physician Service</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_48" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>pctc_description</p>
+</div></th>
+<td headers="stub_1_48 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>PCTC does not apply.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_49" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>surg_bilat</p>
+</div></th>
+<td headers="stub_1_49 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_50" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>bilat_description</p>
+</div></th>
+<td headers="stub_1_50 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Adjustment does not apply. If reported with mod 50 or RT and LT, payment for the two sides is the lower of (a) total charge for both sides (b) 100% of fee schedule amount for a single code. Adjustment is inappropriate because (a) of physiology or anatomy, or (b) code description states it is a unilateral procedure and there is an existing code for the bilateral procedure.</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_51" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>surg_asst</p>
+</div></th>
+<td headers="stub_1_51 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>2</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_52" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Assistant at Surgery</p>
 </div></th>
-<td headers="stub_1_35 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_52 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>No Payment Restriction; Assistant can be paid</p>
 </div></td>
 </tr>
 <tr>
-<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<th id="stub_1_53" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>surg_co</p>
+</div></th>
+<td headers="stub_1_53 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>1</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_54" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
 <p>Co-Surgeons</p>
 </div></th>
-<td headers="stub_1_36 value" class="gt_row gt_left"><div class="gt_from_md">
+<td headers="stub_1_54 value" class="gt_row gt_left"><div class="gt_from_md">
 <p>Medical Necessity Documentation Required</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_55" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>surg_team</p>
+</div></th>
+<td headers="stub_1_55 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_56" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>team_description</p>
+</div></th>
+<td headers="stub_1_56 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Not Permitted</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_57" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>supvis</p>
+</div></th>
+<td headers="stub_1_57 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>09</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_58" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>supvis_description</p>
+</div></th>
+<td headers="stub_1_58 value" class="gt_row gt_left">Concept Does Not Apply</td>
+</tr>
+<tr>
+<th id="stub_1_59" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>dximg</p>
+</div></th>
+<td headers="stub_1_59 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>99</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_60" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>dximg_description</p>
+</div></th>
+<td headers="stub_1_60 value" class="gt_row gt_left">Concept Does Not Apply</td>
+</tr>
+<tr>
+<th id="stub_1_61" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility Practice RVU</p>
+</div></th>
+<td headers="stub_1_61 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>35.14</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_62" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>ntotal</p>
+</div></th>
+<td headers="stub_1_62 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>171</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_63" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>ftotal</p>
+</div></th>
+<td headers="stub_1_63 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>171</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_64" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>nfprvu_opps</p>
+</div></th>
+<td headers="stub_1_64 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>0</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_65" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>two_macs</p>
+</div></th>
+<td headers="stub_1_65 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>FALSE</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_66" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Chapter</p>
+</div></th>
+<td headers="stub_1_66 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>Surgery [10004-69990]</p>
+</div></td>
+</tr>
+<tr>
+<th id="stub_1_67" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Range</p>
+</div></th>
+<td headers="stub_1_67 value" class="gt_row gt_left"><div class="gt_from_md">
+<p>10004 - 69990</p>
 </div></td>
 </tr>
 </tbody></table>
@@ -920,35 +1173,35 @@
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"F50.82"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Code <span class="op">=</span> <span class="va">code</span>, </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"ICD-10-Code"</span> <span class="op">=</span> <span class="va">code</span>, </span>
 <span>         Description <span class="op">=</span> <span class="va">description</span>, </span>
 <span>         Section <span class="op">=</span> <span class="va">section</span>,</span>
-<span>         Number <span class="op">=</span> <span class="va">ch</span>,</span>
+<span>         <span class="st">"Ch. No."</span> <span class="op">=</span> <span class="va">ch</span>,</span>
 <span>         Chapter <span class="op">=</span> <span class="va">chapter</span>, </span>
 <span>         Range <span class="op">=</span> <span class="va">range</span>, </span>
 <span>         Abbreviation <span class="op">=</span> <span class="va">abbrev</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">northstar</span><span class="fu">:::</span><span class="fu">gt_style</span><span class="op">(</span>tablign <span class="op">=</span> <span class="st">"right"</span>, tabsize <span class="op">=</span> <span class="fl">14</span><span class="op">)</span></span></code></pre></div>
-<div id="gzyzradibi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>tablign <span class="op">=</span> <span class="st">"right"</span>, tabsize <span class="op">=</span> <span class="fl">16</span>, tabwt <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span></code></pre></div>
+<div id="dabzgkwssi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gzyzradibi table {
+#dabzgkwssi table {
   font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gzyzradibi thead, #gzyzradibi tbody, #gzyzradibi tfoot, #gzyzradibi tr, #gzyzradibi td, #gzyzradibi th {
+#dabzgkwssi thead, #dabzgkwssi tbody, #dabzgkwssi tfoot, #dabzgkwssi tr, #dabzgkwssi td, #dabzgkwssi th {
   border-style: none;
 }
 
-#gzyzradibi p {
+#dabzgkwssi p {
   margin: 0;
   padding: 0;
 }
 
-#gzyzradibi .gt_table {
+#dabzgkwssi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -974,12 +1227,12 @@
   border-left-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_caption {
+#dabzgkwssi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gzyzradibi .gt_title {
+#dabzgkwssi .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -991,7 +1244,7 @@
   border-bottom-width: 0;
 }
 
-#gzyzradibi .gt_subtitle {
+#dabzgkwssi .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -1003,7 +1256,7 @@
   border-top-width: 0;
 }
 
-#gzyzradibi .gt_heading {
+#dabzgkwssi .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1015,13 +1268,13 @@
   border-right-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_bottom_border {
+#dabzgkwssi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_col_headings {
+#dabzgkwssi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1036,7 +1289,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_col_heading {
+#dabzgkwssi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1056,7 +1309,7 @@
   overflow-x: hidden;
 }
 
-#gzyzradibi .gt_column_spanner_outer {
+#dabzgkwssi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,15 +1321,15 @@
   padding-right: 4px;
 }
 
-#gzyzradibi .gt_column_spanner_outer:first-child {
+#dabzgkwssi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gzyzradibi .gt_column_spanner_outer:last-child {
+#dabzgkwssi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gzyzradibi .gt_column_spanner {
+#dabzgkwssi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1088,11 +1341,11 @@
   width: 100%;
 }
 
-#gzyzradibi .gt_spanner_row {
+#dabzgkwssi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gzyzradibi .gt_group_heading {
+#dabzgkwssi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1118,7 +1371,7 @@
   text-align: left;
 }
 
-#gzyzradibi .gt_empty_group_heading {
+#dabzgkwssi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1133,15 +1386,15 @@
   vertical-align: middle;
 }
 
-#gzyzradibi .gt_from_md > :first-child {
+#dabzgkwssi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gzyzradibi .gt_from_md > :last-child {
+#dabzgkwssi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gzyzradibi .gt_row {
+#dabzgkwssi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1160,7 +1413,7 @@
   overflow-x: hidden;
 }
 
-#gzyzradibi .gt_stub {
+#dabzgkwssi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1173,7 +1426,7 @@
   padding-right: 5px;
 }
 
-#gzyzradibi .gt_stub_row_group {
+#dabzgkwssi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1187,15 +1440,15 @@
   vertical-align: top;
 }
 
-#gzyzradibi .gt_row_group_first td {
+#dabzgkwssi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gzyzradibi .gt_row_group_first th {
+#dabzgkwssi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gzyzradibi .gt_summary_row {
+#dabzgkwssi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1205,16 +1458,16 @@
   padding-right: 5px;
 }
 
-#gzyzradibi .gt_first_summary_row {
+#dabzgkwssi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_first_summary_row.thick {
+#dabzgkwssi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gzyzradibi .gt_last_summary_row {
+#dabzgkwssi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1224,7 +1477,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_grand_summary_row {
+#dabzgkwssi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1234,7 +1487,7 @@
   padding-right: 5px;
 }
 
-#gzyzradibi .gt_first_grand_summary_row {
+#dabzgkwssi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1244,7 +1497,7 @@
   border-top-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_last_grand_summary_row_top {
+#dabzgkwssi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1254,11 +1507,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_striped {
+#dabzgkwssi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gzyzradibi .gt_table_body {
+#dabzgkwssi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1267,7 +1520,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_footnotes {
+#dabzgkwssi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1281,7 +1534,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_footnote {
+#dabzgkwssi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1290,7 +1543,7 @@
   padding-right: 5px;
 }
 
-#gzyzradibi .gt_sourcenotes {
+#dabzgkwssi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1304,7 +1557,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gzyzradibi .gt_sourcenote {
+#dabzgkwssi .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1312,122 +1565,94 @@
   padding-right: 5px;
 }
 
-#gzyzradibi .gt_left {
+#dabzgkwssi .gt_left {
   text-align: left;
 }
 
-#gzyzradibi .gt_center {
+#dabzgkwssi .gt_center {
   text-align: center;
 }
 
-#gzyzradibi .gt_right {
+#dabzgkwssi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gzyzradibi .gt_font_normal {
+#dabzgkwssi .gt_font_normal {
   font-weight: normal;
 }
 
-#gzyzradibi .gt_font_bold {
+#dabzgkwssi .gt_font_bold {
   font-weight: bold;
 }
 
-#gzyzradibi .gt_font_italic {
+#dabzgkwssi .gt_font_italic {
   font-style: italic;
 }
 
-#gzyzradibi .gt_super {
+#dabzgkwssi .gt_super {
   font-size: 65%;
 }
 
-#gzyzradibi .gt_footnote_marks {
+#dabzgkwssi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gzyzradibi .gt_asterisk {
+#dabzgkwssi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gzyzradibi .gt_indent_1 {
+#dabzgkwssi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gzyzradibi .gt_indent_2 {
+#dabzgkwssi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gzyzradibi .gt_indent_3 {
+#dabzgkwssi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gzyzradibi .gt_indent_4 {
+#dabzgkwssi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gzyzradibi .gt_indent_5 {
+#dabzgkwssi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Code</p>
-</div></th>
-<td headers="stub_1_1 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>F50.82</p>
-</div></td>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">ICD-10-Code</th>
+<td headers="stub_1_1 value" class="gt_row gt_left">F50.82</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Description</p>
-</div></th>
-<td headers="stub_1_2 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>Avoidant/restrictive food intake disorder</p>
-</div></td>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">Description</th>
+<td headers="stub_1_2 value" class="gt_row gt_left">Avoidant/restrictive food intake disorder</td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Section</p>
-</div></th>
-<td headers="stub_1_3 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>Eating disorders</p>
-</div></td>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">Section</th>
+<td headers="stub_1_3 value" class="gt_row gt_left">Eating disorders</td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Number</p>
-</div></th>
-<td headers="stub_1_4 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>5</p>
-</div></td>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">Ch. No.</th>
+<td headers="stub_1_4 value" class="gt_row gt_left">5</td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Chapter</p>
-</div></th>
-<td headers="stub_1_5 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>Mental, behavioral and neurodevelopmental disorders</p>
-</div></td>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">Chapter</th>
+<td headers="stub_1_5 value" class="gt_row gt_left">Mental, behavioral and neurodevelopmental disorders</td>
 </tr>
 <tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Range</p>
-</div></th>
-<td headers="stub_1_6 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>F01 - F99</p>
-</div></td>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">Range</th>
+<td headers="stub_1_6 value" class="gt_row gt_left">F01 - F99</td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
-<p>Abbreviation</p>
-</div></th>
-<td headers="stub_1_7 value" class="gt_row gt_left"><div class="gt_from_md">
-<p>PSYCH</p>
-</div></td>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: right; font-weight: bold;">Abbreviation</th>
+<td headers="stub_1_7 value" class="gt_row gt_left">PSYCH</td>
 </tr>
 </tbody></table>
 </div>
