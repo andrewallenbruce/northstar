@@ -10,7 +10,7 @@ rbcs(
   subcategory = NULL,
   family = NULL,
   procedure = NULL,
-  limit_cols = TRUE,
+  concatenate = TRUE,
   ...
 )
 }
@@ -40,7 +40,7 @@ rbcs(
 \item \code{Other} (n = 3244)
 }}
 
-\item{limit_cols}{\emph{\if{html}{\out{<lgl>}}} Limit Columns, default is \code{TRUE}}
+\item{concatenate}{\emph{\if{html}{\out{<lgl>}}} Limit Columns, default is \code{TRUE}}
 
 \item{...}{Empty}
 }
@@ -97,5 +97,5 @@ assigned to a 6-character RBCS taxonomy code.
 }
 
 \examples{
-rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646"))
+rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646", "70170", "0001U"))
 }

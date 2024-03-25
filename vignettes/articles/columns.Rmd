@@ -160,7 +160,8 @@ gpci() |>
   fmt_number(decimals = 3, drop_trailing_zeros = TRUE) |> 
   tab_footnote(footnote = macas, locations = cells_stubhead()) |> 
   tab_footnote(footnote = md(alaska), cells_body(columns = locality, rows = 1)) |> 
-  tab_footnote(footnote = frontier, cells_body(columns = locality, rows = c(68, 70, 81, 91, 109))) |> 
+  tab_footnote(footnote = frontier, cells_body(columns = locality, 
+                                               rows = c(68, 70, 81, 91, 109))) |> 
   tab_footnote(footnote = md(note)) |>
   gt_style(tablign = "center", tabsize = 14) |> 
   gt_marks(cols = c(two_macs))

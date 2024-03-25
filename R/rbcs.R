@@ -48,7 +48,7 @@
 #' + `Major` (n = 3676)
 #' + `Non-Procedure` (n = 10113)
 #' + `Other` (n = 3244)
-#' @param limit_cols *<lgl>* Limit Columns, default is `TRUE`
+#' @param concatenate *<lgl>* Limit Columns, default is `TRUE`
 #' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -66,7 +66,7 @@
 #' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
 #'
 #' @examples
-#' rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646"))
+#' rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646", "70170", "0001U"))
 #' @export
 #' @autoglobal
 rbcs <- function(hcpcs       = NULL,
@@ -74,26 +74,13 @@ rbcs <- function(hcpcs       = NULL,
                  subcategory = NULL,
                  family      = NULL,
                  procedure   = NULL,
-                 limit_cols  = TRUE,
+                 concatenate = TRUE,
                  ...) {
 
-  # TODO rename procedure = major
-  # TODO rename rbcs_category = category,
-  # TODO rename rbcs_subcategory = subcategory,
-  # TODO rename rbcs_family = family,
-  # TODO rename rbcs_procedure = procedure
-
   rb <- pins::pin_read(mount_board(), "rbcs") |>
-    dplyr::rename(procedure = major)
-
-  if (limit_cols) {
-    rb <- dplyr::select(rb,
-          hcpcs,
-          rbcs_category    = category,
-          rbcs_subcategory = subcategory,
-          rbcs_family      = family,
-          rbcs_procedure   = procedure)
-  }
+    dplyr::rename(procedure = major) |>
+    dplyr::mutate(family = dplyr::if_else(
+      family == "No RBCS Family", NA_character_, family))
 
   if (!is.null(hcpcs)) {
 
@@ -130,6 +117,22 @@ rbcs <- function(hcpcs       = NULL,
   if (!is.null(family)) {
     rb <- vctrs::vec_slice(rb,
           vctrs::vec_in(rb$family, family))
+  }
+
+  if (concatenate) {
+    rb <- rb |>
+      tidyr::unite("rbcs_category",
+                   c(procedure, category),
+                   sep = " ") |>
+      tidyr::unite("rbcs_family",
+                   c(subcategory, family),
+                   sep = ": ",
+                   na.rm = TRUE) |>
+      dplyr::select(
+        hcpcs,
+        rbcs_category,
+        rbcs_family
+      )
   }
   return(rb)
 }

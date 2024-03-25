@@ -8,8 +8,6 @@ utils::globalVariables(c(
   ":=",
   # <level2>
   "asc",
-  # <hcpcs_search>
-  "cf",
   # <case_chapter>
   "chapter",
   # <adjustment_codes>
@@ -60,12 +58,12 @@ utils::globalVariables(c(
   "multi_price",
   # <gpci>
   "name",
+  # <hcpcs_search>
+  "nfprvu",
   # <calculate_amounts>
   "nonfacility",
   # <hcpcs_search>
   "npar",
-  # <hcpcs_search>
-  "nprvu",
   # <hcpcs_search>
   "nrvus",
   # <hcpcs_search>
@@ -76,6 +74,10 @@ utils::globalVariables(c(
   "pgpci",
   # <level2>
   "price",
+  # <rbcs>
+  "rbcs_category",
+  # <rbcs>
+  "rbcs_family",
   # <icd10cm>
   "sections",
   # <hcpcs_search>

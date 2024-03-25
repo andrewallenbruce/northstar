@@ -45,18 +45,13 @@ hcpcs_search <- function(hcpcs,
   rv <- rvu(hcpcs = hcpcs)
 
   if (vctrs::vec_is_empty(rv)) {
-    cli::cli_abort("No RVUs found for HCPCS code {.strong {.val {hcpcs}}}.")}
+    cli::cli_abort("HCPCS code {.strong {.val {hcpcs}}} not found.")}
 
   gp <- gpci(state = state, locality = locality, mac = mac)
-
   fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
-
   op <- opps(hcpcs = hcpcs, locality = locality, mac = mac)
-
   ds <- descriptors(hcpcs = hcpcs)
-
   l2 <- level2(hcpcs = hcpcs)
-
   rb <- rbcs(hcpcs = hcpcs)
 
   x <- list(
@@ -71,8 +66,7 @@ hcpcs_search <- function(hcpcs,
 
 
   res <- dplyr::cross_join(x$rvus, x$gpci) |>
-         dplyr::left_join(x$rbcs,
-         by = dplyr::join_by(hcpcs))
+         dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
 
   if (all(rlang::has_name(x, c("level_2", "descriptors")))) {
 
@@ -94,7 +88,7 @@ hcpcs_search <- function(hcpcs,
   if (rlang::has_name(x, "descriptors") & !rlang::has_name(x, "level_2")) {
 
     res <- dplyr::left_join(res,x$payment,
-           by = dplyr::join_by(hcpcs, mod, status, mac, locality)) |>
+           by = dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)) |>
            dplyr::left_join(x$descriptors,
            by = dplyr::join_by(hcpcs))
 
@@ -108,14 +102,14 @@ hcpcs_search <- function(hcpcs,
 
   res |>
     dplyr::mutate(
-      frvus  = ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci)),
-      nrvus  = ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci)),
-      fpar   = frvus * cf,
-      npar   = nrvus * cf,
-      fnpar  = non_participating_amount(fpar),
-      nfnpar = non_participating_amount(npar),
-      flim   = limiting_charge(fpar),
-      nlim   = limiting_charge(npar)) |>
+      frvus  = sum(wrvu * wgpci, fprvu * pgpci, mrvu * mgpci),
+      nrvus  = sum(wrvu * wgpci, nfprvu * pgpci, mrvu * mgpci),
+      fpar   = frvus * 32.7442,
+      npar   = nrvus * 32.7442,
+      fnpar  = fpar * 0.95,
+      nfnpar = npar * 0.95,
+      flim   = fpar * 1.0925,
+      nlim   = npar * 1.0925) |>
     cols_amounts()
 }
 
@@ -194,7 +188,9 @@ cols_amounts <- function(df) {
             'betos',
             'tos'
   )
-  df |> dplyr::select(dplyr::any_of(cols), dplyr::everything())
+  df |> dplyr::select(dplyr::any_of(cols), dplyr::everything(
+
+  ))
 }
 
 # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
