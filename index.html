@@ -113,7 +113,6 @@
 <blockquote>
 <p>Tidy Healthcare Revenue Integrity Tools</p>
 </blockquote>
-<p><br></p>
 <!-- badges: start -->
 
 <!-- badges: end -->
@@ -144,7 +143,7 @@
 <span>             mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">54</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">62</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs                  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"33935"</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description            <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Transplantation heart/lung"</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description_consumer   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Transplantation of donor heart and lung"</span></span>
@@ -169,36 +168,44 @@
 <span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="st">&gt; $ cf                     &lt;dbl&gt; 32.744</span></span>
 <span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="st">&gt; $ f_fee                  &lt;dbl&gt; 4804.08</span></span>
 <span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="st">&gt; $ nf_fee                 &lt;dbl&gt; 4804.08</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">&gt; $ fpar                   &lt;dbl&gt; 4804.053</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">&gt; $ npar                   &lt;dbl&gt; 4804.053</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">&gt; $ fnpar                  &lt;dbl&gt; 4563.85</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">&gt; $ nfnpar                 &lt;dbl&gt; 4563.85</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">&gt; $ flim                   &lt;dbl&gt; 5248.428</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">&gt; $ nlim                   &lt;dbl&gt; 5248.428</span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="st">&gt; $ opps                   &lt;chr&gt; "</span><span class="dv">9</span><span class="st">"</span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="st">&gt; $ opps_nf                &lt;dbl&gt; NA</span></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="st">&gt; $ opps_f                 &lt;dbl&gt; NA</span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="st">&gt; $ nprvu_opps             &lt;dbl&gt; 0</span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="st">&gt; $ fprvu_opps             &lt;dbl&gt; 0</span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="st">&gt; $ mrvu_opps              &lt;dbl&gt; 0</span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="st">&gt; $ mult_surg              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="st">&gt; $ mult_proc              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="st">&gt; $ nther                  &lt;dbl&gt; 0</span></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="st">&gt; $ fther                  &lt;dbl&gt; 0</span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="st">&gt; $ global                 &lt;chr&gt; "</span><span class="dv">090</span><span class="st">"</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="st">&gt; $ op_pre                 &lt;dbl&gt; 0.09</span></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="st">&gt; $ op_intra               &lt;dbl&gt; 0.84</span></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="st">&gt; $ op_post                &lt;dbl&gt; 0.07</span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="st">&gt; $ mod                    &lt;chr&gt; NA</span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="st">&gt; $ surg_bilat             &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="st">&gt; $ surg_asst              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="st">&gt; $ surg_co                &lt;chr&gt; "</span><span class="dv">1</span><span class="st">"</span></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="st">&gt; $ surg_team              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="st">&gt; $ supvis                 &lt;chr&gt; "</span><span class="dv">09</span><span class="st">"</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="st">&gt; $ dximg                  &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="st">&gt; $ endo                   &lt;chr&gt; NA</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="st">&gt; $ rare                   &lt;chr&gt; "</span><span class="dv">10</span><span class="st">"</span></span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="st">&gt; $ unused                 &lt;int&gt; 0</span></span></code></pre></div>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">&gt; $ frvus                  &lt;dbl&gt; 146.7155</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">&gt; $ nrvus                  &lt;dbl&gt; 146.7155</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">&gt; $ fpar                   &lt;dbl&gt; 4804.053</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">&gt; $ npar                   &lt;dbl&gt; 4804.053</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">&gt; $ fnpar                  &lt;dbl&gt; 4563.85</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">&gt; $ nfnpar                 &lt;dbl&gt; 4563.85</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="st">&gt; $ flim                   &lt;dbl&gt; 5248.428</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="st">&gt; $ nlim                   &lt;dbl&gt; 5248.428</span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="st">&gt; $ opps                   &lt;chr&gt; "</span><span class="dv">9</span><span class="st">"</span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="st">&gt; $ opps_nf                &lt;dbl&gt; NA</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="st">&gt; $ opps_f                 &lt;dbl&gt; NA</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="st">&gt; $ nprvu_opps             &lt;dbl&gt; 0</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="st">&gt; $ fprvu_opps             &lt;dbl&gt; 0</span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="st">&gt; $ mrvu_opps              &lt;dbl&gt; 0</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="st">&gt; $ mult_surg              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="st">&gt; $ mult_proc              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="st">&gt; $ nther                  &lt;dbl&gt; 0</span></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="st">&gt; $ fther                  &lt;dbl&gt; 0</span></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="st">&gt; $ global                 &lt;chr&gt; "</span><span class="dv">090</span><span class="st">"</span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="st">&gt; $ op_ind                 &lt;dbl&gt; 1</span></span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="st">&gt; $ op_pre                 &lt;dbl&gt; 0.09</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="st">&gt; $ op_intra               &lt;dbl&gt; 0.84</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="st">&gt; $ op_post                &lt;dbl&gt; 0.07</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="st">&gt; $ mod                    &lt;chr&gt; NA</span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="st">&gt; $ surg_bilat             &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="st">&gt; $ surg_asst              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="st">&gt; $ surg_co                &lt;chr&gt; "</span><span class="dv">1</span><span class="st">"</span></span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="st">&gt; $ surg_team              &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="st">&gt; $ supvis                 &lt;chr&gt; "</span><span class="dv">09</span><span class="st">"</span></span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="st">&gt; $ dximg                  &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a><span class="st">&gt; $ endo                   &lt;chr&gt; NA</span></span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="st">&gt; $ rare                   &lt;chr&gt; "</span><span class="dv">10</span><span class="st">"</span></span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="st">&gt; $ unused                 &lt;int&gt; 0</span></span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="st">&gt; $ pctc.x                 &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="st">&gt; $ two_macs               &lt;lgl&gt; FALSE</span></span>
+<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a><span class="st">&gt; $ pctc.y                 &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
+<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a><span class="st">&gt; $ chapter                &lt;chr&gt; "</span>Surgery<span class="st">"</span></span>
+<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a><span class="st">&gt; $ range                  &lt;chr&gt; "</span><span class="dv">10004</span> <span class="sc">-</span> <span class="dv">69990</span><span class="st">"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="icd-10-cm">ICD-10-CM<a class="anchor" aria-label="anchor" href="#icd-10-cm"></a>
@@ -307,11 +314,11 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master" class="external-link"><img src="https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/andrewallenbruce/northstar" class="external-link"><img src="https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge" alt="CodeFactor"></a></li>
+<li><a href="https://github.com/andrewallenbruce/northstar" class="external-link"><img src="https://img.shields.io/badge/version-0.0.4-red.svg" alt="Version"></a></li>
+<li><a href="https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master" class="external-link"><img src="https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/andrewallenbruce/northstar" class="external-link"><img src="https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg" alt="Code size"></a></li>
 <li><a href="https://github.com/andrewallenbruce/northstar/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg" alt="Last commit"></a></li>
-<li><a href="https://github.com/andrewallenbruce/northstar" class="external-link"><img src="https://img.shields.io/badge/version-0.0.4-red.svg" alt="Version"></a></li>
 </ul>
 </div>
 
