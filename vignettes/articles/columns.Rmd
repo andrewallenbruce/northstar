@@ -20,6 +20,20 @@ f53 <- "Not used to report the elective cancellation of a procedure prior to the
 
 fmod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
 
+img <- stringr::str_pad(c(1:11, 88, 99), width = "2", pad = "0")
+
+x <- sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))
+
+stnote <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
+
+note <- "**Note**: The *Further Continuing Appropriations and Other Extensions Act, 2024* (Section 501) extended the 1.0 Work GPCI floor through January 19, 2024. Therefore, the Work GPCIs for 2023 reflect the 1.0 Work GPCI floor. Work GPCIs for 2024 are shown both with and without a 1.0 floor and Work GPCIs for 2025 do not reflect a 1.0 floor."
+
+alaska <- "Work GPCI reflects a 1.5 floor in Alaska established by [**MIPPA**](https://en.wikipedia.org/wiki/Medicare_Improvements_for_Patients_and_Providers_Act_of_2008)."
+
+frontier <- "PE GPCI reflects a 1.0 floor for Frontier States established by the ACA."
+
+macas <- "MAC assignments as of November 22, 2023"
+
 library(northstar)
 library(dplyr)
 library(gt)
@@ -33,7 +47,7 @@ This file contains locality-specific physician fee schedule payment amounts for 
 ```{r}
 northstar:::col_lb("md", "pfs") |> 
   gt(rowname_col = "var") |>
-  northstar:::gt_style(tablign = "right")
+  gt_style(tablign = "right")
 ```
 
 
@@ -46,7 +60,7 @@ The Medicare physician fee schedule amounts are adjusted to reflect the variatio
 ```{r}
 northstar:::col_lb("md", "rvu") |> 
   gt(rowname_col = "var") |>
-  northstar:::gt_style(tablign = "left")
+  gt_style(tablign = "left")
 ```
 
 
@@ -59,25 +73,20 @@ dplyr::tibble(mod = c("26", "TC", "53")) |>
   tab_header(title = md(modtitle)) |> 
   tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
   tab_footnote(fmod) |> 
-  northstar:::gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18)
 ```
 
 
 ## Status
 
 ```{r}
-x <- sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))
-
-stnote <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
-
-dplyr::tibble(status_code = x, 
-              code = x) |> 
+dplyr::tibble(status_code = x, code = x) |> 
   case_status(code, desc = TRUE) |> 
   gt(rowname_col = "status_code") |> 
   tab_header(title = md(stnote)) |> 
   tab_style(style = cell_fill(color = "yellow", alpha = 0.3),
             locations = cells_body(columns = everything(), rows = c(1, 12, 13))) |> 
-  northstar:::gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -88,18 +97,18 @@ dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")) |>
   case_global(global) |>
   gt(rowname_col = "global") |> 
   sub_missing(missing_text = "Concept does not apply.") |> 
-  northstar:::gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18)
 ```
 
 
-## PCTC
+## PCTC Indicator
 
 ```{r}
 dplyr::tibble(code = as.character(0:9)) |> 
   case_pctc(code) |> 
   gt(rowname_col = "code") |> 
   sub_missing(missing_text = "Concept does not apply.") |> 
-  northstar:::gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -110,20 +119,18 @@ dplyr::tibble(code = as.character(c(0:7, 9))) |>
   case_multproc(code) |>
   gt(rowname_col = "code") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
-  northstar:::gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18)
 ```
 
 
 ## Diagnostic Imaging Family
 
 ```{r}
-img <- stringr::str_pad(c(1:11, 88, 99), width = "2", pad = "0")
-
 dplyr::tibble(dximg = img) |>
   case_imaging(dximg) |> 
   gt(rowname_col = "dximg") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
-  northstar:::gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18)
 ```
 
 
@@ -133,14 +140,6 @@ dplyr::tibble(dximg = img) |>
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 
 ```{r}
-note <- "**Note**: The *Further Continuing Appropriations and Other Extensions Act, 2024* (Section 501) extended the 1.0 Work GPCI floor through January 19, 2024. Therefore, the Work GPCIs for 2023 reflect the 1.0 Work GPCI floor. Work GPCIs for 2024 are shown both with and without a 1.0 floor and Work GPCIs for 2025 do not reflect a 1.0 floor."
-
-alaska <- "Work GPCI reflects a 1.5 floor in Alaska established by [**MIPPA**](https://en.wikipedia.org/wiki/Medicare_Improvements_for_Patients_and_Providers_Act_of_2008)."
-
-frontier <- "PE GPCI reflects a 1.0 floor for Frontier States established by the ACA."
-
-macas <- "MAC assignments as of November 22, 2023"
-
 gpci() |> 
   select(-counties) |> 
   gt(rowname_col     = "mac", 
@@ -158,17 +157,12 @@ gpci() |>
   cols_merge(columns = c(locality, area),
              pattern = "<b>{1}</b><< {2}>>") |> 
   cols_align(align = "left") |> 
-  fmt_number(decimals = 3, 
-             drop_trailing_zeros = TRUE) |> 
-  tab_footnote(footnote = macas,
-               locations = cells_stubhead()) |> 
-  tab_footnote(footnote = md(alaska),
-               cells_body(columns = locality, rows = 1)) |> 
-  tab_footnote(footnote = frontier,
-               cells_body(columns = locality, 
-                          rows = c(68, 70, 81, 91, 109))) |> 
+  fmt_number(decimals = 3, drop_trailing_zeros = TRUE) |> 
+  tab_footnote(footnote = macas, locations = cells_stubhead()) |> 
+  tab_footnote(footnote = md(alaska), cells_body(columns = locality, rows = 1)) |> 
+  tab_footnote(footnote = frontier, cells_body(columns = locality, rows = c(68, 70, 81, 91, 109))) |> 
   tab_footnote(footnote = md(note)) |>
-  northstar:::gt_style(tablign = "center", tabsize = 14) |> 
+  gt_style(tablign = "center", tabsize = 14) |> 
   gt_marks(cols = c(two_macs))
 ```
 

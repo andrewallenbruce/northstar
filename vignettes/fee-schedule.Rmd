@@ -86,7 +86,7 @@ hcpcs_search(
   case_status(Status) |>
   display_long() |>
   gt(rowname_col = "name") |>
-  northstar:::gt_style(tablign = "right", tabsize = 14)
+  gt_style(tablign = "right", tabsize = 14)
 ```
 
 
@@ -111,6 +111,6 @@ icd10cm(code = "F50.82") |>
          Abbreviation = abbrev) |> 
   display_long() |>
   gt(rowname_col = "name") |>
-  northstar:::gt_style(tablign = "right", tabsize = 14)
+  gt_style(tablign = "right", tabsize = 14)
 ```
 

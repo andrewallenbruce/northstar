@@ -1,4 +1,11 @@
-#' @noRd
+#' gt Theme
+#' @param gt_tbl description
+#' @param lbl description
+#' @param tablign description
+#' @param tabsize description
+#' @return description
+#' @export
+#' @keywords internal
 #' @autoglobal
 gt_style <- function(gt_tbl,
                      lbl = TRUE,
@@ -30,7 +37,12 @@ gt_style <- function(gt_tbl,
     )
 }
 
-#' @noRd
+#' gt Marks
+#' @param gt_tbl description
+#' @param cols description
+#' @return description
+#' @export
+#' @keywords internal
 #' @autoglobal
 gt_marks <- function(gt_tbl, cols) {
 
