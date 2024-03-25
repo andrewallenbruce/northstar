@@ -149,6 +149,8 @@ cols_amounts <- function(df) {
             'cf',
             'f_fee',
             'nf_fee',
+            'frvus',
+            'nrvus',
             'fpar',
             'npar',
             'fnpar',
@@ -168,6 +170,7 @@ cols_amounts <- function(df) {
             'nther',
             'fther',
             'global',
+            'op_ind',
             'op_pre',
             'op_intra',
             'op_post',
@@ -191,7 +194,7 @@ cols_amounts <- function(df) {
             'betos',
             'tos'
   )
-  df |> dplyr::select(dplyr::any_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols), dplyr::everything())
 }
 
 # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()

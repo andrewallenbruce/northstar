@@ -5,19 +5,18 @@
 
 > Tidy Healthcare Revenue Integrity Tools
 
-<br>
-
 <!-- badges: start -->
 
-[![Codecov test
-coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
-<br> [![Code
-size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
-[![Last
-commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
 <br>
 [![Version](https://img.shields.io/badge/version-0.0.4-red.svg)](https://github.com/andrewallenbruce/northstar)
+<br> [![Codecov test
+coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
+<br> [![Code
+size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
+<br> [![Last
+commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
+<br>
 
 <!-- badges: end -->
 
@@ -50,7 +49,7 @@ hcpcs_search(hcpcs    = "33935",
 ```
 
     > Rows: 1
-    > Columns: 54
+    > Columns: 62
     > $ hcpcs                  <chr> "33935"
     > $ description            <chr> "Transplantation heart/lung"
     > $ description_consumer   <chr> "Transplantation of donor heart and lung"
@@ -75,6 +74,8 @@ hcpcs_search(hcpcs    = "33935",
     > $ cf                     <dbl> 32.744
     > $ f_fee                  <dbl> 4804.08
     > $ nf_fee                 <dbl> 4804.08
+    > $ frvus                  <dbl> 146.7155
+    > $ nrvus                  <dbl> 146.7155
     > $ fpar                   <dbl> 4804.053
     > $ npar                   <dbl> 4804.053
     > $ fnpar                  <dbl> 4563.85
@@ -92,6 +93,7 @@ hcpcs_search(hcpcs    = "33935",
     > $ nther                  <dbl> 0
     > $ fther                  <dbl> 0
     > $ global                 <chr> "090"
+    > $ op_ind                 <dbl> 1
     > $ op_pre                 <dbl> 0.09
     > $ op_intra               <dbl> 0.84
     > $ op_post                <dbl> 0.07
@@ -105,6 +107,11 @@ hcpcs_search(hcpcs    = "33935",
     > $ endo                   <chr> NA
     > $ rare                   <chr> "10"
     > $ unused                 <int> 0
+    > $ pctc.x                 <chr> "0"
+    > $ two_macs               <lgl> FALSE
+    > $ pctc.y                 <chr> "0"
+    > $ chapter                <chr> "Surgery"
+    > $ range                  <chr> "10004 - 69990"
 
 ### ICD-10-CM
 

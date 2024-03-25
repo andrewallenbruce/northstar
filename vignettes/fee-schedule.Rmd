@@ -41,6 +41,49 @@ hcpcs_search(
     descriptions_clinician, ~paste0("* ", ., collapse = "\n"))) |>
   unnest(cols = descriptions_clinician) |>
   ungroup() |> 
+  unite('rbcs', c(rbcs_procedure, rbcs_category, rbcs_subcategory), sep = " ") |>
+  case_multproc(mult_proc) |>
+  case_global(global) |>
+  case_cosurg(surg_co) |>
+  case_assistant(surg_asst) |>
+  select(HCPCS = hcpcs,
+         Description = description, 
+         Consumer = description_consumer, 
+         Clinician = descriptions_clinician,
+         Chapter = chapter,
+         Range = range,
+         RBCS = rbcs, 
+         Status = status,
+         MAC = mac,
+         State = state,
+         Locality = locality,
+         Area = area,
+         Counties = counties,
+         "Work GPCI" = wgpci,
+         "Practice GPCI" = pgpci,
+         "Malpractice GPCI" = mgpci,
+         "Work RVU" = wrvu,
+         "Non-Facility Practice RVU" = nprvu,
+         "Facility Practice RVU" = fprvu,
+         "Malpractice RVU" = mrvu,
+         "Conversion Factor" = cf,
+         "Total Facility RVU" = frvus,
+         "Total Non-Facility RVU" = nrvus,
+         "Facility Participating Fee" = fpar,
+         "Non-Facility Participating Fee" = npar,
+         "Facility Non-Participating Fee" = fnpar,
+         "Non-Facility Non-Participating Fee" = nfnpar,
+         "Facility Limiting Charge" = flim,
+         "Non-Facility Limiting Charge" = nlim,
+         "Multiple Procedures" = mproc_description,
+         "Global Days" = global_description,
+         "Preoperative" = op_pre,
+         "Intraoperative" = op_intra,
+         "Postoperative" = op_post,
+         "Assistant at Surgery" = asst_description,
+         "Co-Surgeons" = cosurg_description,
+         ) |> 
+  case_status(Status) |>
   display_long() |>
   gt(rowname_col = "name") |>
   northstar:::gt_style(tablign = "right", tabsize = 14)
@@ -59,6 +102,13 @@ hcpcs_search(hcpcs    = "70170",
 
 ```{r}
 icd10cm(code = "F50.82") |> 
+  select(Code = code, 
+         Description = description, 
+         Section = section,
+         Number = ch,
+         Chapter = chapter, 
+         Range = range, 
+         Abbreviation = abbrev) |> 
   display_long() |>
   gt(rowname_col = "name") |>
   northstar:::gt_style(tablign = "right", tabsize = 14)
