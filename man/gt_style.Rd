@@ -4,7 +4,13 @@
 \alias{gt_style}
 \title{gt Theme}
 \usage{
-gt_style(gt_tbl, lbl = TRUE, tablign = "center", tabsize = 16)
+gt_style(
+  gt_tbl,
+  lbl = TRUE,
+  tablign = "center",
+  tabsize = 16,
+  tabwt = "normal"
+)
 }
 \arguments{
 \item{gt_tbl}{description}
@@ -14,6 +20,8 @@ gt_style(gt_tbl, lbl = TRUE, tablign = "center", tabsize = 16)
 \item{tablign}{description}
 
 \item{tabsize}{description}
+
+\item{tabwt}{description}
 }
 \value{
 description

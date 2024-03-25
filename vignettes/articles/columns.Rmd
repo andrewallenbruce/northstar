@@ -47,7 +47,8 @@ This file contains locality-specific physician fee schedule payment amounts for 
 ```{r}
 northstar:::col_lb("md", "pfs") |> 
   gt(rowname_col = "var") |>
-  gt_style(tablign = "right")
+  gt_style(tablign = "right") |> 
+  fmt_markdown()
 ```
 
 
@@ -60,7 +61,8 @@ The Medicare physician fee schedule amounts are adjusted to reflect the variatio
 ```{r}
 northstar:::col_lb("md", "rvu") |> 
   gt(rowname_col = "var") |>
-  gt_style(tablign = "left")
+  gt_style(tablign = "left") |> 
+  fmt_markdown()
 ```
 
 
@@ -73,7 +75,7 @@ dplyr::tibble(mod = c("26", "TC", "53")) |>
   tab_header(title = md(modtitle)) |> 
   tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
   tab_footnote(fmod) |> 
-  gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
 
@@ -86,7 +88,7 @@ dplyr::tibble(status_code = x, code = x) |>
   tab_header(title = md(stnote)) |> 
   tab_style(style = cell_fill(color = "yellow", alpha = 0.3),
             locations = cells_body(columns = everything(), rows = c(1, 12, 13))) |> 
-  gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
 
@@ -97,7 +99,7 @@ dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")) |>
   case_global(global) |>
   gt(rowname_col = "global") |> 
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
 
@@ -108,7 +110,7 @@ dplyr::tibble(code = as.character(0:9)) |>
   case_pctc(code) |> 
   gt(rowname_col = "code") |> 
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
 
@@ -119,7 +121,7 @@ dplyr::tibble(code = as.character(c(0:7, 9))) |>
   case_multproc(code) |>
   gt(rowname_col = "code") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
 
@@ -130,7 +132,7 @@ dplyr::tibble(dximg = img) |>
   case_imaging(dximg) |> 
   gt(rowname_col = "dximg") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style(tablign = "center", tabsize = 18)
+  gt_style(tablign = "center", tabsize = 18, tabwt = "bold")
 ```
 
 
@@ -141,30 +143,44 @@ This file contains the Geographic Practice Cost Index (GPCI) component for each 
 
 ```{r}
 gpci() |> 
-  select(-counties) |> 
-  gt(rowname_col     = "mac", 
-     groupname_col   = "state") |> 
-  tab_stubhead(label = "State | MAC") |> 
+  select(-c(counties, two_macs)) |> 
+  distinct() |> 
+  gt(rowname_col = "mac", 
+     groupname_col = "state",
+     row_group_as_column = TRUE, 
+     process_md = TRUE) |> 
   cols_label(
     mac      = "MAC",
     state    = "State",
-    locality = "Locality",
+    locality = "",
     area     = "Area",
-    wgpci    = "Work",
-    pgpci    = "Practice",
-    mgpci    = "Malpractice",
-    two_macs = "Two MACs") |> 
+    wgpci    = md("**GPCI**<i><sub>w</sub></i>"),
+    pgpci    = md("**GPCI**<i><sub>pe</sub></i>"),
+    mgpci    = md("**GPCI**<i><sub>mp</sub></i>")) |> 
   cols_merge(columns = c(locality, area),
              pattern = "<b>{1}</b><< {2}>>") |> 
-  cols_align(align = "left") |> 
-  fmt_number(decimals = 3, drop_trailing_zeros = TRUE) |> 
-  tab_footnote(footnote = macas, locations = cells_stubhead()) |> 
-  tab_footnote(footnote = md(alaska), cells_body(columns = locality, rows = 1)) |> 
-  tab_footnote(footnote = frontier, cells_body(columns = locality, 
-                                               rows = c(68, 70, 81, 91, 109))) |> 
-  tab_footnote(footnote = md(note)) |>
-  gt_style(tablign = "center", tabsize = 14) |> 
-  gt_marks(cols = c(two_macs))
+  fmt_number(decimals = 2, drop_trailing_zeros = TRUE) |> 
+  gt_style(lbl = FALSE, tablign = "center", tabsize = 16) |> 
+  tab_style(
+      style = cell_text(
+        align = 'center',
+        size = px(16),
+        font = google_font(name = "Fira Code"),
+        weight = "bold"),
+      locations = cells_row_groups()) |> 
+  tab_style(
+      style = cell_text(
+      font = google_font(name = "Fira Code")),
+      locations = cells_body(columns = contains("gpci"))) |>
+  tab_style(
+    style = cell_borders(
+      sides = c("all"),
+      color = "powderblue",
+      weight = px(3)),
+    locations = cells_row_groups()) |>
+  tab_style(
+    style = cell_fill(color = "powderblue"),
+    locations = cells_row_groups())
 ```
 
 

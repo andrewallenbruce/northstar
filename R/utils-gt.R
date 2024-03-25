@@ -3,6 +3,7 @@
 #' @param lbl description
 #' @param tablign description
 #' @param tabsize description
+#' @param tabwt description
 #' @return description
 #' @export
 #' @keywords internal
@@ -10,10 +11,10 @@
 gt_style <- function(gt_tbl,
                      lbl = TRUE,
                      tablign = "center",
-                     tabsize = 16) {
+                     tabsize = 16,
+                     tabwt = "normal") {
   gt_tbl |>
-    gt::fmt_markdown() |>
-    gt::fmt_integer() |>
+    # gt::fmt_markdown() |>
     gt::cols_align("left") |>
     gt::opt_table_font(
       font      = gt::google_font(name = "Atkinson Hyperlegible")) |>
@@ -22,7 +23,7 @@ gt_style <- function(gt_tbl,
         align   = tablign,
         size    = gt::px(tabsize),
         font    = gt::google_font(name = "Fira Code"),
-        weight  = "bold"),
+        weight  = tabwt),
       locations = gt::cells_stub()) |>
     gt::tab_options(
       column_labels.hidden       = lbl,
