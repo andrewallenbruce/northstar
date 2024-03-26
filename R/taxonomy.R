@@ -1,6 +1,6 @@
-#' NUCC Provider Taxonomy Code Set
+#' NUCC Provider Taxonomy Codeset
 #'
-#' `taxonomy()` returns a [tibble()] of the current Health Care Provider
+#' `search_taxonomy()` returns a [tibble()] of the current Health Care Provider
 #' Taxonomy code set
 #'
 #' __Update Frequency__: _Biannually_
@@ -108,25 +108,26 @@
 #' @source
 #' [National Uniform Claim Committee](https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57)
 #'
-#' @param shape shape of the data frame returned, 'wide' or 'long'
-#' @param code vector of taxonomy codes to filter
-#' @param unnest unnest the hierarchy column, default is `FALSE`
+#' @param shape shape of data to return, `wide` (default) or `long`
+#' @param code vector of taxonomy codes
+#' @param unnest unnest the `hierarchy` column, default is `FALSE`
 #' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' @examples
-#' taxonomy("wide", code = c("207K00000X", "193200000X"))
+#' search_taxonomy(code = c("207K00000X", "193200000X"))
 #'
-#' taxonomy("long", code = "207K00000X")
+#' search_taxonomy(shape  = "long",
+#'                 code   = "207K00000X",
+#'                 unnest = TRUE)
 #'
-#' taxonomy("long", code = "207K00000X", unnest = TRUE)
 #' @autoglobal
 #' @export
-taxonomy <- function(shape = c('wide', 'long'),
-                     code = NULL,
-                     unnest = FALSE,
-                     ...) {
+search_taxonomy <- function(shape = c('wide', 'long'),
+                            code = NULL,
+                            unnest = FALSE,
+                            ...) {
 
   shape <- match.arg(shape)
 

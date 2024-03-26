@@ -1,13 +1,12 @@
-#' 2024 National Physician Fee Schedule Relative Value File
+#' Search Relative Value File
 #'
-#' @param hcpcs 5-digit HCPCS code
+#' @param hcpcs < *chr* > 5-digit HCPCS code
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' rvu(c("A0021", "V5362", "J9264", "G8916")) |>
-#' dplyr::glimpse()
+#' search_rvu(c("A0021", "V5362", "J9264", "G8916"))
 #' @autoglobal
 #' @export
-rvu <- function(hcpcs = NULL) {
+search_rvu <- function(hcpcs = NULL) {
 
   rv <- pins::pin_read(mount_board(), "rvu")
 
@@ -20,24 +19,23 @@ rvu <- function(hcpcs = NULL) {
   return(rv)
 }
 
-#' 2024 Physician Fee Schedule Payment Amount File
+#' Search Payment Amount File
 #'
-#' @param hcpcs 5-digit HCPCS code
-#' @param mac 5-digit Medicare Administrative Contractor (MAC) code
-#' @param locality 2-digit locality ID
+#' @param hcpcs < *chr* > 5-digit HCPCS code
+#' @param mac < *chr* > 5-digit MAC ID code
+#' @param locality < *chr* > 2-digit Locality ID
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' pfs(hcpcs    = c("39503", "43116", "33935", "11646"),
-#'     locality = "01",
-#'     mac      = "10212") |>
-#' dplyr::glimpse()
+#' search_payment(hcpcs = c("39503", "43116", "33935", "11646"),
+#'                locality = "01",
+#'                mac = "10212")
 #' @autoglobal
 #' @export
-pfs <- function(hcpcs    = NULL,
-                mac      = NULL,
-                locality = NULL,
-                ...) {
+search_payment <- function(hcpcs = NULL,
+                           mac = NULL,
+                           locality = NULL,
+                           ...) {
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
@@ -61,24 +59,21 @@ pfs <- function(hcpcs    = NULL,
   return(pmt)
 }
 
-#' 2024 Geographic Practice Cost Indices
+#' Search Geographic Practice Cost Indices
 #'
-#' @param mac 5-digit Medicare Administrative Contractor (MAC) code
-#' @param state 2-character State abbreviation
-#' @param locality 2-digit locality ID
+#' @param mac < *chr* > 5-digit MAC code
+#' @param state < *chr* > 2-character State abbreviation
+#' @param locality < *chr* > 2-digit Locality ID
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' gpci(state    = "GA",
-#'      locality = "01",
-#'      mac      = "10212") |>
-#' dplyr::glimpse()
+#' search_gpci(state = "GA", locality = "01", mac = "10212")
 #' @export
 #' @autoglobal
-gpci <- function(mac      = NULL,
-                 state    = NULL,
-                 locality = NULL,
-                 ...) {
+search_gpci <- function(mac      = NULL,
+                        state    = NULL,
+                        locality = NULL,
+                        ...) {
 
   gp <- pins::pin_read(mount_board(), "gpci") |>
     dplyr::rename(area = name)
@@ -103,22 +98,23 @@ gpci <- function(mac      = NULL,
   return(gp)
 }
 
-#' 2024 Healthcare Common Procedure Coding System (HCPCS)
-#' @param hcpcs 5-digit Level II HCPCS code
-#' @param limit_cols limit the number of columns returned
+#' Search HCPCS Level II
+#'
+#' @param hcpcs < *chr* > 5-digit Level II HCPCS code
+#' @param limit < *lgl* > limit columns returned, default is `TRUE`
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' level2(c("A0021", "V5362", "J9264", "G8916")) |> dplyr::glimpse()
+#' search_hcpcs(c("A0021", "V5362", "J9264", "G8916"))
 #' @export
 #' @autoglobal
-level2 <- function(hcpcs = NULL,
-                   limit_cols = TRUE,
-                   ...) {
+search_hcpcs <- function(hcpcs = NULL,
+                         limit = TRUE,
+                         ...) {
 
   l2 <- pins::pin_read(mount_board(), "hcpcs")
 
-  if (limit_cols) {
+  if (limit) {
     l2 <- dplyr::select(l2,
           hcpcs,
           description_short,
@@ -148,14 +144,15 @@ level2 <- function(hcpcs = NULL,
   return(l2)
 }
 
-#' 2023 CPT Descriptors (Clinician & Consumer-Friendly)
-#' @param hcpcs 5-digit Level I, Category I HCPCS code
+#' Search HCPCS Level I (CPT) Codes
+#'
+#' @param hcpcs < *chr* > 5-digit CPT codes
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' descriptors(c("39503", "43116", "33935", "11646"))
+#' search_cpt(c("39503", "43116", "33935", "11646"))
 #' @export
 #' @autoglobal
-descriptors <- function(hcpcs = NULL) {
+search_cpt <- function(hcpcs = NULL) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
@@ -167,7 +164,7 @@ descriptors <- function(hcpcs = NULL) {
   return(cpt)
 }
 
-#' OPPSCAP
+#' Outpatient Prospective Payment System (OPPS) Capitations
 #'
 #' Contains the payment amounts after the application of the OPPS-based payment
 #' caps, except for carrier priced codes. For carrier price codes, the field
@@ -175,18 +172,18 @@ descriptors <- function(hcpcs = NULL) {
 #' OPPS-based payment caps.
 #'
 #' @param hcpcs *<chr>* vector of 5-digit HCPCS codes
-#' @param mac *<chr>* vector of 5-digit Medicare Administrative Contractor (MAC) codes
-#' @param locality *<chr>* vector of 2-digit locality IDs
+#' @param mac *<chr>* vector of 5-digit MAC codes
+#' @param locality *<chr>* vector of 2-digit Locality IDs
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' opps(hcpcs = "71550", mac = "01112")
+#' search_opps(hcpcs = "71550", mac = "01112")
 #' @export
 #' @autoglobal
-opps <- function(hcpcs    = NULL,
-                 mac      = NULL,
-                 locality = NULL,
-                 ...) {
+search_opps <- function(hcpcs    = NULL,
+                        mac      = NULL,
+                        locality = NULL,
+                        ...) {
 
   op <- pins::pin_read(mount_board(), "opps")
 
@@ -208,32 +205,4 @@ opps <- function(hcpcs    = NULL,
           collapse::funique(locality)))
   }
   return(op)
-}
-
-#' Level I and II HCPCS Modifiers
-#'
-#' A modifier provides the means to report or indicate that a service or
-#' procedure that has been performed has been altered by some specific
-#' circumstance but not changed in its definition or code.
-#'
-#' Modifiers also enable health care professionals to effectively respond to
-#' payment policy requirements established by other entities.
-#'
-#' @param mod *<chr>* 2-digit HCPCS modifier
-#' @param ... Empty
-#' @return a [tibble][tibble::tibble-package]
-#' @examples
-#' modifiers(mod = c("25", "59"))
-#' @export
-#' @autoglobal
-modifiers <- function(mod = NULL, ...) {
-
-  md <- pins::pin_read(mount_board(), "modifiers")
-
-  if (!is.null(mod)) {
-    md <- vctrs::vec_slice(md,
-          vctrs::vec_in(md$mod,
-          collapse::funique(mod)))
-  }
-  return(md)
 }

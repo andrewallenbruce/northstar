@@ -67,21 +67,10 @@ reference:
   desc: >
     Medical Coding & Billing Codesets.
   contents:
-  - adjustment_codes
   - icd10cm
   - matches("search")
   - lcd
   - ncd
-  - rvu
-  - pfs
-  - gpci
-  - level2
-  - descriptors
-  - rbcs
-  - opps
-  - msdrg
-  - modifiers
-  - taxonomy
 
 - title: Calculations
   desc: >

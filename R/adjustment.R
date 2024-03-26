@@ -1,4 +1,4 @@
-#' Adjustment Codes
+#' Search Adjustment Codes
 #'
 #' CARC and RARC Codes
 #'
@@ -43,27 +43,17 @@
 #' @param ... Empty
 #' @return a [dplyr::tibble()]
 #' @examples
-#' adjustment_codes()$group
-#'
-#' adjustment_codes(type = "carc",
-#'                  action = "review") |>
-#'                  head()
-#'
-#' adjustment_codes(type = "rarc",
-#'                  action = "review") |>
-#'                  head()
-#'
 #' dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
-#' adjustment_codes(col = "code",
-#'                  type = "carc",
-#'                  action = "join")
+#' search_adjustments(col    = code,
+#'                    type   = "carc",
+#'                    action = "join")
 #' @export
 #' @autoglobal
-adjustment_codes <- function(df   = NULL,
-                             col  = NULL,
-                             type = c("all", "carc", "rarc"),
-                             action = c("review", "join"),
-                             ...) {
+search_adjustments <- function(df = NULL,
+                               col = NULL,
+                               type = c("all", "carc", "rarc"),
+                               action = c("review", "join"),
+                               ...) {
 
   type <- match.arg(type)
 

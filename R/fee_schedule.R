@@ -1,10 +1,10 @@
-#' Search HCPCS Codes
+#' Search Physician Fee Schedule
+#'
 #' @param hcpcs < *chr* > 5-character HCPCS Code
 #' @param state < *chr* > 2-character State Abbreviation
 #' @param locality < *chr* > 2-digit Locality ID
-#' @param mac < *character* > 5-digit MAC ID code
+#' @param mac < *chr* > 5-digit MAC ID code
 #' @param ... Empty
-#'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Column**    |**Description**                       |
@@ -26,52 +26,53 @@
 #' |`pgpci`       |State Abbreviation                    |
 #'
 #' @examples
-#' search_hcpcs(hcpcs    = c("V5299", "70170"),
-#'              state    = "GA",
-#'              locality = "99",
-#'              mac      = "10212")
+#' search_fee_schedule(hcpcs    = c("V5299", "70170"),
+#'                     state    = "GA",
+#'                     locality = "99",
+#'                     mac      = "10212")
 #' @autoglobal
 #' @export
-search_hcpcs <- function(hcpcs,
-                         state    = NULL,
-                         locality = NULL,
-                         mac      = NULL,
-                         ...) {
+search_fee_schedule <- function(hcpcs,
+                                state    = NULL,
+                                locality = NULL,
+                                mac      = NULL,
+                                ...) {
 
   rlang::check_required(hcpcs)
 
-  # retrieve Relative Value File data
-  rv <- rvu(hcpcs = hcpcs)
+  # retrieve Relative Value Units
+  rv <- search_rvu(hcpcs = hcpcs)
 
   # if no data found in rvu file, nothing will be found in others
   msg <- "HCPCS code {.strong {.val {hcpcs}}} not found."
   if (vctrs::vec_is_empty(rv)) {cli::cli_abort(msg)}
 
   # test if all are NULL
-  test <- !vctrs::vec_is_empty(c(state, locality, mac))
+  # test <- !vctrs::vec_is_empty(c(state, locality, mac))
 
-  # retrieve Geographic Practice Cost Indices data
   # if all are NULL, don't call gpci
-  gp <- switch(test,
-    "TRUE" = gpci(state    = state,
-                  locality = locality,
-                  mac      = mac),
-    "FALSE" = character(0))
+  # gp <- switch(
+  # test,
+  # "TRUE" = gpci(state = state, locality = locality, mac = mac),
+  # "FALSE" = character(0))
 
-  # retrieve Payment Amount File data
-  fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
+  # retrieve Geographic Practice Cost Indices
+  gp <- search_gpci(state = state, locality = locality, mac = mac)
 
-  # retrieve OPPS Cap data
-  op <- opps(hcpcs = hcpcs, locality = locality, mac = mac)
+  # retrieve Payment Amounts
+  fs <- search_payment(hcpcs = hcpcs, locality = locality, mac = mac)
 
-  # retrieve CPT data
-  ds <- descriptors(hcpcs = hcpcs)
+  # retrieve OPPS Capitations
+  op <- search_opps(hcpcs = hcpcs, locality = locality, mac = mac)
 
-  # retrieve Level II HCPCS data
-  l2 <- level2(hcpcs = hcpcs)
+  # retrieve CPT codes
+  ds <- search_cpt(hcpcs = hcpcs)
+
+  # retrieve Level II HCPCS codes
+  l2 <- search_hcpcs(hcpcs = hcpcs)
 
   # retrieve Restructured BETOS Classifications
-  rb <- rbcs(hcpcs = hcpcs)
+  rb <- search_rbcs(hcpcs = hcpcs)
 
   # put results in list, remove NULLs
   x <- list(
@@ -208,89 +209,12 @@ cols_amounts <- function(df) {
             'coverage',
             'asc',
             'betos',
-            'tos'
-  )
-  df |> dplyr::select(dplyr::any_of(cols), dplyr::everything())
+            'tos')
+  df |>
+    dplyr::select(
+      dplyr::any_of(cols),
+      dplyr::everything())
 }
-
-# hcpcs_search <- function(hcpcs,
-#                          state = NULL,
-#                          locality = NULL,
-#                          mac = NULL,
-#                          ...) {
-#
-#   rlang::check_required(hcpcs)
-#
-#   rv <- rvu(hcpcs = hcpcs)
-#
-#   if (vctrs::vec_is_empty(rv)) {
-#     cli::cli_abort("HCPCS code {.strong {.val {hcpcs}}} not found.")}
-#
-#   gp <- gpci(state = state, locality = locality, mac = mac)
-#   fs <- pfs(hcpcs = hcpcs, locality = locality, mac = mac)
-#   op <- opps(hcpcs = hcpcs, locality = locality, mac = mac)
-#   ds <- descriptors(hcpcs = hcpcs)
-#   l2 <- level2(hcpcs = hcpcs)
-#   rb <- rbcs(hcpcs = hcpcs)
-#
-#   x <- list(
-#     rvus        = if (!vctrs::vec_is_empty(rv)) rv else NULL,
-#     gpci        = if (!vctrs::vec_is_empty(gp)) gp else NULL,
-#     payment     = if (!vctrs::vec_is_empty(fs)) fs else NULL,
-#     oppscap     = if (!vctrs::vec_is_empty(op)) op else NULL,
-#     descriptors = if (!vctrs::vec_is_empty(ds)) ds else NULL,
-#     level_2     = if (!vctrs::vec_is_empty(l2)) l2 else NULL,
-#     rbcs        = if (!vctrs::vec_is_empty(rb)) rb else NULL) |>
-#     purrr::compact()
-#
-#
-#   res <- dplyr::cross_join(x$rvus, x$gpci) |>
-#     dplyr::left_join(x$rbcs, by = dplyr::join_by(hcpcs))
-#
-#   if (all(rlang::has_name(x, c("level_2", "descriptors")))) {
-#
-#     res <- dplyr::left_join(res, x$level_2,
-#                             by = dplyr::join_by(hcpcs)) |>
-#       dplyr::left_join(x$payment,
-#                        by = dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)) |>
-#       dplyr::left_join(x$descriptors,
-#                        by = dplyr::join_by(hcpcs))
-#
-#   }
-#
-#   if (rlang::has_name(x, "level_2") & !rlang::has_name(x, "descriptors")) {
-#
-#     res <- dplyr::left_join(res, x$level_2, by = dplyr::join_by(hcpcs))
-#
-#   }
-#
-#   if (rlang::has_name(x, "descriptors") & !rlang::has_name(x, "level_2")) {
-#
-#     res <- dplyr::left_join(res,x$payment,
-#                             by = dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)) |>
-#       dplyr::left_join(x$descriptors,
-#                        by = dplyr::join_by(hcpcs))
-#
-#   }
-#
-#   if (rlang::has_name(x, "oppscap")) {
-#
-#     res <- dplyr::left_join(res, x$oppscap,
-#                             by = dplyr::join_by(hcpcs, mod, status, mac, locality))
-#   }
-#
-#   res |>
-#     dplyr::mutate(
-#       frvus  = sum(wrvu * wgpci, fprvu * pgpci, mrvu * mgpci),
-#       nrvus  = sum(wrvu * wgpci, nfprvu * pgpci, mrvu * mgpci),
-#       fpar   = frvus * 32.7442,
-#       npar   = nrvus * 32.7442,
-#       fnpar  = fpar * 0.95,
-#       nfnpar = npar * 0.95,
-#       flim   = fpar * 1.0925,
-#       nlim   = npar * 1.0925) |>
-#     cols_amounts()
-# }
 
 # search_hcpcs(hcpcs = c("39503", "43116", "33935", "11646", "70170"), state = "GA")
 # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()

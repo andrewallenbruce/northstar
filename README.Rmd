@@ -42,42 +42,26 @@ pak::pak("andrewallenbruce/northstar")
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
-library(dplyr)
 ```
 
 
-### HCPCS
+### Search Fee Schedule
 
 ```{r}
-search_hcpcs(hcpcs    = "33935",
-             state    = "GA",
-             locality = "01",
-             mac      = "10212") |>
-  glimpse()
-```
-
-### ICD-10-CM
-
-```{r}
-icd10cm(code = "T38.0X1A") |> glimpse()
-```
-
-
-
-### Physician Fee Schedule
-
-```{r}
-calculate_amounts(
-  wrvu  = 6.26,
-  nprvu = 7.92,
-  fprvu = 4.36,
-  mrvu  = 0.99,
-  cf    = 32.744,
-  wgpci = 1,
-  pgpci = 0.883,
-  mgpci = 1.125
+search_fee_schedule(
+  hcpcs    = "33935",
+  state    = "GA",
+  locality = "01",
+  mac      = "10212"
 )
 ```
+
+### Search ICD-10-CM
+
+```{r}
+icd10cm(code = "T38.0X1A")
+```
+
 
 
 ------------------------------------------------------------------------------

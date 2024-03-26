@@ -1,8 +1,6 @@
-#' Restructured BETOS Classification for HCPCS
+#' Search Restructured BETOS Classifications
 #'
-#' @description
-#'
-#' [rbcs()] allows the user to group HCPCS codes into clinically
+#' [search_rbcs()] allows the user to group HCPCS codes into clinically
 #' meaningful categories based on the original _Berenson-Eggers Type of Service_
 #' (BETOS) classification.
 #'
@@ -32,8 +30,8 @@
 #'
 #' @section Update Frequency: Annually
 #'
-#' @param hcpcs *<chr>* vector of 5-digit HCPCS codes
-#' @param category *<chr>* vector of RBCS categories:
+#' @param hcpcs < *chr* > vector of 5-digit HCPCS codes
+#' @param category < *chr* > vector of RBCS categories:
 #' + `Procedure` (n = 6920)
 #' + `Test` (n = 3015)
 #' + `DME` (n = 2971)
@@ -42,13 +40,13 @@
 #' + `E&M` (n = 695)
 #' + `Anesthesia` (n = 307)
 #' + `Other` (n = 233)
-#' @param subcategory *<chr>* vector of RBCS subcategories (53 unique in total)
-#' @param family *<chr>* vector of RBCS families (178 unique in total)
-#' @param procedure *<chr>* Procedure Type:
+#' @param subcategory < *chr* > vector of RBCS subcategories (53 unique in total)
+#' @param family < *chr* > vector of RBCS families (178 unique in total)
+#' @param procedure < *chr* > Procedure Type:
 #' + `Major` (n = 3676)
 #' + `Non-Procedure` (n = 10113)
 #' + `Other` (n = 3244)
-#' @param concatenate *<lgl>* Limit Columns, default is `TRUE`
+#' @param concatenate < *lgl* > Concatenate output, default is `TRUE`
 #' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -66,16 +64,16 @@
 #' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
 #'
 #' @examples
-#' rbcs(hcpcs = c("J9264", "39503", "43116", "33935", "11646", "70170", "0001U"))
+#' search_rbcs(hcpcs = c("J9264", "39503", "43116", "70170", "0001U"))
 #' @export
 #' @autoglobal
-rbcs <- function(hcpcs       = NULL,
-                 category    = NULL,
-                 subcategory = NULL,
-                 family      = NULL,
-                 procedure   = NULL,
-                 concatenate = TRUE,
-                 ...) {
+search_rbcs <- function(hcpcs       = NULL,
+                        category    = NULL,
+                        subcategory = NULL,
+                        family      = NULL,
+                        procedure   = NULL,
+                        concatenate = TRUE,
+                        ...) {
 
   rb <- pins::pin_read(mount_board(), "rbcs") |>
     dplyr::rename(procedure = major) |>

@@ -30,7 +30,7 @@ library(gt)
 # HCPCS
 
 ```{r}
-search_hcpcs(
+search_fee_schedule(
   hcpcs    = "39503", 
   state    = "GA", 
   locality = "99",
@@ -140,6 +140,8 @@ icd10cm(code = "F50.82") |>
          Abbreviation = abbrev) |> 
   display_long() |>
   gt(rowname_col = "name") |>
-  gt_style(tablign = "right", tabsize = 16, tabwt = "bold")
+  gt_style(tablign = "right", 
+           tabsize = 16, 
+           tabwt = "bold")
 ```
 

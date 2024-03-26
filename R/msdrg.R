@@ -1,4 +1,4 @@
-#' Medicare Severity Diagnosis-Related Groups (MS-DRG)
+#' Medicare Severity Diagnosis-Related Groups
 #'
 #' The Medicare Severity Diagnosis-Related Group (MS-DRG) is a classification
 #' system used by the Centers for Medicare and Medicaid Services (CMS) to group
@@ -17,23 +17,21 @@
 #' reimbursements, while hospitals treating less severely ill patients will
 #' receive less reimbursement.
 #'
-#' @param drg *<chr>* vector of 3-digit Diagnosis-Related Group (DRG) code
-#' @param mdc *<chr>* vector of 2-digit Major Diagnostic Category (MDC) code
-#' @param type *<chr>* DRG type: `Medical` or `Surgical`
+#' @param drg < *chr* > vector of 3-digit DRG codes
+#' @param mdc < *chr* > vector of 2-digit Major Diagnostic Category codes
+#' @param type < *chr* > DRG type: `Medical` or `Surgical`
 #' @param ... Empty
 #' @return A [tibble][tibble::tibble-package]
 #' @examples
-#' msdrg(drg = "011")
+#' search_msdrg(drg = "011")
 #'
-#' msdrg(mdc = "24")
-#'
-#' msdrg(type = "Medical")
+#' search_msdrg(mdc = "24")
 #' @autoglobal
 #' @export
-msdrg <- function(drg  = NULL,
-                  mdc  = NULL,
-                  type = NULL,
-                  ...) {
+search_msdrg <- function(drg  = NULL,
+                         mdc  = NULL,
+                         type = NULL,
+                         ...) {
 
   ms <- pins::pin_read(mount_board(), "msdrg")
 
@@ -43,14 +41,14 @@ msdrg <- function(drg  = NULL,
 
   if (!is.null(drg)) {
     ms <- vctrs::vec_slice(ms,
-                           vctrs::vec_in(ms$drg,
-                                         collapse::funique(drg)))
+          vctrs::vec_in(ms$drg,
+          collapse::funique(drg)))
   }
 
   if (!is.null(mdc)) {
     ms <- vctrs::vec_slice(ms,
-                           vctrs::vec_in(ms$mdc,
-                                         collapse::funique(mdc)))
+          vctrs::vec_in(ms$mdc,
+          collapse::funique(mdc)))
   }
   return(ms)
 }

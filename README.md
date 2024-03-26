@@ -35,134 +35,43 @@ pak::pak("andrewallenbruce/northstar")
 
 ``` r
 library(northstar)
-library(dplyr)
 ```
 
-### HCPCS
+### Search Fee Schedule
 
 ``` r
-search_hcpcs(hcpcs    = "33935",
-             state    = "GA",
-             locality = "01",
-             mac      = "10212") |>
-  glimpse()
-```
-
-    > Rows: 1
-    > Columns: 59
-    > $ hcpcs                  <chr> "33935"
-    > $ description            <chr> "Transplantation heart/lung"
-    > $ description_consumer   <chr> "Transplantation of donor heart and lung"
-    > $ descriptions_clinician <list> [<tbl_df[1 x 1]>]
-    > $ rbcs_category          <chr> "Major Procedure"
-    > $ rbcs_family            <chr> "Cardiovascular"
-    > $ status                 <chr> "R"
-    > $ mac                    <chr> "10212"
-    > $ state                  <chr> "GA"
-    > $ locality               <chr> "01"
-    > $ area                   <chr> "ATLANTA"
-    > $ counties               <chr> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLA…
-    > $ wgpci                  <dbl> 1
-    > $ pgpci                  <dbl> 0.997
-    > $ mgpci                  <dbl> 1.128
-    > $ wrvu                   <dbl> 91.78
-    > $ fprvu                  <dbl> 31.07
-    > $ mrvu                   <dbl> 21.24
-    > $ cf                     <dbl> 32.7442
-    > $ f_fee                  <dbl> 4804.08
-    > $ nf_fee                 <dbl> 4804.08
-    > $ frvus                  <dbl> 146.7155
-    > $ nrvus                  <dbl> 146.7155
-    > $ fpar                   <dbl> 4804.082
-    > $ npar                   <dbl> 4804.082
-    > $ fnpar                  <dbl> 4563.878
-    > $ nfnpar                 <dbl> 4563.878
-    > $ flim                   <dbl> 5248.46
-    > $ nlim                   <dbl> 5248.46
-    > $ opps                   <chr> "9"
-    > $ opps_nf                <dbl> NA
-    > $ opps_f                 <dbl> NA
-    > $ fprvu_opps             <dbl> 0
-    > $ mrvu_opps              <dbl> 0
-    > $ mult_surg              <chr> "2"
-    > $ mult_proc              <chr> "2"
-    > $ nther                  <dbl> 0
-    > $ fther                  <dbl> 0
-    > $ global                 <chr> "090"
-    > $ op_ind                 <dbl> 1
-    > $ op_pre                 <dbl> 0.09
-    > $ op_intra               <dbl> 0.84
-    > $ op_post                <dbl> 0.07
-    > $ mod                    <chr> NA
-    > $ pctc                   <chr> "0"
-    > $ surg_bilat             <chr> "0"
-    > $ surg_asst              <chr> "2"
-    > $ surg_co                <chr> "1"
-    > $ surg_team              <chr> "2"
-    > $ supvis                 <chr> "09"
-    > $ dximg                  <chr> "99"
-    > $ endo                   <chr> NA
-    > $ nfprvu                 <dbl> 31.07
-    > $ ntotal                 <dbl> 144.09
-    > $ ftotal                 <dbl> 144.09
-    > $ nfprvu_opps            <dbl> 0
-    > $ two_macs               <lgl> FALSE
-    > $ chapter                <chr> "Surgery"
-    > $ range                  <chr> "10004 - 69990"
-
-### ICD-10-CM
-
-``` r
-icd10cm(code = "T38.0X1A") |> glimpse()
-```
-
-    > Rows: 1
-    > Columns: 16
-    > $ ch          <int> 19
-    > $ abbrev      <chr> "INJ"
-    > $ chapter     <chr> "Injury, poisoning and certain other consequences of exter…
-    > $ range       <chr> "S00 - T88"
-    > $ ch_start    <int> 30990
-    > $ ch_end      <int> 84933
-    > $ ch_codes    <int> 53943
-    > $ ch_sc       <int> 171
-    > $ section     <chr> "Poisoning by, adverse effect of and underdosing of hormon…
-    > $ order       <int> 75443
-    > $ valid       <int> 1
-    > $ code        <chr> "T38.0X1A"
-    > $ description <chr> "Poisoning by glucocorticoids and synthetic analogues, acc…
-    > $ sc_start    <int> 75439
-    > $ sc_end      <int> 75774
-    > $ sc_codes    <int> 335
-
-### Physician Fee Schedule
-
-``` r
-calculate_amounts(
-  wrvu  = 6.26,
-  nprvu = 7.92,
-  fprvu = 4.36,
-  mrvu  = 0.99,
-  cf    = 32.744,
-  wgpci = 1,
-  pgpci = 0.883,
-  mgpci = 1.125
+search_fee_schedule(
+  hcpcs    = "33935",
+  state    = "GA",
+  locality = "01",
+  mac      = "10212"
 )
 ```
 
-    > Facility Amounts:
-    > 
-    > RVU Total ............ 11.22
-    > Participating ........ $367.51
-    > Non-Particpating ..... $349.13
-    > Limiting Charge ...... $401.50
-    > 
-    > Non-Facility Amounts:
-    > 
-    > RVU Total ............ 14.37
-    > Participating ........ $470.44
-    > Non-Particpating ..... $446.91
-    > Limiting Charge ...... $513.95
+    > # A tibble: 1 × 59
+    >   hcpcs description    description_consumer descriptions_clinician rbcs_category
+    >   <chr> <chr>          <chr>                <list>                 <chr>        
+    > 1 33935 Transplantati… Transplantation of … <tibble [1 × 1]>       Major Proced…
+    > # ℹ 54 more variables: rbcs_family <chr>, status <chr>, mac <chr>, state <chr>,
+    > #   locality <chr>, area <chr>, counties <chr>, wgpci <dbl>, pgpci <dbl>,
+    > #   mgpci <dbl>, wrvu <dbl>, fprvu <dbl>, mrvu <dbl>, cf <dbl>, f_fee <dbl>,
+    > #   nf_fee <dbl>, frvus <dbl>, nrvus <dbl>, fpar <dbl>, npar <dbl>,
+    > #   fnpar <dbl>, nfnpar <dbl>, flim <dbl>, nlim <dbl>, opps <chr>,
+    > #   opps_nf <dbl>, opps_f <dbl>, fprvu_opps <dbl>, mrvu_opps <dbl>,
+    > #   mult_surg <chr>, mult_proc <chr>, nther <dbl>, fther <dbl>, global <chr>, …
+
+### Search ICD-10-CM
+
+``` r
+icd10cm(code = "T38.0X1A")
+```
+
+    > # A tibble: 1 × 16
+    >      ch abbrev chapter  range ch_start ch_end ch_codes ch_sc section order valid
+    >   <int> <chr>  <chr>    <chr>    <int>  <int>    <int> <int> <chr>   <int> <int>
+    > 1    19 INJ    Injury,… S00 …    30990  84933    53943   171 Poison… 75443     1
+    > # ℹ 5 more variables: code <chr>, description <chr>, sc_start <int>,
+    > #   sc_end <int>, sc_codes <int>
 
 ------------------------------------------------------------------------
 

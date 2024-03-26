@@ -142,7 +142,7 @@ dplyr::tibble(dximg = img) |>
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 
 ```{r}
-gpci() |> 
+search_gpci() |> 
   select(-c(counties, two_macs)) |> 
   distinct() |> 
   gt(rowname_col = "mac", 

@@ -6,85 +6,85 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
-  # <level2>
+  # <search_hcpcs>
   "asc",
   # <case_chapter>
   "chapter",
-  # <adjustment_codes>
+  # <search_adjustments>
   "code",
   # <icd10cm>
   "codes",
-  # <level2>
+  # <search_hcpcs>
   "coverage",
   # <col_lb>
   "description",
-  # <adjustment_codes>
+  # <search_adjustments>
   "description.x",
-  # <adjustment_codes>
+  # <search_adjustments>
   "description.y",
-  # <level2>
+  # <search_hcpcs>
   "description_long",
-  # <level2>
+  # <search_hcpcs>
   "description_short",
-  # <adjustment_codes>
+  # <search_adjustments>
   "end_date",
   # <calculate_amounts>
   "facility",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "fpar",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "fprvu",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "frvus",
-  # <adjustment_codes>
+  # <search_adjustments>
   "group",
-  # <taxonomy>
+  # <search_taxonomy>
   "hierarchy",
-  # <level2>
+  # <search_hcpcs>
   "labcert",
   # <col_lb>
   "label",
-  # <rbcs>
+  # <search_rbcs>
   "major",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "mgpci",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "mod",
   # <case_modifier>
   "mod_description",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "mrvu",
-  # <level2>
-  "multi_price",
-  # <gpci>
-  "name",
   # <search_hcpcs>
+  "multi_price",
+  # <search_gpci>
+  "name",
+  # <search_fee_schedule>
   "nfprvu",
   # <calculate_amounts>
   "nonfacility",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "npar",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "nrvus",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "pctc",
   # <case_pctc>
   "pctc_description",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "pgpci",
-  # <level2>
+  # <search_hcpcs>
   "price",
-  # <rbcs>
+  # <search_rbcs>
   "rbcs_category",
-  # <rbcs>
+  # <search_rbcs>
   "rbcs_family",
   # <icd10cm>
   "sections",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "status",
-  # <level2>
+  # <search_hcpcs>
   "tos",
-  # <adjustment_codes>
+  # <search_adjustments>
   "usage",
   # <icd10_search>
   # <.multiple_request>
@@ -94,11 +94,11 @@ utils::globalVariables(c(
   "V2",
   # <col_lb>
   "var",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "wgpci",
-  # <search_hcpcs>
+  # <search_fee_schedule>
   "wrvu",
-  # <level2>
+  # <search_hcpcs>
   "xref",
   NULL
 ))
