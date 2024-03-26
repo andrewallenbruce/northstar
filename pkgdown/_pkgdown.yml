@@ -69,8 +69,7 @@ reference:
   contents:
   - adjustment_codes
   - icd10cm
-  - icd10_search
-  - hcpcs_search
+  - matches("search")
   - lcd
   - ncd
   - rvu

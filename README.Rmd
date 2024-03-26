@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# northstar <img src="man/figures/logo.png" align="right" height="200" />
+# northstar <img src="man/figures/logo.png" align="right" height="300" />
 
 > Tidy Healthcare Revenue Integrity Tools
 
