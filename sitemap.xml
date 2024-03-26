@@ -127,9 +127,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/gt_style.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/hcpcs_search.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/icd10_search.html</loc>
   </url>
   <url>
@@ -194,6 +191,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/rvu.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_hcpcs.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/single_line_string.html</loc>
