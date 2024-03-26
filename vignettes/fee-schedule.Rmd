@@ -30,7 +30,7 @@ library(gt)
 # HCPCS
 
 ```{r}
-hcpcs_search(
+search_hcpcs(
   hcpcs    = "39503", 
   state    = "GA", 
   locality = "99",
@@ -54,14 +54,16 @@ hcpcs_search(
   case_opps(opps) |>
   case_chapter_cpt(hcpcs) |> 
   case_category(hcpcs) |>
-  rename(CPT = hcpcs,
+  select("CPT Code" = hcpcs,
          Description = description,
          Consumer = description_consumer,
          Clinician = descriptions_clinician,
-         Chapter = chapter,
-         Range = range,
-         # RBCS = rbcs,
-         Status = status,
+         "CPT Chapter" = chapter,
+         "Code Range" = range,
+         "CPT Category" = category,
+         "Fee Schedule Status" = status,
+         "RBCS Category" = rbcs_category,
+         "RBCS Family" = rbcs_family,
          MAC = mac,
          State = state,
          Locality = locality,
@@ -84,18 +86,36 @@ hcpcs_search(
          "Facility Limiting Charge" = flim,
          "Non-Facility Limiting Charge" = nlim,
          "Multiple Procedures" = mproc_description,
+         # "Global Indicator" = global,
          "Global Days" = global_description,
          "Preoperative" = op_pre,
          "Intraoperative" = op_intra,
          "Postoperative" = op_post,
          "Assistant at Surgery" = asst_description,
          "Co-Surgeons" = cosurg_description,
+         "Team Surgery" = team_description,
          ) |>
   display_long() |>
-  gt(rowname_col = "name") |>
-  gt_style(tablign = "right", tabsize = 16, tabwt = "bold") |> 
+  gt(groupname_col = "name") |>
+  gt_style(tablign = "right", tabsize = 14, tabwt = "bold") |> 
   sub_missing(missing_text = "Concept Does Not Apply") |> 
-  fmt_markdown()
+  fmt_markdown() |> 
+  tab_style(
+      style = cell_text(
+      font = google_font(name = "Fira Code")),
+      locations = cells_body(columns = contains("value"))) |>
+  tab_style(
+    style = cell_borders(
+      sides = c("all"),
+      color = "powderblue",
+      weight = px(3)),
+    locations = cells_row_groups()) |>
+  tab_style(
+    style = list(
+      cell_fill(color = "powderblue"),
+      cell_text(weight = "bold")
+      ),
+    locations = cells_row_groups())
 ```
 
 

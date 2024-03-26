@@ -49,7 +49,7 @@ library(dplyr)
 ### HCPCS
 
 ```{r}
-hcpcs_search(hcpcs    = "33935",
+search_hcpcs(hcpcs    = "33935",
              state    = "GA",
              locality = "01",
              mac      = "10212") |>

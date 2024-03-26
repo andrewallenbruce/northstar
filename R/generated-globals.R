@@ -30,11 +30,11 @@ utils::globalVariables(c(
   "end_date",
   # <calculate_amounts>
   "facility",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "fpar",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "fprvu",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "frvus",
   # <adjustment_codes>
   "group",
@@ -46,31 +46,31 @@ utils::globalVariables(c(
   "label",
   # <rbcs>
   "major",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "mgpci",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "mod",
   # <case_modifier>
   "mod_description",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "mrvu",
   # <level2>
   "multi_price",
   # <gpci>
   "name",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "nfprvu",
   # <calculate_amounts>
   "nonfacility",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "npar",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "nrvus",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "pctc",
   # <case_pctc>
   "pctc_description",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "pgpci",
   # <level2>
   "price",
@@ -80,7 +80,7 @@ utils::globalVariables(c(
   "rbcs_family",
   # <icd10cm>
   "sections",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "status",
   # <level2>
   "tos",
@@ -94,9 +94,9 @@ utils::globalVariables(c(
   "V2",
   # <col_lb>
   "var",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "wgpci",
-  # <hcpcs_search>
+  # <search_hcpcs>
   "wrvu",
   # <level2>
   "xref",

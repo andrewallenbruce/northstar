@@ -41,7 +41,7 @@ library(dplyr)
 ### HCPCS
 
 ``` r
-hcpcs_search(hcpcs    = "33935",
+search_hcpcs(hcpcs    = "33935",
              state    = "GA",
              locality = "01",
              mac      = "10212") |>
@@ -49,15 +49,13 @@ hcpcs_search(hcpcs    = "33935",
 ```
 
     > Rows: 1
-    > Columns: 62
+    > Columns: 59
     > $ hcpcs                  <chr> "33935"
     > $ description            <chr> "Transplantation heart/lung"
     > $ description_consumer   <chr> "Transplantation of donor heart and lung"
     > $ descriptions_clinician <list> [<tbl_df[1 x 1]>]
-    > $ rbcs_category          <chr> "Procedure"
-    > $ rbcs_subcategory       <chr> "Cardiovascular"
-    > $ rbcs_family            <chr> "No RBCS Family"
-    > $ rbcs_procedure         <chr> "Major"
+    > $ rbcs_category          <chr> "Major Procedure"
+    > $ rbcs_family            <chr> "Cardiovascular"
     > $ status                 <chr> "R"
     > $ mac                    <chr> "10212"
     > $ state                  <chr> "GA"
@@ -68,24 +66,22 @@ hcpcs_search(hcpcs    = "33935",
     > $ pgpci                  <dbl> 0.997
     > $ mgpci                  <dbl> 1.128
     > $ wrvu                   <dbl> 91.78
-    > $ nprvu                  <dbl> 31.07
     > $ fprvu                  <dbl> 31.07
     > $ mrvu                   <dbl> 21.24
-    > $ cf                     <dbl> 32.744
+    > $ cf                     <dbl> 32.7442
     > $ f_fee                  <dbl> 4804.08
     > $ nf_fee                 <dbl> 4804.08
     > $ frvus                  <dbl> 146.7155
     > $ nrvus                  <dbl> 146.7155
-    > $ fpar                   <dbl> 4804.053
-    > $ npar                   <dbl> 4804.053
-    > $ fnpar                  <dbl> 4563.85
-    > $ nfnpar                 <dbl> 4563.85
-    > $ flim                   <dbl> 5248.428
-    > $ nlim                   <dbl> 5248.428
+    > $ fpar                   <dbl> 4804.082
+    > $ npar                   <dbl> 4804.082
+    > $ fnpar                  <dbl> 4563.878
+    > $ nfnpar                 <dbl> 4563.878
+    > $ flim                   <dbl> 5248.46
+    > $ nlim                   <dbl> 5248.46
     > $ opps                   <chr> "9"
     > $ opps_nf                <dbl> NA
     > $ opps_f                 <dbl> NA
-    > $ nprvu_opps             <dbl> 0
     > $ fprvu_opps             <dbl> 0
     > $ mrvu_opps              <dbl> 0
     > $ mult_surg              <chr> "2"
@@ -98,6 +94,7 @@ hcpcs_search(hcpcs    = "33935",
     > $ op_intra               <dbl> 0.84
     > $ op_post                <dbl> 0.07
     > $ mod                    <chr> NA
+    > $ pctc                   <chr> "0"
     > $ surg_bilat             <chr> "0"
     > $ surg_asst              <chr> "2"
     > $ surg_co                <chr> "1"
@@ -105,11 +102,11 @@ hcpcs_search(hcpcs    = "33935",
     > $ supvis                 <chr> "09"
     > $ dximg                  <chr> "99"
     > $ endo                   <chr> NA
-    > $ rare                   <chr> "10"
-    > $ unused                 <int> 0
-    > $ pctc.x                 <chr> "0"
+    > $ nfprvu                 <dbl> 31.07
+    > $ ntotal                 <dbl> 144.09
+    > $ ftotal                 <dbl> 144.09
+    > $ nfprvu_opps            <dbl> 0
     > $ two_macs               <lgl> FALSE
-    > $ pctc.y                 <chr> "0"
     > $ chapter                <chr> "Surgery"
     > $ range                  <chr> "10004 - 69990"
 
