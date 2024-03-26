@@ -1,12 +1,13 @@
 #' Search Relative Value File
 #'
 #' @param hcpcs < *chr* > 5-digit HCPCS code
+#' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' search_rvu(c("A0021", "V5362", "J9264", "G8916"))
 #' @autoglobal
 #' @export
-search_rvu <- function(hcpcs = NULL) {
+search_rvu <- function(hcpcs = NULL, ...) {
 
   rv <- pins::pin_read(mount_board(), "rvu")
 
@@ -147,12 +148,13 @@ search_hcpcs <- function(hcpcs = NULL,
 #' Search HCPCS Level I (CPT) Codes
 #'
 #' @param hcpcs < *chr* > 5-digit CPT codes
+#' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' search_cpt(c("39503", "43116", "33935", "11646"))
 #' @export
 #' @autoglobal
-search_cpt <- function(hcpcs = NULL) {
+search_cpt <- function(hcpcs = NULL, ...) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 

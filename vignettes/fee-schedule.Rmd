@@ -96,7 +96,11 @@ search_fee_schedule(
          "Team Surgery" = team_description,
          ) |>
   display_long() |>
-  gt(groupname_col = "name") |>
+  gt(rowname_col = "name") |>
+  tab_row_group(
+    label = "Descriptions",
+    rows = matches("(Description | Consumer | Clinician)"),
+  ) |> 
   gt_style(tablign = "right", tabsize = 14, tabwt = "bold") |> 
   sub_missing(missing_text = "Concept Does Not Apply") |> 
   fmt_markdown() |> 
@@ -130,18 +134,18 @@ hcpcs_search(hcpcs    = "70170",
 # ICD-10-CM
 
 ```{r}
-icd10cm(code = "F50.82") |> 
+icd10cm(code           = "F50.82") |> 
   select("ICD-10-Code" = code, 
-         Description = description, 
-         Section = section,
-         "Ch. No." = ch,
-         Chapter = chapter, 
-         Range = range, 
-         Abbreviation = abbrev) |> 
+         Description   = description, 
+         Section       = section,
+         "Ch. No."     = ch,
+         Chapter       = chapter, 
+         Range         = range, 
+         Abbreviation  = abbrev) |> 
   display_long() |>
-  gt(rowname_col = "name") |>
-  gt_style(tablign = "right", 
-           tabsize = 16, 
-           tabwt = "bold")
+  gt(rowname_col       = "name") |>
+  gt_style(tablign     = "right", 
+           tabsize     = 16, 
+           tabwt       = "bold")
 ```
 

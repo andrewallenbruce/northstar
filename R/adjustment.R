@@ -55,11 +55,9 @@ search_adjustments <- function(df = NULL,
                                action = c("review", "join"),
                                ...) {
 
-  type <- match.arg(type)
-
+  type   <- match.arg(type)
   action <- match.arg(action)
-
-  adj <- pins::pin_read(mount_board(), "rarc_carc")
+  adj    <- pins::pin_read(mount_board(), "rarc_carc")
 
   if (type == "all") {return(adj)}
   if (type == "carc" && action == "review") {adj$rarc <- NULL; return(adj)}

@@ -1,6 +1,6 @@
 #' Search the NLM's ICD-10-CM API
 #'
-#' @description [icd10_search()] allows you to search the National Library of
+#' @description [icd10api()] allows you to search the National Library of
 #'    Medicine's ICD-10-CM API by code or associated term.
 #'
 #' @details ICD-10-CM (International Classification of Diseases, 10th Revision,
@@ -18,33 +18,40 @@
 #' @param term Associated term describing an ICD-10 code
 #' @param field options are "code" or "both"; default is "both"
 #' @param limit API limit is 500; defaults to 10
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' # Returns the seven codes beginning with "A15"
-#' icd10_search(code = "A15")
+#' Returns the seven codes
+#' beginning with "A15"
+#' icd10api(code = "A15")
 #'
-#' # Returns the first five codes associated with tuberculosis
-#' icd10_search(term = "tuber", limit = 5)
+#' Returns the first five codes
+#' associated with tuberculosis
+#' icd10api(term = "tuber", limit = 5)
 #'
-#' # Returns the two codes associated with pleurisy
-#' icd10_search(term = "pleurisy")
+#' Returns the two codes
+#' associated with pleurisy
+#' icd10api(term = "pleurisy")
 #'
-#' # If you're searching for codes beginning with a certain letter, you
-#' # must set the `field` param to "code" or it will search for terms as well:
+#' If you're searching for codes beginning
+#' with a certain letter, you must set the
+#' `field` param to `code` or it will
+#' search for terms as well:
 #'
-#' # Returns terms containing the letter "Z"
-#' icd10_search(code = "z", limit = 5)
+#' Returns terms containing the letter "Z"
+#' icd10api(code = "z", limit = 5)
 #'
-#' # Returns codes beginning with "Z"
-#' icd10_search(code = "z", field = "code", limit = 5)
+#' Returns codes beginning with "Z"
+#' icd10api(code = "z", field = "code", limit = 5)
 #' @autoglobal
 #' @export
-icd10_search <- function(code  = NULL,
-                         term  = NULL,
-                         field = c("both", "code"),
-                         limit = 500) {
+icd10api <- function(code  = NULL,
+                     term  = NULL,
+                     field = c("both", "code"),
+                     limit = 500,
+                     ...) {
 
   stopifnot("Both `code` and `term` cannot be NULL" = all(!is.null(c(code, term))))
 

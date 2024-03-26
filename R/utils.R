@@ -4,6 +4,8 @@ gh_raw <- function(x) {
   paste0("https://raw.githubusercontent.com/", x)
 }
 
+# compact <- function(.x) Filter(length, .x)
+
 #' Wrapper to mount package's [pins::board_url()]
 #' @noRd
 mount_board <- function() {

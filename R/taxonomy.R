@@ -124,20 +124,17 @@
 #'
 #' @autoglobal
 #' @export
-search_taxonomy <- function(shape = c('wide', 'long'),
-                            code = NULL,
+search_taxonomy <- function(shape  = c('wide', 'long'),
+                            code   = NULL,
                             unnest = FALSE,
                             ...) {
-
   shape <- match.arg(shape)
 
-  if (shape == 'wide') {
-    txn <- pins::pin_read(mount_board(), "taxonomy")
-  }
-
-  if (shape == 'long') {
-    txn <- pins::pin_read(mount_board(), "taxlong")
-  }
+  txn <- switch(
+    shape,
+    "wide" = pins::pin_read(mount_board(), "taxonomy"),
+    "long" = pins::pin_read(mount_board(), "taxlong")
+  )
 
   if (!is.null(code)) {
     txn <- vctrs::vec_slice(txn,
@@ -145,8 +142,9 @@ search_taxonomy <- function(shape = c('wide', 'long'),
            collapse::funique(code)))
   }
 
-  if (shape == 'long' && unnest == TRUE) {
+  if (shape == "long" && unnest) {
     txn <- tidyr::unnest(txn, cols = c(hierarchy))
   }
   return(txn)
 }
+

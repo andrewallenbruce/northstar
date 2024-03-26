@@ -4,10 +4,12 @@
 \alias{search_cpt}
 \title{Search HCPCS Level I (CPT) Codes}
 \usage{
-search_cpt(hcpcs = NULL)
+search_cpt(hcpcs = NULL, ...)
 }
 \arguments{
 \item{hcpcs}{< \emph{chr} > 5-digit CPT codes}
+
+\item{...}{Empty}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

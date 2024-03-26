@@ -40,49 +40,38 @@ search_fee_schedule <- function(hcpcs,
 
   rlang::check_required(hcpcs)
 
+  args <- rlang::list2(
+    hcpcs    = hcpcs,
+    state    = state,
+    locality = locality,
+    mac      = mac
+    )
+
   # retrieve Relative Value Units
-  rv <- search_rvu(hcpcs = hcpcs)
+  rv <- rlang::inject(search_rvu(!!!args))
 
   # if no data found in rvu file, nothing will be found in others
   msg <- "HCPCS code {.strong {.val {hcpcs}}} not found."
   if (vctrs::vec_is_empty(rv)) {cli::cli_abort(msg)}
 
-  # test if all are NULL
-  # test <- !vctrs::vec_is_empty(c(state, locality, mac))
-
-  # if all are NULL, don't call gpci
-  # gp <- switch(
-  # test,
-  # "TRUE" = gpci(state = state, locality = locality, mac = mac),
-  # "FALSE" = character(0))
-
-  # retrieve Geographic Practice Cost Indices
-  gp <- search_gpci(state = state, locality = locality, mac = mac)
-
-  # retrieve Payment Amounts
-  fs <- search_payment(hcpcs = hcpcs, locality = locality, mac = mac)
-
-  # retrieve OPPS Capitations
-  op <- search_opps(hcpcs = hcpcs, locality = locality, mac = mac)
-
-  # retrieve CPT codes
-  ds <- search_cpt(hcpcs = hcpcs)
-
-  # retrieve Level II HCPCS codes
-  l2 <- search_hcpcs(hcpcs = hcpcs)
-
-  # retrieve Restructured BETOS Classifications
-  rb <- search_rbcs(hcpcs = hcpcs)
-
-  # put results in list, remove NULLs
   x <- list(
-    rvu = if (!vctrs::vec_is_empty(rv)) rv else NULL,
-    gpc = if (!vctrs::vec_is_empty(gp)) gp else NULL,
-    pay = if (!vctrs::vec_is_empty(fs)) fs else NULL,
-    opp = if (!vctrs::vec_is_empty(op)) op else NULL,
-    cpt = if (!vctrs::vec_is_empty(ds)) ds else NULL,
-    lvl = if (!vctrs::vec_is_empty(l2)) l2 else NULL,
-    rbc = if (!vctrs::vec_is_empty(rb)) rb else NULL) |>
+    rv = rv,
+    gp = rlang::inject(search_gpci(!!!args)),
+    fs = rlang::inject(search_payment(!!!args)),
+    op = rlang::inject(search_opps(!!!args)),
+    ds = rlang::inject(search_cpt(!!!args)),
+    l2 = rlang::inject(search_hcpcs(!!!args)),
+    rb = rlang::inject(search_rbcs(!!!args))
+  )
+
+  x <- list(
+    rvu = if (!vctrs::vec_is_empty(x$rv)) x$rv else NULL,
+    gpc = if (!vctrs::vec_is_empty(x$gp)) x$gp else NULL,
+    pay = if (!vctrs::vec_is_empty(x$fs)) x$fs else NULL,
+    opp = if (!vctrs::vec_is_empty(x$op)) x$op else NULL,
+    cpt = if (!vctrs::vec_is_empty(x$ds)) x$ds else NULL,
+    lvl = if (!vctrs::vec_is_empty(x$l2)) x$l2 else NULL,
+    rbc = if (!vctrs::vec_is_empty(x$rb)) x$rb else NULL) |>
     purrr::compact()
 
   # create join_by objects
@@ -216,7 +205,18 @@ cols_amounts <- function(df) {
       dplyr::everything())
 }
 
+
+# test if all are NULL
+# test <- !vctrs::vec_is_empty(c(state, locality, mac))
+
+# if all are NULL, don't call gpci
+# gp <- switch(
+# test,
+# "TRUE" = gpci(state = state, locality = locality, mac = mac),
+# "FALSE" = character(0))
+#
 # search_hcpcs(hcpcs = c("39503", "43116", "33935", "11646", "70170"), state = "GA")
+#
 # rv <- purrr::map(hcpcs, \(x) rvu(hcpcs = x)) |> purrr::list_rbind()
 #
 # # nppes_pmap <- function(...) {

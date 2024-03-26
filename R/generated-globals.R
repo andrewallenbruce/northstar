@@ -86,10 +86,10 @@ utils::globalVariables(c(
   "tos",
   # <search_adjustments>
   "usage",
-  # <icd10_search>
+  # <icd10api>
   # <.multiple_request>
   "V1",
-  # <icd10_search>
+  # <icd10api>
   # <.multiple_request>
   "V2",
   # <col_lb>

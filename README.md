@@ -1,23 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# northstar <img src="man/figures/logo.png" align="right" height="300" />
+# northstar <img src="man/figures/logo.png" align="right" height="250" />
 
-> Tidy Healthcare Revenue Integrity Tools
+> Tidy Healthcare Revenue Integrity
 
 <!-- badges: start -->
 
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
-<br>
 [![Version](https://img.shields.io/badge/version-0.0.4-red.svg)](https://github.com/andrewallenbruce/northstar)
-<br> [![Codecov test
-coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
-<br> [![Code
+[![Code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
-<br> [![Last
+[![Codecov test
+coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
+[![Last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
-<br>
-
 <!-- badges: end -->
 
 <br>

@@ -4,10 +4,12 @@
 \alias{search_rvu}
 \title{Search Relative Value File}
 \usage{
-search_rvu(hcpcs = NULL)
+search_rvu(hcpcs = NULL, ...)
 }
 \arguments{
 \item{hcpcs}{< \emph{chr} > 5-digit HCPCS code}
+
+\item{...}{Empty}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

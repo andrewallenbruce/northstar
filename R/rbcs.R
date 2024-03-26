@@ -80,42 +80,52 @@ search_rbcs <- function(hcpcs       = NULL,
     dplyr::mutate(family = dplyr::if_else(
       family == "No RBCS Family", NA_character_, family))
 
+  if (!is.null(procedure)) {
+
+    procedure <- rlang::arg_match(
+      procedure,
+      c(
+        "Major",
+        "Non-Procedure",
+        "Other"
+        )
+      )
+
+    rb <- vctrs::vec_slice(rb,
+          vctrs::vec_in(rb$procedure, procedure))}
+
   if (!is.null(hcpcs)) {
 
     rb <- vctrs::vec_slice(rb,
           vctrs::vec_in(rb$hcpcs,
           collapse::funique(hcpcs)))}
 
-  if (!is.null(procedure)) {
-
-    procedure <- rlang::arg_match(procedure,
-                 c("Major", "Non-Procedure", "Other"))
-
+  if (!is.null(family)) {
     rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$procedure, procedure))
-
-  }
-
-  if (!is.null(category)) {
-
-    category <- rlang::arg_match(category,
-                c("Procedure", "Test", "DME", "Treatment",
-                  "Imaging", "E&M", "Anesthesia", "Other"))
-
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$category, category))
-
-  }
+          vctrs::vec_in(rb$family, family))}
 
   if (!is.null(subcategory)) {
     rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$subcategory, subcategory))
-  }
+          vctrs::vec_in(rb$subcategory, subcategory))}
 
-  if (!is.null(family)) {
+  if (!is.null(category)) {
+
+    category <- rlang::arg_match(
+      category,
+      c(
+        "Procedure",
+        "Test",
+        "DME",
+        "Treatment",
+        "Imaging",
+        "E&M",
+        "Anesthesia",
+        "Other"
+      )
+    )
+
     rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$family, family))
-  }
+          vctrs::vec_in(rb$category, category))}
 
   if (concatenate) {
     rb <- rb |>
@@ -126,11 +136,9 @@ search_rbcs <- function(hcpcs       = NULL,
                    c(subcategory, family),
                    sep = ": ",
                    na.rm = TRUE) |>
-      dplyr::select(
-        hcpcs,
-        rbcs_category,
-        rbcs_family
-      )
+      dplyr::select(hcpcs,
+                    rbcs_category,
+                    rbcs_family)
   }
   return(rb)
 }
