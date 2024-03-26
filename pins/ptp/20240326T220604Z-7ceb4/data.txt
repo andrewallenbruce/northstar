@@ -1,0 +1,10 @@
+file: ptp.qs
+file_size: 1961519
+pin_hash: 7ceb49c72e0f47c8
+type: qs
+title: PTP Edits
+description: Medicare NCCI Procedure to Procedure (PTP) Edits
+tags: ~
+urls: ~
+created: 20240326T220604Z
+api_version: 1
