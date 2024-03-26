@@ -187,7 +187,11 @@
 <span>         <span class="st">"Team Surgery"</span> <span class="op">=</span> <span class="va">team_description</span>,</span>
 <span>         <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tab_row_group</span><span class="op">(</span></span>
+<span>    label <span class="op">=</span> <span class="st">"Descriptions"</span>,</span>
+<span>    rows <span class="op">=</span> <span class="fu">matches</span><span class="op">(</span><span class="st">"(Description | Consumer | Clinician)"</span><span class="op">)</span>,</span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>tablign <span class="op">=</span> <span class="st">"right"</span>, tabsize <span class="op">=</span> <span class="fl">14</span>, tabwt <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">sub_missing</span><span class="op">(</span>missing_text <span class="op">=</span> <span class="st">"Concept Does Not Apply"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">fmt_markdown</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -207,26 +211,26 @@
 <span>      <span class="fu">cell_text</span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span>
 <span>      <span class="op">)</span>,</span>
 <span>    locations <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="tzeozpyhmx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="whltybvour" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tzeozpyhmx table {
+#whltybvour table {
   font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzeozpyhmx thead, #tzeozpyhmx tbody, #tzeozpyhmx tfoot, #tzeozpyhmx tr, #tzeozpyhmx td, #tzeozpyhmx th {
+#whltybvour thead, #whltybvour tbody, #whltybvour tfoot, #whltybvour tr, #whltybvour td, #whltybvour th {
   border-style: none;
 }
 
-#tzeozpyhmx p {
+#whltybvour p {
   margin: 0;
   padding: 0;
 }
 
-#tzeozpyhmx .gt_table {
+#whltybvour .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -252,12 +256,12 @@
   border-left-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_caption {
+#whltybvour .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzeozpyhmx .gt_title {
+#whltybvour .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -269,7 +273,7 @@
   border-bottom-width: 0;
 }
 
-#tzeozpyhmx .gt_subtitle {
+#whltybvour .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -281,7 +285,7 @@
   border-top-width: 0;
 }
 
-#tzeozpyhmx .gt_heading {
+#whltybvour .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -293,13 +297,13 @@
   border-right-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_bottom_border {
+#whltybvour .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_col_headings {
+#whltybvour .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -314,7 +318,7 @@
   border-right-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_col_heading {
+#whltybvour .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -334,7 +338,7 @@
   overflow-x: hidden;
 }
 
-#tzeozpyhmx .gt_column_spanner_outer {
+#whltybvour .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -346,15 +350,15 @@
   padding-right: 4px;
 }
 
-#tzeozpyhmx .gt_column_spanner_outer:first-child {
+#whltybvour .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzeozpyhmx .gt_column_spanner_outer:last-child {
+#whltybvour .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzeozpyhmx .gt_column_spanner {
+#whltybvour .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -366,11 +370,11 @@
   width: 100%;
 }
 
-#tzeozpyhmx .gt_spanner_row {
+#whltybvour .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzeozpyhmx .gt_group_heading {
+#whltybvour .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -396,7 +400,7 @@
   text-align: left;
 }
 
-#tzeozpyhmx .gt_empty_group_heading {
+#whltybvour .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -411,15 +415,15 @@
   vertical-align: middle;
 }
 
-#tzeozpyhmx .gt_from_md > :first-child {
+#whltybvour .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzeozpyhmx .gt_from_md > :last-child {
+#whltybvour .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzeozpyhmx .gt_row {
+#whltybvour .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -438,7 +442,7 @@
   overflow-x: hidden;
 }
 
-#tzeozpyhmx .gt_stub {
+#whltybvour .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -451,7 +455,7 @@
   padding-right: 5px;
 }
 
-#tzeozpyhmx .gt_stub_row_group {
+#whltybvour .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -465,15 +469,15 @@
   vertical-align: top;
 }
 
-#tzeozpyhmx .gt_row_group_first td {
+#whltybvour .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzeozpyhmx .gt_row_group_first th {
+#whltybvour .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzeozpyhmx .gt_summary_row {
+#whltybvour .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -483,16 +487,16 @@
   padding-right: 5px;
 }
 
-#tzeozpyhmx .gt_first_summary_row {
+#whltybvour .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_first_summary_row.thick {
+#whltybvour .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzeozpyhmx .gt_last_summary_row {
+#whltybvour .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -502,7 +506,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_grand_summary_row {
+#whltybvour .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -512,7 +516,7 @@
   padding-right: 5px;
 }
 
-#tzeozpyhmx .gt_first_grand_summary_row {
+#whltybvour .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -522,7 +526,7 @@
   border-top-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_last_grand_summary_row_top {
+#whltybvour .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -532,11 +536,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_striped {
+#whltybvour .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzeozpyhmx .gt_table_body {
+#whltybvour .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -545,7 +549,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_footnotes {
+#whltybvour .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -559,7 +563,7 @@
   border-right-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_footnote {
+#whltybvour .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -568,7 +572,7 @@
   padding-right: 5px;
 }
 
-#tzeozpyhmx .gt_sourcenotes {
+#whltybvour .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -582,7 +586,7 @@
   border-right-color: #D3D3D3;
 }
 
-#tzeozpyhmx .gt_sourcenote {
+#whltybvour .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -590,301 +594,379 @@
   padding-right: 5px;
 }
 
-#tzeozpyhmx .gt_left {
+#whltybvour .gt_left {
   text-align: left;
 }
 
-#tzeozpyhmx .gt_center {
+#whltybvour .gt_center {
   text-align: center;
 }
 
-#tzeozpyhmx .gt_right {
+#whltybvour .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzeozpyhmx .gt_font_normal {
+#whltybvour .gt_font_normal {
   font-weight: normal;
 }
 
-#tzeozpyhmx .gt_font_bold {
+#whltybvour .gt_font_bold {
   font-weight: bold;
 }
 
-#tzeozpyhmx .gt_font_italic {
+#whltybvour .gt_font_italic {
   font-style: italic;
 }
 
-#tzeozpyhmx .gt_super {
+#whltybvour .gt_super {
   font-size: 65%;
 }
 
-#tzeozpyhmx .gt_footnote_marks {
+#whltybvour .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzeozpyhmx .gt_asterisk {
+#whltybvour .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzeozpyhmx .gt_indent_1 {
+#whltybvour .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzeozpyhmx .gt_indent_2 {
+#whltybvour .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzeozpyhmx .gt_indent_3 {
+#whltybvour .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzeozpyhmx .gt_indent_4 {
+#whltybvour .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzeozpyhmx .gt_indent_5 {
+#whltybvour .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
-<tr class="gt_row_group_first">
-<td headers="CPT Code stub_1_1 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">CPT Code</td>
-<td headers="CPT Code stub_1_1 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>CPT Code</p>
+</div></th>
+<td headers="stub_1_1 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>39503</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Description stub_1_2 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Description</td>
-<td headers="Description stub_1_2 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Description</p>
+</div></th>
+<td headers="stub_1_2 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Repair of diaphragm hernia</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Consumer stub_1_3 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Consumer</td>
-<td headers="Consumer stub_1_3 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Consumer</p>
+</div></th>
+<td headers="stub_1_3 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Repair of congenital defect of muscle separating chest and abdominal cavities, neonate</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Clinician stub_1_4 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Clinician</td>
-<td headers="Clinician stub_1_4 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md"><ul>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Clinician</p>
+</div></th>
+<td headers="stub_1_4 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md"><ul>
 <li>Repair of neonatal diaphragmatic hernia</li>
 <li>Repair of neonatal diaphragmatic hernia with creation of ventral hernia</li>
 <li>Repair of neonatal diaphragmatic hernia with insertion of chest tube</li>
 <li>Repair of neonatal diaphragmatic hernia with insertion of chest tube and creation of ventral hernia</li>
 </ul></div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="CPT Chapter stub_1_5 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">CPT Chapter</td>
-<td headers="CPT Chapter stub_1_5 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>CPT Chapter</p>
+</div></th>
+<td headers="stub_1_5 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Surgery [10004-69990]</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Code Range stub_1_6 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Code Range</td>
-<td headers="Code Range stub_1_6 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Code Range</p>
+</div></th>
+<td headers="stub_1_6 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>10004 - 69990</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="CPT Category stub_1_7 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">CPT Category</td>
-<td headers="CPT Category stub_1_7 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>CPT Category</p>
+</div></th>
+<td headers="stub_1_7 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>1</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Fee Schedule Status stub_1_8 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Fee Schedule Status</td>
-<td headers="Fee Schedule Status stub_1_8 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Fee Schedule Status</p>
+</div></th>
+<td headers="stub_1_8 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Active</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="RBCS Category stub_1_9 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">RBCS Category</td>
-<td headers="RBCS Category stub_1_9 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>RBCS Category</p>
+</div></th>
+<td headers="stub_1_9 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Major Procedure</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="RBCS Family stub_1_10 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">RBCS Family</td>
-<td headers="RBCS Family stub_1_10 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>RBCS Family</p>
+</div></th>
+<td headers="stub_1_10 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Other Organ Systems</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="MAC stub_1_11 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">MAC</td>
-<td headers="MAC stub_1_11 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>MAC</p>
+</div></th>
+<td headers="stub_1_11 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>10212</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="State stub_1_12 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">State</td>
-<td headers="State stub_1_12 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>State</p>
+</div></th>
+<td headers="stub_1_12 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>GA</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Locality stub_1_13 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Locality</td>
-<td headers="Locality stub_1_13 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Locality</p>
+</div></th>
+<td headers="stub_1_13 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>99</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Area stub_1_14 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Area</td>
-<td headers="Area stub_1_14 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Area</p>
+</div></th>
+<td headers="stub_1_14 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>REST OF GEORGIA</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Counties stub_1_15 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Counties</td>
-<td headers="Counties stub_1_15 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Counties</p>
+</div></th>
+<td headers="stub_1_15 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>ALL OTHER COUNTIES</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Work GPCI stub_1_16 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Work GPCI</td>
-<td headers="Work GPCI stub_1_16 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Work GPCI</p>
+</div></th>
+<td headers="stub_1_16 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>1</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Practice GPCI stub_1_17 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Practice GPCI</td>
-<td headers="Practice GPCI stub_1_17 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Practice GPCI</p>
+</div></th>
+<td headers="stub_1_17 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>0.883</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Malpractice GPCI stub_1_18 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Malpractice GPCI</td>
-<td headers="Malpractice GPCI stub_1_18 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Malpractice GPCI</p>
+</div></th>
+<td headers="stub_1_18 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>1.125</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Work RVU stub_1_19 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Work RVU</td>
-<td headers="Work RVU stub_1_19 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Work RVU</p>
+</div></th>
+<td headers="stub_1_19 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>108.91</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Non-Facility Practice RVU stub_1_20 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Non-Facility Practice RVU</td>
-<td headers="Non-Facility Practice RVU stub_1_20 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility Practice RVU</p>
+</div></th>
+<td headers="stub_1_20 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>35.14</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Facility Practice RVU stub_1_21 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Facility Practice RVU</td>
-<td headers="Facility Practice RVU stub_1_21 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility Practice RVU</p>
+</div></th>
+<td headers="stub_1_21 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>35.14</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Malpractice RVU stub_1_22 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Malpractice RVU</td>
-<td headers="Malpractice RVU stub_1_22 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Malpractice RVU</p>
+</div></th>
+<td headers="stub_1_22 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>26.95</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Conversion Factor stub_1_23 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Conversion Factor</td>
-<td headers="Conversion Factor stub_1_23 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Conversion Factor</p>
+</div></th>
+<td headers="stub_1_23 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>32.7442</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Total Facility RVUs stub_1_24 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Total Facility RVUs</td>
-<td headers="Total Facility RVUs stub_1_24 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Total Facility RVUs</p>
+</div></th>
+<td headers="stub_1_24 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>170.25737</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Total Non-Facility RVUs stub_1_25 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Total Non-Facility RVUs</td>
-<td headers="Total Non-Facility RVUs stub_1_25 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Total Non-Facility RVUs</p>
+</div></th>
+<td headers="stub_1_25 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>170.25737</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Facility PAR Fee stub_1_26 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Facility PAR Fee</td>
-<td headers="Facility PAR Fee stub_1_26 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility PAR Fee</p>
+</div></th>
+<td headers="stub_1_26 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>5574.941374754</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Non-Facility PAR Fee stub_1_27 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Non-Facility PAR Fee</td>
-<td headers="Non-Facility PAR Fee stub_1_27 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility PAR Fee</p>
+</div></th>
+<td headers="stub_1_27 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>5574.941374754</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Facility NON-PAR Fee stub_1_28 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Facility NON-PAR Fee</td>
-<td headers="Facility NON-PAR Fee stub_1_28 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility NON-PAR Fee</p>
+</div></th>
+<td headers="stub_1_28 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>5296.1943060163</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Non-Facility NON-PAR Fee stub_1_29 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Non-Facility NON-PAR Fee</td>
-<td headers="Non-Facility NON-PAR Fee stub_1_29 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility NON-PAR Fee</p>
+</div></th>
+<td headers="stub_1_29 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>5296.1943060163</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Facility Limiting Charge stub_1_30 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Facility Limiting Charge</td>
-<td headers="Facility Limiting Charge stub_1_30 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Facility Limiting Charge</p>
+</div></th>
+<td headers="stub_1_30 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>6090.62345191875</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Non-Facility Limiting Charge stub_1_31 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Non-Facility Limiting Charge</td>
-<td headers="Non-Facility Limiting Charge stub_1_31 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Non-Facility Limiting Charge</p>
+</div></th>
+<td headers="stub_1_31 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>6090.62345191875</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Multiple Procedures stub_1_32 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Multiple Procedures</td>
-<td headers="Multiple Procedures stub_1_32 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Multiple Procedures</p>
+</div></th>
+<td headers="stub_1_32 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Standard adjustment. If reported on the same day as another procedure with an indicator of 1, 2, or 3, rank the procedures by fee schedule amount and apply the appropriate reduction to this code (100%, 50%, 50%, 50%, 50% and by report). Base payment on the lower of (a) the actual charge, or (b) the fee schedule amount reduced by the appropriate percentage.</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Global Days stub_1_33 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Global Days</td>
-<td headers="Global Days stub_1_33 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Global Days</p>
+</div></th>
+<td headers="stub_1_33 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Major surgery with a 1-day Preoperative period and 90-day Postoperative period included in fee schedule amount.</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Preoperative stub_1_34 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Preoperative</td>
-<td headers="Preoperative stub_1_34 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Preoperative</p>
+</div></th>
+<td headers="stub_1_34 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>0.09</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Intraoperative stub_1_35 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Intraoperative</td>
-<td headers="Intraoperative stub_1_35 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Intraoperative</p>
+</div></th>
+<td headers="stub_1_35 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>0.84</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Postoperative stub_1_36 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Postoperative</td>
-<td headers="Postoperative stub_1_36 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Postoperative</p>
+</div></th>
+<td headers="stub_1_36 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>0.07</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Assistant at Surgery stub_1_37 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Assistant at Surgery</td>
-<td headers="Assistant at Surgery stub_1_37 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_37" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Assistant at Surgery</p>
+</div></th>
+<td headers="stub_1_37 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>No Payment Restriction; Assistant can be paid</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Co-Surgeons stub_1_38 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Co-Surgeons</td>
-<td headers="Co-Surgeons stub_1_38 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_38" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Co-Surgeons</p>
+</div></th>
+<td headers="stub_1_38 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Medical Necessity Documentation Required</p>
 </div></td>
 </tr>
-<tr class="gt_row_group_first">
-<td headers="Team Surgery stub_1_39 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6; font-weight: bold;">Team Surgery</td>
-<td headers="Team Surgery stub_1_39 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<tr>
+<th id="stub_1_39" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 14px; text-align: right; font-weight: bold;"><div class="gt_from_md">
+<p>Team Surgery</p>
+</div></th>
+<td headers="stub_1_39 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
 <p>Not Permitted</p>
 </div></td>
 </tr>
@@ -895,38 +977,38 @@
 <h2 id="icd-10-cm">ICD-10-CM<a class="anchor" aria-label="anchor" href="#icd-10-cm"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"F50.82"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code           <span class="op">=</span> <span class="st">"F50.82"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="st">"ICD-10-Code"</span> <span class="op">=</span> <span class="va">code</span>, </span>
-<span>         Description <span class="op">=</span> <span class="va">description</span>, </span>
-<span>         Section <span class="op">=</span> <span class="va">section</span>,</span>
-<span>         <span class="st">"Ch. No."</span> <span class="op">=</span> <span class="va">ch</span>,</span>
-<span>         Chapter <span class="op">=</span> <span class="va">chapter</span>, </span>
-<span>         Range <span class="op">=</span> <span class="va">range</span>, </span>
-<span>         Abbreviation <span class="op">=</span> <span class="va">abbrev</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>         Description   <span class="op">=</span> <span class="va">description</span>, </span>
+<span>         Section       <span class="op">=</span> <span class="va">section</span>,</span>
+<span>         <span class="st">"Ch. No."</span>     <span class="op">=</span> <span class="va">ch</span>,</span>
+<span>         Chapter       <span class="op">=</span> <span class="va">chapter</span>, </span>
+<span>         Range         <span class="op">=</span> <span class="va">range</span>, </span>
+<span>         Abbreviation  <span class="op">=</span> <span class="va">abbrev</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>tablign <span class="op">=</span> <span class="st">"right"</span>, </span>
-<span>           tabsize <span class="op">=</span> <span class="fl">16</span>, </span>
-<span>           tabwt <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span></code></pre></div>
-<div id="mrcvxeqqdz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">gt</span><span class="op">(</span>rowname_col       <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>tablign     <span class="op">=</span> <span class="st">"right"</span>, </span>
+<span>           tabsize     <span class="op">=</span> <span class="fl">16</span>, </span>
+<span>           tabwt       <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span></code></pre></div>
+<div id="ajljqtbcje" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#mrcvxeqqdz table {
+#ajljqtbcje table {
   font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mrcvxeqqdz thead, #mrcvxeqqdz tbody, #mrcvxeqqdz tfoot, #mrcvxeqqdz tr, #mrcvxeqqdz td, #mrcvxeqqdz th {
+#ajljqtbcje thead, #ajljqtbcje tbody, #ajljqtbcje tfoot, #ajljqtbcje tr, #ajljqtbcje td, #ajljqtbcje th {
   border-style: none;
 }
 
-#mrcvxeqqdz p {
+#ajljqtbcje p {
   margin: 0;
   padding: 0;
 }
 
-#mrcvxeqqdz .gt_table {
+#ajljqtbcje .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -952,12 +1034,12 @@
   border-left-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_caption {
+#ajljqtbcje .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mrcvxeqqdz .gt_title {
+#ajljqtbcje .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -969,7 +1051,7 @@
   border-bottom-width: 0;
 }
 
-#mrcvxeqqdz .gt_subtitle {
+#ajljqtbcje .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -981,7 +1063,7 @@
   border-top-width: 0;
 }
 
-#mrcvxeqqdz .gt_heading {
+#ajljqtbcje .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -993,13 +1075,13 @@
   border-right-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_bottom_border {
+#ajljqtbcje .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_col_headings {
+#ajljqtbcje .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1014,7 +1096,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_col_heading {
+#ajljqtbcje .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1034,7 +1116,7 @@
   overflow-x: hidden;
 }
 
-#mrcvxeqqdz .gt_column_spanner_outer {
+#ajljqtbcje .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1046,15 +1128,15 @@
   padding-right: 4px;
 }
 
-#mrcvxeqqdz .gt_column_spanner_outer:first-child {
+#ajljqtbcje .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mrcvxeqqdz .gt_column_spanner_outer:last-child {
+#ajljqtbcje .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mrcvxeqqdz .gt_column_spanner {
+#ajljqtbcje .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1066,11 +1148,11 @@
   width: 100%;
 }
 
-#mrcvxeqqdz .gt_spanner_row {
+#ajljqtbcje .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mrcvxeqqdz .gt_group_heading {
+#ajljqtbcje .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1096,7 +1178,7 @@
   text-align: left;
 }
 
-#mrcvxeqqdz .gt_empty_group_heading {
+#ajljqtbcje .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1111,15 +1193,15 @@
   vertical-align: middle;
 }
 
-#mrcvxeqqdz .gt_from_md > :first-child {
+#ajljqtbcje .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mrcvxeqqdz .gt_from_md > :last-child {
+#ajljqtbcje .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mrcvxeqqdz .gt_row {
+#ajljqtbcje .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1138,7 +1220,7 @@
   overflow-x: hidden;
 }
 
-#mrcvxeqqdz .gt_stub {
+#ajljqtbcje .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1151,7 +1233,7 @@
   padding-right: 5px;
 }
 
-#mrcvxeqqdz .gt_stub_row_group {
+#ajljqtbcje .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1165,15 +1247,15 @@
   vertical-align: top;
 }
 
-#mrcvxeqqdz .gt_row_group_first td {
+#ajljqtbcje .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mrcvxeqqdz .gt_row_group_first th {
+#ajljqtbcje .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mrcvxeqqdz .gt_summary_row {
+#ajljqtbcje .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1183,16 +1265,16 @@
   padding-right: 5px;
 }
 
-#mrcvxeqqdz .gt_first_summary_row {
+#ajljqtbcje .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_first_summary_row.thick {
+#ajljqtbcje .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mrcvxeqqdz .gt_last_summary_row {
+#ajljqtbcje .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1202,7 +1284,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_grand_summary_row {
+#ajljqtbcje .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1212,7 +1294,7 @@
   padding-right: 5px;
 }
 
-#mrcvxeqqdz .gt_first_grand_summary_row {
+#ajljqtbcje .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1222,7 +1304,7 @@
   border-top-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_last_grand_summary_row_top {
+#ajljqtbcje .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1232,11 +1314,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_striped {
+#ajljqtbcje .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mrcvxeqqdz .gt_table_body {
+#ajljqtbcje .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1245,7 +1327,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_footnotes {
+#ajljqtbcje .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1259,7 +1341,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_footnote {
+#ajljqtbcje .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1268,7 +1350,7 @@
   padding-right: 5px;
 }
 
-#mrcvxeqqdz .gt_sourcenotes {
+#ajljqtbcje .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1282,7 +1364,7 @@
   border-right-color: #D3D3D3;
 }
 
-#mrcvxeqqdz .gt_sourcenote {
+#ajljqtbcje .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1290,63 +1372,63 @@
   padding-right: 5px;
 }
 
-#mrcvxeqqdz .gt_left {
+#ajljqtbcje .gt_left {
   text-align: left;
 }
 
-#mrcvxeqqdz .gt_center {
+#ajljqtbcje .gt_center {
   text-align: center;
 }
 
-#mrcvxeqqdz .gt_right {
+#ajljqtbcje .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mrcvxeqqdz .gt_font_normal {
+#ajljqtbcje .gt_font_normal {
   font-weight: normal;
 }
 
-#mrcvxeqqdz .gt_font_bold {
+#ajljqtbcje .gt_font_bold {
   font-weight: bold;
 }
 
-#mrcvxeqqdz .gt_font_italic {
+#ajljqtbcje .gt_font_italic {
   font-style: italic;
 }
 
-#mrcvxeqqdz .gt_super {
+#ajljqtbcje .gt_super {
   font-size: 65%;
 }
 
-#mrcvxeqqdz .gt_footnote_marks {
+#ajljqtbcje .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mrcvxeqqdz .gt_asterisk {
+#ajljqtbcje .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mrcvxeqqdz .gt_indent_1 {
+#ajljqtbcje .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mrcvxeqqdz .gt_indent_2 {
+#ajljqtbcje .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mrcvxeqqdz .gt_indent_3 {
+#ajljqtbcje .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mrcvxeqqdz .gt_indent_4 {
+#ajljqtbcje .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mrcvxeqqdz .gt_indent_5 {
+#ajljqtbcje .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
