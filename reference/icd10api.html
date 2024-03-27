@@ -139,6 +139,71 @@ diagnoses and reasons for visits in U.S. health care settings.</p><div class="se
     <p>Current Version: ICD-10-CM <strong>2024</strong></p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Returns the seven codes</span></span></span>
+<span class="r-in"><span><span class="co"># beginning with "A15"</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"A15"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A15.0 Tuberculosis of lung                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.4 Tuberculosis of intrathoracic lymph nodes   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A15.5 Tuberculosis of larynx, trachea and bronchus</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A15.6 Tuberculous pleurisy                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A15.7 Primary respiratory tuberculosis            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> A15.8 Other respiratory tuberculosis              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> A15.9 Respiratory tuberculosis unspecified        </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Returns the first five codes</span></span></span>
+<span class="r-in"><span><span class="co"># associated with tuberculosis</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuber"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A15.0 Tuberculosis of lung                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.4 Tuberculosis of intrathoracic lymph nodes   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A15.5 Tuberculosis of larynx, trachea and bronchus</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A15.6 Tuberculous pleurisy                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A15.7 Primary respiratory tuberculosis            </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Returns the two codes</span></span></span>
+<span class="r-in"><span><span class="co"># associated with pleurisy</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>term <span class="op">=</span> <span class="st">"pleurisy"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> R09.1 Pleurisy            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.6 Tuberculous pleurisy</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If you're searching for codes beginning</span></span></span>
+<span class="r-in"><span><span class="co"># with a certain letter, you must set the</span></span></span>
+<span class="r-in"><span><span class="co"># `field` param to `code` or it will</span></span></span>
+<span class="r-in"><span><span class="co"># search for terms as well:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Returns terms containing the letter "Z"</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description                                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A28.8 Other specified zoonotic bacterial diseases, not elsewhere classified</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A28.9 Zoonotic bacterial disease, unspecified                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A92.5 Zika virus disease                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> B02.0 Zoster encephalitis                                                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> B02.1 Zoster meningitis                                                    </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Returns codes beginning with "Z"</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, field <span class="op">=</span> <span class="st">"code"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   code    description                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Z00.00  Encounter for general adult medical examination without abnormal find…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Z00.01  Encounter for general adult medical examination with abnormal findings</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Z00.110 Health examination for newborn under 8 days old                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Z00.111 Health examination for newborn 8 to 28 days old                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Z00.121 Encounter for routine child health examination with abnormal findings </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
