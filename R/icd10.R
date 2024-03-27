@@ -23,27 +23,27 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' Returns the seven codes
-#' beginning with "A15"
+#' # Returns the seven codes
+#' # beginning with "A15"
 #' icd10api(code = "A15")
 #'
-#' Returns the first five codes
-#' associated with tuberculosis
+#' # Returns the first five codes
+#' # associated with tuberculosis
 #' icd10api(term = "tuber", limit = 5)
 #'
-#' Returns the two codes
-#' associated with pleurisy
+#' # Returns the two codes
+#' # associated with pleurisy
 #' icd10api(term = "pleurisy")
 #'
-#' If you're searching for codes beginning
-#' with a certain letter, you must set the
-#' `field` param to `code` or it will
-#' search for terms as well:
+#' # If you're searching for codes beginning
+#' # with a certain letter, you must set the
+#' # `field` param to `code` or it will
+#' # search for terms as well:
 #'
-#' Returns terms containing the letter "Z"
+#' # Returns terms containing the letter "Z"
 #' icd10api(code = "z", limit = 5)
 #'
-#' Returns codes beginning with "Z"
+#' # Returns codes beginning with "Z"
 #' icd10api(code = "z", field = "code", limit = 5)
 #' @autoglobal
 #' @export

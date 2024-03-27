@@ -28,9 +28,9 @@ search_rvu <- function(hcpcs = NULL, ...) {
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' search_payment(hcpcs = c("39503", "43116", "33935", "11646"),
+#' search_payment(hcpcs    = c("39503", "43116", "33935", "11646"),
 #'                locality = "01",
-#'                mac = "10212")
+#'                mac      = "10212")
 #' @autoglobal
 #' @export
 search_payment <- function(hcpcs = NULL,

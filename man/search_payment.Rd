@@ -22,7 +22,7 @@ a \link[tibble:tibble-package]{tibble}
 Search Payment Amount File
 }
 \examples{
-search_payment(hcpcs = c("39503", "43116", "33935", "11646"),
+search_payment(hcpcs    = c("39503", "43116", "33935", "11646"),
                locality = "01",
-               mac = "10212")
+               mac      = "10212")
 }

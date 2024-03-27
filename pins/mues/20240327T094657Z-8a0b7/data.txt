@@ -1,10 +1,10 @@
 file: mues.qs
-file_size: 78878
-pin_hash: cb3ede892a4df142
+file_size: 78881
+pin_hash: 8a0b7264e68c072a
 type: qs
 title: Medically Unlikely Edits
 description: Medicare NCCI Medically Unlikely Edits (MUEs)
 tags: ~
 urls: ~
-created: 20240326T212726Z
+created: 20240327T094657Z
 api_version: 1

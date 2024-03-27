@@ -26,18 +26,25 @@ aoc <- ncci$`AOC_V2024Q2-MCR` |>
     aoc_del_dt                = as.integer(substr(aoc_del_dt, 1, 4)),
     primary_code_del_dt       = as.integer(substr(primary_code_del_dt, 1, 4)),
     aoc_edit_eff_dt           = as.integer(substr(aoc_edit_eff_dt, 1, 4)),
-    aoc_edit_eff_dt           = as.integer(substr(aoc_edit_eff_dt, 1, 4)),
+    aoc_edit_del_dt           = as.integer(substr(aoc_edit_del_dt, 1, 4)),
     aoc_edit_type             = as.integer(aoc_edit_type),
-    special_instruction_notes = str_remove_all(special_instruction_notes, regex('\\(|\\)|\\"'))) |>
+    special_instruction_notes = str_remove_all(special_instruction_notes, regex('\\(|\\)|\\"')),
+    primary_code              = dplyr::if_else(primary_code == "CCCCC", NA_character_, primary_code),
+    type_description = case_match(as.character(aoc_edit_type),
+    "1" ~ "Only Paid if Primary is Paid. Payment Eligible if Primary also Eligible for Payment to Same Practitioner for Same Patient on Same DOS.",
+    "2" ~ "No specific list of primary codes. Payment Eligible if Acceptable Primary as Determined by Claims Processing Contractor also Eligible for Payment to Same Practitioner for Same Patient on Same DOS.",
+    "3" ~ "Has Some Specific Primaries Identified in CPT Manual. Payment Eligible if Acceptable Primary as Determined by Claims Processing Contractor also Eligible for Payment to Same Practitioner for Same Patient on Same DOS."
+    )) |>
   select(
-    addon    = add_on_code,
-    primary  = primary_code,
-    edit     = aoc_edit_type,
-    add_del  = aoc_del_dt,
-    prim_del = primary_code_del_dt,
-    edit_eff = aoc_edit_eff_dt,
-    edit_del = aoc_edit_del_dt,
-    notes    = special_instruction_notes
+    primary                   = primary_code,
+    addon                     = add_on_code,
+    type                      = aoc_edit_type,
+    type_description,
+    primary_deleted           = primary_code_del_dt,
+    addon_deleted             = aoc_del_dt,
+    edit_effective            = aoc_edit_eff_dt,
+    edit_deleted              = aoc_edit_del_dt,
+    notes                     = special_instruction_notes
   )
 
 # Update Pin
@@ -59,45 +66,45 @@ board |> pins::write_board_manifest()
 mue_pract <- ncci$`MCR_MUE_PractitionerServices_Eff_04-01-2024` |>
   clean_names() |>
   mutate(practitioner_services_mue_values = as.integer(practitioner_services_mue_values),
-         adj                              = as.integer(substr(mue_adjudication_indicator, 1, 1)),
+         mai                              = as.integer(substr(mue_adjudication_indicator, 1, 1)),
          adjudication                     = substr(mue_adjudication_indicator, 3, 100),
-         type                             = "Practitioner") |>
+         service_type                     = "Practitioner") |>
   select(hcpcs                            = hcpcs_cpt_code,
-         mues                             = practitioner_services_mue_values,
-         adj,
+         mue                              = practitioner_services_mue_values,
+         mai,
          adjudication,
          rationale                        = mue_rationale,
-         type
+         service_type
     )
 
 mue_outhosp <- ncci$`MCR_MUE_OutpatientHospitalServices_Eff_04-01-2024` |>
   row_to_names(row_number = 1) |>
   clean_names() |>
   mutate(outpatient_hospital_services_mue_values = as.integer(outpatient_hospital_services_mue_values),
-         adj                                     = as.integer(substr(mue_adjudication_indicator, 1, 1)),
+         mai                                     = as.integer(substr(mue_adjudication_indicator, 1, 1)),
          adjudication                            = substr(mue_adjudication_indicator, 3, 100),
-         type                                    = "Outpatient Hospital") |>
+         service_type                            = "Outpatient Hospital") |>
   select(hcpcs                                   = hcpcs_cpt_code,
-         mues                                    = outpatient_hospital_services_mue_values,
-         adj,
+         mue                                     = outpatient_hospital_services_mue_values,
+         mai,
          adjudication,
          rationale                               = mue_rationale,
-         type
+         service_type
   )
 
 mue_dme <- ncci$`MCR_MUE_DMESupplierServices_Eff_04-01-2024` |>
   row_to_names(row_number = 1) |>
   clean_names() |>
   mutate(dme_supplier_services_mue_values = as.integer(dme_supplier_services_mue_values),
-         adj = as.integer(substr(mue_adjudication_indicator, 1, 1)),
-         adjudication = substr(mue_adjudication_indicator, 3, 100),
-         type = "DME Supplier") |>
-  select(hcpcs = hcpcs_cpt_code,
-         mues = dme_supplier_services_mue_values,
-         adj,
+         mai                              = as.integer(substr(mue_adjudication_indicator, 1, 1)),
+         adjudication                     = substr(mue_adjudication_indicator, 3, 100),
+         service_type                     = "DME Supplier") |>
+  select(hcpcs                            = hcpcs_cpt_code,
+         mue                              = dme_supplier_services_mue_values,
+         mai,
          adjudication,
-         rationale = mue_rationale,
-         type
+         rationale                        = mue_rationale,
+         service_type
   )
 
 mue <- vctrs::vec_rbind(mue_pract, mue_outhosp, mue_dme)
