@@ -87,20 +87,20 @@ for the service furnished by the Non-participating physician.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limiting_charge</span><span class="op">(</span><span class="va">par_amount</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">limiting_charge</span><span class="op">(</span><span class="va">participating_fee</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>par_amount</dt>
-<dd><p><em>&lt; dbl &gt;</em> Participating Amount</p></dd>
+    <dl><dt>participating_fee</dt>
+<dd><p><code>&lt;dbl&gt;</code> Participating Fee</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>numeric vector of Limiting Charge Amount</p>
+<p><code>&lt;dbl&gt;</code> Limiting Charge Amount</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -109,16 +109,17 @@ at 95% of the payment amount for Participating physicians (i.e., the fee
 schedule amount).</p>
 <p>Calculating 95% of 115% of an amount is equivalent to multiplying the
 amount by a factor of 1.0925 (or 109.25%).</p>
-<p>Therefore, to calculate the Medicare limiting charge for a physician
+<p>Therefore, to calculate the limiting charge, \(x_{limit}\) for a physician
 service for a locality, multiply the fee schedule amount by a factor
-of 1.0925. The result is the Medicare limiting charge for that service for
-that locality to which the fee schedule amount applies.</p>
+of 1.0925:</p>
+<p>$$x_{limit} = \dfrac{\sum_{i = 0}^t
+        \sum_{j = 0}^\infty c_i f_{j - i}}{\sum_{i = 0} c_i}$$</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">limiting_charge</span><span class="op">(</span><span class="fl">26.35</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 28.78738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 28.79</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
