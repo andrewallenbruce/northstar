@@ -7,11 +7,11 @@
 search_payment(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{< \emph{chr} > 5-digit HCPCS code}
+\item{hcpcs}{\verb{<chr>} 5-digit HCPCS code}
 
-\item{mac}{< \emph{chr} > 5-digit MAC ID code}
+\item{mac}{\verb{<chr>} 5-digit MAC ID code}
 
-\item{locality}{< \emph{chr} > 2-digit Locality ID}
+\item{locality}{\verb{<chr>} 2-digit Locality ID}
 
 \item{...}{Empty}
 }

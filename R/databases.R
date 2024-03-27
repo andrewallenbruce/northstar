@@ -1,6 +1,6 @@
 #' Search Relative Value File
 #'
-#' @param hcpcs < *chr* > 5-digit HCPCS code
+#' @param hcpcs `<chr>` 5-digit HCPCS code
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -22,9 +22,9 @@ search_rvu <- function(hcpcs = NULL, ...) {
 
 #' Search Payment Amount File
 #'
-#' @param hcpcs < *chr* > 5-digit HCPCS code
-#' @param mac < *chr* > 5-digit MAC ID code
-#' @param locality < *chr* > 2-digit Locality ID
+#' @param hcpcs `<chr>` 5-digit HCPCS code
+#' @param mac `<chr>` 5-digit MAC ID code
+#' @param locality `<chr>` 2-digit Locality ID
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -33,8 +33,8 @@ search_rvu <- function(hcpcs = NULL, ...) {
 #'                mac      = "10212")
 #' @autoglobal
 #' @export
-search_payment <- function(hcpcs = NULL,
-                           mac = NULL,
+search_payment <- function(hcpcs    = NULL,
+                           mac      = NULL,
                            locality = NULL,
                            ...) {
 
@@ -62,9 +62,9 @@ search_payment <- function(hcpcs = NULL,
 
 #' Search Geographic Practice Cost Indices
 #'
-#' @param mac < *chr* > 5-digit MAC code
-#' @param state < *chr* > 2-character State abbreviation
-#' @param locality < *chr* > 2-digit Locality ID
+#' @param mac `<chr>` 5-digit MAC code
+#' @param state `<chr>` 2-character State abbreviation
+#' @param locality `<chr>` 2-digit Locality ID
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -101,8 +101,8 @@ search_gpci <- function(mac      = NULL,
 
 #' Search HCPCS Level II
 #'
-#' @param hcpcs < *chr* > 5-digit Level II HCPCS code
-#' @param limit < *lgl* > limit columns returned, default is `TRUE`
+#' @param hcpcs `<chr>` 5-digit Level II HCPCS code
+#' @param limit `<lgl>` limit columns returned, default is `TRUE`
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -147,7 +147,7 @@ search_hcpcs <- function(hcpcs = NULL,
 
 #' Search HCPCS Level I (CPT) Codes
 #'
-#' @param hcpcs < *chr* > 5-digit CPT codes
+#' @param hcpcs `<chr>` 5-digit CPT codes
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -173,9 +173,9 @@ search_cpt <- function(hcpcs = NULL, ...) {
 #' only contains the OPPS-based payment caps. Carrier prices cannot exceed the
 #' OPPS-based payment caps.
 #'
-#' @param hcpcs *<chr>* vector of 5-digit HCPCS codes
-#' @param mac *<chr>* vector of 5-digit MAC codes
-#' @param locality *<chr>* vector of 2-digit Locality IDs
+#' @param hcpcs `<chr>` vector of 5-digit HCPCS codes
+#' @param mac `<chr>` vector of 5-digit MAC codes
+#' @param locality `<chr>` vector of 2-digit Locality IDs
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples

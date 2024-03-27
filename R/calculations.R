@@ -10,52 +10,59 @@
 #' Calculating 95% of 115% of an amount is equivalent to multiplying the
 #' amount by a factor of 1.0925 (or 109.25%).
 #'
-#' Therefore, to calculate the Medicare limiting charge for a physician
+#' Therefore, to calculate the limiting charge, \eqn{x_{limit}} for a physician
 #' service for a locality, multiply the fee schedule amount by a factor
-#' of 1.0925. The result is the Medicare limiting charge for that service for
-#' that locality to which the fee schedule amount applies.
+#' of 1.0925:
 #'
-#' @param par_amount *< dbl >* Participating Amount
-#' @return numeric vector of Limiting Charge Amount
+#' \deqn{x_{limit} = \dfrac{\sum_{i = 0}^t
+#'         \sum_{j = 0}^\infty c_i f_{j - i}}{\sum_{i = 0} c_i}}
+#'
+#'
+#' @param participating_fee `<dbl>` Participating Fee
+#' @return `<dbl>` Limiting Charge Amount
 #' @examples
 #' limiting_charge(26.35)
 #' @export
-limiting_charge <- function(par_amount) {
+limiting_charge <- function(participating_fee) {
 
-  stopifnot("`par_amount` must be numeric" = is.numeric(par_amount))
+  stopifnot("`participating_fee` must be numeric" = is.numeric(participating_fee))
 
-  par_amount * 1.0925
+  janitor::round_half_up(participating_fee * 1.0925, digits = 2)
 }
 
-#' Calculate Non-Participating Amount
+#' Calculate Non-Participating Fee
 #'
 #' The payment amount for Non-participating physicians is 95% of the payment
-#' amount for Participating physicians (i.e., the fee schedule amount).
+#' amount for Participating physicians (i.e., the fee schedule amount):
 #'
-#' @param par_amount *< dbl >* Participating Amount
-#' @return numeric vector of Non-participating amount
+#' \deqn{rvu_{total} = rvu_{w}(gpci_{w}) + rvu_{pe}(gpci_{pe}) + rvu_{mp}(gpci_{mp})}
+#'
+#' @param participating_fee `<dbl>` Participating Fee
+#' @return `<dbl>` Non-Participating Fee
 #' @examples
-#' non_participating_amount(26.35)
+#' non_participating_fee(26.35)
 #' @export
-non_participating_amount <- function(par_amount) {
+non_participating_fee <- function(participating_fee) {
 
-  stopifnot("`par_amount` must be numeric" = is.numeric(par_amount))
+  stopifnot("`participating_fee` must be numeric" = is.numeric(participating_fee))
 
-  par_amount * 0.95
+  participating_fee * 0.95
 }
 
 #' Calculate Physician Fee Schedule Payment Amounts
 #'
+#' \deqn{rvu_{total} = rvu_{w}(gpci_{w}) + rvu_{pe}(gpci_{pe}) + rvu_{mp}(gpci_{mp})}
+#'
 #' ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 #'
-#' @param wrvu *< dbl >* Work RVU
-#' @param fprvu *< dbl >* Facility Practice Expense RVU
-#' @param nprvu *< dbl >* Non-Facility Practice Expense RVU
-#' @param mrvu *< dbl >* Malpractice RVU
-#' @param wgpci *< dbl >* Work GPCI
-#' @param pgpci *< dbl >* Practice Expense GPCI
-#' @param mgpci *< dbl >* Malpractice GPCI
-#' @param cf *< dbl >* Conversion Factor, default is `32.7442`
+#' @param wrvu `<dbl>` Work RVU
+#' @param fprvu `<dbl>` Facility Practice Expense RVU
+#' @param nprvu `<dbl>` Non-Facility Practice Expense RVU
+#' @param mrvu `<dbl>` Malpractice RVU
+#' @param wgpci `<dbl>` Work GPCI
+#' @param pgpci `<dbl>` Practice Expense GPCI
+#' @param mgpci `<dbl>` Malpractice GPCI
+#' @param cf `<dbl>` Conversion Factor, default is `32.7442`
 #' @returns A list (invisibly) of the Participating, Non-Participating &
 #'    Limiting Charge Amounts for both Facility & Non-Facility RVUs
 #' @examples
@@ -81,8 +88,8 @@ calculate_amounts <- function(wrvu,
   stopifnot("all arguments must be numeric" = is.numeric(
     c(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf)))
 
-  frvus <- ((wrvu * wgpci) + (fprvu * pgpci) + (mrvu * mgpci))
-  nrvus <- ((wrvu * wgpci) + (nprvu * pgpci) + (mrvu * mgpci))
+  frvus <- sum(wrvu * wgpci, fprvu * pgpci, mrvu * mgpci)
+  nrvus <- sum(wrvu * wgpci, nprvu * pgpci, mrvu * mgpci)
 
   fpar <- frvus * cf
   npar <- nrvus * cf
@@ -91,14 +98,14 @@ calculate_amounts <- function(wrvu,
     prvu   = fprvu,
     rvu    = frvus,
     par    = fpar,
-    nonpar = non_participating_amount(fpar),
+    nonpar = non_participating_fee(fpar),
     limit  = limiting_charge(fpar))
 
   n <- list(
     prvu   = nprvu,
     rvu    = nrvus,
     par    = npar,
-    nonpar = non_participating_amount(npar),
+    nonpar = non_participating_fee(npar),
     limit  = limiting_charge(npar))
 
   cli::cli_inform(c(

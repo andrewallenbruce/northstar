@@ -78,7 +78,7 @@ reference:
     Functions to calculate various metrics.
   contents:
   - limiting_charge
-  - non_participating_amount
+  - non_participating_fee
   - calculate_amounts
   - count_days
 

@@ -7,11 +7,11 @@
 search_opps(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\emph{\if{html}{\out{<chr>}}} vector of 5-digit HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes}
 
-\item{mac}{\emph{\if{html}{\out{<chr>}}} vector of 5-digit MAC codes}
+\item{mac}{\verb{<chr>} vector of 5-digit MAC codes}
 
-\item{locality}{\emph{\if{html}{\out{<chr>}}} vector of 2-digit Locality IDs}
+\item{locality}{\verb{<chr>} vector of 2-digit Locality IDs}
 
 \item{...}{Empty}
 }

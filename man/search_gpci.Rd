@@ -7,11 +7,11 @@
 search_gpci(mac = NULL, state = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{mac}{< \emph{chr} > 5-digit MAC code}
+\item{mac}{\verb{<chr>} 5-digit MAC code}
 
-\item{state}{< \emph{chr} > 2-character State abbreviation}
+\item{state}{\verb{<chr>} 2-character State abbreviation}
 
-\item{locality}{< \emph{chr} > 2-digit Locality ID}
+\item{locality}{\verb{<chr>} 2-digit Locality ID}
 
 \item{...}{Empty}
 }

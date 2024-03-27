@@ -4,13 +4,13 @@
 \alias{limiting_charge}
 \title{Calculate Limiting Charge}
 \usage{
-limiting_charge(par_amount)
+limiting_charge(participating_fee)
 }
 \arguments{
-\item{par_amount}{\emph{< dbl >} Participating Amount}
+\item{participating_fee}{\verb{<dbl>} Participating Fee}
 }
 \value{
-numeric vector of Limiting Charge Amount
+\verb{<dbl>} Limiting Charge Amount
 }
 \description{
 The Medicare limiting charge is set by law at 115\% of the payment amount
@@ -24,10 +24,12 @@ schedule amount).
 Calculating 95\% of 115\% of an amount is equivalent to multiplying the
 amount by a factor of 1.0925 (or 109.25\%).
 
-Therefore, to calculate the Medicare limiting charge for a physician
+Therefore, to calculate the limiting charge, \eqn{x_{limit}} for a physician
 service for a locality, multiply the fee schedule amount by a factor
-of 1.0925. The result is the Medicare limiting charge for that service for
-that locality to which the fee schedule amount applies.
+of 1.0925:
+
+\deqn{x_{limit} = \dfrac{\sum_{i = 0}^t
+        \sum_{j = 0}^\infty c_i f_{j - i}}{\sum_{i = 0} c_i}}
 }
 \examples{
 limiting_charge(26.35)

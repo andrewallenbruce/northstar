@@ -7,7 +7,7 @@
 search_rvu(hcpcs = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{< \emph{chr} > 5-digit HCPCS code}
+\item{hcpcs}{\verb{<chr>} 5-digit HCPCS code}
 
 \item{...}{Empty}
 }

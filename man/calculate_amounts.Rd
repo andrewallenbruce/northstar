@@ -7,27 +7,30 @@
 calculate_amounts(wrvu, fprvu, nprvu, mrvu, wgpci, pgpci, mgpci, cf = 32.7442)
 }
 \arguments{
-\item{wrvu}{\emph{< dbl >} Work RVU}
+\item{wrvu}{\verb{<dbl>} Work RVU}
 
-\item{fprvu}{\emph{< dbl >} Facility Practice Expense RVU}
+\item{fprvu}{\verb{<dbl>} Facility Practice Expense RVU}
 
-\item{nprvu}{\emph{< dbl >} Non-Facility Practice Expense RVU}
+\item{nprvu}{\verb{<dbl>} Non-Facility Practice Expense RVU}
 
-\item{mrvu}{\emph{< dbl >} Malpractice RVU}
+\item{mrvu}{\verb{<dbl>} Malpractice RVU}
 
-\item{wgpci}{\emph{< dbl >} Work GPCI}
+\item{wgpci}{\verb{<dbl>} Work GPCI}
 
-\item{pgpci}{\emph{< dbl >} Practice Expense GPCI}
+\item{pgpci}{\verb{<dbl>} Practice Expense GPCI}
 
-\item{mgpci}{\emph{< dbl >} Malpractice GPCI}
+\item{mgpci}{\verb{<dbl>} Malpractice GPCI}
 
-\item{cf}{\emph{< dbl >} Conversion Factor, default is \code{32.7442}}
+\item{cf}{\verb{<dbl>} Conversion Factor, default is \code{32.7442}}
 }
 \value{
 A list (invisibly) of the Participating, Non-Participating &
 Limiting Charge Amounts for both Facility & Non-Facility RVUs
 }
 \description{
+\deqn{rvu_{total} = rvu_{w}(gpci_{w}) + rvu_{pe}(gpci_{pe}) + rvu_{mp}(gpci_{mp})}
+}
+\details{
 ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 }
 \examples{

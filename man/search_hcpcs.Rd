@@ -7,9 +7,9 @@
 search_hcpcs(hcpcs = NULL, limit = TRUE, ...)
 }
 \arguments{
-\item{hcpcs}{< \emph{chr} > 5-digit Level II HCPCS code}
+\item{hcpcs}{\verb{<chr>} 5-digit Level II HCPCS code}
 
-\item{limit}{< \emph{lgl} > limit columns returned, default is \code{TRUE}}
+\item{limit}{\verb{<lgl>} limit columns returned, default is \code{TRUE}}
 
 \item{...}{Empty}
 }

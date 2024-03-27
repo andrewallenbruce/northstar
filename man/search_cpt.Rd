@@ -7,7 +7,7 @@
 search_cpt(hcpcs = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{< \emph{chr} > 5-digit CPT codes}
+\item{hcpcs}{\verb{<chr>} 5-digit CPT codes}
 
 \item{...}{Empty}
 }
