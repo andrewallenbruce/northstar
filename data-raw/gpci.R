@@ -75,7 +75,7 @@ gpci <- gpci()
 gpci$state <- as.character(gpci$state)
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(gpci,

@@ -124,7 +124,7 @@ ncd_join <- ncd$ncd_trkg |>
     )
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(ncd_join,

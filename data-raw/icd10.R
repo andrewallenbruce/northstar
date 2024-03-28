@@ -21,7 +21,6 @@ download.file(url      = icdcodes,
 
 unzip(
   "data-raw/2024_Code_Descriptions.zip",
-  # list    = TRUE,
   files     = c("icd10cm-order-2024.txt"),
   exdir     = "data-raw",
   junkpaths = TRUE
@@ -74,9 +73,7 @@ icd_chapter_order <- icd_join |>
   ungroup() |>
   mutate(chapter_end = lead(chapter_start) - 1,
          chapter_end = if_else(chapter_start == 97292, 97296, chapter_end),
-         # chapter_codes = chapter_end - chapter_start,
          chapter_end = as.integer(chapter_end)
-         # , chapter_codes = as.integer(chapter_codes)
          )
 
 icd_section_order <- icd_join |>
@@ -88,37 +85,40 @@ icd_section_order <- icd_join |>
   mutate(section_start = order,
          section_end = lead(order) - 1,
          section_end = if_else(order == 97295, 97296, section_end),
-         section_end = as.integer(section_end)
-         # , section_codes = section_end - section_start
-         ) |>
-  select(order,
-         valid,
-         code,
-         section_name,
-         section_start,
-         section_end
-         # , section_codes
-         )
+         section_end = as.integer(section_end))
+
+sec_end <- icd10 |>
+  filter(order %in% icd_section_order$section_end) |>
+  select(section_end = order, code_end = code)
+
+icd_section_order <- icd_section_order |>
+  left_join(sec_end) |>
+  select(-section_start, -section_end) |>
+  mutate(section_start = code,
+         section_range = if_else(
+           section_start != code_end, paste0(
+             section_start, " - ", code_end), section_start)) |>
+  select(order, valid, code, section_name, section_range)
 
 icd_nest <- icd_join |>
   left_join(icd_section_order) |>
-  fill(section_name, section_start, section_end) |>
-  left_join(icd_chapter_order) |>
+  fill(section_name, section_range) |>
+  # left_join(icd_chapter_order) |>
   nest(section_codes = c(order, valid, code, description)) |>
   # mutate(chapter_sections = dplyr::n_distinct(section_name), .by = chapter_name) |>
-  nest(chapter_sections = c(section_name, section_codes, section_start, section_end)) |>
-  select(chapter_no,
+  nest(chapter_sections = c(section_name, section_range, section_codes)) |>
+  select(ch = chapter_no,
+         abb = chapter_abb,
          chapter_name,
-         chapter_abb,
          chapter_range,
-         chapter_start,
-         chapter_end,
+         # chapter_start,
+         # chapter_end,
          chapter_sections)
 
 fs::file_delete(fs::path("data-raw", c("icd10cm-order-2024.txt", "2024_Code_Descriptions.zip")))
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(icd_nest,

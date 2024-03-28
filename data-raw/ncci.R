@@ -48,7 +48,7 @@ aoc <- ncci$`AOC_V2024Q2-MCR` |>
   )
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(
@@ -110,7 +110,7 @@ mue_dme <- ncci$`MCR_MUE_DMESupplierServices_Eff_04-01-2024` |>
 mue <- vctrs::vec_rbind(mue_pract, mue_outhosp, mue_dme)
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(
@@ -199,8 +199,7 @@ ptp4 <- ncci$`ccipra-v301r0-f4` |>
 ptp <- vctrs::vec_rbind(ptp1, ptp2, ptp3, ptp4)
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
-
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 board |>
   pins::pin_write(
     ptp,

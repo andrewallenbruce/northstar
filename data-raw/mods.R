@@ -189,7 +189,7 @@ mods <- vctrs::vec_rbind(mods,
   dplyr::distinct(mod, label, .keep_all = TRUE)
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(mods,

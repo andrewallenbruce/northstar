@@ -4,10 +4,12 @@
 \alias{icd10cm}
 \title{2024 ICD-10-CM Codes}
 \usage{
-icd10cm(code = NULL)
+icd10cm(code = NULL, ...)
 }
 \arguments{
 \item{code}{\verb{<chr>} vector of ICD-10-CM codes}
+
+\item{...}{Empty}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

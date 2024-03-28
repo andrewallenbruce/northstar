@@ -1,7 +1,6 @@
-#' NCCI Add-On Code Edits
+#' NCCI Add-On Codes
 #'
 #' Medicare NCCI Add-On Code Edits
-#' Version: 2024-04-01
 #'
 #' An AOC is a HCPCS/CPT code that describes a service that, with rare
 #' exception, is performed in conjunction with another primary service by the
@@ -23,28 +22,28 @@
 #' reportable. For example, control of bleeding during an invasive procedure
 #' is considered part of the procedure and is not separately reportable.
 #'
+#' Although the AOC and primary code are normally reported for the same date
+#' of service, there are unusual circumstances where the two services may be
+#' reported for different dates of service (e.g., 99291 and 99292).
+#'
+#' ## AOC Edit Types
+#' **Type 1**: CPT Professional or HCPCS files define all acceptable primary codes.
+#' MACs should not allow other primary codes with Type 1 AOCs.
+#'
+#' **Type 2**: CPT Professional and HCPCS files do not define any primary codes.
+#' MACs should develop their own lists of acceptable primary codes.
+#'
+#' **Type 3**: CPT Professional or HCPCS files define some, but not all, acceptable
+#' primary codes. MACs should allow the listed primary codes for these AOCs but
+#' may develop their own lists of additional acceptable primary codes.
+#'
+#' ## PTP Edits
 #' In general, NCCI PTP edits do not include edits with most AOCs because edits
 #' related to the primary procedure(s) are adequate to prevent inappropriate
 #' payment for an add-on coded procedure (i.e., if an edit prevents payment of
 #' the primary procedure code, the AOC shall not be paid).
 #'
-#' ## AOC Types
-#' For Type 1 AOCs edits, the CPT Professional or HCPCS files define all
-#' acceptable primary codes. MACs should not allow other primary codes with
-#' Type 1 AOCs.
-#'
-#' For Type 2 AOCs edits, the CPT Professional and HCPCS files do not define
-#' any primary codes. MACs should develop their own lists of acceptable primary
-#' codes.
-#'
-#' For Type 3 AOCs edits, the CPT Professional or HCPCS files define some, but
-#' not all, acceptable primary codes. MACs should allow the listed primary codes
-#' for these AOCs but may develop their own lists of additional acceptable
-#' primary codes.
-#'
-#' Although the AOC and primary code are normally reported for the same date
-#' of service, there are unusual circumstances where the two services may be
-#' reported for different dates of service (e.g., 99291 and 99292).
+#' @note Version: 2024-04-01
 #'
 #' [Add-Ons Link](https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits)
 #'
@@ -151,7 +150,7 @@ search_addons <- function(addon   = NULL,
 #' [MUE Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
 #'
 #' @param hcpcs `<chr>` vector of HCPCS codes
-#' @param service `<chr>` service type; one of DME Supplier, Outpatient Hospital, Practitioner
+#' @param service `<chr>` `Practitioner`, `Outpatient Hospital`, `DME Supplier`
 #' @param mai `<int>` MUE adjudication indicator; `1`, `2`, `3`
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]

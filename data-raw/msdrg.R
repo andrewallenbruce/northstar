@@ -20,7 +20,7 @@ ms_drg_v36 <- ms_drg_v36 |>
 ms_drg_v36
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(ms_drg_v36,

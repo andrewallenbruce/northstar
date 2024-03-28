@@ -44,7 +44,7 @@ cpt_desc <- cpt_desc |>
   .after = chapter)
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(cpt_desc,

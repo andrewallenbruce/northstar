@@ -54,58 +54,60 @@ search_fee_schedule(
   case_opps(opps) |>
   case_chapter_cpt(hcpcs) |> 
   case_category(hcpcs) |>
-  select("CPT Code" = hcpcs,
-         Description = description,
-         Consumer = description_consumer,
-         Clinician = descriptions_clinician,
-         "CPT Chapter" = chapter,
-         "Code Range" = range,
-         "CPT Category" = category,
-         "Fee Schedule Status" = status,
-         "RBCS Category" = rbcs_category,
-         "RBCS Family" = rbcs_family,
-         MAC = mac,
-         State = state,
-         Locality = locality,
-         Area = area,
-         Counties = counties,
-         "Work GPCI" = wgpci,
-         "Practice GPCI" = pgpci,
-         "Malpractice GPCI" = mgpci,
-         "Work RVU" = wrvu,
-         "Non-Facility Practice RVU" = nfprvu,
-         "Facility Practice RVU" = fprvu,
-         "Malpractice RVU" = mrvu,
-         "Conversion Factor" = cf,
-         "Total Facility RVUs" = frvus,
-         "Total Non-Facility RVUs" = nrvus,
-         "Facility PAR Fee" = fpar,
-         "Non-Facility PAR Fee" = npar,
-         "Facility NON-PAR Fee" = fnpar,
-         "Non-Facility NON-PAR Fee" = nfnpar,
-         "Facility Limiting Charge" = flim,
+  select("CPT Code"                     = hcpcs,
+         Description                    = description,
+         Consumer                       = description_consumer,
+         Clinician                      = descriptions_clinician,
+         "CPT Chapter"                  = chapter,
+         "Code Range"                   = range,
+         "CPT Category"                 = category,
+         "Fee Schedule Status"          = status,
+         "RBCS Category"                = rbcs_category,
+         "RBCS Family"                  = rbcs_family,
+         MAC                            = mac,
+         State                          = state,
+         Locality                       = locality,
+         Area                           = area,
+         Counties                       = counties,
+         "Work GPCI"                    = wgpci,
+         "Practice GPCI"                = pgpci,
+         "Malpractice GPCI"             = mgpci,
+         "Work RVU"                     = wrvu,
+         "Non-Facility Practice RVU"    = nfprvu,
+         "Facility Practice RVU"        = fprvu,
+         "Malpractice RVU"              = mrvu,
+         "Conversion Factor"            = cf,
+         "Total Facility RVUs"          = frvus,
+         "Total Non-Facility RVUs"      = nrvus,
+         "Facility PAR Fee"             = fpar,
+         "Non-Facility PAR Fee"         = npar,
+         "Facility NON-PAR Fee"         = fnpar,
+         "Non-Facility NON-PAR Fee"     = nfnpar,
+         "Facility Limiting Charge"     = flim,
          "Non-Facility Limiting Charge" = nlim,
-         "Multiple Procedures" = mproc_description,
-         # "Global Indicator" = global,
-         "Global Days" = global_description,
-         "Preoperative" = op_pre,
-         "Intraoperative" = op_intra,
-         "Postoperative" = op_post,
-         "Assistant at Surgery" = asst_description,
-         "Co-Surgeons" = cosurg_description,
-         "Team Surgery" = team_description,
+         "Multiple Procedures"          = mproc_description,
+         "Global Days"                  = global_description,
+         "Preoperative"                 = op_pre,
+         "Intraoperative"               = op_intra,
+         "Postoperative"                = op_post,
+         "Assistant at Surgery"         = asst_description,
+         "Co-Surgeons"                  = cosurg_description,
+         "Team Surgery"                 = team_description,
          ) |>
   display_long() |>
-  gt(groupname_col = "name", row_group_as_column = TRUE) |>
-
-  gt_style(tablign = "right", tabsize = 14, tabwt = "bold") |> 
-  sub_missing(missing_text = "Concept Does Not Apply") |> 
+  gt(groupname_col         = "name", 
+     row_group_as_column   = TRUE) |>
+  gt_style(tablign         = "right", 
+           tabsize         = 14, 
+           tabwt           = "bold") |> 
+  sub_missing(missing_text = "Concept Does Not Apply.") |> 
   fmt_markdown() |> 
   tab_style(
-      style = cell_text(
-      font = google_font(name = "Fira Code")),
-      locations = cells_body(
-        columns = contains("value"))) |>
+      style                = cell_text(
+      font                 = google_font(
+      name                 = "Fira Code")),
+      locations            = cells_body(
+        columns            = contains("value"))) |>
   tab_style(
     style = list(
       cell_fill(color = "powderblue"),
@@ -130,18 +132,38 @@ hcpcs_search(hcpcs    = "70170",
 # ICD-10-CM
 
 ```{r}
-icd10cm(code           = "F50.82") |> 
-  select("ICD-10-Code" = code, 
-         Description   = description, 
-         Section       = section,
-         "Ch. No."     = ch,
-         Chapter       = chapter, 
-         Range         = range, 
-         Abbreviation  = abbrev) |> 
+icd10cm(code = "F50.82") |> 
+  mutate(
+    Chapter = paste0("* ", 
+                     chapter_name, " \n ",
+                     "* Range: [",
+                     chapter_range, "]")) |>
+  select("ICD-10-Code"   = code, 
+         Description     = description, 
+         Chapter,
+         Section         = section_name,
+         Abbreviation    = chapter_abb) |> 
   display_long() |>
-  gt(rowname_col       = "name") |>
-  gt_style(tablign     = "right", 
-           tabsize     = 16, 
-           tabwt       = "bold")
+  gt(groupname_col       = "name", 
+     row_group_as_column = TRUE) |>
+  fmt_markdown() |> 
+  gt_style(tablign       = "right", 
+           tabsize       = 16, 
+           tabwt         = "bold") |> 
+  tab_style(
+      style              = cell_text(
+      font               = google_font(name = "Fira Code")),
+      locations          = cells_body(
+        columns          = contains("value"))) |>
+  tab_style(
+    style                = list(
+      cell_fill(color    = "powderblue"),
+      cell_text(weight   = "bold"),
+      cell_borders(
+      sides              = c("all"),
+      color              = "powderblue",
+      weight             = px(3))
+      ),
+    locations            = cells_row_groups())
 ```
 

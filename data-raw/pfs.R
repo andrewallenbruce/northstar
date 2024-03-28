@@ -63,7 +63,7 @@ pfs_pay <- pfs_pay |>
 # [990,482 x 15]
 
 # Update Pin
-board <- pins::board_folder(here::here("pins"))
+board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
   pins::pin_write(pfs_pay,
