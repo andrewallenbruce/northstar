@@ -7,7 +7,7 @@
 icd10cm(code = NULL)
 }
 \arguments{
-\item{code}{vector of ICD-10-CM codes}
+\item{code}{\verb{<chr>} vector of ICD-10-CM codes}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

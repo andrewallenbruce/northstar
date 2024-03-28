@@ -7,11 +7,11 @@
 search_addons(addon = NULL, primary = NULL, type = NULL, ...)
 }
 \arguments{
-\item{addon}{vector of HCPCS codes}
+\item{addon}{\verb{<chr>} vector of HCPCS codes}
 
-\item{primary}{vector of HCPCS codes}
+\item{primary}{\verb{<chr>} vector of HCPCS codes}
 
-\item{type}{AOC edit type; \code{1}, \code{2}, \code{3}}
+\item{type}{\verb{<int>} AOC edit type; \code{1}, \code{2}, \code{3}}
 
 \item{...}{Empty}
 }

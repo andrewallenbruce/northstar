@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{search_rvu}
 \alias{search_rvu}
-\title{Search Relative Value File}
+\title{Relative Value File}
 \usage{
 search_rvu(hcpcs = NULL, ...)
 }
@@ -15,7 +15,7 @@ search_rvu(hcpcs = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Search Relative Value File
+Relative Value File
 }
 \examples{
 search_rvu(c("A0021", "V5362", "J9264", "G8916"))

@@ -10,10 +10,10 @@ utils::globalVariables(c(
   "asc",
   # <case_chapter>
   "chapter",
+  # <icd10cm>
+  "chapter_sections",
   # <search_adjustments>
   "code",
-  # <icd10cm>
-  "codes",
   # <search_hcpcs>
   "coverage",
   # <col_lb>
@@ -79,7 +79,7 @@ utils::globalVariables(c(
   # <search_rbcs>
   "rbcs_family",
   # <icd10cm>
-  "sections",
+  "section_codes",
   # <search_fee_schedule>
   "status",
   # <search_hcpcs>

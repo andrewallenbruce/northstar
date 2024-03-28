@@ -96,28 +96,24 @@ search_fee_schedule(
          "Team Surgery" = team_description,
          ) |>
   display_long() |>
-  gt(rowname_col = "name") |>
-  tab_row_group(
-    label = "Descriptions",
-    rows = matches("(Description | Consumer | Clinician)"),
-  ) |> 
+  gt(groupname_col = "name", row_group_as_column = TRUE) |>
+
   gt_style(tablign = "right", tabsize = 14, tabwt = "bold") |> 
   sub_missing(missing_text = "Concept Does Not Apply") |> 
   fmt_markdown() |> 
   tab_style(
       style = cell_text(
       font = google_font(name = "Fira Code")),
-      locations = cells_body(columns = contains("value"))) |>
-  tab_style(
-    style = cell_borders(
-      sides = c("all"),
-      color = "powderblue",
-      weight = px(3)),
-    locations = cells_row_groups()) |>
+      locations = cells_body(
+        columns = contains("value"))) |>
   tab_style(
     style = list(
       cell_fill(color = "powderblue"),
-      cell_text(weight = "bold")
+      cell_text(weight = "bold"),
+      cell_borders(
+      sides = c("all"),
+      color = "powderblue",
+      weight = px(3))
       ),
     locations = cells_row_groups())
 ```

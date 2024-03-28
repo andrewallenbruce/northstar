@@ -7,11 +7,11 @@
 search_ptp(column_1 = NULL, column_2 = NULL, mod = NULL, ...)
 }
 \arguments{
-\item{column_1}{vector of HCPCS codes}
+\item{column_1}{\verb{<chr>} Comprehensive HCPCS code}
 
-\item{column_2}{vector of HCPCS codes}
+\item{column_2}{\verb{<chr>} Component HCPCS code}
 
-\item{mod}{1 (Allowed), 0 (Not Allowed), 9 (Not Applicable)}
+\item{mod}{\verb{<int>} \code{1} = Allowed, \code{0} = Not Allowed, \code{9} = Not Applicable}
 
 \item{...}{Empty}
 }
@@ -21,13 +21,14 @@ a \link[tibble:tibble-package]{tibble}
 \description{
 National Correct Coding Initiative (NCCI) Procedure-to-Procedure (PTP) edits
 prevent inappropriate payment of services that should not be reported
-together. Each edit has a Column One and Column Two HCPCS/CPT code. If a
-provider reports the two codes of an edit pair for the same beneficiary on
-the same date of service, the Column One code is eligible for payment, but
-the Column Two code is denied unless a clinically appropriate NCCI
-PTP-associated modifier is also reported.
+together. Each edit has a Column One and Column Two HCPCS/CPT code.
 }
 \details{
+If a provider reports the two codes of an edit pair for the same beneficiary
+on the same date of service, the Column One code is eligible for payment,
+but the Column Two code is denied unless a clinically appropriate NCCI
+PTP-associated modifier is also reported.
+
 \href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits}{PTP Link}
 }
 \examples{

@@ -7,16 +7,22 @@
 National Institute of Health/National Library of Medicine
 }
 \usage{
-icd10api(code = NULL, term = NULL, field = c("both", "code"), limit = 500, ...)
+icd10api(
+  code = NULL,
+  term = NULL,
+  field = c("both", "code"),
+  limit = 500L,
+  ...
+)
 }
 \arguments{
-\item{code}{All or part of an ICD-10-CM code}
+\item{code}{\verb{<chr>} All or part of an ICD-10-CM code}
 
-\item{term}{Associated term describing an ICD-10 code}
+\item{term}{\verb{<chr>} Associated term describing an ICD-10 code}
 
-\item{field}{options are "code" or "both"; default is "both"}
+\item{field}{\verb{<chr>} \code{code} or \code{both}; default is \code{both}}
 
-\item{limit}{API limit is 500; defaults to 10}
+\item{limit}{\verb{<int>} API limit, defaults to 500}
 
 \item{...}{Empty}
 }
@@ -56,7 +62,7 @@ icd10api(term = "pleurisy")
 
 # If you're searching for codes beginning
 # with a certain letter, you must set the
-# `field` param to `code` or it will
+# `field` param to `"code"` or it will
 # search for terms as well:
 
 # Returns terms containing the letter "Z"

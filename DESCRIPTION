@@ -21,7 +21,8 @@ Imports:
     rlang,
     stringr,
     tidyr,
-    vctrs
+    vctrs,
+    fs
 Suggests:
     clock,
     pracma,

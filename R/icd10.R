@@ -14,10 +14,10 @@
 #' @note Current Version: ICD-10-CM **2024**
 #' @source National Institute of Health/National Library of Medicine
 #'
-#' @param code All or part of an ICD-10-CM code
-#' @param term Associated term describing an ICD-10 code
-#' @param field options are "code" or "both"; default is "both"
-#' @param limit API limit is 500; defaults to 10
+#' @param code `<chr>` All or part of an ICD-10-CM code
+#' @param term `<chr>` Associated term describing an ICD-10 code
+#' @param field `<chr>` `code` or `both`; default is `both`
+#' @param limit `<int>` API limit, defaults to 500
 #' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -37,7 +37,7 @@
 #'
 #' # If you're searching for codes beginning
 #' # with a certain letter, you must set the
-#' # `field` param to `code` or it will
+#' # `field` param to `"code"` or it will
 #' # search for terms as well:
 #'
 #' # Returns terms containing the letter "Z"
@@ -50,7 +50,7 @@
 icd10api <- function(code  = NULL,
                      term  = NULL,
                      field = c("both", "code"),
-                     limit = 500,
+                     limit = 500L,
                      ...) {
 
   stopifnot("Both `code` and `term` cannot be NULL" = all(!is.null(c(code, term))))
@@ -143,7 +143,7 @@ icd10api <- function(code  = NULL,
 #' diagnoses and reasons for visits in U.S. health care settings.
 #'
 #'
-#' @param code vector of ICD-10-CM codes
+#' @param code `<chr>` vector of ICD-10-CM codes
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' icd10cm(c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
@@ -156,8 +156,8 @@ icd10cm <- function(code = NULL) {
 
   if (!is.null(code)) {
 
-    icd <- tidyr::unnest(icd, sections) |>
-      tidyr::unnest(codes)
+    icd <- tidyr::unnest(icd, chapter_sections) |>
+      tidyr::unnest(section_codes)
 
     icd <- vctrs::vec_slice(icd,
            vctrs::vec_in(icd$code,
@@ -167,8 +167,8 @@ icd10cm <- function(code = NULL) {
 }
 
 #' Add ICD-10-CM Chapter Labels
-#' @param df data frame
-#' @param col column of ICD-10-CM codes to match on
+#' @param df `<chr>`data frame
+#' @param col `<sym>` column of ICD-10-CM codes to match on
 #' @return A [tibble][tibble::tibble-package] with a `chapter` column
 #' @examples
 #' dplyr::tibble(code = c(

@@ -7,9 +7,9 @@
 case_chapter_icd10(df, col)
 }
 \arguments{
-\item{df}{data frame}
+\item{df}{\verb{<chr>}data frame}
 
-\item{col}{column of ICD-10-CM codes to match on}
+\item{col}{\verb{<sym>} column of ICD-10-CM codes to match on}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with a \code{chapter} column

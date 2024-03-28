@@ -1,4 +1,4 @@
-#' Search Relative Value File
+#' Relative Value File
 #'
 #' @param hcpcs `<chr>` 5-digit HCPCS code
 #' @param ... Empty
@@ -20,7 +20,7 @@ search_rvu <- function(hcpcs = NULL, ...) {
   return(rv)
 }
 
-#' Search Payment Amount File
+#' Payment Amount File
 #'
 #' @param hcpcs `<chr>` 5-digit HCPCS code
 #' @param mac `<chr>` 5-digit MAC ID code
@@ -60,7 +60,7 @@ search_payment <- function(hcpcs    = NULL,
   return(pmt)
 }
 
-#' Search Geographic Practice Cost Indices
+#' Geographic Practice Cost Indices
 #'
 #' @param mac `<chr>` 5-digit MAC code
 #' @param state `<chr>` 2-character State abbreviation
@@ -99,7 +99,7 @@ search_gpci <- function(mac      = NULL,
   return(gp)
 }
 
-#' Search HCPCS Level II
+#' HCPCS Level II Codes
 #'
 #' @param hcpcs `<chr>` 5-digit Level II HCPCS code
 #' @param limit `<lgl>` limit columns returned, default is `TRUE`
@@ -145,7 +145,7 @@ search_hcpcs <- function(hcpcs = NULL,
   return(l2)
 }
 
-#' Search HCPCS Level I (CPT) Codes
+#' CPT (HCPCS Level I) Codes
 #'
 #' @param hcpcs `<chr>` 5-digit CPT codes
 #' @param ... Empty

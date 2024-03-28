@@ -7,11 +7,11 @@
 search_mue(hcpcs = NULL, service = NULL, mai = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{vector of HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of HCPCS codes}
 
-\item{service}{vector of HCPCS codes}
+\item{service}{\verb{<chr>} service type; one of DME Supplier, Outpatient Hospital, Practitioner}
 
-\item{mai}{MUE adjudication indicator; \code{1}, \code{2}, \code{3}}
+\item{mai}{\verb{<int>} MUE adjudication indicator; \code{1}, \code{2}, \code{3}}
 
 \item{...}{Empty}
 }

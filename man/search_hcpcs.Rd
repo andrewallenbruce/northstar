@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{search_hcpcs}
 \alias{search_hcpcs}
-\title{Search HCPCS Level II}
+\title{HCPCS Level II Codes}
 \usage{
 search_hcpcs(hcpcs = NULL, limit = TRUE, ...)
 }
@@ -17,7 +17,7 @@ search_hcpcs(hcpcs = NULL, limit = TRUE, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Search HCPCS Level II
+HCPCS Level II Codes
 }
 \examples{
 search_hcpcs(c("A0021", "V5362", "J9264", "G8916"))

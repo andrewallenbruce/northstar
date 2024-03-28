@@ -7,7 +7,7 @@
 ^docs$
 ^pkgdown$
 ^\.github$
-^pins$
 ^vignettes/articles$
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$
+^man-roxygen$

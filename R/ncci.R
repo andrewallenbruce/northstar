@@ -48,9 +48,9 @@
 #'
 #' [Add-Ons Link](https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits)
 #'
-#' @param addon vector of HCPCS codes
-#' @param primary vector of HCPCS codes
-#' @param type AOC edit type; `1`, `2`, `3`
+#' @param addon `<chr>` vector of HCPCS codes
+#' @param primary `<chr>` vector of HCPCS codes
+#' @param type `<int>` AOC edit type; `1`, `2`, `3`
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -150,9 +150,9 @@ search_addons <- function(addon   = NULL,
 #'
 #' [MUE Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
 #'
-#' @param hcpcs vector of HCPCS codes
-#' @param service vector of HCPCS codes
-#' @param mai MUE adjudication indicator; `1`, `2`, `3`
+#' @param hcpcs `<chr>` vector of HCPCS codes
+#' @param service `<chr>` service type; one of DME Supplier, Outpatient Hospital, Practitioner
+#' @param mai `<int>` MUE adjudication indicator; `1`, `2`, `3`
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
@@ -193,17 +193,18 @@ search_mue <- function(hcpcs   = NULL,
 #'
 #' National Correct Coding Initiative (NCCI) Procedure-to-Procedure (PTP) edits
 #' prevent inappropriate payment of services that should not be reported
-#' together. Each edit has a Column One and Column Two HCPCS/CPT code. If a
-#' provider reports the two codes of an edit pair for the same beneficiary on
-#' the same date of service, the Column One code is eligible for payment, but
-#' the Column Two code is denied unless a clinically appropriate NCCI
+#' together. Each edit has a Column One and Column Two HCPCS/CPT code.
+#'
+#' If a provider reports the two codes of an edit pair for the same beneficiary
+#' on the same date of service, the Column One code is eligible for payment,
+#' but the Column Two code is denied unless a clinically appropriate NCCI
 #' PTP-associated modifier is also reported.
 #'
 #' [PTP Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits)
 #'
-#' @param column_1 vector of HCPCS codes
-#' @param column_2 vector of HCPCS codes
-#' @param mod 1 (Allowed), 0 (Not Allowed), 9 (Not Applicable)
+#' @param column_1 `<chr>` Comprehensive HCPCS code
+#' @param column_2 `<chr>` Component HCPCS code
+#' @param mod `<int>` `1` = Allowed, `0` = Not Allowed, `9` = Not Applicable
 #' @param ... Empty
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
