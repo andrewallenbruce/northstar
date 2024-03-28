@@ -69,6 +69,7 @@ reference:
   contents:
   - icd10cm
   - icd10api
+  - compare_addons
   - matches("search")
   - lcd
   - ncd
