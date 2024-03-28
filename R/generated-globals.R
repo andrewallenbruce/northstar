@@ -6,6 +6,8 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
+  # <compare_addons>
+  "addon",
   # <search_hcpcs>
   "asc",
   # <case_chapter>
@@ -74,6 +76,8 @@ utils::globalVariables(c(
   "pgpci",
   # <search_hcpcs>
   "price",
+  # <compare_addons>
+  "primary",
   # <search_rbcs>
   "rbcs_category",
   # <search_rbcs>
@@ -84,6 +88,8 @@ utils::globalVariables(c(
   "status",
   # <search_hcpcs>
   "tos",
+  # <compare_addons>
+  "type",
   # <search_adjustments>
   "usage",
   # <icd10api>
