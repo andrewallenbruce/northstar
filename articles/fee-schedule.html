@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">northstar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,11 +127,11 @@
 <span>  locality <span class="op">=</span> <span class="st">"99"</span>,</span>
 <span>  mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">remove_empty</span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rowwise</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>descriptions_clinician <span class="op">=</span> <span class="fu">map</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>descriptions_clinician <span class="op">=</span> <span class="fu">map</span><span class="op">(</span></span>
 <span>    <span class="va">descriptions_clinician</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">.</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">descriptions_clinician</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/case_multproc.html">case_multproc</a></span><span class="op">(</span><span class="va">mult_proc</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_global.html">case_global</a></span><span class="op">(</span><span class="va">global</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_cosurg.html">case_cosurg</a></span><span class="op">(</span><span class="va">surg_co</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -145,7 +145,7 @@
 <span>  <span class="fu"><a href="../reference/case_opps.html">case_opps</a></span><span class="op">(</span><span class="va">opps</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/case_chapter_cpt.html">case_chapter_cpt</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/case_category.html">case_category</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="st">"CPT Code"</span>                     <span class="op">=</span> <span class="va">hcpcs</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"CPT Code"</span>                     <span class="op">=</span> <span class="va">hcpcs</span>,</span>
 <span>         Description                    <span class="op">=</span> <span class="va">description</span>,</span>
 <span>         Consumer                       <span class="op">=</span> <span class="va">description_consumer</span>,</span>
 <span>         Clinician                      <span class="op">=</span> <span class="va">descriptions_clinician</span>,</span>
@@ -198,7 +198,7 @@
 <span>      font                 <span class="op">=</span> <span class="fu">google_font</span><span class="op">(</span></span>
 <span>      name                 <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      locations            <span class="op">=</span> <span class="fu">cells_body</span><span class="op">(</span></span>
-<span>        columns            <span class="op">=</span> <span class="fu">contains</span><span class="op">(</span><span class="st">"value"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        columns            <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"value"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tab_style</span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>      <span class="fu">cell_fill</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"powderblue"</span><span class="op">)</span>,</span>
@@ -209,26 +209,26 @@
 <span>      weight <span class="op">=</span> <span class="fu">px</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="op">)</span>,</span>
 <span>    locations <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="uvhaivugjl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="houmflsyav" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#uvhaivugjl table {
+#houmflsyav table {
   font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uvhaivugjl thead, #uvhaivugjl tbody, #uvhaivugjl tfoot, #uvhaivugjl tr, #uvhaivugjl td, #uvhaivugjl th {
+#houmflsyav thead, #houmflsyav tbody, #houmflsyav tfoot, #houmflsyav tr, #houmflsyav td, #houmflsyav th {
   border-style: none;
 }
 
-#uvhaivugjl p {
+#houmflsyav p {
   margin: 0;
   padding: 0;
 }
 
-#uvhaivugjl .gt_table {
+#houmflsyav .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -254,12 +254,12 @@
   border-left-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_caption {
+#houmflsyav .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uvhaivugjl .gt_title {
+#houmflsyav .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -271,7 +271,7 @@
   border-bottom-width: 0;
 }
 
-#uvhaivugjl .gt_subtitle {
+#houmflsyav .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -283,7 +283,7 @@
   border-top-width: 0;
 }
 
-#uvhaivugjl .gt_heading {
+#houmflsyav .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -295,13 +295,13 @@
   border-right-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_bottom_border {
+#houmflsyav .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_col_headings {
+#houmflsyav .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -316,7 +316,7 @@
   border-right-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_col_heading {
+#houmflsyav .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -336,7 +336,7 @@
   overflow-x: hidden;
 }
 
-#uvhaivugjl .gt_column_spanner_outer {
+#houmflsyav .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -348,15 +348,15 @@
   padding-right: 4px;
 }
 
-#uvhaivugjl .gt_column_spanner_outer:first-child {
+#houmflsyav .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uvhaivugjl .gt_column_spanner_outer:last-child {
+#houmflsyav .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uvhaivugjl .gt_column_spanner {
+#houmflsyav .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -368,11 +368,11 @@
   width: 100%;
 }
 
-#uvhaivugjl .gt_spanner_row {
+#houmflsyav .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uvhaivugjl .gt_group_heading {
+#houmflsyav .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -398,7 +398,7 @@
   text-align: left;
 }
 
-#uvhaivugjl .gt_empty_group_heading {
+#houmflsyav .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -413,15 +413,15 @@
   vertical-align: middle;
 }
 
-#uvhaivugjl .gt_from_md > :first-child {
+#houmflsyav .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uvhaivugjl .gt_from_md > :last-child {
+#houmflsyav .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uvhaivugjl .gt_row {
+#houmflsyav .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -440,7 +440,7 @@
   overflow-x: hidden;
 }
 
-#uvhaivugjl .gt_stub {
+#houmflsyav .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -453,7 +453,7 @@
   padding-right: 5px;
 }
 
-#uvhaivugjl .gt_stub_row_group {
+#houmflsyav .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -467,15 +467,15 @@
   vertical-align: top;
 }
 
-#uvhaivugjl .gt_row_group_first td {
+#houmflsyav .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uvhaivugjl .gt_row_group_first th {
+#houmflsyav .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uvhaivugjl .gt_summary_row {
+#houmflsyav .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -485,16 +485,16 @@
   padding-right: 5px;
 }
 
-#uvhaivugjl .gt_first_summary_row {
+#houmflsyav .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_first_summary_row.thick {
+#houmflsyav .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uvhaivugjl .gt_last_summary_row {
+#houmflsyav .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -504,7 +504,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_grand_summary_row {
+#houmflsyav .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -514,7 +514,7 @@
   padding-right: 5px;
 }
 
-#uvhaivugjl .gt_first_grand_summary_row {
+#houmflsyav .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -524,7 +524,7 @@
   border-top-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_last_grand_summary_row_top {
+#houmflsyav .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -534,11 +534,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_striped {
+#houmflsyav .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uvhaivugjl .gt_table_body {
+#houmflsyav .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -547,7 +547,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_footnotes {
+#houmflsyav .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -561,7 +561,7 @@
   border-right-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_footnote {
+#houmflsyav .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -570,7 +570,7 @@
   padding-right: 5px;
 }
 
-#uvhaivugjl .gt_sourcenotes {
+#houmflsyav .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -584,7 +584,7 @@
   border-right-color: #D3D3D3;
 }
 
-#uvhaivugjl .gt_sourcenote {
+#houmflsyav .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -592,63 +592,63 @@
   padding-right: 5px;
 }
 
-#uvhaivugjl .gt_left {
+#houmflsyav .gt_left {
   text-align: left;
 }
 
-#uvhaivugjl .gt_center {
+#houmflsyav .gt_center {
   text-align: center;
 }
 
-#uvhaivugjl .gt_right {
+#houmflsyav .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uvhaivugjl .gt_font_normal {
+#houmflsyav .gt_font_normal {
   font-weight: normal;
 }
 
-#uvhaivugjl .gt_font_bold {
+#houmflsyav .gt_font_bold {
   font-weight: bold;
 }
 
-#uvhaivugjl .gt_font_italic {
+#houmflsyav .gt_font_italic {
   font-style: italic;
 }
 
-#uvhaivugjl .gt_super {
+#houmflsyav .gt_super {
   font-size: 65%;
 }
 
-#uvhaivugjl .gt_footnote_marks {
+#houmflsyav .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uvhaivugjl .gt_asterisk {
+#houmflsyav .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uvhaivugjl .gt_indent_1 {
+#houmflsyav .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uvhaivugjl .gt_indent_2 {
+#houmflsyav .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uvhaivugjl .gt_indent_3 {
+#houmflsyav .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uvhaivugjl .gt_indent_4 {
+#houmflsyav .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uvhaivugjl .gt_indent_5 {
+#houmflsyav .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -797,49 +797,49 @@
 <tr class="gt_row_group_first">
 <td headers="Total Facility RVUs stub_1_24 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Total Facility RVUs</td>
 <td headers="Total Facility RVUs stub_1_24 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>170.25737</p>
+<p>170.26</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Total Non-Facility RVUs stub_1_25 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Total Non-Facility RVUs</td>
 <td headers="Total Non-Facility RVUs stub_1_25 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>170.25737</p>
+<p>170.26</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Facility PAR Fee stub_1_26 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Facility PAR Fee</td>
 <td headers="Facility PAR Fee stub_1_26 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>5574.941374754</p>
+<p>5575.03</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Non-Facility PAR Fee stub_1_27 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Non-Facility PAR Fee</td>
 <td headers="Non-Facility PAR Fee stub_1_27 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>5574.941374754</p>
+<p>5575.03</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Facility NON-PAR Fee stub_1_28 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Facility NON-PAR Fee</td>
 <td headers="Facility NON-PAR Fee stub_1_28 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>5296.1943060163</p>
+<p>5296.28</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Non-Facility NON-PAR Fee stub_1_29 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Non-Facility NON-PAR Fee</td>
 <td headers="Non-Facility NON-PAR Fee stub_1_29 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>5296.1943060163</p>
+<p>5296.28</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Facility Limiting Charge stub_1_30 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Facility Limiting Charge</td>
 <td headers="Facility Limiting Charge stub_1_30 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>6090.62345191875</p>
+<p>6090.72</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Non-Facility Limiting Charge stub_1_31 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Non-Facility Limiting Charge</td>
 <td headers="Non-Facility Limiting Charge stub_1_31 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>6090.62345191875</p>
+<p>6090.72</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
@@ -897,17 +897,15 @@
 <h2 id="icd-10-cm">ICD-10-CM<a class="anchor" aria-label="anchor" href="#icd-10-cm"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"F50.82"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    Chapter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, </span>
-<span>                     <span class="va">chapter_name</span>, <span class="st">" \n "</span>,</span>
-<span>                     <span class="st">"* Range: ["</span>,</span>
-<span>                     <span class="va">chapter_range</span>, <span class="st">"]"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="st">"ICD-10-Code"</span>   <span class="op">=</span> <span class="va">code</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"I10"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Chapter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">chapter_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">chapter_range</span>, <span class="st">"]"</span><span class="op">)</span>,</span>
+<span>         Section <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">section_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">section_range</span>, <span class="st">"]"</span><span class="op">)</span></span>
+<span>         <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"ICD-10-Code"</span>   <span class="op">=</span> <span class="va">code</span>, </span>
 <span>         Description     <span class="op">=</span> <span class="va">description</span>, </span>
 <span>         <span class="va">Chapter</span>,</span>
-<span>         Section         <span class="op">=</span> <span class="va">section_name</span>,</span>
-<span>         Abbreviation    <span class="op">=</span> <span class="va">chapter_abb</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>         <span class="va">Section</span>,</span>
+<span>         Abbreviation    <span class="op">=</span> <span class="va">abb</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>groupname_col       <span class="op">=</span> <span class="st">"name"</span>, </span>
 <span>     row_group_as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -919,7 +917,7 @@
 <span>      style              <span class="op">=</span> <span class="fu">cell_text</span><span class="op">(</span></span>
 <span>      font               <span class="op">=</span> <span class="fu">google_font</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      locations          <span class="op">=</span> <span class="fu">cells_body</span><span class="op">(</span></span>
-<span>        columns          <span class="op">=</span> <span class="fu">contains</span><span class="op">(</span><span class="st">"value"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        columns          <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"value"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tab_style</span><span class="op">(</span></span>
 <span>    style                <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>      <span class="fu">cell_fill</span><span class="op">(</span>color    <span class="op">=</span> <span class="st">"powderblue"</span><span class="op">)</span>,</span>
@@ -930,9 +928,484 @@
 <span>      weight             <span class="op">=</span> <span class="fu">px</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="op">)</span>,</span>
 <span>    locations            <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't select columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `chapter_abb` doesn't exist.</span></span></code></pre>
+<div id="cuwjmvihhy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#cuwjmvihhy table {
+  font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cuwjmvihhy thead, #cuwjmvihhy tbody, #cuwjmvihhy tfoot, #cuwjmvihhy tr, #cuwjmvihhy td, #cuwjmvihhy th {
+  border-style: none;
+}
+
+#cuwjmvihhy p {
+  margin: 0;
+  padding: 0;
+}
+
+#cuwjmvihhy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cuwjmvihhy .gt_title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cuwjmvihhy .gt_subtitle {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cuwjmvihhy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cuwjmvihhy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cuwjmvihhy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cuwjmvihhy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cuwjmvihhy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cuwjmvihhy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cuwjmvihhy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cuwjmvihhy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cuwjmvihhy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cuwjmvihhy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cuwjmvihhy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cuwjmvihhy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cuwjmvihhy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cuwjmvihhy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cuwjmvihhy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cuwjmvihhy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cuwjmvihhy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cuwjmvihhy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cuwjmvihhy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cuwjmvihhy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cuwjmvihhy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cuwjmvihhy .gt_sourcenote {
+  font-size: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cuwjmvihhy .gt_left {
+  text-align: left;
+}
+
+#cuwjmvihhy .gt_center {
+  text-align: center;
+}
+
+#cuwjmvihhy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cuwjmvihhy .gt_font_normal {
+  font-weight: normal;
+}
+
+#cuwjmvihhy .gt_font_bold {
+  font-weight: bold;
+}
+
+#cuwjmvihhy .gt_font_italic {
+  font-style: italic;
+}
+
+#cuwjmvihhy .gt_super {
+  font-size: 65%;
+}
+
+#cuwjmvihhy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cuwjmvihhy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cuwjmvihhy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cuwjmvihhy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cuwjmvihhy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cuwjmvihhy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cuwjmvihhy .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><tbody class="gt_table_body">
+<tr class="gt_row_group_first">
+<td headers="ICD-10-Code stub_1_1 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">ICD-10-Code</td>
+<td headers="ICD-10-Code stub_1_1 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<p>I10</p>
+</div></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Description stub_1_2 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Description</td>
+<td headers="Description stub_1_2 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<p>Essential (primary) hypertension</p>
+</div></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Chapter stub_1_3 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Chapter</td>
+<td headers="Chapter stub_1_3 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md"><ul>
+<li>Diseases of the circulatory system</li>
+<li>Range: [I00 - I99]</li>
+</ul></div></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Section stub_1_4 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Section</td>
+<td headers="Section stub_1_4 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md"><ul>
+<li>Other rheumatic heart diseases</li>
+<li>Range: [I09 - I10]</li>
+</ul></div></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Abbreviation stub_1_5 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Abbreviation</td>
+<td headers="Abbreviation stub_1_5 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<p>CARDIO</p>
+</div></td>
+</tr>
+</tbody></table>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
