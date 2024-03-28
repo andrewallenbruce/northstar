@@ -1,5 +1,7 @@
 aoc:
 - aoc/20240327T060542Z-89a21/
+aoc_vecs:
+- aoc_vecs/20240328T164856Z-50877/
 cpt_descriptors:
 - cpt_descriptors/20240324T135528Z-36949/
 gpci:

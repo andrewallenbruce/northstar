@@ -2,9 +2,9 @@
 % Please edit documentation in R/icd10.R
 \name{icd10api}
 \alias{icd10api}
-\title{Search the NLM's ICD-10-CM API}
+\title{National Library of Medicine's ICD-10-CM API}
 \source{
-National Institute of Health/National Library of Medicine
+National Library of Medicine/National Institute of Health
 }
 \usage{
 icd10api(
@@ -16,7 +16,7 @@ icd10api(
 )
 }
 \arguments{
-\item{code}{\verb{<chr>} All or part of an ICD-10-CM code}
+\item{code}{\verb{<chr>} ICD-10-CM code}
 
 \item{term}{\verb{<chr>} Associated term describing an ICD-10 code}
 

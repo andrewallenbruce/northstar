@@ -260,3 +260,27 @@ is_category_III <- function(x,
 
   stringr::str_detect(x, stringr::regex("^\\d{4}[T]$"))
 }
+
+#' What type of Add-On Code is a HCPCS Code?
+#' @param hcpcs `<chr>` vector of HCPCS codes
+#' @return `<list>` of three vectors: `primary`, `addon`, `both`
+#' @examples
+#' is_aoc_type(c("11646", "0074T"))
+#'
+#' c("22633", "22630", "22532", "77001", "88334", "0715T", "64727") |>
+#' is_aoc_type()
+#' @export
+#' @autoglobal
+is_aoc_type <- function(hcpcs) {
+
+  hcpcs <- collapse::funique(hcpcs)
+
+  vc <- pins::pin_read(mount_board(), "aoc_vecs")
+
+  list(
+    primary = vctrs::vec_slice(hcpcs, vctrs::vec_in(hcpcs, vc$primary)),
+    addon   = vctrs::vec_slice(hcpcs, vctrs::vec_in(hcpcs, vc$addon)),
+    both    = vctrs::vec_slice(hcpcs, vctrs::vec_in(hcpcs, vc$both))
+  ) |>
+    purrr::compact(.p = vctrs::vec_is_empty)
+}

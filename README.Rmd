@@ -40,6 +40,7 @@ pak::pak("andrewallenbruce/northstar")
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
+library(dplyr)
 ```
 
 
@@ -50,14 +51,15 @@ search_fee_schedule(
   hcpcs    = "33935",
   state    = "GA",
   locality = "01",
-  mac      = "10212"
-)
+  mac      = "10212") |> 
+  glimpse()
 ```
 
 ### Search ICD-10-CM
 
 ```{r}
-icd10cm(code = "T38.0X1A")
+icd10cm(code = "T38.0X1A") |> 
+  glimpse()
 ```
 
 

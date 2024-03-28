@@ -2,7 +2,7 @@
 % Please edit documentation in R/icd10.R
 \name{icd10cm}
 \alias{icd10cm}
-\title{2024 ICD-10-CM Codes}
+\title{ICD-10-CM Codes}
 \usage{
 icd10cm(code = NULL, ...)
 }

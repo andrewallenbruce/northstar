@@ -114,14 +114,14 @@ search_fee_schedule <- function(hcpcs,
 
   res |>
     dplyr::mutate(
-      frvus  = sum(wrvu * wgpci, fprvu * pgpci, mrvu * mgpci),
-      nrvus  = sum(wrvu * wgpci, nfprvu * pgpci, mrvu * mgpci),
-      fpar   = frvus * 32.7442,
-      npar   = nrvus * 32.7442,
-      fnpar  = fpar * 0.95,
-      nfnpar = npar * 0.95,
-      flim   = fpar * 1.0925,
-      nlim   = npar * 1.0925) |>
+      frvus  = janitor::round_half_up(sum(wrvu * wgpci, fprvu * pgpci, mrvu * mgpci), 2),
+      nrvus  = janitor::round_half_up(sum(wrvu * wgpci, nfprvu * pgpci, mrvu * mgpci), 2),
+      fpar   = janitor::round_half_up(frvus * 32.7442, 2),
+      npar   = janitor::round_half_up(nrvus * 32.7442, 2),
+      fnpar  = janitor::round_half_up(fpar * 0.95, 2),
+      nfnpar = janitor::round_half_up(npar * 0.95, 2),
+      flim   = janitor::round_half_up(fpar * 1.0925, 2),
+      nlim   = janitor::round_half_up(npar * 1.0925, 2)) |>
     cols_amounts()
 }
 

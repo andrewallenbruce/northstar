@@ -1,4 +1,4 @@
-#' Search the NLM's ICD-10-CM API
+#' National Library of Medicine's ICD-10-CM API
 #'
 #' @description [icd10api()] allows you to search the National Library of
 #'    Medicine's ICD-10-CM API by code or associated term.
@@ -12,9 +12,9 @@
 #'  * [Learn more about ICD-10-CM.](http://www.cdc.gov/nchs/icd/icd10cm.htm)
 #'
 #' @note Current Version: ICD-10-CM **2024**
-#' @source National Institute of Health/National Library of Medicine
+#' @source National Library of Medicine/National Institute of Health
 #'
-#' @param code `<chr>` All or part of an ICD-10-CM code
+#' @param code `<chr>` ICD-10-CM code
 #' @param term `<chr>` Associated term describing an ICD-10 code
 #' @param field `<chr>` `code` or `both`; default is `both`
 #' @param limit `<int>` API limit, defaults to 500
@@ -136,7 +136,7 @@ icd10api <- function(code  = NULL,
 
 }
 
-#' 2024 ICD-10-CM Codes
+#' ICD-10-CM Codes
 #'
 #' ICD-10-CM (International Classification of Diseases, 10th Revision,
 #' Clinical Modification) is a medical coding system for classifying
