@@ -74,7 +74,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>What type of Add-On Code is a HCPCS Code?</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/R/checks.R" class="external-link"><code>R/checks.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/R/addons.R" class="external-link"><code>R/addons.R</code></a></small>
       <div class="d-none name"><code>is_aoc_type.Rd</code></div>
     </div>
 
@@ -84,7 +84,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_aoc_type</span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_aoc_type</span><span class="op">(</span><span class="va">hcpcs</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -92,12 +92,16 @@
     <dl><dt>hcpcs</dt>
 <dd><p><code>&lt;chr&gt;</code> vector of HCPCS codes</p></dd>
 
+
+<dt>...</dt>
+<dd><p>Empty</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p><code>&lt;list&gt;</code> of three vectors: <code>primary</code>, <code>addon</code>, <code>both</code></p>
+<p><code>&lt;list&gt;</code> of three <code>&lt;chr&gt;</code> vectors: <code>primary</code>, <code>addon</code>, <code>both</code></p>
 
 
     </div>
