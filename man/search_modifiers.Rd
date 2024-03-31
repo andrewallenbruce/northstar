@@ -7,7 +7,7 @@
 search_modifiers(mod = NULL, ...)
 }
 \arguments{
-\item{mod}{\emph{\if{html}{\out{<chr>}}} 2-digit HCPCS modifier}
+\item{mod}{\verb{<chr>} vector of 2-character HCPCS modifiers; default is \code{NULL}}
 
 \item{...}{Empty}
 }
@@ -25,4 +25,5 @@ payment policy requirements established by other entities.
 }
 \examples{
 search_modifiers(mod = c("25", "59"))
+
 }

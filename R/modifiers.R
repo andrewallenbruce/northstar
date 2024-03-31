@@ -7,22 +7,32 @@
 #' Modifiers also enable health care professionals to effectively respond to
 #' payment policy requirements established by other entities.
 #'
-#' @param mod *<chr>* 2-digit HCPCS modifier
+#' @param mod `<chr>` vector of 2-character HCPCS modifiers; default is `NULL`
+#'
 #' @param ... Empty
+#'
 #' @template returns
+#'
 #' @examples
 #' search_modifiers(mod = c("25", "59"))
+#'
 #' @export
+#'
 #' @autoglobal
-search_modifiers <- function(mod = NULL,
-                             ...) {
+search_modifiers <- function(mod = NULL, ...) {
 
-  md <- pins::pin_read(mount_board(), "modifiers")
+  md <- pins::pin_read(
+    mount_board(),
+    "modifiers"
+    )
 
   if (!is.null(mod)) {
-    md <- vctrs::vec_slice(md,
-          vctrs::vec_in(md$mod,
-          collapse::funique(mod)))
+
+    md <- search_in(
+      df     = md,
+      dfcol  = md$mod,
+      search = mod
+      )
   }
   return(md)
 }

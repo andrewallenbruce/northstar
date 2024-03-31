@@ -55,14 +55,7 @@ search_fee_schedule(
   glimpse()
 ```
 
-### Search ICD-10-CM
 
-```{r}
-icd10cm(code = "T38.0X1A") |> 
-  glimpse()
-```
-
-## NCCI Edits
 
 
 ------------------------------------------------------------------------------

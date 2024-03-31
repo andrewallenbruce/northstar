@@ -12,8 +12,6 @@ utils::globalVariables(c(
   "asc",
   # <case_chapter>
   "chapter",
-  # <icd10cm>
-  "chapter_sections",
   # <search_adjustments>
   "code",
   # <search_hcpcs>
@@ -82,8 +80,6 @@ utils::globalVariables(c(
   "rbcs_category",
   # <search_rbcs>
   "rbcs_family",
-  # <icd10cm>
-  "section_codes",
   # <search_fee_schedule>
   "status",
   # <search_hcpcs>
@@ -92,12 +88,6 @@ utils::globalVariables(c(
   "type",
   # <search_adjustments>
   "usage",
-  # <icd10api>
-  # <.multiple_request>
-  "V1",
-  # <icd10api>
-  # <.multiple_request>
-  "V2",
   # <col_lb>
   "var",
   # <search_fee_schedule>

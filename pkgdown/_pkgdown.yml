@@ -63,12 +63,10 @@ navbar:
 
 reference:
 
-- title: Medical Codesets
+- title: Search Codesets
   desc: >
     Medical Coding & Billing Codesets.
   contents:
-  - icd10cm
-  - icd10api
   - compare_addons
   - matches("search")
   - lcd
@@ -83,13 +81,13 @@ reference:
   - calculate_amounts
   - count_days
 
-- title: Checkers
+- title: Validation Checks
   desc: >
     Functions to validate inputs.
   contents:
   - starts_with("is_")
 
-- title: Labelling Functions
+- title: Recoding Helpers
   desc: >
     Utilities to label Codeset outputs.
   contents:

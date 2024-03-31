@@ -15,7 +15,6 @@ Imports:
     cli,
     collapse,
     dplyr,
-    httr2,
     pins,
     purrr,
     rlang,

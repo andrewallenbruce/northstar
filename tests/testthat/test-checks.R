@@ -1,8 +1,5 @@
 test_that("validation checks works", {
 
-  expect_equal(is_valid_icd("h00.019"), "H00.019")
-  expect_error(is_valid_icd("H0"))
-
   expect_equal(is_valid_length("11646"), "11646")
   expect_error(is_valid_length("1164"))
 

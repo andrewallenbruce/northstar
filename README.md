@@ -108,28 +108,6 @@ search_fee_schedule(
     > $ chapter                <chr> "Surgery"
     > $ range                  <chr> "10004 - 69990"
 
-### Search ICD-10-CM
-
-``` r
-icd10cm(code = "T38.0X1A") |> 
-  glimpse()
-```
-
-    > Rows: 1
-    > Columns: 10
-    > $ ch            <int> 19
-    > $ abb           <chr> "INJ"
-    > $ chapter_name  <chr> "Injury, poisoning and certain other consequences of ext…
-    > $ chapter_range <chr> "S00 - T88"
-    > $ section_name  <chr> "Poisoning by, adverse effect of and underdosing of horm…
-    > $ section_range <chr> "T38 - T38.996S"
-    > $ order         <int> 75443
-    > $ valid         <int> 1
-    > $ code          <chr> "T38.0X1A"
-    > $ description   <chr> "Poisoning by glucocorticoids and synthetic analogues, a…
-
-## NCCI Edits
-
 ------------------------------------------------------------------------
 
 ## :balance_scale: Code of Conduct
