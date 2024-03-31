@@ -104,11 +104,11 @@ meaningful categories based on the original <em>Berenson-Eggers Type of Service<
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>hcpcs</dt>
-<dd><p>&lt; <em>chr</em> &gt; vector of 5-digit HCPCS codes</p></dd>
+<dd><p><code>&lt;chr&gt;</code> vector of 5-digit HCPCS codes; default is <code>NULL</code></p></dd>
 
 
 <dt>category</dt>
-<dd><p>&lt; <em>chr</em> &gt; vector of RBCS categories:</p><ul><li><p><code>Procedure</code> (n = 6920)</p></li>
+<dd><p><code>&lt;chr&gt;</code> vector of RBCS categories:</p><ul><li><p><code>Procedure</code> (n = 6920)</p></li>
 <li><p><code>Test</code> (n = 3015)</p></li>
 <li><p><code>DME</code> (n = 2971)</p></li>
 <li><p><code>Treatment</code> (n = 1795)</p></li>
@@ -120,26 +120,26 @@ meaningful categories based on the original <em>Berenson-Eggers Type of Service<
 
 
 <dt>subcategory</dt>
-<dd><p>&lt; <em>chr</em> &gt; vector of RBCS subcategories (53 unique in total)</p></dd>
+<dd><p><code>&lt;chr&gt;</code> vector of RBCS subcategories (53 unique in total)</p></dd>
 
 
 <dt>family</dt>
-<dd><p>&lt; <em>chr</em> &gt; vector of RBCS families (178 unique in total)</p></dd>
+<dd><p><code>&lt;chr&gt;</code> vector of RBCS families (178 unique in total)</p></dd>
 
 
 <dt>procedure</dt>
-<dd><p>&lt; <em>chr</em> &gt; Procedure Type:</p><ul><li><p><code>Major</code> (n = 3676)</p></li>
+<dd><p><code>&lt;chr&gt;</code> Procedure Type:</p><ul><li><p><code>Major</code> (n = 3676)</p></li>
 <li><p><code>Non-Procedure</code> (n = 10113)</p></li>
 <li><p><code>Other</code> (n = 3244)</p></li>
 </ul></dd>
 
 
 <dt>concatenate</dt>
-<dd><p>&lt; <em>lgl</em> &gt; Concatenate output, default is <code>TRUE</code></p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Concatenate output, default is <code>TRUE</code></p></dd>
 
 
 <dt>...</dt>
-<dd><p>Empty</p></dd>
+<dd><p>Empty dots</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -180,7 +180,13 @@ assigned to a 6-character RBCS taxonomy code.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_rbcs</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>, <span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"70170"</span>, <span class="st">"0001U"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_rbcs</span><span class="op">(</span></span></span>
+<span class="r-in"><span>   hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"39503"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"43116"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"70170"</span>,</span></span>
+<span class="r-in"><span>             <span class="st">"0001U"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>           <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs rbcs_category           rbcs_family                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               </span>
@@ -190,6 +196,7 @@ assigned to a 6-character RBCS taxonomy code.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 43116 Major Procedure         Digestive/Gastrointestinal          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 70170 Non-Procedure Imaging   Standard X-ray                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> J9264 Non-Procedure Treatment Chemotherapy: Chemotherapeutic Agent</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
