@@ -17,4 +17,5 @@ Database Last Updated 2022-12-08
 }
 \examples{
 ncd(coverage = "Unknown")
+
 }

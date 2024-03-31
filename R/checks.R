@@ -8,6 +8,7 @@
 #' try(is_valid_length("1164"))
 #'
 #' @export
+#'
 #' @autoglobal
 is_valid_length <- function(x,
                             arg = rlang::caller_arg(x),
@@ -48,6 +49,7 @@ is_valid_length <- function(x,
 #' purrr::map_vec(c("11646", "E8015"), is_level_I)
 #'
 #' @export
+#'
 #' @autoglobal
 is_level_I <- function(x,
                        arg = rlang::caller_arg(x),
@@ -83,7 +85,9 @@ is_level_I <- function(x,
 #' is_level_II("E8015")
 #'
 #' is_level_II("11646")
+#'
 #' @export
+#'
 #' @autoglobal
 is_level_II <- function(x,
                         arg = rlang::caller_arg(x),
@@ -101,7 +105,9 @@ is_level_II <- function(x,
 #' is_category_I("11646")
 #'
 #' is_category_I("1164F")
+#'
 #' @export
+#'
 #' @autoglobal
 is_category_I <- function(x,
                           arg = rlang::caller_arg(x),
@@ -146,6 +152,7 @@ is_category_I <- function(x,
 #'
 #' is_category_II("11646")
 #' @export
+#'
 #' @autoglobal
 is_category_II <- function(x,
                           arg = rlang::caller_arg(x),
@@ -211,7 +218,9 @@ is_category_II <- function(x,
 #' is_category_III("0074T")
 #'
 #' is_category_III("11646")
+#'
 #' @export
+#'
 #' @autoglobal
 is_category_III <- function(x,
                            arg = rlang::caller_arg(x),

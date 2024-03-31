@@ -9,7 +9,7 @@
 #'
 #' @param mod `<chr>` vector of 2-character HCPCS modifiers; default is `NULL`
 #'
-#' @param ... Empty
+#' @template args-dots
 #'
 #' @template returns
 #'

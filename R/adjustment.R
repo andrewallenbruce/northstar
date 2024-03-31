@@ -36,31 +36,43 @@
 #' are referred to as Alerts. They are used to convey information about
 #' remittance processing and are *never* related to a specific adjustment or CARC.
 #'
-#' @param df < *df* > data.frame
-#' @param col < *chr* > column of Adjustment codes to match on
-#' @param type < *chr* > type of Adjustment code; `all` (default), `carc`, `rarc`
-#' @param action < *chr* > action to take; `review` (default), `join`
-#' @param ... Empty
-#' @return a [dplyr::tibble()]
+#' @param df `<data.frame>` data.frame
+#'
+#' @param col `<chr>` column of Adjustment codes to match on
+#'
+#' @param type `<chr>` type of Adjustment code; `all` (default), `carc`, `rarc`
+#'
+#' @param action `<chr>` action to take; `review` (default), `join`
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
 #' @examples
 #' dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
 #' search_adjustments(col    = code,
 #'                    type   = "carc",
 #'                    action = "join")
+#'
 #' @export
+#'
 #' @autoglobal
-search_adjustments <- function(df = NULL,
-                               col = NULL,
-                               type = c("all", "carc", "rarc"),
+search_adjustments <- function(df     = NULL,
+                               col    = NULL,
+                               type   = c("all", "carc", "rarc"),
                                action = c("review", "join"),
                                ...) {
 
   type   <- match.arg(type)
+
   action <- match.arg(action)
+
   adj    <- pins::pin_read(mount_board(), "rarc_carc")
 
   if (type == "all") {return(adj)}
+
   if (type == "carc" && action == "review") {adj$rarc <- NULL; return(adj)}
+
   if (type == "rarc" && action == "review") {return(adj$rarc)}
 
   if (type == "carc" && action == "join") {

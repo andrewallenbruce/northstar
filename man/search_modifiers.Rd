@@ -9,7 +9,7 @@ search_modifiers(mod = NULL, ...)
 \arguments{
 \item{mod}{\verb{<chr>} vector of 2-character HCPCS modifiers; default is \code{NULL}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} with the following columns:

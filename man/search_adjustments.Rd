@@ -13,18 +13,18 @@ search_adjustments(
 )
 }
 \arguments{
-\item{df}{< \emph{df} > data.frame}
+\item{df}{\verb{<data.frame>} data.frame}
 
-\item{col}{< \emph{chr} > column of Adjustment codes to match on}
+\item{col}{\verb{<chr>} column of Adjustment codes to match on}
 
-\item{type}{< \emph{chr} > type of Adjustment code; \code{all} (default), \code{carc}, \code{rarc}}
+\item{type}{\verb{<chr>} type of Adjustment code; \code{all} (default), \code{carc}, \code{rarc}}
 
-\item{action}{< \emph{chr} > action to take; \code{review} (default), \code{join}}
+\item{action}{\verb{<chr>} action to take; \code{review} (default), \code{join}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble} with the following columns:
 }
 \description{
 CARC and RARC Codes
@@ -71,4 +71,5 @@ dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
 search_adjustments(col    = code,
                    type   = "carc",
                    action = "join")
+
 }

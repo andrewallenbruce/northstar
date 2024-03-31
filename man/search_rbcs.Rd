@@ -15,9 +15,9 @@ search_rbcs(
 )
 }
 \arguments{
-\item{hcpcs}{< \emph{chr} > vector of 5-digit HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes; default is \code{NULL}}
 
-\item{category}{< \emph{chr} > vector of RBCS categories:
+\item{category}{\verb{<chr>} vector of RBCS categories:
 \itemize{
 \item \code{Procedure} (n = 6920)
 \item \code{Test} (n = 3015)
@@ -29,20 +29,20 @@ search_rbcs(
 \item \code{Other} (n = 233)
 }}
 
-\item{subcategory}{< \emph{chr} > vector of RBCS subcategories (53 unique in total)}
+\item{subcategory}{\verb{<chr>} vector of RBCS subcategories (53 unique in total)}
 
-\item{family}{< \emph{chr} > vector of RBCS families (178 unique in total)}
+\item{family}{\verb{<chr>} vector of RBCS families (178 unique in total)}
 
-\item{procedure}{< \emph{chr} > Procedure Type:
+\item{procedure}{\verb{<chr>} Procedure Type:
 \itemize{
 \item \code{Major} (n = 3676)
 \item \code{Non-Procedure} (n = 10113)
 \item \code{Other} (n = 3244)
 }}
 
-\item{concatenate}{< \emph{lgl} > Concatenate output, default is \code{TRUE}}
+\item{concatenate}{\verb{<lgl>} Concatenate output, default is \code{TRUE}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -97,5 +97,12 @@ assigned to a 6-character RBCS taxonomy code.
 }
 
 \examples{
-search_rbcs(hcpcs = c("J9264", "39503", "43116", "70170", "0001U"))
+search_rbcs(
+   hcpcs = c("J9264",
+             "39503",
+             "43116",
+             "70170",
+             "0001U")
+           )
+
 }

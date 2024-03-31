@@ -19,4 +19,5 @@ Database Last Updated 2023-04-27
 }
 \examples{
 lcd(hcpcs = c("A4555", "E0766"))
+
 }

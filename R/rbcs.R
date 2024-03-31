@@ -30,8 +30,9 @@
 #'
 #' @section Update Frequency: Annually
 #'
-#' @param hcpcs < *chr* > vector of 5-digit HCPCS codes
-#' @param category < *chr* > vector of RBCS categories:
+#' @template args-hcpcs
+#'
+#' @param category `<chr>` vector of RBCS categories:
 #' + `Procedure` (n = 6920)
 #' + `Test` (n = 3015)
 #' + `DME` (n = 2971)
@@ -40,14 +41,19 @@
 #' + `E&M` (n = 695)
 #' + `Anesthesia` (n = 307)
 #' + `Other` (n = 233)
-#' @param subcategory < *chr* > vector of RBCS subcategories (53 unique in total)
-#' @param family < *chr* > vector of RBCS families (178 unique in total)
-#' @param procedure < *chr* > Procedure Type:
+#'
+#' @param subcategory `<chr>` vector of RBCS subcategories (53 unique in total)
+#'
+#' @param family `<chr>` vector of RBCS families (178 unique in total)
+#'
+#' @param procedure `<chr>` Procedure Type:
 #' + `Major` (n = 3676)
 #' + `Non-Procedure` (n = 10113)
 #' + `Other` (n = 3244)
-#' @param concatenate < *lgl* > Concatenate output, default is `TRUE`
-#' @param ... Empty
+#'
+#' @param concatenate `<lgl>` Concatenate output, default is `TRUE`
+#'
+#' @template args-dots
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -64,8 +70,16 @@
 #' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
 #'
 #' @examples
-#' search_rbcs(hcpcs = c("J9264", "39503", "43116", "70170", "0001U"))
+#' search_rbcs(
+#'    hcpcs = c("J9264",
+#'              "39503",
+#'              "43116",
+#'              "70170",
+#'              "0001U")
+#'            )
+#'
 #' @export
+#'
 #' @autoglobal
 search_rbcs <- function(hcpcs       = NULL,
                         category    = NULL,
@@ -75,10 +89,20 @@ search_rbcs <- function(hcpcs       = NULL,
                         concatenate = TRUE,
                         ...) {
 
-  rb <- pins::pin_read(mount_board(), "rbcs") |>
-    dplyr::rename(procedure = major) |>
-    dplyr::mutate(family = dplyr::if_else(
-      family == "No RBCS Family", NA_character_, family))
+  rb <- pins::pin_read(
+    mount_board(),
+    "rbcs"
+    ) |>
+    dplyr::rename(
+      procedure = major
+      ) |>
+    dplyr::mutate(
+      family = dplyr::if_else(
+        family == "No RBCS Family",
+        NA_character_,
+        family
+        )
+      )
 
   if (!is.null(procedure)) {
 
@@ -88,25 +112,43 @@ search_rbcs <- function(hcpcs       = NULL,
         "Major",
         "Non-Procedure",
         "Other"
-        )
+        ),
+      multiple = TRUE
       )
 
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$procedure, procedure))}
+    rb <- search_in(
+      df     = rb,
+      dfcol  = rb$procedure,
+      search = procedure
+    )
+  }
 
   if (!is.null(hcpcs)) {
 
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$hcpcs,
-          collapse::funique(hcpcs)))}
+    rb <- search_in(
+      df     = rb,
+      dfcol  = rb$hcpcs,
+      search = hcpcs
+    )
+  }
 
   if (!is.null(family)) {
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$family, family))}
+
+    rb <- search_in(
+      df     = rb,
+      dfcol  = rb$family,
+      search = family
+    )
+  }
 
   if (!is.null(subcategory)) {
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$subcategory, subcategory))}
+
+    rb <- search_in(
+      df     = rb,
+      dfcol  = rb$subcategory,
+      search = subcategory
+    )
+  }
 
   if (!is.null(category)) {
 
@@ -121,13 +163,19 @@ search_rbcs <- function(hcpcs       = NULL,
         "E&M",
         "Anesthesia",
         "Other"
-      )
+      ),
+      multiple = TRUE
     )
 
-    rb <- vctrs::vec_slice(rb,
-          vctrs::vec_in(rb$category, category))}
+    rb <- search_in(
+      df     = rb,
+      dfcol  = rb$category,
+      search = category
+    )
+  }
 
   if (concatenate) {
+
     rb <- rb |>
       tidyr::unite("rbcs_category",
                    c(procedure, category),
