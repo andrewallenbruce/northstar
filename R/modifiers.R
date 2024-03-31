@@ -9,7 +9,7 @@
 #'
 #' @param mod *<chr>* 2-digit HCPCS modifier
 #' @param ... Empty
-#' @return a [tibble][tibble::tibble-package]
+#' @template returns
 #' @examples
 #' search_modifiers(mod = c("25", "59"))
 #' @export

@@ -1,8 +1,8 @@
 #' Check if string is valid ICD-10-CM code
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#' @param x `<chr>` string of `length(1)`
+#' @param arg `<chr>` function argument name in the current function
+#' @param call `<environment>` environment the function is called from
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
 #' @examples
 #' purrr::map_vec(
 #' c("H00.019", "D50.1", "C4A.70", "Z20.818", "11646", "E8015"),
@@ -29,10 +29,13 @@ is_valid_icd <- function(x,
 }
 
 #' Check if string is valid length of a HCPCS code
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#'
+#' @param x `<chr>` string of `length(1)`
+#' @param arg `<chr>` function argument name in the current function
+#' @param call `<environment>` environment the function is called from
+#'
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
+#'
 #' @examples
 #' is_valid_length("11646")
 #'
@@ -69,10 +72,14 @@ is_valid_length <- function(x,
 #' separately report medical items or services that are regularly billed by
 #' suppliers other than physicians.
 #'
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#' @param x `<chr>` string of `length(1)`
+#'
+#' @param arg `<chr>` function argument name in the current function
+#'
+#' @param call `<environment>` environment the function is called from
+#'
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
+#'
 #' @examples
 #' is_level_I("11646")
 #'
@@ -110,10 +117,11 @@ is_level_I <- function(x,
 #' alphabetical letter followed by 4 numeric digits, while CPT codes are
 #' identified using 5 numeric digits.
 #'
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#' @param x `<chr>` string of `length(1)`
+#' @param arg `<chr>` function argument name in the current function
+#' @param call `<environment>` environment the function is called from
+#'
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
 #' @examples
 #' is_level_II("E8015")
 #'
@@ -129,10 +137,12 @@ is_level_II <- function(x,
 }
 
 #' Check if code is HCPCS Level 1 Category I (CPT)
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#'
+#' @param x `<chr>` string of `length(1)`
+#' @param arg `<chr>` function argument name in the current function
+#' @param call `<environment>` environment the function is called from
+#'
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
 #' @examples
 #' is_category_I("11646")
 #'
@@ -175,10 +185,11 @@ is_category_I <- function(x,
 #' + Used to track services on claims for performance measurement
 #' + Not to be used as a substitute for Category I codes
 #'
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#' @param x `<chr>` string of `length(1)`
+#' @param arg `<chr>` function argument name in the current function
+#' @param call `<environment>` environment the function is called from
+#'
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
 #' @examples
 #' is_category_II("1164F")
 #'
@@ -243,10 +254,11 @@ is_category_II <- function(x,
 #' five years, without conversion, must be reported using the Category I unlisted
 #' code unless another specific cross-reference is established at the time of archiving.
 #'
-#' @param x string
-#' @param arg string
-#' @param call string
-#' @return boolean
+#' @param x `<chr>` string of `length(1)`
+#' @param arg `<chr>` function argument name in the current function
+#' @param call `<environment>` environment the function is called from
+#'
+#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
 #' @examples
 #' is_category_III("0074T")
 #'

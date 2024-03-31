@@ -7,14 +7,14 @@
 is_level_II(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \arguments{
-\item{x}{string}
+\item{x}{\verb{<chr>} string of \code{length(1)}}
 
-\item{arg}{string}
+\item{arg}{\verb{<chr>} function argument name in the current function}
 
-\item{call}{string}
+\item{call}{\verb{<environment>} environment the function is called from}
 }
 \value{
-boolean
+\verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
 }
 \description{
 HCPCS Level II is a standardized coding system that is used primarily to
