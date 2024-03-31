@@ -55,9 +55,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter_hcpcs.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter_icd10.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_cosurg.html</loc>
   </url>
   <url>
@@ -121,12 +118,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/gt_style.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/icd10api.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/icd10cm.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/index.html</loc>
   </url>
   <url>
@@ -146,9 +137,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_level_II.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_icd.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_length.html</loc>
