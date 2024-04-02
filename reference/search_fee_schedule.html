@@ -90,30 +90,33 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>hcpcs</dt>
-<dd><p>&lt; <em>chr</em> &gt; 5-character HCPCS Code</p></dd>
+<dd><p><code>&lt;chr&gt;</code> vector of 5-character HCPCS codes</p></dd>
 
 
 <dt>state</dt>
-<dd><p>&lt; <em>chr</em> &gt; 2-character State Abbreviation</p></dd>
+<dd><p><code>&lt;chr&gt;</code> vector of state abbreviations</p></dd>
 
 
 <dt>locality</dt>
-<dd><p>&lt; <em>chr</em> &gt; 2-digit Locality ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> vector of 2-digit Locality IDs</p></dd>
 
 
 <dt>mac</dt>
-<dd><p>&lt; <em>chr</em> &gt; 5-digit MAC ID code</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 5-digit Medicare Administrative Contractor (MAC) ID</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Empty</p></dd>
+<dd><p>Empty dots</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Column</strong></td><td><strong>Description</strong></td></tr><tr><td><code>hcpcs</code></td><td>5-character HCPCS Code</td></tr><tr><td><code>hcpcs_type</code></td><td>HCPCS Type</td></tr><tr><td><code>description</code></td><td>HCPCS Description</td></tr><tr><td><code>cons_desc</code></td><td>HCPCS Level I Consumer Description</td></tr><tr><td><code>clin_descs</code></td><td>HCPCS Level I Clinician Descriptions</td></tr><tr><td><code>mod</code></td><td>Modifier</td></tr><tr><td><code>status</code></td><td>Status Code</td></tr><tr><td><code>mac</code></td><td>Medicare Administrative Contractor ID</td></tr><tr><td><code>state</code></td><td>State Abbreviation</td></tr><tr><td><code>locality</code></td><td>State Abbreviation</td></tr><tr><td><code>area</code></td><td>State Abbreviation</td></tr><tr><td><code>counties</code></td><td>State Abbreviation</td></tr><tr><td><code>two_macs</code></td><td>State Abbreviation</td></tr><tr><td><code>wgpci</code></td><td>State Abbreviation</td></tr><tr><td><code>pgpci</code></td><td>State Abbreviation</td></tr></table></div>
+<p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+
+
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -135,6 +138,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   npar &lt;dbl&gt;, fnpar &lt;dbl&gt;, nfnpar &lt;dbl&gt;, flim &lt;dbl&gt;, nlim &lt;dbl&gt;, opps &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   opps_nf &lt;dbl&gt;, opps_f &lt;dbl&gt;, fprvu_opps &lt;dbl&gt;, mrvu_opps &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fpymt_opps &lt;dbl&gt;, nfpymt_opps &lt;dbl&gt;, mult_surg &lt;chr&gt;, mult_proc &lt;chr&gt;, …</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
