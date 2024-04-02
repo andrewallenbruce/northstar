@@ -8,7 +8,7 @@
 <!-- badges: start -->
 
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
-[![Version](https://img.shields.io/badge/version-0.0.4-red.svg)](https://github.com/andrewallenbruce/northstar)
+[![Version](https://img.shields.io/badge/version-0.0.5-red.svg)](https://github.com/andrewallenbruce/northstar)
 [![Code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
 [![Codecov test
@@ -18,6 +18,8 @@ commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg
 <!-- badges: end -->
 
 <br>
+
+Version: 0.0.5
 
 ## :package: Installation
 
@@ -33,6 +35,8 @@ pak::pak("andrewallenbruce/northstar")
 ``` r
 library(northstar)
 library(dplyr)
+library(tidyr)
+library(janitor)
 ```
 
 ### Search Fee Schedule
@@ -107,6 +111,63 @@ search_fee_schedule(
     > $ two_macs               <lgl> FALSE
     > $ chapter                <chr> "Surgery"
     > $ range                  <chr> "10004 - 69990"
+
+### Retrieve Add-On Codes
+
+``` r
+compare_addons(hcpcs = "33935") |> 
+  tidyr::unnest(complements) |> 
+  janitor::remove_empty(which = c("cols", "rows")) |> 
+  dplyr::filter(is.na(edit_deleted))
+```
+
+    > # A tibble: 4 × 7
+    >   hcpcs aoc_type complement  type type_description   edit_effective edit_deleted
+    >   <chr> <chr>    <chr>      <int> <chr>                       <int>        <int>
+    > 1 33935 primary  33924          1 Only Paid if Prim…           2015           NA
+    > 2 33935 primary  34714          1 Only Paid if Prim…           2018           NA
+    > 3 33935 primary  34716          1 Only Paid if Prim…           2018           NA
+    > 4 33935 primary  34833          1 Only Paid if Prim…           2018           NA
+
+### Retrieve MUEs
+
+``` r
+search_mue(hcpcs = "33935")
+```
+
+    > # A tibble: 2 × 6
+    >   hcpcs   mue   mai adjudication                 rationale          service_type
+    >   <chr> <int> <int> <chr>                        <chr>              <chr>       
+    > 1 33935     1     2 Date of Service Edit: Policy Anatomic Consider… Practitioner
+    > 2 33935     1     2 Date of Service Edit: Policy Anatomic Consider… Outpatient …
+
+### Procedure-to-Procedure Edits
+
+``` r
+search_ptp(column_1 = "33935") |> 
+  janitor::remove_empty(which = c("cols", "rows")) |> 
+  dplyr::filter(deletion > clock::date_today("")) |> 
+  dplyr::mutate(deletion = NULL) |> 
+  dplyr::arrange(column_2) |> 
+  dplyr::group_by(column_1, modifier, rationale) |> 
+  tidyr::nest()
+```
+
+    > # A tibble: 11 × 4
+    > # Groups:   column_1, modifier, rationale [11]
+    >    column_1 modifier rationale                                         data    
+    >    <chr>       <int> <chr>                                             <list>  
+    >  1 33935           0 Misuse of Column Two code with Column One code    <tibble>
+    >  2 33935           1 Standards of medical/surgical practice            <tibble>
+    >  3 33935           1 CPT Manual or CMS manual coding instruction       <tibble>
+    >  4 33935           1 Misuse of Column Two code with Column One code    <tibble>
+    >  5 33935           0 HCPCS/CPT procedure code definition               <tibble>
+    >  6 33935           1 CPT Separate procedure definition                 <tibble>
+    >  7 33935           0 CPT Separate procedure definition                 <tibble>
+    >  8 33935           0 Mutually exclusive procedures                     <tibble>
+    >  9 33935           0 CPT Manual or CMS manual coding instruction       <tibble>
+    > 10 33935           0 Standards of medical/surgical practice            <tibble>
+    > 11 33935           0 Anesthesia service included in surgical procedure <tibble>
 
 ------------------------------------------------------------------------
 

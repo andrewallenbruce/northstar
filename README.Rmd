@@ -13,19 +13,22 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 # northstar <img src="man/figures/logo.png" align="right" height="250" />
 
 > Tidy Healthcare Revenue Integrity
 
 <!-- badges: start -->
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
-[![Version](https://img.shields.io/badge/version-0.0.4-red.svg)](https://github.com/andrewallenbruce/northstar)
+[![Version](https://img.shields.io/badge/version-0.0.5-red.svg)](https://github.com/andrewallenbruce/northstar)
 [![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
 [![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
 <!-- badges: end -->
 
 <br>
+
+Version: `r paste0(unlist(desc::desc_get_version(), use.names = FALSE), collapse = ".")`
 
 ## :package: Installation
 
@@ -41,6 +44,8 @@ pak::pak("andrewallenbruce/northstar")
 ```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
 library(dplyr)
+library(tidyr)
+library(janitor)
 ```
 
 
@@ -56,6 +61,32 @@ search_fee_schedule(
 ```
 
 
+### Retrieve Add-On Codes
+
+```{r}
+compare_addons(hcpcs = "33935") |> 
+  tidyr::unnest(complements) |> 
+  janitor::remove_empty(which = c("cols", "rows")) |> 
+  dplyr::filter(is.na(edit_deleted))
+```
+
+### Retrieve MUEs
+
+```{r}
+search_mue(hcpcs = "33935")
+```
+
+### Procedure-to-Procedure Edits
+
+```{r}
+search_ptp(column_1 = "33935") |> 
+  janitor::remove_empty(which = c("cols", "rows")) |> 
+  dplyr::filter(deletion > clock::date_today("")) |> 
+  dplyr::mutate(deletion = NULL) |> 
+  dplyr::arrange(column_2) |> 
+  dplyr::group_by(column_1, modifier, rationale) |> 
+  tidyr::nest()
+```
 
 
 ------------------------------------------------------------------------------
