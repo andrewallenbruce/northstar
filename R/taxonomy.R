@@ -108,12 +108,15 @@
 #' @source
 #' [National Uniform Claim Committee](https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57)
 #'
-#' @param shape shape of data to return, `wide` (default) or `long`
-#' @param code vector of taxonomy codes
-#' @param unnest unnest the `hierarchy` column, default is `FALSE`
-#' @param ... Empty
+#' @param code `<chr>` vector of taxonomy codes
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @param shape `<chr>` shape of data to return, `wide` (default) or `long`
+#'
+#' @param unnest `<lgl>`unnest `hierarchy` column, default is `FALSE`
+#'
+#' @template args-dots
+#'
+#' @template returns
 #'
 #' @examples
 #' search_taxonomy(code = c("207K00000X", "193200000X"))
@@ -136,11 +139,7 @@ search_taxonomy <- function(shape  = c('wide', 'long'),
     "long" = pins::pin_read(mount_board(), "taxlong")
   )
 
-  if (!is.null(code)) {
-    txn <- vctrs::vec_slice(txn,
-           vctrs::vec_in(txn$code,
-           collapse::funique(code)))
-  }
+  if (!is.null(code)) {txn <- search_in(txn, txn$code, code)}
 
   if (shape == "long" && unnest) {
     txn <- tidyr::unnest(txn, cols = c(hierarchy))

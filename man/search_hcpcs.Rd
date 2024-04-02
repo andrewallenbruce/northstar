@@ -7,11 +7,11 @@
 search_hcpcs(hcpcs = NULL, limit = TRUE, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} 5-digit Level II HCPCS code}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{limit}{\verb{<lgl>} limit columns returned, default is \code{TRUE}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -21,4 +21,5 @@ HCPCS Level II Codes
 }
 \examples{
 search_hcpcs(c("A0021", "V5362", "J9264", "G8916"))
+
 }

@@ -13,7 +13,7 @@ search_ptp(column_1 = NULL, column_2 = NULL, mod = NULL, ...)
 
 \item{mod}{\verb{<int>} \code{1} = Allowed, \code{0} = Not Allowed, \code{9} = Not Applicable}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -33,4 +33,5 @@ PTP-associated modifier is also reported.
 }
 \examples{
 search_ptp(column_1 = c("39503", "43116", "33935", "11646"))
+
 }

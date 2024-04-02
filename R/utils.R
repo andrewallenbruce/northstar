@@ -36,12 +36,19 @@ mount_board <- function(source = c("local", "remote")) {
 }
 
 #' Search a data frame column by string
-#' @param df data frame
+#'
+#' @template args-df
+#'
 #' @param col bare column name
+#'
 #' @param search string
+#'
 #' @param ignore ignore case, default is `TRUE`
-#' @param ... Empty
-#' @return a [tibble][tibble::tibble-package]
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
 #' @noRd
 srchcol <- function(df,
                     col,
@@ -63,12 +70,18 @@ srchcol <- function(df,
 }
 
 #' Infix operator for `if (!is.null(x)) y else x` statements
+#'
 #' @param x,y vectors
-#' @return `y` if `x` is not `NULL`, else `x`
+#'
 #' @examples
-#' ccn <- NULL
-#' ccn %nn% 123456L
+#' NULL %nn% 123456L
+#'
+#' "abc" %nn% 123456L
+#'
+#' @returns `y` if `x` is not `NULL`, else `x`
+#'
 #' @autoglobal
+#'
 #' @noRd
 `%nn%` <- function(x, y) {
   if (!is.null(x))
@@ -78,27 +91,33 @@ srchcol <- function(df,
 }
 
 #' Infix operator for `not in` statements
-#' @return description
+#'
+#' @returns description
+#'
 #' @autoglobal
+#'
 #' @noRd
 `%nin%` <- function(x, table) {
   match(x, table, nomatch = 0L) == 0L
 }
 
-#' Convert empty char values to NA
+#' Convert empty character values to `NA`
+#'
 #' @param x vector
+#'
 #' @examples
 #' na_blank(x = c(" ", "*", "--", "N/A", ""))
+#'
 #' @autoglobal
+#'
 #' @noRd
 na_blank <- function(x) {
-  x <- dplyr::na_if(x, "")
-  x <- dplyr::na_if(x, " ")
-  x <- dplyr::na_if(x, "*")
-  x <- dplyr::na_if(x, "--")
-  x <- dplyr::na_if(x, "N/A")
-  return(x)
-}
+
+  y <- c("", " ", "*", "--", "N/A")
+
+  x <- dplyr::na_if(x, y)
+
+  }
 
 #' Invert a named vector
 #' @param x A named vector

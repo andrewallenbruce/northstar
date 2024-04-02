@@ -42,20 +42,20 @@
 #' + `Anesthesia` (n = 307)
 #' + `Other` (n = 233)
 #'
-#' @param subcategory `<chr>` vector of RBCS subcategories (53 unique in total)
+#' @param subcategory `<chr>` vector of RBCS subcategories (53 unique)
 #'
-#' @param family `<chr>` vector of RBCS families (178 unique in total)
+#' @param family `<chr>` vector of RBCS families (178 unique)
 #'
 #' @param procedure `<chr>` Procedure Type:
-#' + `Major` (n = 3676)
-#' + `Non-Procedure` (n = 10113)
-#' + `Other` (n = 3244)
+#' * `Major` (n = 3676)
+#' * `Non-Procedure` (n = 10113)
+#' * `Other` (n = 3244)
 #'
 #' @param concatenate `<lgl>` Concatenate output, default is `TRUE`
 #'
 #' @template args-dots
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Column**          |**Description**                              |
 #' |:-------------------|:--------------------------------------------|
@@ -89,15 +89,9 @@ search_rbcs <- function(hcpcs       = NULL,
                         concatenate = TRUE,
                         ...) {
 
-  rb <- pins::pin_read(
-    mount_board(),
-    "rbcs"
-    ) |>
-    dplyr::rename(
-      procedure = major
-      ) |>
-    dplyr::mutate(
-      family = dplyr::if_else(
+  rb <- pins::pin_read(mount_board(), "rbcs") |>
+    dplyr::rename(procedure = major) |>
+    dplyr::mutate(family = dplyr::if_else(
         family == "No RBCS Family",
         NA_character_,
         family
@@ -108,85 +102,48 @@ search_rbcs <- function(hcpcs       = NULL,
 
     procedure <- rlang::arg_match(
       procedure,
-      c(
-        "Major",
-        "Non-Procedure",
-        "Other"
-        ),
-      multiple = TRUE
-      )
+      c("Major", "Non-Procedure", "Other"),
+      multiple = TRUE)
 
-    rb <- search_in(
-      df     = rb,
-      dfcol  = rb$procedure,
-      search = procedure
-    )
+    rb <- search_in(rb, rb$procedure, procedure)
   }
 
   if (!is.null(hcpcs)) {
-
-    rb <- search_in(
-      df     = rb,
-      dfcol  = rb$hcpcs,
-      search = hcpcs
-    )
-  }
+    rb <- search_in(rb, rb$hcpcs, hcpcs)}
 
   if (!is.null(family)) {
-
-    rb <- search_in(
-      df     = rb,
-      dfcol  = rb$family,
-      search = family
-    )
-  }
+    rb <- search_in(rb, rb$family, family)}
 
   if (!is.null(subcategory)) {
-
-    rb <- search_in(
-      df     = rb,
-      dfcol  = rb$subcategory,
-      search = subcategory
-    )
-  }
+    rb <- search_in(rb, rb$subcategory, subcategory)}
 
   if (!is.null(category)) {
 
     category <- rlang::arg_match(
       category,
-      c(
-        "Procedure",
-        "Test",
-        "DME",
-        "Treatment",
-        "Imaging",
-        "E&M",
-        "Anesthesia",
-        "Other"
-      ),
-      multiple = TRUE
-    )
+      c("Procedure", "Test", "DME", "Treatment",
+        "Imaging", "E&M", "Anesthesia", "Other"),
+      multiple = TRUE)
 
-    rb <- search_in(
-      df     = rb,
-      dfcol  = rb$category,
-      search = category
-    )
+    rb <- search_in(rb, rb$category, category)
   }
 
   if (concatenate) {
 
-    rb <- rb |>
-      tidyr::unite("rbcs_category",
-                   c(procedure, category),
-                   sep = " ") |>
-      tidyr::unite("rbcs_family",
-                   c(subcategory, family),
-                   sep = ": ",
-                   na.rm = TRUE) |>
-      dplyr::select(hcpcs,
-                    rbcs_category,
-                    rbcs_family)
+    rb <- tidyr::unite(
+      rb,
+      "rbcs_category",
+      c(procedure, category),
+      sep = " ") |>
+      tidyr::unite(
+        "rbcs_family",
+        c(subcategory, family),
+        sep = ": ",
+        na.rm = TRUE) |>
+      dplyr::select(
+        hcpcs,
+        rbcs_category,
+        rbcs_family)
   }
   return(rb)
 }

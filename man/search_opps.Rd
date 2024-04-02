@@ -7,13 +7,13 @@
 search_opps(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{mac}{\verb{<chr>} vector of 5-digit MAC codes}
+\item{mac}{\verb{<chr>} 5-digit Medicare Administrative Contractor (MAC) ID}
 
 \item{locality}{\verb{<chr>} vector of 2-digit Locality IDs}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -26,4 +26,5 @@ OPPS-based payment caps.
 }
 \examples{
 search_opps(hcpcs = "71550", mac = "01112")
+
 }

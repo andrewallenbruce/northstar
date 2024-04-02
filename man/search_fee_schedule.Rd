@@ -7,35 +7,18 @@
 search_fee_schedule(hcpcs, state = NULL, locality = NULL, mac = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{< \emph{chr} > 5-character HCPCS Code}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{state}{< \emph{chr} > 2-character State Abbreviation}
+\item{state}{\verb{<chr>} vector of state abbreviations}
 
-\item{locality}{< \emph{chr} > 2-digit Locality ID}
+\item{locality}{\verb{<chr>} vector of 2-digit Locality IDs}
 
-\item{mac}{< \emph{chr} > 5-digit MAC ID code}
+\item{mac}{\verb{<chr>} 5-digit Medicare Administrative Contractor (MAC) ID}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Column} \tab \strong{Description} \cr
-   \code{hcpcs} \tab 5-character HCPCS Code \cr
-   \code{hcpcs_type} \tab HCPCS Type \cr
-   \code{description} \tab HCPCS Description \cr
-   \code{cons_desc} \tab HCPCS Level I Consumer Description \cr
-   \code{clin_descs} \tab HCPCS Level I Clinician Descriptions \cr
-   \code{mod} \tab Modifier \cr
-   \code{status} \tab Status Code \cr
-   \code{mac} \tab Medicare Administrative Contractor ID \cr
-   \code{state} \tab State Abbreviation \cr
-   \code{locality} \tab State Abbreviation \cr
-   \code{area} \tab State Abbreviation \cr
-   \code{counties} \tab State Abbreviation \cr
-   \code{two_macs} \tab State Abbreviation \cr
-   \code{wgpci} \tab State Abbreviation \cr
-   \code{pgpci} \tab State Abbreviation \cr
-}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Search Physician Fee Schedule
@@ -45,4 +28,5 @@ search_fee_schedule(hcpcs    = c("V5299", "70170"),
                     state    = "GA",
                     locality = "99",
                     mac      = "10212")
+
 }

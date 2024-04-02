@@ -1,36 +1,25 @@
 #' Search Physician Fee Schedule
 #'
-#' @param hcpcs < *chr* > 5-character HCPCS Code
-#' @param state < *chr* > 2-character State Abbreviation
-#' @param locality < *chr* > 2-digit Locality ID
-#' @param mac < *chr* > 5-digit MAC ID code
-#' @param ... Empty
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @template args-hcpcs
 #'
-#' |**Column**    |**Description**                       |
-#' |:-------------|:-------------------------------------|
-#' |`hcpcs`       |5-character HCPCS Code                |
-#' |`hcpcs_type`  |HCPCS Type                            |
-#' |`description` |HCPCS Description                     |
-#' |`cons_desc`   |HCPCS Level I Consumer Description    |
-#' |`clin_descs`  |HCPCS Level I Clinician Descriptions  |
-#' |`mod`         |Modifier                              |
-#' |`status`      |Status Code                           |
-#' |`mac`         |Medicare Administrative Contractor ID |
-#' |`state`       |State Abbreviation                    |
-#' |`locality`    |State Abbreviation                    |
-#' |`area`        |State Abbreviation                    |
-#' |`counties`    |State Abbreviation                    |
-#' |`two_macs`    |State Abbreviation                    |
-#' |`wgpci`       |State Abbreviation                    |
-#' |`pgpci`       |State Abbreviation                    |
+#' @template args-state
+#'
+#' @template args-locality
+#'
+#' @template args-mac
+#'
+#' @template args-dots
+#'
+#' @template returns
 #'
 #' @examples
 #' search_fee_schedule(hcpcs    = c("V5299", "70170"),
 #'                     state    = "GA",
 #'                     locality = "99",
 #'                     mac      = "10212")
+#'
 #' @autoglobal
+#'
 #' @export
 search_fee_schedule <- function(hcpcs,
                                 state    = NULL,
@@ -50,7 +39,7 @@ search_fee_schedule <- function(hcpcs,
   # retrieve Relative Value Units
   rv <- rlang::inject(search_rvu(!!!args))
 
-  # if no data found in rvu file, nothing will be found in others
+  # if code not found in rvu, no results in others
   msg <- "HCPCS code {.strong {.val {hcpcs}}} not found."
   if (vctrs::vec_is_empty(rv)) {cli::cli_abort(msg)}
 
@@ -74,12 +63,12 @@ search_fee_schedule <- function(hcpcs,
     rbc = if (!vctrs::vec_is_empty(x$rb)) x$rb else NULL) |>
     purrr::compact()
 
-  # create join_by objects
+  # create `join_by` objects
   byhcpc <- dplyr::join_by(hcpcs)
   bypctc <- dplyr::join_by(hcpcs, mod, status, pctc, mac, locality)
   nopctc <- dplyr::join_by(hcpcs, mod, status, mac, locality)
 
-  # cross join rvu and gpci, left join rbcs
+  # `cross_join` rvu and gpci, `left_join` rbcs
   res <- dplyr::cross_join(x$rvu, x$gpc) |>
          dplyr::left_join(x$rbc, byhcpc)
 
@@ -109,8 +98,10 @@ search_fee_schedule <- function(hcpcs,
     "lvl1" = dplyr::left_join(res, x$pay, bypctc) |>
              dplyr::left_join(x$cpt, byhcpc))
 
-  # if opps data is available, left join
-  if (rlang::has_name(x, "opp")) {res <- dplyr::left_join(res, x$opp, nopctc)}
+  # add OPPS data if available
+  if (rlang::has_name(x, "opp")) {
+    res <- dplyr::left_join(res, x$opp, nopctc)
+    }
 
   res |>
     dplyr::mutate(
@@ -125,8 +116,10 @@ search_fee_schedule <- function(hcpcs,
     cols_amounts()
 }
 
-#' @param df data frame
+#' @template args-df
+#'
 #' @autoglobal
+#'
 #' @noRd
 cols_amounts <- function(df) {
 
@@ -208,7 +201,6 @@ cols_amounts <- function(df) {
 
 # test if all are NULL
 # test <- !vctrs::vec_is_empty(c(state, locality, mac))
-
 # if all are NULL, don't call gpci
 # gp <- switch(
 # test,

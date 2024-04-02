@@ -10,7 +10,7 @@ limiting_charge(participating_fee)
 \item{participating_fee}{\verb{<dbl>} Participating Fee}
 }
 \value{
-\verb{<dbl>} Limiting Charge Amount
+\verb{<dbl>} vector of the Limiting Charge Amount
 }
 \description{
 The Medicare limiting charge is set by law at 115\% of the payment amount
@@ -33,4 +33,5 @@ of 1.0925:
 }
 \examples{
 limiting_charge(26.35)
+
 }

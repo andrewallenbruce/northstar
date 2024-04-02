@@ -4,7 +4,7 @@
 #'
 #' @param coverage Coverage level; `"Full"`, `"Restricted"`, `"None"`, `"Unknown"`
 #'
-#' @return a [tibble][tibble::tibble-package]
+#' @template returns
 #'
 #' @examples
 #' ncd(coverage = "Unknown")
@@ -18,8 +18,10 @@ ncd <- function(coverage = NULL) {
 
   if (!is.null(coverage)) {
 
-    coverage <- rlang::arg_match(coverage, c("Full", "Restricted", "None", "Unknown"))
-
+    coverage <- rlang::arg_match(
+      coverage,
+      c("Full", "Restricted", "None", "Unknown")
+      )
     ncd <- vctrs::vec_slice(ncd, ncd$coverage == coverage)
   }
   return(ncd)
@@ -29,11 +31,11 @@ ncd <- function(coverage = NULL) {
 #'
 #' Database Last Updated 2023-04-27
 #'
-#' @param hcpcs vector of HCPCS codes
+#' @template args-hcpcs
 #'
-#' @param ... Empty
+#' @template args-dots
 #'
-#' @return a [tibble][tibble::tibble-package]
+#' @template returns
 #'
 #' @examples
 #' lcd(hcpcs = c("A4555", "E0766"))
@@ -47,13 +49,7 @@ lcd <- function(hcpcs = NULL,
   lcd <- pins::pin_read(mount_board(), "lcd")
 
   if (!is.null(hcpcs)) {
-
-    lcd <- search_in(
-      df     = lcd,
-      dfcol  = lcd$hcpc_code_id,
-      search = hcpcs
-    )
-
+    lcd <- search_in(lcd, lcd$hcpc_code_id, hcpcs)
   }
   return(lcd)
 }

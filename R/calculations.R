@@ -17,11 +17,15 @@
 #' \deqn{x_{limit} = \dfrac{\sum_{i = 0}^t
 #'         \sum_{j = 0}^\infty c_i f_{j - i}}{\sum_{i = 0} c_i}}
 #'
-#'
 #' @param participating_fee `<dbl>` Participating Fee
-#' @return `<dbl>` Limiting Charge Amount
+#'
+#' @returns `<dbl>` vector of the Limiting Charge Amount
+#'
 #' @examples
 #' limiting_charge(26.35)
+#'
+#' @autoglobal
+#'
 #' @export
 limiting_charge <- function(participating_fee) {
 
@@ -38,9 +42,14 @@ limiting_charge <- function(participating_fee) {
 #' \deqn{rvu_{total} = rvu_{w}(gpci_{w}) + rvu_{pe}(gpci_{pe}) + rvu_{mp}(gpci_{mp})}
 #'
 #' @param participating_fee `<dbl>` Participating Fee
-#' @return `<dbl>` Non-Participating Fee
+#'
+#' @returns `<dbl>` vector of the Non-Participating Fee
+#'
 #' @examples
 #' non_participating_fee(26.35)
+#'
+#' @autoglobal
+#'
 #' @export
 non_participating_fee <- function(participating_fee) {
 
@@ -56,25 +65,37 @@ non_participating_fee <- function(participating_fee) {
 #' ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 #'
 #' @param wrvu `<dbl>` Work RVU
+#'
 #' @param fprvu `<dbl>` Facility Practice Expense RVU
+#'
 #' @param nprvu `<dbl>` Non-Facility Practice Expense RVU
+#'
 #' @param mrvu `<dbl>` Malpractice RVU
+#'
 #' @param wgpci `<dbl>` Work GPCI
+#'
 #' @param pgpci `<dbl>` Practice Expense GPCI
+#'
 #' @param mgpci `<dbl>` Malpractice GPCI
+#'
 #' @param cf `<dbl>` Conversion Factor, default is `32.7442`
+#'
 #' @returns A list (invisibly) of the Participating, Non-Participating &
 #'    Limiting Charge Amounts for both Facility & Non-Facility RVUs
+#'
 #' @examples
-#' calculate_amounts(wrvu  = 6.26,
-#'                   nprvu = 7.92,
-#'                   fprvu = 4.36,
-#'                   mrvu  = 0.99,
-#'                   wgpci = 1.053,
-#'                   pgpci = 0.883,
-#'                   mgpci = 1.125,
-#'                   cf    = 32.7442)
+#' calculate_amounts(
+#'    wrvu  = 6.26,
+#'    nprvu = 7.92,
+#'    fprvu = 4.36,
+#'    mrvu  = 0.99,
+#'    wgpci = 1.053,
+#'    pgpci = 0.883,
+#'    mgpci = 1.125,
+#'    cf    = 32.7442)
+#'
 #' @autoglobal
+#'
 #' @export
 calculate_amounts <- function(wrvu,
                               fprvu,
@@ -156,20 +177,38 @@ calculate_amounts <- function(wrvu,
 
 #' Count days between two dates
 #'
-#' @param df *< df >* data.frame
-#' @param start bare date column name
-#' @param end bare date column name
-#' @param name bare name of days output column
-#' @return A [tibble][tibble::tibble-package]
+#' @template args-df
+#'
+#' @param start `<sym>` bare date column name
+#'
+#' @param end `<sym>` bare date column name
+#'
+#' @param name `<sym>` bare name of days output column
+#'
+#' @template returns
+#'
 #' @autoglobal
+#'
 #' @export
+#'
 #' @examples
-#' dplyr::tibble(dos = as.Date(c("2021-04-18", "2021-11-18", "2022-02-18")),
+#' dplyr::tibble(dos    = as.Date(c("2021-04-18", "2021-11-18", "2022-02-18")),
 #'               signed = as.Date("2022-02-18")) |>
-#'               count_days(start = dos,
-#'               end = signed,
-#'               provider_lag)
-count_days <- function(df, start, end, name) {
-  df |> dplyr::mutate({{ name }} := clock::date_count_between(
-    {{ start }}, {{ end }}, "day"), .after = {{ end }})
+#'               count_days(
+#'               start  = dos,
+#'               end    = signed,
+#'               lag)
+#'
+count_days <- function(df,
+                       start,
+                       end,
+                       name) {
+  df |>
+    dplyr::mutate(
+      {{ name }} := clock::date_count_between(
+        {{ start }},
+        {{ end }},
+        "day"),
+      .after = {{ end }}
+      )
 }

@@ -7,24 +7,26 @@
 count_days(df, start, end, name)
 }
 \arguments{
-\item{df}{\emph{< df >} data.frame}
+\item{df}{\verb{<data.frame>}}
 
-\item{start}{bare date column name}
+\item{start}{\verb{<sym>} bare date column name}
 
-\item{end}{bare date column name}
+\item{end}{\verb{<sym>} bare date column name}
 
-\item{name}{bare name of days output column}
+\item{name}{\verb{<sym>} bare name of days output column}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Count days between two dates
 }
 \examples{
-dplyr::tibble(dos = as.Date(c("2021-04-18", "2021-11-18", "2022-02-18")),
+dplyr::tibble(dos    = as.Date(c("2021-04-18", "2021-11-18", "2022-02-18")),
               signed = as.Date("2022-02-18")) |>
-              count_days(start = dos,
-              end = signed,
-              provider_lag)
+              count_days(
+              start  = dos,
+              end    = signed,
+              lag)
+
 }

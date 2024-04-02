@@ -34,12 +34,14 @@ Limiting Charge Amounts for both Facility & Non-Facility RVUs
 ((wRVU x wGPCI) + (pRVU x pGPCI) + (mRVU x mGPCI)) x Conversion Factor
 }
 \examples{
-calculate_amounts(wrvu  = 6.26,
-                  nprvu = 7.92,
-                  fprvu = 4.36,
-                  mrvu  = 0.99,
-                  wgpci = 1.053,
-                  pgpci = 0.883,
-                  mgpci = 1.125,
-                  cf    = 32.7442)
+calculate_amounts(
+   wrvu  = 6.26,
+   nprvu = 7.92,
+   fprvu = 4.36,
+   mrvu  = 0.99,
+   wgpci = 1.053,
+   pgpci = 0.883,
+   mgpci = 1.125,
+   cf    = 32.7442)
+
 }

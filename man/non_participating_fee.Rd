@@ -10,7 +10,7 @@ non_participating_fee(participating_fee)
 \item{participating_fee}{\verb{<dbl>} Participating Fee}
 }
 \value{
-\verb{<dbl>} Non-Participating Fee
+\verb{<dbl>} vector of the Non-Participating Fee
 }
 \description{
 The payment amount for Non-participating physicians is 95\% of the payment
@@ -21,4 +21,5 @@ amount for Participating physicians (i.e., the fee schedule amount):
 }
 \examples{
 non_participating_fee(26.35)
+
 }

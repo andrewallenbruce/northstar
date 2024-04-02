@@ -7,9 +7,9 @@
 search_cpt(hcpcs = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} 5-digit CPT codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -19,4 +19,5 @@ CPT (HCPCS Level I) Codes
 }
 \examples{
 search_cpt(c("39503", "43116", "33935", "11646"))
+
 }

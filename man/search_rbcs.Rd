@@ -15,7 +15,7 @@ search_rbcs(
 )
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes; default is \code{NULL}}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{category}{\verb{<chr>} vector of RBCS categories:
 \itemize{
@@ -29,9 +29,9 @@ search_rbcs(
 \item \code{Other} (n = 233)
 }}
 
-\item{subcategory}{\verb{<chr>} vector of RBCS subcategories (53 unique in total)}
+\item{subcategory}{\verb{<chr>} vector of RBCS subcategories (53 unique)}
 
-\item{family}{\verb{<chr>} vector of RBCS families (178 unique in total)}
+\item{family}{\verb{<chr>} vector of RBCS families (178 unique)}
 
 \item{procedure}{\verb{<chr>} Procedure Type:
 \itemize{

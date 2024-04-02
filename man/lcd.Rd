@@ -7,9 +7,9 @@
 lcd(hcpcs = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{vector of HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

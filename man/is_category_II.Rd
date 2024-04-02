@@ -15,6 +15,8 @@ is_category_II(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
+
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Category II: Supplemental tracking codes that can be used for performance
@@ -50,4 +52,5 @@ Category II codes are:
 is_category_II("1164F")
 
 is_category_II("11646")
+
 }

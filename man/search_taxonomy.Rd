@@ -10,16 +10,16 @@
 search_taxonomy(shape = c("wide", "long"), code = NULL, unnest = FALSE, ...)
 }
 \arguments{
-\item{shape}{shape of data to return, \code{wide} (default) or \code{long}}
+\item{shape}{\verb{<chr>} shape of data to return, \code{wide} (default) or \code{long}}
 
-\item{code}{vector of taxonomy codes}
+\item{code}{\verb{<chr>} vector of taxonomy codes}
 
-\item{unnest}{unnest the \code{hierarchy} column, default is \code{FALSE}}
+\item{unnest}{\verb{<lgl>}unnest \code{hierarchy} column, default is \code{FALSE}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 \code{search_taxonomy()} returns a \code{\link[=tibble]{tibble()}} of the current Health Care Provider

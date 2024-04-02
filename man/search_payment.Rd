@@ -7,13 +7,13 @@
 search_payment(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} 5-digit HCPCS code}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{mac}{\verb{<chr>} 5-digit MAC ID code}
+\item{mac}{\verb{<chr>} 5-digit Medicare Administrative Contractor (MAC) ID}
 
-\item{locality}{\verb{<chr>} 2-digit Locality ID}
+\item{locality}{\verb{<chr>} vector of 2-digit Locality IDs}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -25,4 +25,5 @@ Payment Amount File
 search_payment(hcpcs    = c("39503", "43116", "33935", "11646"),
                locality = "01",
                mac      = "10212")
+
 }

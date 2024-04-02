@@ -15,6 +15,8 @@ is_level_II(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
+
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 HCPCS Level II is a standardized coding system that is used primarily to

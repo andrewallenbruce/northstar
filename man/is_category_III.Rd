@@ -15,6 +15,8 @@ is_category_III(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
+
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 CPT Category III codes are a set of temporary codes that allow data

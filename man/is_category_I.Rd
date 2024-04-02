@@ -15,6 +15,8 @@ is_category_I(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
+
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Check if code is HCPCS Level 1 Category I (CPT)

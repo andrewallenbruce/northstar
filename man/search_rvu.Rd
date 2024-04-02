@@ -7,9 +7,9 @@
 search_rvu(hcpcs = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} 5-digit HCPCS code}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -19,4 +19,5 @@ Relative Value File
 }
 \examples{
 search_rvu(c("A0021", "V5362", "J9264", "G8916"))
+
 }

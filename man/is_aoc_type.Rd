@@ -7,7 +7,7 @@
 is_aoc_type(hcpcs, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes; default is \code{NULL}}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{...}{Empty dots}
 }

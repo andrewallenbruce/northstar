@@ -61,14 +61,21 @@
 #'
 #' [MUE Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
 #'
-#' @param hcpcs `<chr>` vector of HCPCS codes
-#' @param service `<chr>` `Practitioner`, `Outpatient Hospital`, `DME Supplier`
-#' @param mai `<int>` MUE adjudication indicator; `1`, `2`, `3`
-#' @param ... Empty
-#' @return a [tibble][tibble::tibble-package]
+#' @template args-hcpcs
+#'
+#' @param service `<chr>` `Practitioner`, `Outpatient Hospital`, or `DME Supplier`
+#'
+#' @param mai `<int>` MUE adjudication indicator; `1`, `2`, or `3`
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
 #' @examples
 #' search_mue(hcpcs = c("39503", "43116", "33935", "11646"))
+#'
 #' @autoglobal
+#'
 #' @export
 search_mue <- function(hcpcs   = NULL,
                        service = NULL,
@@ -78,24 +85,15 @@ search_mue <- function(hcpcs   = NULL,
   mue <- pins::pin_read(mount_board(), "mues")
 
   if (!is.null(hcpcs)) {
-
-    mue <- vctrs::vec_slice(mue,
-           vctrs::vec_in(mue$hcpcs,
-           collapse::funique(hcpcs)))
-  }
+    mue <- search_in(mue, mue$hcpcs, hcpcs)
+    }
 
   if (!is.null(service)) {
-
-    mue <- vctrs::vec_slice(mue,
-           vctrs::vec_in(mue$service_type,
-           collapse::funique(service)))
-
-    if (!is.null(mai)) {
-
-      mue <- vctrs::vec_slice(mue,
-             vctrs::vec_in(mue$mai,
-             collapse::funique(mai)))
+    mue <- search_in(mue, mue$service_type, service)
     }
+
+  if (!is.null(mai)) {
+    mue <- search_in(mue, mue$mai, mai)
   }
   return(mue)
 }
@@ -114,13 +112,20 @@ search_mue <- function(hcpcs   = NULL,
 #' [PTP Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits)
 #'
 #' @param column_1 `<chr>` Comprehensive HCPCS code
+#'
 #' @param column_2 `<chr>` Component HCPCS code
+#'
 #' @param mod `<int>` `1` = Allowed, `0` = Not Allowed, `9` = Not Applicable
-#' @param ... Empty
-#' @return a [tibble][tibble::tibble-package]
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
 #' @examples
 #' search_ptp(column_1 = c("39503", "43116", "33935", "11646"))
+#'
 #' @autoglobal
+#'
 #' @export
 search_ptp <- function(column_1 = NULL,
                        column_2 = NULL,
@@ -130,24 +135,15 @@ search_ptp <- function(column_1 = NULL,
   ptp <- pins::pin_read(mount_board(), "ptp")
 
   if (!is.null(column_1)) {
-
-    ptp <- vctrs::vec_slice(ptp,
-           vctrs::vec_in(ptp$column_1,
-           collapse::funique(column_1)))
+    ptp <- search_in(ptp, ptp$column_1, column_1)
   }
 
   if (!is.null(column_2)) {
-
-    ptp <- vctrs::vec_slice(ptp,
-           vctrs::vec_in(ptp$column_2,
-           collapse::funique(column_2)))
+    ptp <- search_in(ptp, ptp$column_2, column_2)
   }
 
   if (!is.null(mod)) {
-
-    ptp <- vctrs::vec_slice(ptp,
-           vctrs::vec_in(ptp$modifier,
-           collapse::funique(mod)))
+    ptp <- search_in(ptp, ptp$modifier, mod)
   }
   return(ptp)
 }

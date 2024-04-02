@@ -7,13 +7,13 @@
 search_mue(hcpcs = NULL, service = NULL, mai = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{service}{\verb{<chr>} \code{Practitioner}, \verb{Outpatient Hospital}, \verb{DME Supplier}}
+\item{service}{\verb{<chr>} \code{Practitioner}, \verb{Outpatient Hospital}, or \verb{DME Supplier}}
 
-\item{mai}{\verb{<int>} MUE adjudication indicator; \code{1}, \code{2}, \code{3}}
+\item{mai}{\verb{<int>} MUE adjudication indicator; \code{1}, \code{2}, or \code{3}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -85,4 +85,5 @@ reported medically necessary services
 }
 \examples{
 search_mue(hcpcs = c("39503", "43116", "33935", "11646"))
+
 }

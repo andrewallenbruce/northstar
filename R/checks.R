@@ -2,6 +2,8 @@
 #'
 #' @template args-checks
 #'
+#' @template returns
+#'
 #' @examples
 #' is_valid_length("11646")
 #'
@@ -40,6 +42,8 @@ is_valid_length <- function(x,
 #' suppliers other than physicians.
 #'
 #' @template args-checks
+#'
+#' @template returns
 #'
 #' @examples
 #' is_level_I("11646")
@@ -81,6 +85,8 @@ is_level_I <- function(x,
 #'
 #' @template args-checks
 #'
+#' @template returns
+#'
 #' @examples
 #' is_level_II("E8015")
 #'
@@ -100,6 +106,8 @@ is_level_II <- function(x,
 #' Check if code is HCPCS Level 1 Category I (CPT)
 #'
 #' @template args-checks
+#'
+#' @template returns
 #'
 #' @examples
 #' is_category_I("11646")
@@ -147,10 +155,13 @@ is_category_I <- function(x,
 #'
 #' @template args-checks
 #'
+#' @template returns
+#'
 #' @examples
 #' is_category_II("1164F")
 #'
 #' is_category_II("11646")
+#'
 #' @export
 #'
 #' @autoglobal
@@ -213,6 +224,8 @@ is_category_II <- function(x,
 #' code unless another specific cross-reference is established at the time of archiving.
 #'
 #' @template args-checks
+#'
+#' @template returns
 #'
 #' @examples
 #' is_category_III("0074T")

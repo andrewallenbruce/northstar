@@ -15,6 +15,8 @@ is_valid_length(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
+
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Check if string is valid length of a HCPCS code
