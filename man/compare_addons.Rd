@@ -7,12 +7,12 @@
 compare_addons(hcpcs, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes; default is \code{NULL}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-\link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Return a HCPCS Code's Add-On Code Complement

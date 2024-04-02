@@ -12,7 +12,7 @@ search_modifiers(mod = NULL, ...)
 \item{...}{Empty dots}
 }
 \value{
-a \link[tibble:tibble-package]{tibble} with the following columns:
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 A modifier provides the means to report or indicate that a service or

@@ -7,13 +7,11 @@
 search_addons(addon = NULL, primary = NULL, type = NULL, ...)
 }
 \arguments{
-\item{addon}{\verb{<chr>} vector of HCPCS codes}
-
-\item{primary}{\verb{<chr>} vector of HCPCS codes}
+\item{addon, primary}{\verb{<chr>} vector of HCPCS codes}
 
 \item{type}{\verb{<int>} AOC edit type; \code{1}, \code{2}, \code{3}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -73,4 +71,5 @@ Version: 2024-04-01
 }
 \examples{
 search_addons(primary = c("39503", "43116", "33935", "11646"))
+
 }

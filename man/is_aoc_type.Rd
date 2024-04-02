@@ -7,12 +7,12 @@
 is_aoc_type(hcpcs, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-digit HCPCS codes; default is \code{NULL}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-\verb{<list>} of three \verb{<chr>} vectors: \code{primary}, \code{addon}, \code{both}
+a \verb{<list>} of three \verb{<chr>} vectors: \code{primary}, \code{addon}, \code{both}
 }
 \description{
 What type of Add-On Code is a HCPCS Code?
@@ -22,4 +22,5 @@ is_aoc_type(c("11646", "0074T"))
 
 c("22633", "22630", "22532", "77001", "88334", "0715T", "64727") |>
 is_aoc_type()
+
 }

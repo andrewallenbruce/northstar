@@ -24,7 +24,7 @@ search_adjustments(
 \item{...}{Empty dots}
 }
 \value{
-a \link[tibble:tibble-package]{tibble} with the following columns:
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 CARC and RARC Codes

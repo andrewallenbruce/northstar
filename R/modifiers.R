@@ -21,18 +21,10 @@
 #' @autoglobal
 search_modifiers <- function(mod = NULL, ...) {
 
-  md <- pins::pin_read(
-    mount_board(),
-    "modifiers"
-    )
+  md <- pins::pin_read(mount_board(), "modifiers")
 
   if (!is.null(mod)) {
-
-    md <- search_in(
-      df     = md,
-      dfcol  = md$mod,
-      search = mod
-      )
+    md <- search_in(md, md$mod, mod)
   }
   return(md)
 }

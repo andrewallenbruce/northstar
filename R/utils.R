@@ -7,9 +7,9 @@ search_in <- function(df, dfcol, search) {
       dfcol,
       collapse::funique(
         search
+        )
       )
     )
-  )
 }
 
 #' Return GitHub raw url
@@ -48,11 +48,18 @@ srchcol <- function(df,
                     search,
                     ignore = TRUE,
                     ...) {
-
-  dplyr::filter(df, stringr::str_detect(
-    !!rlang::sym(col),
-    stringr::regex(search, ignore_case = ignore)
-  ))
+  dplyr::filter(
+    df,
+    stringr::str_detect(
+      !!rlang::sym(
+        col
+        ),
+      stringr::regex(
+        search,
+        ignore_case = ignore
+        )
+      )
+    )
 }
 
 #' Infix operator for `if (!is.null(x)) y else x` statements
