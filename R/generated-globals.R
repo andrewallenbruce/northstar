@@ -6,28 +6,14 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
-  # <compare_addons>
-  "addon",
-  # <compare_addons>
-  "addon_deleted",
-  # <compare_addons>
-  "aoc_type",
   # <search_hcpcs>
   "asc",
   # <case_chapter>
   "chapter",
   # <search_adjustments>
   "code",
-  # <compare_addons>
-  "complement",
-  # <compare_addons>
-  "complements",
   # <search_hcpcs>
   "coverage",
-  # <compare_addons>
-  "data",
-  # <compare_addons>
-  "deleted",
   # <col_lb>
   "description",
   # <search_adjustments>
@@ -38,10 +24,6 @@ utils::globalVariables(c(
   "description_long",
   # <search_hcpcs>
   "description_short",
-  # <compare_addons>
-  "edit_deleted",
-  # <compare_addons>
-  "edit_effective",
   # <search_adjustments>
   "end_date",
   # <calculate_amounts>
@@ -78,8 +60,6 @@ utils::globalVariables(c(
   "nfprvu",
   # <calculate_amounts>
   "nonfacility",
-  # <compare_addons>
-  "notes",
   # <search_fee_schedule>
   "npar",
   # <search_fee_schedule>
@@ -92,8 +72,6 @@ utils::globalVariables(c(
   "pgpci",
   # <search_hcpcs>
   "price",
-  # <compare_addons>
-  "primary_deleted",
   # <search_rbcs>
   "rbcs_category",
   # <search_rbcs>
@@ -102,10 +80,6 @@ utils::globalVariables(c(
   "status",
   # <search_hcpcs>
   "tos",
-  # <compare_addons>
-  "type",
-  # <compare_addons>
-  "type_description",
   # <search_adjustments>
   "usage",
   # <col_lb>

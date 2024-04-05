@@ -47,42 +47,60 @@
 #'
 #' [Add-Ons Link](https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits)
 #'
-#' @param addon,primary `<chr>` vector of HCPCS codes
+#' @param hcpcs `<chr>` vector of HCPCS codes
 #'
-#' @param type `<int>` AOC edit type; `1`, `2`, `3`
+#' @param edit_type `<int>` AOC edit type; `1`, `2`, `3`
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' search_addons(primary = c("39503", "43116", "33935", "11646"))
+#' get_addons(hcpcs = c("22633", "0074T"))
+#'
+#' get_addons(hcpcs = c("22630", "22532", "77001", "88334", "64727"))
+#'
+#' get_addons(hcpcs = c("11646", "39503", "43116", "33935"))
 #'
 #' @autoglobal
 #'
 #' @export
-search_addons <- function(addon   = NULL,
-                          primary = NULL,
-                          type    = NULL,
-                          ...) {
+get_addons <- function(hcpcs     = NULL,
+                       edit_type = NULL,
+                       ...) {
 
-  aoc <- pins::pin_read(mount_board(), "aoc")
+    aoc_long <- pins::pin_read(
+      mount_board(),
+      "aoc_long"
+      )
 
-  if (!is.null(addon)) {
-    aoc <- search_in(aoc, aoc$addon, addon)
+  if (!is.null(hcpcs)) {
+
+    aoc_long <- search_in(
+      aoc_long,
+      aoc_long$hcpcs,
+      unlist(
+        get_aoc_type(hcpcs),
+        use.names = FALSE
+        )
+      )
     }
 
-  if (!is.null(primary)) {
-    aoc <- search_in(aoc, aoc$primary, primary)
+  if (!is.null(edit_type)) {
+
+    edit_type <- rlang::arg_match(
+      edit_type,
+      c("1", "2", "3"),
+      multiple = TRUE
+      )
+
+    aoc_long  <- search_in(
+      aoc_long,
+      aoc_long$edit_type,
+      edit_type
+      )
   }
-
-  if (!is.null(type)) {
-
-    type <- rlang::arg_match(type, c("1", "2", "3"), multiple = TRUE)
-
-    aoc  <- search_in(aoc, aoc$type, type)
-  }
-  return(aoc)
+  return(aoc_long)
 }
 
 #' What type of Add-On Code is a HCPCS Code?
@@ -91,100 +109,29 @@ search_addons <- function(addon   = NULL,
 #'
 #' @template args-dots
 #'
-#' @returns a `<list>` of three `<chr>` vectors: `primary`, `addon`, `both`
+#' @returns `<list>` of four `<chr>` vectors indicating group membership:
+#'   `primary`, `addon`, `both`, and `neither`
 #'
 #' @examples
-#' is_aoc_type(c("11646", "0074T"))
+#' get_aoc_type(c("11646", "0074T"))
 #'
 #' c("22633", "22630", "22532", "77001", "88334", "0715T", "64727") |>
-#' is_aoc_type()
+#' get_aoc_type()
 #'
 #' @export
 #'
 #' @autoglobal
-is_aoc_type <- function(hcpcs, ...) {
+get_aoc_type <- function(hcpcs, ...) {
 
   hcpcs <- collapse::funique(hcpcs)
 
-  vc    <- pins::pin_read(mount_board(), "aoc_vecs")
+  vc <- pins::pin_read(mount_board(), "aoc_vecs")
 
   list(
     primary = search_in(hcpcs, hcpcs, vc$primary),
     addon   = search_in(hcpcs, hcpcs, vc$addon),
-    both    = search_in(hcpcs, hcpcs, vc$both)) |>
-    purrr::compact(.p = vctrs::vec_is_empty)
-}
-
-#' Return a HCPCS Code's Add-On Code Complement
-#'
-#' @template args-hcpcs
-#'
-#' @template args-dots
-#'
-#' @template returns
-#'
-#' @examples
-#' compare_addons(c("22633", "0074T"))
-#'
-#' compare_addons(c("22633", "22630", "22532",
-#'                  "77001", "88334", "64727"))
-#'
-#' compare_addons(c("11646", "0074T", "39503",
-#'                  "43116", "33935", "11646"))
-#'
-#' @export
-#'
-#' @autoglobal
-compare_addons <- function(hcpcs, ...) {
-
-  types <- is_aoc_type(hcpcs)
-
-  x <- list(
-    addon   = vctrs::vec_c(types$both, types$addon),
-    primary = vctrs::vec_c(types$both, types$primary)
-  )
-
-  primary <- pins::pin_read(mount_board(), "aoc") |>
-    dplyr::rename(hcpcs         = primary,
-                  complement    = addon,
-                  deleted       = primary_deleted) |>
-    dplyr::mutate(aoc_type      = "primary",
-                  addon_deleted = NULL,
-                  .after        = hcpcs)
-
-  addons <- pins::pin_read(mount_board(), "aoc") |>
-    dplyr::rename(hcpcs           = addon,
-                  complement      = primary,
-                  deleted         = addon_deleted) |>
-    dplyr::mutate(aoc_type        = "addon",
-                  primary_deleted = NULL,
-                  .after          = hcpcs)
-
-  add_ifelse <- function(x, df, dfcol, by) {
-    if (vctrs::vec_is_empty(x)) { NULL } else {
-      vctrs::vec_slice(df,
-      vctrs::vec_in(dfcol, x)) |>
-        tidyr::nest(.by = {{ by }}) }
-  }
-
-  res <- list(
-    addon   = add_ifelse(x$addon, addons, addons$hcpcs, hcpcs),
-    primary = add_ifelse(x$primary, primary, primary$hcpcs, hcpcs)
-  )
-
-  vctrs::vec_rbind(res$addon, res$primary) |>
-    tidyr::unnest(data) |>
-    tidyr::nest(complements = c(complement)) |>
-    dplyr::select(
-      hcpcs,
-      aoc_type,
-      complements,
-      deleted,
-      type,
-      type_description,
-      edit_effective,
-      edit_deleted,
-      notes
-    ) |>
-    dplyr::arrange(hcpcs, edit_effective)
+    both    = search_in(hcpcs, hcpcs, vc$both),
+    neither = vctrs::vec_set_difference(
+    hcpcs, vctrs::vec_c(vc$both, vc$primary, vc$addon))
+    )
 }

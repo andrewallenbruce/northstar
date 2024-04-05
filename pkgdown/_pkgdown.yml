@@ -67,7 +67,7 @@ reference:
   desc: >
     Medical Coding & Billing Codesets.
   contents:
-  - compare_addons
+  - get_addons
   - matches("search")
   - lcd
   - ncd
@@ -85,6 +85,7 @@ reference:
   desc: >
     Functions to validate inputs.
   contents:
+  - get_aoc_type
   - starts_with("is_")
 
 - title: Recoding Helpers

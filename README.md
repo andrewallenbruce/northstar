@@ -43,7 +43,7 @@ library(janitor)
 
 ``` r
 search_fee_schedule(
-  hcpcs    = "33935",
+  hcpcs    = "33924",
   state    = "GA",
   locality = "01",
   mac      = "10212") |> 
@@ -52,13 +52,13 @@ search_fee_schedule(
 
     > Rows: 1
     > Columns: 59
-    > $ hcpcs                  <chr> "33935"
-    > $ description            <chr> "Transplantation heart/lung"
-    > $ description_consumer   <chr> "Transplantation of donor heart and lung"
-    > $ descriptions_clinician <list> [<tbl_df[1 x 1]>]
+    > $ hcpcs                  <chr> "33924"
+    > $ description            <chr> "Remove pulmonary shunt"
+    > $ description_consumer   <chr> "Disconnection of pulmonary artery shunt"
+    > $ descriptions_clinician <list> [<tbl_df[2 x 1]>]
     > $ rbcs_category          <chr> "Major Procedure"
     > $ rbcs_family            <chr> "Cardiovascular"
-    > $ status                 <chr> "R"
+    > $ status                 <chr> "A"
     > $ mac                    <chr> "10212"
     > $ state                  <chr> "GA"
     > $ locality               <chr> "01"
@@ -67,46 +67,46 @@ search_fee_schedule(
     > $ wgpci                  <dbl> 1
     > $ pgpci                  <dbl> 0.997
     > $ mgpci                  <dbl> 1.128
-    > $ wrvu                   <dbl> 91.78
-    > $ fprvu                  <dbl> 31.07
-    > $ mrvu                   <dbl> 21.24
+    > $ wrvu                   <dbl> 5.49
+    > $ fprvu                  <dbl> 1.5
+    > $ mrvu                   <dbl> 1.35
     > $ cf                     <dbl> 32.7442
-    > $ f_fee                  <dbl> 4804.08
-    > $ nf_fee                 <dbl> 4804.08
-    > $ frvus                  <dbl> 146.72
-    > $ nrvus                  <dbl> 146.72
-    > $ fpar                   <dbl> 4804.23
-    > $ npar                   <dbl> 4804.23
-    > $ fnpar                  <dbl> 4564.02
-    > $ nfnpar                 <dbl> 4564.02
-    > $ flim                   <dbl> 5248.62
-    > $ nlim                   <dbl> 5248.62
+    > $ f_fee                  <dbl> 278.6
+    > $ nf_fee                 <dbl> 278.6
+    > $ frvus                  <dbl> 8.51
+    > $ nrvus                  <dbl> 8.51
+    > $ fpar                   <dbl> 278.65
+    > $ npar                   <dbl> 278.65
+    > $ fnpar                  <dbl> 264.72
+    > $ nfnpar                 <dbl> 264.72
+    > $ flim                   <dbl> 304.43
+    > $ nlim                   <dbl> 304.43
     > $ opps                   <chr> "9"
     > $ opps_nf                <dbl> NA
     > $ opps_f                 <dbl> NA
     > $ fprvu_opps             <dbl> 0
     > $ mrvu_opps              <dbl> 0
-    > $ mult_surg              <chr> "2"
-    > $ mult_proc              <chr> "2"
+    > $ mult_surg              <chr> "0"
+    > $ mult_proc              <chr> "0"
     > $ nther                  <dbl> 0
     > $ fther                  <dbl> 0
-    > $ global                 <chr> "090"
-    > $ op_ind                 <dbl> 1
-    > $ op_pre                 <dbl> 0.09
-    > $ op_intra               <dbl> 0.84
-    > $ op_post                <dbl> 0.07
+    > $ global                 <chr> "ZZZ"
+    > $ op_ind                 <dbl> 0
+    > $ op_pre                 <dbl> 0
+    > $ op_intra               <dbl> 0
+    > $ op_post                <dbl> 0
     > $ mod                    <chr> NA
     > $ pctc                   <chr> "0"
     > $ surg_bilat             <chr> "0"
     > $ surg_asst              <chr> "2"
     > $ surg_co                <chr> "1"
-    > $ surg_team              <chr> "2"
+    > $ surg_team              <chr> "0"
     > $ supvis                 <chr> "09"
     > $ dximg                  <chr> "99"
     > $ endo                   <chr> NA
-    > $ nfprvu                 <dbl> 31.07
-    > $ ntotal                 <dbl> 144.09
-    > $ ftotal                 <dbl> 144.09
+    > $ nfprvu                 <dbl> 1.5
+    > $ ntotal                 <dbl> 8.34
+    > $ ftotal                 <dbl> 8.34
     > $ nfprvu_opps            <dbl> 0
     > $ two_macs               <lgl> FALSE
     > $ chapter                <chr> "Surgery"
@@ -115,19 +115,23 @@ search_fee_schedule(
 ### Retrieve Add-On Codes
 
 ``` r
-compare_addons(hcpcs = "33935") |> 
-  tidyr::unnest(complements) |> 
-  janitor::remove_empty(which = c("cols", "rows")) |> 
-  dplyr::filter(is.na(edit_deleted))
+get_addons(hcpcs = c("33935", "33924")) |> 
+  janitor::remove_empty(which = c("cols", "rows"))
 ```
 
-    > # A tibble: 4 × 7
-    >   hcpcs aoc_type complement  type type_description   edit_effective edit_deleted
-    >   <chr> <chr>    <chr>      <int> <chr>                       <int>        <int>
-    > 1 33935 primary  33924          1 Only Paid if Prim…           2015           NA
-    > 2 33935 primary  34714          1 Only Paid if Prim…           2018           NA
-    > 3 33935 primary  34716          1 Only Paid if Prim…           2018           NA
-    > 4 33935 primary  34833          1 Only Paid if Prim…           2018           NA
+    > # A tibble: 9 × 7
+    >   hcpcs aoc_type complements       edit_type edit_description     edit_effective
+    >   <chr> <chr>    <list>                <int> <chr>                         <int>
+    > 1 33924 addon    <tibble [1 × 1]>          1 Only Paid if Primar…           2013
+    > 2 33924 addon    <tibble [39 × 1]>         1 Only Paid if Primar…           2013
+    > 3 33924 addon    <tibble [2 × 1]>          1 Only Paid if Primar…           2013
+    > 4 33924 addon    <tibble [10 × 1]>         1 Only Paid if Primar…           2015
+    > 5 33924 addon    <tibble [1 × 1]>          1 Only Paid if Primar…           2016
+    > 6 33924 addon    <tibble [3 × 1]>          1 Only Paid if Primar…           2021
+    > 7 33935 primary  <tibble [2 × 1]>          1 Only Paid if Primar…           2013
+    > 8 33935 primary  <tibble [1 × 1]>          1 Only Paid if Primar…           2015
+    > 9 33935 primary  <tibble [3 × 1]>          1 Only Paid if Primar…           2018
+    > # ℹ 1 more variable: edit_deleted <int>
 
 ### Retrieve MUEs
 
@@ -150,11 +154,11 @@ search_ptp(column_1 = "33935") |>
   dplyr::mutate(deletion = NULL) |> 
   dplyr::arrange(column_2) |> 
   dplyr::group_by(column_1, modifier, rationale) |> 
-  tidyr::nest()
+  tidyr::nest() |> 
+  dplyr::ungroup()
 ```
 
     > # A tibble: 11 × 4
-    > # Groups:   column_1, modifier, rationale [11]
     >    column_1 modifier rationale                                         data    
     >    <chr>       <int> <chr>                                             <list>  
     >  1 33935           0 Misuse of Column Two code with Column One code    <tibble>

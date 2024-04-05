@@ -53,7 +53,7 @@ library(janitor)
 
 ```{r}
 search_fee_schedule(
-  hcpcs    = "33935",
+  hcpcs    = "33924",
   state    = "GA",
   locality = "01",
   mac      = "10212") |> 
@@ -64,10 +64,8 @@ search_fee_schedule(
 ### Retrieve Add-On Codes
 
 ```{r}
-compare_addons(hcpcs = "33935") |> 
-  tidyr::unnest(complements) |> 
-  janitor::remove_empty(which = c("cols", "rows")) |> 
-  dplyr::filter(is.na(edit_deleted))
+get_addons(hcpcs = c("33935", "33924")) |> 
+  janitor::remove_empty(which = c("cols", "rows"))
 ```
 
 ### Retrieve MUEs
@@ -85,7 +83,8 @@ search_ptp(column_1 = "33935") |>
   dplyr::mutate(deletion = NULL) |> 
   dplyr::arrange(column_2) |> 
   dplyr::group_by(column_1, modifier, rationale) |> 
-  tidyr::nest()
+  tidyr::nest() |> 
+  dplyr::ungroup()
 ```
 
 
