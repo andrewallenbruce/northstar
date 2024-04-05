@@ -103,13 +103,16 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/cases.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/compare_addons.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/count_days.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/display_long.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/get_addons.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/get_aoc_type.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/gt_marks.html</loc>
@@ -119,9 +122,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_aoc_type.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_category_I.html</loc>
@@ -155,9 +155,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_addons.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_adjustments.html</loc>
