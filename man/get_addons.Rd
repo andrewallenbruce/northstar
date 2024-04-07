@@ -7,7 +7,7 @@
 get_addons(hcpcs = NULL, edit_type = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of HCPCS codes}
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{edit_type}{\verb{<int>} AOC edit type; \code{1}, \code{2}, \code{3}}
 

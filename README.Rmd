@@ -77,6 +77,13 @@ search_mue(hcpcs = "33935")
 ### Procedure-to-Procedure Edits
 
 ```{r}
+get_ptp_edits(hcpcs = "33935")
+```
+
+
+
+
+```{r}
 search_ptp(column_1 = "33935") |> 
   janitor::remove_empty(which = c("cols", "rows")) |> 
   dplyr::filter(deletion > clock::date_today("")) |> 

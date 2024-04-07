@@ -2,7 +2,7 @@
 % Please edit documentation in R/addons.R
 \name{get_aoc_type}
 \alias{get_aoc_type}
-\title{What type of Add-On Code is a HCPCS Code?}
+\title{HCPCS Add-On code type}
 \usage{
 get_aoc_type(hcpcs, ...)
 }
@@ -16,7 +16,7 @@ get_aoc_type(hcpcs, ...)
 \code{primary}, \code{addon}, \code{both}, and \code{neither}
 }
 \description{
-What type of Add-On Code is a HCPCS Code?
+HCPCS Add-On code type
 }
 \examples{
 get_aoc_type(c("11646", "0074T"))

@@ -147,3 +147,28 @@ search_ptp <- function(column_1 = NULL,
   }
   return(ptp)
 }
+
+#' Get NCCI Procedure-to-Procedure (PTP) Edits
+#'
+#' @template args-hcpcs
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' get_ptp_edits(hcpcs = c("43116"))
+#'
+#' @autoglobal
+#'
+#' @export
+get_ptp_edits <- function(hcpcs = NULL, ...) {
+
+  ptplong <- pins::pin_read(mount_board(), "ptp_long")
+
+  if (!is.null(hcpcs)) {
+    ptplong <- search_in(ptplong, ptplong$hcpcs, hcpcs)
+  }
+  return(ptplong)
+}
+

@@ -173,57 +173,57 @@ board |> pins::write_board_manifest()
 
 
 # Previous function
-
-compare_addons <- function(hcpcs, ...) {
-
-  types <- is_aoc_type(hcpcs)
-
-  x <- list(
-    addon   = vctrs::vec_c(types$both, types$addon),
-    primary = vctrs::vec_c(types$both, types$primary)
-  )
-
-  primary <- pins::pin_read(mount_board(), "aoc") |>
-    dplyr::rename(hcpcs         = primary,
-                  complement    = addon,
-                  deleted       = primary_deleted) |>
-    dplyr::mutate(aoc_type      = "primary",
-                  addon_deleted = NULL,
-                  .after        = hcpcs)
-
-  addons <- pins::pin_read(mount_board(), "aoc") |>
-    dplyr::rename(hcpcs           = addon,
-                  complement      = primary,
-                  deleted         = addon_deleted) |>
-    dplyr::mutate(aoc_type        = "addon",
-                  primary_deleted = NULL,
-                  .after          = hcpcs)
-
-  add_ifelse <- function(x, df, dfcol, by) {
-    if (vctrs::vec_is_empty(x)) { NULL } else {
-      vctrs::vec_slice(df,
-                       vctrs::vec_in(dfcol, x)) |>
-        tidyr::nest(.by = {{ by }}) }
-  }
-
-  res <- list(
-    addon   = add_ifelse(x$addon, addons, addons$hcpcs, hcpcs),
-    primary = add_ifelse(x$primary, primary, primary$hcpcs, hcpcs)
-  )
-
-  vctrs::vec_rbind(res$addon, res$primary) |>
-    tidyr::unnest(data) |>
-    tidyr::nest(complements = c(complement)) |>
-    dplyr::select(
-      hcpcs,
-      aoc_type,
-      complements,
-      deleted,
-      type,
-      type_description,
-      edit_effective,
-      edit_deleted,
-      notes
-    ) |>
-    dplyr::arrange(hcpcs, edit_effective)
-}
+#
+# compare_addons <- function(hcpcs, ...) {
+#
+#   types <- is_aoc_type(hcpcs)
+#
+#   x <- list(
+#     addon   = vctrs::vec_c(types$both, types$addon),
+#     primary = vctrs::vec_c(types$both, types$primary)
+#   )
+#
+#   primary <- pins::pin_read(mount_board(), "aoc") |>
+#     dplyr::rename(hcpcs         = primary,
+#                   complement    = addon,
+#                   deleted       = primary_deleted) |>
+#     dplyr::mutate(aoc_type      = "primary",
+#                   addon_deleted = NULL,
+#                   .after        = hcpcs)
+#
+#   addons <- pins::pin_read(mount_board(), "aoc") |>
+#     dplyr::rename(hcpcs           = addon,
+#                   complement      = primary,
+#                   deleted         = addon_deleted) |>
+#     dplyr::mutate(aoc_type        = "addon",
+#                   primary_deleted = NULL,
+#                   .after          = hcpcs)
+#
+#   add_ifelse <- function(x, df, dfcol, by) {
+#     if (vctrs::vec_is_empty(x)) { NULL } else {
+#       vctrs::vec_slice(df,
+#                        vctrs::vec_in(dfcol, x)) |>
+#         tidyr::nest(.by = {{ by }}) }
+#   }
+#
+#   res <- list(
+#     addon   = add_ifelse(x$addon, addons, addons$hcpcs, hcpcs),
+#     primary = add_ifelse(x$primary, primary, primary$hcpcs, hcpcs)
+#   )
+#
+#   vctrs::vec_rbind(res$addon, res$primary) |>
+#     tidyr::unnest(data) |>
+#     tidyr::nest(complements = c(complement)) |>
+#     dplyr::select(
+#       hcpcs,
+#       aoc_type,
+#       complements,
+#       deleted,
+#       type,
+#       type_description,
+#       edit_effective,
+#       edit_deleted,
+#       notes
+#     ) |>
+#     dplyr::arrange(hcpcs, edit_effective)
+# }

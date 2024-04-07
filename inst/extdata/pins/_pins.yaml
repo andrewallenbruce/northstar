@@ -1,5 +1,3 @@
-aoc:
-- aoc/20240405T211946Z-7f587/
 aoc_long:
 - aoc_long/20240405T213527Z-a84f5/
 aoc_vecs:
@@ -22,6 +20,8 @@ opps:
 - opps/20240324T141145Z-d081c/
 ptp:
 - ptp/20240326T220604Z-7ceb4/
+ptp_long:
+- ptp_long/20240407T203556Z-ce12c/
 pymt:
 - pymt/20240324T145937Z-d16e8/
 rarc_carc:

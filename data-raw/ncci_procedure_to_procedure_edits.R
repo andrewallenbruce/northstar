@@ -106,3 +106,53 @@ board |>
   )
 
 board |> pins::write_board_manifest()
+
+library(tidyverse)
+ptp <- search_ptp()
+
+comprehensive <- ptp |>
+  select(hcpcs = column_1,
+         complement = column_2,
+         date_deleted = deletion,
+         edit_mod = modifier,
+         edit_rationale = rationale) |>
+  mutate(ptp_type = "comprehensive",
+         .after = hcpcs) |>
+  nest(complements = c(complement))
+
+component <- ptp |>
+  select(hcpcs = column_2,
+         complement = column_1,
+         date_deleted = deletion,
+         edit_mod = modifier,
+         edit_rationale = rationale) |>
+  mutate(ptp_type = "component",
+         .after = hcpcs) |>
+  nest(complements = c(complement))
+
+ptp_long <- vctrs::vec_rbind(comprehensive, component) |>
+  dplyr::select(
+    hcpcs,
+    ptp_type,
+    complements,
+    date_deleted,
+    edit_mod,
+    edit_rationale
+  ) |>
+  dplyr::arrange(hcpcs, date_deleted)
+
+# Update Pin
+board <- pins::board_folder(here::here("inst/extdata/pins"))
+
+board |>
+  pins::pin_write(
+    ptp_long,
+    name = "ptp_long",
+    title = "Procedure-to-Procedure Edits - Long",
+    description = "Medicare NCCI Procedure-to-Procedure Edits 2024-04-01",
+    type = "qs"
+  )
+
+board |> pins::write_board_manifest()
+
+

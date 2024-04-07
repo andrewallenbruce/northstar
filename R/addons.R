@@ -47,7 +47,7 @@
 #'
 #' [Add-Ons Link](https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits)
 #'
-#' @param hcpcs `<chr>` vector of HCPCS codes
+#' @template args-hcpcs
 #'
 #' @param edit_type `<int>` AOC edit type; `1`, `2`, `3`
 #'
@@ -103,7 +103,7 @@ get_addons <- function(hcpcs     = NULL,
   return(aoc_long)
 }
 
-#' What type of Add-On Code is a HCPCS Code?
+#' HCPCS Add-On code type
 #'
 #' @template args-hcpcs
 #'
