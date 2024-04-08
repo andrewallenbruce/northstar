@@ -12,6 +12,20 @@ search_in <- function(df, dfcol, search) {
     )
 }
 
+#' Search in data frame
+#' @noRd
+search_if <- function(df, dfcol, search) {
+
+  if (!is.null(search)) {
+
+  vctrs::vec_slice(df,
+  vctrs::vec_in(dfcol,
+  collapse::funique(search)))
+
+    } else { df }
+
+}
+
 #' Return GitHub raw url
 #' @noRd
 gh_raw <- function(x) {

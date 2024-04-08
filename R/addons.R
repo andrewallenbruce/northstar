@@ -109,11 +109,11 @@ get_addons <- function(hcpcs     = NULL,
 #'
 #' @template args-dots
 #'
-#' @returns `<list>` of four `<chr>` vectors indicating group membership:
+#' @returns A `<list>` of four `<chr>` vectors indicating group membership:
 #'   `primary`, `addon`, `both`, and `neither`
 #'
 #' @examples
-#' get_aoc_type(c("11646", "0074T"))
+#' get_aoc_type(hcpcs = c("11646", "0074T"))
 #'
 #' c("22633", "22630", "22532", "77001", "88334", "0715T", "64727") |>
 #' get_aoc_type()
@@ -131,7 +131,7 @@ get_aoc_type <- function(hcpcs, ...) {
     primary = search_in(hcpcs, hcpcs, vc$primary),
     addon   = search_in(hcpcs, hcpcs, vc$addon),
     both    = search_in(hcpcs, hcpcs, vc$both),
-    neither = vctrs::vec_set_difference(
-    hcpcs, vctrs::vec_c(vc$both, vc$primary, vc$addon))
+    neither = vctrs::vec_set_difference(hcpcs,
+              vctrs::vec_c(vc$both, vc$primary, vc$addon))
     )
 }

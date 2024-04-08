@@ -20,6 +20,6 @@ a \link[tibble:tibble-package]{tibble}
 HCPCS Level II Codes
 }
 \examples{
-search_hcpcs(c("A0021", "V5362", "J9264", "G8916"))
+search_hcpcs(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 
 }

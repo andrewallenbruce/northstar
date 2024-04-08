@@ -16,7 +16,7 @@ search_rvu <- function(hcpcs = NULL, ...) {
 
   rv <- pins::pin_read(mount_board(), "rvu")
 
-  if (!is.null(hcpcs)) {rv <- search_in(rv, rv$hcpcs, hcpcs)}
+  rv <- search_if(rv, rv$hcpcs, hcpcs)
 
   return(rv)
 }
@@ -48,11 +48,11 @@ search_payment <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  if (!is.null(hcpcs)) {pmt <- search_in(pmt, pmt$hcpcs, hcpcs)}
+  pmt <- search_if(pmt, pmt$hcpcs, hcpcs)
 
-  if (!is.null(mac)) {pmt <- search_in(pmt, pmt$mac, mac)}
+  pmt <- search_if(pmt, pmt$mac, mac)
 
-  if (!is.null(locality)) {pmt <- search_in(pmt, pmt$locality, locality)}
+  pmt <- search_if(pmt, pmt$locality, locality)
 
   return(pmt)
 }
@@ -83,11 +83,11 @@ search_gpci <- function(mac      = NULL,
   gp <- pins::pin_read(mount_board(), "gpci") |>
     dplyr::rename(area = name)
 
-  if (!is.null(state)) {gp <- search_in(gp, gp$state, state)}
+  gp <- search_if(gp, gp$state, state)
 
-  if (!is.null(mac)) {gp <- search_in(gp, gp$mac, mac)}
+  gp <- search_if(gp, gp$mac, mac)
 
-  if (!is.null(locality)) {gp <- search_in(gp, gp$locality, locality)}
+  gp <- search_if(gp, gp$locality, locality)
 
   return(gp)
 }
@@ -103,7 +103,7 @@ search_gpci <- function(mac      = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_hcpcs(c("A0021", "V5362", "J9264", "G8916"))
+#' search_hcpcs(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 #'
 #' @export
 #'
@@ -130,7 +130,7 @@ search_hcpcs <- function(hcpcs = NULL,
       betos)
   }
 
-  if (!is.null(hcpcs)) {lv2 <- search_in(lv2, lv2$hcpcs, hcpcs)}
+  lv2 <- search_if(lv2, lv2$hcpcs, hcpcs)
 
   return(lv2)
 }
@@ -153,7 +153,7 @@ search_cpt <- function(hcpcs = NULL, ...) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
-  if (!is.null(hcpcs)) {cpt <- search_in(cpt, cpt$hcpcs, hcpcs)}
+  cpt <- search_if(cpt, cpt$hcpcs, hcpcs)
 
   return(cpt)
 }
@@ -188,11 +188,11 @@ search_opps <- function(hcpcs    = NULL,
 
   opp <- pins::pin_read(mount_board(), "opps")
 
-  if (!is.null(hcpcs)) {opp <- search_in(opp, opp$hcpcs, hcpcs)}
+  opp <- search_if(opp, opp$hcpcs, hcpcs)
 
-  if (!is.null(mac)) {opp <- search_in(opp, opp$mac, mac)}
+  opp <- search_if(opp, opp$mac, mac)
 
-  if (!is.null(locality)) {opp <- search_in(opp, opp$locality, locality)}
+  opp <- search_if(opp, opp$locality, locality)
 
   return(opp)
 }

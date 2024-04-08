@@ -12,14 +12,14 @@ get_aoc_type(hcpcs, ...)
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-\verb{<list>} of four \verb{<chr>} vectors indicating group membership:
+A \verb{<list>} of four \verb{<chr>} vectors indicating group membership:
 \code{primary}, \code{addon}, \code{both}, and \code{neither}
 }
 \description{
 HCPCS Add-On code type
 }
 \examples{
-get_aoc_type(c("11646", "0074T"))
+get_aoc_type(hcpcs = c("11646", "0074T"))
 
 c("22633", "22630", "22532", "77001", "88334", "0715T", "64727") |>
 get_aoc_type()
