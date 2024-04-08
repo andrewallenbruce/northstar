@@ -9,7 +9,7 @@ search_rvu(hcpcs = NULL, ...)
 \arguments{
 \item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -18,6 +18,6 @@ a \link[tibble:tibble-package]{tibble}
 Relative Value File
 }
 \examples{
-search_rvu(c("A0021", "V5362", "J9264", "G8916"))
+search_rvu(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 
 }

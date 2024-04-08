@@ -7,7 +7,7 @@
 #' @template returns
 #'
 #' @examples
-#' search_rvu(c("A0021", "V5362", "J9264", "G8916"))
+#' search_rvu(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 #'
 #' @autoglobal
 #'
@@ -60,20 +60,20 @@ search_payment <- function(hcpcs    = NULL,
 #' Geographic Practice Cost Indices
 #'
 #' @template args-mac
-
+#'
 #' @template args-state
-
+#'
 #' @template args-locality
-
+#'
 #' @template args-dots
-
+#'
 #' @template returns
-
+#'
 #' @examples
 #' search_gpci(state = "GA", locality = "01", mac = "10212")
-
+#'
 #' @export
-
+#'
 #' @autoglobal
 search_gpci <- function(mac      = NULL,
                         state    = NULL,

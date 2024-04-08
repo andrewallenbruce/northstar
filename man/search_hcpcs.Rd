@@ -11,7 +11,7 @@ search_hcpcs(hcpcs = NULL, limit = TRUE, ...)
 
 \item{limit}{\verb{<lgl>} limit columns returned, default is \code{TRUE}}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

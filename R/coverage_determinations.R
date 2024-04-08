@@ -4,6 +4,8 @@
 #'
 #' @param coverage Coverage level; `"Full"`, `"Restricted"`, `"None"`, `"Unknown"`
 #'
+#' @template args-dots
+#'
 #' @template returns
 #'
 #' @examples
@@ -12,7 +14,7 @@
 #' @export
 #'
 #' @autoglobal
-ncd <- function(coverage = NULL) {
+ncd <- function(coverage = NULL, ...) {
 
   ncd <- pins::pin_read(mount_board(), "ncd")
 
@@ -43,8 +45,7 @@ ncd <- function(coverage = NULL) {
 #' @export
 #'
 #' @autoglobal
-lcd <- function(hcpcs = NULL,
-                ...) {
+lcd <- function(hcpcs = NULL, ...) {
 
   lcd <- pins::pin_read(mount_board(), "lcd")
 

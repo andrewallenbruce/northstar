@@ -13,7 +13,7 @@ search_mue(hcpcs = NULL, service = NULL, mai = NULL, ...)
 
 \item{mai}{\verb{<int>} MUE adjudication indicator; \code{1}, \code{2}, or \code{3}}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

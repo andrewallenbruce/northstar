@@ -13,7 +13,7 @@ search_gpci(mac = NULL, state = NULL, locality = NULL, ...)
 
 \item{locality}{\verb{<chr>} vector of 2-digit Locality IDs}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -23,4 +23,5 @@ Geographic Practice Cost Indices
 }
 \examples{
 search_gpci(state = "GA", locality = "01", mac = "10212")
+
 }

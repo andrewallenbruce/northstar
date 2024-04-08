@@ -1,1 +1,1 @@
-#' @param ... Empty dots
+#' @inheritParams rlang::args_dots_empty

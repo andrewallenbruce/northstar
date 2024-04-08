@@ -55,6 +55,7 @@ srchcol <- function(df,
                     search,
                     ignore = TRUE,
                     ...) {
+
   dplyr::filter(
     df,
     stringr::str_detect(

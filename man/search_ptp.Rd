@@ -13,7 +13,7 @@ search_ptp(column_1 = NULL, column_2 = NULL, mod = NULL, ...)
 
 \item{mod}{\verb{<int>} \code{1} = Allowed, \code{0} = Not Allowed, \code{9} = Not Applicable}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

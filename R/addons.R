@@ -51,7 +51,7 @@
 #'
 #' @param edit_type `<int>` AOC edit type; `1`, `2`, `3`
 #'
-#' @inheritParams rlang::args_dots_empty
+#' @template args-dots
 #'
 #' @template returns
 #'
@@ -68,8 +68,6 @@
 get_addons <- function(hcpcs     = NULL,
                        edit_type = NULL,
                        ...) {
-
-  rlang::check_dots_empty()
 
     aoc_long <- pins::pin_read(
       mount_board(),

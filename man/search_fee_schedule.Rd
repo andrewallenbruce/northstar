@@ -15,7 +15,7 @@ search_fee_schedule(hcpcs, state = NULL, locality = NULL, mac = NULL, ...)
 
 \item{mac}{\verb{<chr>} 5-digit Medicare Administrative Contractor (MAC) ID}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

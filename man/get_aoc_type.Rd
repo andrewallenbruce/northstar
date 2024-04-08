@@ -9,7 +9,7 @@ get_aoc_type(hcpcs, ...)
 \arguments{
 \item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 \verb{<list>} of four \verb{<chr>} vectors indicating group membership:

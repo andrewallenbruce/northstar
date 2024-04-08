@@ -42,7 +42,7 @@ search_rbcs(
 
 \item{concatenate}{\verb{<lgl>} Concatenate output, default is \code{TRUE}}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

@@ -21,7 +21,7 @@ search_adjustments(
 
 \item{action}{\verb{<chr>} action to take; \code{review} (default), \code{join}}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

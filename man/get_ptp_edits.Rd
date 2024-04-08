@@ -9,7 +9,7 @@ get_ptp_edits(hcpcs = NULL, ...)
 \arguments{
 \item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

@@ -16,7 +16,7 @@ search_taxonomy(shape = c("wide", "long"), code = NULL, unnest = FALSE, ...)
 
 \item{unnest}{\verb{<lgl>}unnest \code{hierarchy} column, default is \code{FALSE}}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

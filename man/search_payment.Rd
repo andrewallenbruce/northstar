@@ -13,7 +13,7 @@ search_payment(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 
 \item{locality}{\verb{<chr>} vector of 2-digit Locality IDs}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
