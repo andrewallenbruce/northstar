@@ -23,8 +23,7 @@ search_modifiers <- function(mod = NULL, ...) {
 
   md <- pins::pin_read(mount_board(), "modifiers")
 
-  if (!is.null(mod)) {
-    md <- search_in(md, md$mod, mod)
-  }
+  md <- search_in_if(md, md$mod, mod)
+
   return(md)
 }

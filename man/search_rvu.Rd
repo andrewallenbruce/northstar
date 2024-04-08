@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{search_rvu}
 \alias{search_rvu}
-\title{Relative Value File}
+\title{Physician Fee Schedule Relative Value File}
 \usage{
 search_rvu(hcpcs = NULL, ...)
 }
@@ -15,7 +15,7 @@ search_rvu(hcpcs = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Relative Value File
+Physician Fee Schedule Relative Value File
 }
 \examples{
 search_rvu(hcpcs = c("A0021", "V5362", "J9264", "G8916"))

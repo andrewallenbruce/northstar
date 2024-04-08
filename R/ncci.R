@@ -84,17 +84,12 @@ search_mue <- function(hcpcs   = NULL,
 
   mue <- pins::pin_read(mount_board(), "mues")
 
-  if (!is.null(hcpcs)) {
-    mue <- search_in(mue, mue$hcpcs, hcpcs)
-    }
+  mue <- search_in_if(mue, mue$hcpcs, hcpcs)
 
-  if (!is.null(service)) {
-    mue <- search_in(mue, mue$service_type, service)
-    }
+  mue <- search_in_if(mue, mue$service_type, service)
 
-  if (!is.null(mai)) {
-    mue <- search_in(mue, mue$mai, mai)
-  }
+  mue <- search_in_if(mue, mue$mai, mai)
+
   return(mue)
 }
 
@@ -134,17 +129,12 @@ search_ptp <- function(column_1 = NULL,
 
   ptp <- pins::pin_read(mount_board(), "ptp")
 
-  if (!is.null(column_1)) {
-    ptp <- search_in(ptp, ptp$column_1, column_1)
-  }
+  ptp <- search_in_if(ptp, ptp$column_1, column_1)
 
-  if (!is.null(column_2)) {
-    ptp <- search_in(ptp, ptp$column_2, column_2)
-  }
+  ptp <- search_in_if(ptp, ptp$column_2, column_2)
 
-  if (!is.null(mod)) {
-    ptp <- search_in(ptp, ptp$modifier, mod)
-  }
+  ptp <- search_in_if(ptp, ptp$modifier, mod)
+
   return(ptp)
 }
 
@@ -166,9 +156,8 @@ get_ptp_edits <- function(hcpcs = NULL, ...) {
 
   ptplong <- pins::pin_read(mount_board(), "ptp_long")
 
-  if (!is.null(hcpcs)) {
-    ptplong <- search_in(ptplong, ptplong$hcpcs, hcpcs)
-  }
+  ptplong <- search_in_if(ptplong, ptplong$hcpcs, hcpcs)
+
   return(ptplong)
 }
 

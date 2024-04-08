@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{search_cpt}
 \alias{search_cpt}
-\title{CPT (HCPCS Level I) Codes}
+\title{HCPCS Level I (CPT) Codes}
 \usage{
 search_cpt(hcpcs = NULL, ...)
 }
@@ -15,9 +15,9 @@ search_cpt(hcpcs = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-CPT (HCPCS Level I) Codes
+HCPCS Level I (CPT) Codes
 }
 \examples{
-search_cpt(c("39503", "43116", "33935", "11646"))
+search_cpt(hcpcs = c("39503", "43116", "33935", "11646"))
 
 }

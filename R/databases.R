@@ -1,4 +1,4 @@
-#' Relative Value File
+#' Physician Fee Schedule Relative Value File
 #'
 #' @template args-hcpcs
 #'
@@ -16,12 +16,12 @@ search_rvu <- function(hcpcs = NULL, ...) {
 
   rv <- pins::pin_read(mount_board(), "rvu")
 
-  rv <- search_if(rv, rv$hcpcs, hcpcs)
+  rv <- search_in_if(rv, rv$hcpcs, hcpcs)
 
   return(rv)
 }
 
-#' Payment Amount File
+#' Physician Fee Schedule Payment Amount File
 #'
 #' @template args-hcpcs
 #'
@@ -48,16 +48,16 @@ search_payment <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  pmt <- search_if(pmt, pmt$hcpcs, hcpcs)
+  pmt <- search_in_if(pmt, pmt$hcpcs, hcpcs)
 
-  pmt <- search_if(pmt, pmt$mac, mac)
+  pmt <- search_in_if(pmt, pmt$mac, mac)
 
-  pmt <- search_if(pmt, pmt$locality, locality)
+  pmt <- search_in_if(pmt, pmt$locality, locality)
 
   return(pmt)
 }
 
-#' Geographic Practice Cost Indices
+#' Physician Fee Schedule Geographic Practice Cost Indices
 #'
 #' @template args-mac
 #'
@@ -83,11 +83,11 @@ search_gpci <- function(mac      = NULL,
   gp <- pins::pin_read(mount_board(), "gpci") |>
     dplyr::rename(area = name)
 
-  gp <- search_if(gp, gp$state, state)
+  gp <- search_in_if(gp, gp$state, state)
 
-  gp <- search_if(gp, gp$mac, mac)
+  gp <- search_in_if(gp, gp$mac, mac)
 
-  gp <- search_if(gp, gp$locality, locality)
+  gp <- search_in_if(gp, gp$locality, locality)
 
   return(gp)
 }
@@ -96,7 +96,7 @@ search_gpci <- function(mac      = NULL,
 #'
 #' @template args-hcpcs
 #'
-#' @param limit `<lgl>` limit columns returned, default is `TRUE`
+#' @param columns `<chr>` set of columns returned, default is `limit`
 #'
 #' @template args-dots
 #'
@@ -108,34 +108,38 @@ search_gpci <- function(mac      = NULL,
 #' @export
 #'
 #' @autoglobal
-search_hcpcs <- function(hcpcs = NULL,
-                         limit = TRUE,
+search_hcpcs <- function(hcpcs   = NULL,
+                         columns = c("limit", "full"),
                          ...) {
 
-  lv2 <- pins::pin_read(mount_board(), "hcpcs")
+  columns <- match.arg(columns)
 
-  if (limit) {
-    lv2 <- dplyr::select(
-      lv2,
-      hcpcs,
-      description_short,
-      description_long,
-      price,
-      multi_price,
-      labcert,
-      xref,
-      tos,
-      coverage,
-      asc,
-      betos)
-  }
+  limited <- vctrs::vec_c(
+    "hcpcs",
+    "description_short",
+    "description_long",
+    "price",
+    "multi_price",
+    "labcert",
+    "xref",
+    "tos",
+    "coverage",
+    "asc",
+    "betos"
+  )
 
-  lv2 <- search_if(lv2, lv2$hcpcs, hcpcs)
+  lv2 <- switch(
+    columns,
+    limit  = pins::pin_read(mount_board(), "hcpcs")[limited],
+    full   = pins::pin_read(mount_board(), "hcpcs")
+  )
+
+  lv2 <- search_in_if(lv2, lv2$hcpcs, hcpcs)
 
   return(lv2)
 }
 
-#' CPT (HCPCS Level I) Codes
+#' HCPCS Level I (CPT) Codes
 #'
 #' @template args-hcpcs
 #'
@@ -144,7 +148,7 @@ search_hcpcs <- function(hcpcs = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_cpt(c("39503", "43116", "33935", "11646"))
+#' search_cpt(hcpcs = c("39503", "43116", "33935", "11646"))
 #'
 #' @export
 #'
@@ -153,7 +157,7 @@ search_cpt <- function(hcpcs = NULL, ...) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
-  cpt <- search_if(cpt, cpt$hcpcs, hcpcs)
+  cpt <- search_in_if(cpt, cpt$hcpcs, hcpcs)
 
   return(cpt)
 }
@@ -188,11 +192,11 @@ search_opps <- function(hcpcs    = NULL,
 
   opp <- pins::pin_read(mount_board(), "opps")
 
-  opp <- search_if(opp, opp$hcpcs, hcpcs)
+  opp <- search_in_if(opp, opp$hcpcs, hcpcs)
 
-  opp <- search_if(opp, opp$mac, mac)
+  opp <- search_in_if(opp, opp$mac, mac)
 
-  opp <- search_if(opp, opp$locality, locality)
+  opp <- search_in_if(opp, opp$locality, locality)
 
   return(opp)
 }

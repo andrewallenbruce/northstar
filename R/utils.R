@@ -14,7 +14,7 @@ search_in <- function(df, dfcol, search) {
 
 #' Search in data frame
 #' @noRd
-search_if <- function(df, dfcol, search) {
+search_in_if <- function(df, dfcol, search) {
 
   if (!is.null(search)) {
 

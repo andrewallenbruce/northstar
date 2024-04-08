@@ -6,24 +6,16 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
-  # <search_hcpcs>
-  "asc",
   # <case_chapter>
   "chapter",
   # <search_adjustments>
   "code",
-  # <search_hcpcs>
-  "coverage",
   # <col_lb>
   "description",
   # <search_adjustments>
   "description.x",
   # <search_adjustments>
   "description.y",
-  # <search_hcpcs>
-  "description_long",
-  # <search_hcpcs>
-  "description_short",
   # <search_adjustments>
   "end_date",
   # <calculate_amounts>
@@ -38,8 +30,6 @@ utils::globalVariables(c(
   "group",
   # <search_taxonomy>
   "hierarchy",
-  # <search_hcpcs>
-  "labcert",
   # <col_lb>
   "label",
   # <search_rbcs>
@@ -52,8 +42,6 @@ utils::globalVariables(c(
   "mod_description",
   # <search_fee_schedule>
   "mrvu",
-  # <search_hcpcs>
-  "multi_price",
   # <search_gpci>
   "name",
   # <search_fee_schedule>
@@ -70,16 +58,12 @@ utils::globalVariables(c(
   "pctc_description",
   # <search_fee_schedule>
   "pgpci",
-  # <search_hcpcs>
-  "price",
   # <search_rbcs>
   "rbcs_category",
   # <search_rbcs>
   "rbcs_family",
   # <search_fee_schedule>
   "status",
-  # <search_hcpcs>
-  "tos",
   # <search_adjustments>
   "usage",
   # <col_lb>
@@ -88,7 +72,5 @@ utils::globalVariables(c(
   "wgpci",
   # <search_fee_schedule>
   "wrvu",
-  # <search_hcpcs>
-  "xref",
   NULL
 ))

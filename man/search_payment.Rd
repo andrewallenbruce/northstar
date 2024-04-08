@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{search_payment}
 \alias{search_payment}
-\title{Payment Amount File}
+\title{Physician Fee Schedule Payment Amount File}
 \usage{
 search_payment(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 }
@@ -19,7 +19,7 @@ search_payment(hcpcs = NULL, mac = NULL, locality = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Payment Amount File
+Physician Fee Schedule Payment Amount File
 }
 \examples{
 search_payment(hcpcs    = c("39503", "43116", "33935", "11646"),

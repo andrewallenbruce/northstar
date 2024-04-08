@@ -2,7 +2,7 @@
 % Please edit documentation in R/databases.R
 \name{search_gpci}
 \alias{search_gpci}
-\title{Geographic Practice Cost Indices}
+\title{Physician Fee Schedule Geographic Practice Cost Indices}
 \usage{
 search_gpci(mac = NULL, state = NULL, locality = NULL, ...)
 }
@@ -19,7 +19,7 @@ search_gpci(mac = NULL, state = NULL, locality = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Geographic Practice Cost Indices
+Physician Fee Schedule Geographic Practice Cost Indices
 }
 \examples{
 search_gpci(state = "GA", locality = "01", mac = "10212")

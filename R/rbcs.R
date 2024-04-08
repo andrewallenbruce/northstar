@@ -108,14 +108,9 @@ search_rbcs <- function(hcpcs       = NULL,
     rb <- search_in(rb, rb$procedure, procedure)
   }
 
-  if (!is.null(hcpcs)) {
-    rb <- search_in(rb, rb$hcpcs, hcpcs)}
-
-  if (!is.null(family)) {
-    rb <- search_in(rb, rb$family, family)}
-
-  if (!is.null(subcategory)) {
-    rb <- search_in(rb, rb$subcategory, subcategory)}
+  rb <- search_in_if(rb, rb$hcpcs, hcpcs)
+  rb <- search_in_if(rb, rb$family, family)
+  rb <- search_in_if(rb, rb$subcategory, subcategory)
 
   if (!is.null(category)) {
 
@@ -130,20 +125,17 @@ search_rbcs <- function(hcpcs       = NULL,
 
   if (concatenate) {
 
-    rb <- tidyr::unite(
-      rb,
-      "rbcs_category",
-      c(procedure, category),
-      sep = " ") |>
-      tidyr::unite(
-        "rbcs_family",
-        c(subcategory, family),
-        sep = ": ",
-        na.rm = TRUE) |>
-      dplyr::select(
-        hcpcs,
-        rbcs_category,
-        rbcs_family)
+    rb <- tidyr::unite(rb,
+                       "rbcs_category",
+                       c(procedure, category),
+                       sep = " ") |>
+      tidyr::unite("rbcs_family",
+                   c(subcategory, family),
+                   sep = ": ",
+                   na.rm = TRUE) |>
+      dplyr::select(hcpcs,
+                    rbcs_category,
+                    rbcs_family)
   }
   return(rb)
 }

@@ -69,36 +69,25 @@ get_addons <- function(hcpcs     = NULL,
                        edit_type = NULL,
                        ...) {
 
-    aoc_long <- pins::pin_read(
-      mount_board(),
-      "aoc_long"
-      )
+    aoc_long <- pins::pin_read(mount_board(), "aoc_long")
 
   if (!is.null(hcpcs)) {
 
-    aoc_long <- search_in(
-      aoc_long,
-      aoc_long$hcpcs,
-      unlist(
-        get_aoc_type(hcpcs),
-        use.names = FALSE
-        )
-      )
+    aoc_long <- search_in(aoc_long,
+                          aoc_long$hcpcs,
+                          unlist(get_aoc_type(hcpcs),
+                                 use.names = FALSE))
     }
 
   if (!is.null(edit_type)) {
 
-    edit_type <- rlang::arg_match(
-      edit_type,
-      c("1", "2", "3"),
-      multiple = TRUE
-      )
+    edit_type <- rlang::arg_match(edit_type,
+                                  c("1", "2", "3"),
+                                  multiple = TRUE)
 
-    aoc_long  <- search_in(
-      aoc_long,
-      aoc_long$edit_type,
-      edit_type
-      )
+    aoc_long  <- search_in(aoc_long,
+                           aoc_long$edit_type,
+                           edit_type)
   }
   return(aoc_long)
 }

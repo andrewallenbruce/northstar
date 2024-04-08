@@ -4,12 +4,12 @@
 \alias{search_hcpcs}
 \title{HCPCS Level II Codes}
 \usage{
-search_hcpcs(hcpcs = NULL, limit = TRUE, ...)
+search_hcpcs(hcpcs = NULL, columns = c("limit", "full"), ...)
 }
 \arguments{
 \item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{limit}{\verb{<lgl>} limit columns returned, default is \code{TRUE}}
+\item{columns}{\verb{<chr>} set of columns returned, default is \code{limit}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
