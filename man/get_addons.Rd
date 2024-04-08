@@ -11,7 +11,7 @@ get_addons(hcpcs = NULL, edit_type = NULL, ...)
 
 \item{edit_type}{\verb{<int>} AOC edit type; \code{1}, \code{2}, \code{3}}
 
-\item{...}{Empty dots}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
