@@ -27,8 +27,6 @@ utils::globalVariables(c(
   "frvus",
   # <search_adjustments>
   "group",
-  # <search_taxonomy>
-  "hierarchy",
   # <col_lb>
   "label",
   # <search_rbcs>
