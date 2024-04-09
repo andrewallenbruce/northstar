@@ -80,7 +80,6 @@ reference:
   - limiting_charge
   - non_participating_fee
   - calculate_amounts
-  - count_days
 
 - title: Validation Checks
   desc: >

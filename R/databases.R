@@ -16,7 +16,7 @@ search_rvu <- function(hcpcs = NULL, ...) {
 
   rv <- pins::pin_read(mount_board(), "rvu")
 
-  rv <- search_in_if(rv, rv$hcpcs, hcpcs)
+  rv <- fuimus::search_in_if(rv, rv$hcpcs, hcpcs)
 
   return(rv)
 }
@@ -48,11 +48,9 @@ search_payment <- function(hcpcs    = NULL,
 
   pmt <- pins::pin_read(mount_board(), "pymt")
 
-  pmt <- search_in_if(pmt, pmt$hcpcs, hcpcs)
-
-  pmt <- search_in_if(pmt, pmt$mac, mac)
-
-  pmt <- search_in_if(pmt, pmt$locality, locality)
+  pmt <- fuimus::search_in_if(pmt, pmt$hcpcs, hcpcs)
+  pmt <- fuimus::search_in_if(pmt, pmt$mac, mac)
+  pmt <- fuimus::search_in_if(pmt, pmt$locality, locality)
 
   return(pmt)
 }
@@ -83,11 +81,9 @@ search_gpci <- function(mac      = NULL,
   gp <- pins::pin_read(mount_board(), "gpci") |>
     dplyr::rename(area = name)
 
-  gp <- search_in_if(gp, gp$state, state)
-
-  gp <- search_in_if(gp, gp$mac, mac)
-
-  gp <- search_in_if(gp, gp$locality, locality)
+  gp <- fuimus::search_in_if(gp, gp$state, state)
+  gp <- fuimus::search_in_if(gp, gp$mac, mac)
+  gp <- fuimus::search_in_if(gp, gp$locality, locality)
 
   return(gp)
 }
@@ -112,8 +108,6 @@ search_hcpcs <- function(hcpcs   = NULL,
                          columns = c("limit", "full"),
                          ...) {
 
-  columns <- match.arg(columns)
-
   limited <- vctrs::vec_c(
     "hcpcs",
     "description_short",
@@ -128,13 +122,15 @@ search_hcpcs <- function(hcpcs   = NULL,
     "betos"
   )
 
+  columns <- match.arg(columns)
+
   lv2 <- switch(
     columns,
     limit  = pins::pin_read(mount_board(), "hcpcs")[limited],
     full   = pins::pin_read(mount_board(), "hcpcs")
   )
 
-  lv2 <- search_in_if(lv2, lv2$hcpcs, hcpcs)
+  lv2 <- fuimus::search_in_if(lv2, lv2$hcpcs, hcpcs)
 
   return(lv2)
 }
@@ -157,7 +153,7 @@ search_cpt <- function(hcpcs = NULL, ...) {
 
   cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
 
-  cpt <- search_in_if(cpt, cpt$hcpcs, hcpcs)
+  cpt <- fuimus::search_in_if(cpt, cpt$hcpcs, hcpcs)
 
   return(cpt)
 }
@@ -192,11 +188,9 @@ search_opps <- function(hcpcs    = NULL,
 
   opp <- pins::pin_read(mount_board(), "opps")
 
-  opp <- search_in_if(opp, opp$hcpcs, hcpcs)
-
-  opp <- search_in_if(opp, opp$mac, mac)
-
-  opp <- search_in_if(opp, opp$locality, locality)
+  opp <- fuimus::search_in_if(opp, opp$hcpcs, hcpcs)
+  opp <- fuimus::search_in_if(opp, opp$mac, mac)
+  opp <- fuimus::search_in_if(opp, opp$locality, locality)
 
   return(opp)
 }

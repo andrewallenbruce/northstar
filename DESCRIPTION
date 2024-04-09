@@ -15,32 +15,35 @@ Imports:
     cli,
     collapse,
     dplyr,
+    fs,
     pins,
     purrr,
     rlang,
     stringr,
     tidyr,
-    vctrs,
-    fs
+    vctrs
 Suggests:
     clock,
-    pracma,
-    tinytable,
     fontawesome,
+    fuimus,
     gluedown,
     gt,
     janitor,
     knitr,
+    pracma,
     qs,
     rmarkdown,
     roxyglobals,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tinytable
 VignetteBuilder: 
     knitr
+Remotes: 
+    github::andrewallenbruce/fuimus
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
+Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
 RoxygenNote: 7.3.1
-Config/testthat/edition: 3

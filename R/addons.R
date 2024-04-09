@@ -71,23 +71,23 @@ get_addons <- function(hcpcs     = NULL,
 
     aoc_long <- pins::pin_read(mount_board(), "aoc_long")
 
-  if (!is.null(hcpcs)) {
-
-    aoc_long <- search_in(aoc_long,
-                          aoc_long$hcpcs,
-                          unlist(get_aoc_type(hcpcs),
-                                 use.names = FALSE))
-    }
+    aoc_long <- fuimus::search_in_if(
+      aoc_long,
+      aoc_long$hcpcs,
+      unlist(get_aoc_type(hcpcs), use.names = FALSE)
+      )
 
   if (!is.null(edit_type)) {
 
-    edit_type <- rlang::arg_match(edit_type,
-                                  c("1", "2", "3"),
-                                  multiple = TRUE)
+    edit_type <- rlang::arg_match(
+      edit_type,
+      c("1", "2", "3"),
+      multiple = TRUE)
 
-    aoc_long  <- search_in(aoc_long,
-                           aoc_long$edit_type,
-                           edit_type)
+    aoc_long  <- fuimus::search_in(
+      aoc_long,
+      aoc_long$edit_type,
+      edit_type)
   }
   return(aoc_long)
 }
@@ -117,9 +117,9 @@ get_aoc_type <- function(hcpcs, ...) {
   vc <- pins::pin_read(mount_board(), "aoc_vecs")
 
   list(
-    primary = search_in(hcpcs, hcpcs, vc$primary),
-    addon   = search_in(hcpcs, hcpcs, vc$addon),
-    both    = search_in(hcpcs, hcpcs, vc$both),
+    primary = fuimus::search_in(hcpcs, hcpcs, vc$primary),
+    addon   = fuimus::search_in(hcpcs, hcpcs, vc$addon),
+    both    = fuimus::search_in(hcpcs, hcpcs, vc$both),
     neither = vctrs::vec_set_difference(hcpcs,
               vctrs::vec_c(vc$both, vc$primary, vc$addon))
     )

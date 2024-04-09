@@ -84,11 +84,9 @@ search_mue <- function(hcpcs   = NULL,
 
   mue <- pins::pin_read(mount_board(), "mues")
 
-  mue <- search_in_if(mue, mue$hcpcs, hcpcs)
-
-  mue <- search_in_if(mue, mue$service_type, service)
-
-  mue <- search_in_if(mue, mue$mai, mai)
+  mue <- fuimus::search_in_if(mue, mue$hcpcs, hcpcs)
+  mue <- fuimus::search_in_if(mue, mue$service_type, service)
+  mue <- fuimus::search_in_if(mue, mue$mai, mai)
 
   return(mue)
 }
@@ -129,11 +127,9 @@ search_ptp <- function(column_1 = NULL,
 
   ptp <- pins::pin_read(mount_board(), "ptp")
 
-  ptp <- search_in_if(ptp, ptp$column_1, column_1)
-
-  ptp <- search_in_if(ptp, ptp$column_2, column_2)
-
-  ptp <- search_in_if(ptp, ptp$modifier, mod)
+  ptp <- fuimus::search_in_if(ptp, ptp$column_1, column_1)
+  ptp <- fuimus::search_in_if(ptp, ptp$column_2, column_2)
+  ptp <- fuimus::search_in_if(ptp, ptp$modifier, mod)
 
   return(ptp)
 }
@@ -156,7 +152,7 @@ get_ptp_edits <- function(hcpcs = NULL, ...) {
 
   ptplong <- pins::pin_read(mount_board(), "ptp_long")
 
-  ptplong <- search_in_if(ptplong, ptplong$hcpcs, hcpcs)
+  ptplong <- fuimus::search_in_if(ptplong, ptplong$hcpcs, hcpcs)
 
   return(ptplong)
 }

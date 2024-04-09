@@ -126,6 +126,7 @@
 #'                 unnest = TRUE)
 #'
 #' @autoglobal
+#'
 #' @export
 search_taxonomy <- function(shape  = c('wide', 'long'),
                             code   = NULL,
@@ -139,7 +140,7 @@ search_taxonomy <- function(shape  = c('wide', 'long'),
     "long" = pins::pin_read(mount_board(), "taxlong")
   )
 
-  if (!is.null(code)) {txn <- search_in(txn, txn$code, code)}
+  txn <- fuimus::search_in_if(txn, txn$code, code)
 
   if (shape == "long" && unnest) {
     txn <- tidyr::unnest(txn, cols = c(hierarchy))

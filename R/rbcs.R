@@ -105,12 +105,12 @@ search_rbcs <- function(hcpcs       = NULL,
       c("Major", "Non-Procedure", "Other"),
       multiple = TRUE)
 
-    rb <- search_in(rb, rb$procedure, procedure)
+    rb <- fuimus::search_in(rb, rb$procedure, procedure)
   }
 
-  rb <- search_in_if(rb, rb$hcpcs, hcpcs)
-  rb <- search_in_if(rb, rb$family, family)
-  rb <- search_in_if(rb, rb$subcategory, subcategory)
+  rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs)
+  rb <- fuimus::search_in_if(rb, rb$family, family)
+  rb <- fuimus::search_in_if(rb, rb$subcategory, subcategory)
 
   if (!is.null(category)) {
 
@@ -120,7 +120,7 @@ search_rbcs <- function(hcpcs       = NULL,
         "Imaging", "E&M", "Anesthesia", "Other"),
       multiple = TRUE)
 
-    rb <- search_in(rb, rb$category, category)
+    rb <- fuimus::search_in(rb, rb$category, category)
   }
 
   if (concatenate) {

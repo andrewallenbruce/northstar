@@ -49,7 +49,7 @@ lcd <- function(hcpcs = NULL, ...) {
 
   lcd <- pins::pin_read(mount_board(), "lcd")
 
-  lcd <- search_in_if(lcd, lcd$hcpc_code_id, hcpcs)
+  lcd <- fuimus::search_in_if(lcd, lcd$hcpc_code_id, hcpcs)
 
   return(lcd)
 }
