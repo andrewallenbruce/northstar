@@ -103,12 +103,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/cases.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/count_days.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/display_long.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_addons.html</loc>
   </url>
   <url>
@@ -116,9 +110,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_ptp_edits.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/gt_marks.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/gt_style.html</loc>
@@ -197,8 +188,5 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_taxonomy.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/single_line_string.html</loc>
   </url>
 </urlset>
