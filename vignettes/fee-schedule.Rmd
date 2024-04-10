@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
   )
 
 library(northstar)
+library(fuimus)
 library(dplyr)
 library(tidyr)
 library(purrr)

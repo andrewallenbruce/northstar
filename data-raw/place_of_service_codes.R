@@ -8,6 +8,21 @@
 # of service codes to your Medicare Administrative Contractor (MAC) for
 # assistance.
 
+
+library(pdftools)
+
+pos_pdf <- "C:/Users/Andrew/Desktop/payer_guidelines/data/Website_POS_database__9_21_23.pdf"
+
+pos_1 <- stringr::str_split(pdf_text(pos_pdf)[1], "\n")
+
+pos_1[[1]][17:37]
+
+cat(pdf_text(pos_pdf))
+
+pdf_data(pos_pdf)[[1]] |>
+  print(n = 50)
+
+
 place_of_service_codes <- tribble(
   ~pos_code, ~pos_description,
   "01", "Pharmacy",
