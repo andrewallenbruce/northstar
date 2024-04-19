@@ -103,10 +103,13 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/cases.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_addons.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/get_addon_edits.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_aoc_type.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/get_mue_edits.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_ptp_edits.html</loc>
@@ -169,16 +172,10 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mue.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_opps.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_payment.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptp.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
