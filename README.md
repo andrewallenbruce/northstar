@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# northstar <img src="man/figures/logo.png" align="right" height="250" />
+# northstar <img src="man/figures/logo.png" align="right" height="225" />
 
 > Tidy Healthcare Revenue Integrity
 
@@ -51,66 +51,69 @@ search_fee_schedule(
 ```
 
     > Rows: 1
-    > Columns: 59
-    > $ hcpcs                  <chr> "33924"
-    > $ description            <chr> "Remove pulmonary shunt"
-    > $ description_consumer   <chr> "Disconnection of pulmonary artery shunt"
-    > $ descriptions_clinician <list> [<tbl_df[2 x 1]>]
-    > $ rbcs_category          <chr> "Major Procedure"
-    > $ rbcs_family            <chr> "Cardiovascular"
-    > $ status                 <chr> "A"
-    > $ mac                    <chr> "10212"
-    > $ state                  <chr> "GA"
-    > $ locality               <chr> "01"
-    > $ area                   <chr> "ATLANTA"
-    > $ counties               <chr> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLA…
-    > $ wgpci                  <dbl> 1
-    > $ pgpci                  <dbl> 0.997
-    > $ mgpci                  <dbl> 1.128
-    > $ wrvu                   <dbl> 5.49
-    > $ fprvu                  <dbl> 1.5
-    > $ mrvu                   <dbl> 1.35
-    > $ cf                     <dbl> 32.7442
-    > $ f_fee                  <dbl> 278.6
-    > $ nf_fee                 <dbl> 278.6
-    > $ frvus                  <dbl> 8.51
-    > $ nrvus                  <dbl> 8.51
-    > $ fpar                   <dbl> 278.65
-    > $ npar                   <dbl> 278.65
-    > $ fnpar                  <dbl> 264.72
-    > $ nfnpar                 <dbl> 264.72
-    > $ flim                   <dbl> 304.43
-    > $ nlim                   <dbl> 304.43
-    > $ opps                   <chr> "9"
-    > $ opps_nf                <dbl> NA
-    > $ opps_f                 <dbl> NA
-    > $ fprvu_opps             <dbl> 0
-    > $ mrvu_opps              <dbl> 0
-    > $ mult_surg              <chr> "0"
-    > $ mult_proc              <chr> "0"
-    > $ nther                  <dbl> 0
-    > $ fther                  <dbl> 0
-    > $ global                 <chr> "ZZZ"
-    > $ op_ind                 <dbl> 0
-    > $ op_pre                 <dbl> 0
-    > $ op_intra               <dbl> 0
-    > $ op_post                <dbl> 0
-    > $ mod                    <chr> NA
-    > $ pctc                   <chr> "0"
-    > $ surg_bilat             <chr> "0"
-    > $ surg_asst              <chr> "2"
-    > $ surg_co                <chr> "1"
-    > $ surg_team              <chr> "0"
-    > $ supvis                 <chr> "09"
-    > $ dximg                  <chr> "99"
-    > $ endo                   <chr> NA
-    > $ nfprvu                 <dbl> 1.5
-    > $ ntotal                 <dbl> 8.34
-    > $ ftotal                 <dbl> 8.34
-    > $ nfprvu_opps            <dbl> 0
-    > $ two_macs               <lgl> FALSE
-    > $ chapter                <chr> "Surgery"
-    > $ range                  <chr> "10004 - 69990"
+    > Columns: 62
+    > $ hcpcs          <chr> "33924"
+    > $ description    <chr> "Remove pulmonary shunt"
+    > $ rbcs_category  <chr> "Major Procedure"
+    > $ rbcs_family    <chr> "Cardiovascular"
+    > $ status         <chr> "A"
+    > $ mac            <chr> "10212"
+    > $ state          <chr> "GA"
+    > $ locality       <chr> "01"
+    > $ area           <chr> "ATLANTA"
+    > $ counties       <chr> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYET…
+    > $ wgpci          <dbl> 1
+    > $ pgpci          <dbl> 0.997
+    > $ mgpci          <dbl> 1.128
+    > $ wrvu           <dbl> 5.49
+    > $ fprvu          <dbl> 1.5
+    > $ mrvu           <dbl> 1.35
+    > $ cf             <dbl> 32.7442
+    > $ f_fee          <dbl> 278.6
+    > $ nf_fee         <dbl> 278.6
+    > $ frvus          <dbl> 8.51
+    > $ nrvus          <dbl> 8.51
+    > $ fpar           <dbl> 278.65
+    > $ npar           <dbl> 278.65
+    > $ fnpar          <dbl> 264.72
+    > $ nfnpar         <dbl> 264.72
+    > $ flim           <dbl> 304.43
+    > $ nlim           <dbl> 304.43
+    > $ opps           <chr> "9"
+    > $ opps_nf        <dbl> NA
+    > $ opps_f         <dbl> NA
+    > $ fprvu_opps     <dbl> 0
+    > $ mrvu_opps      <dbl> 0
+    > $ mult_surg      <chr> "0"
+    > $ mult_proc      <chr> "0"
+    > $ nther          <dbl> 0
+    > $ fther          <dbl> 0
+    > $ global         <chr> "ZZZ"
+    > $ op_ind         <dbl> 0
+    > $ op_pre         <dbl> 0
+    > $ op_intra       <dbl> 0
+    > $ op_post        <dbl> 0
+    > $ mod            <chr> NA
+    > $ pctc           <chr> "0"
+    > $ surg_bilat     <chr> "0"
+    > $ surg_asst      <chr> "2"
+    > $ surg_co        <chr> "1"
+    > $ surg_team      <chr> "0"
+    > $ supvis         <chr> "09"
+    > $ dximg          <chr> "99"
+    > $ endo           <chr> NA
+    > $ nfprvu         <dbl> 1.5
+    > $ ntotal         <dbl> 8.34
+    > $ ftotal         <dbl> 8.34
+    > $ nfprvu_opps    <dbl> 0
+    > $ two_macs       <lgl> FALSE
+    > $ cpt_chapter    <chr> "Surgery"
+    > $ cpt_range      <chr> "10004 - 69990"
+    > $ cpt_desc_cons  <chr> "Disconnection of pulmonary artery shunt"
+    > $ cpt_desc_long  <chr> "Ligation and takedown of a systemic-to-pulmonary arter…
+    > $ cpt_desc_short <chr> "REMOVE PULMONARY SHUNT"
+    > $ cpt_desc_med   <chr> "LIG&TKDN SYSIC-TO-PULM ART SHUNT W/CGEN HEART"
+    > $ cpt_desc_clin  <list> [<tbl_df[2 x 1]>]
 
 ### Retrieve Add-On Codes
 

@@ -1,6 +1,6 @@
 #' Mount [pins][pins::pins-package] board
 #'
-#' @param source `"local"` or `"remote"`
+#' @param source `<chr>` `"local"` or `"remote"`
 #'
 #' @return `<pins_board_folder>` or `<pins_board_url>`
 #'

@@ -8,7 +8,7 @@
 # of service codes to your Medicare Administrative Contractor (MAC) for
 # assistance.
 
-
+library(tidyverse)
 library(pdftools)
 
 pos_pdf <- "C:/Users/Andrew/Desktop/payer_guidelines/data/Website_POS_database__9_21_23.pdf"

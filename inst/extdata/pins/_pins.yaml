@@ -3,7 +3,7 @@ aoc_long:
 aoc_vecs:
 - aoc_vecs/20240405T212353Z-5f6d1/
 cpt_descriptors:
-- cpt_descriptors/20240324T135528Z-36949/
+- cpt_descriptors/20240419T052848Z-7d8ec/
 gpci:
 - gpci/20240324T142631Z-9f703/
 hcpcs:
@@ -30,7 +30,3 @@ rbcs:
 - rbcs/20240311T110445Z-95e7b/
 rvu:
 - rvu/20240325T125357Z-67907/
-taxlong:
-- taxlong/20240321T212817Z-972c7/
-taxonomy:
-- taxonomy/20240321T214647Z-1a818/

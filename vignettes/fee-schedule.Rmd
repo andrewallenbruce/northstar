@@ -38,9 +38,8 @@ search_fee_schedule(
   mac      = "10212") |> 
   remove_empty(which = c("rows", "cols")) |>
   rowwise() |>
-  mutate(descriptions_clinician = map(
-    descriptions_clinician, ~paste0("* ", ., collapse = "\n"))) |>
-  unnest(cols = descriptions_clinician) |>
+  mutate(cpt_desc_clin = map(cpt_desc_clin, ~paste0("* ", ., collapse = "\n"))) |>
+  unnest(cols = cpt_desc_clin) |>
   ungroup() |> 
   case_multproc(mult_proc) |>
   case_global(global) |>
@@ -57,12 +56,12 @@ search_fee_schedule(
   case_category(hcpcs) |>
   select("CPT Code"                     = hcpcs,
          Description                    = description,
-         Consumer                       = description_consumer,
-         Clinician                      = descriptions_clinician,
-         "CPT Chapter"                  = chapter,
-         "Code Range"                   = range,
+         Consumer                       = cpt_desc_cons,
+         Clinician                      = cpt_desc_clin,
+         "CPT Chapter"                  = cpt_chapter,
+         "CPT Range"                    = cpt_range,
          "CPT Category"                 = category,
-         "Fee Schedule Status"          = status,
+         "Fee Status"                   = status,
          "RBCS Category"                = rbcs_category,
          "RBCS Family"                  = rbcs_family,
          MAC                            = mac,
