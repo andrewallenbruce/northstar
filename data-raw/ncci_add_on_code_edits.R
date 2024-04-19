@@ -49,29 +49,29 @@ aoc <- ncci$`AOC_V2024Q2-MCR` |>
   )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    aoc,
-    name = "aoc",
-    title = "Add-on Code Edits",
-    description = "Medicare NCCI Add-on Code Edits 2024-04-01",
-    type = "qs"
-  )
-
-board |> pins::write_board_manifest()
+# board <- pins::board_folder(here::here("inst/extdata/pins"))
+#
+# board |>
+#   pins::pin_write(
+#     aoc,
+#     name = "aoc",
+#     title = "Add-on Code Edits",
+#     description = "Medicare NCCI Add-on Code Edits 2024-04-01",
+#     type = "qs"
+#   )
+#
+# board |> pins::write_board_manifest()
 
 # pins::pin_list(board)
 # pins::pin_versions(board, "aoc")
 # pins::pin_delete(board, "aoc")
 
-primary <- search_addons() |>
+primary <- aoc |>
   filter(!is.na(primary)) |>
   count(primary, sort = TRUE) |>
   pull(primary)
 
-addon <- search_addons() |>
+addon <- aoc |>
   filter(!is.na(addon)) |>
   count(addon, sort = TRUE) |>
   pull(addon)
@@ -122,40 +122,47 @@ addon[collapse::fmatch(addon[sample(1:length(addon), 10)], addon, nomatch = 0)]
 
 addon[sample(1:length(addon), 10)]
 
-primary <- pins::pin_read(mount_board(), "aoc") |>
-  dplyr::rename(hcpcs            = primary,
-                complement       = addon,
-                deleted          = primary_deleted,
-                edit_type        = type,
-                edit_description = type_description) |>
-  dplyr::mutate(aoc_type         = "primary",
-                addon_deleted    = NULL,
-                .after           = hcpcs)
+primary <- aoc |>
+  dplyr::rename(hcpcs                = primary,
+                aoc_complement       = addon,
+                aoc_year_deleted     = primary_deleted,
+                aoc_edit_type        = type,
+                aoc_edit_description = type_description,
+                aoc_edit_effective   = edit_effective,
+                aoc_edit_deleted     = edit_deleted,
+                aoc_notes            = notes
+                ) |>
+  dplyr::mutate(aoc_type             = "primary",
+                addon_deleted        = NULL,
+                .after               = hcpcs)
 
-addons <- pins::pin_read(mount_board(), "aoc") |>
-  dplyr::rename(hcpcs            = addon,
-                complement       = primary,
-                deleted          = addon_deleted,
-                edit_type        = type,
-                edit_description = type_description) |>
-  dplyr::mutate(aoc_type         = "addon",
-                primary_deleted  = NULL,
-                .after           = hcpcs)
+addons <- aoc |>
+  dplyr::rename(hcpcs                = addon,
+                aoc_complement       = primary,
+                aoc_year_deleted     = addon_deleted,
+                aoc_edit_type        = type,
+                aoc_edit_description = type_description,
+                aoc_edit_effective   = edit_effective,
+                aoc_edit_deleted     = edit_deleted,
+                aoc_notes            = notes) |>
+  dplyr::mutate(aoc_type             = "addon",
+                primary_deleted      = NULL,
+                .after               = hcpcs)
 
 aoc_long <- vctrs::vec_rbind(addons, primary) |>
-  tidyr::nest(complements = c(complement)) |>
+  tidyr::nest(aoc_complements = c(aoc_complement)) |>
   dplyr::select(
     hcpcs,
     aoc_type,
-    complements,
-    deleted,
-    edit_type,
-    edit_description,
-    edit_effective,
-    edit_deleted,
-    notes
+    aoc_complements,
+    aoc_edit_type,
+    aoc_edit_description,
+    aoc_year_deleted,
+    aoc_edit_effective,
+    aoc_edit_deleted,
+    aoc_notes
   ) |>
-  dplyr::arrange(hcpcs, edit_effective)
+  dplyr::arrange(hcpcs, aoc_edit_effective)
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))

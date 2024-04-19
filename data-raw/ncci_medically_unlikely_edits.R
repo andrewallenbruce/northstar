@@ -64,7 +64,38 @@ mue_dme <- ncci$`MCR_MUE_DMESupplierServices_Eff_04-01-2024` |>
          service_type
   )
 
-mue <- vctrs::vec_rbind(mue_pract, mue_outhosp, mue_dme)
+mue <- vctrs::vec_rbind(mue_pract, mue_outhosp, mue_dme) |>
+  dplyr::select(
+    hcpcs,
+    mue_uos = mue,
+    mue_mai = mai,
+    mue_mai_desc = adjudication,
+    mue_service_type = service_type,
+    mue_rationale = rationale
+  )
+
+# mue_mai                                        n
+#   <int>                                    <int>
+#      3 (Date of Service Edit: Clinical)    19983
+#      2 (Date of Service Edit: Policy)      12113
+#      1 (Line Edit)                           106
+
+# mue_rationale                         n
+# <chr>                             <int>
+# CMS Policy                         8546
+# Clinical: Data                     5684
+# Anatomic Consideration             5679
+# Code Descriptor / CPT Instruction  5569
+# Nature of Service/Procedure        2332
+# Prescribing Information            1263
+# Nature of Analyte                  1116
+# Clinical: CMS Workgroup             959
+# Nature of Equipment                 417
+# Drug discontinued                   212
+# Published Contractor Policy         204
+# Compounded Drug Policy               99
+# Clinical: Society Comment            78
+# Oral Medication; Not Payable         44
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))

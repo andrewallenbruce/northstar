@@ -1,4 +1,4 @@
-#' NCCI Add-On Codes
+#' NCCI Add-On Code Edits
 #'
 #' Medicare NCCI Add-On Code Edits
 #'
@@ -27,15 +27,9 @@
 #' reported for different dates of service (e.g., 99291 and 99292).
 #'
 #' ## AOC Edit Types
-#' **Type 1**: CPT Professional or HCPCS files define all acceptable primary codes.
-#' MACs should not allow other primary codes with Type 1 AOCs.
-#'
-#' **Type 2**: CPT Professional and HCPCS files do not define any primary codes.
-#' MACs should develop their own lists of acceptable primary codes.
-#'
-#' **Type 3**: CPT Professional or HCPCS files define some, but not all, acceptable
-#' primary codes. MACs should allow the listed primary codes for these AOCs but
-#' may develop their own lists of additional acceptable primary codes.
+#'    * Type 1: CPT Professional or HCPCS files define all acceptable primary codes. MACs should not allow other primary codes with Type 1 AOCs.
+#'    * Type 2: CPT Professional and HCPCS files do not define any primary codes. MACs should develop their own lists of acceptable primary codes.
+#'    * Type 3: CPT Professional or HCPCS files define some, but not all, acceptable primary codes. MACs should allow the listed primary codes for these AOCs but may develop their own lists of additional acceptable primary codes.
 #'
 #' ## PTP Edits
 #' In general, NCCI PTP edits do not include edits with most AOCs because edits
@@ -45,50 +39,73 @@
 #'
 #' @note Version: 2024-04-01
 #'
-#' [Add-Ons Link](https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits)
+#'    * [NCCI Add-On Code Edits](https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits)
 #'
 #' @template args-hcpcs
 #'
-#' @param edit_type `<int>` AOC edit type; `1`, `2`, `3`
+#' @param aoc_type `<chr>` AOC type; `addon` or `primary`
+#'
+#' @param edit_type `<int>` AOC edit type:
+#'    * `1`: Only Paid if Primary is Paid. Payment Eligible if Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
+#'    * `2`: Some Specific Primaries. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
+#'    * `3`: No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' get_addons(hcpcs = c("22633", "0074T"))
+#' get_addon_edits(hcpcs     = c("22633", "0074T"),
+#'                 aoc_type  = "primary",
+#'                 edit_type = 1)
 #'
-#' get_addons(hcpcs = c("22630", "22532", "77001", "88334", "64727"))
+#' get_addon_edits(hcpcs = c("22630",
+#'                           "22532",
+#'                           "77001",
+#'                           "88334",
+#'                           "64727"))
 #'
-#' get_addons(hcpcs = c("11646", "39503", "43116", "33935"))
+#' get_addon_edits(hcpcs = c("11646",
+#'                           "39503",
+#'                           "43116",
+#'                           "33935"))
 #'
 #' @autoglobal
 #'
 #' @export
-get_addons <- function(hcpcs     = NULL,
-                       edit_type = NULL,
-                       ...) {
+get_addon_edits <- function(hcpcs     = NULL,
+                            aoc_type  = NULL,
+                            edit_type = NULL,
+                            ...) {
 
     aoc_long <- pins::pin_read(mount_board(), "aoc_long")
 
     aoc_long <- fuimus::search_in_if(
       aoc_long,
       aoc_long$hcpcs,
-      unlist(get_aoc_type(hcpcs), use.names = FALSE)
+      unlist(
+        get_aoc_type(hcpcs)[c("primary", "addon", "both")],
+        use.names = FALSE
+        )
       )
 
-  if (!is.null(edit_type)) {
-
-    edit_type <- rlang::arg_match(
-      edit_type,
-      c("1", "2", "3"),
-      multiple = TRUE)
-
-    aoc_long  <- fuimus::search_in(
+    aoc_long  <- fuimus::search_in_if(
       aoc_long,
-      aoc_long$edit_type,
+      aoc_long$aoc_edit_type,
       edit_type)
-  }
+
+    if (!is.null(aoc_type)) {
+
+      aoc_type <- rlang::arg_match(
+        aoc_type,
+        c("primary", "addon")
+        )
+
+      aoc_long  <- fuimus::search_in(
+        aoc_long,
+        aoc_long$aoc_type,
+        aoc_type)
+    }
   return(aoc_long)
 }
 

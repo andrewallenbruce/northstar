@@ -69,8 +69,9 @@ reference:
   desc: >
     Medical Coding & Billing Codesets.
   contents:
-  - get_addons
+  - get_addon_edits
   - get_ptp_edits
+  - get_mue_edits
   - matches("search")
   - lcd
   - ncd

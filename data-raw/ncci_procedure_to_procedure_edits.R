@@ -1,4 +1,3 @@
-
 library(readxl)
 library(tidyverse)
 library(janitor)
@@ -96,6 +95,7 @@ ptp <- vctrs::vec_rbind(ptp1, ptp2, ptp3, ptp4)
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))
+
 board |>
   pins::pin_write(
     ptp,
@@ -107,39 +107,55 @@ board |>
 
 board |> pins::write_board_manifest()
 
+# pins::pin_list(board)
+# pins::pin_versions(board, "aoc")
+# pins::pin_delete(board, "ptp")
+
 library(tidyverse)
-ptp <- search_ptp()
 
 comprehensive <- ptp |>
-  select(hcpcs = column_1,
-         complement = column_2,
-         date_deleted = deletion,
-         edit_mod = modifier,
-         edit_rationale = rationale) |>
-  mutate(ptp_type = "comprehensive",
-         .after = hcpcs) |>
-  nest(complements = c(complement))
+  select(hcpcs              = column_1,
+         ptp_complement     = column_2,
+         ptp_deleted        = deletion,
+         ptp_edit_mod       = modifier,
+         ptp_edit_rationale = rationale
+         ) |>
+  mutate(ptp_type           = "comprehensive",
+         .after             = hcpcs
+         ) |>
+  nest(ptp_complements      = c(ptp_complement))
 
 component <- ptp |>
-  select(hcpcs = column_2,
-         complement = column_1,
-         date_deleted = deletion,
-         edit_mod = modifier,
-         edit_rationale = rationale) |>
-  mutate(ptp_type = "component",
-         .after = hcpcs) |>
-  nest(complements = c(complement))
+  select(hcpcs              = column_2,
+         ptp_complement     = column_1,
+         ptp_deleted        = deletion,
+         ptp_edit_mod       = modifier,
+         ptp_edit_rationale = rationale
+         ) |>
+  mutate(ptp_type           = "component",
+         .after             = hcpcs
+         ) |>
+  nest(ptp_complements      = c(ptp_complement))
 
 ptp_long <- vctrs::vec_rbind(comprehensive, component) |>
+  dplyr::mutate(
+    ptp_edit_mod_desc = dplyr::case_when(
+      ptp_edit_mod == 0 ~ "Not Allowed",
+      ptp_edit_mod == 1 ~ "Allowed",
+      ptp_edit_mod == 9 ~ "Not Applicable"
+      ),
+    .after = ptp_edit_mod
+    ) |>
   dplyr::select(
     hcpcs,
     ptp_type,
-    complements,
-    date_deleted,
-    edit_mod,
-    edit_rationale
+    ptp_complements,
+    ptp_deleted,
+    ptp_edit_mod,
+    ptp_edit_mod_desc,
+    ptp_edit_rationale
   ) |>
-  dplyr::arrange(hcpcs, date_deleted)
+  dplyr::arrange(hcpcs, ptp_deleted)
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))

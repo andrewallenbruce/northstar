@@ -59,11 +59,11 @@
 #' but medically highly unlikely that higher values would represent correctly
 #' reported medically necessary services
 #'
-#' [MUE Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
+#'    * [NCCI Medically Unlikely Edits](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
 #'
 #' @template args-hcpcs
 #'
-#' @param service `<chr>` `Practitioner`, `Outpatient Hospital`, or `DME Supplier`
+#' @param service_type `<chr>` `Practitioner`, `Outpatient Hospital`, or `DME Supplier`
 #'
 #' @param mai `<int>` MUE adjudication indicator; `1`, `2`, or `3`
 #'
@@ -72,88 +72,21 @@
 #' @template returns
 #'
 #' @examples
-#' search_mue(hcpcs = c("39503", "43116", "33935", "11646"))
+#' get_mue_edits(hcpcs = c("39503", "43116", "33935", "11646"))
 #'
 #' @autoglobal
 #'
 #' @export
-search_mue <- function(hcpcs   = NULL,
-                       service = NULL,
-                       mai     = NULL,
-                       ...) {
+get_mue_edits <- function(hcpcs        = NULL,
+                          mai          = NULL,
+                          service_type = NULL,
+                          ...) {
 
   mue <- pins::pin_read(mount_board(), "mues")
 
   mue <- fuimus::search_in_if(mue, mue$hcpcs, hcpcs)
-  mue <- fuimus::search_in_if(mue, mue$service_type, service)
-  mue <- fuimus::search_in_if(mue, mue$mai, mai)
+  mue <- fuimus::search_in_if(mue, mue$mue_service_type, service_type)
+  mue <- fuimus::search_in_if(mue, mue$mue_mai, mai)
 
   return(mue)
 }
-
-#' Procedure to Procedure (PTP) Edits
-#'
-#' National Correct Coding Initiative (NCCI) Procedure-to-Procedure (PTP) edits
-#' prevent inappropriate payment of services that should not be reported
-#' together. Each edit has a Column One and Column Two HCPCS/CPT code.
-#'
-#' If a provider reports the two codes of an edit pair for the same beneficiary
-#' on the same date of service, the Column One code is eligible for payment,
-#' but the Column Two code is denied unless a clinically appropriate NCCI
-#' PTP-associated modifier is also reported.
-#'
-#' [PTP Link](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits)
-#'
-#' @param column_1 `<chr>` Comprehensive HCPCS code
-#'
-#' @param column_2 `<chr>` Component HCPCS code
-#'
-#' @param mod `<int>` `1` = Allowed, `0` = Not Allowed, `9` = Not Applicable
-#'
-#' @template args-dots
-#'
-#' @template returns
-#'
-#' @examples
-#' search_ptp(column_1 = c("39503", "43116", "33935", "11646"))
-#'
-#' @autoglobal
-#'
-#' @export
-search_ptp <- function(column_1 = NULL,
-                       column_2 = NULL,
-                       mod      = NULL,
-                       ...) {
-
-  ptp <- pins::pin_read(mount_board(), "ptp")
-
-  ptp <- fuimus::search_in_if(ptp, ptp$column_1, column_1)
-  ptp <- fuimus::search_in_if(ptp, ptp$column_2, column_2)
-  ptp <- fuimus::search_in_if(ptp, ptp$modifier, mod)
-
-  return(ptp)
-}
-
-#' Get NCCI Procedure-to-Procedure (PTP) Edits
-#'
-#' @template args-hcpcs
-#'
-#' @template args-dots
-#'
-#' @template returns
-#'
-#' @examples
-#' get_ptp_edits(hcpcs = c("43116"))
-#'
-#' @autoglobal
-#'
-#' @export
-get_ptp_edits <- function(hcpcs = NULL, ...) {
-
-  ptplong <- pins::pin_read(mount_board(), "ptp_long")
-
-  ptplong <- fuimus::search_in_if(ptplong, ptplong$hcpcs, hcpcs)
-
-  return(ptplong)
-}
-
