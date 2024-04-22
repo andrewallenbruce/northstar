@@ -19,8 +19,6 @@ commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg
 
 <br>
 
-Version: 0.0.5
-
 ## :package: Installation
 
 You can install **northstar** from [GitHub](https://github.com/) with:
@@ -118,82 +116,54 @@ search_fee_schedule(
 ### Retrieve Add-On Codes
 
 ``` r
-get_addons(hcpcs = c("33935", "33924")) |> 
+get_addon_edits(hcpcs = "33924") |> 
+  dplyr::filter(is.na(aoc_edit_deleted), 
+                is.na(aoc_year_deleted)) |> 
   janitor::remove_empty(which = c("cols", "rows"))
 ```
 
-    > # A tibble: 9 × 7
-    >   hcpcs aoc_type complements       edit_type edit_description     edit_effective
-    >   <chr> <chr>    <list>                <int> <chr>                         <int>
-    > 1 33924 addon    <tibble [1 × 1]>          1 Only Paid if Primar…           2013
-    > 2 33924 addon    <tibble [39 × 1]>         1 Only Paid if Primar…           2013
-    > 3 33924 addon    <tibble [2 × 1]>          1 Only Paid if Primar…           2013
-    > 4 33924 addon    <tibble [10 × 1]>         1 Only Paid if Primar…           2015
-    > 5 33924 addon    <tibble [1 × 1]>          1 Only Paid if Primar…           2016
-    > 6 33924 addon    <tibble [3 × 1]>          1 Only Paid if Primar…           2021
-    > 7 33935 primary  <tibble [2 × 1]>          1 Only Paid if Primar…           2013
-    > 8 33935 primary  <tibble [1 × 1]>          1 Only Paid if Primar…           2015
-    > 9 33935 primary  <tibble [3 × 1]>          1 Only Paid if Primar…           2018
-    > # ℹ 1 more variable: edit_deleted <int>
+    > # A tibble: 4 × 6
+    >   hcpcs aoc_type aoc_complements   aoc_edit_type aoc_edit_description           
+    >   <chr> <chr>    <list>                    <int> <chr>                          
+    > 1 33924 addon    <tibble [39 × 1]>             1 Only Paid if Primary is Paid. …
+    > 2 33924 addon    <tibble [10 × 1]>             1 Only Paid if Primary is Paid. …
+    > 3 33924 addon    <tibble [1 × 1]>              1 Only Paid if Primary is Paid. …
+    > 4 33924 addon    <tibble [3 × 1]>              1 Only Paid if Primary is Paid. …
+    > # ℹ 1 more variable: aoc_edit_effective <int>
 
 ### Retrieve MUEs
 
 ``` r
-search_mue(hcpcs = "33935")
+get_mue_edits(hcpcs = "33935", 
+              service_type = "Practitioner") |> 
+  glimpse()
 ```
 
-    > # A tibble: 2 × 6
-    >   hcpcs   mue   mai adjudication                 rationale          service_type
-    >   <chr> <int> <int> <chr>                        <chr>              <chr>       
-    > 1 33935     1     2 Date of Service Edit: Policy Anatomic Consider… Practitioner
-    > 2 33935     1     2 Date of Service Edit: Policy Anatomic Consider… Outpatient …
+    > Rows: 1
+    > Columns: 6
+    > $ hcpcs            <chr> "33935"
+    > $ mue_uos          <int> 1
+    > $ mue_mai          <int> 2
+    > $ mue_mai_desc     <chr> "Date of Service Edit: Policy"
+    > $ mue_service_type <chr> "Practitioner"
+    > $ mue_rationale    <chr> "Anatomic Consideration"
 
 ### Procedure-to-Procedure Edits
 
 ``` r
-get_ptp_edits(hcpcs = "33935")
+get_ptp_edits(hcpcs = "33935", 
+              ptp_edit_mod = 1) |> 
+  dplyr::filter(ptp_deleted > clock::date_today(""))
 ```
 
-    > # A tibble: 35 × 6
-    >    hcpcs ptp_type      complements      date_deleted edit_mod edit_rationale    
-    >    <chr> <chr>         <list>           <date>          <int> <chr>             
-    >  1 33935 comprehensive <tibble [1 × 1]> 2004-12-31          1 Standards of medi…
-    >  2 33935 comprehensive <tibble [5 × 1]> 2005-12-31          1 Standards of medi…
-    >  3 33935 comprehensive <tibble [2 × 1]> 2006-12-31          1 Standards of medi…
-    >  4 33935 comprehensive <tibble [2 × 1]> 2007-12-31          1 CPT Separate proc…
-    >  5 33935 comprehensive <tibble [5 × 1]> 2008-12-31          1 Standards of medi…
-    >  6 33935 comprehensive <tibble [1 × 1]> 2009-04-01          9 Standards of medi…
-    >  7 33935 comprehensive <tibble [2 × 1]> 2009-12-31          0 Misuse of Column …
-    >  8 33935 comprehensive <tibble [1 × 1]> 2011-12-31          0 HCPCS/CPT procedu…
-    >  9 33935 comprehensive <tibble [1 × 1]> 2012-12-31          1 CPT Separate proc…
-    > 10 33935 comprehensive <tibble [2 × 1]> 2013-07-01          9 CPT Manual or CMS…
-    > # ℹ 25 more rows
-
-``` r
-search_ptp(column_1 = "33935") |> 
-  janitor::remove_empty(which = c("cols", "rows")) |> 
-  dplyr::filter(deletion > clock::date_today("")) |> 
-  dplyr::mutate(deletion = NULL) |> 
-  dplyr::arrange(column_2) |> 
-  dplyr::group_by(column_1, modifier, rationale) |> 
-  tidyr::nest() |> 
-  dplyr::ungroup()
-```
-
-    > # A tibble: 11 × 4
-    >    column_1 modifier rationale                                         data    
-    >    <chr>       <int> <chr>                                             <list>  
-    >  1 33935           0 Misuse of Column Two code with Column One code    <tibble>
-    >  2 33935           1 Standards of medical/surgical practice            <tibble>
-    >  3 33935           1 CPT Manual or CMS manual coding instruction       <tibble>
-    >  4 33935           1 Misuse of Column Two code with Column One code    <tibble>
-    >  5 33935           0 HCPCS/CPT procedure code definition               <tibble>
-    >  6 33935           1 CPT Separate procedure definition                 <tibble>
-    >  7 33935           0 CPT Separate procedure definition                 <tibble>
-    >  8 33935           0 Mutually exclusive procedures                     <tibble>
-    >  9 33935           0 CPT Manual or CMS manual coding instruction       <tibble>
-    > 10 33935           0 Standards of medical/surgical practice            <tibble>
-    > 11 33935           0 Anesthesia service included in surgical procedure <tibble>
+    > # A tibble: 4 × 7
+    >   hcpcs ptp_type      ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc
+    >   <chr> <chr>         <list>          <date>             <int> <chr>            
+    > 1 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
+    > 2 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
+    > 3 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
+    > 4 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
+    > # ℹ 1 more variable: ptp_edit_rationale <chr>
 
 ------------------------------------------------------------------------
 

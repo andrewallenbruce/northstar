@@ -15,6 +15,9 @@ lcd(hcpcs = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
+Local Coverage Determinations
+}
+\note{
 Database Last Updated 2023-04-27
 }
 \examples{

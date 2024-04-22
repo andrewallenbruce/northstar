@@ -78,35 +78,26 @@ get_addon_edits <- function(hcpcs     = NULL,
                             edit_type = NULL,
                             ...) {
 
-    aoc_long <- pins::pin_read(mount_board(), "aoc_long")
+  aoc <- get_pin("aoc_long")
+  nms <- c("primary", "addon", "both")
 
-    aoc_long <- fuimus::search_in_if(
-      aoc_long,
-      aoc_long$hcpcs,
-      unlist(
-        get_aoc_type(hcpcs)[c("primary", "addon", "both")],
-        use.names = FALSE
-        )
-      )
+  aoc <- fuimus::search_in_if(
+    aoc,
+    aoc$hcpcs,
+    fuimus::delister(get_aoc_type(hcpcs)[nms]))
 
-    aoc_long  <- fuimus::search_in_if(
-      aoc_long,
-      aoc_long$aoc_edit_type,
-      edit_type)
+  aoc  <- fuimus::search_in_if(
+    aoc,
+    aoc$aoc_edit_type,
+    edit_type)
 
-    if (!is.null(aoc_type)) {
+  aoc <- search_in_if_args(
+    aoc,
+    aoc$aoc_type,
+    aoc_type,
+    args = c("primary", "addon"))
 
-      aoc_type <- rlang::arg_match(
-        aoc_type,
-        c("primary", "addon")
-        )
-
-      aoc_long  <- fuimus::search_in(
-        aoc_long,
-        aoc_long$aoc_type,
-        aoc_type)
-    }
-  return(aoc_long)
+  return(aoc)
 }
 
 #' HCPCS Add-On code type
@@ -130,8 +121,7 @@ get_addon_edits <- function(hcpcs     = NULL,
 get_aoc_type <- function(hcpcs, ...) {
 
   hcpcs <- collapse::funique(hcpcs)
-
-  vc <- pins::pin_read(mount_board(), "aoc_vecs")
+  vc    <- get_pin("aoc_vecs")
 
   list(
     primary = fuimus::search_in(hcpcs, hcpcs, vc$primary),

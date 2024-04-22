@@ -14,10 +14,8 @@
 #' @export
 search_rvu <- function(hcpcs = NULL, ...) {
 
-  rv <- pins::pin_read(mount_board(), "rvu")
-
+  rv <- get_pin("rvu")
   rv <- fuimus::search_in_if(rv, rv$hcpcs, hcpcs)
-
   return(rv)
 }
 
@@ -45,13 +43,10 @@ search_payment <- function(hcpcs    = NULL,
                            mac      = NULL,
                            locality = NULL,
                            ...) {
-
-  pmt <- pins::pin_read(mount_board(), "pymt")
-
+  pmt <- get_pin("pymt")
   pmt <- fuimus::search_in_if(pmt, pmt$hcpcs, hcpcs)
   pmt <- fuimus::search_in_if(pmt, pmt$mac, mac)
   pmt <- fuimus::search_in_if(pmt, pmt$locality, locality)
-
   return(pmt)
 }
 
@@ -78,13 +73,10 @@ search_gpci <- function(mac      = NULL,
                         locality = NULL,
                         ...) {
 
-  gp <- pins::pin_read(mount_board(), "gpci") |>
-    dplyr::rename(area = name)
-
+  gp <- get_pin("gpci") |> dplyr::rename(area = name)
   gp <- fuimus::search_in_if(gp, gp$state, state)
   gp <- fuimus::search_in_if(gp, gp$mac, mac)
   gp <- fuimus::search_in_if(gp, gp$locality, locality)
-
   return(gp)
 }
 
@@ -126,8 +118,8 @@ search_hcpcs <- function(hcpcs   = NULL,
 
   lv2 <- switch(
     columns,
-    limit  = pins::pin_read(mount_board(), "hcpcs")[limited],
-    full   = pins::pin_read(mount_board(), "hcpcs")
+    limit  = get_pin("hcpcs")[limited],
+    full   = get_pin("hcpcs")
   )
 
   lv2 <- fuimus::search_in_if(lv2, lv2$hcpcs, hcpcs)
@@ -151,10 +143,8 @@ search_hcpcs <- function(hcpcs   = NULL,
 #' @autoglobal
 search_cpt <- function(hcpcs = NULL, ...) {
 
-  cpt <- pins::pin_read(mount_board(), "cpt_descriptors")
-
+  cpt <- get_pin("cpt_descriptors")
   cpt <- fuimus::search_in_if(cpt, cpt$hcpcs, hcpcs)
-
   return(cpt)
 }
 
@@ -186,8 +176,7 @@ search_opps <- function(hcpcs    = NULL,
                         locality = NULL,
                         ...) {
 
-  opp <- pins::pin_read(mount_board(), "opps")
-
+  opp <- get_pin("opps")
   opp <- fuimus::search_in_if(opp, opp$hcpcs, hcpcs)
   opp <- fuimus::search_in_if(opp, opp$mac, mac)
   opp <- fuimus::search_in_if(opp, opp$locality, locality)

@@ -82,11 +82,9 @@ get_mue_edits <- function(hcpcs        = NULL,
                           service_type = NULL,
                           ...) {
 
-  mue <- pins::pin_read(mount_board(), "mues")
-
+  mue <- get_pin("mues")
   mue <- fuimus::search_in_if(mue, mue$hcpcs, hcpcs)
   mue <- fuimus::search_in_if(mue, mue$mue_service_type, service_type)
   mue <- fuimus::search_in_if(mue, mue$mue_mai, mai)
-
   return(mue)
 }

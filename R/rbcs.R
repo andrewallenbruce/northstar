@@ -89,14 +89,17 @@ search_rbcs <- function(hcpcs       = NULL,
                         concatenate = TRUE,
                         ...) {
 
-  rb <- pins::pin_read(mount_board(), "rbcs") |>
+  rb <- get_pin("rbcs") |>
     dplyr::rename(procedure = major) |>
-    dplyr::mutate(family = dplyr::if_else(
+    dplyr::mutate(
+      family = dplyr::if_else(
         family == "No RBCS Family",
         NA_character_,
-        family
-        )
-      )
+        family))
+
+  rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs)
+  rb <- fuimus::search_in_if(rb, rb$family, family)
+  rb <- fuimus::search_in_if(rb, rb$subcategory, subcategory)
 
   if (!is.null(procedure)) {
 
@@ -107,10 +110,6 @@ search_rbcs <- function(hcpcs       = NULL,
 
     rb <- fuimus::search_in(rb, rb$procedure, procedure)
   }
-
-  rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs)
-  rb <- fuimus::search_in_if(rb, rb$family, family)
-  rb <- fuimus::search_in_if(rb, rb$subcategory, subcategory)
 
   if (!is.null(category)) {
 
@@ -125,17 +124,20 @@ search_rbcs <- function(hcpcs       = NULL,
 
   if (concatenate) {
 
-    rb <- tidyr::unite(rb,
-                       "rbcs_category",
-                       c(procedure, category),
-                       sep = " ") |>
-      tidyr::unite("rbcs_family",
-                   c(subcategory, family),
-                   sep = ": ",
-                   na.rm = TRUE) |>
-      dplyr::select(hcpcs,
-                    rbcs_category,
-                    rbcs_family)
+    rb <- tidyr::unite(
+      rb,
+      "rbcs_category",
+      c(procedure, category),
+      sep = " ") |>
+      tidyr::unite(
+        "rbcs_family",
+        c(subcategory, family),
+        sep = ": ",
+        na.rm = TRUE) |>
+      dplyr::select(
+        hcpcs,
+        rbcs_category,
+        rbcs_family)
   }
   return(rb)
 }

@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path  = "man/figures/README-",
   out.width = "100%"
 )
+# Version: `r paste0(unlist(desc::desc_get_version(), use.names = FALSE), collapse = ".")`
 ```
 
 
@@ -27,8 +28,6 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 <br>
-
-Version: `r paste0(unlist(desc::desc_get_version(), use.names = FALSE), collapse = ".")`
 
 ## :package: Installation
 
@@ -64,35 +63,28 @@ search_fee_schedule(
 ### Retrieve Add-On Codes
 
 ```{r}
-get_addons(hcpcs = c("33935", "33924")) |> 
+get_addon_edits(hcpcs = "33924") |> 
+  dplyr::filter(is.na(aoc_edit_deleted), 
+                is.na(aoc_year_deleted)) |> 
   janitor::remove_empty(which = c("cols", "rows"))
 ```
 
 ### Retrieve MUEs
 
 ```{r}
-search_mue(hcpcs = "33935")
+get_mue_edits(hcpcs = "33935", 
+              service_type = "Practitioner") |> 
+  glimpse()
 ```
 
 ### Procedure-to-Procedure Edits
 
 ```{r}
-get_ptp_edits(hcpcs = "33935")
+get_ptp_edits(hcpcs = "33935", 
+              ptp_edit_mod = 1) |> 
+  dplyr::filter(ptp_deleted > clock::date_today(""))
 ```
 
-
-
-
-```{r}
-search_ptp(column_1 = "33935") |> 
-  janitor::remove_empty(which = c("cols", "rows")) |> 
-  dplyr::filter(deletion > clock::date_today("")) |> 
-  dplyr::mutate(deletion = NULL) |> 
-  dplyr::arrange(column_2) |> 
-  dplyr::group_by(column_1, modifier, rationale) |> 
-  tidyr::nest() |> 
-  dplyr::ungroup()
-```
 
 
 ------------------------------------------------------------------------------

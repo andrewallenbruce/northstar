@@ -95,4 +95,5 @@ reference:
   desc: >
     Utilities to label Codeset outputs.
   contents:
+  - search_in_if_args
   - starts_with("case_")

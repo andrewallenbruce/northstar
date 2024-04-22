@@ -21,9 +21,7 @@
 #' @autoglobal
 search_modifiers <- function(mod = NULL, ...) {
 
-  md <- pins::pin_read(mount_board(), "modifiers")
-
+  md <- get_pin("modifiers")
   md <- fuimus::search_in_if(md, md$mod, mod)
-
   return(md)
 }

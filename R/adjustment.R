@@ -64,51 +64,43 @@ search_adjustments <- function(df     = NULL,
                                ...) {
 
   type   <- match.arg(type)
-
   action <- match.arg(action)
+  adj    <- get_pin("rarc_carc")
 
-  adj    <- pins::pin_read(mount_board(), "rarc_carc")
-
-  if (type == "all") {
-
-    return(adj)
-
-    }
+  if (type == "all") { return(adj) }
 
   if (type == "carc" && action == "review") {
-
     adj$rarc <- NULL
-
     return(adj)
-
     }
 
-  if (type == "rarc" && action == "review") {
-
-    return(adj$rarc)
-
-    }
+  if (type == "rarc" && action == "review") { return(adj$rarc) }
 
   if (type == "carc" && action == "join") {
 
     adj$carc <- dplyr::select(adj$carc, -c(usage:end_date))
 
     adj <- df |>
-      tidyr::separate_wider_delim({{ col }},
-                                  delim = "-",
-                                  names = c("group", "code"),
-                                  too_few = "align_start") |>
-      dplyr::left_join(adj$group,
-                       by = dplyr::join_by(group == code)) |>
-      dplyr::left_join(adj$carc,
-                       by = dplyr::join_by(code == code)) |>
-      tidyr::unite("adj_code",
-                   group,
-                   code,
-                   sep = "-",
-                   na.rm = TRUE) |>
-      dplyr::rename(group = description.x,
-                    description = description.y)
+      tidyr::separate_wider_delim(
+        {{ col }},
+        delim = "-",
+        names = c("group", "code"),
+        too_few = "align_start") |>
+      dplyr::left_join(
+        adj$group,
+        by = dplyr::join_by(group == code)) |>
+      dplyr::left_join(
+        adj$carc,
+        by = dplyr::join_by(code == code)) |>
+      tidyr::unite(
+        "adj_code",
+        group,
+        code,
+        sep = "-",
+        na.rm = TRUE) |>
+      dplyr::rename(
+        group = description.x,
+        description = description.y)
 
   }
   return(adj)

@@ -88,11 +88,9 @@ get_ptp_edits <- function(hcpcs        = NULL,
                           ptp_edit_mod = NULL,
                           ...) {
 
-  ptplong <- pins::pin_read(mount_board(), "ptp_long")
-
-  ptplong <- fuimus::search_in_if(ptplong, ptplong$hcpcs, hcpcs)
-  ptplong <- fuimus::search_in_if(ptplong, ptplong$ptp_type, ptp_type)
-  ptplong <- fuimus::search_in_if(ptplong, ptplong$ptp_edit_mod, ptp_edit_mod)
-
-  return(ptplong)
+  ptp <- get_pin("ptp_long")
+  ptp <- fuimus::search_in_if(ptp, ptp$hcpcs, hcpcs)
+  ptp <- fuimus::search_in_if(ptp, ptp$ptp_type, ptp_type)
+  ptp <- fuimus::search_in_if(ptp, ptp$ptp_edit_mod, ptp_edit_mod)
+  return(ptp)
 }

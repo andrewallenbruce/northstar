@@ -7,7 +7,8 @@
 ncd(coverage = NULL, ...)
 }
 \arguments{
-\item{coverage}{Coverage level; \code{"Full"}, \code{"Restricted"}, \code{"None"}, \code{"Unknown"}}
+\item{coverage}{\verb{<chr>} vector of coverage levels; \code{"Full"}, \code{"Restricted"},
+\code{"None"}, \code{"Unknown"}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
@@ -15,9 +16,14 @@ ncd(coverage = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
+National Coverage Determinations
+}
+\note{
 Database Last Updated 2022-12-08
 }
 \examples{
-ncd(coverage = "Unknown")
+ncd(coverage = c("Unknown", "None"))
+
+try(ncd(coverage = c("Unknown", "Noe")))
 
 }
