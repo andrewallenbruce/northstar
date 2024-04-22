@@ -1,0 +1,11 @@
+file: rbcs_vecs.qs
+file_size: 27907
+pin_hash: 7dfd7289831b2685
+type: qs
+title: RBCS Code Vectors
+description: 'List of 3 Vectors of Unique Codes: RBCS and CPT, RBCS and HCPCS, and
+  RBCS Only, a total of 15522 codes.'
+tags: ~
+urls: ~
+created: 20240422T090652Z
+api_version: 1

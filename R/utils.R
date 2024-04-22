@@ -109,3 +109,19 @@ search_in_if_args <- function(df,
 null_if_empty <- function(x) {
   if (vctrs::vec_is_empty(x)) NULL else x
 }
+
+#' @autoglobal
+#'
+#' @noRd
+add_ifelse <- function(x,
+                       df,
+                       dfcol,
+                       by) {
+
+  if (vctrs::vec_is_empty(x)) {
+    NULL
+    } else {
+      vctrs::vec_slice(df,
+      vctrs::vec_in(dfcol, x)) |>
+      tidyr::nest(.by = {{ by }}) }
+  }

@@ -106,7 +106,7 @@ get_addon_edits <- function(hcpcs     = NULL,
 #'
 #' @template args-dots
 #'
-#' @returns A `<list>` of four `<chr>` vectors indicating group membership:
+#' @returns A `<list>` of four `<chr>` vectors, indicating set membership:
 #'   `primary`, `addon`, `both`, and `neither`
 #'
 #' @examples

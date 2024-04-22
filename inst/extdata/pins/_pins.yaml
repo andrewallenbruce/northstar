@@ -4,6 +4,8 @@ aoc_vecs:
 - aoc_vecs/20240405T212353Z-5f6d1/
 cpt_descriptors:
 - cpt_descriptors/20240419T052848Z-7d8ec/
+cpt_hcpcs_vecs:
+- cpt_hcpcs_vecs/20240422T090649Z-7313d/
 gpci:
 - gpci/20240324T142631Z-9f703/
 hcpcs:
@@ -26,5 +28,7 @@ rarc_carc:
 - rarc_carc/20240318T194306Z-4abf5/
 rbcs:
 - rbcs/20240311T110445Z-95e7b/
+rbcs_vecs:
+- rbcs_vecs/20240422T090652Z-7dfd7/
 rvu:
 - rvu/20240325T125357Z-67907/

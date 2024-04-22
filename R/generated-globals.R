@@ -5,6 +5,10 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
+  # <describe_hcpcs>
+  "byhcpc",
+  # <describe_hcpcs>
+  "bypctc",
   # <case_chapter>
   "chapter",
   # <search_adjustments>

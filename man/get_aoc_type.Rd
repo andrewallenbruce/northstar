@@ -12,7 +12,7 @@ get_aoc_type(hcpcs, ...)
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-A \verb{<list>} of four \verb{<chr>} vectors indicating group membership:
+A \verb{<list>} of four \verb{<chr>} vectors, indicating set membership:
 \code{primary}, \code{addon}, \code{both}, and \code{neither}
 }
 \description{

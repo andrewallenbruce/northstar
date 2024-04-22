@@ -88,6 +88,8 @@ reference:
   desc: >
     Functions to validate inputs.
   contents:
+  - get_hcpcs_type
+  - get_rbcs_type
   - get_aoc_type
   - starts_with("is_")
 
@@ -95,5 +97,4 @@ reference:
   desc: >
     Utilities to label Codeset outputs.
   contents:
-  - search_in_if_args
   - starts_with("case_")
