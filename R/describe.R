@@ -66,6 +66,20 @@ search_cpt <- function(hcpcs = NULL, ...) {
   return(cpt)
 }
 
+#' HCPCS Level II Codes
+#'
+#' @template returns
+#'
+#' @examples
+#' search_level_two()
+#'
+#' @export
+#'
+#' @autoglobal
+search_level_two <- function() {
+  get_pin("level_two")
+}
+
 #' HCPCS code type
 #'
 #' @template args-hcpcs
