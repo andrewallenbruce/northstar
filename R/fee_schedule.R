@@ -54,13 +54,13 @@ search_fee_schedule <- function(hcpcs,
   )
 
   x <- list(
-    rvu = if (!vctrs::vec_is_empty(x$rv)) x$rv else NULL,
-    gpc = if (!vctrs::vec_is_empty(x$gp)) x$gp else NULL,
-    pay = if (!vctrs::vec_is_empty(x$fs)) x$fs else NULL,
-    opp = if (!vctrs::vec_is_empty(x$op)) x$op else NULL,
-    cpt = if (!vctrs::vec_is_empty(x$ds)) x$ds else NULL,
-    lvl = if (!vctrs::vec_is_empty(x$l2)) x$l2 else NULL,
-    rbc = if (!vctrs::vec_is_empty(x$rb)) x$rb else NULL) |>
+    rvu = null_if_empty(x$rv),
+    gpc = null_if_empty(x$gp),
+    pay = null_if_empty(x$fs),
+    opp = null_if_empty(x$op),
+    cpt = null_if_empty(x$ds),
+    lvl = null_if_empty(x$l2),
+    rbc = null_if_empty(x$rb)) |>
     purrr::compact()
 
   # create `join_by` objects
@@ -90,7 +90,8 @@ search_fee_schedule <- function(hcpcs,
     names()
 
   # perform join based on path
-  res <- switch(path,
+  res <- switch(
+    path,
     "both" = dplyr::left_join(res, x$lvl, byhcpc) |>
              dplyr::left_join(x$pay, bypctc) |>
              dplyr::left_join(x$cpt, byhcpc),

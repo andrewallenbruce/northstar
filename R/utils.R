@@ -102,3 +102,10 @@ search_in_if_args <- function(df,
     df
     }
 }
+
+#' @autoglobal
+#'
+#' @noRd
+null_if_empty <- function(x) {
+  if (vctrs::vec_is_empty(x)) NULL else x
+}
