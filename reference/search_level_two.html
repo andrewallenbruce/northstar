@@ -84,9 +84,19 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_level_two</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_level_two</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>hcpcs</dt>
+<dd><p><code>&lt;chr&gt;</code> vector of 5-character HCPCS codes</p></dd>
+
+
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
@@ -98,91 +108,21 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_level_two</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $two</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8,349 × 24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    hcpcs lvlII_type lvlII_desc_long            lvlII_desc_short lvlII_date_added</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A1    mod        Dressing for one wound     Dressing for on… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A2    mod        Dressing for two wounds    Dressing for tw… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A3    mod        Dressing for three wounds  Dressing for th… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A4    mod        Dressing for four wounds   Dressing for fo… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> A5    mod        Dressing for five wounds   Dressing for fi… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> A6    mod        Dressing for six wounds    Dressing for si… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> A7    mod        Dressing for seven wounds  Dressing for se… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> A8    mod        Dressing for eight wounds  Dressing for ei… 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> A9    mod        Dressing for nine or more… Dressing for 9 … 2002-07-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AA    mod        Anesthesia services perfo… Anesthesia perf… 1984-01-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8,339 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 19 more variables: lvlII_date_term &lt;date&gt;, lvlII_seqnum &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_recid &lt;chr&gt;, lvlII_price &lt;chr&gt;, lvlII_mprice &lt;chr&gt;, lvlII_cim &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_mcm &lt;chr&gt;, lvlII_statute &lt;chr&gt;, lvlII_labcert &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_xref &lt;chr&gt;, lvlII_coverage &lt;chr&gt;, lvlII_asc_group &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_asc_date &lt;date&gt;, lvlII_procnote &lt;chr&gt;, lvlII_betos &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_tos &lt;chr&gt;, lvlII_anesths &lt;chr&gt;, lvlII_action_date &lt;date&gt;, …</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $correct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs lvlII_action   lvlII_desc_short lvlII_desc_long lvlII_date_eff lvlII_tos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> C9796 Add date and … <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>              2024-01-01     <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> C9797 Add date and … <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>              2024-01-01     <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A4593 Revise         <span style="color: #BB0000;">NA</span>               Neuromodulatio… 2024-04-01     <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> J9255 Revise         <span style="color: #BB0000;">NA</span>               Injection, met… 2024-04-01     <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> C9167 Revise SD and… Inj, adzynma, 1… Injection, ada… 2024-04-01     <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> M0224 Add            Pemivibart infu… Intravenous in… 2024-03-22     V        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> Q0224 Add            Inj, pemivibart… Injection, pem… 2024-03-22     V        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: lvlII_betos &lt;chr&gt;, lvlII_coverage &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_price &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $trans</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8,351 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    hcpcs lvlII_action lvlII_desc_short             lvlII_desc_long              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A2026 ADD          Restrata minimatrix, 5 mg    Restrata minimatrix, 5 mg    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A4271 ADD          Home lancing/test cartridges Integrated lancing and blood…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A4438 ADD          Adhesive clip ext ens contr  Adhesive clip applied to the…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A4564 ADD          Pessary, disposable any type Pessary, disposable, any type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> A4593 ADD          Neuromod sti sys adj rehab   Neuromodulation stimulator s…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> A4594 ADD          Neuromod adj rehab mouthpie  Neuromodulation stimulator s…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> A9293 ADD          Fertility cycl tracking soft Fertility cycle (contracepti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> C9166 ADD          Injection, secukinumab       Injection, secukinumab, intr…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> C9167 ADD          Inj, adzynma, 10 iu          Injection, adamts13, recombi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> C9168 ADD          Injection, mirikizumab-mrkz  Injection, mirikizumab-mrkz,…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8,341 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $noc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 161 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    hcpcs lvlII_desc_long                        lvlII_date_added lvlII_date_term</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A0999 Unlisted ambulance service             1987-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A4100 Skin substitute, fda cleared as a dev… 2022-04-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A4335 Incontinence supply; miscellaneous     1990-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A4421 Ostomy supply; miscellaneous           1985-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> A4641 Radiopharmaceutical, diagnostic, not … 1994-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> A4649 Surgical supply; miscellaneous         1982-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> A4913 Miscellaneous dialysis supplies, not … 1986-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> A5507 For diabetics only, not otherwise spe… 1995-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> A6261 Wound filler, gel/paste, per fluid ou… 1997-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> A6262 Wound filler, dry form, per gram, not… 1997-01-01       <span style="color: #BB0000;">NA</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 151 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $proc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 232 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    note  description                                                date_deleted</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0001  THIS PROCESSING NOTE DELETED 1/1/97.                       1997-01-01  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0002  THESE CODES (82585, 82595) PERTAIN TO PERFORMING THE ANAL… <span style="color: #BB0000;">NA</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0003  THIS PROCEDURE (85029, 85030) IS USUALLY PART OF THE AUTO… <span style="color: #BB0000;">NA</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0004  THIS PROCESSING NOTE DELETED 1/1/97.                       1997-01-01  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0005  THE CERTIFICATION CATEGORY WILL DEPEND ON THE TYPE OF TES… <span style="color: #BB0000;">NA</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0006  THIS IS NOT A LAB TEST AND IS NOT CERTIFIED.               <span style="color: #BB0000;">NA</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0007  THIS PROCESSING NOTE DELETED 1/1/97.                       1997-01-01  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0008  THIS PROCESSING NOTE DELETED 1/1/97.                       1997-01-01  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0009  THIS PROCESSING NOTE DELETED 1/1/97.                       1997-01-01  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0010  THIS PROCESSING NOTE DELETED 1/1/97.                       1997-01-01  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 222 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_level_two</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 25</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs lvlII_type lvlII_desc_short             lvlII_desc_long lvlII_date_added</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021 code       Outside state ambulance serv Ambulance serv… 1985-01-01      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> G8916 code       Pt w iv ab given on time     Patient with p… 2012-04-01      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> J9264 code       Paclitaxel protein bound     Injection, pac… 2006-01-01      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> V5362 code       Speech screening             Speech screeni… 1990-01-01      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more variables: lvlII_date_term &lt;date&gt;, lvlII_price &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_mprice &lt;chr&gt;, lvlII_labcert &lt;chr&gt;, lvlII_xref &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_coverage &lt;chr&gt;, lvlII_tos &lt;chr&gt;, lvlII_betos &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_procnote &lt;chr&gt;, lvlII_procnote_desc &lt;chr&gt;, lvlII_seqnum &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_recid &lt;chr&gt;, lvlII_cim &lt;chr&gt;, lvlII_mcm &lt;chr&gt;, lvlII_statute &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_asc_group &lt;chr&gt;, lvlII_asc_date &lt;date&gt;, lvlII_anesths &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_action_date &lt;date&gt;, lvlII_action &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
