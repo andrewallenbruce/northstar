@@ -23,55 +23,27 @@ utils::globalVariables(c(
   "end_date",
   # <calculate_amounts>
   "facility",
-  # <search_fee_schedule>
-  "fpar",
-  # <search_fee_schedule>
-  "fprvu",
-  # <search_fee_schedule>
-  "frvus",
   # <search_adjustments>
   "group",
   # <col_lb>
   "label",
   # <search_rbcs>
   "major",
-  # <search_fee_schedule>
-  "mgpci",
-  # <search_fee_schedule>
-  "mod",
   # <case_modifier>
   "mod_description",
-  # <search_fee_schedule>
-  "mrvu",
   # <search_gpci>
   "name",
-  # <search_fee_schedule>
-  "nfprvu",
   # <calculate_amounts>
   "nonfacility",
-  # <search_fee_schedule>
-  "npar",
-  # <search_fee_schedule>
-  "nrvus",
-  # <search_fee_schedule>
-  "pctc",
   # <case_pctc>
   "pctc_description",
-  # <search_fee_schedule>
-  "pgpci",
   # <search_rbcs>
   "rbcs_category",
   # <search_rbcs>
   "rbcs_family",
-  # <search_fee_schedule>
-  "status",
   # <search_adjustments>
   "usage",
   # <col_lb>
   "var",
-  # <search_fee_schedule>
-  "wgpci",
-  # <search_fee_schedule>
-  "wrvu",
   NULL
 ))

@@ -5,7 +5,7 @@ aoc_vecs:
 cpt_descriptors:
 - cpt_descriptors/20240419T052848Z-7d8ec/
 cpt_hcpcs_vecs:
-- cpt_hcpcs_vecs/20240422T090649Z-7313d/
+- cpt_hcpcs_vecs/20240423T110139Z-390a8/
 gpci:
 - gpci/20240324T142631Z-9f703/
 hcpcs:
@@ -33,4 +33,4 @@ rbcs:
 rbcs_vecs:
 - rbcs_vecs/20240422T090652Z-7dfd7/
 rvu:
-- rvu/20240325T125357Z-67907/
+- rvu/20240423T123557Z-a168f/

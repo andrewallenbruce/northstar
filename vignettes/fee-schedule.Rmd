@@ -30,7 +30,7 @@ library(gt)
 
 # HCPCS
 
-```{r}
+```{r echo = FALSE, eval=FALSE}
 search_fee_schedule(
   hcpcs    = "39503", 
   state    = "GA", 

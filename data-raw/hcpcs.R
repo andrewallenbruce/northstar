@@ -3,11 +3,12 @@ library(tidyverse)
 library(janitor)
 
 # level2    <- "C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_JAN_ANWEB_v4/HCPC2024_JAN_ANWEB_v4.xlsx" # v4
-hcpcs       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_APR_ANWEB_v5/")
-level2      <- glue::glue("{hcpcs}HCPC2024_APR_ANWEB_v5.xlsx") # v5
 # noc_codes   <- glue::glue("{hcpcs}NOC codes_APR 2024.xlsx")
 # transreport <- glue::glue("{hcpcs}HCPC2024_APR_Transreport_ANWEB_v5.xlsx")
 # corrections <- glue::glue("{hcpcs}HCPC2024_APR_Corrections_to_v5.xlsx")
+
+hcpcs       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_APR_ANWEB_v5/")
+level2      <- glue::glue("{hcpcs}HCPC2024_APR_ANWEB_v5.xlsx") # v5
 procnotes   <- glue::glue("{hcpcs}proc_notes_APR2024.txt")
 
 proc_note <- readr::read_lines(procnotes)[4:602]

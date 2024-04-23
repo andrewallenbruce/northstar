@@ -1,0 +1,11 @@
+file: cpt_hcpcs_vecs.qs
+file_size: 31028
+pin_hash: 390a86646c196762
+type: qs
+title: HCPCS Code Vectors
+description: 'List of 2 Vectors of Unique Codes: CPT (10641) & HCPCS (7966), a total
+  of 18607 codes.'
+tags: ~
+urls: ~
+created: 20240423T110139Z
+api_version: 1

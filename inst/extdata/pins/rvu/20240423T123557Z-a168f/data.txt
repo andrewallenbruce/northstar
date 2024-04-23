@@ -1,10 +1,10 @@
 file: rvu.qs
-file_size: 505155
-pin_hash: 6790794fa9314b5d
+file_size: 526064
+pin_hash: a168f9d6eecb21f1
 type: qs
 title: PFS RVU 2024
 description: National Physician Fee Schedule Relative Value File January 2024 Release
 tags: ~
 urls: ~
-created: 20240325T125357Z
+created: 20240423T123557Z
 api_version: 1
