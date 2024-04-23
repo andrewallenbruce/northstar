@@ -89,17 +89,11 @@ search_rbcs <- function(hcpcs       = NULL,
                         concatenate = TRUE,
                         ...) {
 
-  rb <- get_pin("rbcs") |>
-    dplyr::rename(procedure = major) |>
-    dplyr::mutate(
-      family = dplyr::if_else(
-        family == "No RBCS Family",
-        NA_character_,
-        family))
+  rb <- get_pin("rbcs")
 
   rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs)
-  rb <- fuimus::search_in_if(rb, rb$family, family)
-  rb <- fuimus::search_in_if(rb, rb$subcategory, subcategory)
+  rb <- fuimus::search_in_if(rb, rb$rbcs_family, family)
+  rb <- fuimus::search_in_if(rb, rb$rbcs_subcategory, subcategory)
 
   if (!is.null(procedure)) {
 
@@ -108,7 +102,7 @@ search_rbcs <- function(hcpcs       = NULL,
       c("Major", "Non-Procedure", "Other"),
       multiple = TRUE)
 
-    rb <- fuimus::search_in(rb, rb$procedure, procedure)
+    rb <- fuimus::search_in(rb, rb$rbcs_procedure, procedure)
   }
 
   if (!is.null(category)) {
@@ -119,7 +113,7 @@ search_rbcs <- function(hcpcs       = NULL,
         "Imaging", "E&M", "Anesthesia", "Other"),
       multiple = TRUE)
 
-    rb <- fuimus::search_in(rb, rb$category, category)
+    rb <- fuimus::search_in(rb, rb$rbcs_category, category)
   }
 
   if (concatenate) {
@@ -127,11 +121,11 @@ search_rbcs <- function(hcpcs       = NULL,
     rb <- tidyr::unite(
       rb,
       "rbcs_category",
-      c(procedure, category),
+      c(rbcs_procedure, rbcs_category),
       sep = " ") |>
       tidyr::unite(
         "rbcs_family",
-        c(subcategory, family),
+        c(rbcs_subcategory, rbcs_family),
         sep = ": ",
         na.rm = TRUE) |>
       dplyr::select(

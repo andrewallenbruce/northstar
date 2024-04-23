@@ -27,12 +27,8 @@ utils::globalVariables(c(
   "group",
   # <col_lb>
   "label",
-  # <search_rbcs>
-  "major",
   # <case_modifier>
   "mod_description",
-  # <search_gpci>
-  "name",
   # <calculate_amounts>
   "nonfacility",
   # <case_pctc>
@@ -41,6 +37,10 @@ utils::globalVariables(c(
   "rbcs_category",
   # <search_rbcs>
   "rbcs_family",
+  # <search_rbcs>
+  "rbcs_procedure",
+  # <search_rbcs>
+  "rbcs_subcategory",
   # <search_adjustments>
   "usage",
   # <col_lb>

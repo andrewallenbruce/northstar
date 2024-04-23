@@ -2,40 +2,53 @@ library(readxl)
 library(tidyverse)
 library(janitor)
 
-root <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
-gpci_xl    <- glue::glue("{root}RVU24A-010323/GPCI2024.xlsx")
-locco_xl    <- glue::glue("{root}RVU24A-010323/24LOCCO.xlsx")
+root     <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
+gpci_xl  <- glue::glue("{root}RVU24A-010323/GPCI2024.xlsx")
+locco_xl <- glue::glue("{root}RVU24A-010323/24LOCCO.xlsx")
 
 # ADDENDUM E. FINAL CY 2024 GEOGRAPHIC PRACTICE COST INDICES (GPCIs) BY STATE AND MEDICARE LOCALITY
 # gpci_xl <- here::here("data/RVU24A-010323/GPCI2024.xlsx")
 
-gpci <- read_excel(gpci_xl, col_types = "text") |>
+gpci <- read_excel(
+  gpci_xl,
+  col_types = "text"
+  ) |>
   row_to_names(row_number = 2) |>
   clean_names() |>
   filter(!is.na(state)) |>
-  rename(mac      = medicare_administrative_contractor_mac,
-         locality = locality_number,
-         name     = locality_name,
-         wgpci    = x2024_pw_gpci_with_1_0_floor,
-         pgpci    = x2024_pe_gpci,
-         mgpci    = x2024_mp_gpci) |>
-  mutate(across(contains("gpci"), readr::parse_number)) |>
-  mutate(ftnote = str_extract_all(name, fixed("*")),
-         name   = str_remove_all(name, fixed("*"))) |>
+  rename(
+    gpci_mac         = medicare_administrative_contractor_mac,
+    gpci_locality    = locality_number,
+    gpci_area        = locality_name,
+    gpci_work        = x2024_pw_gpci_with_1_0_floor,
+    gpci_practice    = x2024_pe_gpci,
+    gpci_malpractice = x2024_mp_gpci) |>
+  mutate(
+    across(
+      c(gpci_work, gpci_practice, gpci_malpractice),
+      readr::parse_number
+      )
+    ) |>
+  mutate(
+    ftnote = str_extract_all(gpci_area, fixed("*")),
+    gpci_area = str_remove_all(gpci_area, fixed("*"))) |>
   unnest(ftnote, keep_empty = TRUE) |>
   select(-ftnote)
 
-# [114 x 8]
 gpci
 
 
-locco <- read_excel(locco_xl, col_types = "text") |>
+locco <- read_excel(
+  locco_xl,
+  col_types = "text"
+  ) |>
   row_to_names(row_number = 2) |>
   clean_names() |>
   filter(!is.na(counties)) |>
   fill(state) |>
-  rename(mac = medicare_adminstrative_contractor,
-         locality = locality_number) |>
+  rename(
+    gpci_mac = medicare_adminstrative_contractor,
+    gpci_locality = locality_number) |>
   # *  Payment locality is serviced by two carriers.
   mutate(two_macs = str_extract_all(fee_schedule_area, fixed("*")),
          fee_schedule_area = str_remove_all(fee_schedule_area, fixed("*"))) |>
@@ -47,8 +60,6 @@ states <- dplyr::tibble(
   abb = gpci |> count(state) |> pull(state),
   full = locco |> count(state) |> pull(state)
 )
-
-states |> print(n = Inf)
 
 states[1, 2] <- "ALASKA"
 states[2, 2] <- "ALABAMA"
@@ -67,12 +78,11 @@ locco <- locco |>
 gpci <- gpci |>
   left_join(locco) |>
   select(-fee_schedule_area) |>
-  print(n = Inf)
-
-
-gpci <- gpci()
-
-gpci$state <- as.character(gpci$state)
+  rename(
+    gpci_state = state,
+    gpci_counties = counties,
+    gpci_two_macs = two_macs
+  )
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))

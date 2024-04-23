@@ -45,8 +45,8 @@ search_payment <- function(hcpcs    = NULL,
                            ...) {
   pmt <- get_pin("pymt")
   pmt <- fuimus::search_in_if(pmt, pmt$hcpcs, hcpcs)
-  pmt <- fuimus::search_in_if(pmt, pmt$mac, mac)
-  pmt <- fuimus::search_in_if(pmt, pmt$locality, locality)
+  pmt <- fuimus::search_in_if(pmt, pmt$pmt_mac, mac)
+  pmt <- fuimus::search_in_if(pmt, pmt$pmt_locality, locality)
   return(pmt)
 }
 
@@ -73,10 +73,10 @@ search_gpci <- function(mac      = NULL,
                         locality = NULL,
                         ...) {
 
-  gp <- get_pin("gpci") |> dplyr::rename(area = name)
-  gp <- fuimus::search_in_if(gp, gp$state, state)
-  gp <- fuimus::search_in_if(gp, gp$mac, mac)
-  gp <- fuimus::search_in_if(gp, gp$locality, locality)
+  gp <- get_pin("gpci")
+  gp <- fuimus::search_in_if(gp, gp$gpci_state, state)
+  gp <- fuimus::search_in_if(gp, gp$gpci_mac, mac)
+  gp <- fuimus::search_in_if(gp, gp$gpci_locality, locality)
   return(gp)
 }
 
@@ -110,8 +110,8 @@ search_opps <- function(hcpcs    = NULL,
 
   opp <- get_pin("opps")
   opp <- fuimus::search_in_if(opp, opp$hcpcs, hcpcs)
-  opp <- fuimus::search_in_if(opp, opp$mac, mac)
-  opp <- fuimus::search_in_if(opp, opp$locality, locality)
+  opp <- fuimus::search_in_if(opp, opp$opps_mac, mac)
+  opp <- fuimus::search_in_if(opp, opp$opps_locality, locality)
 
   return(opp)
 }
