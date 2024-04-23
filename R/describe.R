@@ -68,16 +68,25 @@ search_cpt <- function(hcpcs = NULL, ...) {
 
 #' HCPCS Level II Codes
 #'
+#' @template args-hcpcs
+#'
+#' @template args-dots
+#'
 #' @template returns
 #'
 #' @examples
-#' search_level_two()
+#' search_level_two(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 #'
 #' @export
 #'
 #' @autoglobal
-search_level_two <- function() {
-  get_pin("level_two")
+search_level_two <- function(hcpcs = NULL, ...) {
+
+  two <- get_pin("level_two")
+
+  two <- fuimus::search_in_if(two, two$hcpcs, hcpcs)
+
+  return(two)
 }
 
 #' HCPCS code type
@@ -100,8 +109,7 @@ search_level_two <- function() {
 #' get_hcpcs_type(hcpcs = c("39503", "43116", "A0021", "V5362"))
 #'
 #' # Neither
-#' get_hcpcs_type(hcpcs = c("CCCCC", "0002U", "0003U", "0004U", "1164F",
-#' "0074T"))
+#' get_hcpcs_type(hcpcs = c("CCCCC", "0002U", "0003U", "0004U", "1164F", "0074T"))
 #'
 #' # All Three
 #' get_hcpcs_type(hcpcs = c("39503", "43116", "A0021", "V5362", "1164F", "0074T"))
@@ -112,6 +120,7 @@ search_level_two <- function() {
 get_hcpcs_type <- function(hcpcs, ...) {
 
   cvec <- get_pin("cpt_hcpcs_vecs")
+
   hcpcs <- collapse::funique(hcpcs)
 
   list(

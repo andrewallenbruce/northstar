@@ -5,9 +5,9 @@ library(janitor)
 # level2    <- "C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_JAN_ANWEB_v4/HCPC2024_JAN_ANWEB_v4.xlsx" # v4
 hcpcs       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_APR_ANWEB_v5/")
 level2      <- glue::glue("{hcpcs}HCPC2024_APR_ANWEB_v5.xlsx") # v5
-noc_codes   <- glue::glue("{hcpcs}NOC codes_APR 2024.xlsx")
-transreport <- glue::glue("{hcpcs}HCPC2024_APR_Transreport_ANWEB_v5.xlsx")
-corrections <- glue::glue("{hcpcs}HCPC2024_APR_Corrections_to_v5.xlsx")
+# noc_codes   <- glue::glue("{hcpcs}NOC codes_APR 2024.xlsx")
+# transreport <- glue::glue("{hcpcs}HCPC2024_APR_Transreport_ANWEB_v5.xlsx")
+# corrections <- glue::glue("{hcpcs}HCPC2024_APR_Corrections_to_v5.xlsx")
 procnotes   <- glue::glue("{hcpcs}proc_notes_APR2024.txt")
 
 proc_note <- readr::read_lines(procnotes)[4:602]
@@ -50,40 +50,40 @@ proc_note <- proc_note |>
     date_deleted = clock::date_parse(date_deleted, format = "%1m/%1d/%y"),
     delete = NULL)
 
-correct <- read_excel(corrections, col_types = "text") |>
-  clean_names() |>
-  remove_empty(which = c("rows", "cols")) |>
-  mutate(effective_date = excel_numeric_to_date(as.numeric(effective_date))) |>
-  select(hcpcs = hcpcs_mod_code,
-         lvlII_action = action,
-         lvlII_desc_short = short_description,
-         lvlII_desc_long = long_description,
-         lvlII_date_eff = effective_date,
-         lvlII_tos = tos,
-         lvlII_betos = betos,
-         lvlII_coverage = coverage,
-         lvlII_price = pricing,
-         )
-
-trans <- read_excel(transreport, col_types = "text") |>
-  clean_names() |>
-  remove_empty(which = c("rows", "cols")) |>
-  select(hcpcs = hcpc,
-         lvlII_action = action_cd,
-         lvlII_desc_short = short_description,
-         lvlII_desc_long = long_description)
-
-noc <- read_excel(noc_codes,
-                  col_types = "text") |>
-  row_to_names(2) |>
-  clean_names() |>
-  remove_empty(which = c("rows", "cols")) |>
-  mutate(add_date = convert_to_date(add_date),
-         term_date = convert_to_date(term_date)) |>
-  select(hcpcs,
-         lvlII_desc_long = long_description,
-         lvlII_date_added = add_date,
-         lvlII_date_term = term_date)
+# correct <- read_excel(corrections, col_types = "text") |>
+#   clean_names() |>
+#   remove_empty(which = c("rows", "cols")) |>
+#   mutate(effective_date = excel_numeric_to_date(as.numeric(effective_date))) |>
+#   select(hcpcs = hcpcs_mod_code,
+#          lvlII_action = action,
+#          lvlII_desc_short = short_description,
+#          lvlII_desc_long = long_description,
+#          lvlII_date_eff = effective_date,
+#          lvlII_tos = tos,
+#          lvlII_betos = betos,
+#          lvlII_coverage = coverage,
+#          lvlII_price = pricing,
+#          )
+#
+# trans <- read_excel(transreport, col_types = "text") |>
+#   clean_names() |>
+#   remove_empty(which = c("rows", "cols")) |>
+#   select(hcpcs = hcpc,
+#          lvlII_action = action_cd,
+#          lvlII_desc_short = short_description,
+#          lvlII_desc_long = long_description)
+#
+# noc <- read_excel(noc_codes,
+#                   col_types = "text") |>
+#   row_to_names(2) |>
+#   clean_names() |>
+#   remove_empty(which = c("rows", "cols")) |>
+#   mutate(add_date = convert_to_date(add_date),
+#          term_date = convert_to_date(term_date)) |>
+#   select(hcpcs,
+#          lvlII_desc_long = long_description,
+#          lvlII_date_added = add_date,
+#          lvlII_date_term = term_date)
 
 two <- read_excel(level2, col_types = "text") |>
   clean_names() |>
@@ -683,16 +683,16 @@ betos <- function() {
 # T = Miscellaneous change (BETOS, type of service)
 action_cd <- function() {
   c(
-    "A" = "Added procedure or modifier code",
-    "B" = "Change in both administrative data field and long description of procedure or modifier code",
-    "C" = "Change in long description of procedure or modifier code",
-    "D" = "Discontinue procedure or modifier code",
-    "F" = "Change in administrative data field of procedure or modifier code",
-    "N" = "No maintenance for this code",
-    "P" = "Payment change (MOG, pricing indicator codes, anesthesia base units,Ambulatory Surgical Centers)",
-    "R" = "Re-activate discontinued/deleted procedure or modifier code",
-    "S" = "Change in short description of procedure code",
-    "T" = "Miscellaneous change (BETOS, type of service)"
+    "A" = "A: Code added",
+    "B" = "B: Code change - Admin data, Long description",
+    "C" = "C: Code change - Long description",
+    "D" = "D: Code Discontinued",
+    "F" = "F: Code change - Admin data",
+    "N" = "N: No maintenance for code",
+    "P" = "P: Payment change",
+    "R" = "R: Code reactivated",
+    "S" = "S: Code change - Short description",
+    "T" = "T: Miscellaneous change"
   )
 }
 
@@ -732,10 +732,58 @@ level_two <- list(
   proc    = proc_note
 )
 
+x <- search_level_two()
+
+proc <- x$proc |>
+  dplyr::select(
+    lvlII_procnote = note,
+    lvlII_procnote_desc = description,
+    lvlII_procnote_date_deleted = date_deleted
+  )
+
+# Split off the modifiers?
+
+# Join with proc and delete
+
+two <- x$two |>
+  dplyr::left_join(
+    proc,
+    by = dplyr::join_by(lvlII_procnote)) |>
+  dplyr::select(
+    hcpcs,
+    lvlII_type,
+    lvlII_desc_short,
+    lvlII_desc_long,
+    lvlII_date_added,
+    lvlII_date_term,
+    lvlII_price,
+    lvlII_mprice,
+    lvlII_labcert,
+    lvlII_xref,
+    lvlII_coverage,
+    lvlII_tos,
+    lvlII_betos,
+    lvlII_procnote,
+    lvlII_procnote_desc,
+    lvlII_procnote_date_deleted,
+    lvlII_seqnum,
+    lvlII_recid,
+    lvlII_cim,
+    lvlII_mcm,
+    lvlII_statute,
+    lvlII_asc_group,
+    lvlII_asc_date,
+    lvlII_anesths,
+    lvlII_action_date,
+    lvlII_action
+  ) |>
+  janitor::remove_empty(which = c("rows", "cols"))
+
+
 board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
-  pins::pin_write(level_two,
+  pins::pin_write(two,
                   name = "level_two",
                   title = "2024 HCPCS Level II Update",
                   description = "2024 Healthcare Common Procedure Coding System (HCPCS)",

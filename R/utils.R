@@ -113,10 +113,7 @@ null_if_empty <- function(x) {
 #' @autoglobal
 #'
 #' @noRd
-add_ifelse <- function(x,
-                       df,
-                       dfcol,
-                       by) {
+add_ifelse <- function(x, df, dfcol, by) {
 
   if (vctrs::vec_is_empty(x)) {
     NULL

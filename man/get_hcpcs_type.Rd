@@ -29,8 +29,7 @@ get_hcpcs_type(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 get_hcpcs_type(hcpcs = c("39503", "43116", "A0021", "V5362"))
 
 # Neither
-get_hcpcs_type(hcpcs = c("CCCCC", "0002U", "0003U", "0004U", "1164F",
-"0074T"))
+get_hcpcs_type(hcpcs = c("CCCCC", "0002U", "0003U", "0004U", "1164F", "0074T"))
 
 # All Three
 get_hcpcs_type(hcpcs = c("39503", "43116", "A0021", "V5362", "1164F", "0074T"))

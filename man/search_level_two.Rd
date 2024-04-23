@@ -4,7 +4,12 @@
 \alias{search_level_two}
 \title{HCPCS Level II Codes}
 \usage{
-search_level_two()
+search_level_two(hcpcs = NULL, ...)
+}
+\arguments{
+\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -13,6 +18,6 @@ a \link[tibble:tibble-package]{tibble}
 HCPCS Level II Codes
 }
 \examples{
-search_level_two()
+search_level_two(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 
 }
