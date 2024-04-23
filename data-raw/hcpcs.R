@@ -2,8 +2,8 @@ library(readxl)
 library(tidyverse)
 library(janitor)
 
-hcpcs       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_APR_ANWEB_v5/")
 # level2    <- "C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_JAN_ANWEB_v4/HCPC2024_JAN_ANWEB_v4.xlsx" # v4
+hcpcs       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_APR_ANWEB_v5/")
 level2      <- glue::glue("{hcpcs}HCPC2024_APR_ANWEB_v5.xlsx") # v5
 noc_codes   <- glue::glue("{hcpcs}NOC codes_APR 2024.xlsx")
 transreport <- glue::glue("{hcpcs}HCPC2024_APR_Transreport_ANWEB_v5.xlsx")
@@ -24,21 +24,31 @@ proc_note <- vctrs::vec_c(
 proc_note <- proc_note[!is.na(proc_note)]
 
 proc_note <- dplyr::tibble(note = proc_note) |>
-  tidyr::separate_wider_delim(cols = note,
-                              delim = "--",
-                              names = c("note", "desc"),
-                              too_few = "align_end") |>
+  tidyr::separate_wider_delim(
+    cols = note,
+    delim = "--",
+    names = c("note", "desc"),
+    too_few = "align_end"
+  ) |>
   tidyr::fill(note)
 
-# |>
-#   dplyr::nest_by(note, .key = "desc", .keep = TRUE)
-
-# proc_note |>
-#   dplyr::rowwise() |>
-#   dplyr::mutate(desc = list(purrr::map(desc, ~paste0(.)))) |>
-#   tidyr::unnest(cols = desc) |>
-#   tidyr::unnest(cols = desc)
-#   tidyr::unnest_wider(desc, names_sep = "_") |>
+proc_note <- proc_note |>
+  dplyr::mutate(id = dplyr::consecutive_id(note)) |>
+  dplyr::group_by(id) |>
+  tidyr::nest(strings = c(desc)) |>
+  dplyr::rowwise() |>
+  dplyr::mutate(description = purrr::map(strings, ~paste0(., collapse = " "))) |>
+  tidyr::unnest(cols = c(description)) |>
+  dplyr::ungroup() |>
+  dplyr::select(note, description) |>
+  dplyr::mutate(
+    description = stringr::str_replace_all(description, '"', " "),
+    description = stringr::str_squish(description),
+    delete = stringr::str_detect(description, "THIS PROCESSING NOTE DELETED"),
+    date_deleted = dplyr::if_else(delete, stringr::str_extract(
+      description, stringr::regex("[0-9]{1}/[0-9]{1}/[0-9]{2}")), NA_character_),
+    date_deleted = clock::date_parse(date_deleted, format = "%1m/%1d/%y"),
+    delete = NULL)
 
 correct <- read_excel(corrections, col_types = "text") |>
   clean_names() |>
@@ -715,11 +725,11 @@ two <- two |>
 
 
 level_two <- list(
-  two = two,
+  two     = two,
   correct = correct,
-  trans = trans,
-  noc = noc,
-  proc = proc_note
+  trans   = trans,
+  noc     = noc,
+  proc    = proc_note
 )
 
 board <- pins::board_folder(here::here("inst/extdata/pins"))

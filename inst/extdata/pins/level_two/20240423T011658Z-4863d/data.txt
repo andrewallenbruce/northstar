@@ -1,10 +1,10 @@
 file: level_two.qs
-file_size: 601860
-pin_hash: 2e97a119af7586ac
+file_size: 602033
+pin_hash: 4863d92cb36fdc6d
 type: qs
 title: 2024 HCPCS Level II Update
 description: 2024 Healthcare Common Procedure Coding System (HCPCS)
 tags: ~
 urls: ~
-created: 20240422T171608Z
+created: 20240423T011658Z
 api_version: 1
