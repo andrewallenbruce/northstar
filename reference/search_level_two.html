@@ -109,20 +109,13 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_level_two</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 25</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs lvlII_type lvlII_desc_short             lvlII_desc_long lvlII_date_added</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021 code       Outside state ambulance serv Ambulance serv… 1985-01-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> G8916 code       Pt w iv ab given on time     Patient with p… 2012-04-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> J9264 code       Paclitaxel protein bound     Injection, pac… 2006-01-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> V5362 code       Speech screening             Speech screeni… 1990-01-01      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more variables: lvlII_date_term &lt;date&gt;, lvlII_price &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_mprice &lt;chr&gt;, lvlII_labcert &lt;chr&gt;, lvlII_xref &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_coverage &lt;chr&gt;, lvlII_tos &lt;chr&gt;, lvlII_betos &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_procnote &lt;chr&gt;, lvlII_procnote_desc &lt;chr&gt;, lvlII_seqnum &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_recid &lt;chr&gt;, lvlII_cim &lt;chr&gt;, lvlII_mcm &lt;chr&gt;, lvlII_statute &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_asc_group &lt;chr&gt;, lvlII_asc_date &lt;date&gt;, lvlII_anesths &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   lvlII_action_date &lt;date&gt;, lvlII_action &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs two_desc_short               two_desc_long                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021 Outside state ambulance serv Ambulance service, outside state per mile,…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> G8916 Pt w iv ab given on time     Patient with preoperative order for iv ant…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> J9264 Paclitaxel protein bound     Injection, paclitaxel protein-bound partic…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> V5362 Speech screening             Speech screening                           </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
