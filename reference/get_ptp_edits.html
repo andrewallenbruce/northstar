@@ -90,7 +90,13 @@ together. Each edit has a Column One and Column Two HCPCS/CPT code.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_ptp_edits</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="cn">NULL</span>, ptp_type <span class="op">=</span> <span class="cn">NULL</span>, ptp_edit_mod <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_ptp_edits</span><span class="op">(</span></span>
+<span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ptp_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ptp_edit_mod <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  current <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -109,6 +115,10 @@ together. Each edit has a Column One and Column Two HCPCS/CPT code.</p>
 <li><p><code>0</code>: Not Allowed</p></li>
 <li><p><code>9</code>: Not Applicable</p></li>
 </ul></dd>
+
+
+<dt>current</dt>
+<dd><p><code>&lt;lgl&gt;</code> return only current edits, default is <code>FALSE</code></p></dd>
 
 
 <dt>...</dt>
