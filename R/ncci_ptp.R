@@ -69,6 +69,8 @@
 #'    * `0`: Not Allowed
 #'    * `9`: Not Applicable
 #'
+#' @param current `<lgl>` return only current edits, default is `FALSE`
+#'
 #' @template args-dots
 #'
 #' @template returns
@@ -86,11 +88,20 @@
 get_ptp_edits <- function(hcpcs        = NULL,
                           ptp_type     = NULL,
                           ptp_edit_mod = NULL,
+                          current      = FALSE,
                           ...) {
 
   ptp <- get_pin("ptp_long")
   ptp <- fuimus::search_in_if(ptp, ptp$hcpcs, hcpcs)
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_type, ptp_type)
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_edit_mod, ptp_edit_mod)
+
+  if(current) {
+    ptp <- vctrs::vec_slice(
+      ptp,
+      ptp$ptp_deleted == as.Date("9999-12-31")
+      )
+    }
+
   return(ptp)
 }

@@ -1,12 +1,8 @@
-library(tidyverse)
-library(janitor)
-library(gt)
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
-paths <- fs::dir_ls("C:/Users/Andrew/Desktop/all_data/ncd/ncd_csv/", regexp = "*.csv$")
-names <- paths |> basename() |> str_remove_all(pattern = fixed(".csv"))
-names(paths) <- names
-ncd <- paths |> purrr::map(read_csv, col_types = "c")
-
+ncd <- ncd_paths |> purrr::map(read_csv, col_types = "c")
 
 # NCD_BNFT_CTGRY_REF
 #
@@ -124,15 +120,11 @@ ncd_join <- ncd$ncd_trkg |>
     )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(ncd_join,
-                  name = "ncd",
-                  title = "NCD Download Database. Last Updated 2022-12-08",
-                  type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  ncd_join,
+  name = "ncd",
+  title = "NCD Download Database. Last Updated 2022-12-08"
+)
 
 ncd_join |>
   select(contains("date")) |>

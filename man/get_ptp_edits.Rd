@@ -4,7 +4,13 @@
 \alias{get_ptp_edits}
 \title{Procedure to Procedure (PTP) Edits}
 \usage{
-get_ptp_edits(hcpcs = NULL, ptp_type = NULL, ptp_edit_mod = NULL, ...)
+get_ptp_edits(
+  hcpcs = NULL,
+  ptp_type = NULL,
+  ptp_edit_mod = NULL,
+  current = FALSE,
+  ...
+)
 }
 \arguments{
 \item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
@@ -18,6 +24,8 @@ get_ptp_edits(hcpcs = NULL, ptp_type = NULL, ptp_edit_mod = NULL, ...)
 \item \code{0}: Not Allowed
 \item \code{9}: Not Applicable
 }}
+
+\item{current}{\verb{<lgl>} return only current edits, default is \code{FALSE}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

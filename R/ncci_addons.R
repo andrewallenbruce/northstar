@@ -50,6 +50,8 @@
 #'    * `2`: Some Specific Primaries. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 #'    * `3`: No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 #'
+#' @param current `<lgl>` return only current edits, default is `FALSE`
+#'
 #' @template args-dots
 #'
 #' @template returns
@@ -76,6 +78,7 @@
 get_addon_edits <- function(hcpcs     = NULL,
                             aoc_type  = NULL,
                             edit_type = NULL,
+                            current   = FALSE,
                             ...) {
 
   aoc <- get_pin("aoc_long")
@@ -84,7 +87,9 @@ get_addon_edits <- function(hcpcs     = NULL,
   aoc <- fuimus::search_in_if(
     aoc,
     aoc$hcpcs,
-    fuimus::delister(get_aoc_type(hcpcs)[nms]))
+    fuimus::delister(
+      get_aoc_type(hcpcs)[nms])
+    )
 
   aoc  <- fuimus::search_in_if(
     aoc,
@@ -96,6 +101,13 @@ get_addon_edits <- function(hcpcs     = NULL,
     aoc$aoc_type,
     aoc_type,
     args = c("primary", "addon"))
+
+  if(current) {
+    aoc <- vctrs::vec_slice(
+      aoc,
+      is.na(aoc$aoc_edit_deleted)
+    )
+  }
 
   return(aoc)
 }

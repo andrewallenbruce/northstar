@@ -1,0 +1,10 @@
+file: hcpcs_with_phys_vis.qs
+file_size: 3962
+pin_hash: 4d7e781bf4ca14ab
+type: qs
+title: HCPCS with Physician Supervision of Diagnostic Procedures Indicators
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240426T002935Z
+api_version: 1

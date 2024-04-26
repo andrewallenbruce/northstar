@@ -4,7 +4,13 @@
 \alias{get_addon_edits}
 \title{NCCI Add-On Code Edits}
 \usage{
-get_addon_edits(hcpcs = NULL, aoc_type = NULL, edit_type = NULL, ...)
+get_addon_edits(
+  hcpcs = NULL,
+  aoc_type = NULL,
+  edit_type = NULL,
+  current = FALSE,
+  ...
+)
 }
 \arguments{
 \item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
@@ -17,6 +23,8 @@ get_addon_edits(hcpcs = NULL, aoc_type = NULL, edit_type = NULL, ...)
 \item \code{2}: Some Specific Primaries. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 \item \code{3}: No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 }}
+
+\item{current}{\verb{<lgl>} return only current edits, default is \code{FALSE}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

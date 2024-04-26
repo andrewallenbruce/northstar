@@ -1,27 +1,15 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
-# NCCI Files Updated Quarterly
-paths <- fs::dir_ls("C:/Users/Andrew/Desktop/payer_guidelines/data/NCCI/", regexp = "*MCR.xlsx$")
-names <- paths |> basename() |> str_remove_all(pattern = fixed(".xlsx"))
-names(paths) <- names
-
-df2chr <- function(df) {
-  df |>
-    dplyr::mutate(
-      dplyr::across(
-        dplyr::where(is.numeric), as.character))
-}
-
-ncci <- paths |>
+aocs <- aoc_paths |>
   map(read_excel, col_types = "text") |>
-  map(df2chr)
+  map(fuimus::df_2_chr)
 
 # Medicare NCCI Add-on Code Edits 2024-04-01
 # https://www.cms.gov/ncci-medicare/medicare-ncci-add-code-edits
 
-aoc <- ncci$`AOC_V2024Q2-MCR` |>
+aoc <- aocs$`AOC_V2024Q2-MCR` |>
   clean_names() |>
   mutate(
     aoc_del_dt                = as.integer(substr(aoc_del_dt, 1, 4)),
@@ -47,24 +35,6 @@ aoc <- ncci$`AOC_V2024Q2-MCR` |>
     edit_deleted              = aoc_edit_del_dt,
     notes                     = special_instruction_notes
   )
-
-# Update Pin
-# board <- pins::board_folder(here::here("inst/extdata/pins"))
-#
-# board |>
-#   pins::pin_write(
-#     aoc,
-#     name = "aoc",
-#     title = "Add-on Code Edits",
-#     description = "Medicare NCCI Add-on Code Edits 2024-04-01",
-#     type = "qs"
-#   )
-#
-# board |> pins::write_board_manifest()
-
-# pins::pin_list(board)
-# pins::pin_versions(board, "aoc")
-# pins::pin_delete(board, "aoc")
 
 primary <- aoc |>
   filter(!is.na(primary)) |>
@@ -95,18 +65,11 @@ aoc_vecs <- list(
 )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    aoc_vecs,
-    name        = "aoc_vecs",
-    title       = "Add-On Code Vectors",
-    description = "List of 3 Vectors of AOCs: Both, Add-On Only, Primary Only",
-    type = "qs"
-  )
-
-board |> pins::write_board_manifest()
+pin_update(
+  aoc_vecs,
+  name        = "aoc_vecs",
+  title       = "Add-On Code Vectors",
+  description = "List of 3 Vectors of AOCs: Both, Add-On Only, Primary Only")
 
 # HCPCS that are either primary or add-on, not both
 union(primary, addon) |> length() # 3109 + 160 = 3269
@@ -165,19 +128,11 @@ aoc_long <- vctrs::vec_rbind(addons, primary) |>
   dplyr::arrange(hcpcs, aoc_edit_effective)
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    aoc_long,
-    name = "aoc_long",
-    title = "Add-on Code Edits - Long",
-    description = "Medicare NCCI Add-on Code Edits 2024-04-01",
-    type = "qs"
-  )
-
-board |> pins::write_board_manifest()
-
+pin_update(
+  aoc_long,
+  name        = "aoc_long",
+  title       = "Add-on Code Edits - Long",
+  description = "Medicare NCCI Add-on Code Edits 2024-04-01")
 
 # Previous function
 #

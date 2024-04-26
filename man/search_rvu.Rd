@@ -18,6 +18,6 @@ a \link[tibble:tibble-package]{tibble}
 Physician Fee Schedule Relative Value File
 }
 \examples{
-search_rvu(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
+search_rvu(hcpcs = c("95907", "78140", "32820", "61575"))
 
 }

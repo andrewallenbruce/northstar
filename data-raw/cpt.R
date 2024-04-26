@@ -1,15 +1,6 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
-
-cpt       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/cpt2023/")
-clinician <- glue::glue("{cpt}ClinicianDescriptor.xlsx")
-consumer  <- glue::glue("{cpt}ConsumerDescriptor.xlsx")
-modifer   <- glue::glue("{cpt}MODUL.txt")
-longuf    <- glue::glue("{cpt}LONGUF_edit.txt")
-longulf   <- glue::glue("{cpt}LONGULF_edit.txt")
-shortuf   <- glue::glue("{cpt}SHORTUF_edit.txt")
-medu      <- glue::glue("{cpt}MEDU_edit.txt")
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 clin <- readxl::read_excel(clinician, col_types = "text") |>
   janitor::clean_names()
@@ -63,12 +54,9 @@ cpt_desc <- cpt_desc |>
 # 10,411 unique CPT codes
 cpt_desc
 
-
 # LONGUF File ------------------------------------
-longuf_file    <- glue::glue("{cpt}LONGUF_edit.txt")
-
 longuf <- readr::read_table(
-  longuf_file,
+  longuf,
   col_names = FALSE) |>
   dplyr::mutate(
     hcpcs   = substr(X1, 1, 5),
@@ -111,10 +99,8 @@ hcpcs_longuf <- dplyr::left_join(
 hcpcs_longuf
 
 # LONGULF File ------------------------------------
-longulf_file   <- glue::glue("{cpt}LONGULF_edit.txt")
-
 longulf <- readr::read_table(
-  longulf_file,
+  longulf,
   col_names = FALSE) |>
   dplyr::mutate(
     hcpcs   = substr(X1, 1, 5),
@@ -156,10 +142,8 @@ hcpcs_longulf <- dplyr::left_join(
 hcpcs_longulf
 
 # SHORTU File ------------------------------------
-shortu_file <- glue::glue("{cpt}SHORTU_edit.txt")
-
 shortu <- readr::read_table(
-  shortu_file,
+  shortu,
   col_names = FALSE) |>
   dplyr::rename(hcpcs = X1) |>
   tidyr::unite(
@@ -173,10 +157,8 @@ shortu <- readr::read_table(
 shortu
 
 # MEDU File ------------------------------------
-medu_file <- glue::glue("{cpt}MEDU_edit.txt")
-
 medu <- readr::read_table(
-  medu_file,
+  medu,
   col_names = FALSE) |>
   dplyr::rename(hcpcs = X1) |>
   tidyr::unite(
@@ -188,7 +170,6 @@ medu <- readr::read_table(
 
 # 10,641 unique CPT codes
 medu
-
 
 # Join #1 ------------------------------------
 cpt_desc2 <- hcpcs_longuf |>
@@ -220,16 +201,11 @@ cpt_desc2 <- cpt_desc2 |>
     cpt_desc_clin = descriptions_clinician
     )
 
-
 # Should be 10,641 unique CPT codes
 #
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(cpt_desc2,
-                  name = "cpt_descriptors",
-                  title = "CPT Clinician & Consumer-Friendly Descriptors 2023",
-                  type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  cpt_desc2,
+  name = "cpt_descriptors",
+  title = "CPT Clinician & Consumer-Friendly Descriptors 2023"
+)

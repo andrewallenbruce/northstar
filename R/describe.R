@@ -83,9 +83,7 @@ search_cpt <- function(hcpcs = NULL, ...) {
 search_level_two <- function(hcpcs = NULL, ...) {
 
   two <- get_pin("level_two")
-
   two <- fuimus::search_in_if(two, two$hcpcs, hcpcs)
-
   return(two)
 }
 
@@ -141,7 +139,7 @@ describe_hcpcs <- function(hcpcs, ...) {
 
   x <- list(
     ds = search_cpt(hcpcs = hcpcs),
-    l2 = search_hcpcs(hcpcs = hcpcs),
+    l2 = search_level_two(hcpcs = hcpcs),
     rb = search_rbcs(hcpcs = hcpcs)
   )
 
@@ -152,15 +150,17 @@ describe_hcpcs <- function(hcpcs, ...) {
     ) |>
     purrr::compact()
 
-    sort(
-      lengths(
-      list(
-        cpt = collapse::funique(x$cpt$hcpcs),
-        lvl = collapse::funique(x$lvl$hcpcs),
-        rbc = collapse::funique(x$rbc$hcpcs)
-        )
-      ), decreasing = TRUE
-    )
+    # sort(
+    #   lengths(
+    #   list(
+    #     cpt = collapse::funique(x$cpt$hcpcs),
+    #     lvl = collapse::funique(x$lvl$hcpcs),
+    #     rbc = collapse::funique(x$rbc$hcpcs)
+    #     )
+    #   ), decreasing = TRUE
+    # )
+
+  vctrs::vec_rbind(x$cpt, x$lvl)
 
   # create `join_by` object
   by_hcpcs <- dplyr::join_by(hcpcs)

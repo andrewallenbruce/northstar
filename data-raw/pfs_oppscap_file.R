@@ -1,9 +1,6 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
-
-root <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
-opps_xl <- glue::glue("{root}RVU24A-010323/OPPSCAP_JAN.xlsx")
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 # OPPSCAP contains the payment amounts after the application of the OPPS-based
 # payment caps, except for carrier priced codes. For carrier price codes, the
@@ -35,15 +32,12 @@ opps <- read_excel(
     opps_non_amt  = non_facilty_price
     )
 
+collapse::funique(opps$hcpcs)
+
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    opps,
-    name = "opps",
-    title = "PFS OPPSCAP 2024",
-    description = "OPPSCAP contains the payment amounts after the application of the OPPS-based payment caps, except for carrier priced codes. For carrier price codes, the field only contains the OPPS-based payment caps. Carrier prices cannot exceed the OPPS-based payment caps.",
-    type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  opps,
+  name        = "opps",
+  title       = "PFS OPPSCAP 2024",
+  description = "OPPSCAP contains the payment amounts after the application of the OPPS-based payment caps, except for carrier priced codes. For carrier price codes, the field only contains the OPPS-based payment caps. Carrier prices cannot exceed the OPPS-based payment caps."
+)

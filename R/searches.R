@@ -7,14 +7,14 @@
 #' @template returns
 #'
 #' @examples
-#' search_rvu(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
+#' search_rvu(hcpcs = c("95907", "78140", "32820", "61575"))
 #'
 #' @autoglobal
 #'
 #' @export
 search_rvu <- function(hcpcs = NULL, ...) {
 
-  rv <- get_pin("rvu")
+  rv <- get_pin("hcpcs_with_rvus")
   rv <- fuimus::search_in_if(rv, rv$hcpcs, hcpcs)
   return(rv)
 }

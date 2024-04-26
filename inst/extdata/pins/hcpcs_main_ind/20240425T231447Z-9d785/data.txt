@@ -1,0 +1,10 @@
+file: hcpcs_main_ind.qs
+file_size: 37546
+pin_hash: 9d78561b34b8aeec
+type: qs
+title: 'HCPCS Main Indicators: Status Code, Global Days, Op Ind, Multiple Procedure'
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240425T231447Z
+api_version: 1

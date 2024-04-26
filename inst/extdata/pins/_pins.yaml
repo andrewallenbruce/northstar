@@ -12,6 +12,32 @@ gpci:
 - gpci/20240423T143610Z-fe9b8/
 hcpcs:
 - hcpcs/20240324T143027Z-37b59/
+hcpcs_dximg:
+- hcpcs_dximg/20240425T230953Z-ef040/
+hcpcs_endo:
+- hcpcs_endo/20240425T230853Z-ece9a/
+hcpcs_main_ind:
+- hcpcs_main_ind/20240425T231447Z-9d785/
+hcpcs_not_used:
+- hcpcs_not_used/20240425T230804Z-736f2/
+hcpcs_rare:
+- hcpcs_rare/20240425T230720Z-c13d5/
+hcpcs_rvu_descriptions:
+- hcpcs_rvu_descriptions/20240425T225950Z-a75be/
+hcpcs_surg_ind:
+- hcpcs_surg_ind/20240425T231352Z-db93d/
+hcpcs_with_mod:
+- hcpcs_with_mod/20240425T231150Z-bc837/
+hcpcs_with_opps_rvus:
+- hcpcs_with_opps_rvus/20240425T230510Z-27bbd/
+hcpcs_with_op_pct:
+- hcpcs_with_op_pct/20240425T230614Z-6b8fd/
+hcpcs_with_pctc:
+- hcpcs_with_pctc/20240425T231042Z-52bc2/
+hcpcs_with_phys_vis:
+- hcpcs_with_phys_vis/20240426T002935Z-4d7e7/
+hcpcs_with_rvus:
+- hcpcs_with_rvus/20240425T230403Z-975db/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 level_two:
@@ -34,5 +60,3 @@ rbcs:
 - rbcs/20240423T144720Z-044c4/
 rbcs_vecs:
 - rbcs_vecs/20240422T090652Z-7dfd7/
-rvu:
-- rvu/20240423T123557Z-a168f/

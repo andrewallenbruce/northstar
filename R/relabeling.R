@@ -216,7 +216,7 @@ case_imaging <- function(df, col) {
       "09" ~ "CT and CTA (Lower Extremities)",
       "10" ~ "MRI and MRA (Upper Extremities and Joints)",
       "11" ~ "CT and CTA (Upper Extremities)",
-      "88" ~ "Subject to Reduction of TC or PCDiagnostic Imaging",
+      "88" ~ "Subject to Reduction of TC or PC Diagnostic Imaging",
       "99" ~ NA_character_
     ),
     .after = {{ col }})

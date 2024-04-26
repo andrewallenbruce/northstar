@@ -1,0 +1,10 @@
+file: hcpcs_rvu_descriptions.qs
+file_size: 169515
+pin_hash: a75beca52348b832
+type: qs
+title: HCPCS Descriptions from RVU 2024 File
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240425T225950Z
+api_version: 1

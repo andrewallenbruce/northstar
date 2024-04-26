@@ -1,0 +1,10 @@
+file: hcpcs_with_pctc.qs
+file_size: 5977
+pin_hash: 52bc23db8f1c99e9
+type: qs
+title: HCPCS with valid PCTC Indicator
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240425T231042Z
+api_version: 1

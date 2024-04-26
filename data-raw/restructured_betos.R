@@ -1,6 +1,6 @@
-library(provider)
-library(tidyverse)
-library(janitor)
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 rbcs <- betos(tidy = FALSE) |>
   janitor::clean_names() |>
@@ -29,13 +29,8 @@ rbcs <- betos(tidy = FALSE) |>
   )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    rbcs,
-    name = "rbcs",
-    title = "Restructured BETOS Classification for HCPCS",
-    type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  rbcs,
+  name = "rbcs",
+  title = "Restructured BETOS Classification for HCPCS"
+)

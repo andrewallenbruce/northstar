@@ -1,0 +1,10 @@
+file: hcpcs_with_op_pct.qs
+file_size: 16925
+pin_hash: 6b8fda9b4053fa5f
+type: qs
+title: HCPCS with Operative Percentages
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240425T230614Z
+api_version: 1

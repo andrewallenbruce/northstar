@@ -1,0 +1,10 @@
+file: hcpcs_endo.qs
+file_size: 918
+pin_hash: ece9add114ace25f
+type: qs
+title: Endoscopic Base Code for HCPCS with Multiple Surgery indicator 3
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240425T230853Z
+api_version: 1

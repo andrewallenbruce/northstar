@@ -1,13 +1,8 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
-
-root     <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
-gpci_xl  <- glue::glue("{root}RVU24A-010323/GPCI2024.xlsx")
-locco_xl <- glue::glue("{root}RVU24A-010323/24LOCCO.xlsx")
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 # ADDENDUM E. FINAL CY 2024 GEOGRAPHIC PRACTICE COST INDICES (GPCIs) BY STATE AND MEDICARE LOCALITY
-# gpci_xl <- here::here("data/RVU24A-010323/GPCI2024.xlsx")
 
 gpci <- read_excel(
   gpci_xl,
@@ -85,13 +80,9 @@ gpci <- gpci |>
   )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(gpci,
-                  name = "gpci",
-                  title = "GPCIs 2024",
-                  description = "Geographic Practice Cost Indices (GPCIs) by State and Medicare Locality 2024",
-                  type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  gpci,
+  name = "gpci",
+  title = "GPCIs 2024",
+  description = "Geographic Practice Cost Indices (GPCIs) by State and Medicare Locality 2024"
+)

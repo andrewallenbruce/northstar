@@ -166,7 +166,7 @@ modefs <- dplyr::tribble(
 mods <- mods |>
   dplyr::left_join(modefs)
 
-mods_l2 <- pins::pin_read(mount_board(), "hcpcs") |>
+mods_l2 <- northstar:::get_pin("hcpcs") |>
   dplyr::filter(type == "mod") |>
   dplyr::select(-c(type,
                    cim,
@@ -189,13 +189,9 @@ mods <- vctrs::vec_rbind(mods,
   dplyr::distinct(mod, label, .keep_all = TRUE)
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(mods,
-                  name = "modifiers",
-                  title = "HCPCS Modifiers",
-                  description = "Level I and II HCPCS Modifiers",
-                  type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  mods,
+  name = "modifiers",
+  title = "HCPCS Modifiers",
+  description = "Level I and II HCPCS Modifiers"
+)

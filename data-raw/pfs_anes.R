@@ -1,9 +1,6 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
-
-root     <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
-anes_xl  <- glue::glue("{root}RVU24A-010323/ANES2024.xlsx")
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 anesthesia <- read_excel(
   anes_xl,
@@ -28,16 +25,10 @@ anesthesia <- read_excel(
     anes_malpractice = mp
   )
 
-
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    anesthesia,
-    name = "anesthesia",
-    title = "Anesthesia Conversion Factor 2024",
-    description = "Anesthesia Conversion Factor 2024",
-    type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  anesthesia,
+  name = "anesthesia",
+  title = "Anesthesia Conversion Factor 2024",
+  description = "Anesthesia Conversion Factor 2024"
+)

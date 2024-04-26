@@ -1,3 +1,7 @@
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
+
 #------------ vector of unique CPT codes
 cpt_vec <- get_pin("cpt_descriptors") |>
   dplyr::count(hcpcs, sort = TRUE) |>
@@ -68,24 +72,12 @@ rbcs_vecs <- list(
 )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
+pin_update(hcpcs_vecs,
+           name        = "cpt_hcpcs_vecs",
+           title       = "HCPCS Code Vectors",
+           description = "List of 2 Vectors of Unique Codes: CPT (10641) & HCPCS (7966), a total of 18607 codes.")
 
-board |>
-  pins::pin_write(
-    hcpcs_vecs,
-    name        = "cpt_hcpcs_vecs",
-    title       = "HCPCS Code Vectors",
-    description = "List of 2 Vectors of Unique Codes: CPT (10641) & HCPCS (7966), a total of 18607 codes.",
-    type = "qs"
-  )
-
-board |>
-  pins::pin_write(
-    rbcs_vecs,
-    name        = "rbcs_vecs",
-    title       = "RBCS Code Vectors",
-    description = "List of 3 Vectors of Unique Codes: RBCS and CPT, RBCS and HCPCS, and RBCS Only, a total of 15522 codes.",
-    type = "qs"
-  )
-
-board |> pins::write_board_manifest()
+pin_update(rbcs_vecs,
+           name        = "rbcs_vecs",
+           title       = "RBCS Code Vectors",
+           description = "List of 3 Vectors of Unique Codes: RBCS and CPT, RBCS and HCPCS, and RBCS Only, a total of 15522 codes.")

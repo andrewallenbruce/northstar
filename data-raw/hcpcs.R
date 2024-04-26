@@ -1,15 +1,6 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
-
-# level2    <- "C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_JAN_ANWEB_v4/HCPC2024_JAN_ANWEB_v4.xlsx" # v4
-# noc_codes   <- glue::glue("{hcpcs}NOC codes_APR 2024.xlsx")
-# transreport <- glue::glue("{hcpcs}HCPC2024_APR_Transreport_ANWEB_v5.xlsx")
-# corrections <- glue::glue("{hcpcs}HCPC2024_APR_Corrections_to_v5.xlsx")
-
-hcpcs       <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/HCPC2024_APR_ANWEB_v5/")
-level2      <- glue::glue("{hcpcs}HCPC2024_APR_ANWEB_v5.xlsx") # v5
-procnotes   <- glue::glue("{hcpcs}proc_notes_APR2024.txt")
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 proc_note <- readr::read_lines(procnotes)[4:602]
 
@@ -50,41 +41,6 @@ proc_note <- proc_note |>
       description, stringr::regex("[0-9]{1}/[0-9]{1}/[0-9]{2}")), NA_character_),
     date_deleted = clock::date_parse(date_deleted, format = "%1m/%1d/%y"),
     delete = NULL)
-
-# correct <- read_excel(corrections, col_types = "text") |>
-#   clean_names() |>
-#   remove_empty(which = c("rows", "cols")) |>
-#   mutate(effective_date = excel_numeric_to_date(as.numeric(effective_date))) |>
-#   select(hcpcs = hcpcs_mod_code,
-#          lvlII_action = action,
-#          lvlII_desc_short = short_description,
-#          lvlII_desc_long = long_description,
-#          lvlII_date_eff = effective_date,
-#          lvlII_tos = tos,
-#          lvlII_betos = betos,
-#          lvlII_coverage = coverage,
-#          lvlII_price = pricing,
-#          )
-#
-# trans <- read_excel(transreport, col_types = "text") |>
-#   clean_names() |>
-#   remove_empty(which = c("rows", "cols")) |>
-#   select(hcpcs = hcpc,
-#          lvlII_action = action_cd,
-#          lvlII_desc_short = short_description,
-#          lvlII_desc_long = long_description)
-#
-# noc <- read_excel(noc_codes,
-#                   col_types = "text") |>
-#   row_to_names(2) |>
-#   clean_names() |>
-#   remove_empty(which = c("rows", "cols")) |>
-#   mutate(add_date = convert_to_date(add_date),
-#          term_date = convert_to_date(term_date)) |>
-#   select(hcpcs,
-#          lvlII_desc_long = long_description,
-#          lvlII_date_added = add_date,
-#          lvlII_date_term = term_date)
 
 two <- read_excel(level2, col_types = "text") |>
   clean_names() |>
@@ -780,14 +736,45 @@ two <- x$two |>
   ) |>
   janitor::remove_empty(which = c("rows", "cols"))
 
+# Update pin
+pin_update(
+  two,
+  name = "level_two",
+  title = "2024 HCPCS Level II Update",
+  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
+)
 
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(two,
-                  name = "level_two",
-                  title = "2024 HCPCS Level II Update",
-                  description = "2024 Healthcare Common Procedure Coding System (HCPCS)",
-                  type = "qs")
-
-board |> pins::write_board_manifest()
+# correct <- read_excel(corrections, col_types = "text") |>
+#   clean_names() |>
+#   remove_empty(which = c("rows", "cols")) |>
+#   mutate(effective_date = excel_numeric_to_date(as.numeric(effective_date))) |>
+#   select(hcpcs = hcpcs_mod_code,
+#          lvlII_action = action,
+#          lvlII_desc_short = short_description,
+#          lvlII_desc_long = long_description,
+#          lvlII_date_eff = effective_date,
+#          lvlII_tos = tos,
+#          lvlII_betos = betos,
+#          lvlII_coverage = coverage,
+#          lvlII_price = pricing,
+#          )
+#
+# trans <- read_excel(transreport, col_types = "text") |>
+#   clean_names() |>
+#   remove_empty(which = c("rows", "cols")) |>
+#   select(hcpcs = hcpc,
+#          lvlII_action = action_cd,
+#          lvlII_desc_short = short_description,
+#          lvlII_desc_long = long_description)
+#
+# noc <- read_excel(noc_codes,
+#                   col_types = "text") |>
+#   row_to_names(2) |>
+#   clean_names() |>
+#   remove_empty(which = c("rows", "cols")) |>
+#   mutate(add_date = convert_to_date(add_date),
+#          term_date = convert_to_date(term_date)) |>
+#   select(hcpcs,
+#          lvlII_desc_long = long_description,
+#          lvlII_date_added = add_date,
+#          lvlII_date_term = term_date)

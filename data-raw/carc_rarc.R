@@ -1,3 +1,7 @@
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
+
 # Claim Adjustment Reason Codes (CARCs)
 # X12 External Code Source 139
 #
@@ -9,9 +13,6 @@
 # These codes generally assign responsibility for the adjustment amounts.
 # The format is always two alpha characters.
 # For convenience, the values and definitions are below:
-
-library(tidyverse)
-library(rvest)
 
 carc_group_codes <- dplyr::tibble(
   code = c("CO", "CR", "OA", "PI", "PR"),
@@ -77,16 +78,16 @@ rarc_codes <- read_html("https://x12.org/codes/remittance-advice-remark-codes") 
 
 
 
-rarc_carc <- list(group = carc_group_codes, carc = carc_codes, rarc = rarc_codes)
+rarc_carc <- list(
+  group = carc_group_codes,
+  carc = carc_codes,
+  rarc = rarc_codes
+  )
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(rarc_carc,
-                  name = "rarc_carc",
-                  title = "CARCs & RARCs",
-                  description = "Claim Adjustment Reason Codes (CARCs) and Remittance Advice Remark Codes (RARCs)",
-                  type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  rarc_carc,
+  name        = "rarc_carc",
+  title       = "CARCs & RARCs",
+  description = "Claim Adjustment Reason Codes (CARCs) and Remittance Advice Remark Codes (RARCs)"
+)

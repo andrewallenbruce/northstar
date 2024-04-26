@@ -1,0 +1,10 @@
+file: hcpcs_dximg.qs
+file_size: 471
+pin_hash: ef040e465d69b34a
+type: qs
+title: Diagnostic Service Family for HCPCS with Multiple Procedure indicator 4
+description: National Physician Fee Schedule Relative Value File January 2024 Release
+tags: ~
+urls: ~
+created: 20240425T230953Z
+api_version: 1

@@ -1,15 +1,11 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
-
-root <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
-pfs_pay_xl <- glue::glue("{root}PFREV24A_0/PFALL24.csv")
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
 # ANNUAL PHYSICIAN FEE SCHEDULE PAYMENT AMOUNT FILE
-# pfs_pay_xl <- here::here("data/PFREV24A_0/PFALL24.csv")
 
 pfs_pay <- read_csv(
-  pfs_pay_xl,
+  pay_xl,
   col_types = strrep("c", 16)
   ) |>
   slice(
@@ -43,14 +39,9 @@ pfs_pay <- read_csv(
 # [990,482 x 15]
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    pfs_pay,
-    name = "pymt",
-    title = "PFS Payment Amount 2024",
-    description = "Annual Physician Fee Schedule Payment Amount File 2024",
-    type = "qs")
-
-board |> pins::write_board_manifest()
+pin_update(
+  pfs_pay,
+  name = "pymt",
+  title = "PFS Payment Amount 2024",
+  description = "Annual Physician Fee Schedule Payment Amount File 2024"
+)

@@ -1,28 +1,16 @@
-library(readxl)
-library(tidyverse)
-library(janitor)
+source(here::here("data-raw", "file_paths.R"))
+source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "pins_functions.R"))
 
-# NCCI Files Updated Quarterly
-paths <- fs::dir_ls("C:/Users/Andrew/Desktop/payer_guidelines/data/NCCI/", regexp = "*[f][0-9].xlsx$")
-names <- paths |> basename() |> str_remove_all(pattern = fixed(".xlsx"))
-names(paths) <- names
-
-df2chr <- function(df) {
-  df |>
-    dplyr::mutate(
-      dplyr::across(
-        dplyr::where(is.numeric), as.character))
-}
-
-ncci <- paths |>
+ptps <- ptp_paths |>
   map(read_excel, col_types = "text") |>
-  map(df2chr)
+  map(fuimus::df_2_chr)
 
 # Medicare NCCI Procedure to Procedure (PTP) Edits
 # Column 3: * = in existence prior to 1996
 # Column 4: Modifier 0 = Not Allowed, 1 = Allowed, 9 = Not Applicable
 # https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits
-ptp1 <- ncci$`ccipra-v301r0-f1` |>
+ptp1 <- ptps$`ccipra-v301r0-f1` |>
   row_to_names(row_number = 2) |>
   clean_names() |>
   slice(4:n()) |>
@@ -40,7 +28,7 @@ ptp1 <- ncci$`ccipra-v301r0-f1` |>
     )
 
 
-ptp2 <- ncci$`ccipra-v301r0-f2` |>
+ptp2 <- ptps$`ccipra-v301r0-f2` |>
   row_to_names(row_number = 2) |>
   clean_names() |>
   slice(4:n()) |>
@@ -57,7 +45,7 @@ ptp2 <- ncci$`ccipra-v301r0-f2` |>
     rationale = ptp_edit_rationale
   )
 
-ptp3 <- ncci$`ccipra-v301r0-f3` |>
+ptp3 <- ptps$`ccipra-v301r0-f3` |>
   row_to_names(row_number = 2) |>
   clean_names() |>
   slice(4:n()) |>
@@ -74,7 +62,7 @@ ptp3 <- ncci$`ccipra-v301r0-f3` |>
     rationale = ptp_edit_rationale
   )
 
-ptp4 <- ncci$`ccipra-v301r0-f4` |>
+ptp4 <- ptps$`ccipra-v301r0-f4` |>
   row_to_names(row_number = 2) |>
   clean_names() |>
   slice(4:n()) |>
@@ -92,26 +80,6 @@ ptp4 <- ncci$`ccipra-v301r0-f4` |>
   )
 
 ptp <- vctrs::vec_rbind(ptp1, ptp2, ptp3, ptp4)
-
-# Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
-
-board |>
-  pins::pin_write(
-    ptp,
-    name = "ptp",
-    title = "PTP Edits",
-    description = "Medicare NCCI Procedure to Procedure (PTP) Edits",
-    type = "qs"
-  )
-
-board |> pins::write_board_manifest()
-
-# pins::pin_list(board)
-# pins::pin_versions(board, "aoc")
-# pins::pin_delete(board, "ptp")
-
-library(tidyverse)
 
 comprehensive <- ptp |>
   select(hcpcs              = column_1,
@@ -158,17 +126,11 @@ ptp_long <- vctrs::vec_rbind(comprehensive, component) |>
   dplyr::arrange(hcpcs, ptp_deleted)
 
 # Update Pin
-board <- pins::board_folder(here::here("inst/extdata/pins"))
+pin_update(
+  ptp_long,
+  name = "ptp_long",
+  title = "Procedure-to-Procedure Edits - Long",
+  description = "Medicare NCCI Procedure-to-Procedure Edits 2024-04-01"
+)
 
-board |>
-  pins::pin_write(
-    ptp_long,
-    name = "ptp_long",
-    title = "Procedure-to-Procedure Edits - Long",
-    description = "Medicare NCCI Procedure-to-Procedure Edits 2024-04-01",
-    type = "qs"
-  )
-
-board |> pins::write_board_manifest()
-
-
+list_pins()

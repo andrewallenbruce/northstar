@@ -1,10 +1,10 @@
-file: rvu.qs
-file_size: 526064
-pin_hash: a168f9d6eecb21f1
+file: hcpcs_with_mod.qs
+file_size: 3171
+pin_hash: bc837732af45b616
 type: qs
-title: PFS RVU 2024
+title: HCPCS with Mod indicator
 description: National Physician Fee Schedule Relative Value File January 2024 Release
 tags: ~
 urls: ~
-created: 20240423T123557Z
+created: 20240425T231150Z
 api_version: 1
