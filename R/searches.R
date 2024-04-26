@@ -43,10 +43,10 @@ search_payment <- function(hcpcs    = NULL,
                            mac      = NULL,
                            locality = NULL,
                            ...) {
-  pmt <- get_pin("pymt")
+  pmt <- get_pin("pay_mac_fee")
   pmt <- fuimus::search_in_if(pmt, pmt$hcpcs, hcpcs)
-  pmt <- fuimus::search_in_if(pmt, pmt$pmt_mac, mac)
-  pmt <- fuimus::search_in_if(pmt, pmt$pmt_locality, locality)
+  pmt <- fuimus::search_in_if(pmt, pmt$mac, mac)
+  pmt <- fuimus::search_in_if(pmt, pmt$locality, locality)
   return(pmt)
 }
 

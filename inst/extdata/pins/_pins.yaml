@@ -10,8 +10,6 @@ cpt_hcpcs_vecs:
 - cpt_hcpcs_vecs/20240423T110139Z-390a8/
 gpci:
 - gpci/20240423T143610Z-fe9b8/
-hcpcs:
-- hcpcs/20240324T143027Z-37b59/
 hcpcs_dximg:
 - hcpcs_dximg/20240425T230953Z-ef040/
 hcpcs_endo:
@@ -40,8 +38,6 @@ hcpcs_with_rvus:
 - hcpcs_with_rvus/20240425T230403Z-975db/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
-level_two:
-- level_two/20240423T073838Z-885e8/
 modifiers:
 - modifiers/20240324T161618Z-e34b9/
 mues:
@@ -50,13 +46,23 @@ ncd:
 - ncd/20240316T065817Z-33d30/
 opps:
 - opps/20240423T144207Z-c0ff5/
+opps_pay:
+- opps_pay/20240426T053917Z-ea2a1/
+pay_mac_fee:
+- pay_mac_fee/20240426T053757Z-b5d8a/
 ptp_long:
 - ptp_long/20240419T132100Z-ad507/
-pymt:
-- pymt/20240423T132905Z-ec27b/
 rarc_carc:
 - rarc_carc/20240318T194306Z-4abf5/
 rbcs:
 - rbcs/20240423T144720Z-044c4/
 rbcs_vecs:
 - rbcs_vecs/20240422T090652Z-7dfd7/
+therapy_reduction:
+- therapy_reduction/20240426T053831Z-46672/
+two_descriptions:
+- two_descriptions/20240426T060538Z-ecaf2/
+two_mods:
+- two_mods/20240426T060510Z-394c2/
+two_therest:
+- two_therest/20240426T060609Z-aeea7/

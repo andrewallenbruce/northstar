@@ -1,9 +1,9 @@
-source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
 # ANNUAL PHYSICIAN FEE SCHEDULE PAYMENT AMOUNT FILE
-
+# [990,482 x 15]
 pfs_pay <- read_csv(
   pay_xl,
   col_types = strrep("c", 16)
@@ -36,12 +36,60 @@ pfs_pay <- read_csv(
       contains("opps_")),
     readr::parse_number))
 
-# [990,482 x 15]
+# MAC, Locality, Non-Facility Fee, Facility Fee
+# A tibble: 990,485 × 5
+pay_mac_fee <- pfs_pay |>
+  dplyr::select(
+    hcpcs,
+    mac = pmt_mac,
+    locality = pmt_locality,
+    non_fee = pmt_non_amt,
+    fac_fee = pmt_fac_amt
+  )
 
-# Update Pin
 pin_update(
-  pfs_pay,
-  name = "pymt",
-  title = "PFS Payment Amount 2024",
+  pay_mac_fee,
+  name = "pay_mac_fee",
+  title = "MAC, Locality, Non-Facility Fee, Facility Fee",
+  description = "Annual Physician Fee Schedule Payment Amount File 2024"
+)
+
+# Therapy Reduction by MAC and Locality
+# A tibble: 8,393 × 5
+therapy_reduction <- pfs_pay |>
+  dplyr::select(
+    hcpcs,
+    mac = pmt_mac,
+    locality = pmt_locality,
+    non_ther_reduct = pmt_therapy_reduction_non,
+    fac_ther_reduct = pmt_therapy_reduction_fac
+  ) |>
+  dplyr::filter(non_ther_reduct > 0 | fac_ther_reduct > 0)
+
+pin_update(
+  therapy_reduction,
+  name = "therapy_reduction",
+  title = "Therapy Reduction by MAC and Locality",
+  description = "Annual Physician Fee Schedule Payment Amount File 2024"
+)
+
+# OPPS Indicator, Non-Facility Fee, Facility Fee
+# A tibble: 104,204 × 5
+opps_pay <- pfs_pay |>
+  dplyr::select(
+    hcpcs,
+    mac = pmt_mac,
+    locality = pmt_locality,
+    pmt_opps_ind,
+    non_opps = pmt_opps_non,
+    fac_opps = pmt_opps_fac
+  ) |>
+  dplyr::filter(pmt_opps_ind == 1) |>
+  dplyr::select(-pmt_opps_ind)
+
+pin_update(
+  opps_pay,
+  name = "opps_pay",
+  title = "OPPS Indicator, Non-Facility Fee, Facility Fee",
   description = "Annual Physician Fee Schedule Payment Amount File 2024"
 )

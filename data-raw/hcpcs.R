@@ -1,5 +1,5 @@
-source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
 proc_note <- readr::read_lines(procnotes)[4:602]
@@ -653,128 +653,118 @@ action_cd <- function() {
   )
 }
 
-
 two <- two |>
   select(hcpcs,
-         lvlII_type        = type,
-         lvlII_desc_long   = lvl2_desc_long,
-         lvlII_desc_short  = lvl2_desc_short,
-         lvlII_date_added  = lvl2_date_added,
-         lvlII_date_term   = lvl2_date_terminated,
-         lvlII_seqnum      = seqnum,
-         lvlII_recid       = recid,
-         lvlII_price       = price,
-         lvlII_mprice      = lvl2_multi_price,
-         lvlII_cim         = cim,
-         lvlII_mcm         = mcm,
-         lvlII_statute     = statute,
-         lvlII_labcert     = labcert,
-         lvlII_xref        = xref,
-         lvlII_coverage    = lvl2_coverage,
-         lvlII_asc_group   = lvl2_asc,
-         lvlII_asc_date    = asc_dt,
-         lvlII_procnote    = procnote,
-         lvlII_betos       = betos,
-         lvlII_tos         = tos,
-         lvlII_anesths     = anest_bu,
-         lvlII_action_date = lvl2_action_date,
-         lvlII_action      = lvl2_action)
+         type = type,
+         two_desc_long = lvl2_desc_long,
+         two_desc_short = lvl2_desc_short,
+         date_added = lvl2_date_added,
+         date_term = lvl2_date_terminated,
+         price = price,
+         mprice  = lvl2_multi_price,
+         cim = cim,
+         mcm = mcm,
+         statute = statute,
+         labcert = labcert,
+         xref = xref,
+         coverage = lvl2_coverage,
+         asc_group = lvl2_asc,
+         asc_date = asc_dt,
+         betos = betos,
+         tos = tos,
+         anesth = anest_bu,
+         action_date = lvl2_action_date,
+         action = lvl2_action,
+         procnote)
 
-
-level_two <- list(
-  two     = two,
-  correct = correct,
-  trans   = trans,
-  noc     = noc,
-  proc    = proc_note
-)
-
-x <- search_level_two()
-
-proc <- x$proc |>
+proc_note <- proc_note |>
   dplyr::select(
-    lvlII_procnote = note,
-    lvlII_procnote_desc = description,
-    lvlII_procnote_date_deleted = date_deleted
+    procnote = note,
+    procnote_desc = description,
+    procnote_deleted = date_deleted
   )
 
-# Split off the modifiers?
-
-# Join with proc and delete
-
-two <- x$two |>
+# Join with proc
+two <- two |>
   dplyr::left_join(
-    proc,
-    by = dplyr::join_by(lvlII_procnote)) |>
+    proc_note,
+    by = dplyr::join_by(procnote)) |>
   dplyr::select(
     hcpcs,
-    lvlII_type,
-    lvlII_desc_short,
-    lvlII_desc_long,
-    lvlII_date_added,
-    lvlII_date_term,
-    lvlII_price,
-    lvlII_mprice,
-    lvlII_labcert,
-    lvlII_xref,
-    lvlII_coverage,
-    lvlII_tos,
-    lvlII_betos,
-    lvlII_procnote,
-    lvlII_procnote_desc,
-    lvlII_procnote_date_deleted,
-    lvlII_seqnum,
-    lvlII_recid,
-    lvlII_cim,
-    lvlII_mcm,
-    lvlII_statute,
-    lvlII_asc_group,
-    lvlII_asc_date,
-    lvlII_anesths,
-    lvlII_action_date,
-    lvlII_action
+    type,
+    two_desc_short,
+    two_desc_long,
+    date_added,
+    date_term,
+    price,
+    mprice,
+    labcert,
+    xref,
+    coverage,
+    tos,
+    betos,
+    procnote,
+    procnote_desc,
+    procnote_deleted,
+    cim,
+    mcm,
+    statute,
+    asc_group,
+    asc_date,
+    anesth,
+    action_date,
+    action
   ) |>
   janitor::remove_empty(which = c("rows", "cols"))
 
-# Update pin
+# Split off the modifiers?
+# A tibble: 383 × 13
+two_mods <- two |>
+  dplyr::filter(type == "mod") |>
+  select(-type) |>
+  janitor::remove_empty(which = c("rows", "cols"))
+
 pin_update(
-  two,
-  name = "level_two",
-  title = "2024 HCPCS Level II Update",
+  two_mods,
+  name = "two_mods",
+  title = "2024 HCPCS Level II Modifiers",
   description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
 )
 
-# correct <- read_excel(corrections, col_types = "text") |>
-#   clean_names() |>
-#   remove_empty(which = c("rows", "cols")) |>
-#   mutate(effective_date = excel_numeric_to_date(as.numeric(effective_date))) |>
-#   select(hcpcs = hcpcs_mod_code,
-#          lvlII_action = action,
-#          lvlII_desc_short = short_description,
-#          lvlII_desc_long = long_description,
-#          lvlII_date_eff = effective_date,
-#          lvlII_tos = tos,
-#          lvlII_betos = betos,
-#          lvlII_coverage = coverage,
-#          lvlII_price = pricing,
-#          )
-#
-# trans <- read_excel(transreport, col_types = "text") |>
-#   clean_names() |>
-#   remove_empty(which = c("rows", "cols")) |>
-#   select(hcpcs = hcpc,
-#          lvlII_action = action_cd,
-#          lvlII_desc_short = short_description,
-#          lvlII_desc_long = long_description)
-#
-# noc <- read_excel(noc_codes,
-#                   col_types = "text") |>
-#   row_to_names(2) |>
-#   clean_names() |>
-#   remove_empty(which = c("rows", "cols")) |>
-#   mutate(add_date = convert_to_date(add_date),
-#          term_date = convert_to_date(term_date)) |>
-#   select(hcpcs,
-#          lvlII_desc_long = long_description,
-#          lvlII_date_added = add_date,
-#          lvlII_date_term = term_date)
+two <- two |>
+  dplyr::filter(type != "mod") |>
+  select(-type) |>
+  janitor::remove_empty(which = c("rows", "cols"))
+
+# HCPCS Level II Descriptions
+# A tibble: 7,966 × 3
+two_descriptions <- two |>
+  dplyr::select(
+    hcpcs,
+    two_desc_short,
+    two_desc_long)
+
+pin_update(
+  two_descriptions,
+  name = "two_descriptions",
+  title = "2024 HCPCS Level II Descriptions",
+  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
+)
+
+# HCPCS Level II Indicators
+# A tibble: 6,919 × 19
+two_therest <- two |>
+  dplyr::select(
+    -c(
+      two_desc_short,
+      two_desc_long
+    )) |>
+  dplyr::filter(is.na(date_term)) |>
+  dplyr::select(-date_term)
+
+pin_update(
+  two_therest,
+  name = "two_therest",
+  title = "2024 HCPCS Level II Indicators",
+  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
+)

@@ -1,0 +1,10 @@
+file: pay_mac_fee.qs
+file_size: 7948191
+pin_hash: b5d8aef3c133e7e2
+type: qs
+title: MAC, Locality, Non-Facility Fee, Facility Fee
+description: Annual Physician Fee Schedule Payment Amount File 2024
+tags: ~
+urls: ~
+created: 20240426T053757Z
+api_version: 1

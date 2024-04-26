@@ -1,0 +1,10 @@
+file: therapy_reduction.qs
+file_size: 23831
+pin_hash: 466720ad32739384
+type: qs
+title: Therapy Reduction by MAC and Locality
+description: Annual Physician Fee Schedule Payment Amount File 2024
+tags: ~
+urls: ~
+created: 20240426T053831Z
+api_version: 1

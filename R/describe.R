@@ -1,49 +1,34 @@
-#' HCPCS Level II Codes
-#'
-#' @template args-hcpcs
-#'
-#' @param columns `<chr>` set of columns returned, default is `limit`
-#'
-#' @template args-dots
-#'
-#' @template returns
-#'
-#' @examples
-#' search_hcpcs(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
-#'
-#' @export
-#'
-#' @autoglobal
-search_hcpcs <- function(hcpcs   = NULL,
-                         columns = c("limit", "full"),
-                         ...) {
-
-  limited <- vctrs::vec_c(
-    "hcpcs",
-    "description_short",
-    "description_long",
-    "price",
-    "multi_price",
-    "labcert",
-    "xref",
-    "tos",
-    "coverage",
-    "asc",
-    "betos"
-  )
-
-  columns <- match.arg(columns)
-
-  lv2 <- switch(
-    columns,
-    limit  = get_pin("hcpcs")[limited],
-    full   = get_pin("hcpcs")
-  )
-
-  lv2 <- fuimus::search_in_if(lv2, lv2$hcpcs, hcpcs)
-
-  return(lv2)
-}
+# search_hcpcs(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
+# search_hcpcs <- function(hcpcs   = NULL,
+#                          columns = c("limit", "full"),
+#                          ...) {
+#
+#   limited <- vctrs::vec_c(
+#     "hcpcs",
+#     "description_short",
+#     "description_long",
+#     "price",
+#     "multi_price",
+#     "labcert",
+#     "xref",
+#     "tos",
+#     "coverage",
+#     "asc",
+#     "betos"
+#   )
+#
+#   columns <- match.arg(columns)
+#
+#   lv2 <- switch(
+#     columns,
+#     limit  = get_pin("hcpcs")[limited],
+#     full   = get_pin("hcpcs")
+#   )
+#
+#   lv2 <- fuimus::search_in_if(lv2, lv2$hcpcs, hcpcs)
+#
+#   return(lv2)
+# }
 
 #' HCPCS Level I (CPT) Codes
 #'
@@ -82,7 +67,7 @@ search_cpt <- function(hcpcs = NULL, ...) {
 #' @autoglobal
 search_level_two <- function(hcpcs = NULL, ...) {
 
-  two <- get_pin("level_two")
+  two <- get_pin("two_descriptions")
   two <- fuimus::search_in_if(two, two$hcpcs, hcpcs)
   return(two)
 }
