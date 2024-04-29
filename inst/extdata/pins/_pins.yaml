@@ -9,7 +9,7 @@ cpt_descriptors:
 cpt_hcpcs_vecs:
 - cpt_hcpcs_vecs/20240423T110139Z-390a8/
 gpci:
-- gpci/20240423T143610Z-fe9b8/
+- gpci/20240428T221129Z-6622e/
 hcpcs_dximg:
 - hcpcs_dximg/20240425T230953Z-ef040/
 hcpcs_endo:
@@ -26,8 +26,6 @@ hcpcs_surg_ind:
 - hcpcs_surg_ind/20240425T231352Z-db93d/
 hcpcs_with_mod:
 - hcpcs_with_mod/20240425T231150Z-bc837/
-hcpcs_with_opps_rvus:
-- hcpcs_with_opps_rvus/20240425T230510Z-27bbd/
 hcpcs_with_op_pct:
 - hcpcs_with_op_pct/20240425T230614Z-6b8fd/
 hcpcs_with_pctc:
@@ -35,7 +33,7 @@ hcpcs_with_pctc:
 hcpcs_with_phys_vis:
 - hcpcs_with_phys_vis/20240426T002935Z-4d7e7/
 hcpcs_with_rvus:
-- hcpcs_with_rvus/20240425T230403Z-975db/
+- hcpcs_with_rvus/20240428T222709Z-316bb/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 modifiers:
@@ -45,9 +43,7 @@ mues:
 ncd:
 - ncd/20240316T065817Z-33d30/
 opps:
-- opps/20240423T144207Z-c0ff5/
-opps_pay:
-- opps_pay/20240426T053917Z-ea2a1/
+- opps/20240428T092245Z-a93f8/
 pay_mac_fee:
 - pay_mac_fee/20240426T053757Z-b5d8a/
 ptp_long:

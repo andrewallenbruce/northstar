@@ -36,9 +36,24 @@ get_pin <- function(pin, ...) {
 
   board <- mount_board(...)
 
-  pin <- rlang::arg_match(pin, pins::pin_list(board = board))
+  pin <- rlang::arg_match0(pin, list_pins())
 
   pins::pin_read(board, pin)
+
+}
+
+#' List pins from a [pins][pins::pins-package] board
+#'
+#' @param ... arguments to pass to [mount_board()]
+#'
+#' @returns `<list>` of [pins][pins::pins-package]
+#'
+#' @noRd
+list_pins <- function(...) {
+
+  board <- mount_board(...)
+
+  pins::pin_list(board)
 
 }
 
@@ -113,12 +128,6 @@ null_if_empty <- function(x) {
 #' @autoglobal
 #'
 #' @noRd
-add_ifelse <- function(x, df, dfcol, by) {
-
-  if (vctrs::vec_is_empty(x)) {
-    NULL
-    } else {
-      vctrs::vec_slice(df,
-      vctrs::vec_in(dfcol, x)) |>
-      tidyr::nest(.by = {{ by }}) }
-  }
+round_up <- function(x, digits = 2) {
+  janitor::round_half_up(x, digits = digits)
+}

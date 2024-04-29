@@ -17,16 +17,6 @@ pin_update <- function(x, name, title, description) {
 
 }
 
-list_pins <- function() {
-
-  board <- pins::board_folder(
-    here::here("inst/extdata/pins")
-  )
-
-  pins::pin_list(board)
-
-}
-
 delete_pins <- function(pin_names) {
 
   board <- pins::board_folder(

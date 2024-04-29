@@ -69,10 +69,8 @@ reference:
   desc: >
     Medical Coding & Billing Codesets.
   contents:
-  - get_addon_edits
-  - get_ptp_edits
-  - get_mue_edits
-  - matches("search")
+  - starts_with("get_")
+  - matches("search_")
   - lcd
   - ncd
 
@@ -88,9 +86,6 @@ reference:
   desc: >
     Functions to validate inputs.
   contents:
-  - get_hcpcs_type
-  - get_rbcs_type
-  - get_aoc_type
   - starts_with("is_")
 
 - title: Recoding Helpers

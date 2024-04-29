@@ -72,6 +72,8 @@ search_level_two <- function(hcpcs = NULL, ...) {
   return(two)
 }
 
+
+
 #' HCPCS code type
 #'
 #' @template args-hcpcs

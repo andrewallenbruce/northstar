@@ -1,3 +1,5 @@
+#' Get HCPCS Codes with RVUs
+#'
 #' Physician Fee Schedule Relative Value File
 #'
 #' @template args-hcpcs
@@ -7,16 +9,46 @@
 #' @template returns
 #'
 #' @examples
-#' search_rvu(hcpcs = c("95907", "78140", "32820", "61575"))
+#' get_rvus(hcpcs = c("95907", "78140", "32820", "61575"))
 #'
 #' @autoglobal
 #'
 #' @export
-search_rvu <- function(hcpcs = NULL, ...) {
+get_rvus <- function(hcpcs = NULL, ...) {
 
   rv <- get_pin("hcpcs_with_rvus")
   rv <- fuimus::search_in_if(rv, rv$hcpcs, hcpcs)
   return(rv)
+}
+
+#' Physician Fee Schedule Geographic Practice Cost Indices
+#'
+#' @template args-mac
+#'
+#' @template args-state
+#'
+#' @template args-locality
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' get_gpcis(state = "GA", locality = "01", mac = "10212")
+#'
+#' @export
+#'
+#' @autoglobal
+get_gpcis <- function(mac      = NULL,
+                      state    = NULL,
+                      locality = NULL,
+                      ...) {
+
+  gp <- get_pin("gpci")
+  gp <- fuimus::search_in_if(gp, gp$state, state)
+  gp <- fuimus::search_in_if(gp, gp$mac, mac)
+  gp <- fuimus::search_in_if(gp, gp$locality, locality)
+  return(gp)
 }
 
 #' Physician Fee Schedule Payment Amount File
@@ -50,11 +82,9 @@ search_payment <- function(hcpcs    = NULL,
   return(pmt)
 }
 
-#' Physician Fee Schedule Geographic Practice Cost Indices
+#' search_anesthesia
 #'
 #' @template args-mac
-#'
-#' @template args-state
 #'
 #' @template args-locality
 #'
@@ -63,21 +93,19 @@ search_payment <- function(hcpcs    = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_gpci(state = "GA", locality = "01", mac = "10212")
+#' search_anesthesia(locality = "01", mac = "10212")
 #'
 #' @export
 #'
 #' @autoglobal
-search_gpci <- function(mac      = NULL,
-                        state    = NULL,
-                        locality = NULL,
-                        ...) {
+search_anesthesia <- function(mac      = NULL,
+                              locality = NULL,
+                              ...) {
 
-  gp <- get_pin("gpci")
-  gp <- fuimus::search_in_if(gp, gp$gpci_state, state)
-  gp <- fuimus::search_in_if(gp, gp$gpci_mac, mac)
-  gp <- fuimus::search_in_if(gp, gp$gpci_locality, locality)
-  return(gp)
+  an <- get_pin("anesthesia")
+  an <- fuimus::search_in_if(an, an$anes_mac, mac)
+  an <- fuimus::search_in_if(an, an$anes_locality, locality)
+  return(an)
 }
 
 #' Outpatient Prospective Payment System (OPPS) Capitations
@@ -98,7 +126,7 @@ search_gpci <- function(mac      = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_opps(hcpcs = "71550", mac = "01112")
+#' head(search_opps())
 #'
 #' @export
 #'
@@ -108,10 +136,12 @@ search_opps <- function(hcpcs    = NULL,
                         locality = NULL,
                         ...) {
 
-  opp <- get_pin("opps")
-  opp <- fuimus::search_in_if(opp, opp$hcpcs, hcpcs)
-  opp <- fuimus::search_in_if(opp, opp$opps_mac, mac)
-  opp <- fuimus::search_in_if(opp, opp$opps_locality, locality)
+  get_pin("opps")
 
-  return(opp)
+  # op <- get_pin("opps")
+  # opp <- fuimus::search_in_if(opp, opp$hcpcs, hcpcs)
+  # opp <- fuimus::search_in_if(opp, opp$opps_mac, mac)
+  # opp <- fuimus::search_in_if(opp, opp$opps_locality, locality)
+  #
+  # return(opp)
 }

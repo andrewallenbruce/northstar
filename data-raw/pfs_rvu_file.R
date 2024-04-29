@@ -1,5 +1,5 @@
-source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 source(here::here("data-raw", "case_labeling_functions.R"))
 
@@ -80,10 +80,10 @@ pin_update(
 hcpcs_with_rvus <- rvu |>
   dplyr::select(
     hcpcs,
-    wrvu = rel_wrvu,
-    mrvu = rel_mrvu,
-    prvu_non = rel_prvu_non,
-    prvu_fac = rel_prvu_fac,
+    rvu_work = rel_wrvu,
+    rvu_mp = rel_mrvu,
+    rvu_pe_non = rel_prvu_non,
+    rvu_pe_fac = rel_prvu_fac,
     conv_fct = rel_conv,
     tot_non = rel_non_tot,
     tot_fac = rel_fac_tot

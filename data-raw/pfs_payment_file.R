@@ -80,12 +80,12 @@ opps_pay <- pfs_pay |>
     hcpcs,
     mac = pmt_mac,
     locality = pmt_locality,
-    pmt_opps_ind,
-    non_opps = pmt_opps_non,
-    fac_opps = pmt_opps_fac
+    opps_ind = pmt_opps_ind,
+    opps_non_price = pmt_opps_non,
+    opps_fac_price = pmt_opps_fac
   ) |>
-  dplyr::filter(pmt_opps_ind == 1) |>
-  dplyr::select(-pmt_opps_ind)
+  dplyr::filter(opps_ind != 9) |>
+  dplyr::select(-opps_ind)
 
 pin_update(
   opps_pay,

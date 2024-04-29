@@ -1,5 +1,5 @@
-source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
 # ADDENDUM E. FINAL CY 2024 GEOGRAPHIC PRACTICE COST INDICES (GPCIs) BY STATE AND MEDICARE LOCALITY
@@ -12,26 +12,25 @@ gpci <- read_excel(
   clean_names() |>
   filter(!is.na(state)) |>
   rename(
-    gpci_mac         = medicare_administrative_contractor_mac,
-    gpci_locality    = locality_number,
-    gpci_area        = locality_name,
-    gpci_work        = x2024_pw_gpci_with_1_0_floor,
-    gpci_practice    = x2024_pe_gpci,
-    gpci_malpractice = x2024_mp_gpci) |>
+    mac = medicare_administrative_contractor_mac,
+    locality = locality_number,
+    area = locality_name,
+    gpci_work = x2024_pw_gpci_with_1_0_floor,
+    gpci_pe = x2024_pe_gpci,
+    gpci_mp = x2024_mp_gpci) |>
   mutate(
     across(
-      c(gpci_work, gpci_practice, gpci_malpractice),
+      c(gpci_work, gpci_pe, gpci_mp),
       readr::parse_number
       )
     ) |>
   mutate(
-    ftnote = str_extract_all(gpci_area, fixed("*")),
-    gpci_area = str_remove_all(gpci_area, fixed("*"))) |>
+    ftnote = str_extract_all(area, fixed("*")),
+    area = str_remove_all(area, fixed("*"))) |>
   unnest(ftnote, keep_empty = TRUE) |>
   select(-ftnote)
 
 gpci
-
 
 locco <- read_excel(
   locco_xl,
@@ -42,14 +41,13 @@ locco <- read_excel(
   filter(!is.na(counties)) |>
   fill(state) |>
   rename(
-    gpci_mac = medicare_adminstrative_contractor,
-    gpci_locality = locality_number) |>
+    mac = medicare_adminstrative_contractor,
+    locality = locality_number) |>
   # *  Payment locality is serviced by two carriers.
   mutate(two_macs = str_extract_all(fee_schedule_area, fixed("*")),
          fee_schedule_area = str_remove_all(fee_schedule_area, fixed("*"))) |>
   unnest(two_macs, keep_empty = TRUE) |>
   mutate(two_macs = if_else(is.na(two_macs), FALSE, TRUE))
-
 
 states <- dplyr::tibble(
   abb = gpci |> count(state) |> pull(state),
@@ -58,7 +56,6 @@ states <- dplyr::tibble(
 
 states[1, 2] <- "ALASKA"
 states[2, 2] <- "ALABAMA"
-
 states[8, 2] <- "DISTRICT OF COLUMBIA"
 states[9, 2] <- "DELAWARE"
 states[48, 2] <- "VIRGINIA"
@@ -72,11 +69,15 @@ locco <- locco |>
 
 gpci <- gpci |>
   left_join(locco) |>
-  select(-fee_schedule_area) |>
-  rename(
-    gpci_state = state,
-    gpci_counties = counties,
-    gpci_two_macs = two_macs
+  select(-fee_schedule_area, -two_macs) |>
+  mutate(counties = if_else(is.na(counties), "ALL COUNTIES", counties)) |>
+  select(
+    mac,
+    state,
+    locality,
+    area,
+    counties,
+    dplyr::everything()
   )
 
 # Update Pin

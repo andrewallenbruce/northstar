@@ -31,7 +31,7 @@ limiting_charge <- function(participating_fee) {
 
   stopifnot("`participating_fee` must be numeric" = is.numeric(participating_fee))
 
-  janitor::round_half_up(participating_fee * 1.0925, digits = 2)
+  participating_fee * 1.0925
 }
 
 #' Calculate Non-Participating Fee
