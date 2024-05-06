@@ -8,8 +8,12 @@ cpt_descriptors:
 - cpt_descriptors/20240419T052848Z-7d8ec/
 cpt_hcpcs_vecs:
 - cpt_hcpcs_vecs/20240423T110139Z-390a8/
+cpt_pla_codes:
+- cpt_pla_codes/20240430T183333Z-ee46c/
 gpci:
 - gpci/20240428T221129Z-6622e/
+hcpcs_descriptions:
+- hcpcs_descriptions/20240506T035431Z-15679/
 hcpcs_dximg:
 - hcpcs_dximg/20240425T230953Z-ef040/
 hcpcs_endo:
@@ -33,7 +37,7 @@ hcpcs_with_pctc:
 hcpcs_with_phys_vis:
 - hcpcs_with_phys_vis/20240426T002935Z-4d7e7/
 hcpcs_with_rvus:
-- hcpcs_with_rvus/20240428T222709Z-316bb/
+- hcpcs_with_rvus/20240506T035047Z-190a8/
 lcd:
 - lcd/20240321T172123Z-6cbb4/
 modifiers:

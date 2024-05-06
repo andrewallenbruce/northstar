@@ -80,22 +80,132 @@ pin_update(
 hcpcs_with_rvus <- rvu |>
   dplyr::select(
     hcpcs,
+    mod = rel_mod,
+    # pctc = rel_pctc,
     rvu_work = rel_wrvu,
     rvu_mp = rel_mrvu,
     rvu_pe_non = rel_prvu_non,
     rvu_pe_fac = rel_prvu_fac,
-    conv_fct = rel_conv,
-    tot_non = rel_non_tot,
-    tot_fac = rel_fac_tot
-  ) |>
+    # conv_fct = rel_conv, # 32.7442
+    rvu_tot_non = rel_non_tot,
+    rvu_tot_fac = rel_fac_tot
+  )
+
+hcpcs_with_rvus |>
+  dplyr::filter(
+    rvu_tot_non > 0 | rvu_tot_fac > 0
+    )
+
+hcpcs_gt_1 <- hcpcs_with_rvus |>
+  count(hcpcs, sort = TRUE) |>
+  filter(n > 1) |>
+  pull(hcpcs)
+
+hcpcs_with_rvus |>
+  dplyr::filter(hcpcs %in% hcpcs_gt_1) |>
   dplyr::filter(
     tot_non > 0 | tot_fac > 0
-    )
+  )
 
 pin_update(
   hcpcs_with_rvus,
   name = "hcpcs_with_rvus",
   title = "HCPCS with RVUs",
+  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
+)
+
+# HCPCS with valid PCTC Indicator
+# A tibble: 3,667 × 4
+hcpcs_with_pctc <- rvu |>
+  dplyr::select(
+    hcpcs,
+    rel_pctc) |>
+  dplyr::filter(!is.na(rel_pctc)) |>
+  dplyr::filter(rel_pctc != "9") |>
+  # dplyr::filter(rel_pctc != "9", rel_pctc != "0") |>
+  case_pctc(rel_pctc) |>
+  dplyr::select(
+    hcpcs,
+    pctc_ind = rel_pctc,
+    pctc_group = pctc_label,
+    pctc_description)
+
+pin_update(
+  hcpcs_with_pctc,
+  name = "hcpcs_with_pctc",
+  title = "HCPCS with valid PCTC Indicator",
+  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
+)
+
+# HCPCS with Mod indicator
+# A tibble: 2,176 × 4
+hcpcs_with_mod <- rvu |>
+  dplyr::select(
+    hcpcs,
+    rel_mod) |>
+  dplyr::filter(!is.na(rel_mod)) |>
+  case_modifier(rel_mod) |>
+  dplyr::select(
+    hcpcs,
+    mod_ind = rel_mod,
+    mod_group = mod_label,
+    mod_description)
+
+pin_update(
+  hcpcs_with_mod,
+  name = "hcpcs_with_mod",
+  title = "HCPCS with Mod indicator",
+  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
+)
+
+# HCPCS with Surgical Indicators
+# A tibble: 10,629 × 9
+hcpcs_surg_ind <- rvu |>
+  dplyr::select(
+    hcpcs,
+    rel_surg_bilat,
+    rel_surg_asst,
+    rel_surg_co,
+    rel_surg_team) |>
+  dplyr::filter(rel_surg_bilat != "9" | rel_surg_asst != "9" | rel_surg_co != "9" | rel_surg_team != "9") |>
+  dplyr::select(
+    hcpcs,
+    surg_bilat_ind = rel_surg_bilat,
+    surg_asst_ind = rel_surg_asst,
+    surg_co_ind = rel_surg_co,
+    surg_team_ind = rel_surg_team) |>
+  case_assistant(surg_asst_ind) |>
+  case_cosurg(surg_co_ind) |>
+  case_team(surg_team_ind) |>
+  case_bilateral(surg_bilat_ind) |>
+  dplyr::rename(
+    surg_bilat_desc = bilat_description,
+    surg_asst_desc = asst_description,
+    surg_co_desc = cosurg_description,
+    surg_team_desc = team_description)
+
+pin_update(
+  hcpcs_surg_ind,
+  name = "hcpcs_surg_ind",
+  title = "HCPCS with Surgical Indicators",
+  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
+)
+
+# HCPCS Main Indicators: Status Code, Global Days, Op Ind, Multiple Procedure
+# A tibble: 18,500 × 5
+hcpcs_main_ind <- rvu |>
+  dplyr::select(
+    hcpcs,
+    status_code = rel_status,
+    global_days = rel_global,
+    op_ind = rel_op_ind,
+    mult_proc_ind = rel_mult_proc
+  )
+
+pin_update(
+  hcpcs_main_ind,
+  name = "hcpcs_main_ind",
+  title = "HCPCS Main Indicators: Status Code, Global Days, Op Ind, Multiple Procedure",
   description = "National Physician Fee Schedule Relative Value File January 2024 Release"
 )
 
@@ -248,49 +358,6 @@ pin_update(
   description = "National Physician Fee Schedule Relative Value File January 2024 Release"
 )
 
-# HCPCS with valid PCTC Indicator
-# A tibble: 3,667 × 4
-hcpcs_with_pctc <- rvu |>
-  dplyr::select(
-    hcpcs,
-    rel_pctc) |>
-  dplyr::filter(!is.na(rel_pctc)) |>
-  dplyr::filter(rel_pctc != "9", rel_pctc != "0") |>
-  case_pctc(rel_pctc) |>
-  dplyr::select(
-    hcpcs,
-    pctc_ind = rel_pctc,
-    pctc_group = pctc_label,
-    pctc_description)
-
-pin_update(
-  hcpcs_with_pctc,
-  name = "hcpcs_with_pctc",
-  title = "HCPCS with valid PCTC Indicator",
-  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
-)
-
-# HCPCS with Mod indicator
-# A tibble: 2,176 × 4
-hcpcs_with_mod <- rvu |>
-  dplyr::select(
-    hcpcs,
-    rel_mod) |>
-  dplyr::filter(!is.na(rel_mod)) |>
-  case_modifier(rel_mod) |>
-  dplyr::select(
-    hcpcs,
-    mod_ind = rel_mod,
-    mod_group = mod_label,
-    mod_description)
-
-pin_update(
-  hcpcs_with_mod,
-  name = "hcpcs_with_mod",
-  title = "HCPCS with Mod indicator",
-  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
-)
-
 # HCPCS with Physician Supervision of Diagnostic Procedures Indicators
 # A tibble: 1,034 × 3
 hcpcs_with_phys_supvision <- rvu |>
@@ -309,57 +376,6 @@ pin_update(
   hcpcs_with_phys_supvision,
   name = "hcpcs_with_phys_vis",
   title = "HCPCS with Physician Supervision of Diagnostic Procedures Indicators",
-  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
-)
-
-# HCPCS with Surgical Indicators
-# A tibble: 10,629 × 9
-hcpcs_surg_ind <- rvu |>
-  dplyr::select(
-    hcpcs,
-    rel_surg_bilat,
-    rel_surg_asst,
-    rel_surg_co,
-    rel_surg_team) |>
-  dplyr::filter(rel_surg_bilat != "9" | rel_surg_asst != "9" | rel_surg_co != "9" | rel_surg_team != "9") |>
-  dplyr::select(
-    hcpcs,
-    surg_bilat_ind = rel_surg_bilat,
-    surg_asst_ind = rel_surg_asst,
-    surg_co_ind = rel_surg_co,
-    surg_team_ind = rel_surg_team) |>
-  case_assistant(surg_asst_ind) |>
-  case_cosurg(surg_co_ind) |>
-  case_team(surg_team_ind) |>
-  case_bilateral(surg_bilat_ind) |>
-  dplyr::rename(
-    surg_bilat_desc = bilat_description,
-    surg_asst_desc = asst_description,
-    surg_co_desc = cosurg_description,
-    surg_team_desc = team_description)
-
-pin_update(
-  hcpcs_surg_ind,
-  name = "hcpcs_surg_ind",
-  title = "HCPCS with Surgical Indicators",
-  description = "National Physician Fee Schedule Relative Value File January 2024 Release"
-)
-
-# HCPCS Main Indicators: Status Code, Global Days, Op Ind, Multiple Procedure
-# A tibble: 18,500 × 5
-hcpcs_main_ind <- rvu |>
-  dplyr::select(
-    hcpcs,
-    status_code = rel_status,
-    global_days = rel_global,
-    op_ind = rel_op_ind,
-    mult_proc_ind = rel_mult_proc
-  )
-
-pin_update(
-  hcpcs_main_ind,
-  name = "hcpcs_main_ind",
-  title = "HCPCS Main Indicators: Status Code, Global Days, Op Ind, Multiple Procedure",
   description = "National Physician Fee Schedule Relative Value File January 2024 Release"
 )
 

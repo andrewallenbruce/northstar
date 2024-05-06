@@ -2,7 +2,10 @@
 % Please edit documentation in R/checks.R
 \name{is_category_II}
 \alias{is_category_II}
-\title{Check if code is HCPCS Level 1 Category II}
+\title{Check if code is CPT Category II Performance Measurement Codes (F codes)}
+\source{
+\href{https://www.ama-assn.org/practice-management/cpt/category-ii-codes}{AMA Category II Codes}
+}
 \usage{
 is_category_II(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }

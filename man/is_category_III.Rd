@@ -2,7 +2,10 @@
 % Please edit documentation in R/checks.R
 \name{is_category_III}
 \alias{is_category_III}
-\title{Check if code is HCPCS Level 1 Category III}
+\title{Check if code is CPT Category III Temporary Codes (T codes)}
+\source{
+\href{https://www.ama-assn.org/practice-management/cpt/category-iii-codes}{AMA Category III Codes}
+}
 \usage{
 is_category_III(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
@@ -21,11 +24,13 @@ a \link[tibble:tibble-package]{tibble}
 \description{
 CPT Category III codes are a set of temporary codes that allow data
 collection for emerging technologies, services, procedures, and service
-paradigms. These codes are intended to be used for data collection to
-substantiate widespread usage or to provide documentation for the Food and
-Drug Administration (FDA) approval process.
+paradigms.
 }
 \details{
+These codes are intended to be used for data collection to substantiate
+widespread usage or to provide documentation for the Food and Drug
+Administration (FDA) approval process.
+
 CPT Category III codes may not conform to one or more of the following CPT
 Category I code requirements:
 \itemize{
@@ -37,8 +42,8 @@ Category I code requirements:
 }
 
 Category III codes are not developed as a result of Panel review of an
-incomplete proposal, the need for more information, or a lack of CPT
-Advisory Committee support of a code-change application.
+incomplete proposal, the need for more information, or a lack of CPT Advisory
+Committee support of a code-change application.
 
 CPT Category III codes are not referred to the AMA-Specialty RVS Update
 Committee (RUC) for valuation because no relative value units (RVUs) are
@@ -47,26 +52,32 @@ on the policies of payers and not on a yearly fee schedule.
 
 Category III codes allow data collection for these services or procedures,
 unlike the use of unlisted codes, which does not offer the opportunity for
-the collection of specific data. If a Category III code is available, this
-code must be reported instead of a Category I unlisted code. This is an
-activity that is critically important in the evaluation of health care
-delivery and the formation of public and private policy. The use of Category
-III codes allows physicians and other qualified health care professionals,
-insurers, health services researchers, and health policy experts to identify
-emerging technologies, services, procedures, and service paradigms for
-clinical efficacy, utilization, and outcomes.
+the collection of specific data.
+
+If a Category III code is available, this code must be reported instead of a
+Category I unlisted code. This is an activity that is critically important in
+the evaluation of health care delivery and the formation of public and
+private policy.
+
+The use of Category III codes allows physicians and other qualified health
+care professionals, insurers, health services researchers, and health policy
+experts to identify emerging technologies, services, procedures, and service
+paradigms for clinical efficacy, utilization, and outcomes.
 
 These codes have an alpha character as the 5th character in the string (i.e.,
 four digits followed by the letter T). The digits are not intended to reflect
 the placement of the code in the Category I section of CPT nomenclature.
-Codes in this section may or may not eventually receive a Category I CPT code.
-In either case, in general, a given Category III code will be archived five
-years from the initial publication or extension unless a modification of the
-archival date is specifically noted at the time of a revision or change to a
-code (e.g., addition of parenthetical, instructions, reinstatement). Services
-and procedures described by Category III codes which have been archived after
-five years, without conversion, must be reported using the Category I unlisted
-code unless another specific cross-reference is established at the time of archiving.
+
+Codes in this section may or may not eventually receive a Category I CPT
+code. In either case, in general, a given Category III code will be archived
+five years from the initial publication or extension unless a modification of
+the archival date is specifically noted at the time of a revision or change
+to a code (e.g., addition of parenthetical, instructions, reinstatement).
+
+Services and procedures described by Category III codes which have been
+archived after five years, without conversion, must be reported using the
+Category I unlisted code unless another specific cross-reference is
+established at the time of archiving.
 }
 \examples{
 is_category_III("0074T")
