@@ -1,78 +1,33 @@
-# search_hcpcs(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
-# search_hcpcs <- function(hcpcs   = NULL,
-#                          columns = c("limit", "full"),
-#                          ...) {
-#
-#   limited <- vctrs::vec_c(
-#     "hcpcs",
-#     "description_short",
-#     "description_long",
-#     "price",
-#     "multi_price",
-#     "labcert",
-#     "xref",
-#     "tos",
-#     "coverage",
-#     "asc",
-#     "betos"
-#   )
-#
-#   columns <- match.arg(columns)
-#
-#   lv2 <- switch(
-#     columns,
-#     limit  = get_pin("hcpcs")[limited],
-#     full   = get_pin("hcpcs")
-#   )
-#
-#   lv2 <- fuimus::search_in_if(lv2, lv2$hcpcs, hcpcs)
-#
-#   return(lv2)
-# }
-
-#' HCPCS Level I (CPT) Codes
+#' Get HCPCS Descriptions
 #'
 #' @template args-hcpcs
+#'
+#' @param desc_type `<chr>` vector of description types; `All` (default),
+#'   `Short`, `Long`, `Medium`, `Medical`, `Consumer`, `Clinician`,
+#'   `Proprietary Name`
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' search_cpt(hcpcs = c("39503", "43116", "33935", "11646"))
+#' get_descriptions(hcpcs = c("39503", "43116", "33935", "11646"))
+#'
+#' get_descriptions(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
 #'
 #' @export
 #'
 #' @autoglobal
-search_cpt <- function(hcpcs = NULL, ...) {
+get_descriptions <- function(hcpcs = NULL, desc_type = "All", ...) {
 
-  cpt <- get_pin("cpt_descriptors")
-  cpt <- fuimus::search_in_if(cpt, cpt$hcpcs, hcpcs)
-  return(cpt)
+  dsc <- get_pin("hcpcs_descriptions")
+  dsc <- fuimus::search_in_if(dsc, dsc$hcpcs, hcpcs)
+
+  if (desc_type != "All") {
+    dsc <- fuimus::search_in(dsc, dsc$desc_type, desc_type)
+  }
+  return(dsc)
 }
-
-#' HCPCS Level II Codes
-#'
-#' @template args-hcpcs
-#'
-#' @template args-dots
-#'
-#' @template returns
-#'
-#' @examples
-#' search_level_two(hcpcs = c("A0021", "V5362", "J9264", "G8916"))
-#'
-#' @export
-#'
-#' @autoglobal
-search_level_two <- function(hcpcs = NULL, ...) {
-
-  two <- get_pin("two_descriptions")
-  two <- fuimus::search_in_if(two, two$hcpcs, hcpcs)
-  return(two)
-}
-
-
 
 #' HCPCS code type
 #'
@@ -114,69 +69,4 @@ get_hcpcs_type <- function(hcpcs, ...) {
     neither = vctrs::vec_set_difference(hcpcs,
               vctrs::vec_c(cvec$cpt, cvec$hcpcs))
   )
-}
-
-
-#' @autoglobal
-#'
-#' @noRd
-describe_hcpcs <- function(hcpcs, ...) {
-
-  rlang::check_required(hcpcs)
-
-  x <- list(
-    ds = search_cpt(hcpcs = hcpcs),
-    l2 = search_level_two(hcpcs = hcpcs),
-    rb = search_rbcs(hcpcs = hcpcs)
-  )
-
-  x <- list(
-    cpt = null_if_empty(x$ds),
-    lvl = null_if_empty(x$l2),
-    rbc = null_if_empty(x$rb)
-    ) |>
-    purrr::compact()
-
-    # sort(
-    #   lengths(
-    #   list(
-    #     cpt = collapse::funique(x$cpt$hcpcs),
-    #     lvl = collapse::funique(x$lvl$hcpcs),
-    #     rbc = collapse::funique(x$rbc$hcpcs)
-    #     )
-    #   ), decreasing = TRUE
-    # )
-
-  vctrs::vec_rbind(x$cpt, x$lvl)
-
-  # create `join_by` object
-  by_hcpcs <- dplyr::join_by(hcpcs)
-
-  # test if x contains only cpt codes
-  lvl1 <- rlang::has_name(x, "cpt") & !rlang::has_name(x, "lvl")
-
-  # test if x contains only hcpcs codes
-  lvl2 <- rlang::has_name(x, "lvl") & !rlang::has_name(x, "cpt")
-
-  # test if x contains both hcpcs and cpt codes
-  both <- all(rlang::has_name(x, c("lvl", "cpt")))
-
-  # only one should be true, extract its name
-  path <- list(
-    one  = if (lvl1) lvl1 else NULL,
-    two  = if (lvl2) lvl2 else NULL,
-    both = if (both) both else NULL
-    ) |>
-    purrr::compact() |>
-    names()
-
-  # perform join based on path
-  res <- switch(
-    path,
-    one = dplyr::left_join(res, x$pay, bypctc) |> dplyr::left_join(x$cpt, byhcpc),
-    both = dplyr::left_join(res, x$lvl, byhcpc) |> dplyr::left_join(x$pay, bypctc) |> dplyr::left_join(x$cpt, byhcpc),
-    two = dplyr::left_join(res, x$lvl, byhcpc)
-  )
-
-  dplyr::left_join(x$rbc, x$cpt, by = "hcpcs")
 }

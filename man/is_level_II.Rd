@@ -22,8 +22,8 @@ a \link[tibble:tibble-package]{tibble}
 HCPCS Level II is a standardized coding system that is used primarily to
 identify products, supplies, and services not included in the CPT code set
 jurisdiction, such as ambulance services and durable medical equipment,
-prosthetics, orthotics, and supplies (DMEPOS) when used outside a
-physician's office.
+prosthetics, orthotics, and supplies (DMEPOS) when used outside a physician's
+office.
 }
 \details{
 Level II of the HCPCS is a standardized coding system that is used primarily
@@ -32,11 +32,12 @@ such as ambulance services and durable medical equipment, prosthetics,
 orthotics, and supplies (DMEPOS) when used outside a physician's office.
 Because Medicare and other insurers cover a variety of services, supplies,
 and equipment that are not identified by CPT codes, the level II HCPCS codes
-were established for submitting claims for these items. The development and
-use of level II of the HCPCS began in the 1980's. Level II codes are also
-referred to as alpha-numeric codes because they consist of a single
-alphabetical letter followed by 4 numeric digits, while CPT codes are
-identified using 5 numeric digits.
+were established for submitting claims for these items.
+
+The development and use of level II of the HCPCS began in the 1980's. Level
+II codes are also referred to as alpha-numeric codes because they consist of
+a single alphabetical letter followed by 4 numeric digits, while CPT codes
+are identified using 5 numeric digits.
 }
 \examples{
 is_level_II("E8015")

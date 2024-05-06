@@ -2,6 +2,29 @@ source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "load_packages.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
+# Category I Immunization Codes
+# (A codes)
+# https://www.ama-assn.org/practice-management/cpt/category-i-immunization-codes
+
+# Category I Proprietary Laboratory Analyses (PLA) Codes
+# (U codes)
+# https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes
+
+# Category I Molecular Pathology Tier 2 Codes
+# https://www.uhcprovider.com/content/dam/provider/docs/public/policies/exchange-reimbursement/VB-Exchange-Molecular-Pathology-Policy-Professional.pdf
+# https://www.ama-assn.org/practice-management/cpt/molecular-pathology-tier-2-codes
+
+# Category I Administrative MAAA Codes (Multianalyte Assays With Algorithmic Analyses Codes)
+# (M codes)
+# https://www.ama-assn.org/practice-management/cpt/multianalyte-assays-algorithmic-analyses-codes
+
+# Category II Performance Measurement Codes
+# (F codes)
+# https://www.ama-assn.org/practice-management/cpt/category-ii-codes
+
+# Category III Temporary Codes (T codes)
+# https://www.ama-assn.org/practice-management/cpt/category-iii-codes
+
 clin <- readxl::read_excel(clinician, col_types = "text") |>
   janitor::clean_names()
 
