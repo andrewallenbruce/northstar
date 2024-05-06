@@ -110,16 +110,16 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_rvus</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"95907"</span>, <span class="st">"78140"</span>, <span class="st">"32820"</span>, <span class="st">"61575"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs rvu_work rvu_mp rvu_pe_non rvu_pe_fac conv_fct tot_non tot_fac</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 32820    22.5    5.56      11.5       11.5      32.7   39.5    39.5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 61575    36.6   15.2       24.3       24.3      32.7   76.1    76.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 78140     0.61   0.06       2.61       2.61     32.7    3.28    3.28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 78140     0      0.05       2.51       2.51     32.7    2.56    2.56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 78140     0.61   0.01       0.1        0.1      32.7    0.72    0.72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 95907     1      0.05       1.65       1.65     32.7    2.7     2.7 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 95907     0      0.01       1.14       1.14     32.7    1.15    1.15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 95907     1      0.04       0.51       0.51     32.7    1.55    1.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   hcpcs mod   rvu_work rvu_mp rvu_pe_non rvu_pe_fac rvu_tot_non rvu_tot_fac</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 32820 <span style="color: #BB0000;">NA</span>       22.5    5.56      11.5       11.5        39.5        39.5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 61575 <span style="color: #BB0000;">NA</span>       36.6   15.2       24.3       24.3        76.1        76.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 78140 <span style="color: #BB0000;">NA</span>        0.61   0.06       2.61       2.61        3.28        3.28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 78140 TC        0      0.05       2.51       2.51        2.56        2.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 78140 26        0.61   0.01       0.1        0.1         0.72        0.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 95907 <span style="color: #BB0000;">NA</span>        1      0.05       1.65       1.65        2.7         2.7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 95907 TC        0      0.01       1.14       1.14        1.15        1.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 95907 26        1      0.04       0.51       0.51        1.55        1.55</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
