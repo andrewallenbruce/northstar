@@ -20,7 +20,8 @@ Imports:
     rlang,
     stringr,
     tidyr,
-    vctrs
+    vctrs,
+    withr (>= 3.0.0)
 Suggests:
     clock,
     fontawesome,

@@ -103,5 +103,5 @@ get_ptp_edits <- function(hcpcs        = NULL,
       )
     }
 
-  return(ptp)
+  return(.add_class(ptp))
 }

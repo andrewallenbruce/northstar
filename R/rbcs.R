@@ -133,7 +133,7 @@ search_rbcs <- function(hcpcs       = NULL,
         rbcs_category,
         rbcs_family)
   }
-  return(rb)
+  return(.add_class(rb))
 }
 
 #' RBCS-HCPCS code type

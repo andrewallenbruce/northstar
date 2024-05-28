@@ -3,6 +3,8 @@ source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
 # ANNUAL PHYSICIAN FEE SCHEDULE PAYMENT AMOUNT FILE
+# https://www.cms.gov/medicare/payment/fee-schedules/physician/national-payment-amount-file
+# https://www.cms.gov/medicare/payment/fee-schedules/physician/carrier-specific-files/all-states
 # [990,482 x 15]
 pfs_pay <- read_csv(
   pay_xl,

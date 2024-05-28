@@ -103,5 +103,5 @@ search_adjustments <- function(df     = NULL,
         description = description.y)
 
   }
-  return(adj)
+  return(.add_class(adj))
 }

@@ -3,6 +3,7 @@ source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
 # ADDENDUM E. FINAL CY 2024 GEOGRAPHIC PRACTICE COST INDICES (GPCIs) BY STATE AND MEDICARE LOCALITY
+# https://www.ama-assn.org/system/files/geographic-practice-cost-indices-gpcis.pdf
 
 gpci <- read_excel(
   gpci_xl,

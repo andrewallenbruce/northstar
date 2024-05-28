@@ -26,7 +26,7 @@ get_descriptions <- function(hcpcs = NULL, desc_type = "All", ...) {
   if (desc_type != "All") {
     dsc <- fuimus::search_in(dsc, dsc$desc_type, desc_type)
   }
-  return(dsc)
+  return(.add_class(dsc))
 }
 
 #' HCPCS code type

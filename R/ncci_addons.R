@@ -109,7 +109,7 @@ get_addon_edits <- function(hcpcs     = NULL,
     )
   }
 
-  return(aoc)
+  return(.add_class(aoc))
 }
 
 #' HCPCS Add-On code type

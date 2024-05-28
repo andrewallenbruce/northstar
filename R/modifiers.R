@@ -23,5 +23,5 @@ search_modifiers <- function(mod = NULL, ...) {
 
   md <- get_pin("modifiers")
   md <- fuimus::search_in_if(md, md$mod, mod)
-  return(md)
+  return(.add_class(md))
 }
