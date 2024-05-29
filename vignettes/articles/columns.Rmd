@@ -142,25 +142,28 @@ dplyr::tibble(dximg = img) |>
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 
 ```{r}
-search_gpci() |> 
-  select(-c(counties, two_macs)) |> 
+get_gpcis() |> 
+  select(-counties) |> 
   distinct() |> 
   gt(rowname_col = "mac", 
      groupname_col = "state",
      row_group_as_column = TRUE, 
      process_md = TRUE) |> 
   cols_label(
-    mac      = "MAC",
-    state    = "State",
+    mac = "MAC",
+    state = "State",
     locality = "",
-    area     = "Area",
-    wgpci    = md("**GPCI**<i><sub>w</sub></i>"),
-    pgpci    = md("**GPCI**<i><sub>pe</sub></i>"),
-    mgpci    = md("**GPCI**<i><sub>mp</sub></i>")) |> 
+    area = "Area",
+    gpci_work = md("**GPCI**<i><sub>w</sub></i>"),
+    gpci_pe = md("**GPCI**<i><sub>pe</sub></i>"),
+    gpci_mp = md("**GPCI**<i><sub>mp</sub></i>")) |> 
   cols_merge(columns = c(locality, area),
              pattern = "<b>{1}</b><< {2}>>") |> 
-  fmt_number(decimals = 2, drop_trailing_zeros = TRUE) |> 
-  gt_style(lbl = FALSE, tablign = "center", tabsize = 16) |> 
+  fmt_number(decimals = 2, 
+             drop_trailing_zeros = TRUE) |> 
+  gt_style(lbl = FALSE, 
+           tablign = "center", 
+           tabsize = 16) |> 
   tab_style(
       style = cell_text(
         align = 'center',
@@ -182,8 +185,5 @@ search_gpci() |>
     style = cell_fill(color = "powderblue"),
     locations = cells_row_groups())
 ```
-
-
-
 
 

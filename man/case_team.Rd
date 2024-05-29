@@ -20,4 +20,5 @@ Modifier 66: Services for which Team Surgeons may be paid
 \examples{
 dplyr::tibble(surg_team = c(0:2, "9")) |>
 case_team(surg_team)
+
 }

@@ -21,4 +21,5 @@ each in a different specialty, may be paid.
 \examples{
 dplyr::tibble(surg_co = c(0:2, "9")) |>
 case_cosurg(surg_co)
+
 }

@@ -1,13 +1,22 @@
-#' gt Theme
+#' {gt} Theme
+#'
 #' @param gt_tbl description
+#'
 #' @param lbl description
+#'
 #' @param tablign description
+#'
 #' @param tabsize description
+#'
 #' @param tabwt description
-#' @return description
-#' @export
+#'
+#' @returns description
+#'
 #' @keywords internal
+#'
 #' @autoglobal
+#'
+#' @export
 gt_style <- function(gt_tbl,
                      lbl = TRUE,
                      tablign = "center",

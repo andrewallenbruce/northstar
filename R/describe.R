@@ -21,9 +21,9 @@
 #'   dplyr::tibble(
 #'     hcpcs = c("A0021", "V5362", "J9264", "G8916")))
 #'
-#' @export
-#'
 #' @autoglobal
+#'
+#' @export
 describe_hcpcs <- function(hcpcs = NULL, desc_type = "All", varname = "hcpcs", ...) {
 
   dsc <- get_pin("hcpcs_descriptions")

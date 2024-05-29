@@ -21,4 +21,5 @@ This field is for use in post payment review.
 dplyr::tibble(supvis = stringr::str_pad(c(1:6, 9, 21:22, 66, "6A", 77, "7A"),
               width = "2", pad = "0")) |>
 case_supervision(supvis)
+
 }

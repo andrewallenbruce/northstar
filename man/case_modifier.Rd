@@ -20,4 +20,5 @@ Add Modifier Indicator Descriptions
 \examples{
 dplyr::tibble(mod = c(26, "TC", 53)) |>
 case_modifier(mod)
+
 }

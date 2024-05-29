@@ -4,6 +4,8 @@
 #'
 #' @returns `<pins_board_folder>` or `<pins_board_url>`
 #'
+#' @autoglobal
+#'
 #' @noRd
 mount_board <- function(source = c("local", "remote")) {
 
@@ -31,7 +33,11 @@ mount_board <- function(source = c("local", "remote")) {
 #'
 #' @returns `<tibble>`
 #'
-#' @noRd
+#' @keywords internal
+#'
+#' @autoglobal
+#'
+#' @export
 get_pin <- function(pin, ...) {
 
   board <- mount_board(...)
@@ -47,6 +53,8 @@ get_pin <- function(pin, ...) {
 #' @param ... arguments to pass to [mount_board()]
 #'
 #' @returns `<list>` of [pins][pins::pins-package]
+#'
+#' @autoglobal
 #'
 #' @noRd
 list_pins <- function(...) {
@@ -123,11 +131,4 @@ search_in_if_args <- function(df,
 #' @noRd
 null_if_empty <- function(x) {
   if (vctrs::vec_is_empty(x)) NULL else x
-}
-
-#' @autoglobal
-#'
-#' @noRd
-round_up <- function(x, digits = 2) {
-  janitor::round_half_up(x, digits = digits)
 }

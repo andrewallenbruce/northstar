@@ -20,4 +20,5 @@ Modifier 50: Indicates services subject to payment adjustment
 \examples{
 dplyr::tibble(surg_bilat = c(0:3, "9")) |>
 case_bilateral(surg_bilat)
+
 }

@@ -20,4 +20,5 @@ Add OPPS Indicator Descriptions
 \examples{
 dplyr::tibble(opps_ind = c("1", "9")) |>
 case_opps(opps_ind)
+
 }

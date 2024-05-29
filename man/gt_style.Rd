@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-gt.R
 \name{gt_style}
 \alias{gt_style}
-\title{gt Theme}
+\title{{gt} Theme}
 \usage{
 gt_style(
   gt_tbl,
@@ -27,6 +27,6 @@ gt_style(
 description
 }
 \description{
-gt Theme
+{gt} Theme
 }
 \keyword{internal}

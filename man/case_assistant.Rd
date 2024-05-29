@@ -30,4 +30,5 @@ Modifiers:
 \examples{
 dplyr::tibble(surg_asst = c(0:2, "9")) |>
 case_assistant(surg_asst)
+
 }

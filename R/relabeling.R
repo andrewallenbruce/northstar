@@ -1,15 +1,21 @@
 #' Add HCPCS Level I & II Section Labels
+#'
 #' @param df data frame
+#'
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `chapter` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `chapter` column
+#'
 #' @examples
 #' dplyr::tibble(
 #' hcpcs = c("39503", "99215", "99140",
 #'           "69990", "70010", "0222U",
 #'           "V5299", "7010F", "0074T")) |>
 #'           case_chapter(hcpcs)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_chapter <- function(df, col) {
 
   df |>
@@ -48,17 +54,23 @@ case_chapter <- function(df, col) {
 }
 
 #' Add CPT Section Labels
+#'
 #' @param df data frame
+#'
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `chapter` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `chapter` column
+#'
 #' @examples
 #' dplyr::tibble(
 #'       hcpcs = c("39503", "99215", "99140",
 #'                 "69990", "70010", "0222U",
 #'                 "V5299", "7010F", "0074T")) |>
 #'                 case_chapter_cpt(hcpcs)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_chapter_cpt <- function(df, col) {
 
   df |>
@@ -76,17 +88,22 @@ case_chapter_cpt <- function(df, col) {
 }
 
 #' Add HCPCS Section Labels
+#'
 #' @param df data frame
+#'
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `chapter` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `chapter` column
+#'
 #' @examples
 #' dplyr::tibble(
 #'       hcpcs = c("39503", "99215", "99140",
 #'                 "69990", "70010", "0222U",
 #'                 "V5299", "7010F", "0074T")) |>
 #'                 case_chapter_hcpcs(hcpcs)
-#' @export
 #' @autoglobal
+#'
+#' @export
 case_chapter_hcpcs <- function(df, col) {
 
   df |>
@@ -114,17 +131,22 @@ case_chapter_hcpcs <- function(df, col) {
 }
 
 #' Add HCPCS Level Labels
+#'
 #' @param df data frame
+#'
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `level` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `level` column
+#'
 #' @examples
 #' dplyr::tibble(
 #'       hcpcs = c("39503", "99215", "99140",
 #'                 "69990", "70010", "0222U",
 #'                 "V5299", "7010F", "0074T")) |>
 #'                 case_level(hcpcs)
-#' @export
 #' @autoglobal
+#'
+#' @export
 case_level <- function(df, col) {
 
   df |>
@@ -137,17 +159,23 @@ case_level <- function(df, col) {
 }
 
 #' Add CPT Category Labels
+#'
 #' @param df data frame
+#'
 #' @param col column of HCPCS codes to match on
-#' @return A [tibble][tibble::tibble-package] with a `category` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `category` column
+#'
 #' @examples
 #' dplyr::tibble(
 #'       hcpcs = c("39503", "99215", "99140",
 #'                 "69990", "70010", "0222U",
 #'                 "V5299", "7010F", "0074T")) |>
 #'                 case_category(hcpcs)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_category <- function(df, col) {
 
   df |>
@@ -161,15 +189,21 @@ case_category <- function(df, col) {
 }
 
 #' Add Global Days Descriptions
+#'
 #' @param df data frame
+#'
 #' @param col column of Global Days indicators
-#' @return A [tibble][tibble::tibble-package] with a `global_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `global_description` column
+#'
 #' @examples
 #' dplyr::tibble(global = c("000", "010", "090",
 #'                          "MMM", "XXX", "YYY", "ZZZ")) |>
 #' case_global(global)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_global <- function(df, col) {
 
   df |>
@@ -192,14 +226,19 @@ case_global <- function(df, col) {
 #' HCPCS codes with a Multiple Procedure indicator of 4.
 #'
 #' @param df data frame
+#'
 #' @param col column of Diagnostic Imaging indicators
-#' @return A [tibble][tibble::tibble-package] with a `dximg_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `dximg_description` column
+#'
 #' @examples
 #' dplyr::tibble(dximg = stringr::str_pad(c(1:11, 88, 99),
 #' width = "2", pad = "0")) |>
 #' case_imaging(dximg)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_imaging <- function(df, col) {
 
   df |>
@@ -227,14 +266,19 @@ case_imaging <- function(df, col) {
 #' This field is for use in post payment review.
 #'
 #' @param df data frame
+#'
 #' @param col column of Physician Supervision indicators
-#' @return A [tibble][tibble::tibble-package] with a `supvis_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `supvis_description` column
+#'
 #' @examples
 #' dplyr::tibble(supvis = stringr::str_pad(c(1:6, 9, 21:22, 66, "6A", 77, "7A"),
 #'               width = "2", pad = "0")) |>
 #' case_supervision(supvis)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_supervision <- function(df, col) {
 
   df |>
@@ -262,13 +306,18 @@ case_supervision <- function(df, col) {
 #' Modifier 66: Services for which Team Surgeons may be paid
 #'
 #' @param df data frame
+#'
 #' @param col column of Team Surgery indicators
-#' @return A [tibble][tibble::tibble-package] with a `team_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `team_description` column
+#'
 #' @examples
 #' dplyr::tibble(surg_team = c(0:2, "9")) |>
 #' case_team(surg_team)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_team <- function(df, col) {
 
   df |>
@@ -287,13 +336,18 @@ case_team <- function(df, col) {
 #' Modifier 50: Indicates services subject to payment adjustment
 #'
 #' @param df data frame
+#'
 #' @param col column of Bilateral Surgery indicators
-#' @return A [tibble][tibble::tibble-package] with a `bilat_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `bilat_description` column
+#'
 #' @examples
 #' dplyr::tibble(surg_bilat = c(0:3, "9")) |>
 #' case_bilateral(surg_bilat)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_bilateral <- function(df, col) {
 
   df |>
@@ -313,13 +367,18 @@ case_bilateral <- function(df, col) {
 #' Modifier 51: Indicates applicable payment adjustment rule for multiple procedures
 #'
 #' @param df data frame
+#'
 #' @param col column of Multiple Procedure indicators
-#' @return A [tibble][tibble::tibble-package] with a `mproc_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `mproc_description` column
+#'
 #' @examples
 #' dplyr::tibble(mult_proc = as.character(0:9)) |>
 #' case_multproc(mult_proc)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_multproc <- function(df, col) {
 
   df |>
@@ -344,13 +403,18 @@ case_multproc <- function(df, col) {
 #' each in a different specialty, may be paid.
 #'
 #' @param df data frame
+#'
 #' @param col column of Co Surgeon indicators
-#' @return A [tibble][tibble::tibble-package] with a `cosurg_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `cosurg_description` column
+#'
 #' @examples
 #' dplyr::tibble(surg_co = c(0:2, "9")) |>
 #' case_cosurg(surg_co)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_cosurg <- function(df, col) {
 
   df |>
@@ -376,13 +440,18 @@ case_cosurg <- function(df, col) {
 #' + AS: Non-Physician Assistant at Surgery
 #'
 #' @param df data frame
+#'
 #' @param col column of Assistant Surgery indicators
-#' @return A [tibble][tibble::tibble-package] with a `asst_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with a `asst_description` column
+#'
 #' @examples
 #' dplyr::tibble(surg_asst = c(0:2, "9")) |>
 #' case_assistant(surg_asst)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_assistant <- function(df, col) {
 
   df |>
@@ -399,13 +468,18 @@ case_assistant <- function(df, col) {
 #' Add OPPS Indicator Descriptions
 #'
 #' @param df data frame
+#'
 #' @param col column of OPPS Indicator indicators
-#' @return A [tibble][tibble::tibble-package] with an `opps_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with an `opps_description` column
+#'
 #' @examples
 #' dplyr::tibble(opps_ind = c("1", "9")) |>
 #' case_opps(opps_ind)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_opps <- function(df, col) {
 
   df |>
@@ -418,13 +492,18 @@ case_opps <- function(df, col) {
 #' Add Modifier Indicator Descriptions
 #'
 #' @param df data frame
+#'
 #' @param col column of Modifier indicators
-#' @return A [tibble][tibble::tibble-package] with an `mod_description` column
+#'
+#' @returns A [tibble][tibble::tibble-package] with an `mod_description` column
+#'
 #' @examples
 #' dplyr::tibble(mod = c(26, "TC", 53)) |>
 #' case_modifier(mod)
-#' @export
+#'
 #' @autoglobal
+#'
+#' @export
 case_modifier <- function(df, col) {
 
   df |>

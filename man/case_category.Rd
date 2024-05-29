@@ -23,4 +23,5 @@ dplyr::tibble(
                 "69990", "70010", "0222U",
                 "V5299", "7010F", "0074T")) |>
                 case_category(hcpcs)
+
 }

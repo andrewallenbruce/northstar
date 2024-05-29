@@ -22,4 +22,5 @@ HCPCS codes with a Multiple Procedure indicator of 4.
 dplyr::tibble(dximg = stringr::str_pad(c(1:11, 88, 99),
 width = "2", pad = "0")) |>
 case_imaging(dximg)
+
 }
