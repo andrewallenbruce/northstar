@@ -4508,25 +4508,28 @@ physician work, practice expense, and malpractice insurance in a
 geographic area compared to the national average costs for each
 component.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">search_gpci</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">counties</span>, <span class="va">two_macs</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_gpcis.html">get_gpcis</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">counties</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">distinct</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"mac"</span>, </span>
 <span>     groupname_col <span class="op">=</span> <span class="st">"state"</span>,</span>
 <span>     row_group_as_column <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>     process_md <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">cols_label</span><span class="op">(</span></span>
-<span>    mac      <span class="op">=</span> <span class="st">"MAC"</span>,</span>
-<span>    state    <span class="op">=</span> <span class="st">"State"</span>,</span>
+<span>    mac <span class="op">=</span> <span class="st">"MAC"</span>,</span>
+<span>    state <span class="op">=</span> <span class="st">"State"</span>,</span>
 <span>    locality <span class="op">=</span> <span class="st">""</span>,</span>
-<span>    area     <span class="op">=</span> <span class="st">"Area"</span>,</span>
-<span>    wgpci    <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**GPCI**&lt;i&gt;&lt;sub&gt;w&lt;/sub&gt;&lt;/i&gt;"</span><span class="op">)</span>,</span>
-<span>    pgpci    <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**GPCI**&lt;i&gt;&lt;sub&gt;pe&lt;/sub&gt;&lt;/i&gt;"</span><span class="op">)</span>,</span>
-<span>    mgpci    <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**GPCI**&lt;i&gt;&lt;sub&gt;mp&lt;/sub&gt;&lt;/i&gt;"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    area <span class="op">=</span> <span class="st">"Area"</span>,</span>
+<span>    gpci_work <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**GPCI**&lt;i&gt;&lt;sub&gt;w&lt;/sub&gt;&lt;/i&gt;"</span><span class="op">)</span>,</span>
+<span>    gpci_pe <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**GPCI**&lt;i&gt;&lt;sub&gt;pe&lt;/sub&gt;&lt;/i&gt;"</span><span class="op">)</span>,</span>
+<span>    gpci_mp <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**GPCI**&lt;i&gt;&lt;sub&gt;mp&lt;/sub&gt;&lt;/i&gt;"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">cols_merge</span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">locality</span>, <span class="va">area</span><span class="op">)</span>,</span>
 <span>             pattern <span class="op">=</span> <span class="st">"&lt;b&gt;{1}&lt;/b&gt;&lt;&lt; {2}&gt;&gt;"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">fmt_number</span><span class="op">(</span>decimals <span class="op">=</span> <span class="fl">2</span>, drop_trailing_zeros <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>lbl <span class="op">=</span> <span class="cn">FALSE</span>, tablign <span class="op">=</span> <span class="st">"center"</span>, tabsize <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">fmt_number</span><span class="op">(</span>decimals <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>             drop_trailing_zeros <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/gt_style.html">gt_style</a></span><span class="op">(</span>lbl <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>           tablign <span class="op">=</span> <span class="st">"center"</span>, </span>
+<span>           tabsize <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tab_style</span><span class="op">(</span></span>
 <span>      style <span class="op">=</span> <span class="fu">cell_text</span><span class="op">(</span></span>
 <span>        align <span class="op">=</span> <span class="st">'center'</span>,</span>
@@ -4547,7 +4550,1611 @@ component.</p>
 <span>  <span class="fu">tab_style</span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu">cell_fill</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"powderblue"</span><span class="op">)</span>,</span>
 <span>    locations <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in search_gpci(): could not find function "search_gpci"</span></span></code></pre>
+<div id="pgwxpefrlo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#pgwxpefrlo table {
+  font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pgwxpefrlo thead, #pgwxpefrlo tbody, #pgwxpefrlo tfoot, #pgwxpefrlo tr, #pgwxpefrlo td, #pgwxpefrlo th {
+  border-style: none;
+}
+
+#pgwxpefrlo p {
+  margin: 0;
+  padding: 0;
+}
+
+#pgwxpefrlo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pgwxpefrlo .gt_title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pgwxpefrlo .gt_subtitle {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pgwxpefrlo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pgwxpefrlo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pgwxpefrlo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pgwxpefrlo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pgwxpefrlo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pgwxpefrlo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pgwxpefrlo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pgwxpefrlo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pgwxpefrlo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pgwxpefrlo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pgwxpefrlo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pgwxpefrlo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgwxpefrlo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pgwxpefrlo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pgwxpefrlo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pgwxpefrlo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgwxpefrlo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pgwxpefrlo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgwxpefrlo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pgwxpefrlo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgwxpefrlo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pgwxpefrlo .gt_sourcenote {
+  font-size: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgwxpefrlo .gt_left {
+  text-align: left;
+}
+
+#pgwxpefrlo .gt_center {
+  text-align: center;
+}
+
+#pgwxpefrlo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pgwxpefrlo .gt_font_normal {
+  font-weight: normal;
+}
+
+#pgwxpefrlo .gt_font_bold {
+  font-weight: bold;
+}
+
+#pgwxpefrlo .gt_font_italic {
+  font-style: italic;
+}
+
+#pgwxpefrlo .gt_super {
+  font-size: 65%;
+}
+
+#pgwxpefrlo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pgwxpefrlo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pgwxpefrlo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pgwxpefrlo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pgwxpefrlo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pgwxpefrlo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pgwxpefrlo .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="2" scope="colgroup" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;GPCI&lt;/strong&gt;&lt;i&gt;&lt;sub&gt;w&lt;/sub&gt;&lt;/i&gt;">
+<strong>GPCI</strong><i><sub>w</sub></i>
+</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;GPCI&lt;/strong&gt;&lt;i&gt;&lt;sub&gt;pe&lt;/sub&gt;&lt;/i&gt;">
+<strong>GPCI</strong><i><sub>pe</sub></i>
+</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;GPCI&lt;/strong&gt;&lt;i&gt;&lt;sub&gt;mp&lt;/sub&gt;&lt;/i&gt;">
+<strong>GPCI</strong><i><sub>mp</sub></i>
+</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr class="gt_row_group_first">
+<td headers="al stub_2_1 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">AL</td>
+<th id="stub_2_1" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>10112</p>
+</div></th>
+<td headers="al stub_2_1 locality" class="gt_row gt_left">
+<b>00</b> ALABAMA</td>
+<td headers="al stub_2_1 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="al stub_2_1 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.87</td>
+<td headers="al stub_2_1 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.58</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ak stub_2_2 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">AK</td>
+<th id="stub_2_2" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>02102</p>
+</div></th>
+<td headers="ak stub_2_2 locality" class="gt_row gt_left">
+<b>01</b> ALASKA</td>
+<td headers="ak stub_2_2 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.5</td>
+<td headers="ak stub_2_2 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.08</td>
+<td headers="ak stub_2_2 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.59</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="az stub_2_3 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">AZ</td>
+<th id="stub_2_3" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>03102</p>
+</div></th>
+<td headers="az stub_2_3 locality" class="gt_row gt_left">
+<b>00</b> ARIZONA</td>
+<td headers="az stub_2_3 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="az stub_2_3 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.97</td>
+<td headers="az stub_2_3 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.85</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ar stub_2_4 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">AR</td>
+<th id="stub_2_4" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>07102</p>
+</div></th>
+<td headers="ar stub_2_4 locality" class="gt_row gt_left">
+<b>13</b> ARKANSAS</td>
+<td headers="ar stub_2_4 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ar stub_2_4 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.86</td>
+<td headers="ar stub_2_4 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.52</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ca stub_2_5 stub_1" rowspan="29" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">CA</td>
+<th id="stub_2_5" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca stub_2_5 locality" class="gt_row gt_left">
+<b>54</b> BAKERSFIELD</td>
+<td headers="ca stub_2_5 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="ca stub_2_5 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca stub_2_5 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.66</td>
+</tr>
+<tr>
+<th id="locality_6" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_6 locality" class="gt_row gt_left">
+<b>55</b> CHICO</td>
+<td headers="ca locality_6 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_6 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_6 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_7" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01182</p>
+</div></th>
+<td headers="ca locality_7 locality" class="gt_row gt_left">
+<b>71</b> EL CENTRO</td>
+<td headers="ca locality_7 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_7 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_7 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.57</td>
+</tr>
+<tr>
+<th id="locality_8" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_8 locality" class="gt_row gt_left">
+<b>56</b> FRESNO</td>
+<td headers="ca locality_8 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_8 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_8 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_9" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_9 locality" class="gt_row gt_left">
+<b>57</b> HANFORD-CORCORAN</td>
+<td headers="ca locality_9 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_9 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_9 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_10" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01182</p>
+</div></th>
+<td headers="ca locality_10 locality" class="gt_row gt_left">
+<b>18</b> LOS ANGELES-LONG BEACH-ANAHEIM (LOS ANGELES/ORANGE CNTY)</td>
+<td headers="ca locality_10 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.04</td>
+<td headers="ca locality_10 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.19</td>
+<td headers="ca locality_10 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.69</td>
+</tr>
+<tr>
+<th id="locality_11" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_11 locality" class="gt_row gt_left">
+<b>58</b> MADERA</td>
+<td headers="ca locality_11 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_11 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_11 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_12" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_12 locality" class="gt_row gt_left">
+<b>59</b> MERCED</td>
+<td headers="ca locality_12 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_12 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_12 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_13" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_13 locality" class="gt_row gt_left">
+<b>60</b> MODESTO</td>
+<td headers="ca locality_13 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_13 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_13 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_14" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_14 locality" class="gt_row gt_left">
+<b>51</b> NAPA</td>
+<td headers="ca locality_14 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="ca locality_14 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.31</td>
+<td headers="ca locality_14 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.52</td>
+</tr>
+<tr>
+<th id="locality_15" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01182</p>
+</div></th>
+<td headers="ca locality_15 locality" class="gt_row gt_left">
+<b>17</b> OXNARD-THOUSAND OAKS-VENTURA</td>
+<td headers="ca locality_15 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="ca locality_15 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.18</td>
+<td headers="ca locality_15 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.65</td>
+</tr>
+<tr>
+<th id="locality_16" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_16 locality" class="gt_row gt_left">
+<b>61</b> REDDING</td>
+<td headers="ca locality_16 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_16 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_16 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_17" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_17 locality" class="gt_row gt_left">
+<b>62</b> RIVERSIDE-SAN BERNARDINO-ONTARIO</td>
+<td headers="ca locality_17 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_17 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_17 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.89</td>
+</tr>
+<tr>
+<th id="locality_18" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_18 locality" class="gt_row gt_left">
+<b>63</b> SACRAMENTO-ROSEVILLE-FOLSOM</td>
+<td headers="ca locality_18 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="ca locality_18 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.16</td>
+<td headers="ca locality_18 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_19" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_19 locality" class="gt_row gt_left">
+<b>64</b> SALINAS</td>
+<td headers="ca locality_19 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="ca locality_19 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.17</td>
+<td headers="ca locality_19 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_20" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01182</p>
+</div></th>
+<td headers="ca locality_20 locality" class="gt_row gt_left">
+<b>72</b> SAN DIEGO-CHULA VISTA-CARLSBAD</td>
+<td headers="ca locality_20 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="ca locality_20 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.19</td>
+<td headers="ca locality_20 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.57</td>
+</tr>
+<tr>
+<th id="locality_21" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_21 locality" class="gt_row gt_left">
+<b>05</b> SAN FRANCISCO-OAKLAND-BERKELEY (SAN FRANCISCO/SAN MATEO/ALAMEDA/CONTRA COSTA CNTY)</td>
+<td headers="ca locality_21 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_21 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.42</td>
+<td headers="ca locality_21 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.45</td>
+</tr>
+<tr>
+<th id="locality_22" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_22 locality" class="gt_row gt_left">
+<b>52</b> SAN FRANCISCO-OAKLAND-BERKELEY (MARIN CNTY)</td>
+<td headers="ca locality_22 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_22 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.42</td>
+<td headers="ca locality_22 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.47</td>
+</tr>
+<tr>
+<th id="locality_23" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_23 locality" class="gt_row gt_left">
+<b>65</b> SAN JOSE-SUNNYVALE-SANTA CLARA (SAN BENITO CNTY)</td>
+<td headers="ca locality_23 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.1</td>
+<td headers="ca locality_23 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.43</td>
+<td headers="ca locality_23 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_24" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01182</p>
+</div></th>
+<td headers="ca locality_24 locality" class="gt_row gt_left">
+<b>73</b> SAN LUIS OBISPO-PASO ROBLES</td>
+<td headers="ca locality_24 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_24 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.13</td>
+<td headers="ca locality_24 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_25" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_25 locality" class="gt_row gt_left">
+<b>09</b> SAN JOSE-SUNNYVALE-SANTA CLARA (SANTA CLARA CNTY)</td>
+<td headers="ca locality_25 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.1</td>
+<td headers="ca locality_25 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.43</td>
+<td headers="ca locality_25 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.42</td>
+</tr>
+<tr>
+<th id="locality_26" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_26 locality" class="gt_row gt_left">
+<b>66</b> SANTA CRUZ-WATSONVILLE</td>
+<td headers="ca locality_26 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="ca locality_26 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.21</td>
+<td headers="ca locality_26 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_27" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01182</p>
+</div></th>
+<td headers="ca locality_27 locality" class="gt_row gt_left">
+<b>74</b> SANTA MARIA-SANTA BARBARA</td>
+<td headers="ca locality_27 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="ca locality_27 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.18</td>
+<td headers="ca locality_27 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_28" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_28 locality" class="gt_row gt_left">
+<b>67</b> SANTA ROSA-PETALUMA</td>
+<td headers="ca locality_28 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="ca locality_28 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.23</td>
+<td headers="ca locality_28 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_29" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_29 locality" class="gt_row gt_left">
+<b>68</b> STOCKTON</td>
+<td headers="ca locality_29 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_29 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_29 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_30" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_30 locality" class="gt_row gt_left">
+<b>53</b> VALLEJO</td>
+<td headers="ca locality_30 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="ca locality_30 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.31</td>
+<td headers="ca locality_30 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.47</td>
+</tr>
+<tr>
+<th id="locality_31" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_31 locality" class="gt_row gt_left">
+<b>69</b> VISALIA</td>
+<td headers="ca locality_31 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_31 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_31 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_32" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_32 locality" class="gt_row gt_left">
+<b>70</b> YUBA CITY</td>
+<td headers="ca locality_32 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_32 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_32 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr>
+<th id="locality_33" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01112</p>
+</div></th>
+<td headers="ca locality_33 locality" class="gt_row gt_left">
+<b>75</b> REST OF CALIFORNIA</td>
+<td headers="ca locality_33 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="ca locality_33 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ca locality_33 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="co stub_2_34 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">CO</td>
+<th id="stub_2_34" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04112</p>
+</div></th>
+<td headers="co stub_2_34 locality" class="gt_row gt_left">
+<b>01</b> COLORADO</td>
+<td headers="co stub_2_34 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="co stub_2_34 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.05</td>
+<td headers="co stub_2_34 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.83</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ct stub_2_35 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">CT</td>
+<th id="stub_2_35" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>13102</p>
+</div></th>
+<td headers="ct stub_2_35 locality" class="gt_row gt_left">
+<b>00</b> CONNECTICUT</td>
+<td headers="ct stub_2_35 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="ct stub_2_35 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.09</td>
+<td headers="ct stub_2_35 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.21</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="dc stub_2_36 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">DC</td>
+<th id="stub_2_36" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12202</p>
+</div></th>
+<td headers="dc stub_2_36 locality" class="gt_row gt_left">
+<b>01</b> DC + MD/VA SUBURBS</td>
+<td headers="dc stub_2_36 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="dc stub_2_36 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.19</td>
+<td headers="dc stub_2_36 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.17</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="de stub_2_37 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">DE</td>
+<th id="stub_2_37" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12102</p>
+</div></th>
+<td headers="de stub_2_37 locality" class="gt_row gt_left">
+<b>01</b> DELAWARE</td>
+<td headers="de stub_2_37 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="de stub_2_37 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.99</td>
+<td headers="de stub_2_37 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.95</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="fl stub_2_38 stub_1" rowspan="3" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">FL</td>
+<th id="stub_2_38" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>09102</p>
+</div></th>
+<td headers="fl stub_2_38 locality" class="gt_row gt_left">
+<b>03</b> FORT LAUDERDALE</td>
+<td headers="fl stub_2_38 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="fl stub_2_38 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="fl stub_2_38 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.77</td>
+</tr>
+<tr>
+<th id="locality_39" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>09102</p>
+</div></th>
+<td headers="fl locality_39 locality" class="gt_row gt_left">
+<b>04</b> MIAMI</td>
+<td headers="fl locality_39 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="fl locality_39 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="fl locality_39 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">2.5</td>
+</tr>
+<tr>
+<th id="locality_40" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>09102</p>
+</div></th>
+<td headers="fl locality_40 locality" class="gt_row gt_left">
+<b>99</b> REST OF FLORIDA</td>
+<td headers="fl locality_40 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="fl locality_40 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.94</td>
+<td headers="fl locality_40 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.47</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ga stub_2_41 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">GA</td>
+<th id="stub_2_41" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>10212</p>
+</div></th>
+<td headers="ga stub_2_41 locality" class="gt_row gt_left">
+<b>01</b> ATLANTA</td>
+<td headers="ga stub_2_41 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ga stub_2_41 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ga stub_2_41 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.13</td>
+</tr>
+<tr>
+<th id="locality_42" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>10212</p>
+</div></th>
+<td headers="ga locality_42 locality" class="gt_row gt_left">
+<b>99</b> REST OF GEORGIA</td>
+<td headers="ga locality_42 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ga locality_42 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.88</td>
+<td headers="ga locality_42 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.12</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="hi stub_2_43 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">HI</td>
+<th id="stub_2_43" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01212</p>
+</div></th>
+<td headers="hi stub_2_43 locality" class="gt_row gt_left">
+<b>01</b> HAWAII, GUAM</td>
+<td headers="hi stub_2_43 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="hi stub_2_43 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.15</td>
+<td headers="hi stub_2_43 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.56</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="id stub_2_44 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">ID</td>
+<th id="stub_2_44" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>02202</p>
+</div></th>
+<td headers="id stub_2_44 locality" class="gt_row gt_left">
+<b>00</b> IDAHO</td>
+<td headers="id stub_2_44 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="id stub_2_44 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="id stub_2_44 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.46</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="il stub_2_45 stub_1" rowspan="4" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">IL</td>
+<th id="stub_2_45" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>06102</p>
+</div></th>
+<td headers="il stub_2_45 locality" class="gt_row gt_left">
+<b>16</b> CHICAGO</td>
+<td headers="il stub_2_45 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="il stub_2_45 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="il stub_2_45 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">2.02</td>
+</tr>
+<tr>
+<th id="locality_46" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>06102</p>
+</div></th>
+<td headers="il locality_46 locality" class="gt_row gt_left">
+<b>12</b> EAST ST. LOUIS</td>
+<td headers="il locality_46 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="il locality_46 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.92</td>
+<td headers="il locality_46 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.78</td>
+</tr>
+<tr>
+<th id="locality_47" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>06102</p>
+</div></th>
+<td headers="il locality_47 locality" class="gt_row gt_left">
+<b>15</b> SUBURBAN CHICAGO</td>
+<td headers="il locality_47 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="il locality_47 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.05</td>
+<td headers="il locality_47 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.56</td>
+</tr>
+<tr>
+<th id="locality_48" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>06102</p>
+</div></th>
+<td headers="il locality_48 locality" class="gt_row gt_left">
+<b>99</b> REST OF ILLINOIS</td>
+<td headers="il locality_48 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="il locality_48 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="il locality_48 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.38</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="in stub_2_49 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">IN</td>
+<th id="stub_2_49" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>08102</p>
+</div></th>
+<td headers="in stub_2_49 locality" class="gt_row gt_left">
+<b>00</b> INDIANA</td>
+<td headers="in stub_2_49 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="in stub_2_49 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.92</td>
+<td headers="in stub_2_49 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.49</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ia stub_2_50 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">IA</td>
+<th id="stub_2_50" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>05102</p>
+</div></th>
+<td headers="ia stub_2_50 locality" class="gt_row gt_left">
+<b>00</b> IOWA</td>
+<td headers="ia stub_2_50 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ia stub_2_50 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="ia stub_2_50 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.46</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ks stub_2_51 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">KS</td>
+<th id="stub_2_51" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>05202</p>
+</div></th>
+<td headers="ks stub_2_51 locality" class="gt_row gt_left">
+<b>00</b> KANSAS</td>
+<td headers="ks stub_2_51 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ks stub_2_51 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="ks stub_2_51 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.54</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ky stub_2_52 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">KY</td>
+<th id="stub_2_52" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>15102</p>
+</div></th>
+<td headers="ky stub_2_52 locality" class="gt_row gt_left">
+<b>00</b> KENTUCKY</td>
+<td headers="ky stub_2_52 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ky stub_2_52 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.88</td>
+<td headers="ky stub_2_52 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="la stub_2_53 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">LA</td>
+<th id="stub_2_53" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>07202</p>
+</div></th>
+<td headers="la stub_2_53 locality" class="gt_row gt_left">
+<b>01</b> NEW ORLEANS</td>
+<td headers="la stub_2_53 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="la stub_2_53 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.94</td>
+<td headers="la stub_2_53 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.16</td>
+</tr>
+<tr>
+<th id="locality_54" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>07202</p>
+</div></th>
+<td headers="la locality_54 locality" class="gt_row gt_left">
+<b>99</b> REST OF LOUISIANA</td>
+<td headers="la locality_54 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="la locality_54 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.88</td>
+<td headers="la locality_54 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.98</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="me stub_2_55 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">ME</td>
+<th id="stub_2_55" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14112</p>
+</div></th>
+<td headers="me stub_2_55 locality" class="gt_row gt_left">
+<b>03</b> SOUTHERN MAINE</td>
+<td headers="me stub_2_55 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="me stub_2_55 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="me stub_2_55 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.66</td>
+</tr>
+<tr>
+<th id="locality_56" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14112</p>
+</div></th>
+<td headers="me locality_56 locality" class="gt_row gt_left">
+<b>99</b> REST OF MAINE</td>
+<td headers="me locality_56 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="me locality_56 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="me locality_56 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.65</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="md stub_2_57 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MD</td>
+<th id="stub_2_57" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12302</p>
+</div></th>
+<td headers="md stub_2_57 locality" class="gt_row gt_left">
+<b>01</b> BALTIMORE/SURR. CNTYS</td>
+<td headers="md stub_2_57 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="md stub_2_57 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.08</td>
+<td headers="md stub_2_57 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.31</td>
+</tr>
+<tr>
+<th id="locality_58" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12302</p>
+</div></th>
+<td headers="md locality_58 locality" class="gt_row gt_left">
+<b>99</b> REST OF MARYLAND</td>
+<td headers="md locality_58 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="md locality_58 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="md locality_58 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.97</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ma stub_2_59 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MA</td>
+<th id="stub_2_59" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14212</p>
+</div></th>
+<td headers="ma stub_2_59 locality" class="gt_row gt_left">
+<b>01</b> METROPOLITAN BOSTON</td>
+<td headers="ma stub_2_59 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.04</td>
+<td headers="ma stub_2_59 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.2</td>
+<td headers="ma stub_2_59 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.89</td>
+</tr>
+<tr>
+<th id="locality_60" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14212</p>
+</div></th>
+<td headers="ma locality_60 locality" class="gt_row gt_left">
+<b>99</b> REST OF MASSACHUSETTS</td>
+<td headers="ma locality_60 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="ma locality_60 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="ma locality_60 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.8</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="mi stub_2_61 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MI</td>
+<th id="stub_2_61" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>08202</p>
+</div></th>
+<td headers="mi stub_2_61 locality" class="gt_row gt_left">
+<b>01</b> DETROIT</td>
+<td headers="mi stub_2_61 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mi stub_2_61 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.99</td>
+<td headers="mi stub_2_61 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.72</td>
+</tr>
+<tr>
+<th id="locality_62" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>08202</p>
+</div></th>
+<td headers="mi locality_62 locality" class="gt_row gt_left">
+<b>99</b> REST OF MICHIGAN</td>
+<td headers="mi locality_62 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mi locality_62 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="mi locality_62 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.17</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="mn stub_2_63 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MN</td>
+<th id="stub_2_63" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>06202</p>
+</div></th>
+<td headers="mn stub_2_63 locality" class="gt_row gt_left">
+<b>00</b> MINNESOTA</td>
+<td headers="mn stub_2_63 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mn stub_2_63 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="mn stub_2_63 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.3</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ms stub_2_64 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MS</td>
+<th id="stub_2_64" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>07302</p>
+</div></th>
+<td headers="ms stub_2_64 locality" class="gt_row gt_left">
+<b>00</b> MISSISSIPPI</td>
+<td headers="ms stub_2_64 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ms stub_2_64 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.85</td>
+<td headers="ms stub_2_64 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.77</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="mo stub_2_65 stub_1" rowspan="3" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MO</td>
+<th id="stub_2_65" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>05302</p>
+</div></th>
+<td headers="mo stub_2_65 locality" class="gt_row gt_left">
+<b>02</b> METROPOLITAN KANSAS CITY</td>
+<td headers="mo stub_2_65 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mo stub_2_65 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.95</td>
+<td headers="mo stub_2_65 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.99</td>
+</tr>
+<tr>
+<th id="locality_66" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>05302</p>
+</div></th>
+<td headers="mo locality_66 locality" class="gt_row gt_left">
+<b>01</b> METROPOLITAN ST. LOUIS</td>
+<td headers="mo locality_66 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mo locality_66 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.95</td>
+<td headers="mo locality_66 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.99</td>
+</tr>
+<tr>
+<th id="locality_67" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>05302</p>
+</div></th>
+<td headers="mo locality_67 locality" class="gt_row gt_left">
+<b>99</b> REST OF MISSOURI</td>
+<td headers="mo locality_67 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mo locality_67 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.86</td>
+<td headers="mo locality_67 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.97</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="mt stub_2_68 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">MT</td>
+<th id="stub_2_68" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>03202</p>
+</div></th>
+<td headers="mt stub_2_68 locality" class="gt_row gt_left">
+<b>01</b> MONTANA</td>
+<td headers="mt stub_2_68 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mt stub_2_68 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="mt stub_2_68 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.98</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ne stub_2_69 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NE</td>
+<th id="stub_2_69" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>05402</p>
+</div></th>
+<td headers="ne stub_2_69 locality" class="gt_row gt_left">
+<b>00</b> NEBRASKA</td>
+<td headers="ne stub_2_69 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ne stub_2_69 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.92</td>
+<td headers="ne stub_2_69 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.3</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="nv stub_2_70 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NV</td>
+<th id="stub_2_70" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>01312</p>
+</div></th>
+<td headers="nv stub_2_70 locality" class="gt_row gt_left">
+<b>00</b> NEVADA</td>
+<td headers="nv stub_2_70 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nv stub_2_70 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nv stub_2_70 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.84</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="nh stub_2_71 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NH</td>
+<th id="stub_2_71" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14312</p>
+</div></th>
+<td headers="nh stub_2_71 locality" class="gt_row gt_left">
+<b>40</b> NEW HAMPSHIRE</td>
+<td headers="nh stub_2_71 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nh stub_2_71 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+<td headers="nh stub_2_71 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.9</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="nj stub_2_72 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NJ</td>
+<th id="stub_2_72" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12402</p>
+</div></th>
+<td headers="nj stub_2_72 locality" class="gt_row gt_left">
+<b>01</b> NORTHERN NJ</td>
+<td headers="nj stub_2_72 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="nj stub_2_72 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.17</td>
+<td headers="nj stub_2_72 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+</tr>
+<tr>
+<th id="locality_73" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12402</p>
+</div></th>
+<td headers="nj locality_73 locality" class="gt_row gt_left">
+<b>99</b> REST OF NEW JERSEY</td>
+<td headers="nj locality_73 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.04</td>
+<td headers="nj locality_73 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.11</td>
+<td headers="nj locality_73 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.07</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="nm stub_2_74 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NM</td>
+<th id="stub_2_74" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04212</p>
+</div></th>
+<td headers="nm stub_2_74 locality" class="gt_row gt_left">
+<b>05</b> NEW MEXICO</td>
+<td headers="nm stub_2_74 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nm stub_2_74 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="nm stub_2_74 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.17</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ny stub_2_75 stub_1" rowspan="5" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NY</td>
+<th id="stub_2_75" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>13202</p>
+</div></th>
+<td headers="ny stub_2_75 locality" class="gt_row gt_left">
+<b>01</b> MANHATTAN</td>
+<td headers="ny stub_2_75 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="ny stub_2_75 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.17</td>
+<td headers="ny stub_2_75 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.66</td>
+</tr>
+<tr>
+<th id="locality_76" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>13202</p>
+</div></th>
+<td headers="ny locality_76 locality" class="gt_row gt_left">
+<b>02</b> NYC SUBURBS/LONG ISLAND</td>
+<td headers="ny locality_76 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="ny locality_76 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.2</td>
+<td headers="ny locality_76 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.91</td>
+</tr>
+<tr>
+<th id="locality_77" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>13202</p>
+</div></th>
+<td headers="ny locality_77 locality" class="gt_row gt_left">
+<b>03</b> POUGHKPSIE/N NYC SUBURBS</td>
+<td headers="ny locality_77 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.05</td>
+<td headers="ny locality_77 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.11</td>
+<td headers="ny locality_77 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.27</td>
+</tr>
+<tr>
+<th id="locality_78" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>13292</p>
+</div></th>
+<td headers="ny locality_78 locality" class="gt_row gt_left">
+<b>04</b> QUEENS</td>
+<td headers="ny locality_78 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.06</td>
+<td headers="ny locality_78 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.2</td>
+<td headers="ny locality_78 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.46</td>
+</tr>
+<tr>
+<th id="locality_79" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>13282</p>
+</div></th>
+<td headers="ny locality_79 locality" class="gt_row gt_left">
+<b>99</b> REST OF NEW YORK</td>
+<td headers="ny locality_79 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ny locality_79 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.95</td>
+<td headers="ny locality_79 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.73</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="nc stub_2_80 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">NC</td>
+<th id="stub_2_80" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>11502</p>
+</div></th>
+<td headers="nc stub_2_80 locality" class="gt_row gt_left">
+<b>00</b> NORTH CAROLINA</td>
+<td headers="nc stub_2_80 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nc stub_2_80 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.93</td>
+<td headers="nc stub_2_80 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.66</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="nd stub_2_81 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">ND</td>
+<th id="stub_2_81" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>03302</p>
+</div></th>
+<td headers="nd stub_2_81 locality" class="gt_row gt_left">
+<b>01</b> NORTH DAKOTA</td>
+<td headers="nd stub_2_81 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nd stub_2_81 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="nd stub_2_81 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.52</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="oh stub_2_82 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">OH</td>
+<th id="stub_2_82" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>15202</p>
+</div></th>
+<td headers="oh stub_2_82 locality" class="gt_row gt_left">
+<b>00</b> OHIO</td>
+<td headers="oh stub_2_82 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="oh stub_2_82 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="oh stub_2_82 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.03</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ok stub_2_83 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">OK</td>
+<th id="stub_2_83" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04312</p>
+</div></th>
+<td headers="ok stub_2_83 locality" class="gt_row gt_left">
+<b>00</b> OKLAHOMA</td>
+<td headers="ok stub_2_83 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ok stub_2_83 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.89</td>
+<td headers="ok stub_2_83 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.81</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="or stub_2_84 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">OR</td>
+<th id="stub_2_84" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>02302</p>
+</div></th>
+<td headers="or stub_2_84 locality" class="gt_row gt_left">
+<b>01</b> PORTLAND</td>
+<td headers="or stub_2_84 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="or stub_2_84 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.1</td>
+<td headers="or stub_2_84 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.69</td>
+</tr>
+<tr>
+<th id="locality_85" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>02302</p>
+</div></th>
+<td headers="or locality_85 locality" class="gt_row gt_left">
+<b>99</b> REST OF OREGON</td>
+<td headers="or locality_85 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="or locality_85 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.99</td>
+<td headers="or locality_85 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.64</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="pa stub_2_86 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">PA</td>
+<th id="stub_2_86" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12502</p>
+</div></th>
+<td headers="pa stub_2_86 locality" class="gt_row gt_left">
+<b>01</b> METROPOLITAN PHILADELPHIA</td>
+<td headers="pa stub_2_86 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="pa stub_2_86 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.05</td>
+<td headers="pa stub_2_86 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.18</td>
+</tr>
+<tr>
+<th id="locality_87" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>12502</p>
+</div></th>
+<td headers="pa locality_87 locality" class="gt_row gt_left">
+<b>99</b> REST OF PENNSYLVANIA</td>
+<td headers="pa locality_87 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="pa locality_87 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.93</td>
+<td headers="pa locality_87 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.93</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="pr stub_2_88 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">PR</td>
+<th id="stub_2_88" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>09202</p>
+</div></th>
+<td headers="pr stub_2_88 locality" class="gt_row gt_left">
+<b>20</b> PUERTO RICO</td>
+<td headers="pr stub_2_88 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="pr stub_2_88 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="pr stub_2_88 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.98</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ri stub_2_89 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">RI</td>
+<th id="stub_2_89" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14412</p>
+</div></th>
+<td headers="ri stub_2_89 locality" class="gt_row gt_left">
+<b>01</b> RHODE ISLAND</td>
+<td headers="ri stub_2_89 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.02</td>
+<td headers="ri stub_2_89 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.04</td>
+<td headers="ri stub_2_89 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.85</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="sc stub_2_90 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">SC</td>
+<th id="stub_2_90" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>11202</p>
+</div></th>
+<td headers="sc stub_2_90 locality" class="gt_row gt_left">
+<b>01</b> SOUTH CAROLINA</td>
+<td headers="sc stub_2_90 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="sc stub_2_90 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+<td headers="sc stub_2_90 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.82</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="sd stub_2_91 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">SD</td>
+<th id="stub_2_91" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>03402</p>
+</div></th>
+<td headers="sd stub_2_91 locality" class="gt_row gt_left">
+<b>02</b> SOUTH DAKOTA</td>
+<td headers="sd stub_2_91 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="sd stub_2_91 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="sd stub_2_91 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.38</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="tn stub_2_92 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">TN</td>
+<th id="stub_2_92" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>10312</p>
+</div></th>
+<td headers="tn stub_2_92 locality" class="gt_row gt_left">
+<b>35</b> TENNESSEE</td>
+<td headers="tn stub_2_92 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tn stub_2_92 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.9</td>
+<td headers="tn stub_2_92 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.54</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="tx stub_2_93 stub_1" rowspan="8" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">TX</td>
+<th id="stub_2_93" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx stub_2_93 locality" class="gt_row gt_left">
+<b>31</b> AUSTIN</td>
+<td headers="tx stub_2_93 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tx stub_2_93 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.05</td>
+<td headers="tx stub_2_93 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.91</td>
+</tr>
+<tr>
+<th id="locality_94" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_94 locality" class="gt_row gt_left">
+<b>20</b> BEAUMONT</td>
+<td headers="tx locality_94 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tx locality_94 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.9</td>
+<td headers="tx locality_94 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.95</td>
+</tr>
+<tr>
+<th id="locality_95" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_95 locality" class="gt_row gt_left">
+<b>09</b> BRAZORIA</td>
+<td headers="tx locality_95 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_95 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_95 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.79</td>
+</tr>
+<tr>
+<th id="locality_96" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_96 locality" class="gt_row gt_left">
+<b>11</b> DALLAS</td>
+<td headers="tx locality_96 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_96 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_96 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.88</td>
+</tr>
+<tr>
+<th id="locality_97" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_97 locality" class="gt_row gt_left">
+<b>28</b> FORT WORTH</td>
+<td headers="tx locality_97 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_97 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tx locality_97 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.9</td>
+</tr>
+<tr>
+<th id="locality_98" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_98 locality" class="gt_row gt_left">
+<b>15</b> GALVESTON</td>
+<td headers="tx locality_98 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_98 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tx locality_98 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.86</td>
+</tr>
+<tr>
+<th id="locality_99" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_99 locality" class="gt_row gt_left">
+<b>18</b> HOUSTON</td>
+<td headers="tx locality_99 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="tx locality_99 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tx locality_99 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.41</td>
+</tr>
+<tr>
+<th id="locality_100" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>04412</p>
+</div></th>
+<td headers="tx locality_100 locality" class="gt_row gt_left">
+<b>99</b> REST OF TEXAS</td>
+<td headers="tx locality_100 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="tx locality_100 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.94</td>
+<td headers="tx locality_100 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.93</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="ut stub_2_101 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">UT</td>
+<th id="stub_2_101" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>03502</p>
+</div></th>
+<td headers="ut stub_2_101 locality" class="gt_row gt_left">
+<b>09</b> UTAH</td>
+<td headers="ut stub_2_101 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="ut stub_2_101 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.93</td>
+<td headers="ut stub_2_101 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.93</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="vt stub_2_102 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">VT</td>
+<th id="stub_2_102" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>14512</p>
+</div></th>
+<td headers="vt stub_2_102 locality" class="gt_row gt_left">
+<b>50</b> VERMONT</td>
+<td headers="vt stub_2_102 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="vt stub_2_102 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.99</td>
+<td headers="vt stub_2_102 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.52</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="va stub_2_103 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">VA</td>
+<th id="stub_2_103" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>11302</p>
+</div></th>
+<td headers="va stub_2_103 locality" class="gt_row gt_left">
+<b>00</b> VIRGINIA</td>
+<td headers="va stub_2_103 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="va stub_2_103 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.98</td>
+<td headers="va stub_2_103 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.76</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="vi stub_2_104 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">VI</td>
+<th id="stub_2_104" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>09202</p>
+</div></th>
+<td headers="vi stub_2_104 locality" class="gt_row gt_left">
+<b>50</b> VIRGIN ISLANDS</td>
+<td headers="vi stub_2_104 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="vi stub_2_104 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="vi stub_2_104 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.98</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="wa stub_2_105 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">WA</td>
+<th id="stub_2_105" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>02402</p>
+</div></th>
+<td headers="wa stub_2_105 locality" class="gt_row gt_left">
+<b>02</b> SEATTLE (KING CNTY)</td>
+<td headers="wa stub_2_105 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.04</td>
+<td headers="wa stub_2_105 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.22</td>
+<td headers="wa stub_2_105 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.85</td>
+</tr>
+<tr>
+<th id="locality_106" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>02402</p>
+</div></th>
+<td headers="wa locality_106 locality" class="gt_row gt_left">
+<b>99</b> REST OF WASHINGTON</td>
+<td headers="wa locality_106 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1.01</td>
+<td headers="wa locality_106 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1.04</td>
+<td headers="wa locality_106 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.8</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="wv stub_2_107 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">WV</td>
+<th id="stub_2_107" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>11402</p>
+</div></th>
+<td headers="wv stub_2_107 locality" class="gt_row gt_left">
+<b>16</b> WEST VIRGINIA</td>
+<td headers="wv stub_2_107 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="wv stub_2_107 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.86</td>
+<td headers="wv stub_2_107 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">1.33</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="wi stub_2_108 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">WI</td>
+<th id="stub_2_108" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>06302</p>
+</div></th>
+<td headers="wi stub_2_108 locality" class="gt_row gt_left">
+<b>00</b> WISCONSIN</td>
+<td headers="wi stub_2_108 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="wi stub_2_108 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">0.96</td>
+<td headers="wi stub_2_108 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.33</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="wy stub_2_109 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue; background-color: #B0E0E6;">WY</td>
+<th id="stub_2_109" scope="row" class="gt_row gt_left gt_stub" style="font-family: 'Fira Code'; font-size: 16px; text-align: center; font-weight: normal;"><div class="gt_from_md">
+<p>03602</p>
+</div></th>
+<td headers="wy stub_2_109 locality" class="gt_row gt_left">
+<b>21</b> WYOMING</td>
+<td headers="wy stub_2_109 gpci_work" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="wy stub_2_109 gpci_pe" class="gt_row gt_left" style="font-family: 'Fira Code';">1</td>
+<td headers="wy stub_2_109 gpci_mp" class="gt_row gt_left" style="font-family: 'Fira Code';">0.74</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
