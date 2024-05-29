@@ -37,7 +37,7 @@
     
     <a class="navbar-brand me-2" href="index.html">northstar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,133 +129,68 @@
 <span class="emoji" data-emoji="beginner">🔰</span> Usage<a class="anchor" aria-label="anchor" href="#beginner-usage"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor" class="external-link">janitor</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="search-fee-schedule">Search Fee Schedule<a class="anchor" aria-label="anchor" href="#search-fee-schedule"></a>
+<h3 id="describe-hcpcs">Describe HCPCS<a class="anchor" aria-label="anchor" href="#describe-hcpcs"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">search_fee_schedule</span><span class="op">(</span></span>
-<span>  hcpcs    <span class="op">=</span> <span class="st">"33924"</span>,</span>
-<span>  state    <span class="op">=</span> <span class="st">"GA"</span>,</span>
-<span>  locality <span class="op">=</span> <span class="st">"01"</span>,</span>
-<span>  mac      <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">62</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs          <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"33924"</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> description    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Remove pulmonary shunt"</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rbcs_category  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Major Procedure"</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> rbcs_family    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Cardiovascular"</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> status         <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"A"</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mac            <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"10212"</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> state          <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"GA"</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> locality       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"01"</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> area           <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"ATLANTA"</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> counties       <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYET…</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">&gt; $ wgpci          &lt;dbl&gt; 1</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="st">&gt; $ pgpci          &lt;dbl&gt; 0.997</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="st">&gt; $ mgpci          &lt;dbl&gt; 1.128</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">&gt; $ wrvu           &lt;dbl&gt; 5.49</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="st">&gt; $ fprvu          &lt;dbl&gt; 1.5</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="st">&gt; $ mrvu           &lt;dbl&gt; 1.35</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="st">&gt; $ cf             &lt;dbl&gt; 32.7442</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="st">&gt; $ f_fee          &lt;dbl&gt; 278.6</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="st">&gt; $ nf_fee         &lt;dbl&gt; 278.6</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="st">&gt; $ frvus          &lt;dbl&gt; 8.51</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="st">&gt; $ nrvus          &lt;dbl&gt; 8.51</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="st">&gt; $ fpar           &lt;dbl&gt; 278.65</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="st">&gt; $ npar           &lt;dbl&gt; 278.65</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="st">&gt; $ fnpar          &lt;dbl&gt; 264.72</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">&gt; $ nfnpar         &lt;dbl&gt; 264.72</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">&gt; $ flim           &lt;dbl&gt; 304.43</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">&gt; $ nlim           &lt;dbl&gt; 304.43</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">&gt; $ opps           &lt;chr&gt; "</span><span class="dv">9</span><span class="st">"</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">&gt; $ opps_nf        &lt;dbl&gt; NA</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">&gt; $ opps_f         &lt;dbl&gt; NA</span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="st">&gt; $ fprvu_opps     &lt;dbl&gt; 0</span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="st">&gt; $ mrvu_opps      &lt;dbl&gt; 0</span></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="st">&gt; $ mult_surg      &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="st">&gt; $ mult_proc      &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="st">&gt; $ nther          &lt;dbl&gt; 0</span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="st">&gt; $ fther          &lt;dbl&gt; 0</span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="st">&gt; $ global         &lt;chr&gt; "</span>ZZZ<span class="st">"</span></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="st">&gt; $ op_ind         &lt;dbl&gt; 0</span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="st">&gt; $ op_pre         &lt;dbl&gt; 0</span></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="st">&gt; $ op_intra       &lt;dbl&gt; 0</span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="st">&gt; $ op_post        &lt;dbl&gt; 0</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="st">&gt; $ mod            &lt;chr&gt; NA</span></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="st">&gt; $ pctc           &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="st">&gt; $ surg_bilat     &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="st">&gt; $ surg_asst      &lt;chr&gt; "</span><span class="dv">2</span><span class="st">"</span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="st">&gt; $ surg_co        &lt;chr&gt; "</span><span class="dv">1</span><span class="st">"</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="st">&gt; $ surg_team      &lt;chr&gt; "</span><span class="dv">0</span><span class="st">"</span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="st">&gt; $ supvis         &lt;chr&gt; "</span><span class="dv">09</span><span class="st">"</span></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="st">&gt; $ dximg          &lt;chr&gt; "</span><span class="dv">99</span><span class="st">"</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="st">&gt; $ endo           &lt;chr&gt; NA</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="st">&gt; $ nfprvu         &lt;dbl&gt; 1.5</span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="st">&gt; $ ntotal         &lt;dbl&gt; 8.34</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="st">&gt; $ ftotal         &lt;dbl&gt; 8.34</span></span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="st">&gt; $ nfprvu_opps    &lt;dbl&gt; 0</span></span>
-<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a><span class="st">&gt; $ two_macs       &lt;lgl&gt; FALSE</span></span>
-<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="st">&gt; $ cpt_chapter    &lt;chr&gt; "</span>Surgery<span class="st">"</span></span>
-<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="st">&gt; $ cpt_range      &lt;chr&gt; "</span><span class="dv">10004</span> <span class="sc">-</span> <span class="dv">69990</span><span class="st">"</span></span>
-<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="st">&gt; $ cpt_desc_cons  &lt;chr&gt; "</span>Disconnection of pulmonary artery shunt<span class="st">"</span></span>
-<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="st">&gt; $ cpt_desc_long  &lt;chr&gt; "</span>Ligation and takedown of a systemic<span class="sc">-</span>to<span class="sc">-</span>pulmonary arter…</span>
-<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cpt_desc_short <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"REMOVE PULMONARY SHUNT"</span></span>
-<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cpt_desc_med   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"LIG&amp;TKDN SYSIC-TO-PULM ART SHUNT W/CGEN HEART"</span></span>
-<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> cpt_desc_clin  <span class="sc">&lt;</span>list<span class="sc">&gt;</span> [<span class="sc">&lt;</span>tbl_df[<span class="dv">2</span> x <span class="dv">1</span>]<span class="sc">&gt;</span>]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/describe_hcpcs.html">describe_hcpcs</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33924"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># A tibble: 6 × 8</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="er">&gt;</span>   hcpcs description   desc_type level category section rbcs_category rbcs_family</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      </span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="er">&gt;</span> <span class="dv">1</span> <span class="dv">33924</span> Remove pulmo… Short     I     I        Surgery Major Proced… Cardiovasc…</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">2</span> <span class="dv">33924</span> Ligation and… Long      I     I        Surgery Major Proced… Cardiovasc…</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">3</span> <span class="dv">33924</span> LIG<span class="sc">&amp;</span>TKDN SYS… Medical   I     I        Surgery Major Proced… Cardiovasc…</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">4</span> <span class="dv">33924</span> Disconnectio… Consumer  I     I        Surgery Major Proced… Cardiovasc…</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">5</span> <span class="dv">33924</span> Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">6</span> <span class="dv">33924</span> Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…</span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="retrieve-add-on-codes">Retrieve Add-On Codes<a class="anchor" aria-label="anchor" href="#retrieve-add-on-codes"></a>
+<h3 id="add-on-codes">Add-On Codes<a class="anchor" aria-label="anchor" href="#add-on-codes"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_addon_edits.html">get_addon_edits</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33924"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">aoc_edit_deleted</span><span class="op">)</span>, </span>
-<span>                <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">aoc_year_deleted</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cols"</span>, <span class="st">"rows"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># A tibble: 4 × 6</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_addon_edits.html">get_addon_edits</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33924"</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># A tibble: 4 × 9</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="er">&gt;</span>   hcpcs aoc_type aoc_complements   aoc_edit_type aoc_edit_description           </span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>list<span class="sc">&gt;</span>                    <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                          </span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="er">&gt;</span> <span class="dv">1</span> <span class="dv">33924</span> addon    <span class="sc">&lt;</span>tibble [<span class="dv">39</span> × <span class="dv">1</span>]<span class="sc">&gt;</span>             <span class="dv">1</span> Only Paid <span class="cf">if</span> Primary is Paid. …</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">2</span> <span class="dv">33924</span> addon    <span class="sc">&lt;</span>tibble [<span class="dv">10</span> × <span class="dv">1</span>]<span class="sc">&gt;</span>             <span class="dv">1</span> Only Paid <span class="cf">if</span> Primary is Paid. …</span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">3</span> <span class="dv">33924</span> addon    <span class="sc">&lt;</span>tibble [<span class="dv">1</span> × <span class="dv">1</span>]<span class="sc">&gt;</span>              <span class="dv">1</span> Only Paid <span class="cf">if</span> Primary is Paid. …</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">4</span> <span class="dv">33924</span> addon    <span class="sc">&lt;</span>tibble [<span class="dv">3</span> × <span class="dv">1</span>]<span class="sc">&gt;</span>              <span class="dv">1</span> Only Paid <span class="cf">if</span> Primary is Paid. …</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># ℹ 1 more variable: aoc_edit_effective &lt;int&gt;</span></span></code></pre></div>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># ℹ 4 more variables: aoc_year_deleted &lt;int&gt;, aoc_edit_effective &lt;int&gt;,</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="er">&gt;</span> <span class="co">#   aoc_edit_deleted &lt;int&gt;, aoc_notes &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="retrieve-mues">Retrieve MUEs<a class="anchor" aria-label="anchor" href="#retrieve-mues"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_mue_edits.html">get_mue_edits</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33935"</span>, </span>
-<span>              service_type <span class="op">=</span> <span class="st">"Practitioner"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> Rows<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> Columns<span class="sc">:</span> <span class="dv">6</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> hcpcs            <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"33935"</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mue_uos          <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mue_mai          <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mue_mai_desc     <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Date of Service Edit: Policy"</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mue_service_type <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Practitioner"</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="er">$</span> mue_rationale    <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="st">"Anatomic Consideration"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_mue_edits.html">get_mue_edits</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33935"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># A tibble: 2 × 6</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="er">&gt;</span>   hcpcs mue_uos mue_mai mue_mai_desc              mue_service_type mue_rationale</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>            <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        </span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="er">&gt;</span> <span class="dv">1</span> <span class="dv">33935</span>       <span class="dv">1</span>       <span class="dv">2</span> Date of Service Edit<span class="sc">:</span> Po… Practitioner     Anatomic Con…</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">2</span> <span class="dv">33935</span>       <span class="dv">1</span>       <span class="dv">2</span> Date of Service Edit<span class="sc">:</span> Po… Outpatient Hosp… Anatomic Con…</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="procedure-to-procedure-edits">Procedure-to-Procedure Edits<a class="anchor" aria-label="anchor" href="#procedure-to-procedure-edits"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_ptp_edits.html">get_ptp_edits</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33935"</span>, </span>
-<span>              ptp_edit_mod <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ptp_deleted</span> <span class="op">&gt;</span> <span class="fu">clock</span><span class="fu">::</span><span class="fu"><a href="https://clock.r-lib.org/reference/date-today.html" class="external-link">date_today</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># A tibble: 4 × 7</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="er">&gt;</span>   hcpcs ptp_type      ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>list<span class="sc">&gt;</span>          <span class="er">&lt;</span>date<span class="sc">&gt;</span>             <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>            </span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="er">&gt;</span> <span class="dv">1</span> <span class="dv">33935</span> comprehensive <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">2</span> <span class="dv">33935</span> comprehensive <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">3</span> <span class="dv">33935</span> comprehensive <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">4</span> <span class="dv">33935</span> comprehensive <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># ℹ 1 more variable: ptp_edit_rationale &lt;chr&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_ptp_edits.html">get_ptp_edits</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"33935"</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># A tibble: 11 × 7</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="er">&gt;</span>    hcpcs ptp_type     ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>list<span class="sc">&gt;</span>          <span class="er">&lt;</span>date<span class="sc">&gt;</span>             <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>            </span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="er">&gt;</span>  <span class="dv">1</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">2</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">3</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">4</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">5</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">6</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">1</span> Allowed          </span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">7</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">8</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">9</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">11</span> <span class="dv">33935</span> comprehensi… <span class="sc">&lt;</span>tibble<span class="sc">&gt;</span>        <span class="dv">9999-12-31</span>             <span class="dv">0</span> Not Allowed      </span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="co"># ℹ 1 more variable: ptp_edit_rationale &lt;chr&gt;</span></span></code></pre></div>
 <hr>
 </div>
 </div>
