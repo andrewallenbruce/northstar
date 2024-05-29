@@ -32,137 +32,72 @@ pak::pak("andrewallenbruce/northstar")
 
 ``` r
 library(northstar)
-library(dplyr)
-library(tidyr)
-library(janitor)
 ```
 
-### Search Fee Schedule
+### Describe HCPCS
 
 ``` r
-search_fee_schedule(
-  hcpcs    = "33924",
-  state    = "GA",
-  locality = "01",
-  mac      = "10212") |> 
-  glimpse()
+describe_hcpcs(hcpcs = "33924")
 ```
 
-    > Rows: 1
-    > Columns: 62
-    > $ hcpcs          <chr> "33924"
-    > $ description    <chr> "Remove pulmonary shunt"
-    > $ rbcs_category  <chr> "Major Procedure"
-    > $ rbcs_family    <chr> "Cardiovascular"
-    > $ status         <chr> "A"
-    > $ mac            <chr> "10212"
-    > $ state          <chr> "GA"
-    > $ locality       <chr> "01"
-    > $ area           <chr> "ATLANTA"
-    > $ counties       <chr> "BUTTS, CHEROKEE, CLAYTON, COBB, DEKALB, DOUGLAS, FAYET…
-    > $ wgpci          <dbl> 1
-    > $ pgpci          <dbl> 0.997
-    > $ mgpci          <dbl> 1.128
-    > $ wrvu           <dbl> 5.49
-    > $ fprvu          <dbl> 1.5
-    > $ mrvu           <dbl> 1.35
-    > $ cf             <dbl> 32.7442
-    > $ f_fee          <dbl> 278.6
-    > $ nf_fee         <dbl> 278.6
-    > $ frvus          <dbl> 8.51
-    > $ nrvus          <dbl> 8.51
-    > $ fpar           <dbl> 278.65
-    > $ npar           <dbl> 278.65
-    > $ fnpar          <dbl> 264.72
-    > $ nfnpar         <dbl> 264.72
-    > $ flim           <dbl> 304.43
-    > $ nlim           <dbl> 304.43
-    > $ opps           <chr> "9"
-    > $ opps_nf        <dbl> NA
-    > $ opps_f         <dbl> NA
-    > $ fprvu_opps     <dbl> 0
-    > $ mrvu_opps      <dbl> 0
-    > $ mult_surg      <chr> "0"
-    > $ mult_proc      <chr> "0"
-    > $ nther          <dbl> 0
-    > $ fther          <dbl> 0
-    > $ global         <chr> "ZZZ"
-    > $ op_ind         <dbl> 0
-    > $ op_pre         <dbl> 0
-    > $ op_intra       <dbl> 0
-    > $ op_post        <dbl> 0
-    > $ mod            <chr> NA
-    > $ pctc           <chr> "0"
-    > $ surg_bilat     <chr> "0"
-    > $ surg_asst      <chr> "2"
-    > $ surg_co        <chr> "1"
-    > $ surg_team      <chr> "0"
-    > $ supvis         <chr> "09"
-    > $ dximg          <chr> "99"
-    > $ endo           <chr> NA
-    > $ nfprvu         <dbl> 1.5
-    > $ ntotal         <dbl> 8.34
-    > $ ftotal         <dbl> 8.34
-    > $ nfprvu_opps    <dbl> 0
-    > $ two_macs       <lgl> FALSE
-    > $ cpt_chapter    <chr> "Surgery"
-    > $ cpt_range      <chr> "10004 - 69990"
-    > $ cpt_desc_cons  <chr> "Disconnection of pulmonary artery shunt"
-    > $ cpt_desc_long  <chr> "Ligation and takedown of a systemic-to-pulmonary arter…
-    > $ cpt_desc_short <chr> "REMOVE PULMONARY SHUNT"
-    > $ cpt_desc_med   <chr> "LIG&TKDN SYSIC-TO-PULM ART SHUNT W/CGEN HEART"
-    > $ cpt_desc_clin  <list> [<tbl_df[2 x 1]>]
+    > # A tibble: 6 × 8
+    >   hcpcs description   desc_type level category section rbcs_category rbcs_family
+    >   <chr> <chr>         <chr>     <chr> <chr>    <chr>   <chr>         <chr>      
+    > 1 33924 Remove pulmo… Short     I     I        Surgery Major Proced… Cardiovasc…
+    > 2 33924 Ligation and… Long      I     I        Surgery Major Proced… Cardiovasc…
+    > 3 33924 LIG&TKDN SYS… Medical   I     I        Surgery Major Proced… Cardiovasc…
+    > 4 33924 Disconnectio… Consumer  I     I        Surgery Major Proced… Cardiovasc…
+    > 5 33924 Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…
+    > 6 33924 Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…
 
-### Retrieve Add-On Codes
+### Add-On Codes
 
 ``` r
-get_addon_edits(hcpcs = "33924") |> 
-  dplyr::filter(is.na(aoc_edit_deleted), 
-                is.na(aoc_year_deleted)) |> 
-  janitor::remove_empty(which = c("cols", "rows"))
+get_addon_edits(hcpcs = "33924", current = TRUE)
 ```
 
-    > # A tibble: 4 × 6
+    > # A tibble: 4 × 9
     >   hcpcs aoc_type aoc_complements   aoc_edit_type aoc_edit_description           
     >   <chr> <chr>    <list>                    <int> <chr>                          
     > 1 33924 addon    <tibble [39 × 1]>             1 Only Paid if Primary is Paid. …
     > 2 33924 addon    <tibble [10 × 1]>             1 Only Paid if Primary is Paid. …
     > 3 33924 addon    <tibble [1 × 1]>              1 Only Paid if Primary is Paid. …
     > 4 33924 addon    <tibble [3 × 1]>              1 Only Paid if Primary is Paid. …
-    > # ℹ 1 more variable: aoc_edit_effective <int>
+    > # ℹ 4 more variables: aoc_year_deleted <int>, aoc_edit_effective <int>,
+    > #   aoc_edit_deleted <int>, aoc_notes <chr>
 
 ### Retrieve MUEs
 
 ``` r
-get_mue_edits(hcpcs = "33935", 
-              service_type = "Practitioner") |> 
-  glimpse()
+get_mue_edits(hcpcs = "33935")
 ```
 
-    > Rows: 1
-    > Columns: 6
-    > $ hcpcs            <chr> "33935"
-    > $ mue_uos          <int> 1
-    > $ mue_mai          <int> 2
-    > $ mue_mai_desc     <chr> "Date of Service Edit: Policy"
-    > $ mue_service_type <chr> "Practitioner"
-    > $ mue_rationale    <chr> "Anatomic Consideration"
+    > # A tibble: 2 × 6
+    >   hcpcs mue_uos mue_mai mue_mai_desc              mue_service_type mue_rationale
+    >   <chr>   <int>   <int> <chr>                     <chr>            <chr>        
+    > 1 33935       1       2 Date of Service Edit: Po… Practitioner     Anatomic Con…
+    > 2 33935       1       2 Date of Service Edit: Po… Outpatient Hosp… Anatomic Con…
 
 ### Procedure-to-Procedure Edits
 
 ``` r
-get_ptp_edits(hcpcs = "33935", 
-              ptp_edit_mod = 1) |> 
-  dplyr::filter(ptp_deleted > clock::date_today(""))
+get_ptp_edits(hcpcs = "33935", current = TRUE)
 ```
 
-    > # A tibble: 4 × 7
-    >   hcpcs ptp_type      ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc
-    >   <chr> <chr>         <list>          <date>             <int> <chr>            
-    > 1 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
-    > 2 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
-    > 3 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
-    > 4 33935 comprehensive <tibble>        9999-12-31             1 Allowed          
+    > # A tibble: 11 × 7
+    >    hcpcs ptp_type     ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc
+    >    <chr> <chr>        <list>          <date>             <int> <chr>            
+    >  1 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  2 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  3 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  4 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  5 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  6 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  7 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  8 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  9 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 10 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 11 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
     > # ℹ 1 more variable: ptp_edit_rationale <chr>
 
 ------------------------------------------------------------------------

@@ -42,47 +42,32 @@ pak::pak("andrewallenbruce/northstar")
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
-library(dplyr)
-library(tidyr)
-library(janitor)
 ```
 
 
-### Search Fee Schedule
+### Describe HCPCS
 
 ```{r}
-search_fee_schedule(
-  hcpcs    = "33924",
-  state    = "GA",
-  locality = "01",
-  mac      = "10212") |> 
-  glimpse()
+describe_hcpcs(hcpcs = "33924")
 ```
 
 
-### Retrieve Add-On Codes
+### Add-On Codes
 
 ```{r}
-get_addon_edits(hcpcs = "33924") |> 
-  dplyr::filter(is.na(aoc_edit_deleted), 
-                is.na(aoc_year_deleted)) |> 
-  janitor::remove_empty(which = c("cols", "rows"))
+get_addon_edits(hcpcs = "33924", current = TRUE)
 ```
 
 ### Retrieve MUEs
 
 ```{r}
-get_mue_edits(hcpcs = "33935", 
-              service_type = "Practitioner") |> 
-  glimpse()
+get_mue_edits(hcpcs = "33935")
 ```
 
 ### Procedure-to-Procedure Edits
 
 ```{r}
-get_ptp_edits(hcpcs = "33935", 
-              ptp_edit_mod = 1) |> 
-  dplyr::filter(ptp_deleted > clock::date_today(""))
+get_ptp_edits(hcpcs = "33935", current = TRUE)
 ```
 
 

@@ -13,6 +13,7 @@ print.northstar <- function(x, ...) {
 }
 
 #' @keywords internal
+#'
 #' @noRd
 .add_class <- function(data) {
 

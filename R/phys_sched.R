@@ -42,6 +42,7 @@ get_rvus <- function(hcpcs = NULL, ...) {
 #'
 #'
 #' ## Physician Work (Cost-of-Living)
+#'
 #' The work GPCIs are designed to reflect the relative cost of physician labor
 #' by Medicare locality and are measured from salary information of individuals
 #' with higher education.
@@ -54,6 +55,7 @@ get_rvus <- function(hcpcs = NULL, ...) {
 #'
 #'
 #' ## Practice Expense
+#'
 #' The practice expense GPCIs are designed to measure geographic variation in
 #' the prices of inputs to medical practice. They are comprised of four
 #' component indices: employee wages, purchased services, office rent and
@@ -66,6 +68,7 @@ get_rvus <- function(hcpcs = NULL, ...) {
 #'
 #'
 #' ## Malpractice Expense
+#'
 #' The Professional Liability Insurance (PLI), which Medicare regulations refer
 #' to as the malpractice GPCI, account for geographic differences in PLI premium
 #' costs. These have the most variation of the three GPCIs, ranging from 0.3
@@ -76,6 +79,7 @@ get_rvus <- function(hcpcs = NULL, ...) {
 #' differentiation, with 29 different geographic localities.
 #'
 #' ## Geographic Adjustment Factor (GAF)
+#'
 #' The three GPCI components can be combined into a composite GPCI (or GAF) by
 #' weighting each by the share of Medicare payments accounted for by the work,
 #' practice cost, and PLI components. GAF indicates how Medicare payments in a
