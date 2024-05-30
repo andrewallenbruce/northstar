@@ -88,7 +88,8 @@
 <span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  aoc_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  edit_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  current <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -111,7 +112,11 @@
 
 
 <dt>current</dt>
-<dd><p><code>&lt;lgl&gt;</code> return only current edits, default is <code>FALSE</code></p></dd>
+<dd><p><code>&lt;lgl&gt;</code> return only current edits, default is <code>TRUE</code></p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>remove empty rows and columns; default is <code>TRUE</code></p></dd>
 
 
 <dt>...</dt>
@@ -175,57 +180,50 @@ the primary procedure code, the AOC shall not be paid).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_addon_edits</span><span class="op">(</span>hcpcs     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"22633"</span>, <span class="st">"0074T"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                aoc_type  <span class="op">=</span> <span class="st">"primary"</span>,</span></span>
 <span class="r-in"><span>                edit_type <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">aoc_type</span> <span style="font-weight: bold;">aoc_complements</span>   <span style="font-weight: bold;">aoc_edit_type</span> <span style="font-weight: bold;">aoc_edit_description</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22633 primary  <span style="color: #949494;">&lt;tibble [17 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 22633 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 22633 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 22633 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 22633 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: </span><span style="color: #949494; font-weight: bold;">aoc_year_deleted</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">aoc_edit_deleted</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_notes</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 22633 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 22633 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 22633 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid. …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_addon_edits</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"22630"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"22532"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"77001"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"88334"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"64727"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">aoc_type</span> <span style="font-weight: bold;">aoc_complements</span>   <span style="font-weight: bold;">aoc_edit_type</span> <span style="font-weight: bold;">aoc_edit_description</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 22532 primary  <span style="color: #949494;">&lt;tibble [15 × 1]&gt;</span>             1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 22532 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 22532 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 22532 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 22532 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              3 Some Specific Primaries. Paym…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 22630 primary  <span style="color: #949494;">&lt;tibble [16 × 1]&gt;</span>             1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 22532 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 22532 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 22532 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              3 Some Specific Primaries. Paym…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 22630 primary  <span style="color: #949494;">&lt;tibble [16 × 1]&gt;</span>             1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 22630 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 22630 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 22630 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 22630 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 22630 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 64727 addon    <span style="color: #949494;">&lt;tibble [12 × 1]&gt;</span>             3 Some Specific Primaries. Paym…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 64727 addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              3 Some Specific Primaries. Paym…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 77001 addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              2 No Specific Primary Codes. Pa…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 77001 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 88334 addon    <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 88334 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 88334 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: </span><span style="color: #949494; font-weight: bold;">aoc_year_deleted</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">aoc_edit_deleted</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_notes</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 22630 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 64727 addon    <span style="color: #949494;">&lt;tibble [12 × 1]&gt;</span>             3 Some Specific Primaries. Paym…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 64727 addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              3 Some Specific Primaries. Paym…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 77001 addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              2 No Specific Primary Codes. Pa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 77001 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 88334 addon    <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 88334 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 88334 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              1 Only Paid if Primary is Paid.…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_notes</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_addon_edits</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"11646"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"39503"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"43116"</span>,</span></span>
 <span class="r-in"><span>                          <span class="st">"33935"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">aoc_type</span> <span style="font-weight: bold;">aoc_complements</span>  <span style="font-weight: bold;">aoc_edit_type</span> <span style="font-weight: bold;">aoc_edit_description</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 33935 primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. P…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 33935 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. P…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 33935 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>             1 Only Paid if Primary is Paid. P…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: </span><span style="color: #949494; font-weight: bold;">aoc_year_deleted</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">aoc_edit_deleted</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_notes</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 33935 primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. P…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 33935 primary  <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>             1 Only Paid if Primary is Paid. P…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

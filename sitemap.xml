@@ -37,46 +37,13 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_asc.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_assistant.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_bilateral.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_category.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter_cpt.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_chapter_hcpcs.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_cosurg.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_global.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_imaging.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_labcert.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_level.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_modifier.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_multiple_pricing.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_multproc.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_opps.html</loc>
@@ -92,9 +59,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_supervision.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_team.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/case_tos.html</loc>
@@ -157,13 +121,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_length.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/lcd.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/limiting_charge.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/ncd.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/non_participating_fee.html</loc>
@@ -191,5 +149,26 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_assistant_surgery.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_bilateral_surgery.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_co_surgeon.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_diagnostic_imaging.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_global_days.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_procedure.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_team_surgery.html</loc>
   </url>
 </urlset>

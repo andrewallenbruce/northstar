@@ -94,7 +94,7 @@ together. Each edit has a Column One and Column Two HCPCS/CPT code.</p>
 <span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ptp_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ptp_edit_mod <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  current <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -118,7 +118,7 @@ together. Each edit has a Column One and Column Two HCPCS/CPT code.</p>
 
 
 <dt>current</dt>
-<dd><p><code>&lt;lgl&gt;</code> return only current edits, default is <code>FALSE</code></p></dd>
+<dd><p><code>&lt;lgl&gt;</code> return only current edits, default is <code>TRUE</code></p></dd>
 
 
 <dt>...</dt>
@@ -184,30 +184,30 @@ result is all that is required."</p><ul><li><p><a href="https://www.cms.gov/medi
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_ptp_edits</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 158 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 56 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">ptp_type</span>     <span style="font-weight: bold;">ptp_complements</span> <span style="font-weight: bold;">ptp_deleted</span> <span style="font-weight: bold;">ptp_edit_mod</span> <span style="font-weight: bold;">ptp_edit_mod_desc</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        1996-01-01             9 Not Applicable   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        1996-01-01             9 Not Applicable   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        1996-01-01             9 Not Applicable   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2004-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2005-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        2006-03-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2006-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2006-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        2006-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        2006-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2008-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2009-04-01             9 Not Applicable   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2009-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        2009-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2013-07-01             9 Not Applicable   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2015-12-31             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2015-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2016-01-01             9 Not Applicable   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2016-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        2016-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 138 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11646 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 11646 component    <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 33935 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             <span style="color: #949494;">0</span> Not Allowed      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 33935 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 33935 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 33935 comprehensi… <span style="color: #949494;">&lt;tibble&gt;</span>        9999-12-31             1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 36 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">ptp_edit_rationale</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_ptp_edits</span><span class="op">(</span>hcpcs        <span class="op">=</span> <span class="st">"43116"</span>,</span></span>
