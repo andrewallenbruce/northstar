@@ -50,54 +50,69 @@ describe_hcpcs(hcpcs = "33924")
     > 5 33924 Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…
     > 6 33924 Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…
 
+## NCCI Edits
+
 ### Add-On Codes
 
 ``` r
-get_addon_edits(hcpcs = "33924", current = TRUE)
+get_addon_edits(hcpcs = c("33924", "33935"))
 ```
 
-    > # A tibble: 4 × 9
+    > # A tibble: 6 × 6
     >   hcpcs aoc_type aoc_complements   aoc_edit_type aoc_edit_description           
     >   <chr> <chr>    <list>                    <int> <chr>                          
     > 1 33924 addon    <tibble [39 × 1]>             1 Only Paid if Primary is Paid. …
     > 2 33924 addon    <tibble [10 × 1]>             1 Only Paid if Primary is Paid. …
     > 3 33924 addon    <tibble [1 × 1]>              1 Only Paid if Primary is Paid. …
     > 4 33924 addon    <tibble [3 × 1]>              1 Only Paid if Primary is Paid. …
-    > # ℹ 4 more variables: aoc_year_deleted <int>, aoc_edit_effective <int>,
-    > #   aoc_edit_deleted <int>, aoc_notes <chr>
+    > 5 33935 primary  <tibble [1 × 1]>              1 Only Paid if Primary is Paid. …
+    > 6 33935 primary  <tibble [3 × 1]>              1 Only Paid if Primary is Paid. …
+    > # ℹ 1 more variable: aoc_edit_effective <int>
 
 ### Retrieve MUEs
 
 ``` r
-get_mue_edits(hcpcs = "33935")
+get_mue_edits(hcpcs = c("33924", "33935"))
 ```
 
-    > # A tibble: 2 × 6
+    > # A tibble: 4 × 6
     >   hcpcs mue_uos mue_mai mue_mai_desc              mue_service_type mue_rationale
     >   <chr>   <int>   <int> <chr>                     <chr>            <chr>        
-    > 1 33935       1       2 Date of Service Edit: Po… Practitioner     Anatomic Con…
-    > 2 33935       1       2 Date of Service Edit: Po… Outpatient Hosp… Anatomic Con…
+    > 1 33924       1       2 Date of Service Edit: Po… Practitioner     Code Descrip…
+    > 2 33935       1       2 Date of Service Edit: Po… Practitioner     Anatomic Con…
+    > 3 33924       1       2 Date of Service Edit: Po… Outpatient Hosp… Code Descrip…
+    > 4 33935       1       2 Date of Service Edit: Po… Outpatient Hosp… Anatomic Con…
 
 ### Procedure-to-Procedure Edits
 
 ``` r
-get_ptp_edits(hcpcs = "33935", current = TRUE)
+get_ptp_edits(hcpcs = c("33924", "33935"))
 ```
 
-    > # A tibble: 11 × 7
+    > # A tibble: 21 × 7
     >    hcpcs ptp_type     ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc
     >    <chr> <chr>        <list>          <date>             <int> <chr>            
-    >  1 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  2 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  3 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  4 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  5 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  6 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  7 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  8 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  9 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 10 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  1 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  2 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  3 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  4 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  5 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    >  6 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  7 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  8 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    >  9 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 10 33924 component    <tibble>        9999-12-31             0 Not Allowed      
     > 11 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 12 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    > 13 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    > 14 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    > 15 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 16 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
+    > 17 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 18 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 19 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > 20 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > # ℹ 1 more row
     > # ℹ 1 more variable: ptp_edit_rationale <chr>
 
 ------------------------------------------------------------------------

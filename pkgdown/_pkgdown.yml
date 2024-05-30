@@ -72,8 +72,6 @@ reference:
   - describe_hcpcs
   - starts_with("get_")
   - matches("search_")
-  - lcd
-  - ncd
 
 - title: Calculations
   desc: >

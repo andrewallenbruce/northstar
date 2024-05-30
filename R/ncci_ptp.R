@@ -69,7 +69,7 @@
 #'    * `0`: Not Allowed
 #'    * `9`: Not Applicable
 #'
-#' @param current `<lgl>` return only current edits, default is `FALSE`
+#' @param current `<lgl>` return only current edits, default is `TRUE`
 #'
 #' @template args-dots
 #'
@@ -88,7 +88,7 @@
 get_ptp_edits <- function(hcpcs        = NULL,
                           ptp_type     = NULL,
                           ptp_edit_mod = NULL,
-                          current      = FALSE,
+                          current      = TRUE,
                           ...) {
 
   ptp <- get_pin("ptp_long")

@@ -5,8 +5,6 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
-  # <case_chapter>
-  "chapter",
   # <search_adjustments>
   "code",
   # <col_lb>

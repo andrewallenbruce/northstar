@@ -8,7 +8,8 @@ get_addon_edits(
   hcpcs = NULL,
   aoc_type = NULL,
   edit_type = NULL,
-  current = FALSE,
+  current = TRUE,
+  na.rm = TRUE,
   ...
 )
 }
@@ -24,7 +25,9 @@ get_addon_edits(
 \item \code{3}: No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 }}
 
-\item{current}{\verb{<lgl>} return only current edits, default is \code{FALSE}}
+\item{current}{\verb{<lgl>} return only current edits, default is \code{TRUE}}
+
+\item{na.rm}{remove empty rows and columns; default is \code{TRUE}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

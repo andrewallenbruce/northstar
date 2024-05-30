@@ -14,7 +14,7 @@
 #'
 #' try(ncd(coverage = c("Unknown", "Noe")))
 #'
-#' @export
+#' @noRd
 #'
 #' @autoglobal
 ncd <- function(coverage = NULL, ...) {
@@ -44,7 +44,7 @@ ncd <- function(coverage = NULL, ...) {
 #' @examples
 #' lcd(hcpcs = c("A4555", "E0766"))
 #'
-#' @export
+#' @noRd
 #'
 #' @autoglobal
 lcd <- function(hcpcs = NULL, ...) {

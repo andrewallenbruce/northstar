@@ -8,7 +8,7 @@ get_ptp_edits(
   hcpcs = NULL,
   ptp_type = NULL,
   ptp_edit_mod = NULL,
-  current = FALSE,
+  current = TRUE,
   ...
 )
 }
@@ -25,7 +25,7 @@ get_ptp_edits(
 \item \code{9}: Not Applicable
 }}
 
-\item{current}{\verb{<lgl>} return only current edits, default is \code{FALSE}}
+\item{current}{\verb{<lgl>} return only current edits, default is \code{TRUE}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

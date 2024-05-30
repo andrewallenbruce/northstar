@@ -50,7 +50,9 @@
 #'    * `2`: Some Specific Primaries. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 #'    * `3`: No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.
 #'
-#' @param current `<lgl>` return only current edits, default is `FALSE`
+#' @param current `<lgl>` return only current edits, default is `TRUE`
+#'
+#' @param na.rm remove empty rows and columns; default is `TRUE`
 #'
 #' @template args-dots
 #'
@@ -78,7 +80,8 @@
 get_addon_edits <- function(hcpcs     = NULL,
                             aoc_type  = NULL,
                             edit_type = NULL,
-                            current   = FALSE,
+                            current   = TRUE,
+                            na.rm     = TRUE,
                             ...) {
 
   aoc <- get_pin("aoc_long")
@@ -96,17 +99,22 @@ get_addon_edits <- function(hcpcs     = NULL,
     aoc$aoc_edit_type,
     edit_type)
 
+  # TODO
   aoc <- search_in_if_args(
     aoc,
     aoc$aoc_type,
     aoc_type,
     args = c("primary", "addon"))
 
-  if(current) {
+  if (current) {
     aoc <- vctrs::vec_slice(
       aoc,
       is.na(aoc$aoc_edit_deleted)
     )
+  }
+
+  if (na.rm) {
+    aoc <- janitor::remove_empty(aoc, which = c("rows", "cols"))
   }
 
   return(.add_class(aoc))
