@@ -14,6 +14,7 @@ source(here::here("data-raw", "pins_functions.R"))
 #
 # https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c26pdf.pdf
 # https://www.hhs.gov/guidance/sites/default/files/hhs-guidance-documents/mm7631.pdf
+# https://www.findacode.com/cms1500-claim-form/cms1500-place-of-service-codes.html
 
 place_of_service_codes <- dplyr::tribble(
   ~pos_type,       ~pos_code, ~pos_name,                                                                 ~pos_description,

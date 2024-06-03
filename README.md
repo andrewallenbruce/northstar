@@ -37,18 +37,23 @@ library(northstar)
 ### Describe HCPCS
 
 ``` r
-describe_hcpcs(hcpcs = "33924")
+describe_hcpcs(hcpcs = c("33924", "43116"))
 ```
 
-    > # A tibble: 6 × 8
-    >   hcpcs description   desc_type level category section rbcs_category rbcs_family
-    >   <chr> <chr>         <chr>     <chr> <chr>    <chr>   <chr>         <chr>      
-    > 1 33924 Remove pulmo… Short     I     I        Surgery Major Proced… Cardiovasc…
-    > 2 33924 Ligation and… Long      I     I        Surgery Major Proced… Cardiovasc…
-    > 3 33924 LIG&TKDN SYS… Medical   I     I        Surgery Major Proced… Cardiovasc…
-    > 4 33924 Disconnectio… Consumer  I     I        Surgery Major Proced… Cardiovasc…
-    > 5 33924 Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…
-    > 6 33924 Ligation and… Clinician I     I        Surgery Major Proced… Cardiovasc…
+    > # A tibble: 11 × 8
+    >    hcpcs description  desc_type level category section rbcs_category rbcs_family
+    >    <chr> <chr>        <chr>     <chr> <chr>    <chr>   <chr>         <chr>      
+    >  1 33924 Remove pulm… Short     I     I        Surgery Major Proced… Cardiovasc…
+    >  2 33924 Ligation an… Long      I     I        Surgery Major Proced… Cardiovasc…
+    >  3 33924 LIG&TKDN SY… Medical   I     I        Surgery Major Proced… Cardiovasc…
+    >  4 33924 Disconnecti… Consumer  I     I        Surgery Major Proced… Cardiovasc…
+    >  5 33924 Ligation an… Clinician I     I        Surgery Major Proced… Cardiovasc…
+    >  6 33924 Ligation an… Clinician I     I        Surgery Major Proced… Cardiovasc…
+    >  7 43116 Partial rem… Short     I     I        Surgery Major Proced… Digestive/…
+    >  8 43116 Partial eso… Long      I     I        Surgery Major Proced… Digestive/…
+    >  9 43116 PRTL ESOPHA… Medical   I     I        Surgery Major Proced… Digestive/…
+    > 10 43116 Partial rem… Consumer  I     I        Surgery Major Proced… Digestive/…
+    > 11 43116 Partial cer… Clinician I     I        Surgery Major Proced… Digestive/…
 
 ## NCCI Edits
 
@@ -89,29 +94,29 @@ get_mue_edits(hcpcs = c("33924", "33935"))
 get_ptp_edits(hcpcs = c("33924", "33935"))
 ```
 
-    > # A tibble: 21 × 7
-    >    hcpcs ptp_type     ptp_complements ptp_deleted ptp_edit_mod ptp_edit_mod_desc
-    >    <chr> <chr>        <list>          <date>             <int> <chr>            
-    >  1 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  2 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  3 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  4 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  5 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    >  6 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  7 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  8 33924 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    >  9 33924 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 10 33924 component    <tibble>        9999-12-31             0 Not Allowed      
-    > 11 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 12 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    > 13 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    > 14 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    > 15 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 16 33935 comprehensi… <tibble>        9999-12-31             1 Allowed          
-    > 17 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 18 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 19 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
-    > 20 33935 comprehensi… <tibble>        9999-12-31             0 Not Allowed      
+    > # A tibble: 21 × 6
+    >    hcpcs ptp_type      ptp_complements   ptp_edit_mod ptp_edit_mod_desc
+    >    <chr> <chr>         <list>                   <int> <chr>            
+    >  1 33924 comprehensive <tibble [1 × 1]>             0 Not Allowed      
+    >  2 33924 comprehensive <tibble [4 × 1]>             0 Not Allowed      
+    >  3 33924 comprehensive <tibble [1 × 1]>             1 Allowed          
+    >  4 33924 comprehensive <tibble [4 × 1]>             1 Allowed          
+    >  5 33924 comprehensive <tibble [6 × 1]>             0 Not Allowed      
+    >  6 33924 comprehensive <tibble [2 × 1]>             1 Allowed          
+    >  7 33924 comprehensive <tibble [2 × 1]>             1 Allowed          
+    >  8 33924 comprehensive <tibble [2 × 1]>             1 Allowed          
+    >  9 33924 comprehensive <tibble [1 × 1]>             0 Not Allowed      
+    > 10 33924 component     <tibble [1 × 1]>             0 Not Allowed      
+    > 11 33935 comprehensive <tibble [27 × 1]>            0 Not Allowed      
+    > 12 33935 comprehensive <tibble [50 × 1]>            1 Allowed          
+    > 13 33935 comprehensive <tibble [63 × 1]>            1 Allowed          
+    > 14 33935 comprehensive <tibble [67 × 1]>            1 Allowed          
+    > 15 33935 comprehensive <tibble [13 × 1]>            0 Not Allowed      
+    > 16 33935 comprehensive <tibble [1 × 1]>             1 Allowed          
+    > 17 33935 comprehensive <tibble [2 × 1]>             0 Not Allowed      
+    > 18 33935 comprehensive <tibble [2 × 1]>             0 Not Allowed      
+    > 19 33935 comprehensive <tibble [11 × 1]>            0 Not Allowed      
+    > 20 33935 comprehensive <tibble [24 × 1]>            0 Not Allowed      
     > # ℹ 1 more row
     > # ℹ 1 more variable: ptp_edit_rationale <chr>
 

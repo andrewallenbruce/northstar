@@ -38,172 +38,6 @@ case_supervision <- function(df, col) {
     .after = {{ col }})
 }
 
-#' Add OPPS Indicator Descriptions
-#'
-#' @param df data frame
-#'
-#' @param col column of OPPS Indicator indicators
-#'
-#' @returns A [tibble][tibble::tibble-package] with an `opps_description` column
-#'
-#' @examples
-#' dplyr::tibble(opps_ind = c("1", "9")) |>
-#' case_opps(opps_ind)
-#'
-#' @autoglobal
-#'
-#' @export
-case_opps <- function(df, col) {
-
-  df |>
-    dplyr::mutate(opps_description = dplyr::case_match({{ col }},
-    "1" ~ "Subject to OPPS Payment Cap",
-    "9" ~ "Not Subject to OPPS Payment Cap"),
-    .after = {{ col }})
-}
-
-#' Add Modifier Indicator Descriptions
-#'
-#' @param df data frame
-#'
-#' @param col column of Modifier indicators
-#'
-#' @returns A [tibble][tibble::tibble-package] with an `mod_description` column
-#'
-#' @examples
-#' dplyr::tibble(mod = c(26, "TC", 53)) |>
-#' case_modifier(mod)
-#'
-#' @autoglobal
-#'
-#' @export
-case_modifier <- function(df, col) {
-
-  df |>
-    dplyr::mutate(mod_description = dplyr::case_match(
-      {{ col }},
-      "26" ~ dplyr::tibble(
-        mod_label       = "Professional Component",
-        mod_description = "Certain procedures are a combination of a physician or other qualified health care professional component and a technical component. When the physician or other qualified health care professional component is reported separately, the service may be identified by adding modifier 26 to the usual procedure number."),
-      "TC" ~ dplyr::tibble(
-        mod_label       = "Technical Component",
-        mod_description = "Under certain circumstances, a charge may be made for the technical component alone. Under those circumstances the technical component charge is identified by adding modifier TC to the usual procedure number. Technical component charges are institutional charges and not billed separately by physicians; however, portable x-ray suppliers only bill for technical component and should utilize modifier TC. The charge data from portable x-ray suppliers will then be used to build customary and prevailing profiles."),
-      "53" ~ dplyr::tibble(
-        mod_label       = "Discontinued Procedure",
-        mod_description = "Under certain circumstances, the physician or other qualified health care professional may elect to terminate a surgical or diagnostic procedure. Due to extenuating circumstances or those that threaten the well being of the patient, it may be necessary to indicate that a surgical or diagnostic procedure was started but discontinued. This circumstance may be reported by adding modifier 53 to the code reported by the individual for the discontinued procedure.")),
-    .after = {{ col }}) |>
-    tidyr::unpack(cols = mod_description)
-}
-
-#' Add PCTC Indicator Descriptions
-#'
-#' @param df data frame
-#' @param col column of PCTC indicators
-#' @return A [tibble][tibble::tibble-package] with a `pctc_description` column
-#' @examples
-#' dplyr::tibble(pctc = as.character(0:9)) |>
-#' case_pctc(pctc)
-#' @export
-#' @autoglobal
-case_pctc <- function(df, col) {
-  df |>
-    dplyr::mutate(pctc_description = dplyr::case_match(
-      {{ col }},
-    "0" ~ dplyr::tibble(
-      pctc_label       = "Physician Service",
-      pctc_description = "PCTC does not apply."),
-    "1" ~ dplyr::tibble(
-      pctc_label       = "Diagnostic Tests for Radiology Services",
-      pctc_description = "Have both a PC and TC. Mods 26/TC can be used. RVU components: Code + Mod -26 [wRVU, pRVU, mRVU]; Code + Mod -TC [pRVU, mRVU]; Code [wRVU, pRVU, mRVU]"),
-    "2" ~ dplyr::tibble(
-      pctc_label       = "Professional Component Only",
-      pctc_description = "Standalone code. Describes PC of diagnostic tests for which there is a code that describes TC of diagnostic test only and another code that describes the Global test. RVU components: wRVU, pRVU, mRVU"),
-    "3" ~ dplyr::tibble(
-      pctc_label       = "Technical Component Only",
-      pctc_description = "Standalone code. Mods 26/TC cannot be used. Describe TC of diagnostic tests for which there is a code that describes PC of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and do not have a PC code. RVU components: pRVU, mRVU"),
-    "4" ~ dplyr::tibble(
-      pctc_label       = "Global Test Only",
-      pctc_description = "Standalone code. Describes diagnostic tests for which there are codes that describe PC of the test only, and the TC of the test only. Mods 26/TC cannot be used. Total RVUs is sum of total RVUs for PC and TC only codes combined. RVU components: wRVU, pRVU, mRVU"),
-    "5" ~ dplyr::tibble(
-      pctc_label       = "Incident To",
-      pctc_description = "Services provided by personnel working under physician supervision. Payment may not be made when provided to hospital inpatients or outpatients. Mods 26/TC cannot be used."),
-    "6" ~ dplyr::tibble(
-      pctc_label       = "Lab Physician Interpretation",
-      pctc_description = "Clinical Lab codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of tests paid by lab fee schedule. Mod TC cannot be used. RVU components: wRVU, pRVU, mRVU"),
-    "7" ~ dplyr::tibble(
-      pctc_label       = "Physical Therapy",
-      pctc_description = "Payment may not be made if provided to hospital outpatient/inpatient by independently practicing physical or occupational therapist."),
-    "8" ~ dplyr::tibble(
-      pctc_label       = "Physician Interpretation",
-      pctc_description = "Identifies PC of Clinical Lab codes for which separate payment made only if physician interprets abnormal smear for hospital inpatient. No TC billing recognized, payment for test made to hospital. No payment for CPT 85060 furnished to hospital outpatients or non-hospital patients. Physician interpretation paid through clinical laboratory fee schedule."),
-    "9" ~ dplyr::tibble(
-      pctc_label       = NA_character_, # "Not Applicable",
-      pctc_description = NA_character_ # "PCTC Concept does not apply"
-      )),
-    .after = {{ col }}) |>
-    tidyr::unpack(cols = pctc_description)
-}
-
-#' Replace Status Codes with Labels, Add Descriptions
-#'
-#' @param df data frame
-#' @param col column of Status Codes
-#' @param desc add Descriptions
-#' @return A [tibble][tibble::tibble-package] with a `status_desc` column
-#' @examples
-#' dplyr::tibble(status = LETTERS) |>
-#' case_status(status, desc = TRUE)
-#' @export
-#' @autoglobal
-case_status <- function(df, col, desc = FALSE) {
-
-  if (desc) {
-
-  df <- dplyr::mutate(df,
-      status_desc = dplyr::case_match(
-        {{ col }},
-      "A" ~ "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD.",
-      "B" ~ "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident.",
-      "C" ~ "Carriers establish RVUs and payment following documentation review.",
-      "D" ~ "Deleted effective with beginning of year.",
-      "E" ~ "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures.",
-      "F" ~ "Not subject to 90 day grace period",
-      "G" ~ "Another code used for payment. Subject to a 90 day grace period.",
-      "H" ~ "Had TC/26 mod in previous year, TC/26 component now deleted.",
-      "I" ~ "Another code used for payment. Not subject to a 90-day grace period.",
-      "J" ~ "No RVUs or payment amounts. Only identifies anesthesia services.",
-      "M" ~ "Used for reporting purposes only.",
-      "N" ~ "Not covered by Medicare.",
-      "P" ~ "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision.",
-      "R" ~ "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes.",
-      "T" ~ "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment.",
-      "X" ~ "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made."),
-      .after = {{ col }}
-      )
-  }
-
-  df |>
-    dplyr::mutate({{ col }} := dplyr::case_match({{ col }},
-    "A" ~ "Active",
-    "B" ~ "Payment Bundle",
-    "C" ~ "Carrier Priced",
-    "D" ~ "Deleted Codes",
-    "E" ~ "Regulatory Exclusion",
-    "F" ~ "Deleted/Discontinued",
-    "G" ~ "Not Valid for Medicare",
-    "H" ~ "Deleted Modifier",
-    "I" ~ "Not Valid for Medicare",
-    "J" ~ "Anesthesia Service",
-    "M" ~ "Measurement Code",
-    "N" ~ "Restricted Coverage",
-    "P" ~ "Non-Covered Service",
-    "R" ~ "Bundled/Excluded Code",
-    "T" ~ "Injections",
-    "X" ~ "Statutory Exclusion"
-    ))
-
-}
-
 #' Replace HCPCS Level II ASC Group Indicator Descriptions
 #'
 #' @param df data frame
@@ -443,4 +277,135 @@ case_tos <- function(df, col) {
         "P:S" ~ "Lump Sum Purchase of DME, Prosthetics, Orthotics, Surgical Dressings or Other Medical Supplies"
       ),
       .after = {{ col }})
+}
+
+#' @autoglobal
+#' @noRd
+action_cd <- function() {
+  c(
+    "A" = "Added procedure or modifier code",
+    "B" = "Change in both administrative data field and long description of procedure or modifier code",
+    "C" = "Change in long description of procedure or modifier code",
+    "D" = "Discontinue procedure or modifier code",
+    "F" = "Change in administrative data field of procedure or modifier code",
+    "N" = "No maintenance for this code",
+    "P" = "Payment change (MOG, pricing indicator codes, anesthesia base units,Ambulatory Surgical Centers)",
+    "R" = "Re-activate discontinued/deleted procedure or modifier code",
+    "S" = "Change in short description of procedure code",
+    "T" = "Miscellaneous change (BETOS, type of service)"
+  )
+}
+
+#' @autoglobal
+#' @noRd
+betos <- function() {
+  c(
+    "D1A" = "Medical/Surgical Supplies",
+    "D1B" = "Hospital Seds",
+    "D1C" = "Oxygen & Supplies",
+    "D1D" = "Wheelchairs",
+    "D1E" = "Other DME",
+    "D1F" = "Prosthetic/Orthotic Devices",
+    "D1G" = "DME Administered Drugs",
+    "I1A" = "Standard Imaging: Chest",
+    "I1B" = "Standard Imaging: Musculoskeletal",
+    "I1C" = "Standard Imaging: Breast",
+    "I1D" = "Standard Imaging: Contrast GI",
+    "I1E" = "Standard Imaging: Nuclear Medicine",
+    "I1F" = "Standard Imaging: Other",
+    "I2A" = "Advanced Imaging: CAT-CT-CTA, Brain-Head-Neck",
+    "I2B" = "Advanced Imaging: CAT-CT-CTA, Other",
+    "I2C" = "Advanced Imaging: MRI-MRA, Brain-Head-Neck",
+    "I2D" = "Advanced Imaging: MRI-MRA, Other",
+    "I3A" = "Echography-Ultrasonography: Eye",
+    "I3B" = "Echography-Ultrasonography: Abdomen-Pelvis",
+    "I3C" = "Echography-Ultrasonography: Heart",
+    "I3D" = "Echography-Ultrasonography: Carotid Arteries",
+    "I3E" = "Echography-Ultrasonography: Prostate, Transrectal",
+    "I3F" = "Echography-Ultrasonography: Other",
+    "I4A" = "Imaging-Procedure: Heart incl Cardiac Cath",
+    "I4B" = "Imaging-Procedure: Other",
+    "M1A" = "Office Visit: New",
+    "M1B" = "Office Visit: Established",
+    "M2A" = "Hospital Visit: Initial",
+    "M2B" = "Hospital Visit: Subsequent",
+    "M2C" = "Hospital Visit: Critical Care",
+    "M3"  = "ER Visit",
+    "M4A" = "Home Visit",
+    "M4B" = "Nursing Home Visit",
+    "M5A" = "Specialist: Pathology",
+    "M5B" = "Specialist: Psychiatry",
+    "M5C" = "Specialist: Opthamology",
+    "M5D" = "Specialist: Other",
+    "M6"  = "Consultations",
+    "O1A" = "Ambulance",
+    "O1B" = "Chiropractic",
+    "O1C" = "Enteral & Parenteral",
+    "O1D" = "Chemotherapy",
+    "O1E" = "Other Drugs",
+    "O1F" = "Hearing & Speech Services",
+    "O1G" = "Immunizations-Vaccinations",
+    "01L" = "Lymphedema Compression Treatment Items",
+    "P0"  = "Anesthesia",
+    "P1A" = "Major Procedure: Breast",
+    "P1B" = "Major Procedure: Colectomy",
+    "P1C" = "Major Procedure: Cholecystectomy",
+    "P1D" = "Major Procedure: TURP",
+    "P1E" = "Major Procedure: Hysterectomy",
+    "P1F" = "Major Procedure: Explor-Decompr-Excisdisc",
+    "P1G" = "Major Procedure: Other",
+    "P2A" = "Major Procedure: Cardiovascular - CABG",
+    "P2B" = "Major Procedure: Cardiovascular - Aneurysm Repair",
+    "P2C" = "Major Procedure: Cardiovascular - Thromboendarterectomy",
+    "P2D" = "Major Procedure: Cardiovascular - Coronary angioplasty (PTCA)",
+    "P2E" = "Major Procedure: Cardiovascular - Pacemaker Insertion",
+    "P2F" = "Major Procedure: Cardiovascular - Other",
+    "P3A" = "Major Procedure: Orthopedic - Hip Fracture Repair",
+    "P3B" = "Major Procedure: Orthopedic - Hip Replacement",
+    "P3C" = "Major Procedure: Orthopedic - Knee Replacement",
+    "P3D" = "Major Procedure: Orthopedic - Other",
+    "P4A" = "Eye procedure: Corneal Transplant",
+    "P4B" = "Eye procedure: Cataract Removal/Lens Insertion",
+    "P4C" = "Eye procedure: Retinal Detachment",
+    "P4D" = "Eye procedure: Treatment of Retinal Lesions",
+    "P4E" = "Eye procedure: Other",
+    "P5A" = "Ambulatory procedures: Skin",
+    "P5B" = "Ambulatory procedures: Musculoskeletal",
+    "P5C" = "Ambulatory procedures: Inguinal Hernia Repair",
+    "P5D" = "Ambulatory procedures: Lithotripsy",
+    "P5E" = "Ambulatory procedures: Other",
+    "P6A" = "Minor procedures: Skin",
+    "P6B" = "Minor procedures: Musculoskeletal",
+    "P6C" = "Minor procedures: Other (Medicare Fee Schedule)",
+    "P6D" = "Minor procedures: Other (Non-Medicare Fee Schedule)",
+    "P7A" = "Oncology: Radiation Therapy",
+    "P7B" = "Oncology: Other",
+    "P8A" = "Endoscopy: Arthroscopy",
+    "P8B" = "Endoscopy: Upper GI",
+    "P8C" = "Endoscopy: Sigmoidoscopy",
+    "P8D" = "Endoscopy: Colonoscopy",
+    "P8E" = "Endoscopy: Cystoscopy",
+    "P8F" = "Endoscopy: Bronchoscopy",
+    "P8G" = "Endoscopy: Laparoscopic Cholecystectomy",
+    "P8H" = "Endoscopy: Laryngoscopy",
+    "P8I" = "Endoscopy: Other",
+    "P9A" = "Dialysis Services (Medicare Fee Schedule)",
+    "P9B" = "Dialysis Services (Non-Medicare Fee Schedule)",
+    "T1A" = "Lab tests: Routine Venipuncture (Non-Medicare Fee Schedule)",
+    "T1B" = "Lab tests: Automated General Profiles",
+    "T1C" = "Lab tests: Urinalysis",
+    "T1D" = "Lab tests: Blood Counts",
+    "T1E" = "Lab tests: Glucose",
+    "T1F" = "Lab tests: Bacterial Cultures",
+    "T1G" = "Lab tests: Other (Medicare Fee Schedule)",
+    "T1H" = "Lab tests: Other (Non-Medicare Fee Schedule)",
+    "T2A" = "Other tests: ECGs",
+    "T2B" = "Other tests: Cardiovascular Stress Tests",
+    "T2C" = "Other tests: EKG Monitoring",
+    "T2D" = "Other tests: Other",
+    "Y1"  = "Other: Medicare Fee Schedule",
+    "Y2"  = "Other: Non-Medicare Fee Schedule",
+    "Z1"  = "Local Codes",
+    "Z2"  = "Undefined Codes"
+  )
 }

@@ -123,9 +123,9 @@ switch_multiple_procedure <- function(x) {
 #' Modifier 62: Services for which two surgeons,
 #' each in a different specialty, may be paid.
 #'
-#' @param x vector of Co Surgeon indicators
+#' @param x vector of Co-Surgeon indicators
 #'
-#' @returns vector of Co Surgeon descriptions
+#' @returns vector of Co-Surgeon descriptions
 #'
 #' @examples
 #' switch_co_surgeon(c(0:2, 9, NA_character_))
@@ -220,3 +220,118 @@ switch_diagnostic_imaging <- function(x) {
     )
 }
 
+#' OPPS Indicator Descriptions
+#'
+#' @param x vector of OPPS indicators
+#'
+#' @returns vector of OPPS indicator descriptions
+#'
+#' @examples
+#' switch_opps_indicator(c("1", "9"))
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+switch_opps_indicator <- function(x) {
+
+  kit::nswitch(
+    x = x,
+    "1", "Subject to OPPS Payment Cap",
+    "9", "Not Subject to OPPS Payment Cap",
+    default = NA_character_
+  )
+}
+
+#' PC/TC Indicator Descriptions
+#'
+#' @param x vector of PC/TC indicators
+#'
+#' @returns vector of PC/TC indicator descriptions
+#'
+#' @examples
+#' switch_pctc_indicator(as.character(0:9))
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+switch_pctc_indicator <- function(x) {
+
+  kit::nswitch(
+    x = x,
+    "0", "Physician Service: PC/TC does not apply",
+    "1", "Diagnostic Tests for Radiology Services: Have both a PC and TC. Mods 26/TC can be used.",
+    "2", "Professional Component Only: Standalone code. Describes PC of diagnostic tests for which there is a code that describes TC of diagnostic test only and another code that describes the Global test.",
+    "3", "Technical Component Only: Standalone code. Mods 26/TC cannot be used. Describe TC of diagnostic tests for which there is a code that describes PC of the diagnostic test only. Also identifies codes that are covered only as diagnostic tests and do not have a PC code.",
+    "4", "Global Test Only: Standalone code. Mods 26/TC cannot be used. Describes diagnostic tests for which there are codes that describe PC of the test only, and the TC of the test only. Total RVUs is sum of total RVUs for PC and TC only codes combined.",
+    "5", "Incident-To:  Mods 26/TC cannot be used. Services provided by personnel working under physician supervision. Payment may not be made when provided to hospital inpatients or outpatients.",
+    "6", "Lab Physician Interpretation: Mod TC cannot be used. Clinical Lab codes for which separate payment for interpretations by laboratory physicians may be made. Actual performance of tests paid by lab fee schedule.",
+    "7", "Physical Therapy: Payment may not be made if provided to hospital outpatient/inpatient by independently practicing physical or occupational therapist.",
+    "8", "Physician Interpretation: Identifies PC of Clinical Lab codes for which separate payment made only if physician interprets abnormal smear for hospital inpatient. No TC billing recognized, payment for test made to hospital. No payment for CPT 85060 furnished to hospital outpatients or non-hospital patients. Physician interpretation paid through clinical laboratory fee schedule.",
+    "9", "PCTC Concept does not apply",
+    default = NA_character_
+  )
+}
+
+#' Status Code Descriptions
+#'
+#' @param x vector of PC/TC indicators
+#'
+#' @returns vector of PC/TC indicator descriptions
+#'
+#' @examples
+#' switch_status_code(LETTERS)
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+switch_status_code <- function(x) {
+
+  kit::nswitch(
+    x = x,
+    "A", "Active",
+    "B", "Payment Bundle",
+    "C", "Carrier Priced",
+    "D", "Deleted Codes",
+    "E", "Regulatory Exclusion",
+    "F", "Deleted/Discontinued",
+    "G", "Not Valid for Medicare",
+    "H", "Deleted Modifier",
+    "I", "Not Valid for Medicare",
+    "J", "Anesthesia Service",
+    "M", "Measurement Code",
+    "N", "Restricted Coverage",
+    "P", "Non-Covered Service",
+    "R", "Bundled/Excluded Code",
+    "T", "Injections",
+    "X", "Statutory Exclusion",
+    default = NA_character_
+  )
+
+  # kit::nswitch(
+  #   x = x,
+  #   "A", "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD.",
+  #   "B", "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident.",
+  #   "C", "Carriers establish RVUs and payment following documentation review.",
+  #   "D", "Deleted effective with beginning of year.",
+  #   "E", "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures.",
+  #   "F", "Not subject to 90 day grace period",
+  #   "G", "Another code used for payment. Subject to a 90 day grace period.",
+  #   "H", "Had TC/26 mod in previous year, TC/26 component now deleted.",
+  #   "I", "Another code used for payment. Not subject to a 90-day grace period.",
+  #   "J", "No RVUs or payment amounts. Only identifies anesthesia services.",
+  #   "M", "Used for reporting purposes only.",
+  #   "N", "Not covered by Medicare.",
+  #   "P", "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision.",
+  #   "R", "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes.",
+  #   "T", "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment.",
+  #   "X", "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made.",
+  #   default = NA_character_
+  # )
+
+}

@@ -48,7 +48,7 @@ library(northstar)
 ### Describe HCPCS
 
 ```{r}
-describe_hcpcs(hcpcs = "33924")
+describe_hcpcs(hcpcs = c("33924", "43116"))
 ```
 
 

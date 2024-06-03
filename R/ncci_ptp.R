@@ -99,9 +99,11 @@ get_ptp_edits <- function(hcpcs        = NULL,
   if(current) {
     ptp <- vctrs::vec_slice(
       ptp,
-      ptp$ptp_deleted == as.Date("9999-12-31")
-      )
-    }
+      ptp$ptp_deleted == as.Date("9999-12-31"))
+
+    ptp <- dplyr::select(ptp, -ptp_deleted)
+
+  }
 
   return(.add_class(ptp))
 }

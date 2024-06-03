@@ -163,6 +163,24 @@ modefs <- dplyr::tribble(
   "8P",  "Modifier 8P is intended to be used as a reporting modifier to allow the reporting of circumstances when an action described in a measure's numerator is not performed and the reason is not otherwise specified."
 )
 
+case_modifier <- function(df, col) {
+
+  df |>
+    dplyr::mutate(mod_description = dplyr::case_match(
+      {{ col }},
+      "26" ~ dplyr::tibble(
+        mod_label       = "Professional Component",
+        mod_description = "Certain procedures are a combination of a physician or other qualified health care professional component and a technical component. When the physician or other qualified health care professional component is reported separately, the service may be identified by adding modifier 26 to the usual procedure number."),
+      "TC" ~ dplyr::tibble(
+        mod_label       = "Technical Component",
+        mod_description = "Under certain circumstances, a charge may be made for the technical component alone. Under those circumstances the technical component charge is identified by adding modifier TC to the usual procedure number. Technical component charges are institutional charges and not billed separately by physicians; however, portable x-ray suppliers only bill for technical component and should utilize modifier TC. The charge data from portable x-ray suppliers will then be used to build customary and prevailing profiles."),
+      "53" ~ dplyr::tibble(
+        mod_label       = "Discontinued Procedure",
+        mod_description = "Under certain circumstances, the physician or other qualified health care professional may elect to terminate a surgical or diagnostic procedure. Due to extenuating circumstances or those that threaten the well being of the patient, it may be necessary to indicate that a surgical or diagnostic procedure was started but discontinued. This circumstance may be reported by adding modifier 53 to the code reported by the individual for the discontinued procedure.")),
+      .after = {{ col }}) |>
+    tidyr::unpack(cols = mod_description)
+}
+
 mods <- mods |>
   dplyr::left_join(modefs)
 
