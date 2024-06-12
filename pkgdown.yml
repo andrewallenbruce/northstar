@@ -5,10 +5,10 @@ articles:
   adjustment-codes: adjustment-codes.html
   calculations: calculations.html
   columns: columns.html
-  fee-schedule: fee-schedule.html
   modifiers: modifiers.html
   ncci-edits: ncci-edits.html
-last_built: 2024-06-12T15:54Z
+  northstar: northstar.html
+last_built: 2024-06-12T17:30Z
 urls:
   reference: https://andrewallenbruce.github.io/northstar/reference
   article: https://andrewallenbruce.github.io/northstar/articles
