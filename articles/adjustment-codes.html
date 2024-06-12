@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="northstar">
-<title>Fee Schedule • northstar</title>
+<title>Adjustment Codes • northstar</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -19,7 +19,7 @@
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Fee Schedule">
+<meta property="og:title" content="Adjustment Codes">
 <meta property="og:description" content="northstar">
 <meta property="og:image" content="https://andrewallenbruce.github.io/northstar/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -44,13 +44,13 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item">
+<li class="nav-item">
   <a class="nav-link" href="../articles/fee-schedule.html">Getting started</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/columns.html">Dictionary</a>
@@ -110,20 +110,110 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Fee Schedule</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Adjustment Codes</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/vignettes/fee-schedule.Rmd" class="external-link"><code>vignettes/fee-schedule.Rmd</code></a></small>
-      <div class="d-none name"><code>fee-schedule.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/vignettes/articles/adjustment-codes.Rmd" class="external-link"><code>vignettes/articles/adjustment-codes.Rmd</code></a></small>
+      <div class="d-none name"><code>adjustment-codes.Rmd</code></div>
     </div>
 
     
     
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span></code></pre></div>
+<p>Medical billing adjustment codes, also known as Claim Adjustment
+Reason Codes (CARCs), are used by healthcare payers to explain why a
+claim or service line was paid differently than it was billed. These
+codes provide specific reasons for adjustments made to the payment
+amount, such as deductibles, coinsurance, contractual obligations, or
+other adjustments.</p>
 <div class="section level2">
-<h2 id="hcpcs">HCPCS<a class="anchor" aria-label="anchor" href="#hcpcs"></a>
+<h2 id="claim-adjustment-reason-codes-carcs">Claim Adjustment Reason Codes (CARCs)<a class="anchor" aria-label="anchor" href="#claim-adjustment-reason-codes-carcs"></a>
 </h2>
+<p>Group Codes and Claim Adjustment Reason Codes (CARCs) serve distinct
+but complementary purposes in medical billing and remittance advice:</p>
 </div>
-  </main>
+<div class="section level2">
+<h2 id="group-codes">Group Codes<a class="anchor" aria-label="anchor" href="#group-codes"></a>
+</h2>
+<p>Group Codes identify the general category or high-level reason for a
+payment adjustment. They provide an overarching classification for the
+type of adjustment being made.[5] The main Group Codes are:</p>
+<ul>
+<li>CO (Contractual Obligation): Adjustment due to a contractual
+agreement or regulatory requirement, typically a write-off for the
+provider.[3][5]</li>
+<li>OA (Other Adjustment): Used when no other group code applies to the
+adjustment.[3][5]</li>
+<li>PR (Patient Responsibility): Adjustment representing an amount that
+should be billed to the patient, such as deductibles or
+copays.[3][5]</li>
+<li>PI (Payer Initiated Reductions): Adjustment initiated by the payer
+when they believe the provider is financially liable, but there is no
+supporting contract.[3]</li>
+</ul>
+<p>A Group Code must always be used in conjunction with a Claim
+Adjustment Reason Code to provide the specific reason for the
+adjustment.[5]</p>
+</div>
+<div class="section level2">
+<h2 id="claim-adjustment-reason-codes-carcs-1">Claim Adjustment Reason Codes (CARCs)<a class="anchor" aria-label="anchor" href="#claim-adjustment-reason-codes-carcs-1"></a>
+</h2>
+<p>CARCs are more granular, three-character alphanumeric codes that
+describe the precise reason why a claim or service line was paid
+differently than it was billed.[1][4] They provide detailed explanations
+for adjustments, such as:</p>
+<ul>
+<li>CO16: Claim lacks information needed for adjudication.[1]</li>
+<li>PR1: Deductible amount.[1]<br>
+</li>
+<li>OA23: Charges have been unbundled.[1]</li>
+</ul>
+<p>While Group Codes categorize the general type of adjustment, CARCs
+give the exact rationale behind each specific payment adjustment made to
+a claim line or claim.[2][4] The combination of a Group Code and CARC
+fully communicates the nature and responsibility for any differences
+between the billed and paid amounts.</p>
+<p>Citations: [1] <a href="https://x12.org/codes/claim-adjustment-reason-codes" class="external-link uri">https://x12.org/codes/claim-adjustment-reason-codes</a> [2]
+<a href="https://www.aapc.com/support/common-terms/claim-adjustment-reason-codes" class="external-link uri">https://www.aapc.com/support/common-terms/claim-adjustment-reason-codes</a>
+[3] <a href="https://www.linkedin.com/pulse/claim-adjustments-group-code-reason-values-co-cr-oa-jvs-prasad" class="external-link uri">https://www.linkedin.com/pulse/claim-adjustments-group-code-reason-values-co-cr-oa-jvs-prasad</a>
+[4] <a href="https://docs.claim.md/docs/claim-adjustment-reason-codes" class="external-link uri">https://docs.claim.md/docs/claim-adjustment-reason-codes</a>
+[5] <a href="https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c22pdf.pdf" class="external-link uri">https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c22pdf.pdf</a></p>
+</div>
+<div class="section level2">
+<h2 id="remittance-advice-remark-codes-rarcs">Remittance Advice Remark Codes (RARCs)<a class="anchor" aria-label="anchor" href="#remittance-advice-remark-codes-rarcs"></a>
+</h2>
+<p>The purpose of Remittance Advice Remark Codes (RARCs) is to provide
+additional explanation for an adjustment already described by a Claim
+Adjustment Reason Code (CARC) or to convey information about remittance
+processing.[1][2]</p>
+<p>Specifically, RARCs serve two main functions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Supplemental RARCs provide additional details or clarification
+for an adjustment that has already been described by a CARC. For
+example, a CARC may indicate that a claim was denied due to missing
+information, and a supplemental RARC would further specify what exact
+information was missing.[1]</p></li>
+<li><p>Informational RARCs, prefaced with “Alert:”, convey information
+about the remittance processing itself, rather than being related to a
+specific adjustment or CARC. These alerts communicate things like
+changes to procedure codes, potential impacts on patient liability, or
+other processing details.[1]</p></li>
+</ol>
+<p>In summary, while CARCs explain the reason for an adjustment to a
+claim payment, RARCs give additional context, details, or processing
+information related to those adjustments or the remittance advice as a
+whole.[2] The combination of CARCs and RARCs allows for clear
+communication between payers and providers regarding claim adjudication
+decisions.</p>
+<p>Citations: [1] <a href="https://x12.org/codes/remittance-advice-remark-codes" class="external-link uri">https://x12.org/codes/remittance-advice-remark-codes</a> [2]
+<a href="https://med.noridianmedicare.com/web/jeb/topics/ra" class="external-link uri">https://med.noridianmedicare.com/web/jeb/topics/ra</a> [3]
+<a href="https://www.palmettogba.com/palmetto/jmb.nsf/DID/2NF7NSFT1B" class="external-link uri">https://www.palmettogba.com/palmetto/jmb.nsf/DID/2NF7NSFT1B</a>
+[4] <a href="https://files.ontario.ca/moh_1/moh-remittance-advice-explanatory-codes-2022-12-en-2023-05-15.pdf" class="external-link uri">https://files.ontario.ca/moh_1/moh-remittance-advice-explanatory-codes-2022-12-en-2023-05-15.pdf</a>
+[5] <a href="https://www.novitas-solutions.com/webcenter/portal/MedicareJH/pagebyid?contentId=00243417" class="external-link uri">https://www.novitas-solutions.com/webcenter/portal/MedicareJH/pagebyid?contentId=00243417</a></p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

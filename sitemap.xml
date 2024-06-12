@@ -10,6 +10,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/articles/adjustment-codes.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/articles/calculations.html</loc>
   </url>
   <url>
@@ -22,6 +25,12 @@
     <loc>https://andrewallenbruce.github.io/northstar/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/articles/modifiers.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/articles/ncci-edits.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/authors.html</loc>
   </url>
   <url>
@@ -29,6 +38,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/assign_adjustments.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc>
@@ -77,9 +89,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_ptp_edits.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_rbcs_type.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_rvus.html</loc>

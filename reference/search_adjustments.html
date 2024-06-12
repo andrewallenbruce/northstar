@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">northstar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,9 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/columns.html">Dictionary</a>
     <a class="dropdown-item" href="../articles/calculations.html">Calculations</a>
+    <a class="dropdown-item" href="../articles/adjustment-codes.html">Adjustment Codes</a>
+    <a class="dropdown-item" href="../articles/modifiers.html">Modifiers</a>
+    <a class="dropdown-item" href="../articles/ncci-edits.html">NCCI Edits</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -55,13 +58,13 @@
   </a>
 </li>
 <li class="nav-item">
-  <a class="external-link nav-link" href="http://twitter.com/aabrucehimni">
-    <span class="fab fa fab fa-twitter fa-lg"></span>
+  <a class="external-link nav-link" href="https://twitter.com/andrewallbruce">
+    <span class="fab fa fab fa-x-twitter fa-lg"></span>
      
   </a>
 </li>
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://www.linkedin.com/in/andybruce1/">
+  <a class="external-link nav-link" href="https://www.linkedin.com/in/andrewallenbruce">
     <span class="fas fa fas fa-linkedin fa-lg"></span>
      
   </a>
@@ -84,31 +87,14 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_adjustments</span><span class="op">(</span></span>
-<span>  df <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  col <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"carc"</span>, <span class="st">"rarc"</span><span class="op">)</span>,</span>
-<span>  action <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"review"</span>, <span class="st">"join"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_adjustments</span><span class="op">(</span>type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"carc"</span>, <span class="st">"rarc"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>df</dt>
-<dd><p><code>&lt;data.frame&gt;</code> data.frame</p></dd>
-
-
-<dt>col</dt>
-<dd><p><code>&lt;chr&gt;</code> column of Adjustment codes to match on</p></dd>
-
-
-<dt>type</dt>
-<dd><p><code>&lt;chr&gt;</code> type of Adjustment code; <code>all</code> (default), <code>carc</code>, <code>rarc</code></p></dd>
-
-
-<dt>action</dt>
-<dd><p><code>&lt;chr&gt;</code> action to take; <code>review</code> (default), <code>join</code></p></dd>
+    <dl><dt>type</dt>
+<dd><p><code>&lt;chr&gt;</code> type of Adjustment code; <code>group</code> (default), <code>carc</code>,
+<code>rarc</code></p></dd>
 
 
 <dt>...</dt>
@@ -127,11 +113,11 @@
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Claim Adjustment Reason Codes:</p>
 <p><em>X12 External Code Source 139</em></p>
-<p>These codes describe why a claim or service line was paid differently
-than it was billed and generally assign responsibility for the
-adjustment amounts.</p>
-<p>The Claim Adjustment <em>Group Codes</em> are internal to the X12 standard.
-The format is always two alpha characters:</p><ul><li><p><strong>CO</strong>: Contractual Obligations</p></li>
+<p>These codes describe why a claim or service line was paid differently than
+it was billed and generally assign responsibility for the adjustment
+amounts.</p>
+<p>The Claim Adjustment <em>Group Codes</em> are internal to the X12 standard. The
+format is always two alpha characters:</p><ul><li><p><strong>CO</strong>: Contractual Obligations</p></li>
 <li><p><strong>CR</strong>: Corrections and Reversals</p></li>
 <li><p><strong>OA</strong>: Other Adjustments</p></li>
 <li><p><strong>PI</strong>: Payer Initiated Reductions</p></li>
@@ -139,29 +125,82 @@ The format is always two alpha characters:</p><ul><li><p><strong>CO</strong>: Co
 </ul><p>Remittance Advice Remark Codes:</p>
 <p><em>X12 External Code Source 411</em></p>
 <p>Remittance Advice Remark Codes (RARCs) are used to provide additional
-explanation for an adjustment already described by a Claim Adjustment Reason
-Code (CARC) or to convey information about remittance processing.</p>
+explanation for an adjustment already described by a Claim Adjustment
+Reason Code (CARC) or to convey information about remittance processing.</p>
 <p>There are two types of RARCs: <strong>Supplemental</strong> and <strong>Informational</strong>:</p>
-<p>The majority of RARCs are <em>supplemental</em> and, as such, are generally referred
-to as RARCs without further distinction. Supplemental RARCs provide additional
-explanation for an adjustment already described by a CARC.</p>
-<p>The second type is <em>informational</em>; these are all prefaced with <code>Alert:</code> and
-are referred to as Alerts. They are used to convey information about
-remittance processing and are <em>never</em> related to a specific adjustment or CARC.</p>
+<p>The majority of RARCs are <em>supplemental</em> and, as such, are generally
+referred to as RARCs without further distinction. Supplemental RARCs
+provide additional explanation for an adjustment already described by a
+CARC.</p>
+<p>The second type is <em>informational</em>; these are all prefaced with <code>Alert:</code>
+and are referred to as Alerts. They are used to convey information about
+remittance processing and are <em>never</em> related to a specific adjustment or
+CARC.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CO-253"</span>, <span class="st">"OA-23"</span>, <span class="st">"PI-185"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">search_adjustments</span><span class="op">(</span>col    <span class="op">=</span> <span class="va">code</span>,</span></span>
-<span class="r-in"><span>                   type   <span class="op">=</span> <span class="st">"carc"</span>,</span></span>
-<span class="r-in"><span>                   action <span class="op">=</span> <span class="st">"join"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">adj_code</span> <span style="font-weight: bold;">group</span>                      <span style="font-weight: bold;">description</span>                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> CO-253   Contractual Obligations    Sequestration - reduction in federal paym…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> OA-23    Other Adjustments          The impact of prior payer(s) adjudication…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> PI-185   Payer Initiated Reductions The rendering provider is not eligible to…</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_adjustments</span><span class="op">(</span><span class="st">"group"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">code</span>  <span style="font-weight: bold;">description</span>               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> CO    Contractual Obligations   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> CR    Corrections and Reversals </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> OA    Other Adjustments         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> PI    Payer Initiated Reductions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> PR    Patient Responsibility    </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">search_adjustments</span><span class="op">(</span><span class="st">"carc"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 405 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">code</span>  <span style="font-weight: bold;">description</span>             <span style="font-weight: bold;">usage</span> <span style="font-weight: bold;">notes</span> <span style="font-weight: bold;">start_date</span> <span style="font-weight: bold;">last_modified</span> <span style="font-weight: bold;">end_date</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1     Deductible Amount       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2     Coinsurance Amount      <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 3     Co-payment Amount       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 4     The procedure code is … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2020-03-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 5     The procedure code/typ… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2018-03-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 6     The procedure/revenue … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 7     The procedure/revenue … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 8     The procedure code is … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 9     The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 10    The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 11    The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 12    The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 13    The date of death prec… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 14    The date of birth foll… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 15    The authorization numb… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2017-11-01    2018-05-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 16    Claim/service lacks in… Do n… <span style="color: #BB0000;">NA</span>    1995-01-01 2018-03-01    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 17    Requested information … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2008-09-21    2009-07-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 18    Exact duplicate claim/… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2013-06-02    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 19    This is a work-related… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2007-09-30    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 20    This injury/illness is… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2007-09-30    <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 385 more rows</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">search_adjustments</span><span class="op">(</span><span class="st">"rarc"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,171 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">code</span>  <span style="font-weight: bold;">description</span>                              <span style="font-weight: bold;">notes</span> <span style="font-weight: bold;">start_date</span> <span style="font-weight: bold;">last_modified</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> M1    X-ray not taken within the past 12 mont… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> M2    Not paid separately when the patient is… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> M3    Equipment is the same or similar to equ… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> M4    Alert: This is the last monthly install… (Mod… 1997-01-01 2007-04-01   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> M5    Monthly rental payments can continue un… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> M6    Alert: You must furnish and service thi… (Mod… 1997-01-01 2009-03-01   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> M7    No rental payments after the item is pu… (Mod… 1997-01-01 2016-11-01   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> M8    We do not accept blood gas tests result… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> M9    Alert: This is the tenth rental month. … (Mod… 1997-01-01 2007-04-01   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> M10   Equipment purchases are limited to the … <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> M11   DME, orthotics and prosthetics must be … <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> M12   Diagnostic tests performed by a physici… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> M13   Only one initial visit is covered per s… (Mod… 1997-01-01 2007-06-30   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> M14   No separate payment for an injection ad… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> M15   Separately billed services/tests have b… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> M16   Alert: Please see our web site, mailing… (Rea… 1997-01-01 2007-04-01   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> M17   Alert: Payment approved as you did not … (Mod… 1997-01-01 2007-04-01   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> M18   Certain services may be approved for ho… (Mod… 1997-01-01 2003-06-30   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> M19   Missing oxygen certification/re-certifi… (Mod… 1997-01-01 2003-02-28   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> M20   Missing/incomplete/invalid HCPCS.        (Mod… 1997-01-01 2003-02-28   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,151 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
