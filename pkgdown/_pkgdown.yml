@@ -37,7 +37,7 @@ navbar:
     intro:
       icon: ~
       text: Getting started
-      href: articles/fee-schedule.html
+      href: articles/northstar.html
     reference:
       text: Reference
       href: reference/index.html
@@ -66,7 +66,7 @@ navbar:
       icon: fas fa-linkedin fa-lg
       href: https://www.linkedin.com/in/andrewallenbruce
     twitter:
-      icon: fab fa-x-twitter fa-lg
+      icon: fab fa-twitter fa-lg
       href: https://twitter.com/andrewallbruce
 
 reference:

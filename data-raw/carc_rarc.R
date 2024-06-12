@@ -14,7 +14,11 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 
 adj_group <- dplyr::tibble(
   code = c("CO", "CR", "OA", "PI", "PR"),
-  description = c("Contractual Obligations", "Corrections and Reversals", "Other Adjustments", "Payer Initiated Reductions", "Patient Responsibility"),
+  description = c("Contractual Obligations",
+                  "Corrections and Reversals",
+                  "Other Adjustments",
+                  "Payer Initiated Reductions",
+                  "Patient Responsibility"),
 )
 
 # Update Pin
@@ -44,9 +48,17 @@ adj_carc <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |>
          description   = case_when(!is.na(usage) ~ strex::str_before_first(description, "Usage: "), TRUE ~ description),
          description   = stringr::str_squish(description)
   ) |>
-  select(code, description, usage, notes, start_date, last_modified, end_date)
+  select(
+    code,
+    description,
+    usage,
+    notes,
+    start_date,
+    last_modified,
+    end_date
+    )
 
-# Update Pin
+
 pin_update(
   adj_carc,
   name        = "adj_carc",
@@ -87,7 +99,13 @@ adj_rarc <- read_html("https://x12.org/codes/remittance-advice-remark-codes") |>
          start_date    = anytime::anydate(start_date),
          last_modified = anytime::anydate(last_modified),
          description   = stringr::str_squish(description)) |>
-  select(code, description, notes, start_date, last_modified)
+  select(
+    code,
+    description,
+    notes,
+    start_date,
+    last_modified
+    )
 
 # Update Pin
 pin_update(
@@ -100,16 +118,22 @@ pin_update(
 library(triebeard)
 
 adj_trie <- triebeard::trie(
-  keys = c(adj_group$code, adj_carc$code, adj_rarc$code),
-  values = c(adj_group$description, adj_carc$description, adj_rarc$description)
+  keys = c(
+    adj_group$code,
+    adj_carc$code,
+    adj_rarc$code),
+  values = c(
+    adj_group$description,
+    adj_carc$description,
+    adj_rarc$description)
 )
 
 adj_group$code |> deframe() |> unlist()
 
-# Update Pin
-pin_update(
-  adj_trie,
-  name        = "adj_trie",
-  title       = "CARCs & RARCs",
-  description = "Triebeard Object containing CARC and RARC Codes and Descriptions"
-)
+# Will not Work!
+# pin_update(
+#   adj_trie,
+#   name        = "adj_trie",
+#   title       = "CARCs & RARCs",
+#   description = "Triebeard Object containing CARC and RARC Codes and Descriptions"
+# )

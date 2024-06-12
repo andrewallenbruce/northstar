@@ -6,5 +6,5 @@ title: CARC Codes
 description: Claim Adjustment Reason Codes
 tags: ~
 urls: ~
-created: 20240612T111301Z
+created: 20240612T165711Z
 api_version: 1

@@ -1,8 +1,8 @@
 ---
-title: "Fee Schedule"
+title: "Getting started"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Fee Schedule}
+  %\VignetteIndexEntry{Getting started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,7 +28,21 @@ library(janitor)
 library(gt)
 ```
 
-# HCPCS
+# HCPCS Descriptions
+
+```{r}
+describe_hcpcs(hcpcs = "39503")
+```
+
+
+```{r}
+search_adjustments("carc")
+```
+
+```{r}
+search_adjustments("rarc")
+```
+
 
 ```{r echo = FALSE, eval=FALSE}
 search_fee_schedule(
