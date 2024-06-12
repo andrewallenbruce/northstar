@@ -1,12 +1,6 @@
-source(here::here("data-raw", "pins_functions.R"))
-
-library(googlesheets4)
-library(tidyverse)
-library(janitor)
-library(clock)
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 # gs_id <- "1MVaKH6T6GZ39iKvrNRoiOBb47RQtMYJ4g0nvunmzsBg"
-
 wkbk <- "1KUPLYD2dksyD4Gcc8pHL5Chw20Sjcck0HYM9VA_JZJ4"
 sh1 <- read_sheet(wkbk, sheet = 1, col_types = "iicccccicccc")
 sh2 <- read_sheet(wkbk, sheet = 2, col_types = "iicccccicccc")
@@ -40,7 +34,7 @@ practicum <- vctrs::vec_rbind(
       c("OPTIC", "OPTHAM") ~ "Opthamology",
       "WORKCMP" ~ "Worker's Comp"
     ) |>
-      as_factor(),
+      forcats::as_factor(),
     diagnosis = na_if(diagnosis, "-"),
     icd = na_if(icd, "-"),
     procedure = na_if(procedure, "-"),
@@ -77,7 +71,7 @@ hcpcs_vec <- practicum |>
   count(hcpcs, sort = TRUE) |>
   pull(hcpcs)
 
-hcpcs_desc <- northstar::get_descriptions(
+hcpcs_desc <- northstar::describe_hcpcs(
   hcpcs = hcpcs_vec,
   desc_type = "Long"
 ) |>
@@ -98,9 +92,6 @@ icd_vec <- practicum |>
   filter(!is.na(icd_10)) |>
   count(icd_10, sort = TRUE) |>
   pull(icd_10)
-
-library(pathologie)
-library(northstar)
 
 icd_desc <- pathologie::icd10cm(icd = icd_vec) |>
   select(

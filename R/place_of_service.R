@@ -24,9 +24,11 @@
 #' acceptability of direct billing of Medicare, Medicaid and private insurance
 #' services provided by a given provider.
 #'
-#' @param pos_code `<chr>` vector of 2-character Place of Service codes; default is `NULL`
+#' @param pos_code `<chr>` vector of 2-character Place of Service codes; default
+#'   is `NULL`
 #'
-#' @param pos_type `<chr>` Place of Service type, one of `Facility` or `Non-Facility`; default is `NULL`
+#' @param pos_type `<chr>` Place of Service type, one of `Facility` or
+#'   `Non-Facility`; default is `NULL`
 #'
 #' @template args-dots
 #'

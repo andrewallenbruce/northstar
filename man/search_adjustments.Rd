@@ -4,22 +4,11 @@
 \alias{search_adjustments}
 \title{Search Adjustment Codes}
 \usage{
-search_adjustments(
-  df = NULL,
-  col = NULL,
-  type = c("all", "carc", "rarc"),
-  action = c("review", "join"),
-  ...
-)
+search_adjustments(type = c("group", "carc", "rarc"), ...)
 }
 \arguments{
-\item{df}{\verb{<data.frame>} data.frame}
-
-\item{col}{\verb{<chr>} column of Adjustment codes to match on}
-
-\item{type}{\verb{<chr>} type of Adjustment code; \code{all} (default), \code{carc}, \code{rarc}}
-
-\item{action}{\verb{<chr>} action to take; \code{review} (default), \code{join}}
+\item{type}{\verb{<chr>} type of Adjustment code; \code{group} (default), \code{carc},
+\code{rarc}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
@@ -34,12 +23,12 @@ Claim Adjustment Reason Codes:
 
 \emph{X12 External Code Source 139}
 
-These codes describe why a claim or service line was paid differently
-than it was billed and generally assign responsibility for the
-adjustment amounts.
+These codes describe why a claim or service line was paid differently than
+it was billed and generally assign responsibility for the adjustment
+amounts.
 
-The Claim Adjustment \emph{Group Codes} are internal to the X12 standard.
-The format is always two alpha characters:
+The Claim Adjustment \emph{Group Codes} are internal to the X12 standard. The
+format is always two alpha characters:
 \itemize{
 \item \strong{CO}: Contractual Obligations
 \item \strong{CR}: Corrections and Reversals
@@ -53,23 +42,26 @@ Remittance Advice Remark Codes:
 \emph{X12 External Code Source 411}
 
 Remittance Advice Remark Codes (RARCs) are used to provide additional
-explanation for an adjustment already described by a Claim Adjustment Reason
-Code (CARC) or to convey information about remittance processing.
+explanation for an adjustment already described by a Claim Adjustment
+Reason Code (CARC) or to convey information about remittance processing.
 
 There are two types of RARCs: \strong{Supplemental} and \strong{Informational}:
 
-The majority of RARCs are \emph{supplemental} and, as such, are generally referred
-to as RARCs without further distinction. Supplemental RARCs provide additional
-explanation for an adjustment already described by a CARC.
+The majority of RARCs are \emph{supplemental} and, as such, are generally
+referred to as RARCs without further distinction. Supplemental RARCs
+provide additional explanation for an adjustment already described by a
+CARC.
 
-The second type is \emph{informational}; these are all prefaced with \verb{Alert:} and
-are referred to as Alerts. They are used to convey information about
-remittance processing and are \emph{never} related to a specific adjustment or CARC.
+The second type is \emph{informational}; these are all prefaced with \verb{Alert:}
+and are referred to as Alerts. They are used to convey information about
+remittance processing and are \emph{never} related to a specific adjustment or
+CARC.
 }
 \examples{
-dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
-search_adjustments(col    = code,
-                   type   = "carc",
-                   action = "join")
+search_adjustments("group")
+
+search_adjustments("carc")
+
+search_adjustments("rarc")
 
 }

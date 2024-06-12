@@ -4,10 +4,14 @@
 \alias{search_modifiers}
 \title{Level I and II HCPCS Modifiers}
 \usage{
-search_modifiers(mod = NULL, ...)
+search_modifiers(modifier = NULL, modifier_type = NULL, ...)
 }
 \arguments{
-\item{mod}{\verb{<chr>} vector of 2-character HCPCS modifiers; default is \code{NULL}}
+\item{modifier}{\verb{<chr>} vector of 2-character HCPCS modifiers; default is
+\code{NULL}}
+
+\item{modifier_type}{\verb{<chr>} Modifier type, one of \code{HCPCS}, \code{CPT},
+\code{Anesthesia}, or \verb{Performance Measure}; default is \code{NULL}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
@@ -24,6 +28,8 @@ Modifiers also enable health care professionals to effectively respond to
 payment policy requirements established by other entities.
 }
 \examples{
-search_modifiers(mod = c("25", "59"))
+search_modifiers(modifier = c("25", "59"))
+
+search_modifiers(modifier_type = "CPT")
 
 }

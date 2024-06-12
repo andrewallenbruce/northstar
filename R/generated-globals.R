@@ -4,20 +4,10 @@ utils::globalVariables(c(
   # <case_asc>
   # <case_coverage>
   ":=",
-  # <search_adjustments>
-  "code",
   # <col_lb>
   "description",
-  # <search_adjustments>
-  "description.x",
-  # <search_adjustments>
-  "description.y",
-  # <search_adjustments>
-  "end_date",
   # <calculate_amounts>
   "facility",
-  # <search_adjustments>
-  "group",
   # <col_lb>
   "label",
   # <calculate_amounts>
@@ -32,8 +22,6 @@ utils::globalVariables(c(
   "rbcs_procedure",
   # <search_rbcs>
   "rbcs_subcategory",
-  # <search_adjustments>
-  "usage",
   # <col_lb>
   "var",
   NULL

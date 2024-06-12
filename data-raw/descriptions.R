@@ -1,5 +1,4 @@
-source(here::here("data-raw", "load_packages.R"))
-source(here::here("data-raw", "pins_functions.R"))
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 cpt_desc <- get_pin("cpt_descriptors")
 two_desc <- get_pin("two_descriptions")

@@ -1,0 +1,10 @@
+file: adj_group.qs
+file_size: 218
+pin_hash: 2df2f63f4ae9ed16
+type: qs
+title: CARC Group Codes
+description: Claim Adjustment Reason Group Codes
+tags: ~
+urls: ~
+created: 20240612T111236Z
+api_version: 1

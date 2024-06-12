@@ -96,7 +96,7 @@ get_ptp_edits <- function(hcpcs        = NULL,
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_type, ptp_type)
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_edit_mod, ptp_edit_mod)
 
-  if(current) {
+  if (current) {
     ptp <- vctrs::vec_slice(
       ptp,
       ptp$ptp_deleted == as.Date("9999-12-31"))

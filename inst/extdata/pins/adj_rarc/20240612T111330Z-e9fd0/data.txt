@@ -1,0 +1,10 @@
+file: adj_rarc.qs
+file_size: 40736
+pin_hash: e9fd0e71a60223fe
+type: qs
+title: RARC Codes
+description: Remittance Advice Remark Codes
+tags: ~
+urls: ~
+created: 20240612T111330Z
+api_version: 1

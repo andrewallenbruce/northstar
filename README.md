@@ -7,14 +7,16 @@
 
 <!-- badges: start -->
 
+![GitHub R package
+version](https://img.shields.io/github/r-package/v/andrewallenbruce/northstar?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
-[![Version](https://img.shields.io/badge/version-0.0.5-red.svg)](https://github.com/andrewallenbruce/northstar)
 [![Code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
 [![Last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
+
 <!-- badges: end -->
 
 <br>

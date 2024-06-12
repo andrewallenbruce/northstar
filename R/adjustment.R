@@ -4,14 +4,14 @@
 #'
 #' @details Claim Adjustment Reason Codes:
 #'
-#' _X12 External Code Source 139_
+#'   _X12 External Code Source 139_
 #'
-#' These codes describe why a claim or service line was paid differently
-#' than it was billed and generally assign responsibility for the
-#' adjustment amounts.
+#'   These codes describe why a claim or service line was paid differently than
+#'   it was billed and generally assign responsibility for the adjustment
+#'   amounts.
 #'
-#' The Claim Adjustment *Group Codes* are internal to the X12 standard.
-#' The format is always two alpha characters:
+#'   The Claim Adjustment *Group Codes* are internal to the X12 standard. The
+#'   format is always two alpha characters:
 #' - **CO**: Contractual Obligations
 #' - **CR**: Corrections and Reversals
 #' - **OA**: Other Adjustments
@@ -20,88 +20,125 @@
 #'
 #' @details Remittance Advice Remark Codes:
 #'
-#' _X12 External Code Source 411_
+#'   _X12 External Code Source 411_
 #'
-#' Remittance Advice Remark Codes (RARCs) are used to provide additional
-#' explanation for an adjustment already described by a Claim Adjustment Reason
-#' Code (CARC) or to convey information about remittance processing.
+#'   Remittance Advice Remark Codes (RARCs) are used to provide additional
+#'   explanation for an adjustment already described by a Claim Adjustment
+#'   Reason Code (CARC) or to convey information about remittance processing.
 #'
-#' There are two types of RARCs: **Supplemental** and **Informational**:
+#'   There are two types of RARCs: **Supplemental** and **Informational**:
 #'
-#' The majority of RARCs are *supplemental* and, as such, are generally referred
-#' to as RARCs without further distinction. Supplemental RARCs provide additional
-#' explanation for an adjustment already described by a CARC.
+#'   The majority of RARCs are *supplemental* and, as such, are generally
+#'   referred to as RARCs without further distinction. Supplemental RARCs
+#'   provide additional explanation for an adjustment already described by a
+#'   CARC.
 #'
-#' The second type is *informational*; these are all prefaced with `Alert:` and
-#' are referred to as Alerts. They are used to convey information about
-#' remittance processing and are *never* related to a specific adjustment or CARC.
+#'   The second type is *informational*; these are all prefaced with `Alert:`
+#'   and are referred to as Alerts. They are used to convey information about
+#'   remittance processing and are *never* related to a specific adjustment or
+#'   CARC.
 #'
-#' @param df `<data.frame>` data.frame
-#'
-#' @param col `<chr>` column of Adjustment codes to match on
-#'
-#' @param type `<chr>` type of Adjustment code; `all` (default), `carc`, `rarc`
-#'
-#' @param action `<chr>` action to take; `review` (default), `join`
+#' @param type `<chr>` type of Adjustment code; `group` (default), `carc`,
+#'   `rarc`
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' dplyr::tibble(code = c("CO-253", "OA-23", "PI-185")) |>
-#' search_adjustments(col    = code,
-#'                    type   = "carc",
-#'                    action = "join")
+#' search_adjustments("group")
+#'
+#' search_adjustments("carc")
+#'
+#' search_adjustments("rarc")
 #'
 #' @export
 #'
 #' @autoglobal
-search_adjustments <- function(df     = NULL,
-                               col    = NULL,
-                               type   = c("all", "carc", "rarc"),
-                               action = c("review", "join"),
-                               ...) {
+search_adjustments <- function(type = c("group", "carc", "rarc"), ...) {
 
-  type   <- match.arg(type)
-  action <- match.arg(action)
-  adj    <- get_pin("rarc_carc")
+  type <- match.arg(type)
 
-  if (type == "all") { return(adj) }
+  ad <- switch(
+    type,
+    group = get_pin("adj_group"),
+    carc = get_pin("adj_carc"),
+    rarc = get_pin("adj_rarc")
+  ) |>
+    .add_class()
 
-  if (type == "carc" && action == "review") {
-    adj$rarc <- NULL
-    return(adj)
-    }
+  return(ad)
+}
 
-  if (type == "rarc" && action == "review") { return(adj$rarc) }
+#' Make Adjustment Code Trie
+#'
+#' @examples
+#' adj_trie()
+#'
+#' @noRd
+#'
+#' @autoglobal
+adj_trie <- function() {
 
-  if (type == "carc" && action == "join") {
+  gr <- get_pin("adj_group")
+  cc <- get_pin("adj_carc")
+  rc <- get_pin("adj_rarc")
 
-    adj$carc <- dplyr::select(adj$carc, -c(usage:end_date))
+  triebeard::trie(
+    keys = c(gr$code, cc$code, rc$code),
+    values = c(gr$description, cc$description, rc$description))
 
-    adj <- df |>
-      tidyr::separate_wider_delim(
-        {{ col }},
-        delim = "-",
-        names = c("group", "code"),
-        too_few = "align_start") |>
-      dplyr::left_join(
-        adj$group,
-        by = dplyr::join_by(group == code)) |>
-      dplyr::left_join(
-        adj$carc,
-        by = dplyr::join_by(code == code)) |>
-      tidyr::unite(
-        "adj_code",
-        group,
-        code,
-        sep = "-",
-        na.rm = TRUE) |>
-      dplyr::rename(
-        group = description.x,
-        description = description.y)
+}
 
-  }
-  return(.add_class(adj))
+#' Assign Adjustment Codes
+#'
+#' @param code `<chr>` vector of Adjustment codes to match on
+#'
+#' @param include_keys `<lgl>` include keys in output; default is `FALSE`
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' x <- c("CO-253", "OA-23", "PI-185", "-45")
+#'
+#' assign_adjustments(x)
+#'
+#' assign_adjustments(x, include_keys = TRUE)
+#'
+#' dplyr::tibble(code = x,
+#'               desc = list(assign_adjustments(code)))
+#'
+#' dplyr::tibble(code = x) |>
+#'   dplyr::mutate(desc = purrr::map(code, assign_adjustments))
+#'
+#' purrr::map_df(x, assign_adjustments)
+#'
+#' purrr::map_df(x, assign_adjustments, include_keys = TRUE)
+#'
+#' dplyr::tibble(adj_code = x,
+#'   purrr::map_dfr(adj_code, assign_adjustments))
+#'
+#' @export
+#'
+#' @autoglobal
+assign_adjustments <- function(code, include_keys = FALSE, ...) {
+
+  cd <- strsplit(c(code), "[-]")
+  ln <- seq_along(cd)
+  tr <- adj_trie()
+
+  list(
+    adj_group_desc = triebeard::longest_match(
+      tr,
+      purrr::map_chr(
+        ln, ~getElement(cd, .x)[1]),
+      include_keys = include_keys
+      ),
+    adj_code_desc = triebeard::longest_match(tr,
+      purrr::map_chr(ln, ~getElement(cd, .x)[2]),
+      include_keys = include_keys
+      )
+    )
 }

@@ -48,6 +48,12 @@ navbar:
         href: articles/columns.html
       - text: Calculations
         href: articles/calculations.html
+      - text: Adjustment Codes
+        href: articles/adjustment-codes.html
+      - text: Modifiers
+        href: articles/modifiers.html
+      - text: NCCI Edits
+        href: articles/ncci-edits.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
@@ -58,10 +64,10 @@ navbar:
       href: https://github.com/andrewallenbruce/northstar
     linkedin:
       icon: fas fa-linkedin fa-lg
-      href: https://www.linkedin.com/in/andybruce1/
+      href: https://www.linkedin.com/in/andrewallenbruce
     twitter:
-      icon: fab fa-twitter fa-lg
-      href: http://twitter.com/aabrucehimni
+      icon: fab fa-x-twitter fa-lg
+      href: https://twitter.com/andrewallbruce
 
 reference:
 
@@ -70,6 +76,7 @@ reference:
     Medical Coding & Billing Codesets.
   contents:
   - describe_hcpcs
+  - assign_adjustments
   - starts_with("get_")
   - matches("search_")
 
@@ -91,4 +98,5 @@ reference:
   desc: >
     Utilities to label Codeset outputs.
   contents:
+  - starts_with("switch_")
   - starts_with("case_")

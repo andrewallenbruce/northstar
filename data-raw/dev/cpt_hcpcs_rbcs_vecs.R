@@ -1,5 +1,5 @@
-source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "load_packages.R"))
+source(here::here("data-raw", "file_paths.R"))
 source(here::here("data-raw", "pins_functions.R"))
 
 #------------ vector of unique CPT codes

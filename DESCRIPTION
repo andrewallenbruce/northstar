@@ -21,6 +21,8 @@ Imports:
     rlang,
     stringr,
     tidyr,
+    triebeard,
+    purrr,
     vctrs,
     withr (>= 3.0.0)
 Suggests:
@@ -32,7 +34,6 @@ Suggests:
     janitor,
     knitr,
     pracma,
-    purrr,
     qs,
     rmarkdown,
     roxyglobals,

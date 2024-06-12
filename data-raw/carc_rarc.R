@@ -1,6 +1,4 @@
-source(here::here("data-raw", "load_packages.R"))
-source(here::here("data-raw", "file_paths.R"))
-source(here::here("data-raw", "pins_functions.R"))
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 # Claim Adjustment Reason Codes (CARCs)
 # X12 External Code Source 139
@@ -14,12 +12,20 @@ source(here::here("data-raw", "pins_functions.R"))
 # The format is always two alpha characters.
 # For convenience, the values and definitions are below:
 
-carc_group_codes <- dplyr::tibble(
+adj_group <- dplyr::tibble(
   code = c("CO", "CR", "OA", "PI", "PR"),
   description = c("Contractual Obligations", "Corrections and Reversals", "Other Adjustments", "Payer Initiated Reductions", "Patient Responsibility"),
 )
 
-carc_codes <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |>
+# Update Pin
+pin_update(
+  adj_group,
+  name        = "adj_group",
+  title       = "CARC Group Codes",
+  description = "Claim Adjustment Reason Group Codes"
+)
+
+adj_carc <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |>
   html_element(".code_list__code-list-table") |>
   html_table() |>
   select(code = X1, X2) |>
@@ -40,6 +46,13 @@ carc_codes <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |
   ) |>
   select(code, description, usage, notes, start_date, last_modified, end_date)
 
+# Update Pin
+pin_update(
+  adj_carc,
+  name        = "adj_carc",
+  title       = "CARC Codes",
+  description = "Claim Adjustment Reason Codes"
+)
 
 # Remittance Advice Remark Codes (RARCs)
 # X12 External Code Source 411
@@ -60,7 +73,7 @@ carc_codes <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |
 # often referred to as Alerts. Alerts are used to convey information about
 # remittance processing and are never related to a specific adjustment or CARC.
 
-rarc_codes <- read_html("https://x12.org/codes/remittance-advice-remark-codes") |>
+adj_rarc <- read_html("https://x12.org/codes/remittance-advice-remark-codes") |>
   html_element(".code_list__code-list-table") |>
   html_table() |>
   select(code = X1, X2) |>
@@ -76,18 +89,27 @@ rarc_codes <- read_html("https://x12.org/codes/remittance-advice-remark-codes") 
          description   = stringr::str_squish(description)) |>
   select(code, description, notes, start_date, last_modified)
 
+# Update Pin
+pin_update(
+  adj_rarc,
+  name        = "adj_rarc",
+  title       = "RARC Codes",
+  description = "Remittance Advice Remark Codes"
+)
 
+library(triebeard)
 
-rarc_carc <- list(
-  group = carc_group_codes,
-  carc = carc_codes,
-  rarc = rarc_codes
-  )
+adj_trie <- triebeard::trie(
+  keys = c(adj_group$code, adj_carc$code, adj_rarc$code),
+  values = c(adj_group$description, adj_carc$description, adj_rarc$description)
+)
+
+adj_group$code |> deframe() |> unlist()
 
 # Update Pin
 pin_update(
-  rarc_carc,
-  name        = "rarc_carc",
+  adj_trie,
+  name        = "adj_trie",
   title       = "CARCs & RARCs",
-  description = "Claim Adjustment Reason Codes (CARCs) and Remittance Advice Remark Codes (RARCs)"
+  description = "Triebeard Object containing CARC and RARC Codes and Descriptions"
 )

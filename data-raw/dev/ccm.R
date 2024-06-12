@@ -1,7 +1,4 @@
-library(googlesheets4)
-library(tidyverse)
-library(janitor)
-library(northstar)
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 id <- "11iFT9rPKqzu6LgO0sjBtr0K-u5TkrljksoYsTf-hytA"
 coding <- read_sheet(id, sheet = "Coding/Reimbursement") |> clean_names()

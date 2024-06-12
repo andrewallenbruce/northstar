@@ -7,9 +7,11 @@
 search_pos(pos_code = NULL, pos_type = NULL, ...)
 }
 \arguments{
-\item{pos_code}{\verb{<chr>} vector of 2-character Place of Service codes; default is \code{NULL}}
+\item{pos_code}{\verb{<chr>} vector of 2-character Place of Service codes; default
+is \code{NULL}}
 
-\item{pos_type}{\verb{<chr>} Place of Service type, one of \code{Facility} or \code{Non-Facility}; default is \code{NULL}}
+\item{pos_type}{\verb{<chr>} Place of Service type, one of \code{Facility} or
+\code{Non-Facility}; default is \code{NULL}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

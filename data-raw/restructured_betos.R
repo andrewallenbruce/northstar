@@ -1,6 +1,4 @@
-source(here::here("data-raw", "file_paths.R"))
-source(here::here("data-raw", "load_packages.R"))
-source(here::here("data-raw", "pins_functions.R"))
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 rbcs <- betos(tidy = FALSE) |>
   janitor::clean_names() |>
