@@ -1,0 +1,10 @@
+file: denials_extract.qs
+file_size: 1131
+pin_hash: 77da9e199cae95fd
+type: qs
+title: Common Denials Categories and Types
+description: Common Denials Categories and Types
+tags: ~
+urls: ~
+created: 20240613T212455Z
+api_version: 1

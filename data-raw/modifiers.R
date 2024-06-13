@@ -154,3 +154,20 @@ pin_update(
   title = "HCPCS Modifiers",
   description = "Level I and II HCPCS Modifiers"
 )
+
+
+# Modifiers can be two digit numbers,
+# two character modifiers, or alpha-numeric
+# indicators. Modifiers provide additional
+# information to payers to make sure your
+# provider gets paid correctly for services
+# rendered. If appropriate, more than one
+# modifier may be used with a single procedure
+# code; however, are not applicable for every
+# category of the CPT codes. Some modifiers
+# can only be used with a particular category
+# and some are not compatible with others.
+#
+# https://med.noridianmedicare.com/web/jeb/topics/modifiers
+
+

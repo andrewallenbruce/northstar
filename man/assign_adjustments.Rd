@@ -7,7 +7,9 @@
 assign_adjustments(code, include_keys = FALSE, ...)
 }
 \arguments{
-\item{code}{\verb{<chr>} vector of Adjustment codes to match on}
+\item{code}{\verb{<chr>} vector of adjustment codes; should be of the form
+\code{GROUP-CARC}, where \code{GROUP} is two letters followed by a dash (\code{-}) and
+\code{CARC} is a two-to-three alphanumeric string.}
 
 \item{include_keys}{\verb{<lgl>} include keys in output; default is \code{FALSE}}
 

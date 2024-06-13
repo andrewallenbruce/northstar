@@ -92,7 +92,9 @@ adj_trie <- function() {
 
 #' Assign Adjustment Codes
 #'
-#' @param code `<chr>` vector of Adjustment codes to match on
+#' @param code `<chr>` vector of adjustment codes; should be of the form
+#'   `GROUP-CARC`, where `GROUP` is two letters followed by a dash (`-`) and
+#'   `CARC` is a two-to-three alphanumeric string.
 #'
 #' @param include_keys `<lgl>` include keys in output; default is `FALSE`
 #'
@@ -124,6 +126,8 @@ adj_trie <- function() {
 #'
 #' @autoglobal
 assign_adjustments <- function(code, include_keys = FALSE, ...) {
+
+  # TODO if code = "- 29" or "29"
 
   cd <- strsplit(c(code), "[-]")
   ln <- seq_along(cd)
