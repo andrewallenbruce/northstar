@@ -14,15 +14,15 @@ Depends:
 Imports:
     cli,
     collapse,
-    kit,
     dplyr,
     fs,
+    kit,
     pins,
+    purrr,
     rlang,
     stringr,
     tidyr,
     triebeard,
-    purrr,
     vctrs,
     withr (>= 3.0.0)
 Suggests:

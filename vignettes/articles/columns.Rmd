@@ -59,46 +59,85 @@ This file contains information on services covered by the Medicare Physician Fee
 The Medicare physician fee schedule amounts are adjusted to reflect the variation in practice costs from area to area. A geographic practice cost index (GPCI) has been established for every Medicare payment locality for each of the three components of a procedure’s relative value unit (i.e., the RVUs for work, practice expense, and malpractice). The GPCIs are applied in the calculation of a fee schedule payment amount by multiplying the RVU for each component times the GPCI for that component.
 
 ```{r}
-northstar:::col_lb("md", "rvu") |> 
-  gt(rowname_col = "var") |>
+northstar:::col_lb("df", "rvu") |> 
+  gt(groupname_col = "var",
+     row_group_as_column = TRUE
+     ) |>
   gt_style(tablign = "left") |> 
-  fmt_markdown()
+  fmt_markdown() |> 
+  tab_style(style = list(
+    cell_fill(color = "powderblue"),
+    cell_text(weight = "bold"),
+    cell_borders(
+      sides = c("all"),
+      color = "powderblue",
+      weight = px(3)
+    )
+  ),
+  locations = cells_row_groups())
 ```
 
 
 ## Modifier (26/TC/53)
 
 ```{r}
-dplyr::tibble(mod = c("26", "TC", "53")) |> 
-  case_modifier(mod) |>
-  gt(rowname_col = "mod") |> 
-  tab_header(title = md(modtitle)) |> 
-  tab_footnote(f53, locations = cells_stub(rows = 3)) |> 
-  tab_footnote(fmod) |> 
-  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
+dplyr::tibble(mod = c("26", "TC", "53"), desc = search_modifiers(mod)) |>
+  tidyr::unnest_wider(desc) |>
+  dplyr::mutate(modifier = NULL) |>
+  # gt(rowname_col = "mod") |>
+  gt(groupname_col         = "mod", row_group_as_column   = TRUE) |>
+  gt_style(tablign         = "right",
+           tabsize         = 22,
+           tabwt           = "bold") |>
+  sub_missing(missing_text = "") |>
+  fmt_markdown() |>
+  tab_header(title = md(modtitle)) |>
+  tab_style(style = list(
+    cell_fill(color = "powderblue"),
+    cell_text(weight = "bold"),
+    cell_borders(
+      sides = c("all"),
+      color = "powderblue",
+      weight = px(3)
+    )
+  ),
+  locations = cells_row_groups())
 ```
 
 
 ## Status
 
 ```{r}
-dplyr::tibble(status_code = x, code = x) |> 
-  case_status(code, desc = TRUE) |> 
-  gt(rowname_col = "status_code") |> 
-  tab_header(title = md(stnote)) |> 
-  tab_style(style = cell_fill(color = "yellow", alpha = 0.3),
-            locations = cells_body(columns = everything(), rows = c(1, 12, 13))) |> 
-  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
+dplyr::tibble(status_code = x, 
+              description = switch_status_code(status_code)) |>
+  gt(groupname_col = "status_code", row_group_as_column   = TRUE) |>
+  tab_header(title = md(stnote)) |>
+  tab_style(
+    style = cell_fill(color = "yellow", alpha = 0.3),
+    locations = cells_body(columns = everything(), rows = c(1, 12, 13))
+  ) |>
+  gt_style(tablign = "center",
+           tabsize = 22,
+           tabwt = "bold") |>
+  tab_style(style = list(
+    cell_fill(color = "powderblue"),
+    cell_text(weight = "bold"),
+    cell_borders(
+      sides = c("all"),
+      color = "powderblue",
+      weight = px(3)
+    )
+  ),
+  locations = cells_row_groups())
 ```
 
 
 ## Global Days
 
 ```{r}
-dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")) |> 
-  case_global(global) |>
+dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"),
+              desc = switch_global_days(global)) |>
   gt(rowname_col = "global") |> 
-  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
@@ -106,10 +145,9 @@ dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")) |>
 ## PCTC Indicator
 
 ```{r}
-dplyr::tibble(code = as.character(0:9)) |> 
-  case_pctc(code) |> 
+dplyr::tibble(code = as.character(0:9),
+              desc = switch_pctc_indicator(code)) |> 
   gt(rowname_col = "code") |> 
-  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
@@ -117,10 +155,9 @@ dplyr::tibble(code = as.character(0:9)) |>
 ## Multiple Procedures
 
 ```{r}
-dplyr::tibble(code = as.character(c(0:7, 9))) |> 
-  case_multproc(code) |>
+dplyr::tibble(code = as.character(c(0:7, 9)),
+              desc = switch_multiple_procedure(code)) |>
   gt(rowname_col = "code") |>
-  sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
 ```
 
@@ -128,8 +165,8 @@ dplyr::tibble(code = as.character(c(0:7, 9))) |>
 ## Diagnostic Imaging Family
 
 ```{r}
-dplyr::tibble(dximg = img) |>
-  case_imaging(dximg) |> 
+dplyr::tibble(dximg = img,
+              desc = switch_diagnostic_imaging(dximg)) |>
   gt(rowname_col = "dximg") |>
   sub_missing(missing_text = "Concept does not apply.") |> 
   gt_style(tablign = "center", tabsize = 18, tabwt = "bold")

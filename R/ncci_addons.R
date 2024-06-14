@@ -85,14 +85,12 @@ get_addon_edits <- function(hcpcs     = NULL,
                             ...) {
 
   aoc <- get_pin("aoc_long")
-  nms <- c("primary", "addon", "both")
+  # nms <- c("primary", "addon", "both")
 
   aoc <- fuimus::search_in_if(
     aoc,
     aoc$hcpcs,
-    fuimus::delister(
-      get_aoc_type(hcpcs)[nms])
-    )
+    hcpcs)
 
   aoc  <- fuimus::search_in_if(
     aoc,
@@ -100,11 +98,10 @@ get_addon_edits <- function(hcpcs     = NULL,
     edit_type)
 
   # TODO
-  aoc <- search_in_if_args(
+  aoc <- fuimus::search_in_if(
     aoc,
     aoc$aoc_type,
-    aoc_type,
-    args = c("primary", "addon"))
+    aoc_type)
 
   if (current) {
     aoc <- vctrs::vec_slice(
@@ -114,7 +111,7 @@ get_addon_edits <- function(hcpcs     = NULL,
   }
 
   if (na.rm) {
-    aoc <- janitor::remove_empty(aoc, which = c("rows", "cols"))
+    aoc <- remove_quiet(aoc)
   }
 
   return(.add_class(aoc))

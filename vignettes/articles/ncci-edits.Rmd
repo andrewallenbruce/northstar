@@ -12,3 +12,23 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(northstar)
 ```
+
+## Add-On Codes
+
+
+```{r}
+get_addon_edits()
+```
+
+## Medicallly Unlikely Edits
+
+```{r}
+get_mue_edits()
+```
+
+## Procedure-to-Procedure Edits
+
+```{r}
+get_ptp_edits()
+```
+

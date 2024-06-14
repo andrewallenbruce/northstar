@@ -13,6 +13,30 @@ knitr::opts_chunk$set(
 library(northstar)
 ```
 
+
+## Adjustment Codes
+
+```{r}
+search_adjustments("group")
+
+search_adjustments("carc")
+
+search_adjustments("rarc")
+```
+
+## Denials
+
+```{r}
+northstar::get_pin("denials_extract")
+
+northstar::get_pin("denials_site")$common
+
+northstar::get_pin("denials_site")$reasons$codes_desc
+
+northstar::get_pin("denials_site")$reasons$instructions
+```
+
+
 Medical billing adjustment codes, also known as Claim Adjustment Reason Codes (CARCs), are used by healthcare payers to explain why a claim or service line was paid differently than it was billed. These codes provide specific reasons for adjustments made to the payment amount, such as deductibles, coinsurance, contractual obligations, or other adjustments.
 
 ## Claim Adjustment Reason Codes (CARCs)

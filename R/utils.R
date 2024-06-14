@@ -1,3 +1,20 @@
+#' Remove empty rows and columns
+#'
+#' @param df data frame
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+remove_quiet <- function(df) {
+
+  janitor::remove_empty(
+    df,
+    which = c("rows", "cols")
+  )
+}
+
 #' Mount [pins][pins::pins-package] board
 #'
 #' @param source `<chr>` `"local"` or `"remote"`

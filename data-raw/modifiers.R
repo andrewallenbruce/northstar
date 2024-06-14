@@ -147,14 +147,6 @@ modifiers |>
 # before the one that merely provides
 # information about the procedure (the “informational modifier”)
 
-# Update Pin
-pin_update(
-  modifiers,
-  name = "modifiers",
-  title = "HCPCS Modifiers",
-  description = "Level I and II HCPCS Modifiers"
-)
-
 
 # Modifiers can be two digit numbers,
 # two character modifiers, or alpha-numeric
@@ -170,4 +162,253 @@ pin_update(
 #
 # https://med.noridianmedicare.com/web/jeb/topics/modifiers
 
+mod_names <- c(
+  "General",
+  "Advance_Beneficiary_Notice_of_Noncoverage_ABN",
 
+  "Ambulance_Origin_Destination",
+  # Auto Denied Modifiers - DD, DE, DP, DR, DS, ED, EE, EP, ER, ES, GD, GG, GI,
+  # GJ, GP, GS, GX, HD, HG, HP, HS, HX, ID, IE, IJ, IN, IP, IR, IS, IX, JD, JG,
+  # JI, JJ, JP, JS, JX, NI, NN, NP, NS, PD, PE, PG, PJ, PN, PP, PR, PS, PX, RD,
+  # RE, RP, RR, RS, SD, SE, SG, SJ, SN, SP, SR, SS, XD, XE, XG, XJ, XN, XP, XR,
+  # XS, XX. Trips with one of these origin/destination modifiers are not covered
+  # and should not be submitted to Medicare. A provider may bill the patient
+  # directly for these services. If a provider must bill Medicare for a denial,
+  # append modifier GY.
+
+  "Anatomic__Side_of_Body",
+  "Anatomic__Eyelid",
+  "Anatomic__Hand",
+  "Anatomic__Feet",
+  "Anatomic__Coronary_Artery",
+
+  # Anesthesia modifiers are used to receive the correct payment of anesthesia
+  # services. Pricing modifiers must be placed in the first modifier field to
+  # ensure proper payment (AA, AD, QK, QX, QY, and QZ). Informational modifiers
+  # are used in conjunction with pricing modifiers and must be placed in the
+  # second modifier position (QS, G8, G9, and 23).
+  "Anesthesia",
+
+  "Assist_at_Surgery",
+  "Chiropractic",
+
+  # If a drug meets the definition of "usually self-administered," Noridian will
+  # determine that the drug does not meet a Medicare benefit category. The use
+  # of the JA and JB modifiers is required for drugs which have one HCPCS Level
+  # II (J or Q) code but multiple routes of administration. Drugs that fall
+  # under this category must be billed with the JA modifier for the intravenous
+  # infusion of the drug or billed with the JB modifier for the subcutaneous
+  # injection form of administration. Noridian presumes that drugs delivered
+  # intravenously are not usually self-administered by the patient.
+  # -----
+  # CMS requires providers with claims for drugs or biologicals from single use
+  # vials or single use packages appropriately discarded to submit claims with
+  # unused portions or indicate there was zero amount unused. The units billed
+  # must correspond with the smallest dose (vial) available for purchase from
+  # the manufacturer(s) providing the appropriate patient dose, while minimizing
+  # any wastage.
+  "Drugs_and_Biologicals__Administration",
+  "Drugs_and_Biologicals__Disposal",
+
+  "Physician_Quality_Reporting_System_PQRS",
+  "Telehealth",
+  "Therapy"
+)
+
+# names <- rvest::read_html(
+#   "https://med.noridianmedicare.com/web/jeb/topics/modifiers"
+#   ) |>
+#   rvest::html_elements("a") |>
+#   rvest::html_attr("href") |>
+#   stringr::str_subset("#") |>
+#   stringr::str_subset("main", negate = TRUE) |>
+#   stringr::str_remove_all("#") |>
+#   purrr::discard(\(x) x == "")
+
+tbls <- rvest::read_html(
+  "https://med.noridianmedicare.com/web/jeb/topics/modifiers") |>
+  rvest::html_elements(".table") |>
+  rvest::html_table() |>
+  purrr::set_names(mod_names)
+
+tbls[4:8] <- purrr::map(tbls[4:8], ~ {
+  .x |>
+  tidyr::pivot_longer(cols = dplyr::everything()) |>
+    tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
+    tidyr::unnest(c(Modifier, `Modifier Description`))
+})
+
+tbls <- purrr:::map(tbls, ~ {
+  .x |>
+    janitor::clean_names() |>
+    dplyr::mutate(
+      modifier = stringr::str_remove_all(modifier, "[Mm]od "),
+      modifier = dplyr::na_if(modifier, ""),
+      modifier_description = stringr::str_remove_all(modifier_description, '"')
+      ) |>
+    dplyr::filter(
+      !is.na(modifier),
+      modifier != "P1 – P6 P1 P2 P3 P4 P5 P6"
+      )
+}) |>
+  purrr::list_rbind(names_to = "modifier_category") |>
+  dplyr::select(
+    modifier,
+    modifier_category,
+    modifier_description
+    )
+
+partial_urls <- rvest::read_html(
+  "https://med.noridianmedicare.com/web/jeb/topics/modifiers") |>
+  rvest::html_elements(".table") |>
+  html_elements("a") |>
+  html_attr("href") |>
+  unique()
+
+vec_urls <- glue::glue("https://med.noridianmedicare.com{partial_urls}")
+
+url <- vec_urls[1]
+
+scrape_urls <- function(url) {
+
+  pg <- rvest::read_html(url)
+
+  x <- list(
+    name = pg |>
+      rvest::html_elements(".title") |>
+      rvest::html_text2(preserve_nbsp = TRUE) |>
+      stringr::str_subset("Browse by Topic", negate = TRUE),
+    info = pg |>
+      rvest::html_elements(".portlet-journal-content .journal-content-article") |>
+      rvest::html_elements("h3, ul") |>
+      rvest::html_text2(preserve_nbsp = FALSE) |>
+      tibble::enframe(
+        name = "row",
+        value = "text"
+      ) |>
+      dplyr::mutate(row = NULL) |>
+      tidyr::separate_longer_delim(
+        text,
+        delim = "\n"
+      ) |>
+      dplyr::distinct() |>
+      dplyr::mutate(
+        heading = stringr::str_extract(
+          text,
+          "Instructions|Introduction|Definition|Correct Use|Appropriate Usage|Incorrect Use|Inappropriate Usage|Special Appeals Process|Resource|Additional Information"
+        ), .before = text
+      ) |>
+      tidyr::fill(heading) |>
+      dplyr::filter(
+        stringr::str_detect(
+          text,
+          "Instructions|Introduction|Definition|Correct Use|Appropriate Usage|Incorrect Use|Inappropriate Usage|Special Appeals Process|Resource|Additional Information",
+          negate = TRUE
+        )
+      )
+  )
+
+  dplyr::tibble(
+    modifier = stringr::str_remove_all(x$name, "Modifier "),
+    instructions = list(x$info)
+  )
+}
+
+tictoc::tic()
+modifier_pages <- purrr::map(
+  vec_urls,
+  scrape_urls
+)
+tictoc::toc()
+
+modifier_pages <- modifier_pages |>
+  purrr::list_rbind() |>
+  tidyr::unnest(instructions) |>
+  dplyr::mutate(heading = dplyr::case_match(
+    heading,
+    "Appropriate Usage" ~ "Correct Use",
+    "Inappropriate Usage" ~ "Incorrect Use",
+    c("Resource", "Special Appeals Process") ~ "Additional Information",
+    .default = heading
+  )) |>
+  tidyr::pivot_wider(
+    names_from = heading,
+    values_from = text,
+    values_fn = list
+  ) |>
+  janitor::clean_names() |>
+  dplyr::mutate(
+    instructions = purrr::map_chr(
+    instructions, ~ paste(.x, collapse = "; ")),
+    instructions = dplyr::na_if(instructions, ""),
+
+    additional_information = purrr::map_chr(
+    additional_information, ~ paste(.x, collapse = ". ")),
+    additional_information = dplyr::na_if(additional_information, ""),
+
+    correct_use = purrr::map_chr(
+    correct_use, ~ paste(.x, collapse = ". ")),
+    correct_use = dplyr::na_if(correct_use, ""),
+    correct_use = stringr::str_remove_all(correct_use, '"'),
+
+    incorrect_use = purrr::map_chr(
+    incorrect_use, ~ paste(.x, collapse = ". ")),
+    incorrect_use = dplyr::na_if(incorrect_use, ""),
+    incorrect_use = stringr::str_remove_all(incorrect_use, '"')
+  ) |>
+  dplyr::select(
+    modifier,
+    correct_use,
+    incorrect_use,
+    instructions,
+    additional_information
+  )
+
+mod_info <- tbls |>
+  dplyr::full_join(
+    modifier_pages,
+    by = dplyr::join_by(modifier)
+  ) |>
+  dplyr::rename(
+    modifier_correct_use = correct_use,
+    modifier_incorrect_use = incorrect_use,
+    modifier_instructions = instructions,
+    modifier_additional_information = additional_information
+  )
+
+modifiers <- modifiers |>
+  dplyr::rename(
+    modifier_detailed_information = modifier_information
+    ) |>
+  dplyr::left_join(
+    mod_info,
+    by = dplyr::join_by(modifier)
+  ) |>
+  dplyr::mutate(
+    modifier_description = dplyr::if_else(
+      is.na(modifier_description.y),
+      modifier_description.x,
+      modifier_description.y),
+    modifier_description.x = NULL,
+    modifier_description.y = NULL,
+    .after = modifier_type
+  ) |>
+  dplyr::select(
+    modifier,
+    modifier_type,
+    modifier_category,
+    modifier_description,
+    modifier_detailed_information,
+    modifier_correct_use,
+    modifier_incorrect_use,
+    modifier_instructions,
+    modifier_additional_information
+  )
+
+# Update Pin
+pin_update(
+  modifiers,
+  name = "modifiers",
+  title = "HCPCS Modifiers",
+  description = "Level I and II HCPCS Modifiers"
+)
