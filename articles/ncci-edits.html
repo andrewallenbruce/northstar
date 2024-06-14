@@ -121,7 +121,100 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<div class="section level2">
+<h2 id="add-on-codes">Add-On Codes<a class="anchor" aria-label="anchor" href="#add-on-codes"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_addon_edits.html">get_addon_edits</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,130 × 7</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">aoc_type</span> <span style="font-weight: bold;">aoc_complements</span>  <span style="font-weight: bold;">aoc_edit_type</span> <span style="font-weight: bold;">aoc_edit_description</span>           </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0054T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             2 No Specific Primary Codes. Pay…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0055T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             2 No Specific Primary Codes. Pay…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0070U primary  <span style="color: #949494;">&lt;tibble [6 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0071U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0072U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0073U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0074U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0075T primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0075T primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0075U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 0076T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 0076T primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 0076U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 0095T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 0098T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 0101U primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 0102U primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 0103U primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 0130U addon    <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 0131U addon    <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4,110 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_notes</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="medicallly-unlikely-edits">Medicallly Unlikely Edits<a class="anchor" aria-label="anchor" href="#medicallly-unlikely-edits"></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_mue_edits.html">get_mue_edits</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 32,202 × 6</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">mue_uos</span> <span style="font-weight: bold;">mue_mai</span> <span style="font-weight: bold;">mue_mai_desc</span>             <span style="font-weight: bold;">mue_service_type</span> <span style="font-weight: bold;">mue_rationale</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0001U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0002M       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0002U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0003M       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0003U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0004M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0005U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0006M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0007M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0007U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 0008U       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 0009U       2       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 0010U       2       3 Date of Service Edit: C… Practitioner     Nature of Se…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 0011M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 0011U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 0012M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 0013M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 0015M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 0016M       2       3 Date of Service Edit: C… Practitioner     Nature of Se…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 0016U       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32,182 more rows</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="procedure-to-procedure-edits">Procedure-to-Procedure Edits<a class="anchor" aria-label="anchor" href="#procedure-to-procedure-edits"></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_ptp_edits.html">get_ptp_edits</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 95,057 × 6</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">ptp_type</span>      <span style="font-weight: bold;">ptp_complements</span>    <span style="font-weight: bold;">ptp_edit_mod</span> <span style="font-weight: bold;">ptp_edit_mod_desc</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0001U comprehensive <span style="color: #949494;">&lt;tibble [290 × 1]&gt;</span>            1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0001U comprehensive <span style="color: #949494;">&lt;tibble [7 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0001U comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0001U component     <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0002M comprehensive <span style="color: #949494;">&lt;tibble [7 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0002M comprehensive <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0002M comprehensive <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0002M comprehensive <span style="color: #949494;">&lt;tibble [7 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0002M component     <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0002U comprehensive <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 0002U comprehensive <span style="color: #949494;">&lt;tibble [5 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 0002U comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 0003M comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 0003M comprehensive <span style="color: #949494;">&lt;tibble [7 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 0003M comprehensive <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 0003M comprehensive <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 0003M comprehensive <span style="color: #949494;">&lt;tibble [7 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 0003M component     <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 0003U comprehensive <span style="color: #949494;">&lt;tibble [5 × 1]&gt;</span>              <span style="color: #949494;">0</span> Not Allowed      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 0003U comprehensive <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>              1 Allowed          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 95,037 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">ptp_edit_rationale</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

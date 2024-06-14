@@ -121,12 +121,810 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/northstar/">northstar</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="adjustment-codes">Adjustment Codes<a class="anchor" aria-label="anchor" href="#adjustment-codes"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="st">"group"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">code</span>  <span style="font-weight: bold;">description</span>               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO    Contractual Obligations   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CR    Corrections and Reversals </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> OA    Other Adjustments         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> PI    Payer Initiated Reductions</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> PR    Patient Responsibility</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="st">"carc"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 405 × 7</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">code</span>  <span style="font-weight: bold;">description</span>             <span style="font-weight: bold;">usage</span> <span style="font-weight: bold;">notes</span> <span style="font-weight: bold;">start_date</span> <span style="font-weight: bold;">last_modified</span> <span style="font-weight: bold;">end_date</span>  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1     Deductible Amount       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2     Coinsurance Amount      <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 3     Co-payment Amount       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 4     The procedure code is … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2020-03-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 5     The procedure code/typ… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2018-03-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 6     The procedure/revenue … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 7     The procedure/revenue … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8     The procedure code is … Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9     The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10    The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 11    The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 12    The diagnosis is incon… Refe… <span style="color: #BB0000;">NA</span>    1995-01-01 2017-07-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 13    The date of death prec… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 14    The date of birth foll… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 15    The authorization numb… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2017-11-01    2018-05-01</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 16    Claim/service lacks in… Do n… <span style="color: #BB0000;">NA</span>    1995-01-01 2018-03-01    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 17    Requested information … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2008-09-21    2009-07-01</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 18    Exact duplicate claim/… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2013-06-02    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 19    This is a work-related… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2007-09-30    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 20    This injury/illness is… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    1995-01-01 2007-09-30    <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 385 more rows</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="st">"rarc"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,171 × 5</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">code</span>  <span style="font-weight: bold;">description</span>                              <span style="font-weight: bold;">notes</span> <span style="font-weight: bold;">start_date</span> <span style="font-weight: bold;">last_modified</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> M1    X-ray not taken within the past 12 mont… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> M2    Not paid separately when the patient is… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> M3    Equipment is the same or similar to equ… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> M4    Alert: This is the last monthly install… (Mod… 1997-01-01 2007-04-01   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> M5    Monthly rental payments can continue un… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> M6    Alert: You must furnish and service thi… (Mod… 1997-01-01 2009-03-01   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> M7    No rental payments after the item is pu… (Mod… 1997-01-01 2016-11-01   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> M8    We do not accept blood gas tests result… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> M9    Alert: This is the tenth rental month. … (Mod… 1997-01-01 2007-04-01   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> M10   Equipment purchases are limited to the … <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> M11   DME, orthotics and prosthetics must be … <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> M12   Diagnostic tests performed by a physici… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> M13   Only one initial visit is covered per s… (Mod… 1997-01-01 2007-06-30   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> M14   No separate payment for an injection ad… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> M15   Separately billed services/tests have b… <span style="color: #BB0000;">NA</span>    1997-01-01 <span style="color: #BB0000;">NA</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> M16   Alert: Please see our web site, mailing… (Rea… 1997-01-01 2007-04-01   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> M17   Alert: Payment approved as you did not … (Mod… 1997-01-01 2007-04-01   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> M18   Certain services may be approved for ho… (Mod… 1997-01-01 2003-06-30   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> M19   Missing oxygen certification/re-certifi… (Mod… 1997-01-01 2003-02-28   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> M20   Missing/incomplete/invalid HCPCS.        (Mod… 1997-01-01 2003-02-28   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,151 more rows</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="denials">Denials<a class="anchor" aria-label="anchor" href="#denials"></a>
+</h2>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">::</span><span class="fu"><a href="../reference/get_pin.html">get_pin</a></span><span class="op">(</span><span class="st">"denials_extract"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 5</span></span></span>
+<span><span class="co">#&gt;    adj_code denial_type denial_category                denial_cause denial_blame</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 29       Technical   Past Timely Filing Limits      Past Timely… Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 119      Technical   Patient Liability              Maximum Ben… Case Manage…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A1       Clinical    Informational                  Other - Ref… Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 18       Technical   Duplicate Claim                Duplicate C… Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 50       Clinical    Medical Necessity              Not Deemed … Case Manage…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 96       Clinical    Non-Covered Service            Service(s) … Case Manage…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 129      Technical   Billing/Claim Error            Claim Corre… Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 16       Technical   Additional Information Reques… Additional … Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> B13      Technical   Duplicate Claim                Duplicate C… Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 226      Clinical    Additional Information Reques… Information… Patient Fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more rows</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">northstar</span><span class="fu">::</span><span class="fu"><a href="../reference/get_pin.html">get_pin</a></span><span class="op">(</span><span class="st">"denials_site"</span><span class="op">)</span><span class="op">$</span><span class="va">common</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 41 × 4</span></span></span>
+<span><span class="co">#&gt;    carc  rarc  denial_reason                                  denial_description</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16    M51   Missing/Incorrect Required Claim Information   Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 16    N56   Missing/Incorrect Required Claim Information   Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 16    M81   Code to Highest Level of Specificity           Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 16    MA04  Medicare is Secondary Payer                    Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 16    MA36  Invalid Patient Name                           Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 16    N704  Invalid Patient Name                           Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 16    MA120 CLIA Certification Number - Missing/Invalid    Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 16    MA121 Chiropractic Services – Initial Treatment Date Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 16    MA122 Chiropractic Services – Initial Treatment Date Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 16    N264  Missing or Invalid Order/Referring Provider I… Claim/service lac…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 31 more rows</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">northstar</span><span class="fu">::</span><span class="fu"><a href="../reference/get_pin.html">get_pin</a></span><span class="op">(</span><span class="st">"denials_site"</span><span class="op">)</span><span class="op">$</span><span class="va">reasons</span><span class="op">$</span><span class="va">codes_desc</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> M51         Missing/incomplete/invalid procedure code(s).                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N56         Procedure code billed is not correct/valid for the services bille…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> M81         You are required to code to the highest level of specificity.     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MA04        Secondary payment cannot be considered without the identity of or…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MA36        Missing/incomplete/invalid patient name.                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N704        Alert: You may not appeal this decision but can resubmit this cla…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[5]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MA120       Missing/incomplete/invalid CLIA certification number.             </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[6]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` DESCRIPTION                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has a submission/billing error…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MA121       Missing/incomplete/invalid x-ray date.                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> MA122       Missing/incomplete/invalid initial treatment date.                </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[7]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> N264        Missing/incomplete/invalid ordering provider name              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N265        Missing/incomplete/invalid ordering provider primary identifier</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> CO-16       Provider liable                                                </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[8]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N290        Missing/incomplete/invalid rendering provider primary identifier. </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N257        Missing/incomplete/invalid billing provider/supplier primary iden…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[9]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-16       Claim/service lacks information or has submission/billing error(s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N382        Missing/incomplete/invalid patient identifier.                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N704        Alert: You may not appeal this decision but can resubmit this cla…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[10]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-19       This is a work-related injury/illness and thus the liability of t…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> M418        Misrouted claim. See the payer's claim submission instructions.   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[11]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-22       This care may be covered by another payer per coordination of ben…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N598        Health care policy coverage is primary.                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[12]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-24       Charges are covered under a capitation agreement/managed care pla…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[13]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                             </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-29       The time limit for filing has expired.  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N211        Alert: You may not appeal this decision.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[14]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> PR-31       The patient cannot be identified as our insured.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[15]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-45 PR-45 Charge exceeds fee schedule/maximum allowable or contracted/legis…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[16]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> PR-49       This is a non-covered service because it is a routine/preventive …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N111        This service was included in a claim that has been previously bil…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N429        Not covered when considered routine.                              </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[17]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-50       These are non-covered services because this is not deemed a 'medi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N115        This decision was based on a Local Coverage Determination (LCD). …</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[18]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-96       Non-covered charge(s). At least one Remark Code must be provided …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> M117        Not covered unless submitted via electronic claim.                </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[19]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-96       Non-covered charge(s). Note: Refer to the 835 Healthcare Policy I…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N431        Not covered with this procedure.                                  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[20]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-97       The benefit for this service is included in the payment/allowance…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> M15         Separately billed services/tests have been bundled as they are co…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[21]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-97       The benefit for this service is included in the payment/allowance…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CO-B20      Procedure/service was partially or fully furnished by another pro…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N111        No appeal right except duplicate claim/service issue. This servic…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[22]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-107      Related or qualifying claim/service was not identified on this cl…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[23]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-151      Payment adjusted because the payer deems the information submitte…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[24]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` DESCRIPTION                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-236      This procedure or procedure/modifier combination is not compatibl…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[25]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-252      An attachment/other documentation is required to adjudicate this …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> M23         Missing invoice.                                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N704        Alert: You may not appeal this decision but can resubmit this cla…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[26]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-252      An attachment/other documentation is required to adjudicate this …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N706        Missing documentation.                                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> N704        Alert: You may not appeal this decision but can resubmit this cla…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[27]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CO-B7       This provider was not certified/eligible to be paid for this proc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N570        Missing/incomplete/invalid credentialing data.                    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[28]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> PR-B8       Alternative services were available, and should have been utilize…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[29]]</span></span>
+<span><span class="co">#&gt; NULL</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[30]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> OA-18       Exact duplicate claim/service                                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> N522        Duplicate of a claim processed, or to be processed, as a crossove…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[31]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   `CARC/RARC` Description                                                       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> N103        Records indicate this patient was a prisoner or in custody of a F…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> OA-258      Claim/service not covered when patient is in custody/incarcerated…</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">northstar</span><span class="fu">::</span><span class="fu"><a href="../reference/get_pin.html">get_pin</a></span><span class="op">(</span><span class="st">"denials_site"</span><span class="op">)</span><span class="op">$</span><span class="va">reasons</span><span class="op">$</span><span class="va">instructions</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Information required for claim processing is eith…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Next Step                  Submit new claim with corrected/complete informat…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  Claim is unprocessable; no appeal rights          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Claim Submission Tips      Ensure procedure code is appropriate and valid fo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Claim Submission Tips      Select CPT or HCPCS code that accurately identifi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Claim Submission Tips      If no such code exists, use appropriate unlisted …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Claim Submission Tips      Enter a brief yet complete description of service…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      If characters extend beyond SV101-7, continue ent…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      For an unclassified drug code, enter drug name an…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Enter one (1) unit in Item 24G                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips      Procedure codes that require pricing per invoice …</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Truncated (invalid) Diagnosis Code                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message Scanning Error (paper claim)                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Verify diagnosis codes submitted are valid         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  If there is a 5 digit code, do not use a 3 or 4 di…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  For paper claims, if all diagnosis codes submitted…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      To avoid scanning errors when submitting, be sure …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      CMS Internet Only Manual (IOM), Publication 100-04…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Incorrect primary payer type was submitted on an e…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message A claim has been submitted as Medicare secondary a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Verify whether Medicare is primary or secondary    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  Claim may be resubmitted with corrected informatio…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  If Medicare is secondary, verify correct primary i…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Next Step                  If Medicare is primary, verify no MSP information …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      Prior to submitting claim(s), verify patients'elig…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Claim Submission Tips      If there is a problem with file, patient may conta…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> Claim Submission Tips      For electronic claims, verify that all necessary p…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Patient name is missing or does not match the name…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  Verify that the following information is exactly a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Medicare Beneficiary Identifier (MBI) number       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  First and last name (in proper order)              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  If patient has two last names or hyphenated last n…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      Obtain patient's full name and Medicare Beneficiar…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      Keep a copy on file                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Claim Submission Tips      If patient sees a problem or has an error on his/h…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[5]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message <span style="color: #949494;">"</span>CLIA certification number billed in Item 23 of C…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message <span style="color: #949494;">"</span>Incorrect qualifier was used on electronic claim<span style="color: #949494;">"</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  <span style="color: #949494;">"</span>Resubmit claim with valid CLIA certification num…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  <span style="color: #949494;">"</span>CLIA numbers are 10 digits with letter \"D\" in …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  <span style="color: #949494;">"</span>Resubmit with valid qualifier or CLIA certificat…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  <span style="color: #949494;">"</span>Qualifier to indicate CLIA certification number …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  <span style="color: #949494;">"</span>Review EDI training document on billing laborato…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      <span style="color: #949494;">"</span>Apply for CLIA Certification prior to rendering …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      <span style="color: #949494;">"</span>Review codes that require a CLIA certification n…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      <span style="color: #949494;">"</span>Qualifier is only required on electronic claims<span style="color: #949494;">"</span> </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[6]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Initial treatment date in Item 14 is either missi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message Incorrect qualifier was used on electronic claim  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  Resubmit claim with initial treatment date Item 1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  Initial treatment date is required on all chiropr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  Resubmit electronic claim with correct qualifier …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  Initial treatment date is submitted in Loop 2300  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  Initial treatment date is reported in a DTP segme…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step                  Qualifier must be submitted as 454                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      Paper submitters: See CMS-1500 Tutorial for form …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Electronic submitters: See Electronic Data Interc…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[7]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Item 17 on CMS-1500 Claim Form or electronic equi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message Either DN, DK, or DQ qualifier was not included o…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message DN - Referring Provider                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Common Reasons for Message DK - Ordering Provider                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Common Reasons for Message DQ - Supervising Provider                         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Common Reasons for Message Provider's name included a middle name, middle in…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Common Reasons for Message Provider is not enrolled as an ordering/referring…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step                  If claim was deemed unprocessable, submit a new, …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step                  Verify information in Item 17 or electronic equiv…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Next Step                  Ensure provider's name was entered as it is found…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Next Step                  Submit an Appeal request                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Next Step                  Submit documentation with Redetermination request…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[8]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Missing or invalid rendering Provider National Pr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message Missing or invalid billing Provider or Group NPI …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message Rendering Provider NPI in Item 24J or loop 2310B …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  Verify submitted NPIs are correct/valid           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  Submit a new claim with corrected/complete inform…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  Claim is unprocessable; no appeal rights          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Claim Submission Tips      Rendering NPI must be entered in Item 24J or loop…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      Solo, unincorporated provider - leave Item 24J or…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      Group NPI must be entered in Item 33A or loop 201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Rendering NPI must be associated with group NPI, …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips      View CMS-1500 Tutorial for form instructions      </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[9]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Patient Medicare Beneficiary Identifier (MBI) numb…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  Verify that the following information is exactly a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Medicare Beneficiary Identifier (MBI) number       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  First and last name (in proper order)              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Claim Submission Tips      Obtain patient's Medicare Beneficiary Identifier (…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      Keep a copy on file                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      If patient sees a problem or has an error on his/h…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[10]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message <span style="color: #949494;">"</span>Medicare Secondary Payer (MSP) insurance type no…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message <span style="color: #949494;">"</span>Incorrect insurer type<span style="color: #949494;">"</span>                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message <span style="color: #949494;">"</span>Diagnosis codes match the Common Working File<span style="color: #949494;">"</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  <span style="color: #949494;">"</span>Claim may be resubmitted with corrected informat…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  <span style="color: #949494;">"</span>Verify correct MSP insurance type was submitted …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  <span style="color: #949494;">"</span>AnMSPform can be submitted.<span style="color: #949494;">"</span>                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  <span style="color: #949494;">"</span>Fill out the top half, and in the \"Reason for R…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      <span style="color: #949494;">"</span>Verify patient'seligibilityviaInteractive Voice …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      <span style="color: #949494;">"</span>If there is a problem with file, patient will ne…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      <span style="color: #949494;">"</span>Verify that all necessary primary information is…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[11]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Patient has another insurance primary to Medicare </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message Patient's coordination of benefits is not up-to-d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  After billing primary insurance, submit secondary…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  If patient's coordination of benefits has been up…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  If patient's insurance needs to be updated, the b…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Claim Submission Tips      For electronic claims, verify that all necessary …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Claim Submission Tips      Review billing guides                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      Billing Medicare Secondary Payer (MSP) Claims Ele…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      Billing Medicare Secondary Payer (MSP) Electronic…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Verify patient'seligibilityviaInteractive Voice R…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips      If there is a problem with file, patient may cont…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips      Prior to rendering services, obtain all patient's…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Claim Submission Tips      Ask beneficiary to fill out Admission Questions t…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[12]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Patient enrolled in a Medicare Advantage (MA) pla…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message Certain MA plans take place of Original Fee-For-S…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message Patient's Common Working File (CWF) file has not …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Common Reasons for Message Patient is enrolled in an MA plan and also electe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Common Reasons for Message Original Medicare covers attending physician serv…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Common Reasons for Message Appropriate modifier(s) is missing from claim     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Common Reasons for Message Patient enrolled in MA plan and also in a clinica…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Common Reasons for Message Original Medicare covers routine costs of service…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step                  Verify patient'seligibilityviaInteractive Voice R…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Next Step                  If MA plan valid, bill services to appropriate in…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Next Step                  If MA plan has been updated and is no longer vali…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Next Step                  Refile claim with appropriate modifiers           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Next Step                  Modifier GV - Attending physician is not employed…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Next Step                  Modifier GW - Condition not related to the patien…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Next Step                  Modifier Q0 - Investigational clinical service pr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Next Step                  Modifier Q1 - Routine clinical service provided i…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> Next Step                  Submit a Reopening request,                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> Next Step                  Add appropriate modifier(s), if time limit for fi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> Next Step                  If MA plan was not valid, request reprocessing of…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> Claim Submission Tips      Prior to rendering services, obtain patient's hea…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[13]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Claim is billed later than one calendar year from …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message Illegible DOS on CMS 1500 Claim Form               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Verify DOS submitted is correct                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  If the DOS was incorrect, submit a new claim with …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Claim Submission Tips      A claim denied for timely filing is not afforded a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      If claim is submitted later than one year after th…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      Additional information on the Timely Filing webpag…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Claim Submission Tips      Noridian's optical character recognition (OCR) may…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> Claim Submission Tips      CMS Internet Only Manual (IOM), Publication 100-04…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[14]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Patient does not have Medicare Part B entitlement </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Next Step                  Verify patient has Medicare Part B entitlement    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  If patient has Medicare Part B benefits, resubmit…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  Claim must contain the following information exac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  Medicare Beneficiary Identifier (MBI) number      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  First and last name (in proper order)             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  If patient has two last names or hyphenated last …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      Obtain patient's full name andMedicare Beneficiar…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      Keep a copy on file                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Prior to submitting claim(s), verify patient's el…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips      Be sure patient's date of service falls within th…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips      If patient sees a problem or has an error on his/…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[15]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>                         CO-45                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>                         PR-45                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message Item or service paid Medicare allowed amount      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Common Reasons for Message Item or service paid to patient's deductible and/…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Common Reasons for Message Item or services paid with partial units          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  Review claim status prior to submitting a Redeter…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  Review to see if payment went towards patient's d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step                  Submit Appeal request- Items or services with thi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step                  Redetermination request can be submitted with app…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Next Step                  Noridian encourages submission of Redetermination…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[16]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Claim was billed with a routine diagnosis as the p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message Diagnosis codes starting with the letter 'Z' are r…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Verify proper diagnosis was submitted              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  Claims can be reopened with a more appropriate pri…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  Submit an Appeal request - Items or services with …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Next Step                  Submit documentation with Redetermination request.…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      Allow 30 days from first claim submission before r…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Claim Submission Tips      Check claim status via Interactive Voice Response …</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[17]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Missing diagnosis that supports medical necessity  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  View medical documentation to determine that appro…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Review CMS’ Medicare Coverage Database for applica…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  Submit Appeal request - Items or services with thi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  See Appeals webpage for instructions on how to sub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      View Active LCDs to verify diagnosis codes that su…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      If services are not medically necessary, view Adva…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[18]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Claim was submitted on paper CMS-1500 Claim Form b…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  Resubmit claim electronically                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Claim Submission Tips      Verify ability to submit paper claims              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Claim Submission Tips      If individual provider is part of a group with an …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Claim Submission Tips      Apply for an exemption to electronic claim submiss…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[19]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Non Covered Procedure Code (e.g. some ambulance, M…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  Review medical documentation to determine appropri…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Submit Appeal request - Items or services with thi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  See Appeals webpage for instructions on how to sub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Claim Submission Tips      View Active LCDs to verify diagnosis codes that su…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[20]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message A separate charge is not allowed because this serv…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  Verify that surgery was billed correctly and inclu…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Previous surgery date can be found using the Norid…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  A reopening can be performed to add appropriate mo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  Submit an Appeal request - Items or services with …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Next Step                  Submit documentation with Redetermination request.…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      Follow instructions on correct use of Modifiers    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[21]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 2</span></span></span>
+<span><span class="co">#&gt;    heading               text                                                   </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>                    Common Reason for Message                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>                    This is a duplicate of a charge already submitted.     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step             Verify documentation for the following:                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step             Service is appropriate to bill                         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step             Is a modifier required?                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step             Payment was already allowed and/or paid to patient's d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step             Submit an Appeal request - Items or services with this…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step             Indicate services were not duplicate                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step             Submit documentation with Redetermination request. Vie…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips When billing repeat procedures, append repeat modifier…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips Most common repeat modifier                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips Modifier 76 - Repeat procedure by same physician       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Claim Submission Tips Modifier 77 - Repeat procedure by another physician    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Claim Submission Tips Modifier 91 - Repeat clinical diagnostic lab test      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Claim Submission Tips Allow 30 days from first claim submission before resub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Claim Submission Tips Check claim status via Interactive Voice Response (IVR…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[22]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Primary CPT has not been billed                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message Primary CPT was not billed on same claim           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  View claim history to determine if primary CPT was…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  If not, add-on code cannot be billed               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  If so, review medical documentation to determine i…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Next Step                  Submit claim for primary CPT                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Next Step                  Submit Appeal request. See Appeals webpage for ins…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Claim Submission Tips      Verify primary CPT was billed prior to billing add…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[23]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Number of days or units billed exceeds acceptable…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Next Step                  View more information aboutMUEs                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  Access the MUE lookup tool to see a procedure cod…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  View the units of service and rationale for the M…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  Gain access to quarterly MUE version update chang…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  How to submit a reconsideration for a MUE edit to…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  Submit an Appeal request - Items or services with…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step                  See Appeals webpage for instructions on how to su…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      Although CMS publishes most MUE values on its web…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Report services that are medically reasonable and…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[24]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message <span style="color: #949494;">"</span>Combination of codes billed on same date of serv…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message <span style="color: #949494;">"</span>Payment for service billed is bundled into payme…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message <span style="color: #949494;">"</span>It is unusual for services billed to be performe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Common Reasons for Message <span style="color: #949494;">"</span>Modifier used to unbundle is on incorrect code o…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  <span style="color: #949494;">"</span>Verify code set is appropriate to be billed toge…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  <span style="color: #949494;">"</span>SubmitAppealrequest to add modifier, if appropri…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  <span style="color: #949494;">"</span>See Appeals webpage for instructions on how to s…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step                  <span style="color: #949494;">"</span>Providers may not bill patient for NCCI edit den…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step                  <span style="color: #949494;">"</span>Denial is based on incorrect coding<span style="color: #949494;">"</span>             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Next Step                  <span style="color: #949494;">"</span>Providers should not complete an ABN for NCCI ed…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips      <span style="color: #949494;">"</span>ReviewNCCI Coding Editsprior to submitting claim…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips      <span style="color: #949494;">"</span>View How to Use Medicare NCCI Tools<span style="color: #949494;">"</span>             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Claim Submission Tips      <span style="color: #949494;">"</span>When appropriate, modifier to identify separatel…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Claim Submission Tips      <span style="color: #949494;">"</span>Modifier Indicator \"0\" - there are no circumst…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Claim Submission Tips      <span style="color: #949494;">"</span>Modifier Indicator \"1\" - modifiers associated …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Claim Submission Tips      <span style="color: #949494;">"</span>Modifier Indicator \"9\" - NCCI edit does not ap…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[25]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 2</span></span></span>
+<span><span class="co">#&gt;    heading               text                                                   </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>                    Common Reason for Message                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>                    Invoice price is missing                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #BB0000;">NA</span>                    Invoice price was not submitted in the correct format  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #BB0000;">NA</span>                    Multiple invoice prices were submitted                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step             Verify total invoice price plus shipping cost (do not …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step             Verify no additional information was submitted other t…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Claim Submission Tips Invoice' or 'Inv' followed by the price in a currency …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips Invoice $130 - claim priced at $1.30                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips Invoice $130.00 - claim priced at $130.00              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips Invoice 13000 - claim priced at $130.00                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips Invoice $13000 - claim priced at $130.00               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips Invoice $1,300 - claim priced at $1,300.00             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Claim Submission Tips Additional information is found on our Avoiding Denial…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[26]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Claim line submitted is missing DEX Z-Code™ identi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message DEX Z-Code™ identifier submitted is invalid        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Common Reasons for Message CPT code cannot be billed with submitted DEX Z-Cod…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  Verify correct CPT code is billed                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  Verify correct DEX Z-Code™ identifier is billed fo…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      Submit only one DEX Z-Code™ identifier per MolDX C…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Claim Submission Tips      Submit DEX Z-Code™ identifier in Loop 2400/SV101-7 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Claim Submission Tips      Do not submit any other characters or test names. …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> Claim Submission Tips      Visit our MolDX webpage for additional information.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[27]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Lab code billed is not within CLIA certification …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Common Reasons for Message CLIA waived test was missing modifier QW          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Common Reasons for Message Modifier QW was billed but not required           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  Verify correct CLIA certification number was subm…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  Submit Appeal request to correct CLIA certificati…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  See the Appeals webpage for instructions on how t…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Claim Submission Tips      How to Apply for a CLIA Certificate, Including In…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Claim Submission Tips      Categorization of Tests - Review codes that requi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Claim Submission Tips      Tests Granted Waived Status Under CLIA - Refer to…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Claim Submission Tips      Not all CLIA waived tests require modifier QW     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[28]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 2</span></span></span>
+<span><span class="co">#&gt;    heading                    text                                              </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Common Reasons for Message Medical documentation is lacking medical necessity</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Next Step                  Verify medical documentation for the following:   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step                  Service is appropriate to bill                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step                  Date of Service                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step                  Contains Signature                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step                  Include vital signs                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step                  Reason for ambulance transport (explain medical n…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step                  Verify if a modifier is required                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step                  Submit an Appeal request - Items or services with…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Next Step                  Submit documentation with Redetermination request…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips      Bill with appropriate modifiers                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips      Allow 30 days from first claim submission before …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Claim Submission Tips      Check claim status via Interactive Voice Response…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[29]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Patient is enrolled in Hospice on date of service  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Common Reasons for Message Medicare Part B only pays for physician services n…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Common Reasons for Message Patient's Common Working File (CWF) has not been u…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  Append Hospice modifier if appropriate             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  Modifier GV - Attending physician is not employed …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Next Step                  Modifier GW - Condition not related to patient's t…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> Next Step                  Submit Appeal request - Items or services with thi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> Next Step                  See Appeals webpage for instructions on how to sub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> Claim Submission Tips      Verify patient's Hospice enrollment via Interactiv…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[30]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 2</span></span></span>
+<span><span class="co">#&gt;    heading               text                                                   </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>                    Common Reason for Message                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>                    This is a duplicate to a service that has already been…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Next Step             Verify medical documentation for the following:        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Next Step             Service appropriate to bill                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Next Step             Date of service                                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Next Step             Is a modifier required?                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Next Step             Payment already allowed and/or paid to patient's deduc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Next Step             Submit Appeal request - Items or services with this me…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Next Step             Indicate services were not duplicate                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Next Step             Submit documentation with Redetermination request. Vie…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Claim Submission Tips When billing repeat procedures, append most appropriat…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Claim Submission Tips Modifier 76 - Repeat procedure by same physician       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Claim Submission Tips Modifier 91 - Repeat clinical diagnostic lab test      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Claim Submission Tips Modifier JW - Drug amount discarded/not administered t…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Claim Submission Tips When possible include all line items on a single claim </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Claim Submission Tips Allow 30 days from first claim submission before resub…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> Claim Submission Tips Check claim status via Noridian Medicare Portal or the…</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[31]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
+<span><span class="co">#&gt;   heading                    text                                               </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Common Reasons for Message Generally, Medicare will not pay for medical servi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Next Step                  Noridian Medicare Portal users can access NMP to v…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Next Step                  Request beneficiary contact Social Security Admini…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Next Step                  Check with State Department of Corrections regardi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Next Step                  If claim denied in error, complete a Self-Service …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Claim Submission Tips      Patients in Custody Under a Penal Authority - Fact…</span></span></code></pre></div>
 <p>Medical billing adjustment codes, also known as Claim Adjustment
 Reason Codes (CARCs), are used by healthcare payers to explain why a
 claim or service line was paid differently than it was billed. These
 codes provide specific reasons for adjustments made to the payment
 amount, such as deductibles, coinsurance, contractual obligations, or
 other adjustments.</p>
+</div>
 <div class="section level2">
 <h2 id="claim-adjustment-reason-codes-carcs">Claim Adjustment Reason Codes (CARCs)<a class="anchor" aria-label="anchor" href="#claim-adjustment-reason-codes-carcs"></a>
 </h2>
