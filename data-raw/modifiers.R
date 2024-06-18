@@ -92,41 +92,46 @@ modifiers_cpt_information <- dplyr::tribble(
 modifiers_cpt <- dplyr::left_join(
   modifiers_cpt,
   modifiers_cpt_information,
-  by = dplyr::join_by(modifier))
+  by = dplyr::join_by(modifier)) |>
+  dplyr::select(
+    mod_code = modifier,
+    mod_type = modifier_type,
+    mod_description = modifier_description,
+    mod_information = modifier_information
+  )
 
 
 # HCPCS Level II Modifiers
-modifiers_hcpcs <- northstar:::get_pin("two_mods") |>
-  dplyr::mutate(
-    two_desc_long = stringr::str_remove_all(two_desc_long, '"')
-  ) |>
+modifiers_hcpcs <- mod_two |>
   dplyr::reframe(
-    modifier = hcpcs,
-    modifier_type = "HCPCS",
-    modifier_description = two_desc_long)
-
-modifiers_hcpcs |>
-  print(n = 400)
+    mod_code,
+    mod_type = "HCPCS",
+    mod_description) |>
+  dplyr::mutate(
+    mod_description = stringr::str_remove_all(
+      mod_description, '"'
+      )
+    )
 
 # Anesthesia Modifiers
 modifiers_anesthesia <- dplyr::tribble(
-  ~modifier,  ~modifier_type,  ~modifier_description,                                                              ~modifier_information,
-  "P1",       "Anesthesia",   "A normal healthy patient",                                                         "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
-  "P2",       "Anesthesia",   "A patient with mild systemic disease",                                             "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
-  "P3",       "Anesthesia",   "A patient with severe systemic disease",                                           "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
-  "P4",       "Anesthesia",   "A patient with severe systemic disease that is a constant threat to life",         "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
-  "P5",       "Anesthesia",   "A moribund patient who is not expected to survive without the operation",          "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
-  "P6",       "Anesthesia",   "A declared brain-dead patient whose organs are being removed for donor purposes",  "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier."
+  ~mod_code,  ~mod_type,  ~mod_description,                                                              ~mod_information,
+  "P1",       "CPT",       "A normal healthy patient",                                                         "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
+  "P2",       "CPT",       "A patient with mild systemic disease",                                             "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
+  "P3",       "CPT",       "A patient with severe systemic disease",                                           "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
+  "P4",       "CPT",       "A patient with severe systemic disease that is a constant threat to life",         "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
+  "P5",       "CPT",       "A moribund patient who is not expected to survive without the operation",          "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier.",
+  "P6",       "CPT",       "A declared brain-dead patient whose organs are being removed for donor purposes",  "Physical Status modifiers are consistent with American Society of Anesthesiologists ranking of patient physical status, and distinguishing various levels of complexity of the anesthesia service provided. All anesthesia services are reported by use of the anesthesia five-digit procedure codes (00100-01999) with the appropriate physical status modifier appended. Under certain circumstances, when another established modifier(s) is appropriate, it should be used in addition to the physical status modifier."
 )
 
 
 # Performance Measure Modifiers
 modifiers_performance <- dplyr::tribble(
-  ~modifier, ~modifier_type,         ~modifier_description,                                                                               ~modifier_information,
-  "1P",      "Performance Measure",  "Performance Measure Exclusion Modifier due to Medical Reasons",                                     "Reasons include: Not indicated (absence of organ/limb, already received/ performed, other); Contraindicated (patient allergic history, potential adverse drug interaction, other); Other medical reasons",
-  "2P",      "Performance Measure",  "Performance Measure Exclusion Modifier due to Patient Reasons",                                     "Reasons include: Patient declined; Economic, social, or religious reasons; Other patient reasons",
-  "3P",      "Performance Measure",  "Performance Measure Exclusion Modifier due to System Reasons",                                      "Reasons include: Resources to perform the services not available; Insurance coverage/payor-related limitations; Other reasons attributable to health care delivery system",
-  "8P",      "Performance Measure",  "Performance Measure Reporting Modifier, action not performed, reason not otherwise specified",      "Modifier 8P is intended to be used as a reporting modifier to allow the reporting of circumstances when an action described in a measure's numerator is not performed and the reason is not otherwise specified."
+  ~mod_code, ~mod_type,              ~mod_description,                                                                               ~mod_information,
+  "1P",      "CPT",  "Performance Measure Exclusion Modifier due to Medical Reasons",                                     "Reasons include: Not indicated (absence of organ/limb, already received/ performed, other); Contraindicated (patient allergic history, potential adverse drug interaction, other); Other medical reasons",
+  "2P",      "CPT",  "Performance Measure Exclusion Modifier due to Patient Reasons",                                     "Reasons include: Patient declined; Economic, social, or religious reasons; Other patient reasons",
+  "3P",      "CPT",  "Performance Measure Exclusion Modifier due to System Reasons",                                      "Reasons include: Resources to perform the services not available; Insurance coverage/payor-related limitations; Other reasons attributable to health care delivery system",
+  "8P",      "CPT",  "Performance Measure Reporting Modifier, action not performed, reason not otherwise specified",      "Modifier 8P is intended to be used as a reporting modifier to allow the reporting of circumstances when an action described in a measure's numerator is not performed and the reason is not otherwise specified."
 )
 
 modifiers <- vctrs::vec_rbind(
@@ -136,10 +141,10 @@ modifiers <- vctrs::vec_rbind(
   modifiers_performance
 ) |>
   dplyr::mutate(
-    modifier_type = forcats::as_factor(modifier_type))
+    mod_type = forcats::as_factor(mod_type))
 
 modifiers |>
-  filter(modifier %in% c("73", "74"))
+  filter(mod_code %in% c("73", "74"))
 
 # Like CPT modifiers, you want to list the
 # HCPCS modifier that directly affects
@@ -234,7 +239,10 @@ tbls <- rvest::read_html(
 tbls[4:8] <- purrr::map(tbls[4:8], ~ {
   .x |>
   tidyr::pivot_longer(cols = dplyr::everything()) |>
-    tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
+    tidyr::pivot_wider(
+      names_from = name,
+      values_from = value,
+      values_fn = list) |>
     tidyr::unnest(c(Modifier, `Modifier Description`))
 })
 
@@ -243,6 +251,7 @@ tbls <- purrr:::map(tbls, ~ {
     janitor::clean_names() |>
     dplyr::mutate(
       modifier = stringr::str_remove_all(modifier, "[Mm]od "),
+      modifier = stringr::str_remove_all(modifier, "[Mm]od"),
       modifier = dplyr::na_if(modifier, ""),
       modifier_description = stringr::str_remove_all(modifier_description, '"')
       ) |>
@@ -251,12 +260,19 @@ tbls <- purrr:::map(tbls, ~ {
       modifier != "P1 – P6 P1 P2 P3 P4 P5 P6"
       )
 }) |>
-  purrr::list_rbind(names_to = "modifier_category") |>
+  purrr::list_rbind(names_to = "mod_category") |>
+  dplyr::mutate(
+    mod_category = stringr::str_replace_all(mod_category, "_", " "),
+    mod_category = stringr::str_squish(mod_category)
+                ) |>
   dplyr::select(
-    modifier,
-    modifier_category,
-    modifier_description
+    mod_code = modifier,
+    mod_category,
+    mod_description = modifier_description
     )
+
+tbls |>
+  filter(mod_code == "53")
 
 partial_urls <- rvest::read_html(
   "https://med.noridianmedicare.com/web/jeb/topics/modifiers") |>
@@ -267,7 +283,7 @@ partial_urls <- rvest::read_html(
 
 vec_urls <- glue::glue("https://med.noridianmedicare.com{partial_urls}")
 
-scrape_urls <- function(url) {
+scrape_mod_urls <- function(url) {
 
   pg <- rvest::read_html(url)
 
@@ -307,7 +323,7 @@ scrape_urls <- function(url) {
   )
 
   dplyr::tibble(
-    modifier = stringr::str_remove_all(x$name, "Modifier "),
+    mod_code = stringr::str_remove_all(x$name, "Modifier "),
     instructions = list(x$info)
   )
 }
@@ -315,7 +331,7 @@ scrape_urls <- function(url) {
 tictoc::tic()
 modifier_pages <- purrr::map(
   vec_urls,
-  scrape_urls
+  scrape_mod_urls
 )
 tictoc::toc()
 
@@ -355,57 +371,56 @@ modifier_pages <- modifier_pages |>
     incorrect_use = stringr::str_remove_all(incorrect_use, '"')
   ) |>
   dplyr::select(
-    modifier,
-    correct_use,
-    incorrect_use,
-    instructions,
-    additional_information
+    mod_code,
+    mod_correct_use = correct_use,
+    mod_incorrect_use = incorrect_use,
+    mod_instructions = instructions,
+    mod_resources = additional_information
   )
 
 mod_info <- tbls |>
   dplyr::full_join(
     modifier_pages,
-    by = dplyr::join_by(modifier)
-  ) |>
-  dplyr::rename(
-    modifier_correct_use = correct_use,
-    modifier_incorrect_use = incorrect_use,
-    modifier_instructions = instructions,
-    modifier_additional_information = additional_information
-  )
-
-modifiers <- modifiers |>
-  dplyr::rename(
-    modifier_detailed_information = modifier_information
-    ) |>
-  dplyr::left_join(
-    mod_info,
-    by = dplyr::join_by(modifier)
+    by = dplyr::join_by(mod_code)
   ) |>
   dplyr::mutate(
-    modifier_description = dplyr::if_else(
-      is.na(modifier_description.y),
-      modifier_description.x,
-      modifier_description.y),
-    modifier_description.x = NULL,
-    modifier_description.y = NULL,
-    .after = modifier_type
+    mod_category = forcats::as_factor(mod_category)
+    )
+
+mod_final <- modifiers |>
+  dplyr::left_join(
+    mod_info,
+    by = dplyr::join_by(mod_code)
+  ) |>
+  dplyr::mutate(
+    mod_description = mod_description.x,
+    mod_description.y = NULL,
+    mod_description.x = NULL
   ) |>
   dplyr::select(
-    modifier,
-    modifier_type,
-    modifier_category,
-    modifier_description,
-    modifier_detailed_information,
-    modifier_correct_use,
-    modifier_incorrect_use,
-    modifier_instructions,
-    modifier_additional_information
+    mod_code,
+    mod_type,
+    mod_category,
+    mod_description,
+    mod_information,
+    mod_instructions,
+    mod_correct_use,
+    mod_incorrect_use,
+    mod_resources
   )
+
+mod_final <- get_pin("modifiers") |>
+  # dplyr::filter(mod_code == "TC") |>
+  dplyr::mutate(
+    mod_information = dplyr::if_else(mod_code == "TC", mod_description, mod_information),
+    mod_description = dplyr::if_else(mod_code == "TC", strex::str_before_first(mod_description, "; "), mod_description),
+    mod_information = dplyr::if_else(mod_code == "TC", strex::str_after_first(mod_information, "; "), mod_information),
+    mod_information = stringr::str_to_sentence(mod_information)
+    )
 
 # Update Pin
 pin_update(
-  modifiers,
+  mod_final,
   name = "modifiers",
   title = "HCPCS Modifiers",
   description = "Level I and II HCPCS Modifiers"

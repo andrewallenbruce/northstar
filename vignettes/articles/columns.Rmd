@@ -44,7 +44,7 @@ library(gt)
 
 This file contains locality-specific physician fee schedule payment amounts for services covered by the Medicare Physician Fee Schedule (MPFS) with one record for each unique combination of carrier, locality, procedure code and modifier.
 
-```{r}
+```{r echo=FALSE, eval=TRUE}
 northstar:::col_lb("md", "pfs") |> 
   gt(rowname_col = "var") |>
   gt_style(tablign = "right") |> 
@@ -58,7 +58,7 @@ This file contains information on services covered by the Medicare Physician Fee
 
 The Medicare physician fee schedule amounts are adjusted to reflect the variation in practice costs from area to area. A geographic practice cost index (GPCI) has been established for every Medicare payment locality for each of the three components of a procedure’s relative value unit (i.e., the RVUs for work, practice expense, and malpractice). The GPCIs are applied in the calculation of a fee schedule payment amount by multiplying the RVU for each component times the GPCI for that component.
 
-```{r}
+```{r echo=FALSE, eval=TRUE}
 northstar:::col_lb("df", "rvu") |> 
   gt(groupname_col = "var",
      row_group_as_column = TRUE
@@ -80,15 +80,17 @@ northstar:::col_lb("df", "rvu") |>
 
 ## Modifier (26/TC/53)
 
-```{r}
-dplyr::tibble(mod = c("26", "TC", "53"), desc = search_modifiers(mod)) |>
+```{r echo=FALSE, eval=TRUE}
+dplyr::tibble(
+  mod = c("26", "TC", "53"), 
+  desc = search_modifiers(mod)) |>
   tidyr::unnest_wider(desc) |>
-  dplyr::mutate(modifier = NULL) |>
-  # gt(rowname_col = "mod") |>
-  gt(groupname_col         = "mod", row_group_as_column   = TRUE) |>
-  gt_style(tablign         = "right",
-           tabsize         = 22,
-           tabwt           = "bold") |>
+  dplyr::mutate(mod = NULL) |>
+  gt(groupname_col = "mod_code", 
+     row_group_as_column = TRUE) |>
+  # gt_style(tablign = "center",
+  #          tabsize = 22,
+  #          tabwt = "bold") |>
   sub_missing(missing_text = "") |>
   fmt_markdown() |>
   tab_header(title = md(modtitle)) |>
@@ -107,10 +109,13 @@ dplyr::tibble(mod = c("26", "TC", "53"), desc = search_modifiers(mod)) |>
 
 ## Status
 
-```{r}
-dplyr::tibble(status_code = x, 
-              description = switch_status_code(status_code)) |>
-  gt(groupname_col = "status_code", row_group_as_column   = TRUE) |>
+```{r echo=FALSE, eval=TRUE}
+dplyr::tibble(
+  status_code = x, 
+  status_name = switch_status_name(status_code),
+  status_description = switch_status_description(status_code)) |>
+  gt(groupname_col = "status_code", 
+     row_group_as_column   = TRUE) |>
   tab_header(title = md(stnote)) |>
   tab_style(
     style = cell_fill(color = "yellow", alpha = 0.3),
@@ -134,42 +139,51 @@ dplyr::tibble(status_code = x,
 
 ## Global Days
 
-```{r}
-dplyr::tibble(global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"),
-              desc = switch_global_days(global)) |>
+```{r echo=FALSE, eval=TRUE}
+dplyr::tibble(
+  global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"),
+  desc = switch_global_days(global)) |>
   gt(rowname_col = "global") |> 
-  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
+  gt_style(tablign = "center", 
+           tabsize = 22, 
+           tabwt = "bold")
 ```
 
 
 ## PCTC Indicator
 
-```{r}
+```{r echo=FALSE, eval=TRUE}
 dplyr::tibble(code = as.character(0:9),
               desc = switch_pctc_indicator(code)) |> 
   gt(rowname_col = "code") |> 
-  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
+  gt_style(tablign = "center", 
+           tabsize = 22, 
+           tabwt = "bold")
 ```
 
 
 ## Multiple Procedures
 
-```{r}
+```{r echo=FALSE, eval=TRUE}
 dplyr::tibble(code = as.character(c(0:7, 9)),
               desc = switch_multiple_procedure(code)) |>
   gt(rowname_col = "code") |>
-  gt_style(tablign = "center", tabsize = 22, tabwt = "bold")
+  gt_style(tablign = "center", 
+           tabsize = 22, 
+           tabwt = "bold")
 ```
 
 
 ## Diagnostic Imaging Family
 
-```{r}
-dplyr::tibble(dximg = img,
-              desc = switch_diagnostic_imaging(dximg)) |>
-  gt(rowname_col = "dximg") |>
-  sub_missing(missing_text = "Concept does not apply.") |> 
-  gt_style(tablign = "center", tabsize = 18, tabwt = "bold")
+```{r echo=FALSE, eval=TRUE}
+dplyr::tibble(
+  code = img,
+  desc = switch_diagnostic_imaging(code)) |>
+  gt(rowname_col = "code") |>
+  gt_style(tablign = "center", 
+           tabsize = 18, 
+           tabwt = "bold")
 ```
 
 
@@ -178,7 +192,7 @@ dplyr::tibble(dximg = img,
 
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 
-```{r}
+```{r echo=FALSE, eval=TRUE}
 get_gpcis() |> 
   select(-counties) |> 
   distinct() |> 

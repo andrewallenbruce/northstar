@@ -7,10 +7,10 @@
 #' Modifiers also enable health care professionals to effectively respond to
 #' payment policy requirements established by other entities.
 #'
-#' @param modifier `<chr>` vector of 2-character HCPCS modifiers; default is
+#' @param mod_code `<chr>` vector of 2-character HCPCS modifiers; default is
 #'   `NULL`
 #'
-#' @param modifier_type `<chr>` Modifier type, one of `HCPCS`, `CPT`,
+#' @param mod_type `<chr>` Modifier type, one of `HCPCS`, `CPT`,
 #'   `Anesthesia`, or `Performance Measure`; default is `NULL`
 #'
 #' @template args-dots
@@ -18,20 +18,18 @@
 #' @template returns
 #'
 #' @examples
-#' search_modifiers(modifier = c("25", "59"))
+#' search_modifiers(mod_code = c("25", "59"))
 #'
-#' search_modifiers(modifier_type = "CPT")
+#' search_modifiers(mod_type = "CPT")
 #'
 #' @export
 #'
 #' @autoglobal
-search_modifiers <- function(modifier = NULL, modifier_type = NULL, ...) {
+search_modifiers <- function(mod_code = NULL, mod_type = NULL, ...) {
 
   md <- get_pin("modifiers")
-
-  md <- fuimus::search_in_if(md, md$modifier_type, modifier_type)
-  md <- fuimus::search_in_if(md, md$modifier, modifier)
-
+  md <- fuimus::search_in_if(md, md$mod_type, mod_type)
+  md <- fuimus::search_in_if(md, md$mod_code, mod_code)
   return(.add_class(md))
 
 }

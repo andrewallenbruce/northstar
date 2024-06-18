@@ -23,12 +23,7 @@ search_adjustments()
 ## Denials
 
 ```{r}
-northstar::get_pin("denials_extract")
-```
-
-
-```{r}
-northstar::get_pin("denials_site")
+search_denials()
 ```
 
 

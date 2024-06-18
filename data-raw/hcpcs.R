@@ -1,46 +1,4 @@
-source(here::here("data-raw", "load_packages.R"))
-source(here::here("data-raw", "file_paths.R"))
-source(here::here("data-raw", "pins_functions.R"))
-
-proc_note <- readr::read_lines(procnotes)[4:602]
-
-proc_note <- vctrs::vec_c(
-  proc_note[1:359],
-  proc_note[361:599]
-) |>
-  stringr::str_remove_all("\\t") |>
-  stringr::str_remove_all(stringr::fixed("*")) |>
-  stringr::str_squish() |>
-  dplyr::na_if("")
-
-proc_note <- proc_note[!is.na(proc_note)]
-
-proc_note <- dplyr::tibble(note = proc_note) |>
-  tidyr::separate_wider_delim(
-    cols = note,
-    delim = "--",
-    names = c("note", "desc"),
-    too_few = "align_end"
-  ) |>
-  tidyr::fill(note)
-
-proc_note <- proc_note |>
-  dplyr::mutate(id = dplyr::consecutive_id(note)) |>
-  dplyr::group_by(id) |>
-  tidyr::nest(strings = c(desc)) |>
-  dplyr::rowwise() |>
-  dplyr::mutate(description = purrr::map(strings, ~paste0(., collapse = " "))) |>
-  tidyr::unnest(cols = c(description)) |>
-  dplyr::ungroup() |>
-  dplyr::select(note, description) |>
-  dplyr::mutate(
-    description = stringr::str_replace_all(description, '"', " "),
-    description = stringr::str_squish(description),
-    delete = stringr::str_detect(description, "THIS PROCESSING NOTE DELETED"),
-    date_deleted = dplyr::if_else(delete, stringr::str_extract(
-      description, stringr::regex("[0-9]{1}/[0-9]{1}/[0-9]{2}")), NA_character_),
-    date_deleted = clock::date_parse(date_deleted, format = "%1m/%1d/%y"),
-    delete = NULL)
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 two <- read_excel(level2, col_types = "text") |>
   clean_names() |>
@@ -74,6 +32,87 @@ two <- read_excel(level2, col_types = "text") |>
          lvl2_asc = asc_grp,
          lvl2_coverage = cov,
          lvl2_multi_price = mult_pi)
+
+two <- two |>
+  select(hcpcs,
+         type,
+         two_desc_long = lvl2_desc_long,
+         two_desc_short = lvl2_desc_short,
+         date_added = lvl2_date_added,
+         date_term = lvl2_date_terminated,
+         price = price,
+         mprice  = lvl2_multi_price,
+         cim = cim,
+         mcm = mcm,
+         statute = statute,
+         labcert = labcert,
+         xref = xref,
+         coverage = lvl2_coverage,
+         asc_group = lvl2_asc,
+         asc_date = asc_dt,
+         betos = betos,
+         tos = tos,
+         anesth = anest_bu,
+         action_date = lvl2_action_date,
+         action = lvl2_action,
+         procnote)
+
+
+
+# Split off the modifiers?
+# A tibble: 383 × 13
+mod_two <- two |>
+  dplyr::filter(type == "mod") |>
+  dplyr::select(-type) |>
+  janitor::remove_empty(which = c("rows", "cols")) |>
+  dplyr::select(
+    mod_code = hcpcs,
+    mod_description = two_desc_long,
+  )
+
+two <- two |>
+  dplyr::filter(type != "mod") |>
+  select(-type) |>
+  janitor::remove_empty(which = c("rows", "cols"))
+
+# HCPCS Level II Descriptions
+# A tibble: 7,966 × 3
+two_descriptions <- two |>
+  dplyr::select(
+    hcpcs,
+    two_desc_short,
+    two_desc_long)
+
+pin_update(
+  two_descriptions,
+  name = "two_descriptions",
+  title = "2024 HCPCS Level II Descriptions",
+  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
+)
+
+# HCPCS Level II Indicators
+# A tibble: 6,919 × 19
+two_therest <- two |>
+  dplyr::select(
+    -c(
+      two_desc_short,
+      two_desc_long
+    )) |>
+  dplyr::filter(is.na(date_term)) |>
+  dplyr::select(-date_term)
+
+pin_update(
+  two_therest,
+  name = "two_therest",
+  title = "2024 HCPCS Level II Indicators",
+  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
+)
+
+
+
+
+
+
 
 # hcpcs
 #
@@ -287,12 +326,6 @@ two <- read_excel(level2, col_types = "text") |>
 # 800 = Radiobioassay
 # 900 = Clinical cytogenetics
 
-dplyr::tibble(
-  labcert = c("010", 100, 110, 115, 120, "110, 120, 130, 400")
-  ) |>
-  case_labcert(labcert)
-
-
 # xref
 #
 # HCPCS Cross Reference Code. An explicit reference crosswalking a deleted code
@@ -480,118 +513,6 @@ dplyr::tibble(
 # 2003 data. The Berenson-Eggers Type of Service (BETOS) for the procedure code
 # based on generally agreed upon clinically meaningful groupings of procedures
 # and services.
-betos <- function() {
-  c(
-    "D1A" = "Medical/Surgical Supplies",
-    "D1B" = "Hospital Seds",
-    "D1C" = "Oxygen & Supplies",
-    "D1D" = "Wheelchairs",
-    "D1E" = "Other DME",
-    "D1F" = "Prosthetic/Orthotic Devices",
-    "D1G" = "DME Administered Drugs",
-    "I1A" = "Standard Imaging: Chest",
-    "I1B" = "Standard Imaging: Musculoskeletal",
-    "I1C" = "Standard Imaging: Breast",
-    "I1D" = "Standard Imaging: Contrast GI",
-    "I1E" = "Standard Imaging: Nuclear Medicine",
-    "I1F" = "Standard Imaging: Other",
-    "I2A" = "Advanced Imaging: CAT-CT-CTA, Brain-Head-Neck",
-    "I2B" = "Advanced Imaging: CAT-CT-CTA, Other",
-    "I2C" = "Advanced Imaging: MRI-MRA, Brain-Head-Neck",
-    "I2D" = "Advanced Imaging: MRI-MRA, Other",
-    "I3A" = "Echography-Ultrasonography: Eye",
-    "I3B" = "Echography-Ultrasonography: Abdomen-Pelvis",
-    "I3C" = "Echography-Ultrasonography: Heart",
-    "I3D" = "Echography-Ultrasonography: Carotid Arteries",
-    "I3E" = "Echography-Ultrasonography: Prostate, Transrectal",
-    "I3F" = "Echography-Ultrasonography: Other",
-    "I4A" = "Imaging-Procedure: Heart incl Cardiac Cath",
-    "I4B" = "Imaging-Procedure: Other",
-    "M1A" = "Office Visit: New",
-    "M1B" = "Office Visit: Established",
-    "M2A" = "Hospital Visit: Initial",
-    "M2B" = "Hospital Visit: Subsequent",
-    "M2C" = "Hospital Visit: Critical Care",
-    "M3"  = "ER Visit",
-    "M4A" = "Home Visit",
-    "M4B" = "Nursing Home Visit",
-    "M5A" = "Specialist: Pathology",
-    "M5B" = "Specialist: Psychiatry",
-    "M5C" = "Specialist: Opthamology",
-    "M5D" = "Specialist: Other",
-    "M6"  = "Consultations",
-    "O1A" = "Ambulance",
-    "O1B" = "Chiropractic",
-    "O1C" = "Enteral & Parenteral",
-    "O1D" = "Chemotherapy",
-    "O1E" = "Other Drugs",
-    "O1F" = "Hearing & Speech Services",
-    "O1G" = "Immunizations-Vaccinations",
-    "01L" = "Lymphedema Compression Treatment Items",
-    "P0"  = "Anesthesia",
-    "P1A" = "Major Procedure: Breast",
-    "P1B" = "Major Procedure: Colectomy",
-    "P1C" = "Major Procedure: Cholecystectomy",
-    "P1D" = "Major Procedure: TURP",
-    "P1E" = "Major Procedure: Hysterectomy",
-    "P1F" = "Major Procedure: Explor-Decompr-Excisdisc",
-    "P1G" = "Major Procedure: Other",
-    "P2A" = "Major Procedure: Cardiovascular - CABG",
-    "P2B" = "Major Procedure: Cardiovascular - Aneurysm Repair",
-    "P2C" = "Major Procedure: Cardiovascular - Thromboendarterectomy",
-    "P2D" = "Major Procedure: Cardiovascular - Coronary angioplasty (PTCA)",
-    "P2E" = "Major Procedure: Cardiovascular - Pacemaker Insertion",
-    "P2F" = "Major Procedure: Cardiovascular - Other",
-    "P3A" = "Major Procedure: Orthopedic - Hip Fracture Repair",
-    "P3B" = "Major Procedure: Orthopedic - Hip Replacement",
-    "P3C" = "Major Procedure: Orthopedic - Knee Replacement",
-    "P3D" = "Major Procedure: Orthopedic - Other",
-    "P4A" = "Eye procedure: Corneal Transplant",
-    "P4B" = "Eye procedure: Cataract Removal/Lens Insertion",
-    "P4C" = "Eye procedure: Retinal Detachment",
-    "P4D" = "Eye procedure: Treatment of Retinal Lesions",
-    "P4E" = "Eye procedure: Other",
-    "P5A" = "Ambulatory procedures: Skin",
-    "P5B" = "Ambulatory procedures: Musculoskeletal",
-    "P5C" = "Ambulatory procedures: Inguinal Hernia Repair",
-    "P5D" = "Ambulatory procedures: Lithotripsy",
-    "P5E" = "Ambulatory procedures: Other",
-    "P6A" = "Minor procedures: Skin",
-    "P6B" = "Minor procedures: Musculoskeletal",
-    "P6C" = "Minor procedures: Other (Medicare Fee Schedule)",
-    "P6D" = "Minor procedures: Other (Non-Medicare Fee Schedule)",
-    "P7A" = "Oncology: Radiation Therapy",
-    "P7B" = "Oncology: Other",
-    "P8A" = "Endoscopy: Arthroscopy",
-    "P8B" = "Endoscopy: Upper GI",
-    "P8C" = "Endoscopy: Sigmoidoscopy",
-    "P8D" = "Endoscopy: Colonoscopy",
-    "P8E" = "Endoscopy: Cystoscopy",
-    "P8F" = "Endoscopy: Bronchoscopy",
-    "P8G" = "Endoscopy: Laparoscopic Cholecystectomy",
-    "P8H" = "Endoscopy: Laryngoscopy",
-    "P8I" = "Endoscopy: Other",
-    "P9A" = "Dialysis Services (Medicare Fee Schedule)",
-    "P9B" = "Dialysis Services (Non-Medicare Fee Schedule)",
-    "T1A" = "Lab tests: Routine Venipuncture (Non-Medicare Fee Schedule)",
-    "T1B" = "Lab tests: Automated General Profiles",
-    "T1C" = "Lab tests: Urinalysis",
-    "T1D" = "Lab tests: Blood Counts",
-    "T1E" = "Lab tests: Glucose",
-    "T1F" = "Lab tests: Bacterial Cultures",
-    "T1G" = "Lab tests: Other (Medicare Fee Schedule)",
-    "T1H" = "Lab tests: Other (Non-Medicare Fee Schedule)",
-    "T2A" = "Other tests: ECGs",
-    "T2B" = "Other tests: Cardiovascular Stress Tests",
-    "T2C" = "Other tests: EKG Monitoring",
-    "T2D" = "Other tests: Other",
-    "Y1"  = "Other: Medicare Fee Schedule",
-    "Y2"  = "Other: Non-Medicare Fee Schedule",
-    "Z1"  = "Local Codes",
-    "Z2"  = "Undefined Codes"
-  )
-}
-
 
 # tos
 #
@@ -638,133 +559,5 @@ betos <- function() {
 # R = Re-activate discontinued/deleted procedure  or modifier code
 # S = Change in short description of procedure code
 # T = Miscellaneous change (BETOS, type of service)
-action_cd <- function() {
-  c(
-    "A" = "A: Code added",
-    "B" = "B: Code change - Admin data, Long description",
-    "C" = "C: Code change - Long description",
-    "D" = "D: Code Discontinued",
-    "F" = "F: Code change - Admin data",
-    "N" = "N: No maintenance for code",
-    "P" = "P: Payment change",
-    "R" = "R: Code reactivated",
-    "S" = "S: Code change - Short description",
-    "T" = "T: Miscellaneous change"
-  )
-}
 
-two <- two |>
-  select(hcpcs,
-         type = type,
-         two_desc_long = lvl2_desc_long,
-         two_desc_short = lvl2_desc_short,
-         date_added = lvl2_date_added,
-         date_term = lvl2_date_terminated,
-         price = price,
-         mprice  = lvl2_multi_price,
-         cim = cim,
-         mcm = mcm,
-         statute = statute,
-         labcert = labcert,
-         xref = xref,
-         coverage = lvl2_coverage,
-         asc_group = lvl2_asc,
-         asc_date = asc_dt,
-         betos = betos,
-         tos = tos,
-         anesth = anest_bu,
-         action_date = lvl2_action_date,
-         action = lvl2_action,
-         procnote)
 
-proc_note <- proc_note |>
-  dplyr::select(
-    procnote = note,
-    procnote_desc = description,
-    procnote_deleted = date_deleted
-  )
-
-# Join with proc
-two <- two |>
-  dplyr::left_join(
-    proc_note,
-    by = dplyr::join_by(procnote)) |>
-  dplyr::select(
-    hcpcs,
-    type,
-    two_desc_short,
-    two_desc_long,
-    date_added,
-    date_term,
-    price,
-    mprice,
-    labcert,
-    xref,
-    coverage,
-    tos,
-    betos,
-    procnote,
-    procnote_desc,
-    procnote_deleted,
-    cim,
-    mcm,
-    statute,
-    asc_group,
-    asc_date,
-    anesth,
-    action_date,
-    action
-  ) |>
-  janitor::remove_empty(which = c("rows", "cols"))
-
-# Split off the modifiers?
-# A tibble: 383 × 13
-two_mods <- two |>
-  dplyr::filter(type == "mod") |>
-  select(-type) |>
-  janitor::remove_empty(which = c("rows", "cols"))
-
-pin_update(
-  two_mods,
-  name = "two_mods",
-  title = "2024 HCPCS Level II Modifiers",
-  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
-)
-
-two <- two |>
-  dplyr::filter(type != "mod") |>
-  select(-type) |>
-  janitor::remove_empty(which = c("rows", "cols"))
-
-# HCPCS Level II Descriptions
-# A tibble: 7,966 × 3
-two_descriptions <- two |>
-  dplyr::select(
-    hcpcs,
-    two_desc_short,
-    two_desc_long)
-
-pin_update(
-  two_descriptions,
-  name = "two_descriptions",
-  title = "2024 HCPCS Level II Descriptions",
-  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
-)
-
-# HCPCS Level II Indicators
-# A tibble: 6,919 × 19
-two_therest <- two |>
-  dplyr::select(
-    -c(
-      two_desc_short,
-      two_desc_long
-    )) |>
-  dplyr::filter(is.na(date_term)) |>
-  dplyr::select(-date_term)
-
-pin_update(
-  two_therest,
-  name = "two_therest",
-  title = "2024 HCPCS Level II Indicators",
-  description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
-)

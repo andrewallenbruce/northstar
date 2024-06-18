@@ -62,6 +62,26 @@ search_adjustments <- function(type = NULL, ...) {
   return(.add_class(ad))
 }
 
+#' Search Denial Types
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' search_denials()
+#'
+#' @autoglobal
+#'
+#' @export
+search_denials <- function(...) {
+  list(
+    site = get_pin("denials_site") |> .add_class(),
+    ext = get_pin("denials_extract") |> .add_class()
+  )
+
+}
+
 #' Make Adjustment Code Trie
 #'
 #' @examples
