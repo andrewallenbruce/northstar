@@ -30,17 +30,26 @@ denials_extract <- forager:::get_pin("denials_extract") |>
   mutate(
     adj_desc = NULL,
     adj_code = str_remove_all(adj_code, " -")
-    # ,
-    # adj_code = str_c("-", adj_code)
     ) |>
   distinct() |>
-  select(
+  reframe(
     adj_code,
     denial_type,
     denial_category = denial_rollup,
     denial_cause = denial_root_cause,
-    denial_blame = denial_root_cause_department
-    )
+    denial_category = case_when(
+      denial_category == "Billing/Claim Error" ~ "Billing Error: Invalid Code",
+      TRUE ~ denial_category),
+    denial_cause = case_when(
+      denial_category == denial_cause ~ NA_character_,
+      denial_category == "Medical Necessity" ~ NA_character_,
+      denial_category == "Billing Error: Invalid Code" ~ NA_character_,
+      denial_cause == "Service(s) Not Covered" ~ NA_character_,
+      TRUE ~ denial_cause
+    ),
+    ) |>
+  select(-denial_cause)
+
 
 # Update Pin
 pin_update(
@@ -50,11 +59,11 @@ pin_update(
   description = "Common Denials Categories and Types"
 )
 
-northstar::search_adjustments("rarc") |>
-  filter(code == "M51")
+northstar::search_adjustments() |>
+  filter(adj_type == "RARC")
 
-northstar::search_adjustments("carc") |>
-  filter(code == "B13")
+northstar::search_adjustments() |>
+  filter(adj_code == "MA121")
 
 
 denials_common <- read_html(
@@ -71,7 +80,12 @@ denials_common <- read_html(
   mutate(rarc = na_if(rarc, "")) |>
   separate_longer_delim(carc, delim = " | ") |>
   separate_longer_delim(rarc, delim = " | ") |>
-  separate_longer_delim(rarc, delim = " ")
+  separate_longer_delim(rarc, delim = " ") |>
+  reframe(
+    adj_CARC = carc,
+    adj_RARC = rarc,
+    denial_reason
+  )
 
 denials_common
 
@@ -90,21 +104,24 @@ scrape_urls <- function(url) {
   pg <- rvest::read_html(url)
 
   x <- list(
-    denial_reason = pg |>
+    denial_reason = fuimus::null_if_empty(
+      pg |>
       rvest::html_elements(".title") |>
       rvest::html_text2(preserve_nbsp = TRUE) |>
-      stringr::str_subset("Browse by Topic", negate = TRUE),
-    tbl = pg |>
+      stringr::str_subset("Browse by Topic", negate = TRUE)
+      ),
+    tbl = fuimus::null_if_empty(
+      pg |>
       rvest::html_elements(".table") |>
       rvest::html_table() |>
-      purrr::pluck(1)
-    # |>
-    #   janitor::clean_names() |>
-    #   dplyr::select(
-    #     adj_code = carc_rarc,
-    #     adj_description = description)
-    ,
-    info = pg |>
+      purrr::pluck(1) # |>
+        # janitor::clean_names() |>
+        # dplyr::select(
+        #   adj_code = carc_rarc,
+        #   adj_description = description)
+      ),
+    info = fuimus::null_if_empty(
+      pg |>
       rvest::html_elements(".portlet-journal-content .journal-content-article") |>
       rvest::html_elements("h3, ul") |>
       rvest::html_text2(preserve_nbsp = FALSE) |>
@@ -121,38 +138,86 @@ scrape_urls <- function(url) {
       dplyr::mutate(
         heading = stringr::str_extract(
           text,
-          "Common Reasons for Message|Next Step|Claim Submission Tips"
+          "Common Reasons for Message|Common Reason for Message|Next Step|Claim Submission Tips"
         ), .before = text
-      ) |>
-      tidyr::fill(heading) |>
-      dplyr::filter(
-        stringr::str_detect(
-          text,
-          "Common Reasons for Message|Next Step|Claim Submission Tips",
-          negate = TRUE
-      )
-    )
+      ) # |>
+      # tidyr::fill(heading) |>
+      # dplyr::filter(
+      #   stringr::str_detect(
+      #     text,
+      #     "Common Reasons for Message|Common Reason for Message|Next Step|Claim Submission Tips",
+      #     negate = TRUE
+     # )
+    # )
+   )
   )
 
-  dplyr::tibble(
+ dplyr::tibble(
     denial_reason = x$denial_reason,
     codes_desc = list(x$tbl),
     instructions = list(x$info)
   )
 }
 
-
-denial_reasons_pages <- purrr::map(
+denial_pages <- purrr::map(
   vec_urls,
   scrape_urls
   ) |>
   purrr::list_rbind()
 
+denials_common
 
-denials <- list(
-  common = denials_common,
-  reasons = denial_reasons_pages
-)
+denial_reasons <- denial_pages |>
+  select(denial_reason, codes_desc) |>
+  unnest(codes_desc) |>
+  clean_names() |>
+  mutate(description = if_else(is.na(description), description_2, description),
+         description_2 = NULL) |>
+  separate_longer_delim(carc_rarc, delim = " ") |>
+  rename(adj_code = carc_rarc) |>
+  select(adj_code, denial_reason)
+
+next_step_tips <- denial_pages |>
+  select(denial_reason, instructions) |>
+  unnest(instructions) |>
+  fill(heading) |>
+  mutate(heading = if_else(heading == "Common Reason for Message", "Common Reasons for Message", heading)) |>
+  pivot_wider(
+    names_from = heading,
+    values_from = text,
+    values_fn = list) |>
+  clean_names() |>
+
+  unnest(common_reasons_for_message) |>
+  filter(common_reasons_for_message != "Common Reasons for Message") |>
+  nest(common_reasons = c(common_reasons_for_message)) |>
+  rowwise() |>
+  mutate(common_reasons = map_chr(common_reasons, ~paste0(., collapse = ". "))) |>
+  unnest(common_reasons) |>
+  ungroup() |>
+
+  unnest(next_step) |>
+  filter(next_step != "Next Step") |>
+  nest(next_steps = c(next_step)) |>
+  rowwise() |>
+  mutate(next_steps = map_chr(next_steps, ~paste0(., collapse = ". "))) |>
+  unnest(next_steps) |>
+  ungroup() |>
+  mutate(next_steps = str_remove_all(next_steps, '"')) |>
+
+  unnest(claim_submission_tips) |>
+  filter(claim_submission_tips != "Claim Submission Tips") |>
+  nest(claim_submission_tips = c(claim_submission_tips)) |>
+  rowwise() |>
+  mutate(claim_submission_tips = map_chr(claim_submission_tips, ~paste0(., collapse = ". "))) |>
+  unnest(claim_submission_tips) |>
+  ungroup() |>
+  mutate(claim_submission_tips = str_remove_all(claim_submission_tips, '"'))
+
+denials <- denial_reasons |>
+  left_join(
+    next_step_tips,
+    by = join_by(denial_reason))
 
 # Update Pin
 pin_update(

@@ -1,10 +1,10 @@
 file: adj_codes.qs
-file_size: 53421
-pin_hash: e4dff1276436ef5c
+file_size: 53428
+pin_hash: c1491ca52dd49457
 type: qs
 title: CARC RARC Codes
 description: Claim Adjustment Reason Codes and Remittance Advice Remark Codes
 tags: ~
 urls: ~
-created: 20240618T103557Z
+created: 20240618T123408Z
 api_version: 1

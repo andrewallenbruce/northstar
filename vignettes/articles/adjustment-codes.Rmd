@@ -17,24 +17,22 @@ library(northstar)
 ## Adjustment Codes
 
 ```{r}
-search_adjustments("group")
-
-search_adjustments("carc")
-
-search_adjustments("rarc")
+search_adjustments()
 ```
 
 ## Denials
 
 ```{r}
 northstar::get_pin("denials_extract")
-
-northstar::get_pin("denials_site")$common
-
-northstar::get_pin("denials_site")$reasons$codes_desc
-
-northstar::get_pin("denials_site")$reasons$instructions
 ```
+
+
+```{r}
+northstar::get_pin("denials_site")
+```
+
+
+
 
 
 Medical billing adjustment codes, also known as Claim Adjustment Reason Codes (CARCs), are used by healthcare payers to explain why a claim or service line was paid differently than it was billed. These codes provide specific reasons for adjustments made to the payment amount, such as deductibles, coinsurance, contractual obligations, or other adjustments.
@@ -43,51 +41,43 @@ Medical billing adjustment codes, also known as Claim Adjustment Reason Codes (C
 
 Group Codes and Claim Adjustment Reason Codes (CARCs) serve distinct but complementary purposes in medical billing and remittance advice:
 
-## Group Codes
-Group Codes identify the general category or high-level reason for a payment adjustment. They provide an overarching classification for the type of adjustment being made.[5] The main Group Codes are:
+### Group Codes
 
-- CO (Contractual Obligation): Adjustment due to a contractual agreement or regulatory requirement, typically a write-off for the provider.[3][5]
-- OA (Other Adjustment): Used when no other group code applies to the adjustment.[3][5] 
-- PR (Patient Responsibility): Adjustment representing an amount that should be billed to the patient, such as deductibles or copays.[3][5]
-- PI (Payer Initiated Reductions): Adjustment initiated by the payer when they believe the provider is financially liable, but there is no supporting contract.[3]
+Group Codes identify the general category or high-level reason for a payment adjustment. They provide an overarching classification for the type of adjustment being made. The main Group Codes are:
 
-A Group Code must always be used in conjunction with a Claim Adjustment Reason Code to provide the specific reason for the adjustment.[5]
+- CO (Contractual Obligation): Adjustment due to a contractual agreement or regulatory requirement, typically a write-off for the provider.
+- OA (Other Adjustment): Used when no other group code applies to the adjustment.
+- PR (Patient Responsibility): Adjustment representing an amount that should be billed to the patient, such as deductibles or copays.
+- PI (Payer Initiated Reductions): Adjustment initiated by the payer when they believe the provider is financially liable, but there is no supporting contract.
+
+A Group Code must always be used in conjunction with a Claim Adjustment Reason Code to provide the specific reason for the adjustment.
 
 ## Claim Adjustment Reason Codes (CARCs)
 
-CARCs are more granular, three-character alphanumeric codes that describe the precise reason why a claim or service line was paid differently than it was billed.[1][4] They provide detailed explanations for adjustments, such as:
+CARCs are more granular, three-character alphanumeric codes that describe the precise reason why a claim or service line was paid differently than it was billed. They provide detailed explanations for adjustments, such as:
 
-- CO16: Claim lacks information needed for adjudication.[1]
-- PR1: Deductible amount.[1]  
-- OA23: Charges have been unbundled.[1]
+- CO-16: Claim lacks information needed for adjudication.
+- PR-1: Deductible amount.
+- OA-23: Charges have been unbundled.
 
-While Group Codes categorize the general type of adjustment, CARCs give the exact rationale behind each specific payment adjustment made to a claim line or claim.[2][4] The combination of a Group Code and CARC fully communicates the nature and responsibility for any differences between the billed and paid amounts.
-
-Citations:
-[1] https://x12.org/codes/claim-adjustment-reason-codes
-[2] https://www.aapc.com/support/common-terms/claim-adjustment-reason-codes
-[3] https://www.linkedin.com/pulse/claim-adjustments-group-code-reason-values-co-cr-oa-jvs-prasad
-[4] https://docs.claim.md/docs/claim-adjustment-reason-codes
-[5] https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c22pdf.pdf
+While Group Codes categorize the general type of adjustment, CARCs give the exact rationale behind each specific payment adjustment made to a claim line or claim. The combination of a Group Code and CARC fully communicates the nature and responsibility for any differences between the billed and paid amounts.
 
 ## Remittance Advice Remark Codes (RARCs)
 
-The purpose of Remittance Advice Remark Codes (RARCs) is to provide additional explanation for an adjustment already described by a Claim Adjustment Reason Code (CARC) or to convey information about remittance processing.[1][2]
+The purpose of Remittance Advice Remark Codes (RARCs) is to provide additional explanation for an adjustment already described by a Claim Adjustment Reason Code (CARC) or to convey information about remittance processing.
 
 Specifically, RARCs serve two main functions:
 
-1. Supplemental RARCs provide additional details or clarification for an adjustment that has already been described by a CARC. For example, a CARC may indicate that a claim was denied due to missing information, and a supplemental RARC would further specify what exact information was missing.[1]
+1. Supplemental RARCs provide additional details or clarification for an adjustment that has already been described by a CARC. For example, a CARC may indicate that a claim was denied due to missing information, and a supplemental RARC would further specify what exact information was missing.
 
-2. Informational RARCs, prefaced with "Alert:", convey information about the remittance processing itself, rather than being related to a specific adjustment or CARC. These alerts communicate things like changes to procedure codes, potential impacts on patient liability, or other processing details.[1]
+2. Informational RARCs, prefaced with "Alert:", convey information about the remittance processing itself, rather than being related to a specific adjustment or CARC. These alerts communicate things like changes to procedure codes, potential impacts on patient liability, or other processing details.
 
-In summary, while CARCs explain the reason for an adjustment to a claim payment, RARCs give additional context, details, or processing information related to those adjustments or the remittance advice as a whole.[2] The combination of CARCs and RARCs allows for clear communication between payers and providers regarding claim adjudication decisions.
+In summary, while CARCs explain the reason for an adjustment to a claim payment, RARCs give additional context, details, or processing information related to those adjustments or the remittance advice as a whole. The combination of CARCs and RARCs allows for clear communication between payers and providers regarding claim adjudication decisions.
 
-Citations:
-[1] https://x12.org/codes/remittance-advice-remark-codes
-[2] https://med.noridianmedicare.com/web/jeb/topics/ra
-[3] https://www.palmettogba.com/palmetto/jmb.nsf/DID/2NF7NSFT1B
-[4] https://files.ontario.ca/moh_1/moh-remittance-advice-explanatory-codes-2022-12-en-2023-05-15.pdf
-[5] https://www.novitas-solutions.com/webcenter/portal/MedicareJH/pagebyid?contentId=00243417
+<https://med.noridianmedicare.com/web/jeb/topics/ra>
+<https://www.palmettogba.com/palmetto/jmb.nsf/DID/2NF7NSFT1B>
+<https://files.ontario.ca/moh_1/moh-remittance-advice-explanatory-codes-2022-12-en-2023-05-15.pdf>
+<https://www.novitas-solutions.com/webcenter/portal/MedicareJH/pagebyid?contentId=00243417>
 
 
 

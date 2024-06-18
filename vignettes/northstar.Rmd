@@ -36,12 +36,17 @@ describe_hcpcs(hcpcs = "39503")
 
 
 ```{r}
-search_adjustments("carc")
+search_adjustments()
 ```
 
 ```{r}
-search_adjustments("rarc")
+search_pos()
 ```
+
+```{r}
+search_modifiers()
+```
+
 
 
 ```{r echo = FALSE, eval=FALSE}

@@ -267,8 +267,6 @@ partial_urls <- rvest::read_html(
 
 vec_urls <- glue::glue("https://med.noridianmedicare.com{partial_urls}")
 
-url <- vec_urls[1]
-
 scrape_urls <- function(url) {
 
   pg <- rvest::read_html(url)

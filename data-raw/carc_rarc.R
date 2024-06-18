@@ -89,7 +89,7 @@ adj_rarc <- read_html("https://x12.org/codes/remittance-advice-remark-codes") |>
     X2
     ) |>
   mutate(
-    adj_type = "CARC",
+    adj_type = "RARC",
     description   = strex::str_before_first(X2, "Start: "),
          dates         = strex::str_after_first(X2, "Start: "),
          X2            = NULL,
