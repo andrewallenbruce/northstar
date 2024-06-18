@@ -20,4 +20,3 @@ procedures
 switch_multiple_procedure(as.character(0:9))
 
 }
-\keyword{internal}

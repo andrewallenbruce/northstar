@@ -17,7 +17,6 @@ Identifies the applicable Diagnostic Service family for
 HCPCS codes with a Multiple Procedure indicator of 4.
 }
 \examples{
-switch_diagnostic_imaging(fuimus::pad_number(c(1:11, 88, 99)))
+dplyr::tibble(code = fuimus::pad_number(c(1:11, 88, 99)), desc = switch_diagnostic_imaging(code))
 
 }
-\keyword{internal}

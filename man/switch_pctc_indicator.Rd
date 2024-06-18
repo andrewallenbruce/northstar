@@ -19,4 +19,3 @@ PC/TC Indicator Descriptions
 switch_pctc_indicator(as.character(0:9))
 
 }
-\keyword{internal}

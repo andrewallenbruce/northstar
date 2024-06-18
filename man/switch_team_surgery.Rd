@@ -19,4 +19,3 @@ Modifier 66: Services for which Team Surgeons may be paid
 switch_team_surgery(c(0:2, "9"))
 
 }
-\keyword{internal}

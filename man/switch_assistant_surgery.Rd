@@ -29,4 +29,3 @@ Modifiers:
 switch_assistant_surgery(c(0:2, "9"))
 
 }
-\keyword{internal}

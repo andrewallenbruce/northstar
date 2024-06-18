@@ -20,4 +20,3 @@ each in a different specialty, may be paid.
 switch_co_surgeon(c(0:2, 9, NA_character_))
 
 }
-\keyword{internal}

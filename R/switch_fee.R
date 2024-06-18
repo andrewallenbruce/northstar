@@ -9,8 +9,6 @@
 #'
 #' @autoglobal
 #'
-#' @keywords internal
-#'
 #' @export
 switch_global_days <- function(x) {
 
@@ -40,8 +38,6 @@ switch_global_days <- function(x) {
 #'
 #' @autoglobal
 #'
-#' @keywords internal
-#'
 #' @export
 switch_team_surgery <- function(x) {
 
@@ -65,8 +61,6 @@ switch_team_surgery <- function(x) {
 #'
 #' @examples
 #' switch_bilateral_surgery(c(0:3, "9"))
-#'
-#' @autoglobal
 #'
 #' @keywords internal
 #'
@@ -97,8 +91,6 @@ switch_bilateral_surgery <- function(x) {
 #' switch_multiple_procedure(as.character(0:9))
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @export
 switch_multiple_procedure <- function(x) {
@@ -131,8 +123,6 @@ switch_multiple_procedure <- function(x) {
 #' switch_co_surgeon(c(0:2, 9, NA_character_))
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @export
 switch_co_surgeon <- function(x) {
@@ -167,8 +157,6 @@ switch_co_surgeon <- function(x) {
 #'
 #' @autoglobal
 #'
-#' @keywords internal
-#'
 #' @export
 switch_assistant_surgery <- function(x) {
 
@@ -192,11 +180,9 @@ switch_assistant_surgery <- function(x) {
 #' @returns vector of Diagnostic Imaging descriptions
 #'
 #' @examples
-#' switch_diagnostic_imaging(fuimus::pad_number(c(1:11, 88, 99)))
+#' dplyr::tibble(code = fuimus::pad_number(c(1:11, 88, 99)), desc = switch_diagnostic_imaging(code))
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @export
 switch_diagnostic_imaging <- function(x) {
@@ -231,8 +217,6 @@ switch_diagnostic_imaging <- function(x) {
 #'
 #' @autoglobal
 #'
-#' @keywords internal
-#'
 #' @export
 switch_opps_indicator <- function(x) {
 
@@ -255,8 +239,6 @@ switch_opps_indicator <- function(x) {
 #'
 #' @autoglobal
 #'
-#' @keywords internal
-#'
 #' @export
 switch_pctc_indicator <- function(x) {
 
@@ -276,21 +258,23 @@ switch_pctc_indicator <- function(x) {
   )
 }
 
-#' Status Code Descriptions
+#' Status Code Names
 #'
-#' @param x vector of PC/TC indicators
+#' @param x vector of status codes
 #'
-#' @returns vector of PC/TC indicator descriptions
+#' @returns vector of status code names
 #'
 #' @examples
-#' switch_status_code(LETTERS)
+#' dplyr::tibble(
+#'   code = LETTERS,
+#'   name = switch_status_name(LETTERS),
+#'   desc = switch_status_description(LETTERS)
+#' )
 #'
 #' @autoglobal
 #'
-#' @keywords internal
-#'
 #' @export
-switch_status_code <- function(x) {
+switch_status_name <- function(x) {
 
   kit::nswitch(
     x = x,
@@ -312,26 +296,44 @@ switch_status_code <- function(x) {
     "X", "Statutory Exclusion",
     default = NA_character_
   )
+}
 
-  # kit::nswitch(
-  #   x = x,
-  #   "A", "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD.",
-  #   "B", "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident.",
-  #   "C", "Carriers establish RVUs and payment following documentation review.",
-  #   "D", "Deleted effective with beginning of year.",
-  #   "E", "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures.",
-  #   "F", "Not subject to 90 day grace period",
-  #   "G", "Another code used for payment. Subject to a 90 day grace period.",
-  #   "H", "Had TC/26 mod in previous year, TC/26 component now deleted.",
-  #   "I", "Another code used for payment. Not subject to a 90-day grace period.",
-  #   "J", "No RVUs or payment amounts. Only identifies anesthesia services.",
-  #   "M", "Used for reporting purposes only.",
-  #   "N", "Not covered by Medicare.",
-  #   "P", "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision.",
-  #   "R", "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes.",
-  #   "T", "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment.",
-  #   "X", "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made.",
-  #   default = NA_character_
-  # )
+#' Status Code Descriptions
+#'
+#' @param x vector of status codes
+#'
+#' @returns vector of status code descriptions
+#'
+#' @examples
+#' dplyr::tibble(
+#'   code = LETTERS,
+#'   name = switch_status_name(LETTERS),
+#'   desc = switch_status_description(LETTERS)
+#' )
+#'
+#' @autoglobal
+#'
+#' @export
+switch_status_description <- function(x) {
 
+  kit::nswitch(
+    x = x,
+    "A", "Separately paid if covered. RVUs and payment amounts. Carriers responsible for coverage decisions in absence of an NCD.",
+    "B", "Payment bundled into payment for other services not specified. No RVUs, no payment made. When covered, payment subsumed by payment for services to which they are incident.",
+    "C", "Carriers establish RVUs and payment following documentation review.",
+    "D", "Deleted effective with beginning of year.",
+    "E", "Excluded by regulation. No RVUs, no payment made. When covered, payment made under reasonable charge procedures.",
+    "F", "Not subject to 90 day grace period",
+    "G", "Another code used for payment. Subject to a 90 day grace period.",
+    "H", "Had TC/26 mod in previous year, TC/26 component now deleted.",
+    "I", "Another code used for payment. Not subject to a 90-day grace period.",
+    "J", "No RVUs or payment amounts. Only identifies anesthesia services.",
+    "M", "Used for reporting purposes only.",
+    "N", "Not covered by Medicare.",
+    "P", "No RVUs, no payment made. If covered as Incident To and provided on same day as physician service, payment bundled into payment for Incident To service. If covered as other than Incident To, paid under other payment provision.",
+    "R", "Special coverage instructions apply. If covered, service is contractor priced. Assigned to limited number of codes covered in unusual circumstances. Majority of codes are dental codes.",
+    "T", "RVUs and payment amounts. Paid only if no other payable services billed on same date by same provider. If payable services billed, bundled into payment.",
+    "X", "Not in statutory definition of Physician Services. No RVUs or payment amounts, no payment made.",
+    default = NA_character_
+  )
 }

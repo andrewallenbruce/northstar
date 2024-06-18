@@ -19,4 +19,3 @@ Global Days Descriptions
 switch_global_days(c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"))
 
 }
-\keyword{internal}
