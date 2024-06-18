@@ -46,25 +46,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_asc.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_labcert.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_multiple_pricing.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_pricing.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_supervision.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/case_tos.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/cases.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/carc_add_dash.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/describe_hcpcs.html</loc>
@@ -154,7 +136,16 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_action_code.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_asc_group.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_assistant_surgery.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_betos.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_bilateral_surgery.html</loc>
@@ -163,10 +154,19 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_co_surgeon.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_coverage.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_diagnostic_imaging.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_global_days.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_lab_certification.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_pricing.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_procedure.html</loc>
@@ -178,9 +178,21 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_pctc_indicator.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_code.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_pricing.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_description.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_name.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_supervision.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_team_surgery.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_type_of_service.html</loc>
   </url>
 </urlset>

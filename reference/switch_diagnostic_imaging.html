@@ -108,20 +108,23 @@ HCPCS codes with a Multiple Procedure indicator of 4.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">switch_diagnostic_imaging</span><span class="op">(</span><span class="fu">fuimus</span><span class="fu">::</span><span class="fu"><a href="https://andrewallenbruce.github.io/fuimus/reference/pad_number.html" class="external-link">pad_number</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">88</span>, <span class="fl">99</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Ultrasound (Chest / Abdomen / Pelvis-Non-Obstetrical)"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "CT and CTA (Chest / Thorax / Abd / Pelvis)"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "CT and CTA (Head / Brain / Orbit / Maxillofacial / Neck)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "MRI and MRA (Chest / Abd / Pelvis)"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "MRI and MRA (Head / Brain / Neck)"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "MRI and MRA (Spine)"                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "CT (Spine)"                                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "MRI and MRA (Lower Extremities)"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "CT and CTA (Lower Extremities)"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "MRI and MRA (Upper Extremities and Joints)"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "CT and CTA (Upper Extremities)"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Subject to Reduction of TC or PC Diagnostic Imaging"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "Concept does not apply"                                  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fu">fuimus</span><span class="fu">::</span><span class="fu"><a href="https://andrewallenbruce.github.io/fuimus/reference/pad_number.html" class="external-link">pad_number</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">88</span>, <span class="fl">99</span><span class="op">)</span><span class="op">)</span>, desc <span class="op">=</span> <span class="fu">switch_diagnostic_imaging</span><span class="op">(</span><span class="va">code</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    code  desc                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 01    Ultrasound (Chest / Abdomen / Pelvis-Non-Obstetrical)   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 02    CT and CTA (Chest / Thorax / Abd / Pelvis)              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 03    CT and CTA (Head / Brain / Orbit / Maxillofacial / Neck)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 04    MRI and MRA (Chest / Abd / Pelvis)                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 05    MRI and MRA (Head / Brain / Neck)                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 06    MRI and MRA (Spine)                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 07    CT (Spine)                                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 08    MRI and MRA (Lower Extremities)                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 09    CT and CTA (Lower Extremities)                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 10    MRI and MRA (Upper Extremities and Joints)              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 11    CT and CTA (Upper Extremities)                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 88    Subject to Reduction of TC or PC Diagnostic Imaging     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 99    Concept does not apply                                  </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

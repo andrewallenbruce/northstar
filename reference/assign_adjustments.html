@@ -94,8 +94,8 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>code</dt>
 <dd><p><code>&lt;chr&gt;</code> vector of adjustment codes; should be of the form
-<code>GROUP-CARC</code>, where <code>GROUP</code> is two letters followed by a dash (<code>-</code>) and
-<code>CARC</code> is a two-to-three alphanumeric string.</p></dd>
+<code>GROUP-CARC</code>, where <code>GROUP</code> is two letters, followed by a dash (<code>-</code>) and
+<code>CARC</code> is a two-to-three character alphanumeric string.</p></dd>
 
 
 <dt>include_keys</dt>
@@ -200,6 +200,20 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> OA-23    Other Adjustments          The impact of prior payer(s) adjudication…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> PI-185   Payer Initiated Reductions The rendering provider is not eligible to…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -45      <span style="color: #BB0000;">NA</span>                         Charge exceeds fee schedule/maximum allow…</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">assign_adjustments</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="carc_add_dash.html">carc_add_dash</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CO-253"</span>, <span class="st">"OA-23"</span>, <span class="st">"PI-185"</span>, <span class="st">"-45"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    include_keys <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   adj_group_desc.match_key adj_group_desc.match_value adj_code_desc.match_key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> CO                       Contractual Obligations    253                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> OA                       Other Adjustments          23                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> PI                       Payer Initiated Reductions 185                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>                       <span style="color: #BB0000;">NA</span>                         45                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: adj_code_desc.match_value &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
