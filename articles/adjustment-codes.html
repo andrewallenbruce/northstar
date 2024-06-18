@@ -156,25 +156,10 @@
 <h2 id="denials">Denials<a class="anchor" aria-label="anchor" href="#denials"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">::</span><span class="fu"><a href="../reference/get_pin.html">get_pin</a></span><span class="op">(</span><span class="st">"denials_extract"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 3</span></span></span>
-<span><span class="co">#&gt;    adj_code denial_type denial_category                 </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 29       Technical   Past Timely Filing Limits       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 119      Technical   Patient Liability               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A1       Clinical    Informational                   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 18       Technical   Duplicate Claim                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 50       Clinical    Medical Necessity               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 96       Clinical    Non-Covered Service             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 129      Technical   Billing Error: Invalid Code     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 16       Technical   Additional Information Requested</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> B13      Technical   Duplicate Claim                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 226      Clinical    Additional Information Requested</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more rows</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">northstar</span><span class="fu">::</span><span class="fu"><a href="../reference/get_pin.html">get_pin</a></span><span class="op">(</span><span class="st">"denials_site"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_denials.html">search_denials</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $site</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 64 × 5</span></span></span>
-<span><span class="co">#&gt;    adj_code denial_reason        common_reasons next_steps claim_submission_tips</span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">adj_code</span> <span style="font-weight: bold;">denial_reason</span>        <span style="font-weight: bold;">common_reasons</span> <span style="font-weight: bold;">next_steps</span> <span style="font-weight: bold;">claim_submission_tips</span></span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> CO-16    Missing/Incorrect R… Information r… Submit ne… Ensure procedure cod…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> M51      Missing/Incorrect R… Information r… Submit ne… Ensure procedure cod…</span></span>
@@ -186,7 +171,43 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CO-16    Invalid Patient Name Patient name … Verify th… Obtain patient's ful…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> MA36     Invalid Patient Name Patient name … Verify th… Obtain patient's ful…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> N704     Invalid Patient Name Patient name … Verify th… Obtain patient's ful…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 54 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> CO-16    CLIA Certification … CLIA certific… Resubmit … Apply for CLIA Certi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> MA120    CLIA Certification … CLIA certific… Resubmit … Apply for CLIA Certi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> CO-16    Chiropractic Servic… Initial treat… Resubmit … Paper submitters: Se…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> MA121    Chiropractic Servic… Initial treat… Resubmit … Paper submitters: Se…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> MA122    Chiropractic Servic… Initial treat… Resubmit … Paper submitters: Se…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> N264     Missing or Invalid … <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> N265     Missing or Invalid … <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> CO-16    Missing or Invalid … <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> CO-16    Missing/Incorrect R… Missing or in… Verify su… Rendering NPI must b…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> N290     Missing/Incorrect R… Missing or in… Verify su… Rendering NPI must b…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 44 more rows</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ext</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 3</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">adj_code</span> <span style="font-weight: bold;">denial_type</span> <span style="font-weight: bold;">denial_category</span>                 </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 29       Technical   Past Timely Filing Limits       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 119      Technical   Patient Liability               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A1       Clinical    Informational                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 18       Technical   Duplicate Claim                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 50       Clinical    Medical Necessity               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 96       Clinical    Non-Covered Service             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 129      Technical   Billing Error: Invalid Code     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 16       Technical   Additional Information Requested</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> B13      Technical   Duplicate Claim                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 226      Clinical    Additional Information Requested</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 252      Clinical    Additional Information Requested</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 4        Clinical    Billing Error: Invalid Code     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 146      Clinical    Billing Error: Invalid Code     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 197      Clinical    Invalid/Missing Authorization   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 236      Clinical    Bundling                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 199      Clinical    Billing Error: Invalid Code     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 250      Clinical    Additional Information Requested</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 6        Clinical    Billing Error: Invalid Code     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 96       Technical   Non-Covered Service             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 286      Clinical    Medical Necessity               </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 38 more rows</span></span></span></code></pre></div>
 <p>Medical billing adjustment codes, also known as Claim Adjustment
 Reason Codes (CARCs), are used by healthcare payers to explain why a
 claim or service line was paid differently than it was billed. These
