@@ -3,6 +3,7 @@
 S3method(print,northstar)
 export(assign_adjustments)
 export(calculate_amounts)
+export(carc_add_dash)
 export(case_asc)
 export(case_coverage)
 export(case_labcert)

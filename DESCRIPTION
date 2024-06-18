@@ -20,6 +20,7 @@ Imports:
     pins,
     purrr,
     rlang,
+    stringfish,
     stringr,
     tidyr,
     triebeard,

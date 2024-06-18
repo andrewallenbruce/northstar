@@ -3,8 +3,7 @@
 #' @template args-hcpcs
 #'
 #' @param desc_type `<chr>` vector of code description types; `All` (default),
-#'   `Short`, `Long`, `Medium`, `Medical`, `Consumer`, `Clinician`, `Proprietary
-#'   Name`
+#'   `Short`, `Long`, `Medium`, `Medical`, `Consumer`, `Clinician`, `Proprietary Name`
 #'
 #' @param varname If `hcpcs` is a [data.frame] or a
 #'   [tibble][tibble::tibble-package], this is the quoted name of the column
