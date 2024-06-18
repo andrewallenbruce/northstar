@@ -136,7 +136,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 39503 Repair of ne… Clinician I     I        Surgery Major Proced… Other Orga…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 39503 Repair of ne… Clinician I     I        Surgery Major Proced… Other Orga…</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="st">"carc"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,581 × 8</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">adj_code</span> <span style="font-weight: bold;">adj_type</span> <span style="font-weight: bold;">adj_description</span>          <span style="font-weight: bold;">adj_usage</span> <span style="font-weight: bold;">adj_notes</span> <span style="font-weight: bold;">adj_start_date</span></span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        </span></span>
@@ -163,32 +163,60 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,561 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: </span><span style="color: #949494; font-weight: bold;">adj_last_modified</span><span style="color: #949494;"> &lt;date&gt;, </span><span style="color: #949494; font-weight: bold;">adj_end_date</span><span style="color: #949494;"> &lt;date&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="st">"rarc"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,581 × 8</span></span></span>
-<span><span class="co">#&gt;    <span style="font-weight: bold;">adj_code</span> <span style="font-weight: bold;">adj_type</span> <span style="font-weight: bold;">adj_description</span>          <span style="font-weight: bold;">adj_usage</span> <span style="font-weight: bold;">adj_notes</span> <span style="font-weight: bold;">adj_start_date</span></span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> CO       Group    Contractual Obligations  <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> CR       Group    Corrections and Reversa… <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> OA       Group    Other Adjustments        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> PI       Group    Payer Initiated Reducti… <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> PR       Group    Patient Responsibility   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1        CARC     Deductible Amount        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2        CARC     Coinsurance Amount       <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 3        CARC     Co-payment Amount        <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 4        CARC     The procedure code is i… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 5        CARC     The procedure code/type… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 6        CARC     The procedure/revenue c… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 7        CARC     The procedure/revenue c… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 8        CARC     The procedure code is i… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 9        CARC     The diagnosis is incons… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 10       CARC     The diagnosis is incons… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 11       CARC     The diagnosis is incons… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 12       CARC     The diagnosis is incons… Refer to… <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 13       CARC     The date of death prece… <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 14       CARC     The date of birth follo… <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 15       CARC     The authorization numbe… <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        1995-01-01    </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,561 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: </span><span style="color: #949494; font-weight: bold;">adj_last_modified</span><span style="color: #949494;"> &lt;date&gt;, </span><span style="color: #949494; font-weight: bold;">adj_end_date</span><span style="color: #949494;"> &lt;date&gt;</span></span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 4</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">pos_code</span> <span style="font-weight: bold;">pos_type</span>     <span style="font-weight: bold;">pos_name</span>                                <span style="font-weight: bold;">pos_description</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01       Non-Facility Pharmacy                                A facility or …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02       Facility     Telehealth Provided Other than in Pati… The location w…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03       Non-Facility School                                  A facility who…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04       Non-Facility Homeless Shelter                        A facility or …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05       <span style="color: #BB0000;">NA</span>           Indian Health Service Free-standing Fa… A facility or …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 06       <span style="color: #BB0000;">NA</span>           Indian Health Service Provider-based F… A facility or …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 07       <span style="color: #BB0000;">NA</span>           Tribal 638 Free-standing Facility       A facility or …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 08       <span style="color: #BB0000;">NA</span>           Tribal 638 Provider-based Facility      A facility or …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 09       Non-Facility Prison/Correctional Facility            A prison, jail…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10       <span style="color: #BB0000;">NA</span>           Telehealth Provided in Patient’s Home   The location w…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 11       Non-Facility Office                                  Location, othe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 12       Non-Facility Home                                    Location, othe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 13       Non-Facility Assisted Living Facility                Congregate res…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 14       Non-Facility Group Home                              A residence, w…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 15       Non-Facility Mobile Unit                             A facility/uni…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 16       Non-Facility Temporary Lodging                       A short term a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 17       Non-Facility Walk-in Retail Health Clinic            A walk-in heal…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 18       <span style="color: #BB0000;">NA</span>           Place of Employment/Worksite            A location, no…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 19       Facility     Off Campus-Outpatient Hospital          A portion of a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 20       Non-Facility Urgent Care Facility                    Location, dist…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 79 more rows</span></span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_modifiers.html">search_modifiers</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 433 × 9</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">modifier</span> <span style="font-weight: bold;">modifier_type</span> <span style="font-weight: bold;">modifier_category</span> <span style="font-weight: bold;">modifier_description</span>                </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 22       CPT           General           Increased Procedural Services (surg…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 23       CPT           Anesthesia        Unusual anesthesia - Used to report…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 24       CPT           General           Unrelated evaluation and management…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25       CPT           General           Significant, separately identifiabl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 26       CPT           General           Professional Component Only (separa…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 27       CPT           <span style="color: #BB0000;">NA</span>                Multiple Outpatient Hospital E/M En…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 32       CPT           <span style="color: #BB0000;">NA</span>                Mandated Services                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 33       CPT           General           Preventive Services                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 47       CPT           Anesthesia        Anesthesia by surgeon – Used to rep…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 50       CPT           General           Bilateral Procedure                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 51       CPT           General           Multiple procedures                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 52       CPT           General           Partially Reduced/Eliminated Servic…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 53       CPT           General           Discontinued Procedure (professiona…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 54       CPT           General           Surgical Care Only                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 55       CPT           General           Postoperative Management Only       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 56       CPT           <span style="color: #BB0000;">NA</span>                Preoperative Management Only        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 57       CPT           General           An evaluation and management (E/M) …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 58       CPT           General           Staged or Related Procedure or Serv…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 59       CPT           General           Distinct Procedural Service         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 62       CPT           General           Co-Surgeons                         </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 413 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: </span><span style="color: #949494; font-weight: bold;">modifier_detailed_information</span><span style="color: #949494;"> &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">modifier_correct_use</span><span style="color: #949494;"> &lt;chr&gt;, </span><span style="color: #949494; font-weight: bold;">modifier_incorrect_use</span><span style="color: #949494;"> &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">modifier_instructions</span><span style="color: #949494;"> &lt;chr&gt;, </span><span style="color: #949494; font-weight: bold;">modifier_additional_information</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre>
 </div>
   </main>
 </div>
