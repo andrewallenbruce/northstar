@@ -12,60 +12,6 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 # The format is always two alpha characters.
 # For convenience, the values and definitions are below:
 
-adj_group <- dplyr::tibble(
-  code = c("CO", "CR", "OA", "PI", "PR"),
-  description = c("Contractual Obligations",
-                  "Corrections and Reversals",
-                  "Other Adjustments",
-                  "Payer Initiated Reductions",
-                  "Patient Responsibility"),
-)
-
-# Update Pin
-pin_update(
-  adj_group,
-  name        = "adj_group",
-  title       = "CARC Group Codes",
-  description = "Claim Adjustment Reason Group Codes"
-)
-
-adj_carc <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |>
-  html_element(".code_list__code-list-table") |>
-  html_table() |>
-  select(code = X1, X2) |>
-  mutate(description   = strex::str_before_first(X2, "Start: "),
-         dates         = strex::str_after_first(X2, "Start: "),
-         X2            = NULL,
-         start_date    = strex::str_before_first(dates, " "),
-         start_date    = case_when(is.na(start_date) ~ dates, TRUE ~ start_date),
-         last_modified = strex::str_after_first(dates, "Last Modified: "),
-         notes         = strex::str_after_first(dates, "Notes: "),
-         end_date      = strex::str_after_first(dates, "Stop: "),
-         start_date    = anytime::anydate(start_date),
-         end_date      = anytime::anydate(end_date),
-         last_modified = anytime::anydate(last_modified),
-         usage         = strex::str_after_first(description, "Usage: "),
-         description   = case_when(!is.na(usage) ~ strex::str_before_first(description, "Usage: "), TRUE ~ description),
-         description   = stringr::str_squish(description)
-  ) |>
-  select(
-    code,
-    description,
-    usage,
-    notes,
-    start_date,
-    last_modified,
-    end_date
-    )
-
-
-pin_update(
-  adj_carc,
-  name        = "adj_carc",
-  title       = "CARC Codes",
-  description = "Claim Adjustment Reason Codes"
-)
-
 # Remittance Advice Remark Codes (RARCs)
 # X12 External Code Source 411
 #
@@ -85,11 +31,66 @@ pin_update(
 # often referred to as Alerts. Alerts are used to convey information about
 # remittance processing and are never related to a specific adjustment or CARC.
 
+adj_group <- dplyr::tibble(
+  adj_code = c("CO", "CR", "OA", "PI", "PR"),
+  adj_type = "Group",
+  adj_description = c(
+    "Contractual Obligations",
+    "Corrections and Reversals",
+    "Other Adjustments",
+    "Payer Initiated Reductions",
+    "Patient Responsibility"
+    ),
+)
+
+
+adj_carc <- read_html("https://x12.org/codes/claim-adjustment-reason-codes") |>
+  html_element(".code_list__code-list-table") |>
+  html_table() |>
+  select(
+    adj_code = X1,
+    X2
+    ) |>
+  mutate(
+    adj_type          = "CARC",
+    adj_description   = strex::str_before_first(X2, "Start: "),
+    dates             = strex::str_after_first(X2, "Start: "),
+    X2                = NULL,
+    start_date        = strex::str_before_first(dates, " "),
+    start_date        = case_when(is.na(start_date) ~ dates, TRUE ~ start_date),
+    last_modified     = strex::str_after_first(dates, "Last Modified: "),
+    notes             = strex::str_after_first(dates, "Notes: "),
+    end_date          = strex::str_after_first(dates, "Stop: "),
+    start_date        = anytime::anydate(start_date),
+    end_date          = anytime::anydate(end_date),
+    last_modified     = anytime::anydate(last_modified),
+    usage             = strex::str_after_first(adj_description, "Usage: "),
+    adj_description   = case_when(!is.na(usage) ~ strex::str_before_first(adj_description, "Usage: "), TRUE ~ adj_description),
+    adj_description   = stringr::str_squish(adj_description)
+  ) |>
+  select(
+    adj_code,
+    adj_type,
+    adj_description,
+    adj_usage = usage,
+    adj_notes = notes,
+    adj_start_date = start_date,
+    adj_last_modified = last_modified,
+    adj_end_date = end_date
+    )
+
+
+
 adj_rarc <- read_html("https://x12.org/codes/remittance-advice-remark-codes") |>
   html_element(".code_list__code-list-table") |>
   html_table() |>
-  select(code = X1, X2) |>
-  mutate(description   = strex::str_before_first(X2, "Start: "),
+  select(
+    adj_code = X1,
+    X2
+    ) |>
+  mutate(
+    adj_type = "CARC",
+    description   = strex::str_before_first(X2, "Start: "),
          dates         = strex::str_after_first(X2, "Start: "),
          X2            = NULL,
          start_date    = strex::str_before_first(dates, " "),
@@ -100,40 +101,23 @@ adj_rarc <- read_html("https://x12.org/codes/remittance-advice-remark-codes") |>
          last_modified = anytime::anydate(last_modified),
          description   = stringr::str_squish(description)) |>
   select(
-    code,
-    description,
-    notes,
-    start_date,
-    last_modified
+    adj_code,
+    adj_type,
+    adj_description = description,
+    adj_notes = notes,
+    adj_start_date = start_date,
+    adj_last_modified = last_modified
     )
 
-# Update Pin
+adj_codes <- vctrs::vec_rbind(
+  adj_group,
+  adj_carc,
+  adj_rarc
+)
+
 pin_update(
-  adj_rarc,
-  name        = "adj_rarc",
-  title       = "RARC Codes",
-  description = "Remittance Advice Remark Codes"
+  adj_codes,
+  name        = "adj_codes",
+  title       = "CARC RARC Codes",
+  description = "Claim Adjustment Reason Codes and Remittance Advice Remark Codes"
 )
-
-library(triebeard)
-
-adj_trie <- triebeard::trie(
-  keys = c(
-    adj_group$code,
-    adj_carc$code,
-    adj_rarc$code),
-  values = c(
-    adj_group$description,
-    adj_carc$description,
-    adj_rarc$description)
-)
-
-adj_group$code |> deframe() |> unlist()
-
-# Will not Work!
-# pin_update(
-#   adj_trie,
-#   name        = "adj_trie",
-#   title       = "CARCs & RARCs",
-#   description = "Triebeard Object containing CARC and RARC Codes and Descriptions"
-# )

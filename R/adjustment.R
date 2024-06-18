@@ -38,36 +38,28 @@
 #'   remittance processing and are *never* related to a specific adjustment or
 #'   CARC.
 #'
-#' @param type `<chr>` type of Adjustment code; `group` (default), `carc`,
-#'   `rarc`
+#' @param type `<chr>` type of Adjustment code; `all` (default), `group`,
+#'   `carc`, `rarc`
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' search_adjustments("group")
-#'
-#' search_adjustments("carc")
-#'
-#' search_adjustments("rarc")
+#' search_adjustments()
 #'
 #' @autoglobal
 #'
 #' @export
-search_adjustments <- function(type = c("group", "carc", "rarc"), ...) {
+search_adjustments <- function(type = NULL, ...) {
 
-  type <- match.arg(type)
+  # if (is.null(type)) {type <- "all"}
 
-  ad <- switch(
-    type,
-    group = get_pin("adj_group"),
-    carc  = get_pin("adj_carc"),
-    rarc  = get_pin("adj_rarc")
-  ) |>
-    .add_class()
+  # type <- match.arg(type, c("all", "group", "carc", "rarc"))
 
-  return(ad)
+  ad <- get_pin("adj_codes")
+
+  return(.add_class(ad))
 }
 
 #' Make Adjustment Code Trie
@@ -80,13 +72,11 @@ search_adjustments <- function(type = c("group", "carc", "rarc"), ...) {
 #' @autoglobal
 adj_trie <- function() {
 
-  gr <- get_pin("adj_group")
-  cc <- get_pin("adj_carc")
-  rc <- get_pin("adj_rarc")
+  ad <- get_pin("adj_codes")
 
   triebeard::trie(
-    keys = c(gr$code, cc$code, rc$code),
-    values = c(gr$description, cc$description, rc$description))
+    keys = ad$adj_code,
+    values = ad$adj_description)
 
 }
 
@@ -105,53 +95,70 @@ adj_trie <- function() {
 #' @examples
 #' x <- c("CO-253", "OA-23", "PI-185", "-45")
 #'
+#' x
+#'
 #' assign_adjustments(x)
 #'
-#' assign_adjustments(x, include_keys = TRUE)
+#' assign_adjustments(x,
+#'   include_keys = TRUE)
 #'
 #' dplyr::tibble(code = x,
-#'               desc = list(assign_adjustments(code)))
+#'   desc = assign_adjustments(code))
 #'
 #' dplyr::tibble(code = x) |>
-#'   dplyr::mutate(desc = purrr::map(code, assign_adjustments))
+#'   dplyr::mutate(desc = purrr::map(
+#'   code,
+#'   assign_adjustments))
 #'
-#' purrr::map_df(x, assign_adjustments)
+#' purrr::map_df(x,
+#'   assign_adjustments)
 #'
-#' purrr::map_df(x, assign_adjustments, include_keys = TRUE)
+#' purrr::map_df(x,
+#'   assign_adjustments,
+#'   include_keys = TRUE)
 #'
-#' dplyr::tibble(adj_code = x,
-#'   purrr::map_dfr(adj_code, assign_adjustments))
+#' dplyr::tibble(code = x,
+#'   purrr::map_dfr(code, assign_adjustments))
 #'
-#' assign_adjustments(
-#'   carc_add_dash(c("CO-253", "OA-23", "PI-185", "-45")),
-#'     include_keys = TRUE) |>
-#'     as.data.frame() |>
-#'     dplyr::tibble()
+#' assign_adjustments(x, include_keys = TRUE) |>
+#'   as.data.frame() |>
+#'   dplyr::tibble()
 #'
 #' @export
 #'
 #' @autoglobal
 assign_adjustments <- function(code, include_keys = FALSE, ...) {
 
-  # TODO if code = "- 29" or "29"
+  cd <- carc_add_dash(code)
 
-  # cd <- strsplit(c(code), "[-]")
-  cd <- stringfish::sf_split(code, "-")
+  cd <- stringfish::sf_split(cd, "-")
+
   ln <- seq_along(cd)
+
   tr <- adj_trie()
 
-  list(
-    adj_group_desc = triebeard::longest_match(
-      tr,
-      purrr::map_chr(
-        ln, ~getElement(cd, .x)[1]),
-      include_keys = include_keys
+  group <- triebeard::longest_match(
+    tr,
+    purrr::map_chr(
+      ln,
+      ~getElement(cd, .x)[1]
       ),
-    adj_code_desc = triebeard::longest_match(tr,
-      purrr::map_chr(ln, ~getElement(cd, .x)[2]),
-      include_keys = include_keys
-      )
+    include_keys = include_keys
     )
+  desc  <- triebeard::longest_match(
+    tr,
+    purrr::map_chr(
+      ln,
+      ~getElement(cd, .x)[2]
+      ),
+    include_keys = include_keys
+    )
+
+  dplyr::tibble(
+    adj_code  = code,
+    adj_group = group,
+    adj_desc  = desc
+  )
 }
 
 #' Format CARC Codes for Identification

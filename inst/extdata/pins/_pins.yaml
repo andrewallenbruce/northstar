@@ -1,11 +1,5 @@
-adj_carc:
-- adj_carc/20240612T165711Z-fc4e7/
-adj_group:
-- adj_group/20240612T111236Z-2df2f/
-adj_rarc:
-- adj_rarc/20240612T111330Z-e9fd0/
-adj_trie:
-- adj_trie/20240612T104109Z-9d731/
+adj_codes:
+- adj_codes/20240618T103557Z-e4dff/
 anesthesia:
 - anesthesia/20240423T151006Z-213ea/
 aoc_long:

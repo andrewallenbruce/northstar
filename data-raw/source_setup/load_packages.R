@@ -5,8 +5,11 @@ library(rvest)
 library(gt)
 library(googlesheets4)
 library(clock)
+library(hacksaw)
+
 
 library(provider)
 library(forager)
 library(fuimus)
 library(pathologie)
+library(northstar)

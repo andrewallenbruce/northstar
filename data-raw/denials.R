@@ -1,6 +1,4 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
-library(northstar)
-library(hacksaw)
 
 # Claim Adjustment Reason Codes (CARCs)
 # communicate an adjustment, meaning that

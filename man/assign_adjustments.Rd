@@ -24,27 +24,33 @@ Assign Adjustment Codes
 \examples{
 x <- c("CO-253", "OA-23", "PI-185", "-45")
 
+x
+
 assign_adjustments(x)
 
-assign_adjustments(x, include_keys = TRUE)
+assign_adjustments(x,
+  include_keys = TRUE)
 
 dplyr::tibble(code = x,
-              desc = list(assign_adjustments(code)))
+  desc = assign_adjustments(code))
 
 dplyr::tibble(code = x) |>
-  dplyr::mutate(desc = purrr::map(code, assign_adjustments))
+  dplyr::mutate(desc = purrr::map(
+  code,
+  assign_adjustments))
 
-purrr::map_df(x, assign_adjustments)
+purrr::map_df(x,
+  assign_adjustments)
 
-purrr::map_df(x, assign_adjustments, include_keys = TRUE)
+purrr::map_df(x,
+  assign_adjustments,
+  include_keys = TRUE)
 
-dplyr::tibble(adj_code = x,
-  purrr::map_dfr(adj_code, assign_adjustments))
+dplyr::tibble(code = x,
+  purrr::map_dfr(code, assign_adjustments))
 
-assign_adjustments(
-  carc_add_dash(c("CO-253", "OA-23", "PI-185", "-45")),
-    include_keys = TRUE) |>
-    as.data.frame() |>
-    dplyr::tibble()
+assign_adjustments(x, include_keys = TRUE) |>
+  as.data.frame() |>
+  dplyr::tibble()
 
 }
