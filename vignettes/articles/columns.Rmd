@@ -22,10 +22,6 @@ fmod <- "For services other than those with a professional and/or technical comp
 
 img <- stringr::str_pad(c(1:11, 88, 99), width = "2", pad = "0")
 
-x <- sort(c("A", "B", "C", "D", "E", "F", "I", "M", "R", "N", "J", "P", "T", "X"))
-
-stnote <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
-
 note <- "**Note**: The *Further Continuing Appropriations and Other Extensions Act, 2024* (Section 501) extended the 1.0 Work GPCI floor through January 19, 2024. Therefore, the Work GPCIs for 2023 reflect the 1.0 Work GPCI floor. Work GPCIs for 2024 are shown both with and without a 1.0 floor and Work GPCIs for 2025 do not reflect a 1.0 floor."
 
 alaska <- "Work GPCI reflects a 1.5 floor in Alaska established by [**MIPPA**](https://en.wikipedia.org/wiki/Medicare_Improvements_for_Patients_and_Providers_Act_of_2008)."
@@ -110,30 +106,28 @@ dplyr::tibble(
 ## Status
 
 ```{r echo=FALSE, eval=TRUE}
+stnote <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
+
 dplyr::tibble(
-  status_code = x, 
+  status_code = LETTERS, 
   status_name = switch_status_name(status_code),
-  status_description = switch_status_description(status_code)) |>
-  gt(groupname_col = "status_code", 
-     row_group_as_column   = TRUE) |>
-  tab_header(title = md(stnote)) |>
-  tab_style(
-    style = cell_fill(color = "yellow", alpha = 0.3),
-    locations = cells_body(columns = everything(), rows = c(1, 12, 13))
-  ) |>
-  gt_style(tablign = "center",
-           tabsize = 22,
-           tabwt = "bold") |>
-  tab_style(style = list(
-    cell_fill(color = "powderblue"),
-    cell_text(weight = "bold"),
-    cell_borders(
-      sides = c("all"),
-      color = "powderblue",
-      weight = px(3)
-    )
-  ),
-  locations = cells_row_groups())
+  status_description = switch_status_description(status_code)) |> 
+  dplyr::filter(!is.na(status_name)) |>
+  gt::gt(
+    groupname_col = "status_code", 
+    row_group_as_column   = TRUE) |>
+  gt_theme_northstar(
+    column_labels = FALSE,
+    tab_size = 22,
+    tab_weight = "bold") |> 
+  gt::tab_header(
+    title = gt::md("Status Codes"),
+    subtitle = gt::md(stnote),
+    ) |>
+  gt::tab_style(
+    style = gt::cell_fill(color = "yellow", alpha = 0.3),
+    locations = gt::cells_body(columns = gt::everything(), rows = c(1, 12, 13))
+  )
 ```
 
 

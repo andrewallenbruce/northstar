@@ -36,8 +36,7 @@ mount_board <- function(source = c("local", "remote")) {
                package = "northstar")
              ),
     remote = pins::board_url(
-      fuimus::gh_raw(
-      "andrewallenbruce/northstar/master/inst/extdata/pins/")
+  "https://raw.githubusercontent.com/andrewallenbruce/northstar/master/inst/extdata/pins/"
       )
     )
 }
