@@ -30,7 +30,7 @@ Suggests:
     clock,
     fontawesome,
     fuimus,
-    gluedown,
+    glue,
     gt,
     janitor,
     knitr,

@@ -111,7 +111,7 @@ get_addon_edits <- function(hcpcs     = NULL,
   }
 
   if (na.rm) {
-    aoc <- remove_quiet(aoc)
+    aoc <- fuimus::remove_quiet(aoc)
   }
 
   return(.add_class(aoc))

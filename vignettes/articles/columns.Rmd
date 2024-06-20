@@ -14,25 +14,21 @@ knitr::opts_chunk$set(
   out.width = "100%"
   )
 
-modtitle <- "For **Diagnostic Tests**, a blank in this field denotes the **Global Service** & the following Modifiers identify the components:"
-
 f53 <- "Not used to report the elective cancellation of a procedure prior to the patient's anesthesia induction and/or surgical preparation in the operating suite. For outpatient hospital/ambulatory surgery center (ASC) reporting of a previously scheduled procedure/service that is partially reduced or cancelled as a result of extenuating circumstances or those that threaten the well being of the patient prior to or after administration of anesthesia, see modifiers 73 and 74 (see modifiers approved for ASC hospital outpatient use)."
 
 fmod <- "For services other than those with a professional and/or technical component, a blank will appear in this field with one exception: the presence of CPT modifier 53 indicates that separate RVUs and a fee schedule amount have been established for procedures which the physician terminated before completion. This modifier is used only with colonoscopy CPT codes 44388 and 45378, or with G0105 and G0121. Any other codes billed with modifier 53 are subject to carrier medical review and priced by individual consideration."
-
-img <- stringr::str_pad(c(1:11, 88, 99), width = "2", pad = "0")
 
 note <- "**Note**: The *Further Continuing Appropriations and Other Extensions Act, 2024* (Section 501) extended the 1.0 Work GPCI floor through January 19, 2024. Therefore, the Work GPCIs for 2023 reflect the 1.0 Work GPCI floor. Work GPCIs for 2024 are shown both with and without a 1.0 floor and Work GPCIs for 2025 do not reflect a 1.0 floor."
 
 alaska <- "Work GPCI reflects a 1.5 floor in Alaska established by [**MIPPA**](https://en.wikipedia.org/wiki/Medicare_Improvements_for_Patients_and_Providers_Act_of_2008)."
 
-frontier <- "PE GPCI reflects a 1.0 floor for Frontier States established by the ACA."
-
-macas <- "MAC assignments as of November 22, 2023"
-
 library(northstar)
+library(fuimus)
 library(dplyr)
+library(tidyr)
 library(gt)
+library(glue)
+library(stringr)
 ```
 
 
@@ -41,9 +37,10 @@ library(gt)
 This file contains locality-specific physician fee schedule payment amounts for services covered by the Medicare Physician Fee Schedule (MPFS) with one record for each unique combination of carrier, locality, procedure code and modifier.
 
 ```{r echo=FALSE, eval=TRUE}
-northstar:::col_lb("md", "pfs") |> 
-  gt(rowname_col = "var") |>
-  gt_style(tablign = "right") |> 
+data_dict("md", "pfs") |> 
+  gt(rowname_col = "var",
+     process_md = TRUE) |>
+  gt_theme_northstar() |> 
   fmt_markdown()
 ```
 
@@ -55,79 +52,58 @@ This file contains information on services covered by the Medicare Physician Fee
 The Medicare physician fee schedule amounts are adjusted to reflect the variation in practice costs from area to area. A geographic practice cost index (GPCI) has been established for every Medicare payment locality for each of the three components of a procedure’s relative value unit (i.e., the RVUs for work, practice expense, and malpractice). The GPCIs are applied in the calculation of a fee schedule payment amount by multiplying the RVU for each component times the GPCI for that component.
 
 ```{r echo=FALSE, eval=TRUE}
-northstar:::col_lb("df", "rvu") |> 
+data_dict("md", "rvu") |> 
   gt(groupname_col = "var",
-     row_group_as_column = TRUE
-     ) |>
-  gt_style(tablign = "left") |> 
-  fmt_markdown() |> 
-  tab_style(style = list(
-    cell_fill(color = "powderblue"),
-    cell_text(weight = "bold"),
-    cell_borders(
-      sides = c("all"),
-      color = "powderblue",
-      weight = px(3)
-    )
-  ),
-  locations = cells_row_groups())
+     row_group_as_column = TRUE,
+     process_md = TRUE) |>
+  gt_theme_northstar() |> 
+  fmt_markdown()
 ```
 
 
 ## Modifier (26/TC/53)
 
 ```{r echo=FALSE, eval=TRUE}
-dplyr::tibble(
-  mod = c("26", "TC", "53"), 
-  desc = search_modifiers(mod)) |>
-  tidyr::unnest_wider(desc) |>
-  dplyr::mutate(mod = NULL) |>
+modtitle <- "For **Diagnostic Tests**, a blank in this field denotes the **Global Service** & the following Modifiers identify the components:"
+
+search_modifiers(
+  mod_code = c("26", "TC", "53")) |>
+  tidyr::pivot_longer(cols = !mod_code, 
+               names_to = "name", 
+               names_prefix = "mod_",
+               values_to = "value",
+               values_drop_na = TRUE) |>
+  mutate(name = str_replace_all(name, "_", " ") |> str_to_title()) |> 
   gt(groupname_col = "mod_code", 
+     rowname_col = "name",
      row_group_as_column = TRUE) |>
-  # gt_style(tablign = "center",
-  #          tabsize = 22,
-  #          tabwt = "bold") |>
-  sub_missing(missing_text = "") |>
-  fmt_markdown() |>
-  tab_header(title = md(modtitle)) |>
-  tab_style(style = list(
-    cell_fill(color = "powderblue"),
-    cell_text(weight = "bold"),
-    cell_borders(
-      sides = c("all"),
-      color = "powderblue",
-      weight = px(3)
-    )
-  ),
-  locations = cells_row_groups())
+  gt_theme_northstar() |> 
+  tab_header(title = md(modtitle))
 ```
 
 
 ## Status
 
 ```{r echo=FALSE, eval=TRUE}
-stnote <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
+status_sub <- "Indicates whether the code is in the fee schedule and whether it is separately payable if the service is covered. Only RVUs associated with status codes of **A**, **R**, or **T**, are used for Medicare payment."
 
 dplyr::tibble(
-  status_code = LETTERS, 
-  status_name = switch_status_name(status_code),
-  status_description = switch_status_description(status_code)) |> 
-  dplyr::filter(!is.na(status_name)) |>
-  gt::gt(
-    groupname_col = "status_code", 
-    row_group_as_column   = TRUE) |>
-  gt_theme_northstar(
-    column_labels = FALSE,
-    tab_size = 22,
-    tab_weight = "bold") |> 
-  gt::tab_header(
-    title = gt::md("Status Codes"),
-    subtitle = gt::md(stnote),
-    ) |>
-  gt::tab_style(
-    style = gt::cell_fill(color = "yellow", alpha = 0.3),
-    locations = gt::cells_body(columns = gt::everything(), rows = c(1, 12, 13))
-  )
+  code = LETTERS, 
+  name = switch_status_name(code),
+  desc = switch_status_description(code)) |> 
+  filter(!is.na(name)) |>
+  gt(groupname_col = "code", 
+     row_group_as_column = TRUE) |> 
+  tab_header(
+    title = md("**Medicare Status Codes**"),
+    subtitle = md(status_sub)) |>
+  tab_style(
+    style = cell_fill(color = "yellow", alpha = 0.3),
+    locations = cells_body(columns = everything(), rows = c(1, 12, 13))) |>
+  gt_theme_northstar(tab_size = 22,
+                     tab_weight = "bold") |> 
+  tab_options(heading.title.font.size = px(24),
+              heading.title.font.weight = "bold")
 ```
 
 
@@ -138,33 +114,29 @@ dplyr::tibble(
   global = c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"),
   desc = switch_global_days(global)) |>
   gt(rowname_col = "global") |> 
-  gt_style(tablign = "center", 
-           tabsize = 22, 
-           tabwt = "bold")
+  gt_theme_northstar(tab_size = 22)
 ```
 
 
 ## PCTC Indicator
 
 ```{r echo=FALSE, eval=TRUE}
-dplyr::tibble(code = as.character(0:9),
-              desc = switch_pctc_indicator(code)) |> 
+dplyr::tibble(
+  code = as.character(0:9),
+  desc = switch_pctc_indicator(code)) |> 
   gt(rowname_col = "code") |> 
-  gt_style(tablign = "center", 
-           tabsize = 22, 
-           tabwt = "bold")
+  gt_theme_northstar(tab_size = 22)
 ```
 
 
 ## Multiple Procedures
 
 ```{r echo=FALSE, eval=TRUE}
-dplyr::tibble(code = as.character(c(0:7, 9)),
-              desc = switch_multiple_procedure(code)) |>
+dplyr::tibble(
+  code = as.character(c(0:7, 9)),
+  desc = switch_multiple_procedure(code)) |>
   gt(rowname_col = "code") |>
-  gt_style(tablign = "center", 
-           tabsize = 22, 
-           tabwt = "bold")
+  gt_theme_northstar(tab_size = 22)
 ```
 
 
@@ -172,12 +144,10 @@ dplyr::tibble(code = as.character(c(0:7, 9)),
 
 ```{r echo=FALSE, eval=TRUE}
 dplyr::tibble(
-  code = img,
+  code = fuimus::pad_number(c(1:11, 88, 99)),
   desc = switch_diagnostic_imaging(code)) |>
   gt(rowname_col = "code") |>
-  gt_style(tablign = "center", 
-           tabsize = 18, 
-           tabwt = "bold")
+  gt_theme_northstar()
 ```
 
 
@@ -187,28 +157,27 @@ dplyr::tibble(
 This file contains the Geographic Practice Cost Index (GPCI) component for each carrier/locality for 2024 as well as the locality/county crosswalk. The GPCI reflects the relative costs of physician work, practice expense, and malpractice insurance in a geographic area compared to the national average costs for each component.
 
 ```{r echo=FALSE, eval=TRUE}
-get_gpcis() |> 
-  select(-counties) |> 
+search_gpci() |> 
+  mutate(
+    counties = NULL,
+    area = glue::glue("<small>{area}</small>")) |> 
   distinct() |> 
   gt(rowname_col = "mac", 
      groupname_col = "state",
-     row_group_as_column = TRUE, 
+     row_group_as_column = TRUE,
      process_md = TRUE) |> 
   cols_label(
     mac = "MAC",
     state = "State",
     locality = "",
-    area = "Area",
-    gpci_work = md("**GPCI**<i><sub>w</sub></i>"),
+    area = "",
+    gpci_work = md("**GPCI**<i><sub>wk</sub></i>"),
     gpci_pe = md("**GPCI**<i><sub>pe</sub></i>"),
     gpci_mp = md("**GPCI**<i><sub>mp</sub></i>")) |> 
-  cols_merge(columns = c(locality, area),
-             pattern = "<b>{1}</b><< {2}>>") |> 
   fmt_number(decimals = 2, 
-             drop_trailing_zeros = TRUE) |> 
-  gt_style(lbl = FALSE, 
-           tablign = "center", 
-           tabsize = 16) |> 
+             drop_trailing_zeros = TRUE) |>
+  fmt_markdown(columns = "area") |> 
+  gt_theme_northstar(no_column_labels = FALSE) |> 
   tab_style(
       style = cell_text(
         align = 'center',
@@ -219,16 +188,7 @@ get_gpcis() |>
   tab_style(
       style = cell_text(
       font = google_font(name = "Fira Code")),
-      locations = cells_body(columns = contains("gpci"))) |>
-  tab_style(
-    style = cell_borders(
-      sides = c("all"),
-      color = "powderblue",
-      weight = px(3)),
-    locations = cells_row_groups()) |>
-  tab_style(
-    style = cell_fill(color = "powderblue"),
-    locations = cells_row_groups())
+      locations = cells_body(columns = contains("gpci")))
 ```
 
 

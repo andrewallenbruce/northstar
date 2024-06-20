@@ -100,12 +100,12 @@ get_rvus <- function(hcpcs = NULL, ...) {
 #' @template returns
 #'
 #' @examples
-#' get_gpcis(state = "GA", locality = "01", mac = "10212")
+#' search_gpci(state = "GA", locality = "01", mac = "10212")
 #'
 #' @export
 #'
 #' @autoglobal
-get_gpcis <- function(mac      = NULL,
+search_gpci <- function(mac      = NULL,
                       state    = NULL,
                       locality = NULL,
                       ...) {

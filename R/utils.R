@@ -1,20 +1,3 @@
-#' Remove empty rows and columns
-#'
-#' @param df data frame
-#'
-#' @autoglobal
-#'
-#' @keywords internal
-#'
-#' @export
-remove_quiet <- function(df) {
-
-  janitor::remove_empty(
-    df,
-    which = c("rows", "cols")
-  )
-}
-
 #' Mount [pins][pins::pins-package] board
 #'
 #' @param source `<chr>` `"local"` or `"remote"`
@@ -30,7 +13,7 @@ mount_board <- function(source = c("local", "remote")) {
 
   switch(
     source,
-    local  = pins::board_folder(
+    local = pins::board_folder(
              fs::path_package(
                "extdata/pins",
                package = "northstar")
@@ -81,38 +64,117 @@ list_pins <- function(...) {
 
 }
 
+#' Apply {gt} Theme
+#'
+#' @param gt_object `<gt_tbl>` A [gt][gt::gt-package] table object
+#'
+#' @param column_labels `<lgl>` Show column labels, default is `TRUE`
+#'
+#' @param tab_align `<chr>` Stub text alignment, default is `center`
+#'
+#' @param tab_size `<int>` Font size, default is `16`
+#'
+#' @param tab_weight Font weight, default is `bold`
+#'
+#' @param ... Additional arguments to [gt::table_options()][gt::gt-package]
+#'
+#' @returns An object of class `<gt_tbl>`
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+gt_theme_northstar <- function(gt_object,
+                               no_column_labels = TRUE,
+                               tab_align = "center",
+                               tab_size = 16,
+                               tab_weight = "bold",
+                               ...) {
+
+  stopifnot(
+    "`gt_object` must be a `gt_tbl`" = "gt_tbl" %in% class(
+      gt_object
+    )
+  )
+
+  gt_object |>
+    gt::cols_align("left") |>
+    gt::opt_table_font(
+      font = gt::google_font(
+        name = "Atkinson Hyperlegible")) |>
+    gt::tab_style(
+      style = gt::cell_text(
+        align   = tab_align,
+        size    = gt::px(tab_size),
+        font    = gt::google_font(name = "Fira Code"),
+        weight  = tab_weight),
+      locations = gt::cells_stub()) |>
+    gt::tab_style(
+      style = list(
+        gt::cell_fill(color = "powderblue"),
+        gt::cell_text(weight = "bold"),
+        gt::cell_borders(
+          sides = c("all"),
+          color = "powderblue",
+          weight = gt::px(2)
+        )
+      ),
+      locations = gt::cells_row_groups()) |>
+    gt::tab_options(
+      column_labels.hidden = no_column_labels,
+      column_labels.text_transform = if (!no_column_labels) "capitalize" else NULL,
+      heading.align = "left",
+      heading.title.font.size = gt::px(16),
+      heading.subtitle.font.size = gt::px(16),
+      quarto.disable_processing = TRUE,
+      row_group.as_column = TRUE,
+      row_group.font.size = gt::px(24),
+      source_notes.font.size = gt::px(16),
+      table.font.size = gt::px(16),
+      table.width = gt::pct(100),
+      ...
+    )
+}
+
+#' Data dictionary for PFS and RVU data
+#'
+#' @param out description
+#'
+#' @param dict description
+#'
+#' @returns description
+#'
+#' @examples
+#' data_dict()
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+data_dict <- function(out = c("md", "df"), dict = c("pfs", "rvu")) {
+
+  out  <- match.arg(out)
+  dict <- match.arg(dict)
+  res  <- switch(dict, pfs = dict_pfs(), rvu = dict_rvu())
+
+  switch(
+    out,
+    df = res,
+    md = res |>
+      dplyr::mutate(
+        var = glue::glue("`{var}`"),
+        label = glue::glue("**{label}**")
+        )
+    )
+}
+
 #' @autoglobal
 #'
 #' @noRd
-null_if_empty <- function(x) {
-  if (vctrs::vec_is_empty(x)) NULL else x
-}
+dict_pfs <- function() {
 
-#' @autoglobal
-#' @noRd
-col_lb <- function(output = c("md", "df"), type = c("pfs", "rvu")) {
-
-  output <- match.arg(output)
-  type <- match.arg(type)
-
-  if (type == "pfs") {res <- pfs_lb()}
-  if (type == "rvu") {res <- rvu_lb()}
-
-  if (output == "df") {return(res)}
-
-  if (output == "md") {
-    return(
-      res |>
-        dplyr::mutate(var         = gluedown::md_code(var),
-                      label       = gluedown::md_bold(label),
-                      description = gluedown::md_hardline(description))
-    )
-  }
-}
-
-#' @autoglobal
-#' @noRd
-pfs_lb <- function() {
   dplyr::tribble(
     ~var,        ~label,                              ~description,
     #----        #-----                              #-----------
@@ -134,8 +196,10 @@ pfs_lb <- function() {
 }
 
 #' @autoglobal
+#'
 #' @noRd
-rvu_lb <- function() {
+dict_rvu <- function() {
+
   dplyr::tribble(
     ~var,        ~  label,                                         ~description,
     #----          #-----                                          #-----------
