@@ -125,32 +125,31 @@
 <h2 id="add-on-codes">Add-On Codes<a class="anchor" aria-label="anchor" href="#add-on-codes"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_addon_edits.html">get_addon_edits</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,130 × 7</span></span></span>
-<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">aoc_type</span> <span style="font-weight: bold;">aoc_complements</span>  <span style="font-weight: bold;">aoc_edit_type</span> <span style="font-weight: bold;">aoc_edit_description</span>           </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0054T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             2 No Specific Primary Codes. Pay…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0055T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             2 No Specific Primary Codes. Pay…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0070U primary  <span style="color: #949494;">&lt;tibble [6 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0071U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0072U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0073U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0074U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0075T primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0075T primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0075U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 0076T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 0076T primary  <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 0076U addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 0095T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 0098T addon    <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 0101U primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 0102U primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 0103U primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 0130U addon    <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 0131U addon    <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>             1 Only Paid if Primary is Paid. …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4,110 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: </span><span style="color: #949494; font-weight: bold;">aoc_edit_effective</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">aoc_notes</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_addons.html">search_addons</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,463 × 4</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">aoc_type</span> <span style="font-weight: bold;">aoc_complements</span>  <span style="font-weight: bold;">aoc_edit</span></span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 00100      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 00102      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 00103      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 00104      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 00120      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 00124      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 00126      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 00140      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 00142      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 00144      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 00145      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 00147      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 00148      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 00160      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 00162      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 00164      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 00170      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 00172      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 00174      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 00176      Primary  <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,443 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="medicallly-unlikely-edits">Medicallly Unlikely Edits<a class="anchor" aria-label="anchor" href="#medicallly-unlikely-edits"></a>

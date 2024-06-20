@@ -55,12 +55,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/describe_hcpcs.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_addon_edits.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_aoc_type.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_hcpcs_type.html</loc>
   </url>
   <url>
@@ -107,6 +101,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_addons.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_adjustments.html</loc>
