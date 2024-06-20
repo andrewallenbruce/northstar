@@ -4,10 +4,10 @@
 \alias{describe_hcpcs}
 \title{Describe HCPCS Codes}
 \usage{
-describe_hcpcs(hcpcs = NULL, desc_type = "All", varname = "hcpcs", ...)
+describe_hcpcs(hcpcs_code = NULL, desc_type = "All", varname = "hcpcs", ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+\item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{desc_type}{\verb{<chr>} vector of code description types; \code{All} (default),
 \code{Short}, \code{Long}, \code{Medium}, \code{Medical}, \code{Consumer}, \code{Clinician}, \verb{Proprietary Name}}

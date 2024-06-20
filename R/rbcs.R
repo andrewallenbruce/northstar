@@ -81,7 +81,7 @@
 #' @export
 #'
 #' @autoglobal
-search_rbcs <- function(hcpcs       = NULL,
+search_rbcs <- function(hcpcs_code = NULL,
                         category    = NULL,
                         subcategory = NULL,
                         family      = NULL,
@@ -91,7 +91,7 @@ search_rbcs <- function(hcpcs       = NULL,
 
   rb <- get_pin("rbcs")
 
-  rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs)
+  rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs_code)
   rb <- fuimus::search_in_if(rb, rb$rbcs_family, family)
   rb <- fuimus::search_in_if(rb, rb$rbcs_subcategory, subcategory)
 

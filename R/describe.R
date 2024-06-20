@@ -23,7 +23,7 @@
 #' @autoglobal
 #'
 #' @export
-describe_hcpcs <- function(hcpcs = NULL, desc_type = "All", varname = "hcpcs", ...) {
+describe_hcpcs <- function(hcpcs_code = NULL, desc_type = "All", varname = "hcpcs", ...) {
 
   dsc <- get_pin("hcpcs_descriptions")
 
@@ -35,16 +35,16 @@ describe_hcpcs <- function(hcpcs = NULL, desc_type = "All", varname = "hcpcs", .
     several.ok = TRUE
   )
 
-  if (!is.null(hcpcs)) {
+  if (!is.null(hcpcs_code)) {
 
     obj_type <- names(
-      which(c(vec = is.vector(hcpcs),
-              dfr = is.data.frame(hcpcs))))
+      which(c(vec = is.vector(hcpcs_code),
+              dfr = is.data.frame(hcpcs_code))))
 
     dsc <- switch(
       obj_type,
-      vec = fuimus::search_in(dsc, dsc$hcpcs, hcpcs),
-      dfr = fuimus::search_in(dsc, dsc$hcpcs, hcpcs[[varname]]))
+      vec = fuimus::search_in(dsc, dsc$hcpcs, hcpcs_code),
+      dfr = fuimus::search_in(dsc, dsc$hcpcs, hcpcs_code[[varname]]))
   }
 
   if (desc_type != "All") {
@@ -82,11 +82,11 @@ describe_hcpcs <- function(hcpcs = NULL, desc_type = "All", varname = "hcpcs", .
 #' @autoglobal
 #'
 #' @export
-get_hcpcs_type <- function(hcpcs, ...) {
+get_hcpcs_type <- function(hcpcs_code, ...) {
 
   cvec <- get_pin("cpt_hcpcs_vecs")
 
-  hcpcs <- collapse::funique(hcpcs)
+  hcpcs <- collapse::funique(hcpcs_code)
 
   list(
     cpt     = fuimus::search_in(hcpcs, hcpcs, cvec$cpt),

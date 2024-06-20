@@ -4,10 +4,10 @@
 \alias{get_rvus}
 \title{Get HCPCS Codes with RVUs}
 \usage{
-get_rvus(hcpcs = NULL, ...)
+get_rvus(hcpcs_code = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+\item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
@@ -18,6 +18,6 @@ a \link[tibble:tibble-package]{tibble}
 Physician Fee Schedule Relative Value File
 }
 \examples{
-get_rvus(hcpcs = c("95907", "78140", "32820", "61575"))
+get_rvus(hcpcs_code = c("95907", "78140", "32820", "61575"))
 
 }

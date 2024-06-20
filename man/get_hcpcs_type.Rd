@@ -4,10 +4,10 @@
 \alias{get_hcpcs_type}
 \title{HCPCS code type}
 \usage{
-get_hcpcs_type(hcpcs, ...)
+get_hcpcs_type(hcpcs_code, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+\item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

@@ -24,7 +24,6 @@ library(fuimus)
 library(dplyr)
 library(tidyr)
 library(purrr)
-library(janitor)
 library(gt)
 ```
 
@@ -55,7 +54,7 @@ search_fee_schedule(
   state    = "GA", 
   locality = "99",
   mac      = "10212") |> 
-  remove_empty(which = c("rows", "cols")) |>
+  fuimus::remove_quiet() |>
   rowwise() |>
   mutate(cpt_desc_clin = map(cpt_desc_clin, ~paste0("* ", ., collapse = "\n"))) |>
   unnest(cols = cpt_desc_clin) |>

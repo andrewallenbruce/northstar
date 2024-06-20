@@ -4,10 +4,10 @@
 \alias{search_payment}
 \title{Physician Fee Schedule Payment Amount File}
 \usage{
-search_payment(hcpcs = NULL, mac = NULL, locality = NULL, ...)
+search_payment(hcpcs_code = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+\item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{mac}{\verb{<chr>} 5-digit Medicare Administrative Contractor (MAC) ID}
 
@@ -22,8 +22,8 @@ a \link[tibble:tibble-package]{tibble}
 Physician Fee Schedule Payment Amount File
 }
 \examples{
-search_payment(hcpcs    = c("39503", "43116", "33935", "11646"),
+search_payment(hcpcs_code = c("39503", "43116", "33935", "11646"),
                locality = "01",
-               mac      = "10212")
+               mac = "10212")
 
 }

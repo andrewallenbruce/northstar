@@ -17,7 +17,7 @@ library(northstar)
 
 
 ```{r}
-get_addon_edits()
+search_addons()
 ```
 
 ## Medicallly Unlikely Edits

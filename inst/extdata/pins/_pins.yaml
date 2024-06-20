@@ -2,10 +2,6 @@ adj_codes:
 - adj_codes/20240618T123408Z-c1491/
 anesthesia:
 - anesthesia/20240423T151006Z-213ea/
-aoc_long:
-- aoc_long/20240419T130857Z-84946/
-aoc_vecs:
-- aoc_vecs/20240405T212353Z-5f6d1/
 cpt_descriptors:
 - cpt_descriptors/20240419T052848Z-7d8ec/
 cpt_hcpcs_vecs:
@@ -48,6 +44,10 @@ modifiers:
 - modifiers/20240618T182144Z-22317/
 mues:
 - mues/20240419T125525Z-c2935/
+ncci_aoc:
+- ncci_aoc/20240620T170255Z-3930c/
+ncci_aoc_nested:
+- ncci_aoc_nested/20240620T170223Z-dde52/
 opps:
 - opps/20240428T092245Z-a93f8/
 pay_mac_fee:

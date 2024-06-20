@@ -4,10 +4,10 @@
 \alias{search_opps}
 \title{Outpatient Prospective Payment System (OPPS) Capitations}
 \usage{
-search_opps(hcpcs = NULL, mac = NULL, locality = NULL, ...)
+search_opps(hcpcs_code = NULL, mac = NULL, locality = NULL, ...)
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+\item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{mac}{\verb{<chr>} 5-digit Medicare Administrative Contractor (MAC) ID}
 

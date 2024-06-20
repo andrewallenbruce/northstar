@@ -9,15 +9,15 @@
 #' @template returns
 #'
 #' @examples
-#' get_rvus(hcpcs = c("95907", "78140", "32820", "61575"))
+#' get_rvus(hcpcs_code = c("95907", "78140", "32820", "61575"))
 #'
 #' @autoglobal
 #'
 #' @export
-get_rvus <- function(hcpcs = NULL, ...) {
+get_rvus <- function(hcpcs_code = NULL, ...) {
 
   rv <- get_pin("hcpcs_with_rvus")
-  rv <- fuimus::search_in_if(rv, rv$hcpcs, hcpcs)
+  rv <- fuimus::search_in_if(rv, rv$hcpcs, hcpcs_code)
   return(.add_class(rv))
 }
 
@@ -105,10 +105,10 @@ get_rvus <- function(hcpcs = NULL, ...) {
 #' @export
 #'
 #' @autoglobal
-search_gpci <- function(mac      = NULL,
-                      state    = NULL,
-                      locality = NULL,
-                      ...) {
+search_gpci <- function(mac = NULL,
+                        state = NULL,
+                        locality = NULL,
+                        ...) {
 
   gp <- get_pin("gpci")
   gp <- fuimus::search_in_if(gp, gp$state, state)
@@ -130,19 +130,19 @@ search_gpci <- function(mac      = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_payment(hcpcs    = c("39503", "43116", "33935", "11646"),
+#' search_payment(hcpcs_code = c("39503", "43116", "33935", "11646"),
 #'                locality = "01",
-#'                mac      = "10212")
+#'                mac = "10212")
 #'
 #' @autoglobal
 #'
 #' @export
-search_payment <- function(hcpcs    = NULL,
-                           mac      = NULL,
+search_payment <- function(hcpcs_code = NULL,
+                           mac = NULL,
                            locality = NULL,
                            ...) {
   pmt <- get_pin("pay_mac_fee")
-  pmt <- fuimus::search_in_if(pmt, pmt$hcpcs, hcpcs)
+  pmt <- fuimus::search_in_if(pmt, pmt$hcpcs, hcpcs_code)
   pmt <- fuimus::search_in_if(pmt, pmt$mac, mac)
   pmt <- fuimus::search_in_if(pmt, pmt$locality, locality)
   return(.add_class(pmt))
@@ -197,8 +197,8 @@ search_anesthesia <- function(mac      = NULL,
 #' @export
 #'
 #' @autoglobal
-search_opps <- function(hcpcs    = NULL,
-                        mac      = NULL,
+search_opps <- function(hcpcs_code = NULL,
+                        mac = NULL,
                         locality = NULL,
                         ...) {
 

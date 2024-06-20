@@ -5,7 +5,7 @@
 \title{Search Restructured BETOS Classifications}
 \usage{
 search_rbcs(
-  hcpcs = NULL,
+  hcpcs_code = NULL,
   category = NULL,
   subcategory = NULL,
   family = NULL,
@@ -15,7 +15,7 @@ search_rbcs(
 )
 }
 \arguments{
-\item{hcpcs}{\verb{<chr>} vector of 5-character HCPCS codes}
+\item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
 \item{category}{\verb{<chr>} vector of RBCS categories:
 \itemize{
