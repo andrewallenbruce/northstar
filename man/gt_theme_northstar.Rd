@@ -9,7 +9,7 @@ gt_theme_northstar(
   column_labels = TRUE,
   tab_align = "center",
   tab_size = 16,
-  tab_weight = "normal",
+  tab_weight = "bold",
   ...
 )
 }
@@ -22,9 +22,9 @@ gt_theme_northstar(
 
 \item{tab_size}{\verb{<int>} Font size, default is \code{16}}
 
-\item{tab_weight}{description}
+\item{tab_weight}{Font weight, default is \code{bold}}
 
-\item{...}{Optional additional arguments to \link[gt:gt-package]{gt::table_options()}}
+\item{...}{Additional arguments to \link[gt:gt-package]{gt::table_options()}}
 }
 \value{
 An object of class \verb{<gt_tbl>}
@@ -32,3 +32,4 @@ An object of class \verb{<gt_tbl>}
 \description{
 {gt} Theme
 }
+\keyword{internal}

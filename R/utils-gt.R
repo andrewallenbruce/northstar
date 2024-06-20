@@ -8,20 +8,22 @@
 #'
 #' @param tab_size `<int>` Font size, default is `16`
 #'
-#' @param tab_weight description
+#' @param tab_weight Font weight, default is `bold`
 #'
-#' @param ... Optional additional arguments to [gt::table_options()][gt::gt-package]
+#' @param ... Additional arguments to [gt::table_options()][gt::gt-package]
 #'
 #' @returns An object of class `<gt_tbl>`
 #'
 #' @autoglobal
+#'
+#' @keywords internal
 #'
 #' @export
 gt_theme_northstar <- function(gt_object,
                                column_labels = TRUE,
                                tab_align = "center",
                                tab_size = 16,
-                               tab_weight = "normal",
+                               tab_weight = "bold",
                                ...) {
 
   stopifnot(
