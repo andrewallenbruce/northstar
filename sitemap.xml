@@ -49,6 +49,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/carc_add_dash.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/data_dict.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/describe_hcpcs.html</loc>
   </url>
   <url>
@@ -56,9 +59,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_aoc_type.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_gpcis.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_hcpcs_type.html</loc>
@@ -109,9 +109,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/remove_quiet.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_adjustments.html</loc>
   </url>
   <url>
@@ -119,6 +116,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_gpci.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
