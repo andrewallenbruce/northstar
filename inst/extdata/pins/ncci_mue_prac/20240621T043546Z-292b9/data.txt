@@ -1,0 +1,10 @@
+file: ncci_mue_prac.qs
+file_size: 44304
+pin_hash: 292b957245ea3903
+type: qs
+title: MUEs Practitioner
+description: 'NCCI Medically Unlikely Edits 07-01-2024: Practitioner Services'
+tags: ~
+urls: ~
+created: 20240621T043546Z
+api_version: 1

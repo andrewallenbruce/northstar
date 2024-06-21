@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_type_of_service}
 \alias{switch_type_of_service}
-\title{HCPCS Level II Type of Service Descriptions}
+\title{HCPCS Type of Service Descriptions}
 \usage{
 switch_type_of_service(x)
 }
@@ -13,9 +13,10 @@ switch_type_of_service(x)
 vector of Type of Service descriptions
 }
 \description{
-HCPCS Level II Type of Service Descriptions
+HCPCS Type of Service Descriptions
 }
 \examples{
-dplyr::tibble(code = c(0:9, LETTERS), desc = switch_type_of_service(code))
+dplyr::tibble(code = c(0:9, LETTERS),
+              desc = switch_type_of_service(code))
 
 }

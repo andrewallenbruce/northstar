@@ -48,6 +48,12 @@ ncci_aoc:
 - ncci_aoc/20240620T170255Z-3930c/
 ncci_aoc_nested:
 - ncci_aoc_nested/20240620T170223Z-dde52/
+ncci_mue_dme:
+- ncci_mue_dme/20240621T043740Z-70148/
+ncci_mue_out:
+- ncci_mue_out/20240621T043644Z-29db6/
+ncci_mue_prac:
+- ncci_mue_prac/20240621T043546Z-292b9/
 opps:
 - opps/20240428T092245Z-a93f8/
 pay_mac_fee:

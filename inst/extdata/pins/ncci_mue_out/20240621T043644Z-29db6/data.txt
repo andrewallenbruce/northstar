@@ -1,0 +1,10 @@
+file: ncci_mue_out.qs
+file_size: 45518
+pin_hash: 29db6f2a8b807d65
+type: qs
+title: MUEs Outpatient Hospital
+description: 'NCCI Medically Unlikely Edits 07-01-2024: Outpatient Hospital Services'
+tags: ~
+urls: ~
+created: 20240621T043644Z
+api_version: 1

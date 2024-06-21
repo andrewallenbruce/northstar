@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_pricing}
 \alias{switch_pricing}
-\title{HCPCS Level II Pricing Descriptions}
+\title{HCPCS Pricing Descriptions}
 \usage{
 switch_pricing(x)
 }
@@ -13,7 +13,7 @@ switch_pricing(x)
 vector of Pricing descriptions
 }
 \description{
-HCPCS Level II Pricing Descriptions
+HCPCS Pricing Descriptions
 }
 \examples{
 dplyr::tibble(

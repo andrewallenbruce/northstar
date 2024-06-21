@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_bilateral_surgery}
 \alias{switch_bilateral_surgery}
-\title{Bilateral Surgery Descriptions}
+\title{PFS Bilateral Surgery Descriptions}
 \usage{
 switch_bilateral_surgery(x)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_status_name}
 \alias{switch_status_name}
-\title{Status Code Names}
+\title{PFS Status Code Names}
 \usage{
 switch_status_name(x)
 }
@@ -13,7 +13,7 @@ switch_status_name(x)
 vector of status code names
 }
 \description{
-Status Code Names
+PFS Status Code Names
 }
 \examples{
 dplyr::tibble(

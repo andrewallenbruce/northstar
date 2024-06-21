@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_action_code}
 \alias{switch_action_code}
-\title{HCPCS Level II Action Descriptions}
+\title{HCPCS Action Descriptions}
 \usage{
 switch_action_code(x)
 }
@@ -13,9 +13,10 @@ switch_action_code(x)
 vector of Action descriptions
 }
 \description{
-HCPCS Level II Action Descriptions
+HCPCS Action Descriptions
 }
 \examples{
-dplyr::tibble(code = c(LETTERS), desc = switch_action_code(code))
+dplyr::tibble(code = c(LETTERS),
+              desc = switch_action_code(code))
 
 }

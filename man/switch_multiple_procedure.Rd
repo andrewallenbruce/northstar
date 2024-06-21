@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_multiple_procedure}
 \alias{switch_multiple_procedure}
-\title{Multiple Procedure Descriptions}
+\title{PFS Multiple Procedure Descriptions}
 \usage{
 switch_multiple_procedure(x)
 }
@@ -17,6 +17,6 @@ Modifier 51: Indicates applicable payment adjustment rule for multiple
 procedures
 }
 \examples{
-switch_multiple_procedure(as.character(0:9))
+switch_multiple_procedure(0:9)
 
 }

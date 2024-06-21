@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_assistant_surgery}
 \alias{switch_assistant_surgery}
-\title{Assistant Surgery Descriptions}
+\title{PFS Assistant Surgery Descriptions}
 \usage{
 switch_assistant_surgery(x)
 }
@@ -26,6 +26,6 @@ Modifiers:
 }
 }
 \examples{
-switch_assistant_surgery(c(0:2, "9"))
+switch_assistant_surgery(0:9)
 
 }

@@ -94,72 +94,72 @@ search_addons <- function(hcpcs_code = NULL,
   return(.add_class(aoc))
 }
 
-#' NCCI Medically Unlikely Edits
+#' NCCI Medically Unlikely Edits (MUEs)
 #'
-#' Medicare NCCI Medically Unlikely Edits (MUEs)
+#' National Correct Coding Initiative (NCCI) Medically Unlikely Edits (MUEs) are
+#' used by Medicare Administrative Contractors (MACs) to reduce improper
+#' payments for Part B claims.
 #'
-#' National Correct Coding Initiative (NCCI) Medically Unlikely Edits (MUEs)
-#' are used by the Medicare Administrative Contractors (MACs), to reduce
-#' improper payments for Part B claims.
+#' An MUE describes the maximum **Units of Service** (UOS) reported for a
+#' HCPCS code on the vast majority of appropriately reported claims by the
+#' same provider/supplier for the same beneficiary on the same date of service.
 #'
-#' An MUE is the maximum **Units of Service** (UOS) reported for a HCPCS/CPT code
-#' on the vast majority of appropriately reported claims by the same
-#' provider/supplier for the same beneficiary on the same date of service.
+#' Not all HCPCS codes have an MUE. Although CMS publishes most MUE values,
+#' other MUE values are confidential. Confidential MUE values are not
+#' releasable. The confidential status of MUEs is subject to change.
 #'
-#' Not all HCPCS/CPT codes have an MUE. Although CMS publishes most MUE values
-#' on its website, other MUE values are confidential. Confidential MUE values
-#' are not releasable. The confidential status of MUEs is subject to change.
+#' ## MUE Edit Types
 #'
-#' ## Quarterly Version Update Changes
+#' MUEs are adjudicated as either a **Claim Line** edit or **Date of Service**
+#' edit, the latter of which has two subclasses: *Policy* and *Clinical*.
 #'
-#' CMS posts changes to each of its NCCI MUE published edit files on a
-#' quarterly basis. This includes additions, deletions, and revisions to
-#' published MUEs for Practitioner Services, Outpatient Hospital Services,
-#' and DME Supplier Services.
+#' If the MUE is adjudicated as a Claim Line edit, the HCPCS code's UOS on each
+#' claim line are compared to that code's MUE value. If the UOS exceeds the MUE
+#' value, all UOS on that claim line are denied.
 #'
-#' CMS began introducing date of service (DOS) MUEs. Over time CMS will convert
-#' many, but not all, MUEs to DOS MUEs. MUEs are adjudicated either as claim
-#' line edits or DOS edits. If the MUE is adjudicated as a claim line edit,
-#' the UOS on each claim line are compared to the MUE value for the HCPCS/CPT
-#' code on that claim line. If the UOS exceed the MUE value, all UOS on that
-#' claim line are denied.
+#' DOS MUEs are used for HCPCS codes where it would be extremely unlikely that
+#' more UOS than the MUE value would ever be performed on the same date of
+#' service for the same patient.
 #'
-#' If the MUE is adjudicated as a DOS MUE, all UOS on each claim line for the
-#' same date of service for the same HCPCS/CPT code are summed, and the sum is
-#' compared to the MUE value. If the summed UOS exceed the MUE value, all UOS
-#' for the HCPCS/CPT code for that date of service are denied. Denials due to
-#' claim line MUEs or DOS MUEs may be appealed to the local claims processing
-#' contractor. DOS MUEs are used for HCPCS/CPT codes where it would be
-#' extremely unlikely that more UOS than the MUE value would ever be performed
-#' on the same date of service for the same patient.
+#' If the MUE is adjudicated as a DOS MUE, the sum of all UOS on each claim line
+#' for the same date of service for the same HCPCS code is compared to the MUE
+#' value. If the summed UOS exceeds the MUE value, all UOS for the HCPCS code
+#' for that date of service are denied.
 #'
-#' ## MUE Adjudication Indicator (MAI)
+#' ## MUE Adjudication Indicator
+#'
 #' An MAI of 1 indicates that the edit is a claim line MUE. An MAI of 2 or 3
 #' indicates that the edit is a DOS MUE.
 #'
-#' If a HCPCS/CPT code has an MUE that is adjudicated as a claim line edit,
-#' appropriate use of CPT modifiers (i.e., 59 or XE, XP, XS, XU; 76, 77, 91,
-#' anatomic) may be used to report the same HCPCS/CPT code on separate lines
+#' If a HCPCS code has an MUE that is adjudicated as a claim line edit,
+#' appropriate use of modifiers (i.e., 59 or XE, XP, XS, XU; 76, 77, 91,
+#' anatomic) may be used to report the same HCPCS code on separate lines
 #' of a claim.
 #'
-#' MUEs for HCPCS codes with an MAI of 2 are absolute date of service edits.
-#' These are "per day edits based on policy." These have been rigorously
-#' reviewed and vetted within CMS and obtain this MAI designation because UOS
-#' on the same date of service (DOS) in excess of the MUE value would be
-#' considered impossible because it was contrary to statute, regulation, or
-#' subregulatory guidance.
+#' MUEs for HCPCS codes with an MAI of 2 are **absolute** date of service edits.
+#' These are *"per day edits based on **policy**."* They obtain this MAI
+#' designation because UOS on the same date of service (DOS) in excess of the
+#' MUE value would contradict statute, regulation, or subregulatory guidance.
 #'
-#' MUEs for HCPCS codes with an MAI of 3 are "per day edits based on clinical
-#' benchmarks." These are based on criteria (e.g., nature of service,
-#' prescribing information) combined with data such that it would be possible
-#' but medically highly unlikely that higher values would represent correctly
-#' reported medically necessary services
+#' MUEs with an MAI of 3 are *"per day edits based on **clinical** benchmarks."*
+#' These are based on criteria (e.g., nature of service, prescribing
+#' information) and historical data such that it would be possible but medically
+#' highly unlikely that higher values would represent correctly reported
+#' medically necessary services.
+#'
+#' ## Quarterly Updates
+#'
+#' CMS posts changes to each NCCI MUE edit file on a *quarterly* basis. This
+#' includes additions, deletions, and revisions to published MUEs for
+#' Practitioner Services, Outpatient Hospital Services, and DME Supplier
+#' Services.
 #'
 #'    * [NCCI Medically Unlikely Edits](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
 #'
 #' @template args-hcpcs
 #'
-#' @param service_type `<chr>` `Practitioner`, `Outpatient Hospital`, or `DME Supplier`
+#' @param service `<chr>` `Practitioner`, `Outpatient`, or `DME`; default is
+#'   `Practitioner`
 #'
 #' @param mai `<int>` MUE adjudication indicator; `1`, `2`, or `3`
 #'
@@ -168,28 +168,37 @@ search_addons <- function(hcpcs_code = NULL,
 #' @template returns
 #'
 #' @examples
-#' get_mue_edits(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#' search_mues(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
 #' @autoglobal
 #'
 #' @export
-get_mue_edits <- function(hcpcs_code = NULL,
-                          mai          = NULL,
-                          service_type = NULL,
-                          ...) {
+search_mues <- function(hcpcs_code = NULL,
+                        service = c("Practitioner", "Outpatient", "DME"),
+                        mai = NULL,
+                        ...) {
 
-  mue <- get_pin("mues")
-  mue <- fuimus::search_in_if(mue, mue$hcpcs, hcpcs_code)
-  mue <- fuimus::search_in_if(mue, mue$mue_service_type, service_type)
+  service <- match.arg(service)
+
+  mue <- switch(
+    service,
+    Practitioner = get_pin("ncci_mue_prac"),
+    Outpatient   = get_pin("ncci_mue_out"),
+    DME          = get_pin("ncci_mue_dme"))
+
+  mue <- fuimus::search_in_if(mue, mue$hcpcs_code, hcpcs_code)
+
   mue <- fuimus::search_in_if(mue, mue$mue_mai, mai)
+
   return(.add_class(mue))
 }
 
-#' Procedure to Procedure (PTP) Edits
+#' NCCI Procedure to Procedure (PTP) Edits
 #'
 #' National Correct Coding Initiative (NCCI) Procedure-to-Procedure (PTP) edits
 #' prevent inappropriate payment of services that should not be reported
-#' together. Each edit has a Column One and Column Two HCPCS/CPT code.
+#' together. Each edit has a Column One (Comprehensive) and Column Two
+#' (Component) HCPCS code.
 #'
 #' If a provider reports the two codes of an edit pair for the same beneficiary
 #' on the same date of service, the Column One code is eligible for payment, but
@@ -198,26 +207,27 @@ get_mue_edits <- function(hcpcs_code = NULL,
 #'
 #' The NCCI [PTP edits](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits) and [MUEs](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits) are usually updated at least quarterly.
 #'
-#' ### NCCI Modifiers
+#' ## PTP Modifiers
+#'
 #' Modifiers that may be used under appropriate clinical circumstances to bypass
 #' an NCCI PTP edit include:
+#'
 #'    * Anatomic: E1-E4, FA, F1-F9, TA, T1-T9, LT, RT, LC, LD, RC, LM, RI
 #'    * Global Surgery: 24, 25, 57, 58, 78, 79
 #'    * Other: 27, 59, 91, XE, XS, XP, XU
 #'
 #' It’s very important that NCCI PTP-associated modifiers only be used when
 #' appropriate. In general, these circumstances relate to separate patient
-#' encounters, separate anatomic sites, or separate specimens. (See subsequent
-#' discussion of modifiers in this section.)
+#' encounters, separate anatomic sites, or separate specimens.
 #'
 #' Most edits involving paired organs or structures (e.g., eyes, ears,
 #' extremities, lungs, kidneys) have NCCI PTP modifier indicators of `1` because
-#' the two codes of the code pair edit may be reported if performed on the
-#' contralateral organs or structures.
+#' the two codes of the code-pair edit may be reported if performed on the
+#' **contralateral** organs or structures.
 #'
-#' Most of these code pairs should not be reported with NCCI PTP-associated
-#' modifiers when performed on the ipsilateral organ or structure unless there
-#' is a specific coding rationale to bypass the edit.
+#' Most of these code-pairs should not be reported with NCCI PTP-associated
+#' modifiers when performed on the **ipsilateral** organ or structure unless
+#' there is a specific coding rationale to bypass the edit.
 #'
 #' The presence of an NCCI PTP edit indicates that the two codes generally can’t
 #' be reported together unless the two corresponding procedures are performed at
@@ -227,14 +237,12 @@ get_mue_edits <- function(hcpcs_code = NULL,
 #' patient encounter and in contiguous structures in the same organ or anatomic
 #' region, NCCI PTP-associated modifiers generally shouldn’t be used.
 #'
-#' Modifier 59 ([MLN 1783722](https://www.cms.gov/files/document/mln1783722-proper-use-modifiers-59-xe-xp-xs-and-xu.pdf))
-#' may be used only if no other appropriate modifier describes the service. The
-#' article provides more information on the appropriate use of the 59 modifier.
-#'
-#' Some Column One/Column Two correct coding edits would ever warrant the use of
+#' Some Column One/Column Two correct coding edits would never warrant the use of
 #' any of the modifiers associated with the NCCI PTP edits. These code pairs are
-#' assigned a correct coding modifier indicator (CCMI) of `0`.
+#' assigned a Correct Coding Modifier Indicator (CCMI) of `0`.
 #'
+#'
+#' Modifier 59 may be used only if no other appropriate modifier describes the service.
 #' Claim line edits allow use of NCCI PTP-associated **Modifier 91** to bypass
 #' them if one or more of the individual laboratory tests are repeated on the
 #' same date of service.
@@ -248,8 +256,7 @@ get_mue_edits <- function(hcpcs_code = NULL,
 #'
 #' @template args-hcpcs
 #'
-#' @param ptp_type `<chr>` `comprehensive` (Column One code) or `component`
-#'   (Column Two code)
+#' @param ptp_type `<chr>` `Comprehensive` (Column One) or `Component` (Column Two)
 #'
 #' @param ptp_edit_mod `<int>`
 #'    * `1`: Allowed
@@ -263,19 +270,19 @@ get_mue_edits <- function(hcpcs_code = NULL,
 #' @template returns
 #'
 #' @examples
-#' get_ptp_edits(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#' search_ptps(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
-#' get_ptp_edits(hcpcs_code = "43116",
-#'               ptp_type     = "component",
-#'               ptp_edit_mod = 0)
+#' search_ptps(hcpcs_code = "43116",
+#'             ptp_type = "component",
+#'             ptp_edit_mod = 0)
 #'
 #' @autoglobal
 #'
 #' @export
-get_ptp_edits <- function(hcpcs_code = NULL,
-                          ptp_type     = NULL,
-                          ptp_edit_mod = NULL,
-                          current      = TRUE,
+search_ptps <- function(hcpcs_code = NULL,
+                        ptp_type = NULL,
+                        ptp_edit_mod = NULL,
+                        current = TRUE,
                           ...) {
 
   ptp <- get_pin("ptp_long")
@@ -284,12 +291,10 @@ get_ptp_edits <- function(hcpcs_code = NULL,
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_edit_mod, ptp_edit_mod)
 
   if (current) {
-    ptp <- vctrs::vec_slice(
-      ptp,
+    ptp <- vctrs::vec_slice(ptp,
       ptp$ptp_deleted == as.Date("9999-12-31"))
 
-    ptp <- dplyr::select(ptp, -ptp_deleted)
-
+    ptp$ptp_deleted <- NULL
   }
   return(.add_class(ptp))
 }

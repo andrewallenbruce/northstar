@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_global_days}
 \alias{switch_global_days}
-\title{Global Days Descriptions}
+\title{PFS Global Days Descriptions}
 \usage{
 switch_global_days(x)
 }
@@ -13,9 +13,10 @@ switch_global_days(x)
 vector of Global Days descriptions
 }
 \description{
-Global Days Descriptions
+PFS Global Days Descriptions
 }
 \examples{
-switch_global_days(c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"))
+x <- c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")
+switch_global_days(x)
 
 }

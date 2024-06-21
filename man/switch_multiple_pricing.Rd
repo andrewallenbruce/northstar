@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_multiple_pricing}
 \alias{switch_multiple_pricing}
-\title{HCPCS Level II Multiple Pricing Descriptions}
+\title{HCPCS Multiple Pricing Descriptions}
 \usage{
 switch_multiple_pricing(x)
 }
@@ -13,7 +13,7 @@ switch_multiple_pricing(x)
 vector of Multiple Pricing descriptions
 }
 \description{
-HCPCS Level II Multiple Pricing Descriptions
+HCPCS Multiple Pricing Descriptions
 }
 \examples{
 dplyr::tibble(code = c(9, LETTERS[1:7]))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_betos}
 \alias{switch_betos}
-\title{HCPCS Level II BETOS Descriptions}
+\title{HCPCS BETOS Descriptions}
 \usage{
 switch_betos(x)
 }
@@ -13,9 +13,10 @@ switch_betos(x)
 vector of BETOS descriptions
 }
 \description{
-HCPCS Level II BETOS Descriptions
+HCPCS BETOS Descriptions
 }
 \examples{
-dplyr::tibble(code = c("D1A", "I2A", "M3", "P0"), desc = switch_betos(code))
+dplyr::tibble(code = c("D1A", "I2A", "M3", "P0"),
+              desc = switch_betos(code))
 
 }

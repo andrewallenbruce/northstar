@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_pctc_indicator}
 \alias{switch_pctc_indicator}
-\title{PC/TC Indicator Descriptions}
+\title{PFS PC/TC Indicator Descriptions}
 \usage{
 switch_pctc_indicator(x)
 }
@@ -13,9 +13,9 @@ switch_pctc_indicator(x)
 vector of PC/TC indicator descriptions
 }
 \description{
-PC/TC Indicator Descriptions
+PFS PC/TC Indicator Descriptions
 }
 \examples{
-switch_pctc_indicator(as.character(0:9))
+switch_pctc_indicator(0:9)
 
 }

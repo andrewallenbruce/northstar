@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_team_surgery}
 \alias{switch_team_surgery}
-\title{Team Surgery Descriptions}
+\title{PFS Team Surgery Descriptions}
 \usage{
 switch_team_surgery(x)
 }
@@ -16,6 +16,6 @@ vector of Team Surgery descriptions
 Modifier 66: Services for which Team Surgeons may be paid
 }
 \examples{
-switch_team_surgery(c(0:2, "9"))
+switch_team_surgery(0:9)
 
 }

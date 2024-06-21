@@ -23,12 +23,12 @@ search_addons()
 ## Medicallly Unlikely Edits
 
 ```{r}
-get_mue_edits()
+search_mues()
 ```
 
 ## Procedure-to-Procedure Edits
 
 ```{r}
-get_ptp_edits()
+search_ptps()
 ```
 

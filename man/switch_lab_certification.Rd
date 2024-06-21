@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_lab_certification}
 \alias{switch_lab_certification}
-\title{HCPCS Level II Lab Certification Descriptions}
+\title{HCPCS Lab Certification Descriptions}
 \usage{
 switch_lab_certification(x)
 }
@@ -13,7 +13,7 @@ switch_lab_certification(x)
 vector of Lab Certification descriptions
 }
 \description{
-HCPCS Level II Lab Certification Descriptions
+HCPCS Lab Certification Descriptions
 }
 \examples{
 dplyr::tibble(

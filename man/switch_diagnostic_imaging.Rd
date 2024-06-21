@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_diagnostic_imaging}
 \alias{switch_diagnostic_imaging}
-\title{Diagnostic Imaging Descriptions}
+\title{PFS Diagnostic Imaging Descriptions}
 \usage{
 switch_diagnostic_imaging(x)
 }
@@ -17,6 +17,8 @@ Identifies the applicable Diagnostic Service family for
 HCPCS codes with a Multiple Procedure indicator of 4.
 }
 \examples{
-dplyr::tibble(code = fuimus::pad_number(c(1:11, 88, 99)), desc = switch_diagnostic_imaging(code))
+dplyr::tibble(
+  code = fuimus::pad_number(c(1:11, 88, 99)),
+  desc = switch_diagnostic_imaging(code))
 
 }

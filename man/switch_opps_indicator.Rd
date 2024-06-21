@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_opps_indicator}
 \alias{switch_opps_indicator}
-\title{OPPS Indicator Descriptions}
+\title{PFS OPPS Indicator Descriptions}
 \usage{
 switch_opps_indicator(x)
 }
@@ -13,9 +13,9 @@ switch_opps_indicator(x)
 vector of OPPS indicator descriptions
 }
 \description{
-OPPS Indicator Descriptions
+PFS OPPS Indicator Descriptions
 }
 \examples{
-switch_opps_indicator(c("1", "9"))
+switch_opps_indicator(c(1, 9))
 
 }

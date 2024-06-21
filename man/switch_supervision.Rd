@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_supervision}
 \alias{switch_supervision}
-\title{HCPCS Level II Physician Supervision Descriptions}
+\title{HCPCS Physician Supervision Descriptions}
 \usage{
 switch_supervision(x)
 }
@@ -17,8 +17,8 @@ This field is for use in post payment review.
 }
 \examples{
 dplyr::tibble(
-  code = c(
-    fuimus::pad_number(c(1:6, 9, 21:22, 66, 77)), "6A", "7A"),
+  code = c(fuimus::pad_number(
+  c(1:6, 9, 21:22, 66, 77)), "6A", "7A"),
   desc = switch_supervision(code))
 
 }

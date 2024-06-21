@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_co_surgeon}
 \alias{switch_co_surgeon}
-\title{Co-Surgeon Descriptions}
+\title{PFS Co-Surgeon Descriptions}
 \usage{
 switch_co_surgeon(x)
 }
@@ -17,6 +17,6 @@ Modifier 62: Services for which two surgeons,
 each in a different specialty, may be paid.
 }
 \examples{
-switch_co_surgeon(c(0:2, 9, NA_character_))
+switch_co_surgeon(0:9)
 
 }

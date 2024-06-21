@@ -1,0 +1,10 @@
+file: ncci_mue_dme.qs
+file_size: 8779
+pin_hash: 701487676cd87507
+type: qs
+title: MUEs DME Supplier
+description: 'NCCI Medically Unlikely Edits 07-01-2024: DME Supplier Services'
+tags: ~
+urls: ~
+created: 20240621T043740Z
+api_version: 1

@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_asc_group}
 \alias{switch_asc_group}
-\title{HCPCS Level II ASC Group Descriptions}
+\title{HCPCS ASC Group Descriptions}
 \usage{
 switch_asc_group(x)
 }
@@ -13,9 +13,10 @@ switch_asc_group(x)
 vector of ASC Group descriptions
 }
 \description{
-HCPCS Level II ASC Group Descriptions
+HCPCS ASC Group Descriptions
 }
 \examples{
-dplyr::tibble(code = c("YY", "99"), desc = switch_asc_group(code))
+dplyr::tibble(code = c("YY", 99),
+              desc = switch_asc_group(code))
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/switches.R
 \name{switch_coverage}
 \alias{switch_coverage}
-\title{HCPCS Level II Coverage Descriptions}
+\title{HCPCS Coverage Descriptions}
 \usage{
 switch_coverage(x)
 }
@@ -13,7 +13,7 @@ switch_coverage(x)
 vector of Coverage descriptions
 }
 \description{
-HCPCS Level II Coverage Descriptions
+HCPCS Coverage Descriptions
 }
 \examples{
 dplyr::tibble(code = c("C", "D", "I", "M", "S"), desc = switch_coverage(code))

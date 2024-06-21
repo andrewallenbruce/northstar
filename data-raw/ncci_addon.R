@@ -85,9 +85,3 @@ pin_update(
   name        = "ncci_aoc",
   title       = "Add-on Code Edits",
   description = "NCCI Add-on Code Edits 2024-06-03")
-
-# type_description = case_match(as.character(aoc_edit_type),
-#                               "1" ~ "Only Paid if Primary is Paid. Payment Eligible if Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.",
-#                               "2" ~ "No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.",
-#                               "3" ~ "Some Specific Primaries. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS."
-# )

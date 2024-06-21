@@ -1,11 +1,66 @@
-#' Global Days Descriptions
+#' NCCI MUE Adjudication Indicator Descriptions
+#'
+#' @param x vector of MUE Adjudication Indicators
+#'
+#' @returns vector of MUE Adjudication Indicator descriptions
+#'
+#' @examples
+#' switch_mue_mai(1:3)
+#'
+#' @autoglobal
+#'
+#' @export
+switch_mue_mai <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
+
+  kit::nswitch(
+    x = x,
+    "1", "Line Edit",
+    "2", "Date of Service Edit: Policy",
+    "3", "Date of Service Edit: Clinical",
+    default = NA_character_
+  )
+}
+
+#' NCCI Add-On Code Edit Type Descriptions
+#'
+#' @param x vector of Add-On Code Edit Types
+#'
+#' @returns vector of Add-On Code Edit Type descriptions
+#'
+#' @examples
+#' switch_addon_edits(1:3)
+#'
+#' @autoglobal
+#'
+#' @export
+switch_addon_edits <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
+
+  kit::nswitch(
+    x = x,
+    "1", "Only Paid if Primary is Paid. Payment Eligible if Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.",
+    "2", "No Specific Primary Codes. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.",
+    "3", "Some Specific Primaries. Payment Eligible if, as Determined by MAC, Primary Payment Eligible to Same Practitioner for Same Patient on Same DOS.",
+    default = NA_character_
+  )
+}
+
+#' PFS Global Days Descriptions
 #'
 #' @param x vector of Global Days indicators
 #'
 #' @returns vector of Global Days descriptions
 #'
 #' @examples
-#' switch_global_days(c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ"))
+#' x <- c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")
+#' switch_global_days(x)
 #'
 #' @autoglobal
 #'
@@ -25,7 +80,7 @@ switch_global_days <- function(x) {
   )
 }
 
-#' Team Surgery Descriptions
+#' PFS Team Surgery Descriptions
 #'
 #' Modifier 66: Services for which Team Surgeons may be paid
 #'
@@ -34,12 +89,16 @@ switch_global_days <- function(x) {
 #' @returns vector of Team Surgery descriptions
 #'
 #' @examples
-#' switch_team_surgery(c(0:2, "9"))
+#' switch_team_surgery(0:9)
 #'
 #' @autoglobal
 #'
 #' @export
 switch_team_surgery <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
       x = x,
@@ -51,7 +110,7 @@ switch_team_surgery <- function(x) {
   )
 }
 
-#' Bilateral Surgery Descriptions
+#' PFS Bilateral Surgery Descriptions
 #'
 #' Modifier 50: Indicates services subject to payment adjustment
 #'
@@ -67,6 +126,10 @@ switch_team_surgery <- function(x) {
 #' @export
 switch_bilateral_surgery <- function(x) {
 
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
+
   kit::nswitch(
     x = x,
     "0", "Adjustment does not apply. If reported with mod 50 or RT and LT, payment for the two sides is the lower of (a) total charge for both sides (b) 100% of fee schedule amount for a single code. Adjustment is inappropriate because (a) of physiology or anatomy, or (b) code description states it is a unilateral procedure and there is an existing code for the bilateral procedure.",
@@ -78,7 +141,7 @@ switch_bilateral_surgery <- function(x) {
   )
 }
 
-#' Multiple Procedure Descriptions
+#' PFS Multiple Procedure Descriptions
 #'
 #' Modifier 51: Indicates applicable payment adjustment rule for multiple
 #' procedures
@@ -88,12 +151,16 @@ switch_bilateral_surgery <- function(x) {
 #' @returns vector of Multiple Procedure descriptions
 #'
 #' @examples
-#' switch_multiple_procedure(as.character(0:9))
+#' switch_multiple_procedure(0:9)
 #'
 #' @autoglobal
 #'
 #' @export
 switch_multiple_procedure <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -110,7 +177,7 @@ switch_multiple_procedure <- function(x) {
   )
 }
 
-#' Co-Surgeon Descriptions
+#' PFS Co-Surgeon Descriptions
 #'
 #' Modifier 62: Services for which two surgeons,
 #' each in a different specialty, may be paid.
@@ -120,12 +187,16 @@ switch_multiple_procedure <- function(x) {
 #' @returns vector of Co-Surgeon descriptions
 #'
 #' @examples
-#' switch_co_surgeon(c(0:2, 9, NA_character_))
+#' switch_co_surgeon(0:9)
 #'
 #' @autoglobal
 #'
 #' @export
 switch_co_surgeon <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -137,7 +208,7 @@ switch_co_surgeon <- function(x) {
     )
 }
 
-#' Assistant Surgery Descriptions
+#' PFS Assistant Surgery Descriptions
 #'
 #' Fee schedule amount equals 16 percent of amount
 #' otherwise applicable for surgical payment.
@@ -153,12 +224,16 @@ switch_co_surgeon <- function(x) {
 #' @returns vector of Assistant Surgery descriptions
 #'
 #' @examples
-#' switch_assistant_surgery(c(0:2, "9"))
+#' switch_assistant_surgery(0:9)
 #'
 #' @autoglobal
 #'
 #' @export
 switch_assistant_surgery <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -170,7 +245,7 @@ switch_assistant_surgery <- function(x) {
   )
 }
 
-#' Diagnostic Imaging Descriptions
+#' PFS Diagnostic Imaging Descriptions
 #'
 #' Identifies the applicable Diagnostic Service family for
 #' HCPCS codes with a Multiple Procedure indicator of 4.
@@ -180,7 +255,9 @@ switch_assistant_surgery <- function(x) {
 #' @returns vector of Diagnostic Imaging descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = fuimus::pad_number(c(1:11, 88, 99)), desc = switch_diagnostic_imaging(code))
+#' dplyr::tibble(
+#'   code = fuimus::pad_number(c(1:11, 88, 99)),
+#'   desc = switch_diagnostic_imaging(code))
 #'
 #' @autoglobal
 #'
@@ -206,19 +283,23 @@ switch_diagnostic_imaging <- function(x) {
     )
 }
 
-#' OPPS Indicator Descriptions
+#' PFS OPPS Indicator Descriptions
 #'
 #' @param x vector of OPPS indicators
 #'
 #' @returns vector of OPPS indicator descriptions
 #'
 #' @examples
-#' switch_opps_indicator(c("1", "9"))
+#' switch_opps_indicator(c(1, 9))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_opps_indicator <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -228,19 +309,23 @@ switch_opps_indicator <- function(x) {
   )
 }
 
-#' PC/TC Indicator Descriptions
+#' PFS PC/TC Indicator Descriptions
 #'
 #' @param x vector of PC/TC indicators
 #'
 #' @returns vector of PC/TC indicator descriptions
 #'
 #' @examples
-#' switch_pctc_indicator(as.character(0:9))
+#' switch_pctc_indicator(0:9)
 #'
 #' @autoglobal
 #'
 #' @export
 switch_pctc_indicator <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -258,7 +343,7 @@ switch_pctc_indicator <- function(x) {
   )
 }
 
-#' Status Code Names
+#' PFS Status Code Names
 #'
 #' @param x vector of status codes
 #'
@@ -298,7 +383,7 @@ switch_status_name <- function(x) {
   )
 }
 
-#' Status Code Descriptions
+#' PFS Status Code Descriptions
 #'
 #' @param x vector of status codes
 #'
@@ -338,7 +423,7 @@ switch_status_description <- function(x) {
   )
 }
 
-#' HCPCS Level II Physician Supervision Descriptions
+#' HCPCS Physician Supervision Descriptions
 #'
 #' This field is for use in post payment review.
 #'
@@ -348,8 +433,8 @@ switch_status_description <- function(x) {
 #'
 #' @examples
 #' dplyr::tibble(
-#'   code = c(
-#'     fuimus::pad_number(c(1:6, 9, 21:22, 66, 77)), "6A", "7A"),
+#'   code = c(fuimus::pad_number(
+#'   c(1:6, 9, 21:22, 66, 77)), "6A", "7A"),
 #'   desc = switch_supervision(code))
 #'
 #' @autoglobal
@@ -376,19 +461,24 @@ switch_supervision <- function(x) {
   )
 }
 
-#' HCPCS Level II ASC Group Descriptions
+#' HCPCS ASC Group Descriptions
 #'
 #' @param x vector of ASC Group indicators
 #'
 #' @returns vector of ASC Group descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = c("YY", "99"), desc = switch_asc_group(code))
+#' dplyr::tibble(code = c("YY", 99),
+#'               desc = switch_asc_group(code))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_asc_group <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -398,7 +488,7 @@ switch_asc_group <- function(x) {
   )
 }
 
-#' HCPCS Level II Coverage Descriptions
+#' HCPCS Coverage Descriptions
 #'
 #' @param x vector of Coverage indicators
 #'
@@ -423,7 +513,7 @@ switch_coverage <- function(x) {
   )
 }
 
-#' HCPCS Level II Pricing Descriptions
+#' HCPCS Pricing Descriptions
 #'
 #' @param x vector of Pricing indicators
 #'
@@ -474,7 +564,7 @@ switch_pricing <- function(x) {
   )
 }
 
-#' HCPCS Level II Multiple Pricing Descriptions
+#' HCPCS Multiple Pricing Descriptions
 #'
 #' @param x vector of Multiple Pricing indicators
 #'
@@ -502,7 +592,7 @@ switch_multiple_pricing <- function(x) {
   )
 }
 
-#' HCPCS Level II Lab Certification Descriptions
+#' HCPCS Lab Certification Descriptions
 #'
 #' @param x vector of Lab Certification indicators
 #'
@@ -561,19 +651,24 @@ switch_lab_certification <- function(x) {
   )
 }
 
-#' HCPCS Level II Type of Service Descriptions
+#' HCPCS Type of Service Descriptions
 #'
 #' @param x vector of Type of Service codes
 #'
 #' @returns vector of Type of Service descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = c(0:9, LETTERS), desc = switch_type_of_service(code))
+#' dplyr::tibble(code = c(0:9, LETTERS),
+#'               desc = switch_type_of_service(code))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_type_of_service <- function(x) {
+
+  if (!rlang::is_character(x)) {
+    x <- as.character(x)
+  }
 
   kit::nswitch(
     x = x,
@@ -639,14 +734,15 @@ switch_type_of_service <- function(x) {
   )
 }
 
-#' HCPCS Level II Action Descriptions
+#' HCPCS Action Descriptions
 #'
 #' @param x vector of Action codes
 #'
 #' @returns vector of Action descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = c(LETTERS), desc = switch_action_code(code))
+#' dplyr::tibble(code = c(LETTERS),
+#'               desc = switch_action_code(code))
 #'
 #' @autoglobal
 #'
@@ -669,14 +765,15 @@ switch_action_code <- function(x) {
   )
 }
 
-#' HCPCS Level II BETOS Descriptions
+#' HCPCS BETOS Descriptions
 #'
 #' @param x vector of BETOS codes
 #'
 #' @returns vector of BETOS descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = c("D1A", "I2A", "M3", "P0"), desc = switch_betos(code))
+#' dplyr::tibble(code = c("D1A", "I2A", "M3", "P0"),
+#'               desc = switch_betos(code))
 #'
 #' @autoglobal
 #'
