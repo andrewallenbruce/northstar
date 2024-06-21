@@ -58,13 +58,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_hcpcs_type.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_mue_edits.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_pin.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_ptp_edits.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_rvus.html</loc>
@@ -121,6 +115,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mues.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_opps.html</loc>
   </url>
   <url>
@@ -130,10 +127,16 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_pos.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptps.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_action_code.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_addon_edits.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_asc_group.html</loc>
@@ -161,6 +164,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_lab_certification.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_mue_mai.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_pricing.html</loc>

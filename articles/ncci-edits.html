@@ -155,37 +155,37 @@
 <h2 id="medicallly-unlikely-edits">Medicallly Unlikely Edits<a class="anchor" aria-label="anchor" href="#medicallly-unlikely-edits"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_mue_edits.html">get_mue_edits</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 32,202 × 6</span></span></span>
-<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">mue_uos</span> <span style="font-weight: bold;">mue_mai</span> <span style="font-weight: bold;">mue_mai_desc</span>             <span style="font-weight: bold;">mue_service_type</span> <span style="font-weight: bold;">mue_rationale</span></span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0001U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0002M       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0002U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0003M       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0003U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0004M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0005U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0006M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0007M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0007U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 0008U       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 0009U       2       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 0010U       2       3 Date of Service Edit: C… Practitioner     Nature of Se…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 0011M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 0011U       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 0012M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 0013M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 0015M       1       2 Date of Service Edit: P… Practitioner     Code Descrip…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 0016M       2       3 Date of Service Edit: C… Practitioner     Nature of Se…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 0016U       1       3 Date of Service Edit: C… Practitioner     Nature of An…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32,182 more rows</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_mues.html">search_mues</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 14,677 × 5</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">mue_units</span> <span style="font-weight: bold;">mue_mai</span> <span style="font-weight: bold;">mue_rationale</span>                     <span style="font-weight: bold;">mue_service</span> </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0001U              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0002M              1       3 Nature of Analyte                 Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0002U              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0003M              1       3 Nature of Analyte                 Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0003U              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 0004M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 0005U              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 0006M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0007M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0007U              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 0008U              1       3 Nature of Analyte                 Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 0009U              2       3 Nature of Analyte                 Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 0010U              2       3 Nature of Service/Procedure       Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 0011M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 0011U              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 0012M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 0013M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 0015M              1       2 Code Descriptor / CPT Instruction Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 0016M              2       3 Nature of Service/Procedure       Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 0016U              1       3 Nature of Analyte                 Practitioner</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14,657 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="procedure-to-procedure-edits">Procedure-to-Procedure Edits<a class="anchor" aria-label="anchor" href="#procedure-to-procedure-edits"></a>
 </h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_ptp_edits.html">get_ptp_edits</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_ptps.html">search_ptps</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 95,057 × 6</span></span></span>
 <span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">ptp_type</span>      <span style="font-weight: bold;">ptp_complements</span>    <span style="font-weight: bold;">ptp_edit_mod</span> <span style="font-weight: bold;">ptp_edit_mod_desc</span></span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
