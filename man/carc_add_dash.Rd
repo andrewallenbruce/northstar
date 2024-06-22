@@ -11,7 +11,7 @@ carc_add_dash(x, placeholder = "||")
 \code{GROUP-CARC}, where \code{GROUP} is two letters, followed by a dash (\code{-}) and
 \code{CARC} is a two-to-three character alphanumeric string.}
 
-\item{placeholder}{\verb{<chr>} placeholder text for missing elements of CARC
+\item{placeholder}{\verb{<chr>} placeholder string for missing elements of CARC
 codes; default is \code{||}}
 }
 \value{
@@ -21,6 +21,7 @@ a \link[tibble:tibble-package]{tibble}
 Format CARC Codes for Identification
 }
 \examples{
-carc_add_dash(c("- 253", "OA-23", "PI-", "-45 "))
+carc_add_dash(c("- 253", "OA-23", "PI-", "-45 ", "OA23"))
 
 }
+\keyword{internal}

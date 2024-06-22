@@ -4,11 +4,13 @@
 \alias{search_adjustments}
 \title{Search Adjustment Codes}
 \usage{
-search_adjustments(type = NULL, ...)
+search_adjustments(adj_code = NULL, adj_type = NULL, ...)
 }
 \arguments{
-\item{type}{\verb{<chr>} type of Adjustment code; \code{all} (default), \code{group},
-\code{carc}, \code{rarc}}
+\item{adj_code}{\verb{<chr>} vector of Adjustment codes; default is \code{NULL}}
+
+\item{adj_type}{\verb{<chr>} type of Adjustment code; \code{Group}, \code{CARC}, \code{RARC};
+default is \code{NULL}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
@@ -58,6 +60,10 @@ remittance processing and are \emph{never} related to a specific adjustment or
 CARC.
 }
 \examples{
-search_adjustments()
+search_adjustments(adj_type = "Group")
+
+search_adjustments(adj_type = "CARC")
+
+search_adjustments(adj_type = "RARC")
 
 }

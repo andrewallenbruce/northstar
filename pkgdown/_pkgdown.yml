@@ -77,7 +77,6 @@ reference:
   contents:
   - describe_hcpcs
   - assign_adjustments
-  - carc_add_dash
   - starts_with("get_")
   - matches("search_")
 

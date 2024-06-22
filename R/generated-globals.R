@@ -9,6 +9,8 @@ utils::globalVariables(c(
   "hcpcs",
   # <calculate_amounts>
   "nonfacility",
+  # <search_ptps>
+  "ptp_complements",
   # <search_rbcs>
   "rbcs_category",
   # <search_rbcs>

@@ -217,7 +217,7 @@ carc_add_dash <- \(x, placeholder = "||") {
   dplyr::case_when(
     # "OA" -> "OA-||"
     stringr::str_detect(x,
-      stringr::regex("^[ACIOPR]{2}-?[ABDPW]{1,2}?[0-9]{1,3}$")) ~
+      stringr::regex("^[ACIOPR]{2}-?$")) ~
       stringr::str_c(x, "-", placeholder),
 
     # "OA-" -> "OA-||"

@@ -258,12 +258,12 @@ search_mues <- function(hcpcs_code = NULL,
 #'
 #' @param ptp_type `<chr>` `Comprehensive` (Column One) or `Component` (Column Two)
 #'
-#' @param ptp_edit_mod `<int>`
+#' @param ptp_mod `<int>`
 #'    * `1`: Allowed
 #'    * `0`: Not Allowed
 #'    * `9`: Not Applicable
 #'
-#' @param current `<lgl>` return only current edits, default is `TRUE`
+#' @param unnest `<lgl>` Unnest the `ptp_complements` column, default is `FALSE`
 #'
 #' @template args-dots
 #'
@@ -281,20 +281,20 @@ search_mues <- function(hcpcs_code = NULL,
 #' @export
 search_ptps <- function(hcpcs_code = NULL,
                         ptp_type = NULL,
-                        ptp_edit_mod = NULL,
-                        current = TRUE,
+                        ptp_mod = NULL,
+                        unnest = FALSE,
                           ...) {
 
-  ptp <- get_pin("ptp_long")
-  ptp <- fuimus::search_in_if(ptp, ptp$hcpcs, hcpcs_code)
+  ptp <- get_pin("ncci_ptp_nested")
+
+  ptp <- fuimus::search_in_if(ptp, ptp$hcpcs_code, hcpcs_code)
+
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_type, ptp_type)
-  ptp <- fuimus::search_in_if(ptp, ptp$ptp_edit_mod, ptp_edit_mod)
 
-  if (current) {
-    ptp <- vctrs::vec_slice(ptp,
-      ptp$ptp_deleted == as.Date("9999-12-31"))
+  ptp <- fuimus::search_in_if(ptp, ptp$ptp_mod, ptp_mod)
 
-    ptp$ptp_deleted <- NULL
+  if (unnest) {
+    ptp <- tidyr::unnest(ptp, ptp_complements)
   }
   return(.add_class(ptp))
 }

@@ -6,6 +6,12 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 
 # df %>% filter(if_all(starts_with("value"), ~ . == first(.)))
 
+# adj_re2 <- search_adjustments() |>
+#   select(adj_code, adj_type) |>
+#   mutate(adj = map(adj_code, \(x) infer_regex(x))) |>
+#   unnest_wider(adj, names_sep = "_")
+
+
 "https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits"
 
 ptp_zips <- fs::dir_ls("C:/Users/Andrew/Downloads", regexp = "*[f][0-9].zip$")

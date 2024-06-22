@@ -7,8 +7,8 @@
 search_ptps(
   hcpcs_code = NULL,
   ptp_type = NULL,
-  ptp_edit_mod = NULL,
-  current = TRUE,
+  ptp_mod = NULL,
+  unnest = FALSE,
   ...
 )
 }
@@ -17,14 +17,14 @@ search_ptps(
 
 \item{ptp_type}{\verb{<chr>} \code{Comprehensive} (Column One) or \code{Component} (Column Two)}
 
-\item{ptp_edit_mod}{\verb{<int>}
+\item{ptp_mod}{\verb{<int>}
 \itemize{
 \item \code{1}: Allowed
 \item \code{0}: Not Allowed
 \item \code{9}: Not Applicable
 }}
 
-\item{current}{\verb{<lgl>} return only current edits, default is \code{TRUE}}
+\item{unnest}{\verb{<lgl>} Unnest the \code{ptp_complements} column, default is \code{FALSE}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
