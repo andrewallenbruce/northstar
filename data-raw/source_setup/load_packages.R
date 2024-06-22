@@ -11,8 +11,8 @@ library(tidyverse)
 library(zip)
 
 
-library(forager)
-library(fuimus)
-library(northstar)
-library(pathologie)
-library(provider)
+# library(forager)
+# library(fuimus)
+# library(northstar)
+# library(pathologie)
+# library(provider)

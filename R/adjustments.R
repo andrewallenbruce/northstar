@@ -38,28 +38,37 @@
 #'   remittance processing and are *never* related to a specific adjustment or
 #'   CARC.
 #'
-#' @param type `<chr>` type of Adjustment code; `all` (default), `group`,
-#'   `carc`, `rarc`
+#' @param adj_code `<chr>` vector of Adjustment codes; default is `NULL`
+#'
+#' @param adj_type `<chr>` type of Adjustment code; `Group`, `CARC`, `RARC`;
+#'   default is `NULL`
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' search_adjustments()
+#' search_adjustments(adj_type = "Group")
+#'
+#' search_adjustments(adj_type = "CARC")
+#'
+#' search_adjustments(adj_type = "RARC")
 #'
 #' @autoglobal
 #'
 #' @export
-search_adjustments <- function(type = NULL, ...) {
+search_adjustments <- function(adj_code = NULL, adj_type = NULL, ...) {
 
-  # if (is.null(type)) {type <- "all"}
+  adj_type <- if (!is.null(adj_type)) match.arg(
+    adj_type,
+    c("Group", "CARC", "RARC"))
 
-  # type <- match.arg(type, c("all", "group", "carc", "rarc"))
+  adj <- get_pin("adj_codes")
 
-  ad <- get_pin("adj_codes")
+  adj <- fuimus::search_in_if(adj, adj$adj_type, adj_type)
+  adj <- fuimus::search_in_if(adj, adj$adj_code, adj_code)
 
-  return(.add_class(ad))
+  return(.add_class(adj))
 }
 
 #' Search Denial Types
@@ -187,90 +196,84 @@ assign_adjustments <- function(code, include_keys = FALSE, ...) {
 #'   `GROUP-CARC`, where `GROUP` is two letters, followed by a dash (`-`) and
 #'   `CARC` is a two-to-three character alphanumeric string.
 #'
-#' @param placeholder `<chr>` placeholder text for missing elements of CARC
+#' @param placeholder `<chr>` placeholder string for missing elements of CARC
 #'   codes; default is `||`
 #'
 #' @template returns
 #'
 #' @examples
-#' carc_add_dash(c("- 253", "OA-23", "PI-", "-45 "))
+#' carc_add_dash(c("- 253", "OA-23", "PI-", "-45 ", "OA23"))
 #'
 #' @autoglobal
 #'
+#' @keywords internal
+#'
 #' @export
-carc_add_dash <- function(x, placeholder = "||") {
+carc_add_dash <- \(x, placeholder = "||") {
 
+  # Remove all whitespace
   x <- gsub(" ", "", x)
 
   dplyr::case_when(
+    # "OA" -> "OA-||"
+    stringr::str_detect(x,
+      stringr::regex("^[ACIOPR]{2}-?[ABDPW]{1,2}?[0-9]{1,3}$")) ~
+      stringr::str_c(x, "-", placeholder),
 
-    ## CARC Groups -----------------
-    # beginning of string, 2 letters
-    stringr::str_detect(
-      x,
-      stringr::regex("^[A-Z]{2}$")
-      ) == TRUE ~ stringr::str_c(
-        x,
-        "-",
-        placeholder
-        ),
+    # "OA-" -> "OA-||"
+    stringr::str_detect(x,
+      stringr::regex("^[ACIOPR]{2}-$")) ~
+      stringr::str_c(x, placeholder),
 
-    # beginning of string, 2 letters, dash
-    stringr::str_detect(
-      x,
-      stringr::regex("^[A-Z]{2}-$")
-      ) == TRUE ~ stringr::str_c(
-        x,
-        placeholder
-        ),
+    # "OA" -> "OA-||"
+    stringr::str_detect(x,
+                        stringr::regex("^[ACIOPR]{2}$")) ~
+      stringr::str_c(x, "-", placeholder),
 
-    ## CARC Codes --------------------
-    # beginning of string, 1-3 numbers
-    stringr::str_detect(
-      x,
-      stringr::regex("^[0-9]{1,3}$")
-      ) == TRUE ~ stringr::str_c(
-        placeholder,
-        "-",
-        x
-        ),
+    # "123" -> "||-123"
+    stringr::str_detect(x,
+      stringr::regex("^[0-9]{1,3}$")) ~
+      stringr::str_c(placeholder, "-", x),
 
-    # beginning of string, dash, 1-3 numbers
-    stringr::str_detect(
-      x,
-      stringr::regex("^-[0-9]{1,3}$")
-      ) == TRUE ~ stringr::str_c(
-        placeholder,
-        x
-        ),
+    # "-123" -> "||-123"
+    stringr::str_detect(x,
+      stringr::regex("^-[0-9]{1,3}$")) ~
+      stringr::str_c(placeholder, x),
 
-    # beginning of string, 1 letter, 2-3 numbers
-    stringr::str_detect(
-      x,
-      stringr::regex("^[ABDPWY]{1}[0-9]{1,2}$")
-      ) == TRUE ~ stringr::str_c(
-        placeholder,
-        "-",
-        x
-        ),
+    # "A123" -> "||-A123"
+    stringr::str_detect(x,
+      stringr::regex("^[ABDPWY]{1}[0-9]{1,2}$")) ~
+      stringr::str_c(placeholder, "-", x),
 
-    # beginning of string, dash, 1 letter, 1-2 numbers
-    stringr::str_detect(
-      x,
-      stringr::regex("^-[ABDPWY]{1}[0-9]{1,2}$")
-      ) == TRUE ~ stringr::str_c(
-        placeholder,
-        x
-        ),
+    # "-A123" -> "||-A123"
+    stringr::str_detect(x,
+      stringr::regex("^-[ABDPWY]{1}[0-9]{1,2}$")) ~
+      stringr::str_c(placeholder, x),
 
     ## RARC Codes:
-    # stringr::str_detect(x,
-    # stringr::regex("^[A-Z]{1,2}[0-9]{2,3}$")
-    # ) == TRUE ~ stringr::str_c(placeholder, "-", x),
     # stringr::str_detect(x,
     # stringr::regex("^[A-Z]{1,2}[0-9]{2,3}$")
     # ) == TRUE ~ stringr::str_c(placeholder, x),
 
     .default = x
   )
+}
+
+
+#' @noRd
+#' @autoglobal
+is_carc <- \(x) {
+  stringr::str_detect(
+    gsub(" ", "", x),
+    stringr::regex(
+    "^[ACIOPR]{2}-?[ABDPW]?[0-9]{1,3}$"))
+}
+
+#' @noRd
+#' @autoglobal
+is_carc_group <- \(x) {
+  stringr::str_detect(
+    gsub(" ", "", x),
+    stringr::regex(
+    "^[ACIOPR]{2}-?$"))
 }

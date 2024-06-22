@@ -1,0 +1,10 @@
+file: ncci_ptp.qs
+file_size: 4359728
+pin_hash: c38380799c3e0937
+type: qs
+title: Procedure-to-Procedure Edits
+description: Medicare NCCI Procedure-to-Procedure Edits 07-01-2024
+tags: ~
+urls: ~
+created: 20240622T014541Z
+api_version: 1

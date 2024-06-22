@@ -42,8 +42,6 @@ hcpcs_with_rvus:
 - hcpcs_with_rvus/20240506T035047Z-190a8/
 modifiers:
 - modifiers/20240618T182144Z-22317/
-mues:
-- mues/20240419T125525Z-c2935/
 ncci_aoc:
 - ncci_aoc/20240620T170255Z-3930c/
 ncci_aoc_nested:
@@ -54,6 +52,10 @@ ncci_mue_out:
 - ncci_mue_out/20240621T043644Z-29db6/
 ncci_mue_prac:
 - ncci_mue_prac/20240621T043546Z-292b9/
+ncci_ptp:
+- ncci_ptp/20240622T014541Z-c3838/
+ncci_ptp_nested:
+- ncci_ptp_nested/20240622T015627Z-2369e/
 opps:
 - opps/20240428T092245Z-a93f8/
 pay_mac_fee:
@@ -62,8 +64,6 @@ pos_codes:
 - pos_codes/20240529T153029Z-7ee58/
 practicum:
 - practicum/20240528T001114Z-362d5/
-ptp_long:
-- ptp_long/20240419T132100Z-ad507/
 rbcs:
 - rbcs/20240423T144720Z-044c4/
 therapy_reduction:
