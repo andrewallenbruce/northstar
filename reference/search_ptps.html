@@ -99,8 +99,8 @@ together. Each edit has a Column One (Comprehensive) and Column Two
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_ptps</span><span class="op">(</span></span>
 <span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ptp_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ptp_edit_mod <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ptp_mod <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  unnest <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -115,15 +115,15 @@ together. Each edit has a Column One (Comprehensive) and Column Two
 <dd><p><code>&lt;chr&gt;</code> <code>Comprehensive</code> (Column One) or <code>Component</code> (Column Two)</p></dd>
 
 
-<dt>ptp_edit_mod</dt>
+<dt>ptp_mod</dt>
 <dd><p><code>&lt;int&gt;</code></p><ul><li><p><code>1</code>: Allowed</p></li>
 <li><p><code>0</code>: Not Allowed</p></li>
 <li><p><code>9</code>: Not Applicable</p></li>
 </ul></dd>
 
 
-<dt>current</dt>
-<dd><p><code>&lt;lgl&gt;</code> return only current edits, default is <code>TRUE</code></p></dd>
+<dt>unnest</dt>
+<dd><p><code>&lt;lgl&gt;</code> Unnest the <code>ptp_complements</code> column, default is <code>FALSE</code></p></dd>
 
 
 <dt>...</dt>
@@ -186,41 +186,37 @@ result is all that is required."</p><ul><li><p><a href="https://www.cms.gov/medi
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_ptps</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 56 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">ptp_type</span>      <span style="font-weight: bold;">ptp_complements</span>   <span style="font-weight: bold;">ptp_edit_mod</span> <span style="font-weight: bold;">ptp_edit_mod_desc</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [25 × 1]&gt;</span>            <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [46 × 1]&gt;</span>            1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [24 × 1]&gt;</span>            1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [63 × 1]&gt;</span>            1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [11 × 1]&gt;</span>            <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [26 × 1]&gt;</span>            <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11646 comprehensive <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>             <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 11646 component     <span style="color: #949494;">&lt;tibble [26 × 1]&gt;</span>            1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 11646 component     <span style="color: #949494;">&lt;tibble [9 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 11646 component     <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 11646 component     <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 11646 component     <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 11646 component     <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>             1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 33935 comprehensive <span style="color: #949494;">&lt;tibble [27 × 1]&gt;</span>            <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 33935 comprehensive <span style="color: #949494;">&lt;tibble [50 × 1]&gt;</span>            1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 33935 comprehensive <span style="color: #949494;">&lt;tibble [63 × 1]&gt;</span>            1 Allowed          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 33935 comprehensive <span style="color: #949494;">&lt;tibble [67 × 1]&gt;</span>            1 Allowed          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 56 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">ptp_type</span>      <span style="font-weight: bold;">ptp_complements</span>   <span style="font-weight: bold;">ptp_mod</span> <span style="font-weight: bold;">ptp_rationale</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        <span style="color: #949494;">0</span> Anesthesia service includ…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [25 × 1]&gt;</span>       <span style="color: #949494;">0</span> Misuse of Column Two code…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [46 × 1]&gt;</span>       1 Standards of medical/surg…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [24 × 1]&gt;</span>       1 Misuse of Column Two code…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [63 × 1]&gt;</span>       1 CPT Manual or CMS manual …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [4 × 1]&gt;</span>        1 Mutually exclusive proced…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [11 × 1]&gt;</span>       <span style="color: #949494;">0</span> CPT Manual or CMS manual …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [26 × 1]&gt;</span>       <span style="color: #949494;">0</span> Standards of medical/surg…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1 More extensive procedure  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11646      Comprehensive <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>        <span style="color: #949494;">0</span> HCPCS/CPT procedure code …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [27 × 1]&gt;</span>       <span style="color: #949494;">0</span> Misuse of Column Two code…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [50 × 1]&gt;</span>       1 Standards of medical/surg…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [63 × 1]&gt;</span>       1 CPT Manual or CMS manual …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [67 × 1]&gt;</span>       1 Misuse of Column Two code…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [13 × 1]&gt;</span>       <span style="color: #949494;">0</span> HCPCS/CPT procedure code …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>        1 CPT Separate procedure de…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>        <span style="color: #949494;">0</span> CPT Separate procedure de…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [2 × 1]&gt;</span>        <span style="color: #949494;">0</span> Mutually exclusive proced…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [11 × 1]&gt;</span>       <span style="color: #949494;">0</span> CPT Manual or CMS manual …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 33935      Comprehensive <span style="color: #949494;">&lt;tibble [24 × 1]&gt;</span>       <span style="color: #949494;">0</span> Standards of medical/surg…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 36 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">ptp_edit_rationale</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">search_ptps</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"43116"</span>,</span></span>
 <span class="r-in"><span>            ptp_type <span class="op">=</span> <span class="st">"component"</span>,</span></span>
 <span class="r-in"><span>            ptp_edit_mod <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">ptp_type</span>  <span style="font-weight: bold;">ptp_complements</span>  <span style="font-weight: bold;">ptp_edit_mod</span> <span style="font-weight: bold;">ptp_edit_mod_desc</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 43116 component <span style="color: #949494;">&lt;tibble [3 × 1]&gt;</span>            <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 43116 component <span style="color: #949494;">&lt;tibble [1 × 1]&gt;</span>            <span style="color: #949494;">0</span> Not Allowed      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">ptp_edit_rationale</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 variables: </span><span style="color: #949494; font-weight: bold;">hcpcs_code</span><span style="color: #949494;"> &lt;chr&gt;, </span><span style="color: #949494; font-weight: bold;">ptp_type</span><span style="color: #949494;"> &lt;chr&gt;, </span><span style="color: #949494; font-weight: bold;">ptp_complements</span><span style="color: #949494;"> &lt;list&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">ptp_mod</span><span style="color: #949494;"> &lt;int&gt;, </span><span style="color: #949494; font-weight: bold;">ptp_rationale</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
