@@ -16,6 +16,6 @@ vector of PC/TC indicator descriptions
 PFS PC/TC Indicator Descriptions
 }
 \examples{
-switch_pctc_indicator(0:9)
+switch_pctc_indicator(as.character(0:9))
 
 }

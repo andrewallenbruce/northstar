@@ -16,6 +16,6 @@ vector of OPPS indicator descriptions
 PFS OPPS Indicator Descriptions
 }
 \examples{
-switch_opps_indicator(c(1, 9))
+switch_opps_indicator(c("1", "9"))
 
 }

@@ -1,3 +1,26 @@
+#' NCCI PTP CCMI Descriptions
+#'
+#' @param x vector of PTP CCMIs
+#'
+#' @returns vector of PTP CCMI descriptions
+#'
+#' @examples
+#' switch_ptp_mod(as.character(0:9))
+#'
+#' @autoglobal
+#'
+#' @export
+switch_ptp_mod <- function(x) {
+
+  kit::nswitch(
+    x = x,
+    "0", "Not Allowed",
+    "1", "Allowed",
+    "9", "Not Applicable",
+    default = NA_character_
+  )
+}
+
 #' NCCI MUE Adjudication Indicator Descriptions
 #'
 #' @param x vector of MUE Adjudication Indicators
@@ -5,16 +28,12 @@
 #' @returns vector of MUE Adjudication Indicator descriptions
 #'
 #' @examples
-#' switch_mue_mai(1:3)
+#' switch_mue_mai(as.character(1:3))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_mue_mai <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -32,16 +51,12 @@ switch_mue_mai <- function(x) {
 #' @returns vector of Add-On Code Edit Type descriptions
 #'
 #' @examples
-#' switch_addon_edits(1:3)
+#' switch_addon_edits(as.character(1:3))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_addon_edits <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -89,16 +104,12 @@ switch_global_days <- function(x) {
 #' @returns vector of Team Surgery descriptions
 #'
 #' @examples
-#' switch_team_surgery(0:9)
+#' switch_team_surgery(as.character(0:9))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_team_surgery <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
       x = x,
@@ -121,14 +132,8 @@ switch_team_surgery <- function(x) {
 #' @examples
 #' switch_bilateral_surgery(c(0:3, "9"))
 #'
-#' @keywords internal
-#'
 #' @export
 switch_bilateral_surgery <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -151,16 +156,12 @@ switch_bilateral_surgery <- function(x) {
 #' @returns vector of Multiple Procedure descriptions
 #'
 #' @examples
-#' switch_multiple_procedure(0:9)
+#' switch_multiple_procedure(as.character(0:9))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_multiple_procedure <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -187,16 +188,12 @@ switch_multiple_procedure <- function(x) {
 #' @returns vector of Co-Surgeon descriptions
 #'
 #' @examples
-#' switch_co_surgeon(0:9)
+#' switch_co_surgeon(as.character(0:9))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_co_surgeon <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -224,16 +221,12 @@ switch_co_surgeon <- function(x) {
 #' @returns vector of Assistant Surgery descriptions
 #'
 #' @examples
-#' switch_assistant_surgery(0:9)
+#' switch_assistant_surgery(as.character(0:9))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_assistant_surgery <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -290,16 +283,12 @@ switch_diagnostic_imaging <- function(x) {
 #' @returns vector of OPPS indicator descriptions
 #'
 #' @examples
-#' switch_opps_indicator(c(1, 9))
+#' switch_opps_indicator(c("1", "9"))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_opps_indicator <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -316,16 +305,12 @@ switch_opps_indicator <- function(x) {
 #' @returns vector of PC/TC indicator descriptions
 #'
 #' @examples
-#' switch_pctc_indicator(0:9)
+#' switch_pctc_indicator(as.character(0:9))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_pctc_indicator <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -468,17 +453,14 @@ switch_supervision <- function(x) {
 #' @returns vector of ASC Group descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = c("YY", 99),
-#'               desc = switch_asc_group(code))
+#' dplyr::tibble(
+#'   code = c("YY", 99),
+#'   desc = switch_asc_group(code))
 #'
 #' @autoglobal
 #'
 #' @export
 switch_asc_group <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,
@@ -495,7 +477,9 @@ switch_asc_group <- function(x) {
 #' @returns vector of Coverage descriptions
 #'
 #' @examples
-#' dplyr::tibble(code = c("C", "D", "I", "M", "S"), desc = switch_coverage(code))
+#' dplyr::tibble(
+#'   code = c("C", "D", "I", "M", "S"),
+#'   desc = switch_coverage(code))
 #'
 #' @autoglobal
 #'
@@ -665,10 +649,6 @@ switch_lab_certification <- function(x) {
 #'
 #' @export
 switch_type_of_service <- function(x) {
-
-  if (!rlang::is_character(x)) {
-    x <- as.character(x)
-  }
 
   kit::nswitch(
     x = x,

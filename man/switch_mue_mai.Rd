@@ -16,6 +16,6 @@ vector of MUE Adjudication Indicator descriptions
 NCCI MUE Adjudication Indicator Descriptions
 }
 \examples{
-switch_mue_mai(1:3)
+switch_mue_mai(as.character(1:3))
 
 }

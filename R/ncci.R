@@ -88,9 +88,8 @@ search_addons <- function(hcpcs_code = NULL,
     aoc$aoc_type,
     aoc_type)
 
-  if (unnest) {
-    aoc <- tidyr::unnest(aoc, aoc_complements)
-  }
+  aoc <- if (unnest) tidyr::unnest(aoc, aoc_complements)
+
   return(.add_class(aoc))
 }
 
@@ -256,10 +255,13 @@ search_mues <- function(hcpcs_code = NULL,
 #'
 #' @template args-hcpcs
 #'
+#' @param service `<chr>` `Practitioner` or `Outpatient`; default is
+#'   `Practitioner`
+#'
 #' @param ptp_type `<chr>` `Comprehensive` (Column One) or `Component` (Column Two)
 #'
 #' @param ptp_mod `<int>`
-#'    * `1`: Allowed
+#'    * `1`: Code-pair allowed with NCCI PTP-associated Modifier
 #'    * `0`: Not Allowed
 #'    * `9`: Not Applicable
 #'
@@ -273,19 +275,25 @@ search_mues <- function(hcpcs_code = NULL,
 #' search_ptps(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
 #' search_ptps(hcpcs_code = "43116",
-#'             ptp_type = "component",
-#'             ptp_edit_mod = 0)
+#'             ptp_type = "Component",
+#'             ptp_mod = 0)
 #'
 #' @autoglobal
 #'
 #' @export
 search_ptps <- function(hcpcs_code = NULL,
+                        service = c("Practitioner", "Outpatient"),
                         ptp_type = NULL,
                         ptp_mod = NULL,
                         unnest = FALSE,
                           ...) {
 
-  ptp <- get_pin("ncci_ptp_nested")
+  service <- match.arg(service)
+
+  ptp <- switch(
+    service,
+    Practitioner = get_pin("ncci_ptp_prac"),
+    Outpatient   = get_pin("ncci_out_out"))
 
   ptp <- fuimus::search_in_if(ptp, ptp$hcpcs_code, hcpcs_code)
 
@@ -293,8 +301,7 @@ search_ptps <- function(hcpcs_code = NULL,
 
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_mod, ptp_mod)
 
-  if (unnest) {
-    ptp <- tidyr::unnest(ptp, ptp_complements)
-  }
+  ptp <- if (unnest) tidyr::unnest(ptp, ptp_complements)
+
   return(.add_class(ptp))
 }

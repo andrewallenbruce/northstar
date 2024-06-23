@@ -16,6 +16,6 @@ vector of Add-On Code Edit Type descriptions
 NCCI Add-On Code Edit Type Descriptions
 }
 \examples{
-switch_addon_edits(1:3)
+switch_addon_edits(as.character(1:3))
 
 }

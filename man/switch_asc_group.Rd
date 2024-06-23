@@ -16,7 +16,8 @@ vector of ASC Group descriptions
 HCPCS ASC Group Descriptions
 }
 \examples{
-dplyr::tibble(code = c("YY", 99),
-              desc = switch_asc_group(code))
+dplyr::tibble(
+  code = c("YY", 99),
+  desc = switch_asc_group(code))
 
 }

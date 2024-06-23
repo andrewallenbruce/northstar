@@ -1,10 +1,8 @@
-source(here::here("data-raw", "load_packages.R"))
-source(here::here("data-raw", "file_paths.R"))
-source(here::here("data-raw", "pins_functions.R"))
-source(here::here("data-raw", "case_labeling_functions.R"))
+source(here::here("data-raw", "source_setup", "setup.R"))
 
 # NATIONAL PHYSICIAN FEE SCHEDULE RELATIVE VALUE FILE CALENDAR YEAR 2024
 # https://www.cms.gov/medicare/payment/fee-schedules/physician/pfs-relative-value-files
+
 rvu <- read_excel(
   rvu_xl,
   col_types = "text") |>

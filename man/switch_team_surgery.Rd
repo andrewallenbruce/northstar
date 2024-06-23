@@ -16,6 +16,6 @@ vector of Team Surgery descriptions
 Modifier 66: Services for which Team Surgeons may be paid
 }
 \examples{
-switch_team_surgery(0:9)
+switch_team_surgery(as.character(0:9))
 
 }

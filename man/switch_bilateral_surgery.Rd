@@ -19,4 +19,3 @@ Modifier 50: Indicates services subject to payment adjustment
 switch_bilateral_surgery(c(0:3, "9"))
 
 }
-\keyword{internal}

@@ -16,6 +16,8 @@ vector of Coverage descriptions
 HCPCS Coverage Descriptions
 }
 \examples{
-dplyr::tibble(code = c("C", "D", "I", "M", "S"), desc = switch_coverage(code))
+dplyr::tibble(
+  code = c("C", "D", "I", "M", "S"),
+  desc = switch_coverage(code))
 
 }

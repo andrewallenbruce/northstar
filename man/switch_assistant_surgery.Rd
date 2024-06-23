@@ -26,6 +26,6 @@ Modifiers:
 }
 }
 \examples{
-switch_assistant_surgery(0:9)
+switch_assistant_surgery(as.character(0:9))
 
 }

@@ -54,8 +54,10 @@ ncci_mue_prac:
 - ncci_mue_prac/20240621T043546Z-292b9/
 ncci_ptp:
 - ncci_ptp/20240622T014541Z-c3838/
-ncci_ptp_nested:
-- ncci_ptp_nested/20240622T015627Z-2369e/
+ncci_ptp_out:
+- ncci_ptp_out/20240622T072930Z-9893a/
+ncci_ptp_prac:
+- ncci_ptp_prac/20240622T072926Z-12e14/
 opps:
 - opps/20240428T092245Z-a93f8/
 pay_mac_fee:

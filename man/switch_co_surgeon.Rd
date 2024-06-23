@@ -17,6 +17,6 @@ Modifier 62: Services for which two surgeons,
 each in a different specialty, may be paid.
 }
 \examples{
-switch_co_surgeon(0:9)
+switch_co_surgeon(as.character(0:9))
 
 }

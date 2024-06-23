@@ -6,6 +6,7 @@
 \usage{
 search_ptps(
   hcpcs_code = NULL,
+  service = c("Practitioner", "Outpatient"),
   ptp_type = NULL,
   ptp_mod = NULL,
   unnest = FALSE,
@@ -15,11 +16,14 @@ search_ptps(
 \arguments{
 \item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
+\item{service}{\verb{<chr>} \code{Practitioner} or \code{Outpatient}; default is
+\code{Practitioner}}
+
 \item{ptp_type}{\verb{<chr>} \code{Comprehensive} (Column One) or \code{Component} (Column Two)}
 
 \item{ptp_mod}{\verb{<int>}
 \itemize{
-\item \code{1}: Allowed
+\item \code{1}: Code-pair allowed with NCCI PTP-associated Modifier
 \item \code{0}: Not Allowed
 \item \code{9}: Not Applicable
 }}
@@ -97,7 +101,7 @@ result is all that is required."
 search_ptps(hcpcs_code = c("39503", "43116", "33935", "11646"))
 
 search_ptps(hcpcs_code = "43116",
-            ptp_type = "component",
-            ptp_edit_mod = 0)
+            ptp_type = "Component",
+            ptp_mod = 0)
 
 }

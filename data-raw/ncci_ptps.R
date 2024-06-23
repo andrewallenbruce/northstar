@@ -77,46 +77,52 @@ pin_update(
 
 fs::file_delete(here::here(fs::dir_ls(glob = "*.xlsx")))
 
-comprehensive <- ptp_prac |>
-  reframe(
-    hcpcs_code = column_1,
-    ptp_type = "Comprehensive",
-    ptp_complement = column_2,
-    ptp_deleted = deletion,
-    ptp_mod = modifier,
-    ptp_rationale = rationale
-         ) |>
-  nest(ptp_complements = c(ptp_complement)) |>
-  relocate(ptp_complements, .after = ptp_type) |>
-  filter(ptp_deleted >= Sys.Date()) |>
-  select(-ptp_deleted)
+nest_ptp_sets <- function(x) {
 
-component <- ptp_prac |>
-  reframe(
-    hcpcs_code = column_2,
-    ptp_type = "Component",
-    ptp_complement = column_1,
-    ptp_deleted = deletion,
-    ptp_mod = modifier,
-    ptp_rationale = rationale
-  ) |>
-  nest(ptp_complements = c(ptp_complement)) |>
-  relocate(ptp_complements, .after = ptp_type) |>
-  filter(ptp_deleted >= Sys.Date()) |>
-  select(-ptp_deleted)
+  comprehensive <- x |>
+    dplyr::reframe(
+      hcpcs_code     = column_1,
+      ptp_type       = "Comprehensive",
+      ptp_complement = column_2,
+      ptp_deleted    = deletion,
+      ptp_mod        = modifier,
+      ptp_rationale  = rationale
+    ) |>
+    tidyr::nest(ptp_complements = c(ptp_complement)) |>
+    dplyr::relocate(ptp_complements, .after = ptp_type)
 
-ptp_nest <- vctrs::vec_rbind(comprehensive, component)
+  component <- x |>
+    dplyr::reframe(
+      hcpcs_code     = column_2,
+      ptp_type       = "Component",
+      ptp_complement = column_1,
+      ptp_deleted    = deletion,
+      ptp_mod        = modifier,
+      ptp_rationale  = rationale
+    ) |>
+    tidyr::nest(ptp_complements = c(ptp_complement)) |>
+    dplyr::relocate(ptp_complements,
+             .after = ptp_type)
+
+  vctrs::vec_rbind(comprehensive, component)
+}
+
+ptp_prac_nest <- nest_ptp_sets(ptp_prac)
+
+ptp_out_nest <- nest_ptp_sets(ptp_out)
 
 # Update Pin
 pin_update(
-  ptp_nest,
-  name = "ncci_ptp_nested",
-  title = "Procedure-to-Procedure Edits",
-  description = "Medicare NCCI Procedure-to-Procedure Edits 07-01-2024"
+  ptp_prac_nest,
+  name = "ncci_ptp_prac",
+  title = "Procedure-to-Procedure Edits - Practitioner",
+  description = "Medicare NCCI Procedure-to-Procedure Edits 07-01-2024 - Practitioner"
 )
 
-# dplyr::case_when(
-#   ptp_edit_mod == 0 ~ "Not Allowed",
-#   ptp_edit_mod == 1 ~ "Allowed",
-#   ptp_edit_mod == 9 ~ "Not Applicable"
-# )
+# Update Pin
+pin_update(
+  ptp_out_nest,
+  name = "ncci_ptp_out",
+  title = "Procedure-to-Procedure Edits - Outpatient Hospital",
+  description = "Medicare NCCI Procedure-to-Procedure Edits 07-01-2024 - Outpatient Hospital"
+)

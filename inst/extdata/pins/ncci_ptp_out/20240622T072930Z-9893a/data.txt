@@ -1,0 +1,10 @@
+file: ncci_ptp_out.qs
+file_size: 1684116
+pin_hash: 9893ab159cfb5922
+type: qs
+title: Procedure-to-Procedure Edits - Outpatient Hospital
+description: Medicare NCCI Procedure-to-Procedure Edits 07-01-2024 - Outpatient Hospital
+tags: ~
+urls: ~
+created: 20240622T072930Z
+api_version: 1
