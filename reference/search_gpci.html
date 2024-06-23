@@ -199,10 +199,14 @@ adjustments under the PFS across Medicare fee schedule areas.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_gpci</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, locality <span class="op">=</span> <span class="st">"01"</span>, mac <span class="op">=</span> <span class="st">"10212"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">mac</span>   <span style="font-weight: bold;">state</span> <span style="font-weight: bold;">locality</span> <span style="font-weight: bold;">area</span>    <span style="font-weight: bold;">counties</span>                <span style="font-weight: bold;">gpci_work</span> <span style="font-weight: bold;">gpci_pe</span> <span style="font-weight: bold;">gpci_mp</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 10212 GA    01       ATLANTA BUTTS, CHEROKEE, CLAYT…         1   <span style="color: #949494;">0.</span>997    1.13</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_pin("gpci"):</span> `pin` must be one of "adj_codes", "anesthesia", "cpt_descriptors",</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> "cpt_pla_codes", "denials_extract", "denials_site", "hcpcs_descriptions",</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> "modifiers", "ncci_aoc", "ncci_aoc_nested", "ncci_mue_dme", "ncci_mue_out",</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> "ncci_mue_prac", "ncci_ptp", "ncci_ptp_out", "ncci_ptp_prac", "pay_mac_fee",</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> "pfs_anesthesia", "pfs_gpci", "pfs_locco", "pfs_opps", "pfs_rvu", "pos_codes",</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> "practicum", "rbcs", "therapy_reduction", "two_descriptions", or "two_therest",</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> not "gpci".</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you mean "pfs_gpci"?</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
