@@ -56,20 +56,20 @@
 #' @template returns
 #'
 #' @examples
-#' search_addons(hcpcs_code = "22532", aoc_type  = "Primary")
+#' search_aoc(hcpcs_code = "22532", aoc_type = "Primary")
 #'
-#' search_addons(hcpcs_code = c("22630", "77001", "88334", "64727"))
+#' search_aoc(hcpcs_code = c("22630", "77001", "88334", "64727"))
 #'
-#' search_addons(hcpcs_code = "33935", unnest = TRUE)
+#' search_aoc(hcpcs_code = "33935", unnest = TRUE)
 #'
 #' @autoglobal
 #'
 #' @export
-search_addons <- function(hcpcs_code = NULL,
-                          aoc_type = NULL,
-                          aoc_edit = NULL,
-                          unnest = FALSE,
-                          ...) {
+search_aoc <- function(hcpcs_code = NULL,
+                       aoc_type = NULL,
+                       aoc_edit = NULL,
+                       unnest = FALSE,
+                       ...) {
 
   aoc <- get_pin("ncci_aoc_nested")
 
@@ -88,7 +88,7 @@ search_addons <- function(hcpcs_code = NULL,
     aoc$aoc_type,
     aoc_type)
 
-  aoc <- if (unnest) tidyr::unnest(aoc, aoc_complements)
+  aoc <- if (unnest) tidyr::unnest(aoc, aoc_complements) else aoc
 
   return(.add_class(aoc))
 }
@@ -157,37 +157,37 @@ search_addons <- function(hcpcs_code = NULL,
 #'
 #' @template args-hcpcs
 #'
-#' @param service `<chr>` `Practitioner`, `Outpatient`, or `DME`; default is
+#' @param mue_service `<chr>` `Practitioner`, `Outpatient`, or `DME`; default is
 #'   `Practitioner`
 #'
-#' @param mai `<int>` MUE adjudication indicator; `1`, `2`, or `3`
+#' @param mue_mai `<int>` MUE adjudication indicator; `1`, `2`, or `3`
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' search_mues(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#' search_mue(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
 #' @autoglobal
 #'
 #' @export
-search_mues <- function(hcpcs_code = NULL,
-                        service = c("Practitioner", "Outpatient", "DME"),
-                        mai = NULL,
-                        ...) {
+search_mue <- function(hcpcs_code = NULL,
+                       mue_service = c("Practitioner", "Outpatient", "DME"),
+                       mue_mai = NULL,
+                       ...) {
 
-  service <- match.arg(service)
+  mue_service <- match.arg(mue_service)
 
   mue <- switch(
-    service,
+    mue_service,
     Practitioner = get_pin("ncci_mue_prac"),
     Outpatient   = get_pin("ncci_mue_out"),
     DME          = get_pin("ncci_mue_dme"))
 
   mue <- fuimus::search_in_if(mue, mue$hcpcs_code, hcpcs_code)
 
-  mue <- fuimus::search_in_if(mue, mue$mue_mai, mai)
+  mue <- fuimus::search_in_if(mue, mue$mue_mai, mue_mai)
 
   return(.add_class(mue))
 }
@@ -255,7 +255,7 @@ search_mues <- function(hcpcs_code = NULL,
 #'
 #' @template args-hcpcs
 #'
-#' @param service `<chr>` `Practitioner` or `Outpatient`; default is
+#' @param ptp_service `<chr>` `Practitioner` or `Outpatient`; default is
 #'   `Practitioner`
 #'
 #' @param ptp_type `<chr>` `Comprehensive` (Column One) or `Component` (Column Two)
@@ -272,26 +272,26 @@ search_mues <- function(hcpcs_code = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_ptps(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#' search_ptp(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
-#' search_ptps(hcpcs_code = "43116",
-#'             ptp_type = "Component",
-#'             ptp_mod = 0)
+#' search_ptp(hcpcs_code = "43116",
+#'            ptp_type = "Component",
+#'            ptp_mod = 0)
 #'
 #' @autoglobal
 #'
 #' @export
-search_ptps <- function(hcpcs_code = NULL,
-                        service = c("Practitioner", "Outpatient"),
-                        ptp_type = NULL,
-                        ptp_mod = NULL,
-                        unnest = FALSE,
-                          ...) {
+search_ptp <- function(hcpcs_code = NULL,
+                       ptp_service = c("Practitioner", "Outpatient"),
+                       ptp_type = NULL,
+                       ptp_mod = NULL,
+                       unnest = FALSE,
+                       ...) {
 
-  service <- match.arg(service)
+  ptp_service <- match.arg(ptp_service, c("Practitioner", "Outpatient"))
 
   ptp <- switch(
-    service,
+    ptp_service,
     Practitioner = get_pin("ncci_ptp_prac"),
     Outpatient   = get_pin("ncci_out_out"))
 
@@ -301,7 +301,7 @@ search_ptps <- function(hcpcs_code = NULL,
 
   ptp <- fuimus::search_in_if(ptp, ptp$ptp_mod, ptp_mod)
 
-  ptp <- if (unnest) tidyr::unnest(ptp, ptp_complements)
+  ptp <- if (unnest) tidyr::unnest(ptp, ptp_complements) else ptp
 
   return(.add_class(ptp))
 }
