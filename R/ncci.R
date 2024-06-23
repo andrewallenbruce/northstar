@@ -204,7 +204,11 @@ search_mue <- function(hcpcs_code = NULL,
 #' the Column Two code is denied unless a clinically appropriate NCCI
 #' PTP-associated modifier is also reported.
 #'
-#' The NCCI [PTP edits](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits) and [MUEs](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits) are usually updated at least quarterly.
+#' The NCCI [PTP
+#' edits](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits)
+#' and
+#' [MUEs](https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits)
+#' are usually updated at least quarterly.
 #'
 #' ## PTP Modifiers
 #'
@@ -236,15 +240,20 @@ search_mue <- function(hcpcs_code = NULL,
 #' patient encounter and in contiguous structures in the same organ or anatomic
 #' region, NCCI PTP-associated modifiers generally shouldn’t be used.
 #'
-#' Some Column One/Column Two correct coding edits would never warrant the use of
-#' any of the modifiers associated with the NCCI PTP edits. These code pairs are
-#' assigned a Correct Coding Modifier Indicator (CCMI) of `0`.
+#' Some Column One/Column Two correct coding edits would never warrant the use
+#' of any of the modifiers associated with the NCCI PTP edits. These code pairs
+#' are assigned a Correct Coding Modifier Indicator (CCMI) of `0`.
+#'
+#' NCCI PTP modifier indicators of `9` indicate that the use of NCCI
+#' PTP-associated modifiers is not specified. This indicator is used for all
+#' code pairs that have a deletion date that is the same as the effective date.
+#' This indicator prevents blank spaces from appearing in the indicator field.
 #'
 #'
-#' Modifier 59 may be used only if no other appropriate modifier describes the service.
-#' Claim line edits allow use of NCCI PTP-associated **Modifier 91** to bypass
-#' them if one or more of the individual laboratory tests are repeated on the
-#' same date of service.
+#' Modifier 59 may be used only if no other appropriate modifier describes the
+#' service. Claim line edits allow use of NCCI PTP-associated **Modifier 91** to
+#' bypass them if one or more of the individual laboratory tests are repeated on
+#' the same date of service.
 #'
 #' The repeat testing must be medically reasonable and necessary and can’t be
 #' performed to "confirm initial results; due to testing problems with specimens
@@ -258,12 +267,13 @@ search_mue <- function(hcpcs_code = NULL,
 #' @param ptp_service `<chr>` `Practitioner` or `Outpatient`; default is
 #'   `Practitioner`
 #'
-#' @param ptp_type `<chr>` `Comprehensive` (Column One) or `Component` (Column Two)
+#' @param ptp_type `<chr>` `Comprehensive` (Column One) or `Component` (Column
+#'   Two)
 #'
 #' @param ptp_mod `<int>`
-#'    * `1`: Code-pair allowed with NCCI PTP-associated Modifier
-#'    * `0`: Not Allowed
-#'    * `9`: Not Applicable
+#'    * `1`: Allowed: The code-pair is allowed with an NCCI PTP-associated modifier.
+#'    * `0`: Not Allowed: An NCCI PTP-associated modifier is not allowed and will not bypass the edit.
+#'    * `9`: Not Applicable: The use of NCCI PTP-associated modifiers is not specified.
 #'
 #' @param unnest `<lgl>` Unnest the `ptp_complements` column, default is `FALSE`
 #'

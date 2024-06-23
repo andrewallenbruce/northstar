@@ -17,18 +17,18 @@ library(northstar)
 
 
 ```{r}
-search_addons()
+search_aoc()
 ```
 
 ## Medicallly Unlikely Edits
 
 ```{r}
-search_mues()
+search_mue()
 ```
 
 ## Procedure-to-Procedure Edits
 
 ```{r}
-search_ptps()
+search_ptp()
 ```
 

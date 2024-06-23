@@ -19,13 +19,14 @@ search_ptp(
 \item{ptp_service}{\verb{<chr>} \code{Practitioner} or \code{Outpatient}; default is
 \code{Practitioner}}
 
-\item{ptp_type}{\verb{<chr>} \code{Comprehensive} (Column One) or \code{Component} (Column Two)}
+\item{ptp_type}{\verb{<chr>} \code{Comprehensive} (Column One) or \code{Component} (Column
+Two)}
 
 \item{ptp_mod}{\verb{<int>}
 \itemize{
-\item \code{1}: Code-pair allowed with NCCI PTP-associated Modifier
-\item \code{0}: Not Allowed
-\item \code{9}: Not Applicable
+\item \code{1}: Allowed: The code-pair is allowed with an NCCI PTP-associated modifier.
+\item \code{0}: Not Allowed: An NCCI PTP-associated modifier is not allowed and will not bypass the edit.
+\item \code{9}: Not Applicable: The use of NCCI PTP-associated modifiers is not specified.
 }}
 
 \item{unnest}{\verb{<lgl>} Unnest the \code{ptp_complements} column, default is \code{FALSE}}
@@ -47,7 +48,10 @@ on the same date of service, the Column One code is eligible for payment, but
 the Column Two code is denied unless a clinically appropriate NCCI
 PTP-associated modifier is also reported.
 
-The NCCI \href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits}{PTP edits} and \href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits}{MUEs} are usually updated at least quarterly.
+The NCCI \href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits}{PTP edits}
+and
+\href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits}{MUEs}
+are usually updated at least quarterly.
 \subsection{PTP Modifiers}{
 
 Modifiers that may be used under appropriate clinical circumstances to bypass
@@ -79,14 +83,19 @@ Similarly, if the two corresponding procedures are performed at the same
 patient encounter and in contiguous structures in the same organ or anatomic
 region, NCCI PTP-associated modifiers generally shouldn’t be used.
 
-Some Column One/Column Two correct coding edits would never warrant the use of
-any of the modifiers associated with the NCCI PTP edits. These code pairs are
-assigned a Correct Coding Modifier Indicator (CCMI) of \code{0}.
+Some Column One/Column Two correct coding edits would never warrant the use
+of any of the modifiers associated with the NCCI PTP edits. These code pairs
+are assigned a Correct Coding Modifier Indicator (CCMI) of \code{0}.
 
-Modifier 59 may be used only if no other appropriate modifier describes the service.
-Claim line edits allow use of NCCI PTP-associated \strong{Modifier 91} to bypass
-them if one or more of the individual laboratory tests are repeated on the
-same date of service.
+NCCI PTP modifier indicators of \code{9} indicate that the use of NCCI
+PTP-associated modifiers is not specified. This indicator is used for all
+code pairs that have a deletion date that is the same as the effective date.
+This indicator prevents blank spaces from appearing in the indicator field.
+
+Modifier 59 may be used only if no other appropriate modifier describes the
+service. Claim line edits allow use of NCCI PTP-associated \strong{Modifier 91} to
+bypass them if one or more of the individual laboratory tests are repeated on
+the same date of service.
 
 The repeat testing must be medically reasonable and necessary and can’t be
 performed to "confirm initial results; due to testing problems with specimens
