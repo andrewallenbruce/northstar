@@ -97,13 +97,13 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_addons.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_adjustments.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_anesthesia.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_aoc.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc>
@@ -115,7 +115,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mues.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mue.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_opps.html</loc>
@@ -127,7 +127,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_pos.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptps.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptp.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
