@@ -4,42 +4,14 @@ anesthesia:
 - anesthesia/20240423T151006Z-213ea/
 cpt_descriptors:
 - cpt_descriptors/20240419T052848Z-7d8ec/
-cpt_hcpcs_vecs:
-- cpt_hcpcs_vecs/20240423T110139Z-390a8/
 cpt_pla_codes:
 - cpt_pla_codes/20240430T183333Z-ee46c/
 denials_extract:
 - denials_extract/20240618T141211Z-dd08c/
 denials_site:
 - denials_site/20240618T140439Z-58f21/
-gpci:
-- gpci/20240428T221129Z-6622e/
 hcpcs_descriptions:
 - hcpcs_descriptions/20240506T143147Z-1cbb8/
-hcpcs_dximg:
-- hcpcs_dximg/20240425T230953Z-ef040/
-hcpcs_endo:
-- hcpcs_endo/20240425T230853Z-ece9a/
-hcpcs_main_ind:
-- hcpcs_main_ind/20240425T231447Z-9d785/
-hcpcs_not_used:
-- hcpcs_not_used/20240425T230804Z-736f2/
-hcpcs_rare:
-- hcpcs_rare/20240425T230720Z-c13d5/
-hcpcs_rvu_descriptions:
-- hcpcs_rvu_descriptions/20240425T225950Z-a75be/
-hcpcs_surg_ind:
-- hcpcs_surg_ind/20240425T231352Z-db93d/
-hcpcs_with_mod:
-- hcpcs_with_mod/20240425T231150Z-bc837/
-hcpcs_with_op_pct:
-- hcpcs_with_op_pct/20240425T230614Z-6b8fd/
-hcpcs_with_pctc:
-- hcpcs_with_pctc/20240425T231042Z-52bc2/
-hcpcs_with_phys_vis:
-- hcpcs_with_phys_vis/20240426T002935Z-4d7e7/
-hcpcs_with_rvus:
-- hcpcs_with_rvus/20240506T035047Z-190a8/
 modifiers:
 - modifiers/20240618T182144Z-22317/
 ncci_aoc:
@@ -58,10 +30,18 @@ ncci_ptp_out:
 - ncci_ptp_out/20240622T072930Z-9893a/
 ncci_ptp_prac:
 - ncci_ptp_prac/20240622T072926Z-12e14/
-opps:
-- opps/20240428T092245Z-a93f8/
 pay_mac_fee:
 - pay_mac_fee/20240426T053757Z-b5d8a/
+pfs_anesthesia:
+- pfs_anesthesia/20240623T111455Z-35651/
+pfs_gpci:
+- pfs_gpci/20240623T110601Z-cdebb/
+pfs_locco:
+- pfs_locco/20240623T111629Z-b1325/
+pfs_opps:
+- pfs_opps/20240623T074548Z-67126/
+pfs_rvu:
+- pfs_rvu/20240623T072656Z-ec809/
 pos_codes:
 - pos_codes/20240529T153029Z-7ee58/
 practicum:

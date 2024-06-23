@@ -2,7 +2,9 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 
 cpt_desc <- get_pin("cpt_descriptors")
 two_desc <- get_pin("two_descriptions")
-rvu_desc <- get_pin("hcpcs_rvu_descriptions")
+
+# From pfs_rvu_file
+rvu24_jul |> dplyr::select(hcpcs_code, hcpcs_description)
 
 
 # EDA ------------------
