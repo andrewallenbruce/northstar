@@ -64,6 +64,8 @@
 #'
 #' @autoglobal
 #'
+#' @family NCCI
+#'
 #' @export
 search_aoc <- function(hcpcs_code = NULL,
                        aoc_type = NULL,
@@ -170,6 +172,8 @@ search_aoc <- function(hcpcs_code = NULL,
 #' search_mue(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
 #' @autoglobal
+#'
+#' @family NCCI
 #'
 #' @export
 search_mue <- function(hcpcs_code = NULL,
@@ -289,6 +293,8 @@ search_mue <- function(hcpcs_code = NULL,
 #'            ptp_mod = 0)
 #'
 #' @autoglobal
+#'
+#' @family NCCI
 #'
 #' @export
 search_ptp <- function(hcpcs_code = NULL,

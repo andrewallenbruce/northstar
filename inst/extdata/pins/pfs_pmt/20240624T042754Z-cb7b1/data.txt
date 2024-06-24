@@ -1,0 +1,10 @@
+file: pfs_pmt.qs
+file_size: 8602053
+pin_hash: cb7b1811e8b7b6c9
+type: qs
+title: Physician Fee Schedule Payment Amount File July 2024
+description: Physician Fee Schedule Payment Amount File July 2024
+tags: ~
+urls: ~
+created: 20240624T042754Z
+api_version: 1

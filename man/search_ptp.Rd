@@ -114,3 +114,9 @@ search_ptp(hcpcs_code = "43116",
            ptp_mod = 0)
 
 }
+\seealso{
+Other NCCI: 
+\code{\link{search_aoc}()},
+\code{\link{search_mue}()}
+}
+\concept{NCCI}

@@ -87,3 +87,9 @@ search_aoc(hcpcs_code = c("22630", "77001", "88334", "64727"))
 search_aoc(hcpcs_code = "33935", unnest = TRUE)
 
 }
+\seealso{
+Other NCCI: 
+\code{\link{search_mue}()},
+\code{\link{search_ptp}()}
+}
+\concept{NCCI}

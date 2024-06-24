@@ -93,3 +93,9 @@ Services.
 search_mue(hcpcs_code = c("39503", "43116", "33935", "11646"))
 
 }
+\seealso{
+Other NCCI: 
+\code{\link{search_aoc}()},
+\code{\link{search_ptp}()}
+}
+\concept{NCCI}
