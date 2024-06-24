@@ -83,7 +83,7 @@ OPPS-based payment caps."><meta property="og:image" content="https://andrewallen
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Outpatient Prospective Payment System (OPPS) Capitations</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/R/phys_sched.R" class="external-link"><code>R/phys_sched.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/northstar/blob/HEAD/R/pfs.R" class="external-link"><code>R/pfs.R</code></a></small>
       <div class="d-none name"><code>search_opps.Rd</code></div>
     </div>
 
@@ -128,15 +128,8 @@ OPPS-based payment caps.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">search_opps</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_pin("opps"):</span> `pin` must be one of "adj_codes", "anesthesia", "cpt_descriptors",</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> "cpt_pla_codes", "denials_extract", "denials_site", "hcpcs_descriptions",</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> "modifiers", "ncci_aoc", "ncci_aoc_nested", "ncci_mue_dme", "ncci_mue_out",</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> "ncci_mue_prac", "ncci_ptp", "ncci_ptp_out", "ncci_ptp_prac", "pay_mac_fee",</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> "pfs_anesthesia", "pfs_gpci", "pfs_locco", "pfs_opps", "pfs_rvu", "pos_codes",</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> "practicum", "rbcs", "therapy_reduction", "two_descriptions", or "two_therest",</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> not "opps".</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you mean "pfs_opps"?</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_opps</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0633T"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in search_opps(hcpcs_code = "0633T"):</span> object 'opp' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -55,13 +55,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/describe_hcpcs.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_hcpcs_type.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_pin.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_rvus.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/gt_theme_northstar.html</loc>
@@ -109,7 +103,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_gpci.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_gpcis.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
@@ -131,6 +125,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_rvus.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/switch_action_code.html</loc>
