@@ -1,9 +1,11 @@
 adj_codes:
 - adj_codes/20240618T123408Z-c1491/
+cpt_descriptions:
+- cpt_descriptions/20240625T060512Z-792c6/
 cpt_descriptors:
 - cpt_descriptors/20240419T052848Z-7d8ec/
-cpt_pla_codes:
-- cpt_pla_codes/20240430T183333Z-ee46c/
+cpt_pla:
+- cpt_pla/20240625T060336Z-1a40b/
 denials_extract:
 - denials_extract/20240618T141211Z-dd08c/
 denials_site:
@@ -28,18 +30,18 @@ ncci_ptp_out:
 - ncci_ptp_out/20240622T072930Z-9893a/
 ncci_ptp_prac:
 - ncci_ptp_prac/20240622T072926Z-12e14/
-pfs_anesthesia:
-- pfs_anesthesia/20240623T111455Z-35651/
+pfs_anes:
+- pfs_anes/20240625T054413Z-c3519/
 pfs_gpci:
-- pfs_gpci/20240623T110601Z-cdebb/
+- pfs_gpci/20240625T054128Z-58b79/
 pfs_locco:
 - pfs_locco/20240623T111629Z-b1325/
 pfs_opps:
-- pfs_opps/20240623T074548Z-67126/
+- pfs_opps/20240625T054028Z-054bc/
 pfs_pmt:
 - pfs_pmt/20240624T042754Z-cb7b1/
 pfs_rvu:
-- pfs_rvu/20240623T072656Z-ec809/
+- pfs_rvu/20240625T053635Z-48ee1/
 pos_codes:
 - pos_codes/20240529T153029Z-7ee58/
 practicum:

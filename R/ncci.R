@@ -56,18 +56,18 @@
 #' @template returns
 #'
 #' @examples
-#' search_aoc(hcpcs_code = "22532", aoc_type = "Primary")
+#' search_aocs(hcpcs_code = "22532", aoc_type = "Primary")
 #'
-#' search_aoc(hcpcs_code = c("22630", "77001", "88334", "64727"))
+#' search_aocs(hcpcs_code = c("22630", "77001", "88334", "64727"))
 #'
-#' search_aoc(hcpcs_code = "33935", unnest = TRUE)
+#' search_aocs(hcpcs_code = "33935", unnest = TRUE)
 #'
 #' @autoglobal
 #'
-#' @family NCCI
+#' @family NCCI Edits
 #'
 #' @export
-search_aoc <- function(hcpcs_code = NULL,
+search_aocs <- function(hcpcs_code = NULL,
                        aoc_type = NULL,
                        aoc_edit = NULL,
                        unnest = FALSE,
@@ -169,14 +169,14 @@ search_aoc <- function(hcpcs_code = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_mue(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#' search_mues(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
 #' @autoglobal
 #'
-#' @family NCCI
+#' @family NCCI Edits
 #'
 #' @export
-search_mue <- function(hcpcs_code = NULL,
+search_mues <- function(hcpcs_code = NULL,
                        mue_service = c("Practitioner", "Outpatient", "DME"),
                        mue_mai = NULL,
                        ...) {
@@ -286,30 +286,30 @@ search_mue <- function(hcpcs_code = NULL,
 #' @template returns
 #'
 #' @examples
-#' search_ptp(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#' search_ptps(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
-#' search_ptp(hcpcs_code = "43116",
-#'            ptp_type = "Component",
-#'            ptp_mod = 0)
+#' search_ptps(hcpcs_code = "43116",
+#'             ptp_type = "Component",
+#'             ptp_mod = 0)
 #'
 #' @autoglobal
 #'
-#' @family NCCI
+#' @family NCCI Edits
 #'
 #' @export
-search_ptp <- function(hcpcs_code = NULL,
-                       ptp_service = c("Practitioner", "Outpatient"),
-                       ptp_type = NULL,
-                       ptp_mod = NULL,
-                       unnest = FALSE,
-                       ...) {
+search_ptps <- function(hcpcs_code = NULL,
+                        ptp_service = c("Practitioner", "Outpatient"),
+                        ptp_type = NULL,
+                        ptp_mod = NULL,
+                        unnest = FALSE,
+                        ...) {
 
   ptp_service <- match.arg(ptp_service, c("Practitioner", "Outpatient"))
 
   ptp <- switch(
     ptp_service,
     Practitioner = get_pin("ncci_ptp_prac"),
-    Outpatient   = get_pin("ncci_out_out"))
+    Outpatient   = get_pin("ncci_ptp_out"))
 
   ptp <- fuimus::search_in_if(ptp, ptp$hcpcs_code, hcpcs_code)
 

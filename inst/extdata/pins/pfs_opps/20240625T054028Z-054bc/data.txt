@@ -1,6 +1,6 @@
 file: pfs_opps.qs
-file_size: 92655
-pin_hash: 6712681a5d458472
+file_size: 92642
+pin_hash: 054bcf63f3fc5573
 type: qs
 title: PFS OPPSCAP July 2024
 description: OPPSCAP contains the payment amounts after the application of the OPPS-based
@@ -9,5 +9,5 @@ description: OPPSCAP contains the payment amounts after the application of the O
   payment caps.
 tags: ~
 urls: ~
-created: 20240623T074548Z
+created: 20240625T054028Z
 api_version: 1

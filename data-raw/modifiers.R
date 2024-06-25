@@ -1,5 +1,7 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
 
+codexchain::modul
+
 modifiers_cpt <- dplyr::tribble(
 
   ~modifier, ~modifier_type,   ~modifier_description,

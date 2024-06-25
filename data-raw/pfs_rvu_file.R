@@ -19,6 +19,7 @@ latest_zip_url <- pg$url |> url_absolute("https://www.cms.gov")
 
 "https://www.cms.gov/files/zip/rvu24c.zip" == latest_zip_url
 
+# START HERE
 curl::multi_download("https://www.cms.gov/files/zip/rvu24c.zip")
 
 xlsx_filename <- zip::zip_list(
@@ -40,17 +41,17 @@ fs::file_delete(here::here(fs::dir_ls(glob = "*.zip")))
 rvu_names <- c(
   'hcpcs',
   'mod',
-  'description',
-  'status_code',
-  'not_used_for_medicare_payment',
-  'work_rvu',
-  'non_fac_pe_rvu',
-  'non_fac_na_indicator',
-  'facility_pe_rvu',
-  'facility_na_indicator',
-  'mp_rvu',
-  'non_facility_total',
-  'facility_total',
+  'hcpcs_description',
+  'status',
+  'not_used_for_mcr_pmt',
+  'rvu_work',
+  'rvu_non_pe',
+  'non_na_ind',
+  'rvu_fac_pe',
+  'fac_na_ind',
+  'rvu_mp',
+  'rvu_non_total',
+  'rvu_fac_total',
   'pctc_ind',
   'glob_days',
   'pre_op',
@@ -62,73 +63,48 @@ rvu_names <- c(
   'co_surg',
   'team_surg',
   'endo_base',
-  'conv_factor',
-  'physician_supervision_of_diagnostic_procedures',
-  'calculation_flag',
-  'diagnostic_imaging_family_indicator',
-  'non_facility_pe_used_for_opps_payment_amount',
-  'facility_pe_used_for_opps_payment_amount',
-  'mp_used_for_opps_payment_amount'
+  'cf',
+  'phys_sup_diag_proc',
+  'calc_flag',
+  'diag_img_fam_ind',
+  'rvu_opps_non_pe',
+  'rvu_opps_fac_pe',
+  'rvu_opps_mp'
 )
 
 rvu24_jul <- rvu_files$PPRRVU24_JUL |>
   janitor::row_to_names(row_number = "find_header") |>
   janitor::clean_names() |>
   rlang::set_names(rvu_names) |>
+  dplyr::filter(!is.na(calc_flag)) |>
   dplyr::mutate(
     dplyr::across(
-      c(
-      work_rvu,
-      non_fac_pe_rvu,
-      facility_pe_rvu,
-      non_facility_total,
-      facility_total,
-      mp_rvu,
-      conv_factor,
-      pre_op,
-      intra_op,
-      post_op,
-      non_facility_pe_used_for_opps_payment_amount,
-      facility_pe_used_for_opps_payment_amount,
-      mp_used_for_opps_payment_amount
-    ),
-    readr::parse_number
-  )) |>
-  dplyr::rename(
-    hcpcs_code             = hcpcs,
-    hcpcs_description      = description,
-    rvu_status_code        = status_code,
-    rvu_work               = work_rvu,
-    rvu_mp                 = mp_rvu,
-    rvu_non_pe             = non_fac_pe_rvu,
-    rvu_fac_pe             = facility_pe_rvu,
-    rvu_conv_factor        = conv_factor,
-    rvu_non_total          = non_facility_total,
-    rvu_fac_total          = facility_total,
-    rvu_opps_non_pe        = non_facility_pe_used_for_opps_payment_amount,
-    rvu_opps_fac_pe        = facility_pe_used_for_opps_payment_amount,
-    rvu_opps_mp            = mp_used_for_opps_payment_amount,
-    rvu_glob_days          = glob_days,
-    rvu_pre_op             = pre_op,
-    rvu_intra_op           = intra_op,
-    rvu_post_op            = post_op,
-    rvu_bilat_surg         = bilat_surg,
-    rvu_asst_surg          = asst_surg,
-    rvu_co_surg            = co_surg,
-    rvu_team_surg          = team_surg,
-    rvu_mult_proc          = mult_proc,
-    rvu_mod                = mod,
-    rvu_pctc_ind           = pctc_ind,
-    rvu_endo_base          = endo_base,
-    rvu_phys_sup_diag_proc = physician_supervision_of_diagnostic_procedures,
-    rvu_diag_img_fam_ind   = diagnostic_imaging_family_indicator,
-    rvu_non_na_ind         = non_fac_na_indicator,
-    rvu_fac_na_ind         = facility_na_indicator,
-    rvu_not_used_mcr_pmt   = not_used_for_medicare_payment,
-    rvu_calc_flag          = calculation_flag) |>
-  dplyr:::mutate(
-    rvu_op_ind = rvu_pre_op + rvu_intra_op + rvu_post_op,
-    .before = rvu_pre_op)
+      c(dplyr::contains("rvu"),
+        dplyr::contains("surg"),
+        cf,
+        pre_op,
+        intra_op,
+        post_op,
+        pctc_ind,
+        mult_proc
+      ),
+      readr::parse_number),
+    op_ind = as.integer(pre_op + intra_op + post_op)
+  ) |>
+  dplyr::select(-calc_flag)
+
+rvu24_jul |>
+  hacksaw::count_split(
+    not_used_for_mcr_pmt,
+    non_na_ind,
+    fac_na_ind,
+    pctc_ind,
+    mult_proc,
+    bilat_surg,
+    asst_surg,
+    co_surg,
+    team_surg
+    )
 
 pin_update(
   rvu24_jul,
@@ -151,13 +127,23 @@ opps <- rvu_files$OPPSCAP_JUL |>
   dplyr::filter(hcpcs != "\u001a") |>
   dplyr::select(
     hcpcs_code = hcpcs,
-    opps_mod = mod,
-    opps_procstat = procstat,
-    opps_carrier = carrier,
-    opps_locality = locality,
+    mod = mod,
+    status = procstat,
+    mac = carrier,
+    locality = locality,
     opps_fac_price = facility_price,
     opps_non_price = non_facilty_price
   )
+
+opps |>
+  hacksaw::count_split(
+    hcpcs_code,
+    mod,
+    status,
+    mac,
+    locality
+    )
+
 
 # Update Pin
 pin_update(
@@ -166,9 +152,6 @@ pin_update(
   title = "PFS OPPSCAP July 2024",
   description = "OPPSCAP contains the payment amounts after the application of the OPPS-based payment caps, except for carrier priced codes. For carrier price codes, the field only contains the OPPS-based payment caps. Carrier prices cannot exceed the OPPS-based payment caps."
 )
-
-delete_pins("opps")
-list_pins()
 
 # ADDENDUM E. FINAL CY 2024 GEOGRAPHIC PRACTICE COST INDICES (GPCIs) BY STATE AND MEDICARE LOCALITY
 # https://www.ama-assn.org/system/files/geographic-practice-cost-indices-gpcis.pdf
@@ -180,14 +163,15 @@ gpci <- rvu_files$GPCI2024 |>
   dplyr::reframe(
     mac = medicare_administrative_contractor_mac,
     state = state,
-    locality_number,
+    locality = locality_number,
     gpci_work = x2024_pw_gpci_with_1_0_floor,
     gpci_pe = x2024_pe_gpci,
     gpci_mp = x2024_mp_gpci,
     locality_name) |>
   dplyr::mutate(
     dplyr::across(
-      c(gpci_work, gpci_pe, gpci_mp), readr::parse_number),
+      c(gpci_work, gpci_pe, gpci_mp),
+      readr::parse_number),
     locality_name = stringr::str_remove_all(locality_name, stringr::fixed("*"))
          )
 
@@ -199,7 +183,8 @@ pin_update(
   description = "Geographic Practice Cost Indices (GPCIs) by State and Medicare Locality 2024"
 )
 
-# counties_included_in_2024_localities_alphabetically_by_state_and_locality_name_within_state
+# counties_included_in_2024_localities_alphabetically_
+# by_state_and_locality_name_within_state
 # * = Payment locality is serviced by two carriers.
 
 locco <- rvu_files$`24LOCCO` |>
@@ -260,17 +245,18 @@ gpci <- gpci |>
 
 anesthesia <- rvu_files$ANES2024 |>
   janitor::clean_names() |>
-  dplyr::mutate(
-    x2024_anesthesia_conversion_factor = as.double(x2024_anesthesia_conversion_factor)) |>
-  dplyr::rename(anesthesia_cf = x2024_anesthesia_conversion_factor)
+  dplyr::reframe(
+    mac = contractor,
+    locality,
+    # locality_name,
+    anes_cf = as.double(x2024_anesthesia_conversion_factor))
 
 # Update Pin
 pin_update(
   anesthesia,
-  name = "pfs_anesthesia",
+  name = "pfs_anes",
   title = "Anesthesia Conversion Factor July 2024",
   description = "Anesthesia Conversion Factor July 2024"
 )
-
 
 fs::file_delete(here::here(fs::dir_ls(glob = "*.zip|*.xlsx")))

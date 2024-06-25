@@ -168,7 +168,7 @@ search_anesthesia <- function(mac      = NULL,
                               locality = NULL,
                               ...) {
 
-  an <- get_pin("pfs_anesthesia")
+  an <- get_pin("pfs_anes")
   an <- fuimus::search_in_if(an, an$contractor, mac)
   an <- fuimus::search_in_if(an, an$locality, locality)
   return(.add_class(an))
@@ -207,5 +207,5 @@ search_opps <- function(hcpcs_code = NULL,
   op <- fuimus::search_in_if(op, op$opps_carrier, mac)
   op <- fuimus::search_in_if(op, op$opps_locality, locality)
 
-  return(.add_class(opp))
+  return(.add_class(op))
 }
