@@ -19,7 +19,7 @@ latest_zip_url <- pg$url |> url_absolute("https://www.cms.gov")
 
 "https://www.cms.gov/files/zip/rvu24c.zip" == latest_zip_url
 
-# START HERE
+#################### START HERE
 curl::multi_download("https://www.cms.gov/files/zip/rvu24c.zip")
 
 xlsx_filename <- zip::zip_list(
@@ -39,7 +39,7 @@ fs::file_delete(here::here(fs::dir_ls(glob = "*.zip")))
 
 #----- RVU File July 2024
 rvu_names <- c(
-  'hcpcs',
+  'hcpcs_code',
   'mod',
   'hcpcs_description',
   'status',

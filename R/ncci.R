@@ -68,10 +68,10 @@
 #'
 #' @export
 search_aocs <- function(hcpcs_code = NULL,
-                       aoc_type = NULL,
-                       aoc_edit = NULL,
-                       unnest = FALSE,
-                       ...) {
+                        aoc_type = NULL,
+                        aoc_edit = NULL,
+                        unnest = FALSE,
+                        ...) {
 
   aoc <- get_pin("ncci_aoc_nested")
 
@@ -177,9 +177,9 @@ search_aocs <- function(hcpcs_code = NULL,
 #'
 #' @export
 search_mues <- function(hcpcs_code = NULL,
-                       mue_service = c("Practitioner", "Outpatient", "DME"),
-                       mue_mai = NULL,
-                       ...) {
+                        mue_service = c("Practitioner", "Outpatient", "DME"),
+                        mue_mai = NULL,
+                        ...) {
 
   mue_service <- match.arg(mue_service)
 

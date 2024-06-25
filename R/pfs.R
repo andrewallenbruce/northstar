@@ -113,7 +113,7 @@ search_gpcis <- function(mac = NULL,
   gp <- get_pin("pfs_gpci")
   gp <- fuimus::search_in_if(gp, gp$state, state)
   gp <- fuimus::search_in_if(gp, gp$mac, mac)
-  gp <- fuimus::search_in_if(gp, gp$locality_number, locality)
+  gp <- fuimus::search_in_if(gp, gp$locality, locality)
   return(.add_class(gp))
 }
 
@@ -169,7 +169,7 @@ search_anesthesia <- function(mac      = NULL,
                               ...) {
 
   an <- get_pin("pfs_anes")
-  an <- fuimus::search_in_if(an, an$contractor, mac)
+  an <- fuimus::search_in_if(an, an$mac, mac)
   an <- fuimus::search_in_if(an, an$locality, locality)
   return(.add_class(an))
 }
@@ -204,8 +204,8 @@ search_opps <- function(hcpcs_code = NULL,
 
   op <- get_pin("pfs_opps")
   op <- fuimus::search_in_if(op, op$hcpcs_code, hcpcs_code)
-  op <- fuimus::search_in_if(op, op$opps_carrier, mac)
-  op <- fuimus::search_in_if(op, op$opps_locality, locality)
+  op <- fuimus::search_in_if(op, op$mac, mac)
+  op <- fuimus::search_in_if(op, op$locality, locality)
 
   return(.add_class(op))
 }
