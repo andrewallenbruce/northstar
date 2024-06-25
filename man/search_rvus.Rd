@@ -2,12 +2,14 @@
 % Please edit documentation in R/pfs.R
 \name{search_rvus}
 \alias{search_rvus}
-\title{Get HCPCS Codes with RVUs}
+\title{HCPCS Relative Value Units (RVUs)}
 \usage{
-search_rvus(hcpcs_code = NULL, ...)
+search_rvus(hcpcs_code = NULL, type = c("amounts", "indicators"), ...)
 }
 \arguments{
 \item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
+
+\item{type}{description}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

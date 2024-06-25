@@ -2,7 +2,7 @@
 % Please edit documentation in R/pfs.R
 \name{search_anesthesia}
 \alias{search_anesthesia}
-\title{search_anesthesia}
+\title{Anesthesia Conversion Factors}
 \usage{
 search_anesthesia(mac = NULL, locality = NULL, ...)
 }
@@ -17,7 +17,7 @@ search_anesthesia(mac = NULL, locality = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-search_anesthesia
+Anesthesia Conversion Factors
 }
 \examples{
 search_anesthesia(locality = "01", mac = "10212")

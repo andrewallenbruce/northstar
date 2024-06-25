@@ -1,11 +1,11 @@
 file: pfs_gpci.qs
-file_size: 3678
-pin_hash: 58b79c7dab1f3e35
+file_size: 4568
+pin_hash: 236b55c6fe744db1
 type: qs
 title: GPCI July 2024
 description: Geographic Practice Cost Indices (GPCIs) by State and Medicare Locality
   2024
 tags: ~
 urls: ~
-created: 20240625T054128Z
+created: 20240625T203123Z
 api_version: 1

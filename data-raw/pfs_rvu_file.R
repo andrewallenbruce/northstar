@@ -106,10 +106,109 @@ rvu24_jul |>
     team_surg
     )
 
+rvu_desc <- get_pin("pfs_rvu") |>
+  dplyr::reframe(
+    hcpcs_code,
+    hcpcs_desc_type = "Short",
+    hcpcs_description,
+  )
+
 pin_update(
-  rvu24_jul,
-  name = "pfs_rvu",
-  title = "RVU File July 2024",
+  rvu_desc,
+  name = "rvu_descriptions",
+  title = "RVU HCPCS Descriptions July 2024",
+  description = "RVU HCPCS Descriptions July 2024"
+)
+
+# get_pin("pfs_rvu") |>
+#   dplyr::select(
+#     hcpcs_code,
+#     mod,
+#     status,
+#     rvu_work,
+#     rvu_non_pe,
+#     rvu_fac_pe,
+#     rvu_mp,
+#     rvu_non_sum = rvu_non_total,
+#     rvu_fac_sum = rvu_fac_total,
+#     rvu_opps_non_pe,
+#     rvu_opps_fac_pe,
+#     rvu_opps_mp,
+#     cf,
+#     pctc = pctc_ind,
+#     global = glob_days,
+#     op_ind,
+#     pre_op,
+#     intra_op,
+#     post_op,
+#     mult_proc,
+#     bilat_surg,
+#     asst_surg,
+#     co_surg,
+#     team_surg,
+#     endo_base,
+#     phys_diag_pro = phys_sup_diag_proc,
+#     diag_img_fam = diag_img_fam_ind,
+#     non_na = non_na_ind,
+#     fac_na = fac_na_ind,
+#     not_used_mcr = not_used_for_mcr_pmt
+#   )
+
+
+board <- mount_board(source = "remote")
+
+pfs_rvu_amt <- pins::pin_read(board, "pfs_rvu") |>
+  dplyr::select(
+    hcpcs_code,
+    rvu_work,
+    rvu_non_pe,
+    rvu_fac_pe,
+    rvu_mp,
+    rvu_non_sum = rvu_non_total,
+    rvu_fac_sum = rvu_fac_total,
+    rvu_opps_non_pe,
+    rvu_opps_fac_pe,
+    rvu_opps_mp,
+    cf
+  ) |>
+  fuimus::remove_quiet()
+
+pfs_rvu_ind <- pins::pin_read(board, "pfs_rvu") |>
+  dplyr::select(
+    hcpcs_code,
+    mod,
+    status,
+    pctc = pctc_ind,
+    global = glob_days,
+    # op_ind,
+    pre_op,
+    intra_op,
+    post_op,
+    mult_proc,
+    bilat_surg,
+    asst_surg,
+    co_surg,
+    team_surg,
+    endo_base,
+    phys_diag_pro = phys_sup_diag_proc,
+    diag_img_fam = diag_img_fam_ind,
+    non_na = non_na_ind,
+    fac_na = fac_na_ind,
+    not_used_mcr = not_used_for_mcr_pmt
+  ) |>
+  fuimus::remove_quiet()
+
+pin_update(
+  pfs_rvu_amt,
+  name = "pfs_rvu_amt",
+  title = "RVU File Amounts July 2024",
+  description = "National Physician Fee Schedule Relative Value File July 2024"
+)
+
+pin_update(
+  pfs_rvu_ind,
+  name = "pfs_rvu_ind",
+  title = "RVU File Indicators July 2024",
   description = "National Physician Fee Schedule Relative Value File July 2024"
 )
 
@@ -169,11 +268,20 @@ gpci <- rvu_files$GPCI2024 |>
     gpci_mp = x2024_mp_gpci,
     locality_name) |>
   dplyr::mutate(
-    dplyr::across(
-      c(gpci_work, gpci_pe, gpci_mp),
-      readr::parse_number),
+    dplyr::across(c(gpci_work, gpci_pe, gpci_mp), readr::parse_number),
     locality_name = stringr::str_remove_all(locality_name, stringr::fixed("*"))
          )
+
+gpci <- get_pin("pfs_gpci") |>
+  dplyr::reframe(
+    mac,
+    state = forcats::as_factor(state),
+    locality,
+    locality_name,
+    gpci_work,
+    gpci_pe,
+    gpci_mp,
+    gpci_gaf = gpci_work + gpci_pe + gpci_mp)
 
 # Update Pin
 pin_update(

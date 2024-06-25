@@ -33,20 +33,24 @@ ncci_ptp_prac:
 pfs_anes:
 - pfs_anes/20240625T054413Z-c3519/
 pfs_gpci:
-- pfs_gpci/20240625T054128Z-58b79/
+- pfs_gpci/20240625T203123Z-236b5/
 pfs_locco:
 - pfs_locco/20240623T111629Z-b1325/
 pfs_opps:
 - pfs_opps/20240625T054028Z-054bc/
 pfs_pmt:
 - pfs_pmt/20240624T042754Z-cb7b1/
-pfs_rvu:
-- pfs_rvu/20240625T061309Z-fd61f/
+pfs_rvu_amt:
+- pfs_rvu_amt/20240625T205649Z-367ce/
+pfs_rvu_ind:
+- pfs_rvu_ind/20240625T205653Z-9d738/
 pos_codes:
 - pos_codes/20240529T153029Z-7ee58/
 practicum:
 - practicum/20240528T001114Z-362d5/
 rbcs:
 - rbcs/20240423T144720Z-044c4/
+rvu_descriptions:
+- rvu_descriptions/20240625T203447Z-40570/
 two_descriptions:
 - two_descriptions/20240625T080521Z-33411/

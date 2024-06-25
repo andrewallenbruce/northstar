@@ -1,8 +1,10 @@
-#' Get HCPCS Codes with RVUs
+#' HCPCS Relative Value Units (RVUs)
 #'
 #' Physician Fee Schedule Relative Value File
 #'
 #' @template args-hcpcs
+#'
+#' @param type description
 #'
 #' @template args-dots
 #'
@@ -16,9 +18,16 @@
 #' @family Physician Fee Schedule Sources
 #'
 #' @export
-search_rvus <- function(hcpcs_code = NULL, ...) {
+search_rvus <- function(hcpcs_code = NULL, type = c("amounts", "indicators"), ...) {
 
-  rv <- get_pin("pfs_rvu")
+  type <- match.arg(type, c("amounts", "indicators"))
+
+  rv <- switch(
+    type,
+    amounts = get_pin("pfs_rvu_amt"),
+    indicators = get_pin("pfs_rvu_ind")
+  )
+
   rv <- fuimus::search_in_if(rv, rv$hcpcs_code, hcpcs_code)
   return(.add_class(rv))
 }
@@ -110,9 +119,9 @@ search_rvus <- function(hcpcs_code = NULL, ...) {
 #'
 #' @export
 search_gpcis <- function(mac = NULL,
-                        state = NULL,
-                        locality = NULL,
-                        ...) {
+                         state = NULL,
+                         locality = NULL,
+                         ...) {
 
   gp <- get_pin("pfs_gpci")
   gp <- fuimus::search_in_if(gp, gp$state, state)
@@ -154,7 +163,7 @@ search_payment <- function(hcpcs_code = NULL,
   return(.add_class(pmt))
 }
 
-#' search_anesthesia
+#' Anesthesia Conversion Factors
 #'
 #' @template args-mac
 #'

@@ -4,24 +4,19 @@ cpt_desc <- get_pin("cpt_descriptions") |>
   dplyr::reframe(
     hcpcs_code,
     hcpcs_desc_type,
-    hcpcs_description,
-    hcpcs_level = "I"
+    hcpcs_description
+    # , hcpcs_level = "I"
   )
 
 hcpcs_desc <- get_pin("two_descriptions") |>
   dplyr::reframe(
     hcpcs_code,
     hcpcs_desc_type = hcpcs_description_type,
-    hcpcs_description,
-    hcpcs_level = "II"
+    hcpcs_description
+    # , hcpcs_level = "II"
   )
 
-rvu_desc <- get_pin("pfs_rvu") |>
-  dplyr::reframe(
-    hcpcs_code,
-    hcpcs_desc_type = "Short",
-    hcpcs_description
-    )
+rvu_desc <- get_pin("rvu_descriptions")
 
 # Combine Description Sets ---------------------
 hcpcs_desc <- rvu_desc |>
