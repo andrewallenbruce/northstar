@@ -97,7 +97,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_anesthesia.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_aoc.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_aocs.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc>
@@ -106,10 +106,13 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_gpcis.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_hcpcs.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mue.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mues.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_opps.html</loc>
@@ -121,7 +124,7 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_pos.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptp.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptps.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>

@@ -129,7 +129,30 @@ OPPS-based payment caps.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_opps</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0633T"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in search_opps(hcpcs_code = "0633T"):</span> object 'opp' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 115 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">mod</span>   <span style="font-weight: bold;">status</span> <span style="font-weight: bold;">mac</span>   <span style="font-weight: bold;">locality</span> <span style="font-weight: bold;">opps_fac_price</span> <span style="font-weight: bold;">opps_non_price</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0633T      TC    C      01112 05                 148.           148.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0633T      TC    C      01112 09                 150.           150.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0633T      TC    C      01112 17                 124.           124.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0633T      TC    C      01112 18                 125.           125.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0633T      TC    C      01112 51                 137.           137.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0633T      TC    C      01112 52                 148.           148.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0633T      TC    C      01112 53                 137.           137.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0633T      TC    C      01112 54                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0633T      TC    C      01112 55                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0633T      TC    C      01112 56                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 0633T      TC    C      01112 57                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 0633T      TC    C      01112 58                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 0633T      TC    C      01112 59                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 0633T      TC    C      01112 60                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 0633T      TC    C      01112 61                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 0633T      TC    C      01112 62                 114.           114.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 0633T      TC    C      01112 63                 121.           121.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 0633T      TC    C      01112 64                 122.           122.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 0633T      TC    C      01112 65                 150.           150.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 0633T      TC    C      01112 66                 126.           126.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 95 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
