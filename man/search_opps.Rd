@@ -28,3 +28,11 @@ OPPS-based payment caps.
 search_opps(hcpcs_code = "0633T")
 
 }
+\seealso{
+Other Physician Fee Schedule Sources: 
+\code{\link{search_anesthesia}()},
+\code{\link{search_gpcis}()},
+\code{\link{search_payment}()},
+\code{\link{search_rvus}()}
+}
+\concept{Physician Fee Schedule Sources}

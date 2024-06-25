@@ -23,3 +23,11 @@ search_anesthesia
 search_anesthesia(locality = "01", mac = "10212")
 
 }
+\seealso{
+Other Physician Fee Schedule Sources: 
+\code{\link{search_gpcis}()},
+\code{\link{search_opps}()},
+\code{\link{search_payment}()},
+\code{\link{search_rvus}()}
+}
+\concept{Physician Fee Schedule Sources}

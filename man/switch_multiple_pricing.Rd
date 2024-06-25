@@ -19,3 +19,14 @@ HCPCS Multiple Pricing Descriptions
 dplyr::tibble(code = c(9, LETTERS[1:7]))
 
 }
+\seealso{
+Other HCPCS II Helpers: 
+\code{\link{switch_action_code}()},
+\code{\link{switch_asc_group}()},
+\code{\link{switch_betos}()},
+\code{\link{switch_coverage}()},
+\code{\link{switch_lab_certification}()},
+\code{\link{switch_pricing}()},
+\code{\link{switch_type_of_service}()}
+}
+\concept{HCPCS II Helpers}

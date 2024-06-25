@@ -67,3 +67,11 @@ search_adjustments(adj_type = "CARC")
 search_adjustments(adj_type = "RARC")
 
 }
+\seealso{
+Other HIPAA Code Standards: 
+\code{\link{search_hcpcs}()},
+\code{\link{search_modifiers}()},
+\code{\link{search_pos}()},
+\code{\link{search_rbcs}()}
+}
+\concept{HIPAA Code Standards}

@@ -21,3 +21,14 @@ dplyr::tibble(
   desc = switch_pricing(code))
 
 }
+\seealso{
+Other HCPCS II Helpers: 
+\code{\link{switch_action_code}()},
+\code{\link{switch_asc_group}()},
+\code{\link{switch_betos}()},
+\code{\link{switch_coverage}()},
+\code{\link{switch_lab_certification}()},
+\code{\link{switch_multiple_pricing}()},
+\code{\link{switch_type_of_service}()}
+}
+\concept{HCPCS II Helpers}

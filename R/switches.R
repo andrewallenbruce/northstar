@@ -9,6 +9,8 @@
 #'
 #' @autoglobal
 #'
+#' @family NCCI Helpers
+#'
 #' @export
 switch_ptp_mod <- function(x) {
 
@@ -31,6 +33,8 @@ switch_ptp_mod <- function(x) {
 #' switch_mue_mai(as.character(1:3))
 #'
 #' @autoglobal
+#'
+#' @family NCCI Helpers
 #'
 #' @export
 switch_mue_mai <- function(x) {
@@ -55,6 +59,8 @@ switch_mue_mai <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family NCCI Helpers
+#'
 #' @export
 switch_addon_edits <- function(x) {
 
@@ -78,6 +84,8 @@ switch_addon_edits <- function(x) {
 #' switch_global_days(x)
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_global_days <- function(x) {
@@ -108,6 +116,8 @@ switch_global_days <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family PFS Helpers
+#'
 #' @export
 switch_team_surgery <- function(x) {
 
@@ -131,6 +141,10 @@ switch_team_surgery <- function(x) {
 #'
 #' @examples
 #' switch_bilateral_surgery(c(0:3, "9"))
+#'
+#' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_bilateral_surgery <- function(x) {
@@ -159,6 +173,8 @@ switch_bilateral_surgery <- function(x) {
 #' switch_multiple_procedure(as.character(0:9))
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_multiple_procedure <- function(x) {
@@ -191,6 +207,8 @@ switch_multiple_procedure <- function(x) {
 #' switch_co_surgeon(as.character(0:9))
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_co_surgeon <- function(x) {
@@ -225,6 +243,8 @@ switch_co_surgeon <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family PFS Helpers
+#'
 #' @export
 switch_assistant_surgery <- function(x) {
 
@@ -253,6 +273,8 @@ switch_assistant_surgery <- function(x) {
 #'   desc = switch_diagnostic_imaging(code))
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_diagnostic_imaging <- function(x) {
@@ -287,6 +309,8 @@ switch_diagnostic_imaging <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family PFS Helpers
+#'
 #' @export
 switch_opps_indicator <- function(x) {
 
@@ -308,6 +332,8 @@ switch_opps_indicator <- function(x) {
 #' switch_pctc_indicator(as.character(0:9))
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_pctc_indicator <- function(x) {
@@ -342,6 +368,8 @@ switch_pctc_indicator <- function(x) {
 #' )
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_status_name <- function(x) {
@@ -383,6 +411,8 @@ switch_status_name <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family PFS Helpers
+#'
 #' @export
 switch_status_description <- function(x) {
 
@@ -408,7 +438,7 @@ switch_status_description <- function(x) {
   )
 }
 
-#' HCPCS Physician Supervision Descriptions
+#' PFS Physician Supervision Descriptions
 #'
 #' This field is for use in post payment review.
 #'
@@ -423,6 +453,8 @@ switch_status_description <- function(x) {
 #'   desc = switch_supervision(code))
 #'
 #' @autoglobal
+#'
+#' @family PFS Helpers
 #'
 #' @export
 switch_supervision <- function(x) {
@@ -459,6 +491,8 @@ switch_supervision <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family HCPCS II Helpers
+#'
 #' @export
 switch_asc_group <- function(x) {
 
@@ -482,6 +516,8 @@ switch_asc_group <- function(x) {
 #'   desc = switch_coverage(code))
 #'
 #' @autoglobal
+#'
+#' @family HCPCS II Helpers
 #'
 #' @export
 switch_coverage <- function(x) {
@@ -509,6 +545,8 @@ switch_coverage <- function(x) {
 #'   desc = switch_pricing(code))
 #'
 #' @autoglobal
+#'
+#' @family HCPCS II Helpers
 #'
 #' @export
 switch_pricing <- function(x) {
@@ -559,6 +597,8 @@ switch_pricing <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family HCPCS II Helpers
+#'
 #' @export
 switch_multiple_pricing <- function(x) {
 
@@ -588,6 +628,8 @@ switch_multiple_pricing <- function(x) {
 #'   desc = switch_lab_certification(code))
 #'
 #' @autoglobal
+#'
+#' @family HCPCS II Helpers
 #'
 #' @export
 switch_lab_certification <- function(x) {
@@ -646,6 +688,8 @@ switch_lab_certification <- function(x) {
 #'               desc = switch_type_of_service(code))
 #'
 #' @autoglobal
+#'
+#' @family HCPCS II Helpers
 #'
 #' @export
 switch_type_of_service <- function(x) {
@@ -726,6 +770,8 @@ switch_type_of_service <- function(x) {
 #'
 #' @autoglobal
 #'
+#' @family HCPCS II Helpers
+#'
 #' @export
 switch_action_code <- function(x) {
 
@@ -756,6 +802,8 @@ switch_action_code <- function(x) {
 #'               desc = switch_betos(code))
 #'
 #' @autoglobal
+#'
+#' @family HCPCS II Helpers
 #'
 #' @export
 switch_betos <- function(x) {

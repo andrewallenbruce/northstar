@@ -1,79 +1,30 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
 
-cpt_desc <- get_pin("cpt_descriptors")
-two_desc <- get_pin("two_descriptions")
+cpt_desc <- get_pin("cpt_descriptions") |>
+  dplyr::reframe(
+    hcpcs_code,
+    hcpcs_desc_type,
+    hcpcs_description,
+    hcpcs_level = "I"
+  )
 
-# From pfs_rvu_file
-get_pin("pfs_rvu") |>
-  dplyr::select(hcpcs_code, hcpcs_description)
+hcpcs_desc <- get_pin("two_descriptions") |>
+  dplyr::reframe(
+    hcpcs_code,
+    hcpcs_desc_type = hcpcs_description_type,
+    hcpcs_description,
+    hcpcs_level = "II"
+  )
 
-
-# EDA ------------------
-cpt_uq <- collapse::funique(cpt_desc$hcpcs) # 10641
-two_uq <- collapse::funique(two_desc$hcpcs) # 7966
-rvu_uq <- collapse::funique(rvu_desc$hcpcs) # 16325
-
-length(c(rvu_uq, cpt_uq, two_uq)) # 34932
-
-# Neither are in the other group - Total unique 18607
-cpt_two_uq <- c(cpt_uq, two_uq)
-
-# RVU & CPT - 10557
-vctrs::vec_set_intersect(rvu_uq, cpt_uq) |> length()
-# CPT only - 84
-cpt_only <- vctrs::vec_set_difference(cpt_uq, rvu_uq)
-
-cpt_desc |>
-  filter(hcpcs %in% cpt_only)
-
-# RVU & HCPCS - 4793
-vctrs::vec_set_intersect(rvu_uq, two_uq) |> length()
-# HCPCS only - 3173
-hcpcs_only <- vctrs::vec_set_difference(two_uq, rvu_uq)
-
-vctrs::vec_set_difference(rvu_uq, cpt_uq) |> length() # 5768
-vctrs::vec_set_difference(rvu_uq, two_uq) |> length() # 11532
-
-# RVU Only - 975
-rvu_only <- vctrs::vec_set_difference(rvu_uq, cpt_two_uq)
-
-rvu_desc |>
-  filter(hcpcs %in% rvu_only)
-
+rvu_desc <- get_pin("pfs_rvu") |>
+  dplyr::reframe(
+    hcpcs_code,
+    hcpcs_desc_type = "Short",
+    hcpcs_description
+    )
 
 # Combine Description Sets ---------------------
-rvu_clean <- rvu_desc |>
-  filter(hcpcs != "\032") |>
-  rename(description = rel_desc) |>
-  mutate(desc_type = "Short")
-
-two_pivot <- two_desc |>
-  select(
-    hcpcs,
-    Short = two_desc_short,
-    Long = two_desc_long
-  ) |>
-  pivot_longer(
-    !hcpcs,
-    names_to = "desc_type",
-    values_to = "description")
-
-cpt_pivot <- cpt_desc |>
-  unnest(cpt_desc_clin) |>
-  select(
-    hcpcs,
-    Short = cpt_desc_short,
-    Long = cpt_desc_long,
-    Medical = cpt_desc_med,
-    Consumer = cpt_desc_cons,
-    Clinician = cpt_desc_clin
-  ) |>
-  pivot_longer(
-    !hcpcs,
-    names_to = "desc_type",
-    values_to = "description")
-
-hcpcs_desc <- rvu_clean |>
+hcpcs_desc <- rvu_desc |>
   dplyr::full_join(two_pivot) |>
   dplyr::full_join(cpt_pivot) |>
   dplyr::arrange(hcpcs) |>
@@ -107,43 +58,6 @@ hcpcs_desc |>
   # filter(hcpcs %in% two_uq) # 7966
   filter(hcpcs %in% rvu_uq) # 16324
 # ---------------------------------------
-
-# Add CPT PLA Codes
-library(codexchain)
-
-cpt_pla_codes <- codexchain::placodes |>
-  select(
-    hcpcs = X1,
-    desc_long = X2,
-    desc_medium = X3,
-    desc_short = X4,
-    X5,
-    X6,
-    date_released = X7,
-    date_effective = X8,
-    proprietary_name = X9,
-    clinical_lab = X10,
-    manufacturer = X11
-  ) |>
-  janitor::remove_empty()
-
-pla_pivot <- cpt_pla_codes |>
-  select(
-    hcpcs,
-    Short = desc_short,
-    Medium = desc_medium,
-    Long = desc_long,
-    "Proprietary Name" = proprietary_name
-  ) |>
-  pivot_longer(
-    !hcpcs,
-    names_to = "desc_type",
-    values_to = "description")
-
-hcpcs_desc <- vctrs::vec_rbind(
-  hcpcs_desc,
-  pla_pivot
-)
 
 # A tibble: 5 × 2
 # end_letter     n

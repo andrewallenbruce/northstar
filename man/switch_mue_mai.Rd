@@ -19,3 +19,9 @@ NCCI MUE Adjudication Indicator Descriptions
 switch_mue_mai(as.character(1:3))
 
 }
+\seealso{
+Other NCCI Helpers: 
+\code{\link{switch_addon_edits}()},
+\code{\link{switch_ptp_mod}()}
+}
+\concept{NCCI Helpers}

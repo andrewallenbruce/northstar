@@ -21,3 +21,11 @@ Physician Fee Schedule Relative Value File
 search_rvus(hcpcs_code = c("95907", "78140", "32820", "61575"))
 
 }
+\seealso{
+Other Physician Fee Schedule Sources: 
+\code{\link{search_anesthesia}()},
+\code{\link{search_gpcis}()},
+\code{\link{search_opps}()},
+\code{\link{search_payment}()}
+}
+\concept{Physician Fee Schedule Sources}

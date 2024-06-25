@@ -90,3 +90,11 @@ adjustments under the PFS across Medicare fee schedule areas.
 search_gpcis(state = "GA", locality = "01", mac = "10212")
 
 }
+\seealso{
+Other Physician Fee Schedule Sources: 
+\code{\link{search_anesthesia}()},
+\code{\link{search_opps}()},
+\code{\link{search_payment}()},
+\code{\link{search_rvus}()}
+}
+\concept{Physician Fee Schedule Sources}

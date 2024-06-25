@@ -13,6 +13,8 @@
 #'
 #' @autoglobal
 #'
+#' @family Physician Fee Schedule Sources
+#'
 #' @export
 search_rvus <- function(hcpcs_code = NULL, ...) {
 
@@ -102,9 +104,11 @@ search_rvus <- function(hcpcs_code = NULL, ...) {
 #' @examples
 #' search_gpcis(state = "GA", locality = "01", mac = "10212")
 #'
-#' @export
-#'
 #' @autoglobal
+#'
+#' @family Physician Fee Schedule Sources
+#'
+#' @export
 search_gpcis <- function(mac = NULL,
                         state = NULL,
                         locality = NULL,
@@ -136,6 +140,8 @@ search_gpcis <- function(mac = NULL,
 #'
 #' @autoglobal
 #'
+#' @family Physician Fee Schedule Sources
+#'
 #' @export
 search_payment <- function(hcpcs_code = NULL,
                            mac = NULL,
@@ -161,9 +167,11 @@ search_payment <- function(hcpcs_code = NULL,
 #' @examples
 #' search_anesthesia(locality = "01", mac = "10212")
 #'
-#' @export
-#'
 #' @autoglobal
+#'
+#' @family Physician Fee Schedule Sources
+#'
+#' @export
 search_anesthesia <- function(mac      = NULL,
                               locality = NULL,
                               ...) {
@@ -194,9 +202,11 @@ search_anesthesia <- function(mac      = NULL,
 #' @examples
 #' search_opps(hcpcs_code = "0633T")
 #'
-#' @export
-#'
 #' @autoglobal
+#'
+#' @family Physician Fee Schedule Sources
+#'
+#' @export
 search_opps <- function(hcpcs_code = NULL,
                         mac = NULL,
                         locality = NULL,

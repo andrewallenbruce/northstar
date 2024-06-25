@@ -19,3 +19,9 @@ NCCI Add-On Code Edit Type Descriptions
 switch_addon_edits(as.character(1:3))
 
 }
+\seealso{
+Other NCCI Helpers: 
+\code{\link{switch_mue_mai}()},
+\code{\link{switch_ptp_mod}()}
+}
+\concept{NCCI Helpers}

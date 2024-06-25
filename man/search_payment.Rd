@@ -27,3 +27,11 @@ search_payment(hcpcs_code = c("39503", "43116", "33935", "11646"),
                mac = "10212")
 
 }
+\seealso{
+Other Physician Fee Schedule Sources: 
+\code{\link{search_anesthesia}()},
+\code{\link{search_gpcis}()},
+\code{\link{search_opps}()},
+\code{\link{search_rvus}()}
+}
+\concept{Physician Fee Schedule Sources}

@@ -19,3 +19,9 @@ NCCI PTP CCMI Descriptions
 switch_ptp_mod(as.character(0:9))
 
 }
+\seealso{
+Other NCCI Helpers: 
+\code{\link{switch_addon_edits}()},
+\code{\link{switch_mue_mai}()}
+}
+\concept{NCCI Helpers}

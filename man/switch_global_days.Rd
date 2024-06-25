@@ -20,3 +20,18 @@ x <- c("000", "010", "090", "MMM", "XXX", "YYY", "ZZZ")
 switch_global_days(x)
 
 }
+\seealso{
+Other PFS Helpers: 
+\code{\link{switch_assistant_surgery}()},
+\code{\link{switch_bilateral_surgery}()},
+\code{\link{switch_co_surgeon}()},
+\code{\link{switch_diagnostic_imaging}()},
+\code{\link{switch_multiple_procedure}()},
+\code{\link{switch_opps_indicator}()},
+\code{\link{switch_pctc_indicator}()},
+\code{\link{switch_status_description}()},
+\code{\link{switch_status_name}()},
+\code{\link{switch_supervision}()},
+\code{\link{switch_team_surgery}()}
+}
+\concept{PFS Helpers}

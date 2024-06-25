@@ -56,6 +56,8 @@
 #'
 #' @autoglobal
 #'
+#' @family HIPAA Code Standards
+#'
 #' @export
 search_adjustments <- function(adj_code = NULL, adj_type = NULL, ...) {
 
