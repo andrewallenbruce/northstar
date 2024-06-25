@@ -1,5 +1,7 @@
 root <- c("C:/Users/Andrew/Desktop/payer_guidelines/data/")
 
+# https://www.cms.gov/medicare/regulations-guidance/physician-self-referral
+
 # Physician Fee Schedule 2024
 rvu_xl   <- glue("{root}RVU24A-010323/PPRRVU24_JAN.xlsx")
 pay_xl   <- glue("{root}PFREV24A_0/PFALL24.csv")

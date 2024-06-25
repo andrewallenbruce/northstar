@@ -1,118 +1,148 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
 
-two <- read_excel(level2, col_types = "text") |>
-  clean_names() |>
-  remove_empty(which = c("rows", "cols")) |>
-  rename(hcpcs = hcpc) |>
-  mutate(len = str_length(hcpcs), .after = hcpcs) |>
-  mutate(type = if_else(len == 2, "mod", "code"), .after = hcpcs) |>
-  mutate(len = NULL) |>
-  mutate(add_dt = convert_to_date(add_dt),
-         act_eff_dt = convert_to_date(act_eff_dt),
-         term_dt = convert_to_date(term_dt),
-         asc_dt = convert_to_date(asc_dt)) |>
-  unite("price", price1:price2, sep = ":", remove = TRUE, na.rm = TRUE) |>
-  unite("cim", cim1:cim2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  unite("mcm", mcm1:mcm3, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  unite("labcert", labcert1:labcert4, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  unite("xref", xref1:xref2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
-  unite("tos", tos1:tos4, sep = ":", remove = TRUE, na.rm = TRUE) |>
-  mutate(price = na_if(price, "")) |>
-  mutate(cim = na_if(cim, "")) |>
-  mutate(mcm = na_if(mcm, "")) |>
-  mutate(labcert = na_if(labcert, "")) |>
-  mutate(xref = na_if(xref, "")) |>
-  mutate(tos = na_if(tos, "")) |>
-  rename(lvl2_date_added  = add_dt,
-         lvl2_action_date = act_eff_dt,
-         lvl2_date_terminated  = term_dt,
-         lvl2_action = action_cd,
-         lvl2_desc_short = short_description,
-         lvl2_desc_long = long_description,
-         lvl2_asc = asc_grp,
-         lvl2_coverage = cov,
-         lvl2_multi_price = mult_pi)
+url_to_scrape <- "https://www.cms.gov/medicare/coding-billing/healthcare-common-procedure-system/quarterly-update"
 
-two <- two |>
-  select(hcpcs,
-         type,
-         two_desc_long = lvl2_desc_long,
-         two_desc_short = lvl2_desc_short,
-         date_added = lvl2_date_added,
-         date_term = lvl2_date_terminated,
-         price = price,
-         mprice  = lvl2_multi_price,
-         cim = cim,
-         mcm = mcm,
-         statute = statute,
-         labcert = labcert,
-         xref = xref,
-         coverage = lvl2_coverage,
-         asc_group = lvl2_asc,
-         asc_date = asc_dt,
-         betos = betos,
-         tos = tos,
-         anesth = anest_bu,
-         action_date = lvl2_action_date,
-         action = lvl2_action,
-         procnote)
+hcpcs_url <- rvest::read_html(url_to_scrape) |>
+  rvest::html_elements("a") |>
+  rvest::html_attr("href") |>
+  unique() |>
+  stringr::str_subset("/files/zip/")
 
+months_re <- "(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
 
+hcpcs_zip_url <- dplyr::tibble(
+  url = hcpcs_url,
+  month = stringr::str_extract(
+    url,
+    stringr::regex(
+      months_re,
+      ignore_case = TRUE)
+    ) |>
+    stringr::str_to_title(),
+  year = stringr::str_extract(url, "\\d{4}") |>
+    as.integer(),
+  dl = glue::glue("https://www.cms.gov{url}")
+) |>
+  dplyr::filter(
+    year == substr(Sys.Date(), 1, 4),
+    month == as.character(
+      lubridate::month(
+        lubridate::today() + lubridate::dmonths(1),
+        label = TRUE,
+        abbr = FALSE
+        )
+      )
+    ) |>
+  dplyr::pull(dl)
 
-# Split off the modifiers?
-# A tibble: 383 × 13
-mod_two <- two |>
-  dplyr::filter(type == "mod") |>
-  dplyr::select(-type) |>
-  janitor::remove_empty(which = c("rows", "cols")) |>
+curl::multi_download(hcpcs_zip_url)
+
+zip_paths <- fs::file_info(
+  fs::dir_ls(path = here::here(),
+             glob = "*.zip")) |>
+  dplyr::pull(path) |>
+  as.character()
+
+# Unzip
+purrr::walk(zip_paths, zip::unzip)
+
+# Delete zips
+fs::file_delete(here::here(fs::dir_ls(glob = "*.zip")))
+
+xlsx_paths <- fs::file_info(
+  fs::dir_ls(path = here::here(),
+             glob = "*.xlsx")) |>
+  dplyr::pull(path) |>
+  as.character()
+
+hcpcs <- xlsx_paths |>
+  purrr::map(read_excel, col_types = "text") |>
+  purrr::set_names(
+    stringr::str_remove_all(
+      janitor::make_clean_names(
+        basename(xlsx_paths)), ".xlsx"))
+
+hcpcs_jul24 <- hcpcs$hcpc2024_jul_anweb_v3 |>
+  janitor::clean_names() |>
+  fuimus::remove_quiet() |>
+  dplyr::mutate(
+    len = stringr::str_length(hcpc),
+    type = dplyr::if_else(len == 2, "mod", "code"),
+    len = NULL,
+    add_dt = janitor::convert_to_date(add_dt),
+    act_eff_dt = janitor::convert_to_date(act_eff_dt),
+    term_dt = janitor::convert_to_date(term_dt),
+    asc_dt = janitor::convert_to_date(asc_dt),
+    .after = hcpc
+    ) |>
+  dplyr::filter(type == "code") |>
+  dplyr::mutate(type = NULL)
+
+# Descriptions Only
+hcpcs_desc_jul24 <- hcpcs_jul24 |>
   dplyr::select(
-    mod_code = hcpcs,
-    mod_description = two_desc_long,
+    hcpcs_code = hcpc,
+    Long = long_description,
+    Short = short_description,
+  ) |>
+  tidyr::pivot_longer(
+    cols = !hcpcs_code,
+    names_to = "hcpcs_description_type",
+    values_to = "hcpcs_description"
   )
 
-two <- two |>
-  dplyr::filter(type != "mod") |>
-  select(-type) |>
-  janitor::remove_empty(which = c("rows", "cols"))
-
-# HCPCS Level II Descriptions
-# A tibble: 7,966 × 3
-two_descriptions <- two |>
-  dplyr::select(
-    hcpcs,
-    two_desc_short,
-    two_desc_long)
-
 pin_update(
-  two_descriptions,
+  hcpcs_desc_jul24,
   name = "two_descriptions",
   title = "2024 HCPCS Level II Descriptions",
   description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
 )
 
-# HCPCS Level II Indicators
-# A tibble: 6,919 × 19
-two_therest <- two |>
+hcpcs_jul24 <- hcpcs_jul24 |>
+  tidyr::unite("price", price1:price2, sep = ":", na.rm = TRUE) |>
+  tidyr::unite("cim", cim1:cim2, sep = ", ", na.rm = TRUE) |>
+  tidyr::unite("mcm", mcm1:mcm3, sep = ", ", na.rm = TRUE) |>
+  tidyr::unite("labcert", labcert1:labcert4, sep = ", ", na.rm = TRUE) |>
+  tidyr::unite("xref", xref1:xref2, sep = ", ", na.rm = TRUE) |>
+  tidyr::unite("tos", tos1:tos4, sep = ":", na.rm = TRUE) |>
+  dplyr::mutate(
+    price = dplyr::na_if(price, ""),
+    cim = dplyr::na_if(cim, ""),
+    mcm = dplyr::na_if(mcm, ""),
+    labcert = dplyr::na_if(labcert, ""),
+    xref = dplyr::na_if(xref, ""),
+    tos = dplyr::na_if(tos, "")) |>
   dplyr::select(
-    -c(
-      two_desc_short,
-      two_desc_long
-    )) |>
-  dplyr::filter(is.na(date_term)) |>
-  dplyr::select(-date_term)
+    hcpcs_code = hcpc,
+    price,
+    multi = mult_pi,
+    cov,
+    betos,
+    tos,
+    action = action_cd,
+    cim,
+    mcm,
+    statute,
+    lab = labcert,
+    xref,
+    asc_grp,
+    proc = procnote,
+    anes = anest_bu,
+    date_term  = term_dt,
+    date_added  = add_dt,
+    date_asc = asc_dt,
+    date_action = act_eff_dt
+    )
 
 pin_update(
-  two_therest,
-  name = "two_therest",
-  title = "2024 HCPCS Level II Indicators",
+  hcpcs_jul24,
+  name = "hcpcs_lvl2",
+  title = "2024 HCPCS Level II Codes July 2024",
   description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
 )
 
-
-
-
-
-
+# Delete zips
+fs::file_delete(here::here(fs::dir_ls(glob = "*.xlsx|*.txt")))
 
 # hcpcs
 #
@@ -124,7 +154,7 @@ pin_update(
 #
 # Level I Codes and descriptors copyrighted by the American Medical
 # Association's current procedural terminology, fourth # edition (CPT-4). These
-# are 5 position numeric codes representing physician and nonphysician services.
+# are 5 position numeric codes representing physician and non-physician services.
 #
 # **** NOTE: ****
 # CPT-4 codes including both long and short descriptions shall be used in
@@ -140,7 +170,7 @@ pin_update(
 # Association of America, and the Blue Cross and Blue Shield Association).
 #
 # These are 5 position alpha- numeric codes representing primarily items and
-# nonphysician services that are not represented in the level I codes.
+# non-physician services that are not represented in the level I codes.
 
 
 # type == "mod"
