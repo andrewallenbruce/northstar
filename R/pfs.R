@@ -4,7 +4,7 @@
 #'
 #' @template args-hcpcs
 #'
-#' @param type description
+#' @param type `<chr>` part of RVU file to return; `amt` or `ind`
 #'
 #' @template args-dots
 #'
@@ -13,19 +13,23 @@
 #' @examples
 #' search_rvus(hcpcs_code = c("95907", "78140", "32820", "61575"))
 #'
+#' search_rvus(hcpcs_code = "95907", type = "amt")
+#'
+#' search_rvus(hcpcs_code = "95907", type = "ind")
+#'
 #' @autoglobal
 #'
 #' @family Physician Fee Schedule Sources
 #'
 #' @export
-search_rvus <- function(hcpcs_code = NULL, type = c("amounts", "indicators"), ...) {
+search_rvus <- function(hcpcs_code = NULL, type = c("amt", "ind"), ...) {
 
-  type <- match.arg(type, c("amounts", "indicators"))
+  type <- match.arg(type)
 
   rv <- switch(
     type,
-    amounts = get_pin("pfs_rvu_amt"),
-    indicators = get_pin("pfs_rvu_ind")
+    amt = get_pin("pfs_rvu_amt"),
+    ind = get_pin("pfs_rvu_ind")
   )
 
   rv <- fuimus::search_in_if(rv, rv$hcpcs_code, hcpcs_code)

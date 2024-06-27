@@ -10,7 +10,7 @@ search_rbcs(
   subcategory = NULL,
   family = NULL,
   procedure = NULL,
-  concatenate = TRUE,
+  concatenate = FALSE,
   ...
 )
 }
@@ -97,13 +97,9 @@ assigned to a 6-character RBCS taxonomy code.
 }
 
 \examples{
-search_rbcs(
-   hcpcs = c("J9264",
-             "39503",
-             "43116",
-             "70170",
-             "0001U")
-           )
+search_rbcs(hcpcs_code = c("J9264", "39503", "43116", "70170", "0001U"))
+
+search_rbcs(hcpcs_code = "0001U")
 
 }
 \seealso{

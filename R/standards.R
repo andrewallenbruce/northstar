@@ -212,30 +212,26 @@ search_pos <- function(pos_code = NULL, pos_type = NULL, ...) {
 #' |`date_rbcs_assign`  |Earliest Date that the RBCS ID was effective |
 #'
 #' @examples
-#' search_rbcs(
-#'    hcpcs = c("J9264",
-#'              "39503",
-#'              "43116",
-#'              "70170",
-#'              "0001U")
-#'            )
+#' search_rbcs(hcpcs_code = c("J9264", "39503", "43116", "70170", "0001U"))
+#'
+#' search_rbcs(hcpcs_code = "0001U")
 #'
 #' @autoglobal
 #'
 #' @family HIPAA Code Standards
 #'
 #' @export
-search_rbcs <- function(hcpcs_code = NULL,
+search_rbcs <- function(hcpcs_code  = NULL,
                         category    = NULL,
                         subcategory = NULL,
                         family      = NULL,
                         procedure   = NULL,
-                        concatenate = TRUE,
+                        concatenate = FALSE,
                         ...) {
 
   rb <- get_pin("rbcs")
 
-  rb <- fuimus::search_in_if(rb, rb$hcpcs, hcpcs_code)
+  rb <- fuimus::search_in_if(rb, rb$hcpcs_code, hcpcs_code)
   rb <- fuimus::search_in_if(rb, rb$rbcs_family, family)
   rb <- fuimus::search_in_if(rb, rb$rbcs_subcategory, subcategory)
 
@@ -273,7 +269,7 @@ search_rbcs <- function(hcpcs_code = NULL,
         sep = ": ",
         na.rm = TRUE) |>
       dplyr::select(
-        hcpcs,
+        hcpcs_code,
         rbcs_category,
         rbcs_family)
   }

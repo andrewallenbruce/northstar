@@ -5,8 +5,6 @@ utils::globalVariables(c(
   "aoc_complements",
   # <calculate_amounts>
   "facility",
-  # <search_rbcs>
-  "hcpcs",
   # <calculate_amounts>
   "nonfacility",
   # <search_ptps>

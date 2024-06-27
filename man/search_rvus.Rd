@@ -4,12 +4,12 @@
 \alias{search_rvus}
 \title{HCPCS Relative Value Units (RVUs)}
 \usage{
-search_rvus(hcpcs_code = NULL, type = c("amounts", "indicators"), ...)
+search_rvus(hcpcs_code = NULL, type = c("amt", "ind"), ...)
 }
 \arguments{
 \item{hcpcs_code}{\verb{<chr>} vector of 5-character HCPCS codes}
 
-\item{type}{description}
+\item{type}{\verb{<chr>} part of RVU file to return; \code{amt} or \code{ind}}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }
@@ -21,6 +21,10 @@ Physician Fee Schedule Relative Value File
 }
 \examples{
 search_rvus(hcpcs_code = c("95907", "78140", "32820", "61575"))
+
+search_rvus(hcpcs_code = "95907", type = "amt")
+
+search_rvus(hcpcs_code = "95907", type = "ind")
 
 }
 \seealso{
