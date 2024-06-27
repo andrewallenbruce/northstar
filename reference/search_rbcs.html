@@ -99,7 +99,7 @@ meaningful categories based on the original <em>Berenson-Eggers Type of Service<
 <span>  subcategory <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  family <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  procedure <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  concatenate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  concatenate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -191,22 +191,27 @@ assigned to a 6-character RBCS taxonomy code.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_rbcs</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>,</span></span>
-<span class="r-in"><span>             <span class="st">"39503"</span>,</span></span>
-<span class="r-in"><span>             <span class="st">"43116"</span>,</span></span>
-<span class="r-in"><span>             <span class="st">"70170"</span>,</span></span>
-<span class="r-in"><span>             <span class="st">"0001U"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>           <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">rbcs_category</span>           <span style="font-weight: bold;">rbcs_family</span>                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0001U Non-Procedure Test      Molecular Testing: No RBCS Family         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0001U Non-Procedure Test      Molecular Testing: Genetic Analysis       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 39503 Major Procedure         Other Organ Systems: No RBCS Family       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 43116 Major Procedure         Digestive/Gastrointestinal: No RBCS Family</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 70170 Non-Procedure Imaging   Standard X-ray: No RBCS Family            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> J9264 Non-Procedure Treatment Chemotherapy: Chemotherapeutic Agent      </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_rbcs</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"J9264"</span>, <span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"70170"</span>, <span class="st">"0001U"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">rbcs_procedure</span> <span style="font-weight: bold;">rbcs_category</span> <span style="font-weight: bold;">rbcs_subcategory</span>           <span style="font-weight: bold;">rbcs_family</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0001U      Non-Procedure  Test          Molecular Testing          No RBCS Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0001U      Non-Procedure  Test          Molecular Testing          Genetic An…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 39503      Major          Procedure     Other Organ Systems        No RBCS Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 43116      Major          Procedure     Digestive/Gastrointestinal No RBCS Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 70170      Non-Procedure  Imaging       Standard X-ray             No RBCS Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> J9264      Non-Procedure  Treatment     Chemotherapy               Chemothera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: </span><span style="color: #949494; font-weight: bold;">hcpcs_date_added</span><span style="color: #949494;"> &lt;date&gt;, </span><span style="color: #949494; font-weight: bold;">hcpcs_date_ended</span><span style="color: #949494;"> &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">rbcs_date_effective</span><span style="color: #949494;"> &lt;date&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">search_rbcs</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0001U"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">rbcs_procedure</span> <span style="font-weight: bold;">rbcs_category</span> <span style="font-weight: bold;">rbcs_subcategory</span>  <span style="font-weight: bold;">rbcs_family</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0001U      Non-Procedure  Test          Molecular Testing No RBCS Family  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0001U      Non-Procedure  Test          Molecular Testing Genetic Analysis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: </span><span style="color: #949494; font-weight: bold;">hcpcs_date_added</span><span style="color: #949494;"> &lt;date&gt;, </span><span style="color: #949494; font-weight: bold;">hcpcs_date_ended</span><span style="color: #949494;"> &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">rbcs_date_effective</span><span style="color: #949494;"> &lt;date&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
