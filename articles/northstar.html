@@ -123,8 +123,16 @@
 <h2 id="hcpcs-descriptions">HCPCS Descriptions<a class="anchor" aria-label="anchor" href="#hcpcs-descriptions"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_descriptions.html">search_descriptions</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"39503"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in search_descriptions(hcpcs = "39503"): argument 1 matches multiple formal arguments</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_descriptions.html">search_descriptions</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"39503"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 6</span></span></span>
+<span><span class="co">#&gt;   <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">hcpcs_level</span> <span style="font-weight: bold;">hcpcs_category</span> <span style="font-weight: bold;">hcpcs_section</span> <span style="font-weight: bold;">hcpcs_desc_type</span></span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 39503      I           I              Surgery       Short          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 39503      I           I              Surgery       Long           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 39503      I           I              Surgery       Medical        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 39503      I           I              Surgery       Consumer       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 39503      I           I              Surgery       Clinician      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">hcpcs_description</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_adjustments.html">search_adjustments</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,581 × 8</span></span></span>
