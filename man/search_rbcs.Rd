@@ -103,10 +103,10 @@ search_rbcs(hcpcs_code = "0001U")
 
 }
 \seealso{
-Other HIPAA Code Standards: 
-\code{\link{search_adjustments}()},
+Other HIPAA Standards: 
+\code{\link{search_descriptions}()},
 \code{\link{search_hcpcs}()},
 \code{\link{search_modifiers}()},
 \code{\link{search_pos}()}
 }
-\concept{HIPAA Code Standards}
+\concept{HIPAA Standards}

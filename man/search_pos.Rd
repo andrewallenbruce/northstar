@@ -52,10 +52,10 @@ search_pos(pos_type = "Facility")
 
 }
 \seealso{
-Other HIPAA Code Standards: 
-\code{\link{search_adjustments}()},
+Other HIPAA Standards: 
+\code{\link{search_descriptions}()},
 \code{\link{search_hcpcs}()},
 \code{\link{search_modifiers}()},
 \code{\link{search_rbcs}()}
 }
-\concept{HIPAA Code Standards}
+\concept{HIPAA Standards}

@@ -1,76 +1,132 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
 
-hcpcs_desc <- get_pin("hcpcs_desc_raw") |>
+cpt_desc <- get_pin("cpt_descriptions") |>
+  dplyr::reframe(
+    hcpcs_code,
+    hcpcs_desc_type,
+    hcpcs_description
+    # , hcpcs_level = "I"
+  )
+
+hcpcs_desc <- get_pin("two_descriptions") |>
+  dplyr::reframe(
+    hcpcs_code,
+    hcpcs_desc_type = hcpcs_description_type,
+    hcpcs_description
+    # , hcpcs_level = "II"
+  )
+
+rvu_desc <- get_pin("rvu_descriptions")
+
+hcpcs_desc <- vctrs::vec_rbind(
+  cpt_desc,
+  hcpcs_desc,
+  rvu_desc
+) |>
   dplyr::distinct(
     hcpcs_code,
     hcpcs_description,
     .keep_all = TRUE
+  )
+
+hcpcs_desc |>
+  dplyr::filter(
+    stringr::str_ends(
+      hcpcs_code,
+      stringr::regex("[M]")
     )
+  )
+
+hcpcs_desc |>
+  hacksaw::count_split(
+    hcpcs_code,
+    hcpcs_desc_type
+  )
+
+# Combine Description Sets ---------------------
+hcpcs_desc <- rvu_desc |>
+  dplyr::full_join(two_pivot) |>
+  dplyr::full_join(cpt_pivot) |>
+  dplyr::arrange(hcpcs) |>
+  dplyr::distinct(
+    hcpcs,
+    description,
+    .keep_all = TRUE)
+
+short_dupes <- hcpcs_desc |>
+  dplyr::filter(desc_type == "Short") |>
+  janitor::get_dupes(hcpcs, desc_type) |>
+  dplyr::count(hcpcs) |>
+  dplyr::pull(hcpcs)
+
+desc_dupes <- hcpcs_desc |>
+  filter(hcpcs %in% short_dupes) |>
+  filter(desc_type == "Short") |>
+  group_by(hcpcs) |>
+  slice_tail() |>
+  ungroup() |>
+  pull(description)
+
+hcpcs_desc <- hcpcs_desc |>
+  filter(!description %in% desc_dupes)
+
+# Sanity check --------------------------
+hcpcs_desc |>
+  count(hcpcs) |>
+  select(hcpcs) |>
+  # filter(hcpcs %in% cpt_uq) # 10641
+  # filter(hcpcs %in% two_uq) # 7966
+  filter(hcpcs %in% rvu_uq) # 16324
+# ---------------------------------------
+
+# A tibble: 5 × 2
+# end_letter     n
+# 1 A            142
+# 2 F            565
+# 3 M             65
+# 4 T           2224
+# 5 U           1348
+
+
+# Remove CPT M & T Codes with no descriptions
+hcpcs_desc_rowid <- hcpcs_desc |>
+  mutate(rowid = row_number())
+
+m_codes_no_clin_desc <- hcpcs_desc_rowid |>
+  filter(str_ends(hcpcs, regex("[M]"))) |>
+  filter(is.na(description)) |>
+  pull(rowid)
+
+t_codes_no_clin_desc <- hcpcs_desc_rowid |>
+  filter(str_ends(hcpcs, regex("[T]"))) |>
+  filter(is.na(description)) |>
+  pull(rowid)
+
+rows_no_clin_desc <- c(m_codes_no_clin_desc, t_codes_no_clin_desc)
+
+hcpcs_desc <- hcpcs_desc_rowid |>
+  filter(!rowid %in% rows_no_clin_desc) |>
+  select(-rowid)
 
 # Add Levels and Categories ---------------------
 hcpcs_desc <- hcpcs_desc |>
-  dplyr::mutate(
-    hcpcs_level = dplyr::case_when(
-      stringr::str_detect(
-        hcpcs_code,
-        stringr::regex("^\\d{4}[A-Z0-9]$")) ~ "I",
-      stringr::str_detect(
-        hcpcs_code,
-        stringr::regex("^[A-V]\\d{4}$")) ~ "II",
+  mutate(level = case_when(
+    str_detect(hcpcs, regex("^\\d{4}[A-Z0-9]$")) ~ "I",
+    str_detect(hcpcs, regex("^[A-V]\\d{4}$")) ~ "II",
     .default = NA_character_
-  ) |> forcats::as_factor(),
-  hcpcs_category = dplyr::case_when(
-    hcpcs_level == "I" & stringr::str_ends(
-      hcpcs_code, stringr::regex("[A-EG-SU-Z0-9]")) ~ "I",
-    hcpcs_level == "I" & stringr::str_ends(
-      hcpcs_code, stringr::regex("[F]")) ~ "II",
-    hcpcs_level == "I" & stringr::str_ends(
-      hcpcs_code, stringr::regex("[T]")) ~ "III",
+  )) |>
+  mutate(category = case_when(
+    level == "I" & str_ends(hcpcs, regex("[A-EG-SU-Z0-9]")) ~ "I",
+    level == "I" & str_ends(hcpcs, regex("[F]")) ~ "II",
+    level == "I" & str_ends(hcpcs, regex("[T]")) ~ "III",
     .default = NA_character_
-  ) |> forcats::as_factor(),
-  .after = hcpcs_code,
-  hcpcs_desc_type = forcats::as_factor(hcpcs_desc_type),
-  hcpcs_desc_type = forcats::fct_infreq(hcpcs_desc_type, ordered = TRUE)
-  ) |>
-  dplyr::arrange(hcpcs_code, hcpcs_desc_type)
+  ))
 
-
-# Remove 'Short' Duplicates ---------------------
-hcpcs_desc <- hcpcs_desc |>
-  dplyr::mutate(
-    rowid = dplyr::row_number(),
-    .before = hcpcs_code
-    )
-
-vec_short_dupes <- hcpcs_desc |>
-  dplyr::filter(hcpcs_desc_type == "Short") |>
-  dplyr::count(hcpcs_code, sort = TRUE) |>
-  dplyr::filter(n > 1) |>
-  dplyr::pull(hcpcs_code)
-
-dupes_rowid <- hcpcs_desc |>
-  dplyr::filter(
-    hcpcs_desc_type == "Short",
-    hcpcs_code %in% vec_short_dupes
-    ) |>
-  dplyr::slice_max(rowid, by = hcpcs_code) |>
-  dplyr::pull(rowid)
-
-hcpcs_desc <- hcpcs_desc |>
-  dplyr::filter(!rowid %in% dupes_rowid) |>
-  dplyr::mutate(
-    hcpcs_description = dplyr::case_when(
-      hcpcs_desc_type == "Short" ~ stringr::str_to_upper(hcpcs_description),
-      .default = hcpcs_description
-    ),
-    rowid = NULL
-  )
 
 # Add Sections and Ranges ---------------------
 hcpcs_desc <- hcpcs_desc |>
-  dplyr::mutate(
-    hcpcs_section = dplyr::case_match(
-    hcpcs_code,
+  mutate(section = case_match(
+    hcpcs,
 
     # Level I Codes
     as.character(99202:99499) ~ "Evaluation and Management",
@@ -109,34 +165,132 @@ hcpcs_desc <- hcpcs_desc |>
 
     paste0("A", stringr::str_pad(21:999, width = 4, pad = "0")) ~ "Transportation Services Including Ambulance",
     paste0("A", stringr::str_pad(2000:9999, width = 4, pad = "0")) ~ "Medical and Surgical Supplies",
+
     paste0("B", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Enteral and Parenteral Therapy",
     paste0("C", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Outpatient PPS",
     paste0("D", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Dental Codes",
     paste0("E", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Durable Medical Equipment",
     paste0("G", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Procedures/Professional Services (Temporary)",
+
     paste0("H", stringr::str_pad(1:2037, width = 4, pad = "0")) ~ "Alcohol and Drug Abuse Treatment Services",
     paste0("H", stringr::str_pad(2038:2041, width = 4, pad = "0")) ~ "Rehabilitative Services",
+
     paste0("J", stringr::str_pad(120:8499, width = 4, pad = "0")) ~ "Drugs Administered Other Than Oral Method",
     paste0("J", stringr::str_pad(8501:9999, width = 4, pad = "0")) ~ "Chemotherapy Drugs",
+
     paste0("K", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Temporary DME Codes",
     paste0("L", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Orthotic Procedures and Devices",
+
     paste0("M", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Medical Services/Quality Measures",
+
     # paste0("M", stringr::str_pad(75:301, width = 4, pad = "0")) ~ "Medical Services",
     # paste0("M", stringr::str_pad(1003:1149, width = 4, pad = "0")) ~ "Quality Measures",
+
     paste0("P", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Pathology and Laboratory",
     paste0("Q", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Miscellaneous Services (Temporary)",
     paste0("R", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Diagnostic Radiology Services",
     paste0("S", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Commercial Payers (Temporary)",
     paste0("T", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "State Medicaid Agency Codes",
     paste0("U", stringr::str_pad(1:9999, width = 4, pad = "0")) ~ "Coronavirus Lab Tests",
+
     paste0("V", stringr::str_pad(2020:2799, width = 4, pad = "0")) ~ "Vision Services",
     paste0("V", stringr::str_pad(5008:5361, width = 4, pad = "0")) ~ "Hearing Services",
     paste0("V", stringr::str_pad(5362:5364, width = 4, pad = "0")) ~ "Speech-Language Pathology Services",
 
     .default = NA_character_
-    ) |> forcats::as_factor(),
-    .after = hcpcs_category
   )
+  )
+
+# Add RBCS ------------------------------
+rbcs <- search_rbcs(concatenate = FALSE) |>
+  filter(rbcs_date_hcpcs_end > lubridate::today()) |>
+  select(
+    hcpcs,
+    rbcs_procedure,
+    rbcs_category,
+    rbcs_subcategory,
+    rbcs_family
+  )
+
+rbcs_3 <- rbcs |>
+  count(hcpcs, sort = TRUE) |>
+  filter(n == 3) |>
+  pull(hcpcs)
+
+rbcs_2 <- rbcs |>
+  count(hcpcs, sort = TRUE) |>
+  filter(n == 2) |>
+  pull(hcpcs)
+
+rbcs_1 <- rbcs |>
+  count(hcpcs, sort = TRUE) |>
+  filter(n == 1) |>
+  pull(hcpcs)
+
+rbcs_3grp <- rbcs |>
+  filter(hcpcs %in% rbcs_3) |>
+  mutate(rbcs_family = na_if(rbcs_family, "No RBCS Family")) |>
+  filter(!is.na(rbcs_family)) |>
+  unite(
+    "rbcs_category",
+    c(rbcs_procedure, rbcs_category),
+    sep = " ") |>
+  unite(
+    "rbcs_family",
+    c(rbcs_subcategory, rbcs_family),
+    sep = ": ",
+    na.rm = TRUE) |>
+  select(
+    hcpcs,
+    rbcs_category,
+    rbcs_family)
+
+rbcs_2grp <- rbcs |>
+  filter(hcpcs %in% rbcs_2) |>
+  mutate(rbcs_family = na_if(rbcs_family, "No RBCS Family")) |>
+  filter(!is.na(rbcs_family)) |>
+  unite(
+    "rbcs_category",
+    c(rbcs_procedure, rbcs_category),
+    sep = " ") |>
+  unite(
+    "rbcs_family",
+    c(rbcs_subcategory, rbcs_family),
+    sep = ": ",
+    na.rm = TRUE) |>
+  select(
+    hcpcs,
+    rbcs_category,
+    rbcs_family)
+
+rbcs_1grp <- rbcs |>
+  filter(hcpcs %in% rbcs_1) |>
+  mutate(rbcs_family = na_if(rbcs_family, "No RBCS Family")) |>
+  unite(
+    "rbcs_category",
+    c(rbcs_procedure, rbcs_category),
+    sep = " ") |>
+  unite(
+    "rbcs_family",
+    c(rbcs_subcategory, rbcs_family),
+    sep = ": ",
+    na.rm = TRUE) |>
+  select(
+    hcpcs,
+    rbcs_category,
+    rbcs_family)
+
+rbcs_desc <- vctrs::vec_rbind(
+  rbcs_3grp,
+  rbcs_2grp,
+  rbcs_1grp
+)
+
+hcpcs_desc <- hcpcs_desc |>
+  left_join(rbcs_desc,
+            by = join_by(hcpcs),
+            relationship = "many-to-many")
+
 
 pin_update(
   hcpcs_desc,
@@ -144,20 +298,3 @@ pin_update(
   title = "HCPCS Descriptions Master File",
   description = "HCPCS Descriptions Master File"
 )
-
-# A tibble: 5 × 2
-# end_letter     n
-# 1 A            142 -> 150
-# 2 F            565 -> 2233
-# 3 M             65 -> 52
-# 4 T           2224 -> 2230
-# 5 U           1348 -> 1666
-
-hcpcs_desc |>
-  hacksaw::filter_split(
-    stringr::str_ends(hcpcs_code, stringr::regex("[A]")),
-    stringr::str_ends(hcpcs_code, stringr::regex("[F]")),
-    stringr::str_ends(hcpcs_code, stringr::regex("[M]")),
-    stringr::str_ends(hcpcs_code, stringr::regex("[T]")),
-    stringr::str_ends(hcpcs_code, stringr::regex("[U]"))
-  )

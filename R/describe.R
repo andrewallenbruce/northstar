@@ -5,7 +5,7 @@
 #' @param desc_type `<chr>` vector of code description types; `All` (default),
 #'   `Short`, `Long`, `Medium`, `Medical`, `Consumer`, `Clinician`, `Proprietary Name`
 #'
-#' @param varname If `hcpcs` is a [data.frame] or a
+#' @param varname If `hcpcs_code` is a [data.frame] or a
 #'   [tibble][tibble::tibble-package], this is the quoted name of the column
 #'   containing HCPCS codes; default is `"hcpcs"`
 #'
@@ -14,18 +14,18 @@
 #' @template returns
 #'
 #' @examples
-#' describe_hcpcs(hcpcs = c("39503", "43116", "33935", "11646"))
+#' search_descriptions(hcpcs = c("39503", "43116", "33935", "11646"))
 #'
-#' describe_hcpcs(
+#' search_descriptions(
 #'   dplyr::tibble(
 #'     hcpcs = c("A0021", "V5362", "J9264", "G8916")))
 #'
 #' @autoglobal
 #'
 #' @export
-describe_hcpcs <- function(hcpcs_code = NULL, desc_type = "All", varname = "hcpcs", ...) {
+search_descriptions <- function(hcpcs_code = NULL, desc_type = "All", varname = "hcpcs", ...) {
 
-  dsc <- get_pin("hcpcs_descriptions")
+  hcp <- get_pin("hcpcs_descriptions")
 
   desc_type <- match.arg(
     desc_type,
@@ -41,15 +41,15 @@ describe_hcpcs <- function(hcpcs_code = NULL, desc_type = "All", varname = "hcpc
       which(c(vec = is.vector(hcpcs_code),
               dfr = is.data.frame(hcpcs_code))))
 
-    dsc <- switch(
+    hcp <- switch(
       obj_type,
-      vec = fuimus::search_in(dsc, dsc$hcpcs, hcpcs_code),
-      dfr = fuimus::search_in(dsc, dsc$hcpcs, hcpcs_code[[varname]]))
+      vec = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code),
+      dfr = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code[[varname]]))
   }
 
   if (desc_type != "All") {
 
-    dsc <- fuimus::search_in(dsc, dsc$desc_type, desc_type)
+    hcp <- fuimus::search_in(hcp, hcp$hcpcs_desc_type, desc_type)
   }
-  return(.add_class(dsc))
+  return(.add_class(hcp))
 }

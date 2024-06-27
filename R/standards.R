@@ -1,3 +1,59 @@
+#' Describe HCPCS Codes
+#'
+#' @template args-hcpcs
+#'
+#' @param varname If `hcpcs_code` is a [data.frame] or a
+#'   [tibble][tibble::tibble-package], this is the quoted name of the column
+#'   containing HCPCS codes; default is `"hcpcs_code"`
+#'
+#' @param hcpcs_desc_type `<chr>` vector of code description types; `All` (default),
+#'   `Short`, `Long`, `Medium`, `Medical`, `Consumer`, `Clinician`, `Proprietary Name`
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' search_descriptions(hcpcs_code = c("39503", "43116", "33935", "11646"))
+#'
+#' search_descriptions(dplyr::tibble(hcpcs_code = c("A0021", "V5362", "J9264", "G8916")))
+#'
+#' @autoglobal
+#'
+#' @family HIPAA Standards
+#'
+#' @export
+search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", varname = "hcpcs_code", ...) {
+
+  hcp <- get_pin("hcpcs_descriptions")
+
+  hcpcs_desc_type <- match.arg(
+    hcpcs_desc_type,
+    c("All", "Short", "Long",
+      "Medium", "Medical", "Consumer",
+      "Clinician", "Proprietary Name"),
+    several.ok = TRUE
+  )
+
+  if (!is.null(hcpcs_code)) {
+
+    obj_type <- names(
+      which(c(vec = is.vector(hcpcs_code),
+              dfr = is.data.frame(hcpcs_code))))
+
+    hcp <- switch(
+      obj_type,
+      vec = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code),
+      dfr = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code[[varname]]))
+  }
+
+  if (hcpcs_desc_type != "All") {
+
+    hcp <- fuimus::search_in(hcp, hcp$hcpcs_desc_type, hcpcs_desc_type)
+  }
+  return(.add_class(hcp))
+}
+
 #' Level I and II HCPCS Modifiers
 #'
 #' A modifier provides the means to report or indicate that a service or
@@ -24,7 +80,7 @@
 #'
 #' @autoglobal
 #'
-#' @family HIPAA Code Standards
+#' @family HIPAA Standards
 #'
 #' @export
 search_modifiers <- function(mod_code = NULL, mod_type = NULL, ...) {
@@ -73,7 +129,7 @@ search_modifiers <- function(mod_code = NULL, mod_type = NULL, ...) {
 #'
 #' @autoglobal
 #'
-#' @family HIPAA Code Standards
+#' @family HIPAA Standards
 #'
 #' @export
 search_hcpcs <- function(hcpcs_code = NULL, ...) {
@@ -128,7 +184,7 @@ search_hcpcs <- function(hcpcs_code = NULL, ...) {
 #'
 #' @autoglobal
 #'
-#' @family HIPAA Code Standards
+#' @family HIPAA Standards
 #'
 #' @export
 search_pos <- function(pos_code = NULL, pos_type = NULL, ...) {
@@ -218,7 +274,7 @@ search_pos <- function(pos_code = NULL, pos_type = NULL, ...) {
 #'
 #' @autoglobal
 #'
-#' @family HIPAA Code Standards
+#' @family HIPAA Standards
 #'
 #' @export
 search_rbcs <- function(hcpcs_code  = NULL,

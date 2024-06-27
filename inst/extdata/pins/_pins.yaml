@@ -1,7 +1,5 @@
 adj_codes:
 - adj_codes/20240618T123408Z-c1491/
-cpt_descriptions:
-- cpt_descriptions/20240625T060512Z-792c6/
 cpt_pla:
 - cpt_pla/20240625T060336Z-1a40b/
 denials_extract:
@@ -9,7 +7,9 @@ denials_extract:
 denials_site:
 - denials_site/20240618T140439Z-58f21/
 hcpcs_descriptions:
-- hcpcs_descriptions/20240506T143147Z-1cbb8/
+- hcpcs_descriptions/20240627T025507Z-9bffb/
+hcpcs_desc_raw:
+- hcpcs_desc_raw/20240627T020527Z-5dba8/
 hcpcs_lvl2:
 - hcpcs_lvl2/20240625T180704Z-a38f5/
 modifiers:
@@ -50,7 +50,3 @@ practicum:
 - practicum/20240528T001114Z-362d5/
 rbcs:
 - rbcs/20240626T235703Z-37165/
-rvu_descriptions:
-- rvu_descriptions/20240625T203447Z-40570/
-two_descriptions:
-- two_descriptions/20240625T080521Z-33411/
