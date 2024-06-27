@@ -30,7 +30,7 @@ library(gt)
 # HCPCS Descriptions
 
 ```{r}
-search_descriptions(hcpcs = "39503")
+search_descriptions(hcpcs_code = "39503")
 ```
 
 

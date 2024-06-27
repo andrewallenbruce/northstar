@@ -154,49 +154,19 @@ pin_update(
 #     not_used_mcr = not_used_for_mcr_pmt
 #   )
 
-
-board <- mount_board(source = "remote")
-
-pfs_rvu_amt <- pins::pin_read(board, "pfs_rvu") |>
-  dplyr::select(
-    hcpcs_code,
-    rvu_work,
-    rvu_non_pe,
-    rvu_fac_pe,
-    rvu_mp,
-    rvu_non_sum = rvu_non_total,
-    rvu_fac_sum = rvu_fac_total,
-    rvu_opps_non_pe,
-    rvu_opps_fac_pe,
-    rvu_opps_mp,
-    cf
-  ) |>
-  fuimus::remove_quiet()
-
-pfs_rvu_ind <- pins::pin_read(board, "pfs_rvu") |>
-  dplyr::select(
+pfs_rvu_amt <- vctrs::vec_cbind(
+  get_pin("pfs_rvu_amt"),
+  get_pin("pfs_rvu_ind") |> select(mod)
+) |>
+  select(
     hcpcs_code,
     mod,
-    status,
-    pctc = pctc_ind,
-    global = glob_days,
-    # op_ind,
-    pre_op,
-    intra_op,
-    post_op,
-    mult_proc,
-    bilat_surg,
-    asst_surg,
-    co_surg,
-    team_surg,
-    endo_base,
-    phys_diag_pro = phys_sup_diag_proc,
-    diag_img_fam = diag_img_fam_ind,
-    non_na = non_na_ind,
-    fac_na = fac_na_ind,
-    not_used_mcr = not_used_for_mcr_pmt
-  ) |>
-  fuimus::remove_quiet()
+    everything()
+  )
+
+
+pfs_rvu_ind <- get_pin("pfs_rvu_ind") |>
+  select(-mod)
 
 pin_update(
   pfs_rvu_amt,
