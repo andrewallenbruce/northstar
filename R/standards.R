@@ -2,7 +2,7 @@
 #'
 #' @template args-hcpcs
 #'
-#' @param varname If `hcpcs_code` is a [data.frame] or a
+#' @param column If `hcpcs_code` is a [data.frame] or a
 #'   [tibble][tibble::tibble-package], this is the quoted name of the column
 #'   containing HCPCS codes; default is `"hcpcs_code"`
 #'
@@ -16,14 +16,19 @@
 #' @examples
 #' search_descriptions(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
-#' search_descriptions(dplyr::tibble(hcpcs_code = c("A0021", "V5362", "J9264", "G8916")))
+#' search_descriptions(
+#'   hcpcs_code = dplyr::tibble(code = c("A0021", "V5362", "J9264", "G8916")),
+#'   column = "code")
+#'
+#' dplyr::tibble(code = c("A0021", "V5362", "J9264", "G8916")) |>
+#'   search_descriptions(column = "code")
 #'
 #' @autoglobal
 #'
 #' @family HIPAA Standards
 #'
 #' @export
-search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", varname = "hcpcs_code", ...) {
+search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", column = "hcpcs_code", ...) {
 
   hcp <- get_pin("hcpcs_descriptions")
 
@@ -44,7 +49,7 @@ search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", varn
     hcp <- switch(
       obj_type,
       vec = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code),
-      dfr = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code[[varname]]))
+      dfr = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code[[column]]))
   }
 
   if (hcpcs_desc_type != "All") {
