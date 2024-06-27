@@ -75,7 +75,6 @@ reference:
   desc: >
     Medical Coding & Billing Codesets.
   contents:
-  - describe_hcpcs
   - assign_adjustments
   - starts_with("search_")
 
