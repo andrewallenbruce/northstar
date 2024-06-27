@@ -52,9 +52,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/data_dict.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/describe_hcpcs.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_pin.html</loc>
   </url>
   <url>
@@ -101,6 +98,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_descriptions.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_gpcis.html</loc>
