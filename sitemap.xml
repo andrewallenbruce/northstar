@@ -52,6 +52,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/data_dict.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/get_example.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/get_pin.html</loc>
   </url>
   <url>
@@ -119,6 +122,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_payment.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/search_plas.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/search_pos.html</loc>
