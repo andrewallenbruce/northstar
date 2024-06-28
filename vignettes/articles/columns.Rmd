@@ -159,8 +159,8 @@ This file contains the Geographic Practice Cost Index (GPCI) component for each 
 ```{r echo=FALSE, eval=TRUE}
 search_gpcis() |> 
   mutate(
-    counties = NULL,
-    area = glue::glue("<small>{area}</small>")) |> 
+    # counties = NULL,
+    locality_name = glue::glue("<small>{locality_name}</small>")) |> 
   distinct() |> 
   gt(rowname_col = "mac", 
      groupname_col = "state",
@@ -170,13 +170,15 @@ search_gpcis() |>
     mac = "MAC",
     state = "State",
     locality = "",
-    area = "",
+    locality_name = "",
     gpci_work = md("**GPCI**<i><sub>wk</sub></i>"),
     gpci_pe = md("**GPCI**<i><sub>pe</sub></i>"),
-    gpci_mp = md("**GPCI**<i><sub>mp</sub></i>")) |> 
+    gpci_mp = md("**GPCI**<i><sub>mp</sub></i>"),
+    gpci_gaf = md("**GPCI**<i><sub>gaf</sub></i>")
+    ) |> 
   fmt_number(decimals = 2, 
              drop_trailing_zeros = TRUE) |>
-  fmt_markdown(columns = "area") |> 
+  fmt_markdown(columns = "locality_name") |> 
   gt_theme_northstar(no_column_labels = FALSE) |> 
   tab_style(
       style = cell_text(

@@ -76,6 +76,72 @@ get_example <- function(name = c("report", "practicum")) {
 
 }
 
+#' Alias for `as.character()`
+#'
+#' @param ... arguments to pass to `as.character()`
+#'
+#' @keywords internal
+#'
+#' @export
+chr <- function(...) {
+  as.character(...)
+}
+
+#' Construct regex pattern for HCPCS codes
+#'
+#' @param x `<chr>` vector
+#'
+#' @examples
+#' construct_regex(search_descriptions()$hcpcs_code)
+#'
+#' @returns `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+construct_regex <- function(x) {
+
+  # TODO: check for equal lengths
+
+  x <- collapse::funique(
+    collapse::na_rm(
+      gsub(" ", "", x)))
+
+  x <- stringr::str_split(x, "") |>
+    purrr::list_transpose() |>
+    purrr::map(collapse::funique) |>
+    purrr::map(pos_re) |>
+    purrr::list_c() |>
+    paste0(collapse = "")
+
+  paste0("^", x, "$")
+
+}
+
+#' Internal function for `construct_regex()`
+#'
+#' @param x `<chr>` vector
+#'
+#' @returns `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+pos_re <- function(x) {
+
+  sorted   <- stringr::str_sort(x, numeric = TRUE)
+  alphabet <- purrr::list_c(strex::str_extract_non_numerics(sorted))
+  numbers  <- purrr::list_c(strex::str_extract_numbers(sorted))
+
+  paste0("[",
+         fuimus::collapser(alphabet),
+         fuimus::collapser(numbers),
+         "]")
+
+}
+
 #' Apply {gt} Theme
 #'
 #' @param gt_object `<gt_tbl>` A [gt][gt::gt-package] table object

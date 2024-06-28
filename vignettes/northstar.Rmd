@@ -24,31 +24,95 @@ library(fuimus)
 library(dplyr)
 library(tidyr)
 library(purrr)
+library(collapse)
+library(triebeard)
+# library(pathologie)
 library(gt)
 ```
+
+
+   * Calculate Patient Age  -> Check ICD/HCPCS for Age Conflicts
+   * Calculate Provider Lag -> Days between DOS and DOR
+   * Calculate Balance      -> Charges - (Payments + Adjustments)
+   * Calculate Coinsurance  -> Charges - Allowed
+
+
 
 ## Load Example
 
 ```{r}
-x <- get_example()
-
-x
+(x <- get_example() |> 
+   dplyr::filter(!hcpcs %in% c("WCPAIN", 
+                               "MATERIALCTR", 
+                               "MATERIALOFF", 
+                               "SPBARIATRIC", 
+                               "LETTER")) |> 
+   dplyr::mutate(
+     # coinsurance = charges - allowed,
+     balance = charges - (payments + adjustments), 
+     .after = adjustments))
 ```
 
 ## Place of Service
 
 ```{r}
-search_pos(pos_code = x$pos)
+pos_trie <- triebeard::trie(
+    keys = search_pos()$pos_code,
+    values = chr(search_pos()$pos_type))
+
+x_pos <- x |> 
+  dplyr::mutate(
+    pos_type = triebeard::longest_match(pos_trie, pos), 
+    .after = pos)
+
+x_pos
 ```
 
 
 ## Categorize HCPCS
 
 ```{r}
-search_descriptions(hcpcs_code = x$hcpcs)
+hcpcs_unq <- collapse::funique(x$hcpcs[!x$hcpcs %in% not_hcpcs])
+
+search_rbcs(hcpcs_code = hcpcs_unq) |> 
+  dplyr::select(hcpcs_code:rbcs_family) |> 
+  dplyr::left_join(
+    search_descriptions(hcpcs_code = hcpcs_unq, 
+                        hcpcs_desc_type = "Long") |> 
+  dplyr::select(hcpcs_code, hcpcs_description),
+  by = dplyr::join_by(hcpcs_code))
+```
+
+## Define Modifiers
+
+```{r}
+mod_unq <- strsplit(toupper(x$mod[!is.na(x$mod)]), "-") |> 
+  list_c() |> 
+  funique()
+
+search_modifiers(mod_code = mod_unq)
+```
+
+
+
+```{r}
+x |> 
+  select(
+    claim_id,
+    dos,
+    order,
+    hcpcs
+    ) |> 
+  group_by(claim_id) |> 
+  filter(n() > 1) |> 
+  ungroup()
 ```
 
 ```{r}
-search_rbcs(hcpcs_code = x$hcpcs)
+aocs <- search_aocs(hcpcs_code = hcpcs_unq) |> 
+  tidyr::unnest(cols = aoc_complements)
+
+aocs |> 
+  filter(aoc_type == "Primary")
 ```
 

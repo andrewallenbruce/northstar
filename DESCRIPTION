@@ -13,12 +13,14 @@ Depends:
     R (>= 4.1.0)
 Imports:
     cli,
+    collapse,
     dplyr,
     fs,
     kit,
     pins,
     purrr,
     rlang,
+    strex,
     stringfish,
     stringr,
     tidyr,

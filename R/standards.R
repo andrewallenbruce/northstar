@@ -17,10 +17,12 @@
 #' search_descriptions(hcpcs_code = c("39503", "43116", "33935", "11646"))
 #'
 #' search_descriptions(
-#'   hcpcs_code = dplyr::tibble(code = c("A0021", "V5362", "J9264", "G8916")),
+#'   hcpcs_code = dplyr::tibble(
+#'   code = c("A0021", "V5362", "J9264", "G8916")),
 #'   column = "code")
 #'
-#' dplyr::tibble(code = c("A0021", "V5362", "J9264", "G8916")) |>
+#' dplyr::tibble(
+#'   code = c("A0021", "V5362", "J9264", "G8916")) |>
 #'   search_descriptions(column = "code")
 #'
 #' @autoglobal
