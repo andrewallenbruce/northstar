@@ -33,7 +33,6 @@ library(gt)
 search_descriptions(hcpcs_code = "39503")
 ```
 
-
 ```{r}
 search_adjustments()
 ```

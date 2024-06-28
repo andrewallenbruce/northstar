@@ -1,13 +1,17 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
 
-# gs_id <- "1MVaKH6T6GZ39iKvrNRoiOBb47RQtMYJ4g0nvunmzsBg"
+
+# Report Example ----------------
+report <- qs::qread(here::here("data-raw", "rpt_clean"))
+
+
+# Practicum Example ----------------
 wkbk <- "1KUPLYD2dksyD4Gcc8pHL5Chw20Sjcck0HYM9VA_JZJ4"
 sh1 <- read_sheet(wkbk, sheet = 1, col_types = "iicccccicccc")
 sh2 <- read_sheet(wkbk, sheet = 2, col_types = "iicccccicccc")
 sh3 <- read_sheet(wkbk, sheet = 3, col_types = "iicccccicccc")
 
 # What year were these cases from?
-
 practicum_raw <- vctrs::vec_rbind(
   sh1,
   sh2,
@@ -62,12 +66,17 @@ practicum <- practicum_raw |>
     .before = 1
   )
 
+examples <- list(
+  report = report,
+  practicum = practicum
+)
+
 # Update pin -------------------
 pin_update(
-  practicum,
-  name = "practicum",
-  title = "AAPC CPC Practicum Case Data",
-  description = "AAPC CPC Practicum Case Data"
+  examples,
+  name = "examples",
+  title = "Northstar Example Data",
+  description = "Northstar Example Data"
 )
 
 # Example usage ----------------

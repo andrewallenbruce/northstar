@@ -145,6 +145,33 @@ search_hcpcs <- function(hcpcs_code = NULL, ...) {
 
 }
 
+
+#' Proprietary Laboratory Analyses (PLA) Codes
+#' (U codes)
+#' https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes
+#
+#' @template args-hcpcs
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' search_plas(hcpcs_code = c("C9039", "J1835"))
+#'
+#' @autoglobal
+#'
+#' @family HIPAA Standards
+#'
+#' @export
+search_plas <- function(hcpcs_code = NULL, ...) {
+
+  pla <- get_pin("cpt_pla")
+  pla <- fuimus::search_in_if(pla, pla$hcpcs_code, hcpcs_code)
+  return(.add_class(pla))
+
+}
+
 #' Place of Service (POS) Codes
 #'
 #' Place of Service Codes are two-digit codes placed on health care professional

@@ -114,11 +114,7 @@ scrape_urls <- function(url) {
       pg |>
       rvest::html_elements(".table") |>
       rvest::html_table() |>
-      purrr::pluck(1) # |>
-        # janitor::clean_names() |>
-        # dplyr::select(
-        #   adj_code = carc_rarc,
-        #   adj_description = description)
+      purrr::pluck(1)
       ),
     info = fuimus::null_if_empty(
       pg |>

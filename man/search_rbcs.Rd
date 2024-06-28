@@ -107,6 +107,7 @@ Other HIPAA Standards:
 \code{\link{search_descriptions}()},
 \code{\link{search_hcpcs}()},
 \code{\link{search_modifiers}()},
+\code{\link{search_plas}()},
 \code{\link{search_pos}()}
 }
 \concept{HIPAA Standards}

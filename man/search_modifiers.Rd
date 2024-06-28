@@ -37,6 +37,7 @@ search_modifiers(mod_type = "CPT")
 Other HIPAA Standards: 
 \code{\link{search_descriptions}()},
 \code{\link{search_hcpcs}()},
+\code{\link{search_plas}()},
 \code{\link{search_pos}()},
 \code{\link{search_rbcs}()}
 }

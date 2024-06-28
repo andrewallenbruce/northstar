@@ -44,6 +44,7 @@ dplyr::tibble(code = c("A0021", "V5362", "J9264", "G8916")) |>
 Other HIPAA Standards: 
 \code{\link{search_hcpcs}()},
 \code{\link{search_modifiers}()},
+\code{\link{search_plas}()},
 \code{\link{search_pos}()},
 \code{\link{search_rbcs}()}
 }

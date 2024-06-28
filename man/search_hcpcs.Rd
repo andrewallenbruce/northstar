@@ -47,6 +47,7 @@ search_hcpcs(hcpcs_code = c("C9039", "J1835"))
 Other HIPAA Standards: 
 \code{\link{search_descriptions}()},
 \code{\link{search_modifiers}()},
+\code{\link{search_plas}()},
 \code{\link{search_pos}()},
 \code{\link{search_rbcs}()}
 }

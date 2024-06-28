@@ -13,15 +13,8 @@ mount_board <- function(source = c("local", "remote")) {
 
   switch(
     source,
-    local = pins::board_folder(
-             fs::path_package(
-               "extdata/pins",
-               package = "northstar")
-             ),
-    remote = pins::board_url(
-  "https://raw.githubusercontent.com/andrewallenbruce/northstar/master/inst/extdata/pins/"
-      )
-    )
+    local = pins::board_folder(fs::path_package("extdata/pins", package = "northstar")),
+    remote = pins::board_url("https://raw.githubusercontent.com/andrewallenbruce/northstar/master/inst/extdata/pins/"))
 }
 
 #' Get a pinned dataset from a [pins][pins::pins-package] board
@@ -61,6 +54,25 @@ list_pins <- function(...) {
   board <- mount_board(...)
 
   pins::pin_list(board)
+
+}
+
+#' Load Example Datasets
+#'
+#' @param name name of example
+#'
+#' @returns `<tibble>`
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+get_example <- function(name = c("report", "practicum")) {
+
+  name <- match.arg(name)
+
+  get_pin("examples")[[name]] |> .add_class()
 
 }
 
