@@ -47,8 +47,6 @@ pfs_rvu_amt:
 pfs_rvu_ind:
 - pfs_rvu_ind/20240627T092248Z-2b55a/
 pos_codes:
-- pos_codes/20240529T153029Z-7ee58/
-practicum:
-- practicum/20240627T083139Z-d296e/
+- pos_codes/20240628T042527Z-8ef7c/
 rbcs:
 - rbcs/20240626T235703Z-37165/

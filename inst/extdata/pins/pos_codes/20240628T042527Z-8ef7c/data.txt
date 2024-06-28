@@ -1,10 +1,10 @@
 file: pos_codes.qs
-file_size: 4632
-pin_hash: 7ee580c33ca288c2
+file_size: 4612
+pin_hash: 8ef7cc3fd0ddcc8a
 type: qs
 title: Place of Service Codes
 description: Place of Service Codes and Descriptions
 tags: ~
 urls: ~
-created: 20240529T153029Z
+created: 20240628T042527Z
 api_version: 1

@@ -157,7 +157,7 @@ search_hcpcs <- function(hcpcs_code = NULL, ...) {
 #' @template returns
 #'
 #' @examples
-#' search_plas(hcpcs_code = c("C9039", "J1835"))
+#' search_plas()
 #'
 #' @autoglobal
 #'

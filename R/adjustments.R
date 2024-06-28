@@ -126,30 +126,20 @@ adj_trie <- function() {
 #' @examples
 #' x <- c("CO-253", "OA-23", "PI-185", "-45")
 #'
-#' x
-#'
 #' assign_adjustments(x)
 #'
-#' assign_adjustments(x,
-#'   include_keys = TRUE)
+#' assign_adjustments(x, include_keys = TRUE)
 #'
-#' dplyr::tibble(code = x,
-#'   desc = assign_adjustments(code))
+#' dplyr::tibble(code = x, desc = assign_adjustments(code))
 #'
 #' dplyr::tibble(code = x) |>
-#'   dplyr::mutate(desc = purrr::map(
-#'   code,
-#'   assign_adjustments))
+#'   dplyr::mutate(desc = purrr::map(code, assign_adjustments))
 #'
-#' purrr::map_df(x,
-#'   assign_adjustments)
+#' purrr::map_df(x, assign_adjustments)
 #'
-#' purrr::map_df(x,
-#'   assign_adjustments,
-#'   include_keys = TRUE)
+#' purrr::map_df(x, assign_adjustments, include_keys = TRUE)
 #'
-#' dplyr::tibble(code = x,
-#'   purrr::map_dfr(code, assign_adjustments))
+#' dplyr::tibble(code = x, purrr::map_dfr(code, assign_adjustments))
 #'
 #' assign_adjustments(x, include_keys = TRUE) |>
 #'   as.data.frame() |>
@@ -262,20 +252,48 @@ carc_add_dash <- \(x, placeholder = "||") {
 }
 
 
-#' @noRd
+#' Validate CARC Codes
+#'
+#' @param x `<chr>` vector of CARC adjustment codes; should be of the form
+#'   `GROUP-CARC`, where `GROUP` is two letters, followed by a dash (`-`) and
+#'   `CARC` is a two-to-three character alphanumeric string.
+#'
+#' @template returns
+#'
+#' @examples
+#' x <- c("- 253", "OA-23", "PI-", "-45 ", "OA23")
+#'
+#' is_carc_code(x)
+#'
+#' x[which(is_carc_code(x))]
+#'
 #' @autoglobal
-is_carc <- \(x) {
-  stringr::str_detect(
-    gsub(" ", "", x),
-    stringr::regex(
-    "^[ACIOPR]{2}-?[ABDPW]?[0-9]{1,3}$"))
+#'
+#' @export
+is_carc_code <- function(x) {
+
+  stringr::str_detect(gsub(" ", "", x),
+    stringr::regex("^[ACIOPR]{2}-?[ABDPW]?[0-9]{1,3}$"))
+
 }
 
-#' @noRd
+#' Validate CARC Group Codes
+#'
+#' @param x `<chr>` vector of CARC adjustment codes; should be of the form
+#'   `GROUP-CARC`, where `GROUP` is two letters, followed by a dash (`-`) and
+#'   `CARC` is a two-to-three character alphanumeric string.
+#'
+#' @template returns
+#'
+#' @examples
+#' is_carc_group(c("- 253", "OA-23", "PI-", "-45 ", "OA23"))
+#'
 #' @autoglobal
-is_carc_group <- \(x) {
-  stringr::str_detect(
-    gsub(" ", "", x),
-    stringr::regex(
-    "^[ACIOPR]{2}-?$"))
+#'
+#' @export
+is_carc_group <- function(x) {
+
+  stringr::str_detect(gsub(" ", "", x),
+    stringr::regex("^[ACIOPR]{2}-?$"))
+
 }
