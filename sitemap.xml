@@ -55,6 +55,9 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex2.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/data_dict.html</loc>
   </url>
   <url>
@@ -71,6 +74,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_code.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_full.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_group.html</loc>
