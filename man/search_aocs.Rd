@@ -2,7 +2,7 @@
 % Please edit documentation in R/ncci.R
 \name{search_aocs}
 \alias{search_aocs}
-\title{NCCI Add-On Code Edits}
+\title{NCCI Edits: Add-On Codes}
 \usage{
 search_aocs(
   hcpcs_code = NULL,
@@ -32,13 +32,19 @@ search_aocs(
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Medicare NCCI Add-On Code Edits
+An Add-on Code (AOC) is a Healthcare Common Procedure Coding System (HCPCS) /
+Current Procedural Terminology (CPT) code that describes a service that is
+performed in conjunction with the primary service by the same practitioner.
+An AOC is rarely eligible for payment if it’s the only procedure reported by
+a practitioner.
 }
 \details{
-An AOC is a HCPCS/CPT code that describes a service that, with rare
-exception, is performed in conjunction with another primary service by the
-same practitioner. An AOC is rarely eligible for payment if it is the only
-procedure reported by a practitioner.
+Add-on codes may be identified in three ways:
+\enumerate{
+\item The add-on code is in the AOC file as a Type 1, Type 2, or Type 3 AOC (formerly displayed as Type I, Type II or Type III).
+\item In the Medicare Physician Fee Schedule, an AOC generally has a global surgery period of \code{ZZZ}.
+\item In the CPT Manual, an add-on code is designated by the symbol \code{+}. The code descriptor of an AOC generally includes phrases such as "each additional" or "(List separately in addition to primary procedure)."
+}
 
 Some CPT codes are identified as Add-on Codes (AOCs), which describe a
 service that can only be reported in addition to a primary procedure.
@@ -50,27 +56,32 @@ AOCs permit the reporting of significant supplemental services commonly
 performed in addition to the primary procedure. By contrast, incidental
 services that are necessary to accomplish the primary procedure (e.g., lysis
 of adhesions in the course of an open cholecystectomy) are not separately
-reportable with an AOC. Similarly, complications inherent in an invasive
-procedure occurring during the procedure are not separately reportable. For
-example, control of bleeding during an invasive procedure is considered part
-of the procedure and is not separately reportable.
+reportable with an AOC.
+
+Similarly, complications inherent in an invasive procedure occurring during
+the procedure are not separately reportable. For example, control of bleeding
+during an invasive procedure is considered part of the procedure and is not
+separately reportable.
 
 Although the AOC and primary code are normally reported for the same date of
 service, there are unusual circumstances where the two services may be
 reported for different dates of service (e.g., 99291 and 99292).
 \subsection{AOC Edit Types}{
+
+CMS divided the AOCs into three types to distinguish the payment policy for each type:
 \itemize{
-\item Type 1: CPT Professional or HCPCS files define all acceptable primary codes. MACs should not allow other primary codes with Type 1 AOCs.
-\item Type 2: CPT Professional and HCPCS files do not define any primary codes. MACs should develop their own lists of acceptable primary codes.
-\item Type 3: CPT Professional or HCPCS files define some, but not all, acceptable primary codes. MACs should allow the listed primary codes for these AOCs but may develop their own lists of additional acceptable primary codes.
+\item Type 1: A Type 1 AOC has a limited number of identifiable primary procedure codes. The Change Request (CR) lists the Type 1 AOCs with their acceptable primary procedure codes. A Type 1 AOC, with one exception, is eligible for payment if one of the listed primary procedure codes is also eligible for payment to the same practitioner for the same patient on the same date of service. Claims processing contractors must adopt edits to assure that Type 1 AOCs are never paid unless a listed primary procedure code is also paid.
+\item Type 2: A Type 2 AOC does not have a specific list of primary procedure codes. The CR lists the Type 2 AOCs without any primary procedure codes. Claims processing contractors are encouraged to develop their own lists of primary procedure codes for this type of AOC. Like the Type 1 AOCs, a Type 2 AOC is eligible for payment if an acceptable primary procedure code as determined by the claims processing contractor is also eligible for payment to the same practitioner for the same patient on the same date of service.
+\item Type 3: A Type 3 AOC has some, but not all, specific primary procedure codes identified in the CPT Manual. The CR lists the Type 3 AOCs with the primary procedure codes that are specifically identifiable. However, claims processing contractors are advised that these lists are not exclusive and there are other acceptable primary procedure codes for AOCs in this Type. Claims processing contractors are encouraged to develop their own lists of additional primary procedure codes for this group of AOCs. Like the Type 1 AOCs, a Type 3 AOC is eligible for payment if an acceptable primary procedure code as determined by the claims processing contractor is also eligible for payment to the same practitioner for the same patient on the same date of service.
 }
 }
 
-\subsection{PTP Edits In general, NCCI PTP edits do not include edits with most AOCs}{
+\subsection{PTP Edits}{
 
-because edits related to the primary procedure(s) are adequate to prevent
-inappropriate payment for an add-on coded procedure (i.e., if an edit
-prevents payment of the primary procedure code, the AOC shall not be paid).
+In general, NCCI PTP edits do not include edits with most AOCs because edits
+related to the primary procedure(s) are adequate to prevent inappropriate
+payment for an add-on coded procedure (i.e., if an edit prevents payment of
+the primary procedure code, the AOC shall not be paid).
 }
 }
 \note{

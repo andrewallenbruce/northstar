@@ -2,7 +2,7 @@
 % Please edit documentation in R/ncci.R
 \name{search_mues}
 \alias{search_mues}
-\title{NCCI Medically Unlikely Edits (MUEs)}
+\title{NCCI Edits: Medically Unlikely Edits (MUEs)}
 \usage{
 search_mues(
   hcpcs_code = NULL,

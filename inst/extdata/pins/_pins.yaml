@@ -16,6 +16,8 @@ hcpcs_lvl2:
 - hcpcs_lvl2/20240625T180704Z-a38f5/
 modifiers:
 - modifiers/20240618T182144Z-22317/
+mod_addition:
+- mod_addition/20240629T190314Z-eac7b/
 ncci_aoc:
 - ncci_aoc/20240620T170255Z-3930c/
 ncci_aoc_nested:

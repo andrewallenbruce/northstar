@@ -45,6 +45,7 @@ library(gt)
    dplyr::filter(!hcpcs %in% c("WCPAIN", 
                                "MATERIALCTR", 
                                "MATERIALOFF", 
+                               "MEDREC",
                                "SPBARIATRIC", 
                                "LETTER")) |> 
    dplyr::mutate(
@@ -60,6 +61,11 @@ pos_trie <- triebeard::trie(
     keys = search_pos()$pos_code,
     values = chr(search_pos()$pos_type))
 
+pos_trie
+```
+
+
+```{r}
 x_pos <- x |> 
   dplyr::mutate(
     pos_type = triebeard::longest_match(pos_trie, pos), 
@@ -72,7 +78,8 @@ x_pos
 ## Categorize HCPCS
 
 ```{r}
-hcpcs_unq <- collapse::funique(x$hcpcs[!x$hcpcs %in% not_hcpcs])
+# hcpcs_unq <- collapse::funique(x$hcpcs[!x$hcpcs %in% not_hcpcs])
+hcpcs_unq <- collapse::funique(x$hcpcs)
 
 search_rbcs(hcpcs_code = hcpcs_unq) |> 
   dplyr::select(hcpcs_code:rbcs_family) |> 
@@ -90,19 +97,15 @@ mod_unq <- strsplit(toupper(x$mod[!is.na(x$mod)]), "-") |>
   list_c() |> 
   funique()
 
-search_modifiers(mod_code = mod_unq)
+search_modifiers(mod_code = mod_unq) |> 
+  select(mod_code, mod_description)
 ```
 
 
 
 ```{r}
 x |> 
-  select(
-    claim_id,
-    dos,
-    order,
-    hcpcs
-    ) |> 
+  select(claim_id, dos, order, hcpcs) |> 
   group_by(claim_id) |> 
   filter(n() > 1) |> 
   ungroup()
@@ -112,7 +115,30 @@ x |>
 aocs <- search_aocs(hcpcs_code = hcpcs_unq) |> 
   tidyr::unnest(cols = aoc_complements)
 
-aocs |> 
-  filter(aoc_type == "Primary")
+aoc_pairs <- aocs |> 
+  filter(aoc_type == "Primary") |> 
+  select(hcpcs_primary = hcpcs_code, hcpcs_addon = aoc_complement)
+
+ex_aoc <- x |> 
+  select(claim_id, dos, order, hcpcs) |> 
+  group_by(claim_id) |> 
+  filter(n() > 1) |> 
+  ungroup()
+
+prim <- ex_aoc |> 
+  filter(order == 1) |> 
+  select(claim_id, dos, hcpcs_primary = hcpcs)
+
+addon <- ex_aoc |> 
+  filter(order != 1) |> 
+  select(claim_id, dos, order_addon = order, hcpcs_addon = hcpcs)
+
+addon |> 
+  left_join(prim, by = join_by(claim_id, dos)) |> 
+  filter(claim_id %in% c('46440-13', '16057-35', '57128-01')) #|>
+  # semi_join(aoc_pairs) |> 
+  # pull(claim_id)
 ```
+
+
 

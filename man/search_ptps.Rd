@@ -2,7 +2,7 @@
 % Please edit documentation in R/ncci.R
 \name{search_ptps}
 \alias{search_ptps}
-\title{NCCI Procedure to Procedure (PTP) Edits}
+\title{NCCI Edits: Procedure to Procedure (PTP)}
 \usage{
 search_ptps(
   hcpcs_code = NULL,
@@ -47,11 +47,6 @@ If a provider reports the two codes of an edit pair for the same beneficiary
 on the same date of service, the Column One code is eligible for payment, but
 the Column Two code is denied unless a clinically appropriate NCCI
 PTP-associated modifier is also reported.
-
-The NCCI \href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-procedure-procedure-ptp-edits}{PTP edits}
-and
-\href{https://www.cms.gov/medicare/coding-billing/national-correct-coding-initiative-ncci-edits/medicare-ncci-medically-unlikely-edits}{MUEs}
-are usually updated at least quarterly.
 \subsection{PTP Modifiers}{
 
 Modifiers that may be used under appropriate clinical circumstances to bypass

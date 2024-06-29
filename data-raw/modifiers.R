@@ -427,3 +427,61 @@ pin_update(
   title = "HCPCS Modifiers",
   description = "Level I and II HCPCS Modifiers"
 )
+
+# Additional Modifiers
+addition <- rvest::read_html("https://www.novitas-solutions.com/webcenter/portal/MedicareJH/pagebyid?contentId=00144506") |>
+  rvest::html_elements("table") |>
+  rvest::html_table() |>
+  purrr::pluck(14) |>
+  janitor::clean_names() |>
+  dplyr::mutate(
+    references = dplyr::na_if(references, "") |>
+      stringr::str_squish()
+    )
+
+addition
+
+add_categories <- dplyr::tribble(
+  ~type,                             ~modifier,
+
+  "Additional",                      "AB, AE, AF, AG, AI, AK, AM, AO, AT, AZ, BL, CA, CB, CG, CR, CS, CT, DA, ER, ET, FB, FC, FS, FX, FY, G7, GC, GE, GG, GJ, GU, J1, J2, J3, JC, JA, JB, JC, JD, JG, JW, JZ, KX, L1, LU, M2, PD, PI, PO, PN, PS, PT, Q0, Q1, Q3, Q4, Q5, Q6, QJ, QQ, RD, RE, SC, SF, SS, SW, TB, TC, TS, UJ, UN, UP, UQ, UR, US, X1, X2, X3, X4, X5, XE, XP, XS, XU",
+  "Advance beneficiary notice",      "GA, GX, GY, GZ",
+  "Advanced diagnostic imaging",     "MA, MB, MC, MD, ME, MF, MG, MG, MH, QQ",
+  "Ambulance",                       "D, E, G, H, I, J, N, P, R, S, X, GM, QL, QM, QN",
+  "Anatomical",                      "E1, E2, E3, E4, FA, F1, F2, F4, F5, F6, F7, F8, F9, LC, LD, LM, LT, RC, RI, RT, TA, T1, T2, T3, T4, T5, T6, T7, T8, T9",
+  "Anesthesia",                      "AA, AD, G8, G9, P1, P2, P3, P4, P5, P6, QK, QS, QY, QX, QZ, 23, 33",
+  "Assistant at surgery",            "AS, 80, 81, 82",
+  # End stage renal disease (ESRD) and Erythropoiesis stimulating agent (ESA)
+  "ESRD/ESA",                        "AX, EA, EB, EC, AY, ED, EE, EJ, EM, G1, G2, G3, G4, G5, G6, GS, JA, JB, JE, V5, V6, V7, V8, V9",
+  "Global surgery",                  "24, 25, 54, 55, 57, 58, 78, 79, FT",
+  "Hospice",                         "GV, GW",
+  "Laboratory",                      "90, 91, 92, LR, QW",
+  "Other",                           "26, 27, 33, 59, 76, 77, 96, 97",
+  "Podiatry",                        "Q7, Q8, Q9",
+  "QPP",                             "1P, 2P, 3P, 8P, AQ, AR, MA, MB, MC, MD, ME, MF, MG, MH, X1, X2, X3, X4, X5",
+  "Surgical",                        "22, 50, 51, 52, 53, 62, 66, 73, 74, PA, PB, PC",
+  "Telehealth",                      "95, FQ, GQ, GT, G0",
+  "Therapy",                         "GN, GO, GP, KX, CO, CQ",
+  "Functional",                      "22, 26, 50, 51, 52, 53, 54, 55, 58, 62, 66, 78, 79, 80, 81, 82, AA, AD, AS, TC, QK, QW, QY"
+) |>
+  tidyr::separate_longer_delim(modifier, delim = ", ") |>
+  dplyr::select(modifier, type)
+
+mod_addition <- addition |>
+  dplyr::full_join(
+    add_categories
+  ) |>
+  dplyr::select(
+    modifier,
+    type,
+    description,
+    references
+  )
+
+# Update Pin
+pin_update(
+  mod_addition,
+  name = "mod_addition",
+  title = "HCPCS Modifiers",
+  description = "Level I and II HCPCS Modifiers"
+)
