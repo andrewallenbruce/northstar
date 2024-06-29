@@ -25,6 +25,7 @@ Imports:
     stringr,
     tidyr,
     triebeard,
+    vctrs,
     withr (>= 3.0.0)
 Suggests:
     clock,

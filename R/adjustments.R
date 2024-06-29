@@ -251,6 +251,32 @@ carc_add_dash <- \(x, placeholder = "||") {
   )
 }
 
+#' Validate CARC Codes
+#'
+#' @param x `<chr>` vector of CARC adjustment codes; should be of the form
+#'   `GROUP-CARC`, where `GROUP` is two letters, followed by a dash (`-`) and
+#'   `CARC` is a two-to-three character alphanumeric string.
+#'
+#' @template returns
+#'
+#' @examples
+#' x <- c("- 253", "OA-23", "PI-", "-45 ", "OA23")
+#'
+#' is_carc_code(x)
+#'
+#' x[which(is_carc_code(x))]
+#'
+#' @autoglobal
+#'
+#' @export
+is_carc_full <- function(x) {
+
+  stringr::str_detect(
+    gsub(" ", "", x),
+    stringr::regex(
+      "^[COP]{1}[AIOR]{1}-?[ABDPWY123456789]{1,3}$"))
+
+}
 
 #' Validate CARC Codes
 #'
@@ -293,7 +319,11 @@ is_carc_code <- function(x) {
 #' @export
 is_carc_group <- function(x) {
 
-  stringr::str_detect(gsub(" ", "", x),
-    stringr::regex("^[ACIOPR]{2}-?$"))
-
+  stringr::str_detect(
+    gsub(" ", "", x),
+    stringr::regex(
+      # "^[ACIOPR]{2}-?$"
+      "^[COP][AIOR]-?[ABDPWY123456789]$"
+      )
+    )
 }
