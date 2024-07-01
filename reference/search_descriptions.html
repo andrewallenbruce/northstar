@@ -137,59 +137,53 @@ containing HCPCS codes; default is <code>"hcpcs_code"</code></p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">search_descriptions</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"39503"</span>, <span class="st">"43116"</span>, <span class="st">"33935"</span>, <span class="st">"11646"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 31 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">hcpcs_level</span> <span style="font-weight: bold;">hcpcs_category</span> <span style="font-weight: bold;">hcpcs_section</span> <span style="font-weight: bold;">hcpcs_desc_type</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11646      I           I              Surgery       Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11646      I           I              Surgery       Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11646      I           I              Surgery       Medical        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11646      I           I              Surgery       Consumer       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11646      I           I              Surgery       Clinician      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11646      I           I              Surgery       Clinician      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 33935      I           I              Surgery       Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 33935      I           I              Surgery       Medical        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 33935      I           I              Surgery       Consumer       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 33935      I           I              Surgery       Clinician      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 39503      I           I              Surgery       Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 39503      I           I              Surgery       Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 39503      I           I              Surgery       Medical        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 39503      I           I              Surgery       Consumer       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 39503      I           I              Surgery       Clinician      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 43116      I           I              Surgery       Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 43116      I           I              Surgery       Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 43116      I           I              Surgery       Medical        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 43116      I           I              Surgery       Consumer       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 43116      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 11646      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 11646      I           I              Surgery       Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 11646      I           I              Surgery       Medical        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 11646      I           I              Surgery       Consumer       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 33935      I           I              Surgery       Short          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 33935      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 33935      I           I              Surgery       Medical        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 33935      I           I              Surgery       Consumer       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 39503      I           I              Surgery       Short          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 39503      I           I              Surgery       Clinician      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">hcpcs_description</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">search_descriptions</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  hcpcs_code <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  column <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">hcpcs_level</span> <span style="font-weight: bold;">hcpcs_category</span> <span style="font-weight: bold;">hcpcs_section</span>            <span style="font-weight: bold;">hcpcs_desc_type</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021      II          <span style="color: #BB0000;">NA</span>             Transportation Services… Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A0021      II          <span style="color: #BB0000;">NA</span>             Transportation Services… Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> G8916      II          <span style="color: #BB0000;">NA</span>             Procedures/Professional… Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> G8916      II          <span style="color: #BB0000;">NA</span>             Procedures/Professional… Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> J9264      II          <span style="color: #BB0000;">NA</span>             Chemotherapy Drugs       Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> J9264      II          <span style="color: #BB0000;">NA</span>             Chemotherapy Drugs       Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> V5362      II          <span style="color: #BB0000;">NA</span>             Speech-Language Patholo… Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021      II          <span style="color: #BB0000;">NA</span>             Transportation Services… Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> G8916      II          <span style="color: #BB0000;">NA</span>             Procedures/Professional… Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> J9264      II          <span style="color: #BB0000;">NA</span>             Chemotherapy Drugs       Long           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">hcpcs_description</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0021"</span>, <span class="st">"V5362"</span>, <span class="st">"J9264"</span>, <span class="st">"G8916"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">search_descriptions</span><span class="op">(</span>column <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">hcpcs_level</span> <span style="font-weight: bold;">hcpcs_category</span> <span style="font-weight: bold;">hcpcs_section</span>            <span style="font-weight: bold;">hcpcs_desc_type</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021      II          <span style="color: #BB0000;">NA</span>             Transportation Services… Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A0021      II          <span style="color: #BB0000;">NA</span>             Transportation Services… Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> G8916      II          <span style="color: #BB0000;">NA</span>             Procedures/Professional… Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> G8916      II          <span style="color: #BB0000;">NA</span>             Procedures/Professional… Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> J9264      II          <span style="color: #BB0000;">NA</span>             Chemotherapy Drugs       Short          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> J9264      II          <span style="color: #BB0000;">NA</span>             Chemotherapy Drugs       Long           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> V5362      II          <span style="color: #BB0000;">NA</span>             Speech-Language Patholo… Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A0021      II          <span style="color: #BB0000;">NA</span>             Transportation Services… Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> G8916      II          <span style="color: #BB0000;">NA</span>             Procedures/Professional… Long           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> J9264      II          <span style="color: #BB0000;">NA</span>             Chemotherapy Drugs       Long           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">hcpcs_description</span><span style="color: #949494;"> &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
