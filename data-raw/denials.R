@@ -14,7 +14,7 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 # or to convey information about remittance
 # processing
 
-
+## From forager package -------------
 denials_extract <- forager:::get_pin("denials_extract") |>
   select(
     contains("denial"),
@@ -65,7 +65,7 @@ northstar::search_adjustments() |>
 northstar::search_adjustments() |>
   filter(adj_code == "MA121")
 
-
+## From Noridian Site -------------
 denials_common <- read_html(
   "https://med.noridianmedicare.com/web/jeb/topics/claim-submission/denial-resolution") |>
   html_element(xpath = '//*[(@id = "tableToSearch")]') |>
@@ -221,4 +221,60 @@ pin_update(
   name        = "denials_site",
   title       = "Noridian: Most Common Claim Submission Errors",
   description = "Noridian: Most Common Claim Submission Errors"
+)
+
+## From Novitas Site -------------
+# https://www.novitas-solutions.com/SupportFiles/webFiles/NovExternal/scripts/errorCodeTool/index.html
+
+x <- RcppSimdJson::fload(
+  json = "C:/Users/Andrew/Downloads/dDocName_00246508.json",
+  always_list = TRUE
+  # parse_error_ok = TRUE
+) |>
+  as.data.frame()
+
+denials_site_2 <- dplyr::tibble(
+  mcs_msg = x$MCS_MSG,
+  carc = x$CARC,
+  rarc = x$RARC,
+  reasons = x$Reasons,
+  actions = x$Actions,
+  references = x$References
+) |>
+  dplyr::reframe(
+    carc = dplyr::na_if(carc, ""),
+    rarc = dplyr::na_if(rarc, ""),
+    claim_type = strex::str_before_first(reasons, "</p>"),
+    claim_type = dplyr::case_match(
+      claim_type,
+      c("All Claim Types", "All Claim Types (see second entry for Ambulance)") ~ "All",
+      "Medicare Secondary Payer (MSP)" ~ "MSP",
+      "Evaluation & Management Services, Laboratory Services, and Radiology Services" ~ "E&M, Lab, Radiology",
+      "Medicare Part B Entitlement" ~ "Medicare Part B",
+      "Evaluation & Management Services; Surgical Services" ~ "E&M, Surgical",
+      "Ambulance Service" ~ "Ambulance",
+      "Laboratory Services" ~ "Lab",
+      .default = claim_type
+    ) |> forcats::as_factor(),
+    # regex("^Our\\s(records|Records)\\s(indicate?s|show)\\sthat\\s")
+    reasons = dplyr::if_else(stringr::str_detect(reasons, "</p>"), strex::str_after_first(reasons, "</p>"), reasons),
+    reasons = stringr::str_remove_all(reasons, "Our records indicate that "),
+    reasons = stringr::str_remove_all(reasons, "Our Records indicate that "),
+    reasons = stringr::str_remove_all(reasons, "Our records indicates that "),
+    reasons = stringr::str_remove_all(reasons, "Our Records indicate "),
+    reasons = stringr::str_remove_all(reasons, "Our records indicate "),
+    reasons = stringr::str_remove_all(reasons, "Our records show that "),
+    reasons = stringr::str_replace_all(reasons, "</p>", " "),
+    reasons = stringr::str_squish(reasons) |> stringr::str_to_sentence(),
+    resolutions = dplyr::na_if(actions, ""),
+    resolutions = stringr::str_replace_all(resolutions, "</p>", " "),
+    resolutions = stringr::str_squish(resolutions) |> stringr::str_to_sentence(),
+  )
+
+# Update Pin
+pin_update(
+  denials_site_2,
+  name        = "denials_site_2",
+  title       = "Novitas: Error Codes",
+  description = "Novitas: Error Codes"
 )

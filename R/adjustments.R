@@ -88,6 +88,7 @@ search_adjustments <- function(adj_code = NULL, adj_type = NULL, ...) {
 search_denials <- function(...) {
   list(
     site = get_pin("denials_site") |> .add_class(),
+    site2 = get_pin("denials_site_2") |> .add_class(),
     ext = get_pin("denials_extract") |> .add_class()
   )
 
