@@ -5,14 +5,96 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 "two_descriptions"
 "hcpcs_noc"
 
-hcpcs_desc <- get_pin("hcpcs_desc_raw") |>
-  dplyr::count(hcpcs_code, hcpcs_desc_type, sort = TRUE) |>
-  dplyr::filter(hcpcs_desc_type == "Clinician") |>
+rvu_desc <- get_pin("rvu_descriptions")
+cpt_desc <- get_pin("cpt_descriptions")
+two_desc <- get_pin("two_descriptions")
+noc_desc <- get_pin("hcpcs_noc")
+
+nocs <- noc_desc |>
+  dplyr::reframe(
+    hcpcs_code = hcpcs,
+    hcpcs_desc_type = "NOC",
+    hcpcs_description = long_description,
+    noc_add_date = add_date,
+    noc_term_date = term_date
+    )
+
+hcpcs_desc <- vctrs::vec_rbind(
+  rvu_desc,
+  cpt_desc,
+  two_desc,
+  nocs |>
+    dplyr::select(
+      -dplyr::contains("date")
+      )
+  ) |>
   dplyr::distinct(
     hcpcs_code,
     hcpcs_description,
     .keep_all = TRUE
+  ) |>
+  dplyr::mutate(
+    hcpcs_desc_type = forcats::as_factor(hcpcs_desc_type),
+    hcpcs_desc_type = forcats::fct_infreq(hcpcs_desc_type, ordered = TRUE)
+  ) |>
+  dplyr::arrange(
+    hcpcs_code,
+    hcpcs_desc_type
     )
+
+hcpcs_desc |>
+  dplyr::filter(hcpcs_desc_type == "Short") |>
+  dplyr::group_by(hcpcs_code) |>
+  dplyr::filter(n() > 1) |>
+  dplyr::mutate(
+    hcpcs_description = stringr::str_to_upper(hcpcs_description)
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::distinct(
+    hcpcs_code,
+    hcpcs_description,
+    .keep_all = TRUE
+  ) |>
+  dplyr::group_by(hcpcs_code) |>
+  dplyr::filter(n() > 1)
+
+# Remove 'Short' Duplicates ---------------------
+hcpcs_desc <- hcpcs_desc |>
+  dplyr::mutate(rowid = dplyr::row_number(),
+                .before = hcpcs_code)
+
+hcpcs_no_short <- hcpcs_desc |>
+  dplyr::filter(hcpcs_desc_type != "Short")
+
+
+hcpcs_short <- hcpcs_desc |>
+  dplyr::filter(hcpcs_desc_type == "Short") |>
+  dplyr::group_by(hcpcs_code) |>
+  dplyr::filter(n() > 1) |>
+  dplyr::mutate(
+    hcpcs_description = stringr::str_to_upper(
+      hcpcs_description)) |>
+  dplyr::ungroup() |>
+  dplyr::distinct(
+    hcpcs_code,
+    hcpcs_description,
+    .keep_all = TRUE
+  )
+
+rows <- hcpcs_short |>
+  dplyr::group_by(hcpcs_code) |>
+  dplyr::filter(n() > 1) |>
+  dplyr::slice_max(rowid) |>
+  dplyr::pull(rowid)
+
+hcpcs_desc <- hcpcs_short |>
+  dplyr::filter(!hcpcs_code %in% rows) |>
+  dplyr::bind_rows(hcpcs_no_short) |>
+  dplyr::mutate(rowid = NULL) |>
+  dplyr::arrange(
+    hcpcs_code,
+    hcpcs_desc_type
+  )
 
 # Add Levels and Categories ---------------------
 hcpcs_desc <- hcpcs_desc |>
@@ -35,43 +117,9 @@ hcpcs_desc <- hcpcs_desc |>
       hcpcs_code, stringr::regex("[T]")) ~ "III",
     .default = NA_character_
   ) |> forcats::as_factor(),
-  .after = hcpcs_code,
-  hcpcs_desc_type = forcats::as_factor(hcpcs_desc_type),
-  hcpcs_desc_type = forcats::fct_infreq(hcpcs_desc_type, ordered = TRUE)
+  .after = hcpcs_code
   ) |>
   dplyr::arrange(hcpcs_code, hcpcs_desc_type)
-
-
-# Remove 'Short' Duplicates ---------------------
-hcpcs_desc <- hcpcs_desc |>
-  dplyr::mutate(
-    rowid = dplyr::row_number(),
-    .before = hcpcs_code
-    )
-
-vec_short_dupes <- hcpcs_desc |>
-  dplyr::filter(hcpcs_desc_type == "Short") |>
-  dplyr::count(hcpcs_code, sort = TRUE) |>
-  dplyr::filter(n > 1) |>
-  dplyr::pull(hcpcs_code)
-
-dupes_rowid <- hcpcs_desc |>
-  dplyr::filter(
-    hcpcs_desc_type == "Short",
-    hcpcs_code %in% vec_short_dupes
-    ) |>
-  dplyr::slice_max(rowid, by = hcpcs_code) |>
-  dplyr::pull(rowid)
-
-hcpcs_desc <- hcpcs_desc |>
-  dplyr::filter(!rowid %in% dupes_rowid) |>
-  dplyr::mutate(
-    hcpcs_description = dplyr::case_when(
-      hcpcs_desc_type == "Short" ~ stringr::str_to_upper(hcpcs_description),
-      .default = hcpcs_description
-    ),
-    rowid = NULL
-  )
 
 # Add Sections and Ranges ---------------------
 hcpcs_desc <- hcpcs_desc |>

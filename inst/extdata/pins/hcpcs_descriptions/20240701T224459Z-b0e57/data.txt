@@ -1,10 +1,10 @@
 file: hcpcs_descriptions.qs
-file_size: 1201292
-pin_hash: 9bffbb205abf7040
+file_size: 1124134
+pin_hash: b0e57df30919136a
 type: qs
 title: HCPCS Descriptions Master File
 description: HCPCS Descriptions Master File
 tags: ~
 urls: ~
-created: 20240627T025507Z
+created: 20240701T224459Z
 api_version: 1
