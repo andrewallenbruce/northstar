@@ -1,6 +1,13 @@
 source(here::here("data-raw", "source_setup", "setup.R"))
 
+"rvu_descriptions"
+"cpt_descriptions"
+"two_descriptions"
+"hcpcs_noc"
+
 hcpcs_desc <- get_pin("hcpcs_desc_raw") |>
+  dplyr::count(hcpcs_code, hcpcs_desc_type, sort = TRUE) |>
+  dplyr::filter(hcpcs_desc_type == "Clinician") |>
   dplyr::distinct(
     hcpcs_code,
     hcpcs_description,

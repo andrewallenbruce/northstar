@@ -1,0 +1,10 @@
+file: cpt_descriptions.qs
+file_size: 953576
+pin_hash: a70c8bae6e23e1e8
+type: qs
+title: CPT Descriptors 2023
+description: CPT Descriptors 2023
+tags: ~
+urls: ~
+created: 20240701T171245Z
+api_version: 1

@@ -87,7 +87,7 @@ hcpcs_desc_jul24 <- hcpcs_jul24 |>
   ) |>
   tidyr::pivot_longer(
     cols = !hcpcs_code,
-    names_to = "hcpcs_description_type",
+    names_to = "hcpcs_desc_type",
     values_to = "hcpcs_description"
   )
 
@@ -137,11 +137,27 @@ hcpcs_jul24 <- hcpcs_jul24 |>
 pin_update(
   hcpcs_jul24,
   name = "hcpcs_lvl2",
-  title = "2024 HCPCS Level II Codes July 2024",
+  title = "HCPCS Level II Codes July 2024",
   description = "2024 Healthcare Common Procedure Coding System (HCPCS)"
 )
 
-# Delete zips
+hcpcs_noc_jul24 <- hcpcs$noc_codes_jul_2024 |>
+  janitor::row_to_names(row_number = 2) |>
+  janitor::clean_names() |>
+  fuimus::remove_quiet() |>
+  dplyr::mutate(
+    add_date = janitor::convert_to_date(add_date),
+    term_date = janitor::convert_to_date(term_date)
+  )
+
+pin_update(
+  hcpcs_noc_jul24,
+  name = "hcpcs_noc",
+  title = "HCPCS Level II NOC Codes July 2024",
+  description = "2024 Healthcare Common Procedure Coding System (HCPCS): Not Otherwise Classified Codes"
+)
+
+# Delete xlsx
 fs::file_delete(here::here(fs::dir_ls(glob = "*.xlsx|*.txt")))
 
 # hcpcs

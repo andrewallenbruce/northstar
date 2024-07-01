@@ -3,31 +3,45 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 #----- NATIONAL PHYSICIAN FEE SCHEDULE RELATIVE VALUE FILE zip file
 url_to_scrape <- "https://www.cms.gov/medicare/payment/fee-schedules/physician/pfs-relative-value-files"
 
-url_to_click <- read_html(url_to_scrape)
+url_to_click <- rvest::read_html(url_to_scrape)
 
-url_to_click |>
-  html_elements("a") |>
-  html_attr("href") |>
+rvu_prefix <- url_to_click |>
+  rvest::html_elements("a") |>
+  rvest::html_attr("href") |>
   unique() |>
-  str_subset(glue("{url_to_scrape}/rvu{substr(Sys.Date(), 3, 4)}"))
+  stringr::str_subset(
+    stringr::regex(
+      as.character(
+        glue::glue(
+          "/medicare/payment/fee-schedules/physician/pfs-relative-value-files/rvu<<substr(Sys.Date(), 3, 4)>>[a-z]{1,2}",
+          .open = "<<",
+          .close = ">>"
+          )
+        )
+      )
+    ) |>
+  stringr::str_replace_all(
+    "/medicare/payment/fee-schedules/physician/pfs-relative-value-files/",
+    "https://www.cms.gov/files/zip/"
+    ) |>
+  stringr::str_c(".zip")
 
-pg <- session(url_to_scrape) |>
-  session_jump_to(url_to_click[1]) |>
-  session_follow_link("RVU24C")
 
-latest_zip_url <- pg$url |> url_absolute("https://www.cms.gov")
+# pg <- session(url_to_scrape) |>
+#   session_jump_to(url_to_click[1]) |>
+#   session_follow_link("RVU24C")
+# latest_zip_url <- pg$url |> url_absolute("https://www.cms.gov")
+# "https://www.cms.gov/files/zip/rvu24c.zip" == latest_zip_url
 
-"https://www.cms.gov/files/zip/rvu24c.zip" == latest_zip_url
-
-#################### START HERE
-curl::multi_download("https://www.cms.gov/files/zip/rvu24c.zip")
+curl::multi_download(rvu_prefix)
 
 xlsx_filename <- zip::zip_list(
-  fs::dir_ls(glob = "*.zip")) |>
+  fs::dir_ls(glob = "*c.zip")) |>
   filter(str_detect(filename, ".xlsx")) |>
   pull(filename)
 
-zip::unzip(fs::dir_ls(glob = "*.zip"), files = xlsx_filename)
+zip::unzip(fs::dir_ls(glob = "*c.zip"),
+           files = xlsx_filename)
 
 rvu_files <- here::here(xlsx_filename) |>
   purrr::map(readxl::read_excel, col_types = "text") |>
@@ -91,22 +105,53 @@ rvu24_jul <- rvu_files$PPRRVU24_JUL |>
       readr::parse_number),
     op_ind = as.integer(pre_op + intra_op + post_op)
   ) |>
-  dplyr::select(-calc_flag)
-
-rvu24_jul |>
-  hacksaw::count_split(
-    not_used_for_mcr_pmt,
-    non_na_ind,
-    fac_na_ind,
-    pctc_ind,
+  dplyr::select(
+    hcpcs_code,
+    mod,
+    status,
+    rvu_work,
+    rvu_non_pe,
+    rvu_fac_pe,
+    rvu_mp,
+    rvu_non_sum = rvu_non_total,
+    rvu_fac_sum = rvu_fac_total,
+    rvu_opps_non_pe,
+    rvu_opps_fac_pe,
+    rvu_opps_mp,
+    cf,
+    pctc = pctc_ind,
+    glob = glob_days,
+    # op_ind,
+    pre_op,
+    intra_op,
+    post_op,
     mult_proc,
     bilat_surg,
     asst_surg,
     co_surg,
-    team_surg
-    )
+    team_surg,
+    endo_base,
+    phys_diag_pro = phys_sup_diag_proc,
+    diag_img_fam = diag_img_fam_ind,
+    non_na = non_na_ind,
+    fac_na = fac_na_ind,
+    not_used_mcr = not_used_for_mcr_pmt
+  )
 
-rvu_desc <- get_pin("pfs_rvu") |>
+# rvu24_jul |>
+#   hacksaw::count_split(
+#     not_used_for_mcr_pmt,
+#     non_na_ind,
+#     fac_na_ind,
+#     pctc_ind,
+#     mult_proc,
+#     bilat_surg,
+#     asst_surg,
+#     co_surg,
+#     team_surg
+#     )
+
+rvu_desc <- rvu24_jul |>
   dplyr::reframe(
     hcpcs_code,
     hcpcs_desc_type = "Short",
@@ -120,53 +165,43 @@ pin_update(
   description = "RVU HCPCS Descriptions July 2024"
 )
 
-# get_pin("pfs_rvu") |>
-#   dplyr::select(
-#     hcpcs_code,
-#     mod,
-#     status,
-#     rvu_work,
-#     rvu_non_pe,
-#     rvu_fac_pe,
-#     rvu_mp,
-#     rvu_non_sum = rvu_non_total,
-#     rvu_fac_sum = rvu_fac_total,
-#     rvu_opps_non_pe,
-#     rvu_opps_fac_pe,
-#     rvu_opps_mp,
-#     cf,
-#     pctc = pctc_ind,
-#     global = glob_days,
-#     op_ind,
-#     pre_op,
-#     intra_op,
-#     post_op,
-#     mult_proc,
-#     bilat_surg,
-#     asst_surg,
-#     co_surg,
-#     team_surg,
-#     endo_base,
-#     phys_diag_pro = phys_sup_diag_proc,
-#     diag_img_fam = diag_img_fam_ind,
-#     non_na = non_na_ind,
-#     fac_na = fac_na_ind,
-#     not_used_mcr = not_used_for_mcr_pmt
-#   )
-
-pfs_rvu_amt <- vctrs::vec_cbind(
-  get_pin("pfs_rvu_amt"),
-  get_pin("pfs_rvu_ind") |> select(mod)
-) |>
-  select(
+pfs_rvu_amt <- rvu24_jul |>
+  dplyr::select(
     hcpcs_code,
     mod,
-    everything()
+    rvu_work,
+    rvu_non_pe,
+    rvu_fac_pe,
+    rvu_mp,
+    rvu_non_sum,
+    rvu_fac_sum,
+    rvu_opps_non_pe,
+    rvu_opps_fac_pe,
+    rvu_opps_mp,
+    cf
   )
 
-
-pfs_rvu_ind <- get_pin("pfs_rvu_ind") |>
-  select(-mod)
+pfs_rvu_ind <- rvu24_jul |>
+  dplyr::select(
+    hcpcs_code,
+    status,
+    pctc,
+    glob,
+    pre_op,
+    intra_op,
+    post_op,
+    mult_proc,
+    bilat_surg,
+    asst_surg,
+    co_surg,
+    team_surg,
+    endo_base,
+    phys_diag_pro,
+    diag_img_fam,
+    non_na,
+    fac_na,
+    not_used_mcr
+  )
 
 pin_update(
   pfs_rvu_amt,

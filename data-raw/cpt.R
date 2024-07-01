@@ -25,39 +25,24 @@ source(here::here("data-raw", "source_setup", "setup.R"))
 
 # Clinician Descriptors
 cpt_clinician <- codexchain::clinician |>
-  dplyr::reframe(
-    hcpcs_code = cpt_code,
-    hcpcs_description = clinician_descriptor
-  ) |>
-  tidyr::nest(
-    .by = hcpcs_code,
-    .key = 'hcpcs_description') |>
-  dplyr::rowwise() |>
-  dplyr::mutate(
-    hcpcs_description_type = "Clinician",
-    hcpcs_description = purrr::map(
-      hcpcs_description,
-      paste0,
-      collapse = " ")) |>
-  tidyr::unnest(cols = hcpcs_description)
+  dplyr::reframe(hcpcs_code = cpt_code,
+                 hcpcs_desc_type = "Clinician",
+                 hcpcs_description = clinician_descriptor)
+
+# cpt_clinician <- codexchain::clinician |>
+#   dplyr::reframe(hcpcs_code = cpt_code,
+#                  hcpcs_description = clinician_descriptor) |>
+#   tidyr::nest(.by = hcpcs_code, .key = 'hcpcs_description') |>
+#   dplyr::rowwise() |>
+#   dplyr::mutate(hcpcs_description_type = "Clinician",
+#                 hcpcs_description = purrr::map(hcpcs_description, paste0, collapse = " ")) |>
+#   tidyr::unnest(cols = hcpcs_description)
 
 # Consumer-Friendly Descriptors
 cpt_consumer <- codexchain::consumer |>
-  dplyr::reframe(
-    hcpcs_code = cpt_code,
-    hcpcs_description = consumer_friendly_descriptor
-  ) |>
-  tidyr::nest(
-    .by = hcpcs_code,
-    .key = 'hcpcs_description') |>
-  dplyr::rowwise() |>
-  dplyr::mutate(
-    hcpcs_description_type = "Consumer",
-    hcpcs_description = purrr::map(
-      hcpcs_description,
-      paste0,
-      collapse = " ")) |>
-  tidyr::unnest(cols = hcpcs_description)
+  dplyr::reframe(hcpcs_code = cpt_code,
+                 hcpcs_desc_type = "Consumer",
+                 hcpcs_description = consumer_friendly_descriptor)
 
 # LONGULF - lowercase
 cpt_longulf <- codexchain::longulf |>
@@ -69,7 +54,7 @@ cpt_longulf <- codexchain::longulf |>
     .key = 'hcpcs_description') |>
   dplyr::rowwise() |>
   dplyr::mutate(
-    hcpcs_description_type = "Long",
+    hcpcs_desc_type = "Long",
     hcpcs_description = purrr::map(
       hcpcs_description,
       paste0,
@@ -77,52 +62,52 @@ cpt_longulf <- codexchain::longulf |>
   tidyr::unnest(cols = hcpcs_description)
 
 # LONGUF - uppercase
-cpt_longuf <- codexchain::longuf |>
-  dplyr::reframe(
-    hcpcs_code = substr(X1, 1, 5),
-    hcpcs_description = substr(X1, 10, 100)) |>
-  tidyr::nest(
-    .by = hcpcs_code,
-    .key = 'hcpcs_description') |>
-  dplyr::rowwise() |>
-  dplyr::mutate(
-    hcpcs_description_type = "Long UF",
-    hcpcs_description = purrr::map(
-      hcpcs_description,
-      paste0,
-      collapse = " ")) |>
-  tidyr::unnest(cols = hcpcs_description)
+# cpt_longuf <- codexchain::longuf |>
+#   dplyr::reframe(
+#     hcpcs_code = substr(X1, 1, 5),
+#     hcpcs_description = substr(X1, 10, 100)) |>
+#   tidyr::nest(
+#     .by = hcpcs_code,
+#     .key = 'hcpcs_description') |>
+#   dplyr::rowwise() |>
+#   dplyr::mutate(
+#     hcpcs_desc_type = "Long UF",
+#     hcpcs_description = purrr::map(
+#       hcpcs_description,
+#       paste0,
+#       collapse = " ")) |>
+#   tidyr::unnest(cols = hcpcs_description)
 
 # LONGULT - lowercase
-cpt_longult <- codexchain::longult |>
-  dplyr::reframe(
-    hcpcs_code = X1,
-    hcpcs_description = X2,
-    hcpcs_description_type = "Long ULT"
-  )
+# cpt_longult <- codexchain::longult |>
+#   dplyr::reframe(
+#     hcpcs_code = X1,
+#     hcpcs_description = X2,
+#     hcpcs_desc_type = "Long ULT"
+#   )
 
 # SHORTU - uppercase
 cpt_shortuf <- codexchain::shortu |>
   dplyr::reframe(
     hcpcs_code = substr(X1, 1, 5),
-    hcpcs_description = substr(X1, 7, 1000),
-    hcpcs_description_type = "Short"
+    hcpcs_desc_type = "Short",
+    hcpcs_description = substr(X1, 7, 1000)
     )
 
 # MEDU - uppercase
 cpt_medu <- codexchain::medu |>
   dplyr::reframe(
     hcpcs_code = substr(X1, 1, 5),
-    hcpcs_description = substr(X1, 7, 1000),
-    hcpcs_description_type = "Medical"
+    hcpcs_desc_type = "Medical",
+    hcpcs_description = substr(X1, 7, 1000)
   )
 
 # Concept IDs + CPTs
-cpt_concept_id <- codexchain::concept_id |>
-  dplyr::reframe(
-    hcpcs_code = X2,
-    cpt_id = as.integer(X1),
-  )
+# cpt_concept_id <- codexchain::concept_id |>
+#   dplyr::reframe(
+#     hcpcs_code = X2,
+#     cpt_id = as.integer(X1),
+#   )
 
 # Category I Proprietary Laboratory Analyses (PLA) Codes
 cpt_pla <- codexchain::placodes |>
@@ -150,7 +135,7 @@ cpt_pla_desc <- cpt_pla |>
   ) |>
   tidyr::pivot_longer(
     cols = !hcpcs_code,
-    names_to = "hcpcs_description_type",
+    names_to = "hcpcs_desc_type",
     values_to = "hcpcs_description"
   )
 
@@ -188,11 +173,6 @@ cpt_desc <- vctrs::vec_rbind(
   cpt_medu,
   cpt_pla_desc
 ) |>
-  dplyr::select(
-    hcpcs_code,
-    hcpcs_desc_type = hcpcs_description_type,
-    hcpcs_description
-  ) |>
   dplyr::arrange(hcpcs_code)
 
 # Update Pin
