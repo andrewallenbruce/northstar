@@ -24,6 +24,10 @@ Modifiers:
 \item 82: Assistance by Another Physician when Qualified Resident Surgeon Unavailable
 \item AS: Non-Physician Assistant at Surgery
 }
+\subsection{Physician Assistant-at-surgery Services}{
+
+Allowed at 85\% of MPFS and then 16\% of that amount is allowed for Assistant-at-surgery
+}
 }
 \examples{
 switch_assistant_surgery(as.character(0:9))

@@ -165,6 +165,7 @@ pin_update(
   description = "RVU HCPCS Descriptions July 2024"
 )
 
+
 pfs_rvu_amt <- rvu24_jul |>
   dplyr::select(
     hcpcs_code,
@@ -184,6 +185,7 @@ pfs_rvu_amt <- rvu24_jul |>
 pfs_rvu_ind <- rvu24_jul |>
   dplyr::select(
     hcpcs_code,
+    mod,
     status,
     pctc,
     glob,
@@ -201,6 +203,16 @@ pfs_rvu_ind <- rvu24_jul |>
     non_na,
     fac_na,
     not_used_mcr
+  )
+
+pfs_rvu_ind <- dplyr::bind_cols(
+  get_pin("pfs_rvu_ind"),
+  get_pin("pfs_rvu_amt") |> dplyr::select(mod)
+) |>
+  dplyr::select(
+    hcpcs_code,
+    mod,
+    dplyr::everything()
   )
 
 pin_update(

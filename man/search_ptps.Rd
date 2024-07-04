@@ -47,6 +47,14 @@ If a provider reports the two codes of an edit pair for the same beneficiary
 on the same date of service, the Column One code is eligible for payment, but
 the Column Two code is denied unless a clinically appropriate NCCI
 PTP-associated modifier is also reported.
+
+Per National Correct Coding Initiative (NCCI) rules, Column 2 codes will
+bundle their payment to specific Column 1 codes.
+\itemize{
+\item When a Column 2 code is billed and paid before the Column 1 code is submitted, the Column 1 procedure code's allowed amount may be reduced by the already paid services.
+\item Providers would need to add distinguishing modifiers to the Column 2 code before the Column 1 code can pay in full.
+\item Reopenings or appeals should be used to add the modifiers.
+}
 \subsection{PTP Modifiers}{
 
 Modifiers that may be used under appropriate clinical circumstances to bypass

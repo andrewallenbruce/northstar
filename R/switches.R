@@ -165,6 +165,12 @@ switch_bilateral_surgery <- function(x) {
 #' Modifier 51: Indicates applicable payment adjustment rule for multiple
 #' procedures
 #'
+#' Multiple Surgery Rules
+#' 100% of MPFS amount is allowed for highest valued surgical procedure and 50%
+#' for additional surgical procedures (with a multiple surgery indicator of "2")
+#' performed same day. Modifier 51 will be appended to identify reduced
+#' services.
+#'
 #' @param x vector of Multiple Procedure indicators
 #'
 #' @returns vector of Multiple Procedure descriptions
@@ -198,6 +204,8 @@ switch_multiple_procedure <- function(x) {
 #'
 #' Modifier 62: Services for which two surgeons,
 #' each in a different specialty, may be paid.
+#'
+#' Reimbursement is 62.5% of MPFS allowed amount.
 #'
 #' @param x vector of Co-Surgeon indicators
 #'
@@ -234,6 +242,9 @@ switch_co_surgeon <- function(x) {
 #' * 82: Assistance by Another Physician when Qualified Resident Surgeon Unavailable
 #' * AS: Non-Physician Assistant at Surgery
 #'
+#' ### Physician Assistant-at-surgery Services
+#' Allowed at 85% of MPFS and then 16% of that amount is allowed for Assistant-at-surgery
+#'
 #' @param x vector of Assistant Surgery indicators
 #'
 #' @returns vector of Assistant Surgery descriptions
@@ -260,8 +271,11 @@ switch_assistant_surgery <- function(x) {
 
 #' PFS Diagnostic Imaging Descriptions
 #'
-#' Identifies the applicable Diagnostic Service family for
-#' HCPCS codes with a Multiple Procedure indicator of 4.
+#' Identifies the applicable Diagnostic Service family for HCPCS codes with a
+#' Multiple Procedure indicator of 4.
+#'
+#' Effective January 1, 2011, and after, family indicators 01 - 11 won’t
+#' populate.
 #'
 #' @param x vector of Diagnostic Imaging indicators
 #'
@@ -269,8 +283,8 @@ switch_assistant_surgery <- function(x) {
 #'
 #' @examples
 #' dplyr::tibble(
-#'   code = fuimus::pad_number(c(1:11, 88, 99)),
-#'   desc = switch_diagnostic_imaging(code))
+#'   ind = c("88", "99"),
+#'   desc = switch_diagnostic_imaging(ind))
 #'
 #' @autoglobal
 #'
@@ -281,17 +295,17 @@ switch_diagnostic_imaging <- function(x) {
 
   kit::nswitch(
     x = x,
-    "01", "Ultrasound (Chest / Abdomen / Pelvis-Non-Obstetrical)",
-    "02", "CT and CTA (Chest / Thorax / Abd / Pelvis)",
-    "03", "CT and CTA (Head / Brain / Orbit / Maxillofacial / Neck)",
-    "04", "MRI and MRA (Chest / Abd / Pelvis)",
-    "05", "MRI and MRA (Head / Brain / Neck)",
-    "06", "MRI and MRA (Spine)",
-    "07", "CT (Spine)",
-    "08", "MRI and MRA (Lower Extremities)",
-    "09", "CT and CTA (Lower Extremities)",
-    "10", "MRI and MRA (Upper Extremities and Joints)",
-    "11", "CT and CTA (Upper Extremities)",
+    # "01", "Ultrasound (Chest / Abdomen / Pelvis-Non-Obstetrical)",
+    # "02", "CT and CTA (Chest / Thorax / Abd / Pelvis)",
+    # "03", "CT and CTA (Head / Brain / Orbit / Maxillofacial / Neck)",
+    # "04", "MRI and MRA (Chest / Abd / Pelvis)",
+    # "05", "MRI and MRA (Head / Brain / Neck)",
+    # "06", "MRI and MRA (Spine)",
+    # "07", "CT (Spine)",
+    # "08", "MRI and MRA (Lower Extremities)",
+    # "09", "CT and CTA (Lower Extremities)",
+    # "10", "MRI and MRA (Upper Extremities and Joints)",
+    # "11", "CT and CTA (Upper Extremities)",
     "88", "Subject to Reduction of TC or PC Diagnostic Imaging",
     "99", "Concept does not apply",
     default = NA_character_

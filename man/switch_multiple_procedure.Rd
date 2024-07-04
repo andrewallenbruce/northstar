@@ -16,6 +16,13 @@ vector of Multiple Procedure descriptions
 Modifier 51: Indicates applicable payment adjustment rule for multiple
 procedures
 }
+\details{
+Multiple Surgery Rules
+100\% of MPFS amount is allowed for highest valued surgical procedure and 50\%
+for additional surgical procedures (with a multiple surgery indicator of "2")
+performed same day. Modifier 51 will be appended to identify reduced
+services.
+}
 \examples{
 switch_multiple_procedure(as.character(0:9))
 

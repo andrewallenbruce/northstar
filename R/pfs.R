@@ -169,6 +169,11 @@ search_payment <- function(hcpcs_code = NULL,
 
 #' Anesthesia Conversion Factors
 #'
+#' The Medicare approved amount for anesthesia service is calculated using the
+#' following formula:
+#'
+#' Allowed Amount = ((Anesthesia Base Units + Billed Minutes) / 15) x Conversion Factor
+#'
 #' @template args-mac
 #'
 #' @template args-locality

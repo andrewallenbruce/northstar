@@ -87,6 +87,16 @@ chr <- function(...) {
   as.character(...)
 }
 
+.short <- list(
+  chr = \(...) as.character(...),
+  int = \(...) as.integer(...),
+  dbl = \(...) as.double(...),
+  lgl = \(...) as.logical(...),
+  fct = \(...) as.factor(...),
+  dte = \(...) as.Date(...),
+  vct = \(...) as.vector(...)
+)
+
 #' Apply {gt} Theme
 #'
 #' @param gt_object `<gt_tbl>` A [gt][gt::gt-package] table object

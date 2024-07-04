@@ -23,6 +23,150 @@ library(dplyr)
 library(tinytable)
 ```
 
+
+# Calculating Medicare Fee Schedule Rates
+
+The Medicare Physician Fee Schedule (MPFS) uses a resource-based relative value
+system (RBRVS) that assigns a relative value to HCPCS codes with input from
+representatives of health care professional associations and societies. The
+relative weighting factor (relative value unit or RVU) is derived from a
+resource-based relative value scale.
+
+The components of the RBRVS for each procedure are the (a) professional
+component (i.e., work as expressed in the amount of time, technical skill,
+physical effort, stress, and judgment for the procedure required of physicians
+and certain other practitioners); (b) technical component (i.e., the practice
+expense expressed in overhead costs such as assistant's time, equipment,
+supplies); and (c) professional liability component.
+
+CMS determines the final relative value unit (RVU) for each code, which is then
+multiplied by the annual conversion factor (a dollar amount) to yield the
+national average fee. Rates are adjusted according to geographic indices based
+on provider locality. Payers other than Medicare that adopt these relative
+values may apply a higher or lower conversion factor.
+
+## How Medicare Part B Fees are Calculated by Providers
+
+There are many factors providers must take into account when calculating the
+final payment they will receive for Medicare Part B services:
+
+   * Standard 20% Co-Pay
+   * Nonparticipating Status & Limiting Charge
+   * Facility & Non-Facility Rates
+   * Geographic Adjustments
+   * Multiple Procedure Payment Reductions (MPPR)
+
+### Standard 20% Co-Pay
+
+All Part B services require the patient to pay a 20% co-payment. The MPFS does
+not deduct the co-payment amount. Therefore, the actual payment by Medicare is
+20% less than shown in the fee schedule. A provider must make "reasonable"
+efforts to collect the 20% co-payment from the beneficiary.
+
+### Nonparticipating Status & Limiting Charge
+
+There are two categories of provider participation within Medicare:
+
+   * Participating: Accept assignment and accept the Medicare fee schedule rate.
+   * Nonparticipating: May choose to not accept assignment and may bill a slightly higher rate known as the limiting charge.
+
+Both categories require that providers enroll in the Medicare program and are
+required to file the claim to Medicare.
+
+#### Participating
+
+A participating provider is required to bill on an assignment basis and accept
+the Medicare allowable fee as payment in full. Medicare will pay 80% of the
+allowable amount of the MPFS and the patient will pay a 20% co-insurance at the
+time services are rendered or ask you to bill their Medicare supplemental
+policy.
+
+For example, if the Medicare allowed amount is \$100, but a provider's rate is
+\$160, the provider must accept \$100 and cannot balance bill the patient for
+the \$60 difference. In this scenario, Medicare would pay the provider \$80, and
+the patient would pay the provider \$20.
+
+#### Nonparticipating Provider
+
+A nonparticipating provider is permitted to decide on an individual claim basis
+whether or not to accept the Medicare fee schedule rate (accept assignment) or
+bill the patient via the limiting charge.
+
+The limiting charge is a calculation that allows you to charge a slightly higher
+rate than the Medicare fee schedule.
+
+As with participating providers, nonparticipating providers cannot balance bill
+the Medicare beneficiary for the difference between the provider’s fee schedule
+and the limiting charge. 
+
+In addition, civil monetary penalties can be applied to providers charging in
+excess of the limiting charge, as outlined in the Medicare Claims Processing and
+Program Integrity Manuals.
+
+The allowable fee for a nonparticipating provider is reduced by 5% in comparison
+to a participating provider; in other words, the allowable fee for
+nonparticipating providers is 95% of the Medicare fee schedule allowed amount,
+whether or not they choose to accept assignment.
+
+However, the provider is allowed to bill the patient the limiting charge. The
+limiting charge is 115% of 95% of the fee schedule allowed amount.
+
+For example, if the Medicare allowed amount is \$100, a nonparticipating
+provider starts at \$95 (95% of the Medicare fee schedule rate) and then adds
+the limiting charge (115% of the nonparticipating provider rate).
+
+In this case, the most that can be charged to the patient is \$109.25. 
+
+The provider will submit an unassigned claim to Medicare; Medicare will pay 80%
+of the approved Medicare amount (\$95) and the patient is responsible for 20% of
+the \$95 plus the difference between the \$95 and the limiting charge.
+
+However, you are responsible for collecting the full amount (the limiting
+charge) from the patient and Medicare will send reimbursement directly to the
+patient for the 80%.
+
+```{r}
+# Example: Calculating the Limiting Charge Using 2022 National Medicare Rates
+dplyr::tibble(
+  hcpcs_code = "92626",
+  rate_par_non = 89.98,
+  rate_non_non = rate_par_non * 0.95,
+  limiting_charge = rate_non_non * 1.15
+)
+```
+
+```{r}
+search_rvus(hcpcs_code = "92626")
+```
+
+
+
+In this example, Medicare will reimburse the patient 80% of the Medicare
+approved amount for nonparticipating providers (\$85.48 x 0.80 [80%] = \$68.38).
+
+The patient is fully responsible for the difference between the approved rate
+and the limiting charge (\$98.30 - \$68.38 = \$29.92).
+
+### Facility & Non-Facility Rates
+
+The MPFS includes both facility and non-facility rates. In general, if services
+are rendered in one's own office, the Medicare fee is higher (i.e., the
+non-facility rate) because the practitioner is paying for overhead and equipment
+costs.
+
+Providers receive lower rates when services are rendered in a facility because
+the facility incurs overhead/equipment costs.
+
+### Multiple Procedure Payment Reductions (MPPR)
+
+
+Under the MPPR policy, Medicare reduces payment for the second and subsequent therapy, surgical, nuclear medicine, and advanced imaging procedures furnished to the same patient on the same day. Currently, no audiology procedures are affected by MPPR.
+
+Therapy Services
+MPPR is a per-day policy that applies across disciplines and across settings. For example, if an SLP and a physical therapist both provide treatment to the same patient on the same day, the MPPR applies to all codes billed that day, regardless of discipline. Under MPPR, full payment is made for the therapy service or unit with the highest practice expense value (MPFS reimbursement rates are based on professional work, practice expense, and malpractice components) and payment reductions will apply for any other therapy performed on the same day. For the additional procedures provided on the same day, the practice expense (i.e., support personnel time, supplies, equipment, and indirect costs) of each fee will be reduced by 50% (effective April 1, 2013) for Part B services in all settings. The professional work and malpractice expense components of the payment will not be affected. ASHA has developed three MPPR scenarios to illustrate how reductions are calculated.
+
+MPPR primarily affects physical therapists and occupational therapists because they are professions that commonly bill multiple procedures or a timed procedure billed more than once per visit.
+
 # Physician Fee Schedule Amount Calculation
 
 ```{r echo=FALSE}

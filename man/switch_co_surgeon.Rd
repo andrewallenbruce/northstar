@@ -16,6 +16,9 @@ vector of Co-Surgeon descriptions
 Modifier 62: Services for which two surgeons,
 each in a different specialty, may be paid.
 }
+\details{
+Reimbursement is 62.5\% of MPFS allowed amount.
+}
 \examples{
 switch_co_surgeon(as.character(0:9))
 

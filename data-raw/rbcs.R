@@ -27,23 +27,24 @@ rbcs <- rbcs |>
     rbcs_procedure = forcats::as_factor(rbcs_procedure)
     )
 
-hcpcs_gt1 <- rbcs |>
-  dplyr::count(
-    hcpcs_code,
-    rbcs_subcategory,
-    rbcs_family,
-    sort = TRUE
-    ) |>
-  dplyr::filter(n > 1) |>
-  dplyr::pull(hcpcs_code) |>
-  unique()
+# Need to filter out HCPCS codes that have more than two entries
+# only if one entry is rbcs_family == "No RBCS Family"
+rbcs <- rbcs |>
+  mutate(
+    rowid = row_number(),
+    .before = hcpcs_code
+    )
 
-rbcs |>
-  dplyr::filter(rbcs_subcategory == "Breast")
-  dplyr::filter(
-    hcpcs_code %in% hcpcs_gt1,
-    rbcs_family == "No RBCS Family") |>
-  dplyr::count(rbcs_subcategory, rbcs_family)
+rowids_no_family <- rbcs |>
+  select(-contains("date")) |>
+  group_by(hcpcs_code) |>
+  filter(n() > 1) |>
+  ungroup() |>
+  filter(rbcs_family == "No RBCS Family") |>
+  pull(rowid)
+
+rbcs <- rbcs |>
+  filter(!rowid %in% rowids_no_family)
 
 # Update Pin
 pin_update(

@@ -17,7 +17,11 @@ search_anesthesia(mac = NULL, locality = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Anesthesia Conversion Factors
+The Medicare approved amount for anesthesia service is calculated using the
+following formula:
+}
+\details{
+Allowed Amount = ((Anesthesia Base Units + Billed Minutes) / 15) x Conversion Factor
 }
 \examples{
 search_anesthesia(locality = "01", mac = "10212")

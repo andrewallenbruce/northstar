@@ -13,13 +13,17 @@ switch_diagnostic_imaging(x)
 vector of Diagnostic Imaging descriptions
 }
 \description{
-Identifies the applicable Diagnostic Service family for
-HCPCS codes with a Multiple Procedure indicator of 4.
+Identifies the applicable Diagnostic Service family for HCPCS codes with a
+Multiple Procedure indicator of 4.
+}
+\details{
+Effective January 1, 2011, and after, family indicators 01 - 11 won’t
+populate.
 }
 \examples{
 dplyr::tibble(
-  code = fuimus::pad_number(c(1:11, 88, 99)),
-  desc = switch_diagnostic_imaging(code))
+  ind = c("88", "99"),
+  desc = switch_diagnostic_imaging(ind))
 
 }
 \seealso{
