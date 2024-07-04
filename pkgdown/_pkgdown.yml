@@ -2,6 +2,7 @@ url: https://andrewallenbruce.github.io/northstar/
 
 template:
   bootstrap: 5
+  theme: tango
   bslib:
     font_scale: 1.1
     base_font: {google: "Atkinson Hyperlegible"}
@@ -75,6 +76,7 @@ reference:
   desc: >
     Medical Coding & Billing Codesets.
   contents:
+  - starts_with("construct_")
   - assign_adjustments
   - starts_with("search_")
 
