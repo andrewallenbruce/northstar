@@ -19,4 +19,3 @@ Construct regex patterns
 construct_regex(search_descriptions()$hcpcs_code)
 
 }
-\keyword{internal}

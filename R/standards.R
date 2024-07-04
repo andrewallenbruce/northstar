@@ -149,9 +149,11 @@ search_hcpcs <- function(hcpcs_code = NULL, ...) {
 
 
 #' Proprietary Laboratory Analyses (PLA) Codes
-#' (U codes)
-#' https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes
-#
+#'
+#'
+#' ## U codes
+#' <https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes>
+#'
 #' @template args-hcpcs
 #'
 #' @template args-dots

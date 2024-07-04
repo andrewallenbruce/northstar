@@ -19,7 +19,7 @@ print.northstar <- function(x, ...) {
 
   data <- dplyr::as_tibble(data)
 
-  class(data) <- c("northstar", class(data))
+  class(data) <- unique(c("northstar", class(data)))
 
   data
 }

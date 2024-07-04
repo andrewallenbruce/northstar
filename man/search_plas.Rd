@@ -2,9 +2,7 @@
 % Please edit documentation in R/standards.R
 \name{search_plas}
 \alias{search_plas}
-\title{Proprietary Laboratory Analyses (PLA) Codes
-(U codes)
-https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes}
+\title{Proprietary Laboratory Analyses (PLA) Codes}
 \usage{
 search_plas(hcpcs_code = NULL, ...)
 }
@@ -17,9 +15,10 @@ search_plas(hcpcs_code = NULL, ...)
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Proprietary Laboratory Analyses (PLA) Codes
-(U codes)
-https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes
+\subsection{U codes}{
+
+\url{https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes}
+}
 }
 \examples{
 search_plas()

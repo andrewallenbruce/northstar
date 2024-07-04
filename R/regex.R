@@ -9,7 +9,7 @@
 #'
 #' @autoglobal
 #'
-#' @keywords internal
+# @keywords internal
 #'
 #' @export
 construct_regex <- function(x) {
@@ -64,7 +64,7 @@ pos_re <- function(x) {
 #'
 #' @autoglobal
 #'
-#' @keywords internal
+# @keywords internal
 #'
 #' @export
 construct_regex2 <- function(x) {

@@ -180,7 +180,8 @@ assign_adjustments <- function(code, include_keys = FALSE, ...) {
     adj_code  = code,
     adj_group = group,
     adj_desc  = desc
-  )
+  ) |>
+    .add_class()
 }
 
 #' Format CARC Codes for Identification
