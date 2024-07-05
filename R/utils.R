@@ -6,6 +6,8 @@
 #'
 #' @autoglobal
 #'
+#' @keywords internal
+#'
 #' @export
 mount_board <- function(source = c("local", "remote")) {
 
@@ -27,6 +29,8 @@ mount_board <- function(source = c("local", "remote")) {
 #'
 #' @autoglobal
 #'
+#' @keywords internal
+#'
 #' @export
 get_pin <- function(pin, ...) {
 
@@ -45,6 +49,8 @@ get_pin <- function(pin, ...) {
 #' @returns `<list>` of [pins][pins::pins-package]
 #'
 #' @autoglobal
+#'
+#' @keywords internal
 #'
 #' @export
 list_pins <- function(...) {

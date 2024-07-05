@@ -15,3 +15,4 @@ mount_board(source = c("local", "remote"))
 \description{
 Mount \link[pins:pins-package]{pins} board
 }
+\keyword{internal}

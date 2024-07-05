@@ -15,3 +15,4 @@ list_pins(...)
 \description{
 List pins from a \link[pins:pins-package]{pins} board
 }
+\keyword{internal}
