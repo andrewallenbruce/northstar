@@ -173,48 +173,28 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pos_trie</span> <span class="op">&lt;-</span> <span class="fu">triebeard</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/triebeard/man/trie.html" class="external-link">trie</a></span><span class="op">(</span></span>
 <span>    keys <span class="op">=</span> <span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">pos_code</span>,</span>
-<span>    values <span class="op">=</span> <span class="fu"><a href="../reference/chr.html">chr</a></span><span class="op">(</span><span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">pos_type</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">pos_trie</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; A string_trie object with 99 entries</span></span></code></pre>
+<span>    values <span class="op">=</span> <span class="fu">chr</span><span class="op">(</span><span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">pos_type</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in chr(search_pos()$pos_type): could not find function "chr"</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pos_trie</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'pos_trie' not found</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x_pos</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    pos_type <span class="op">=</span> <span class="fu">triebeard</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/triebeard/man/longest_match.html" class="external-link">longest_match</a></span><span class="op">(</span><span class="va">pos_trie</span>, <span class="va">pos</span><span class="op">)</span>, </span>
-<span>    .after <span class="op">=</span> <span class="va">pos</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">x_pos</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 39,020 × 18</span></span></span>
-<span><span class="co">#&gt;    <span style="font-weight: bold;">claim_id</span> <span style="font-weight: bold;">dos</span>        <span style="font-weight: bold;">dor</span>        <span style="font-weight: bold;">dob</span>        <span style="font-weight: bold;">icd</span>   <span style="font-weight: bold;">order</span> <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">units</span> <span style="font-weight: bold;">mod</span>   <span style="font-weight: bold;">pos</span>  </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 30564-03 2022-08-09 <span style="color: #BB0000;">NA</span>         2007-11-05 F32.9     1 96101     1 <span style="color: #BB0000;">NA</span>    23   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 00068-01 2022-08-16 2022-08-17 1990-02-24 F43.…     1 90837     1 <span style="color: #BB0000;">NA</span>    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 00318-01 2022-08-16 2022-08-22 2012-10-24 F43.…     1 90832     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 01908-01 2022-08-16 2022-09-12 1985-01-09 F43.…     1 90834     1 95    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 02295-01 2022-08-16 2022-08-16 1977-09-30 F43.…     1 90837     1 95    10   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 04305-01 2022-08-16 2022-08-16 2006-01-07 A69.…     1 90791     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     1 90791     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     2 96130     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     3 96131     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     4 96136     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     5 96137     3 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 04386-01 2022-08-16 2022-08-22 2011-08-22 F90.2     1 90834     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 05014-01 2022-08-16 2022-08-17 2003-09-09 F40.…     1 90837     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     1 90791     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     2 96130     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     3 96131     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     4 96136     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     5 96137     3 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 07395-01 2022-08-16 2022-08-16 1994-11-18 F43.…     1 90837     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 09495-01 2022-08-16 2022-08-17 1960-07-02 F44.4     1 90837     1 <span style="color: #BB0000;">NA</span>    10   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 39,000 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: </span><span style="color: #949494; font-weight: bold;">pos_type</span><span style="color: #949494;"> &lt;chr&gt;, </span><span style="color: #949494; font-weight: bold;">charges</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">allowed</span><span style="color: #949494;"> &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">payments</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">adjustments</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">balance</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">class</span><span style="color: #949494;"> &lt;fct&gt;, </span><span style="color: #949494; font-weight: bold;">adj</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre>
+<span>    .after <span class="op">=</span> <span class="va">pos</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `pos_type = triebeard::longest_match(pos_trie, pos)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'pos_trie' not found</span></span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x_pos</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'x_pos' not found</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="categorize-hcpcs">Categorize HCPCS<a class="anchor" aria-label="anchor" href="#categorize-hcpcs"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># hcpcs_unq &lt;- collapse::funique(x$hcpcs[!x$hcpcs %in% not_hcpcs])</span></span>
 <span><span class="va">hcpcs_unq</span> <span class="op">&lt;-</span> <span class="fu">collapse</span><span class="fu">::</span><span class="fu"><a href="https://sebkrantz.github.io/collapse/reference/funique.html" class="external-link">funique</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hcpcs</span><span class="op">)</span></span>
 <span></span>
@@ -254,7 +234,7 @@
 <div class="section level2">
 <h2 id="define-modifiers">Define Modifiers<a class="anchor" aria-label="anchor" href="#define-modifiers"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_unq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">mod</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">mod</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">list_c</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">funique</span><span class="op">(</span><span class="op">)</span></span>
@@ -273,7 +253,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> HJ       Employee assistance program                                          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> U8       Medicaid level of care 8, as defined by each state                   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> UD       Medicaid level of care 13, as defined by each state</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, <span class="va">order</span>, <span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">claim_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -293,7 +273,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 06641-01 2022-08-16     4 96136</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 06641-01 2022-08-16     5 96137</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12,128 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aocs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_aocs.html">search_aocs</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="va">hcpcs_unq</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">aoc_complements</span><span class="op">)</span></span>
 <span></span>
@@ -325,7 +305,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 16057-35 2023-11-16           2 90834       99214        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 16057-35 2023-11-16           3 90836       99214        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 57128-01 2023-12-18           2 96121       96116</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># semi_join(aoc_pairs) |&gt; </span></span>
 <span>  <span class="co"># pull(claim_id)</span></span></code></pre></div>
 </div>

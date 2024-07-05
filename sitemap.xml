@@ -49,9 +49,6 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/carc_add_dash.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/chr.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex.html</loc>
   </url>
   <url>
@@ -82,28 +79,34 @@
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_group.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_category_I.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_I.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_category_II.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_II.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_category_III.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_III.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_level_I.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_hcpcs_level_I.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_level_II.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_hcpcs_level_II.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/is_rarc_code.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_length.html</loc>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_hcpcs.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/limiting_charge.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/list_pins.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/northstar/reference/mount_board.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/northstar/reference/non_participating_fee.html</loc>
