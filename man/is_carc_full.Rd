@@ -20,8 +20,8 @@ Validate CARC Codes
 \examples{
 x <- c("- 253", "OA-23", "PI-", "-45 ", "OA23")
 
-is_carc_code(x)
+is_carc_full(x)
 
-x[which(is_carc_code(x))]
+x[which(is_carc_full(x))]
 
 }

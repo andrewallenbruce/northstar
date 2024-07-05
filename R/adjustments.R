@@ -273,13 +273,10 @@ carc_add_dash <- \(x, placeholder = "||") {
 #' @export
 is_rarc_code <- function(x) {
 
-  stringr::str_detect(
+  # Test for presence of "-"
+  stringfish::sf_grepl(
     gsub("-", "", gsub(" ", "", x)),
-    stringr::regex(
-      "^[AMN]{1,2}[0-9]{1,3}$"
-    )
-  )
-
+    "^[AMN]{1,2}[0-9]{1,3}$")
 }
 
 #' Validate CARC Codes
@@ -293,20 +290,18 @@ is_rarc_code <- function(x) {
 #' @examples
 #' x <- c("- 253", "OA-23", "PI-", "-45 ", "OA23")
 #'
-#' is_carc_code(x)
+#' is_carc_full(x)
 #'
-#' x[which(is_carc_code(x))]
+#' x[which(is_carc_full(x))]
 #'
 #' @autoglobal
 #'
 #' @export
 is_carc_full <- function(x) {
-
-  stringr::str_detect(
+  stringfish::sf_grepl(
     gsub(" ", "", x),
-    stringr::regex(
-      "^[COP]{1}[AIOR]{1}-?[ABDPWY123456789]{1,3}$"))
-
+    "^[COP][AIOR]-?[ABDPWY1-9]{1,3}$"
+  )
 }
 
 #' Validate CARC Codes
@@ -328,13 +323,10 @@ is_carc_full <- function(x) {
 #'
 #' @export
 is_carc_code <- function(x) {
-
-  stringr::str_detect(
+  stringfish::sf_grepl(
     gsub(" ", "", x),
-    stringr::regex(
-      "^[ACIOPR]{2}-?[ABDPW]?[0-9]{1,3}$"
-      )
-    )
+    "^[COP]?[AIOR]?-?[ABDPWY1-9]{1,3}$"
+  )
 }
 
 #' Validate CARC Group Codes
@@ -346,18 +338,18 @@ is_carc_code <- function(x) {
 #' @template returns
 #'
 #' @examples
-#' is_carc_group(c("- 253", "OA-23", "PI-", "-45 ", "OA23"))
+#' x <- c("- 253", "OA-23", "PI-", "-45 ", "OA23")
+#'
+#' is_carc_group(x)
+#'
+#' x[which(is_carc_group(x))]
 #'
 #' @autoglobal
 #'
 #' @export
 is_carc_group <- function(x) {
-
-  stringr::str_detect(
+  stringfish::sf_grepl(
     gsub(" ", "", x),
-    stringr::regex(
-      # "^[ACIOPR]{2}-?$"
-      "^[COP][AIOR]-?[ABDPWY123456789]$"
-      )
-    )
+    "^[COP][AIOR]-?[ABDPWY1-9]{0,3}?$"
+  )
 }

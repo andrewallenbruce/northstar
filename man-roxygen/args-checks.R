@@ -2,4 +2,4 @@
 #' @param arg `<chr>` function argument name in the current function
 #' @param call `<environment>` environment the function is called from
 #'
-#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`

@@ -6,7 +6,7 @@
 #'
 #' @autoglobal
 #'
-#' @noRd
+#' @export
 mount_board <- function(source = c("local", "remote")) {
 
   source <- match.arg(source)
@@ -24,8 +24,6 @@ mount_board <- function(source = c("local", "remote")) {
 #' @template args-dots
 #'
 #' @returns `<tibble>`
-#'
-#' @keywords internal
 #'
 #' @autoglobal
 #'
@@ -48,7 +46,7 @@ get_pin <- function(pin, ...) {
 #'
 #' @autoglobal
 #'
-#' @noRd
+#' @export
 list_pins <- function(...) {
 
   board <- mount_board(...)
@@ -76,26 +74,6 @@ get_example <- function(name = c("report", "practicum")) {
 
 }
 
-#' Alias for `as.character()`
-#'
-#' @param ... arguments to pass to `as.character()`
-#'
-#' @keywords internal
-#'
-#' @export
-chr <- function(...) {
-  as.character(...)
-}
-
-.short <- list(
-  chr = \(...) as.character(...),
-  int = \(...) as.integer(...),
-  dbl = \(...) as.double(...),
-  lgl = \(...) as.logical(...),
-  fct = \(...) as.factor(...),
-  dte = \(...) as.Date(...),
-  vct = \(...) as.vector(...)
-)
 
 #' Apply {gt} Theme
 #'

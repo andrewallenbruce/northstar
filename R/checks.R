@@ -1,257 +1,263 @@
-#' Check if string is valid length of a HCPCS code
+#' Check that input is 5 characters long
 #'
-#' @template args-checks
+#' @param x `<chr>` string
 #'
-#' @template returns
-#'
-#' @examples
-#' is_valid_length("11646")
-#'
-#' try(is_valid_length("1164"))
-#'
-#' @export
+#' @inheritParams rlang::args_error_context
 #'
 #' @autoglobal
-is_valid_length <- function(x,
-                            arg = rlang::caller_arg(x),
-                            call = rlang::caller_env()) {
-
-  if (stringr::str_length(x) != 5L) {
-    cli::cli_abort(c(
-      "A {.strong HCPCS} code is {.emph 5} characters.",
-      "x" = "{.strong {.val {x}}} is {.val {nchar(x)}}."),
-      call = call)}
-
-  if (grepl("[[:lower:]]*", x)) {toupper(x)}
+#'
+#' @noRd
+check_nchars <- function(x,
+                         arg = rlang::caller_arg(x),
+                         call = rlang::caller_env()) {
+  if (any(stringfish::sf_nchar(x) != 5L, na.rm = TRUE)) {
+    cli::cli_abort(
+      "{.arg {arg}} must be 5 characters long.",
+      arg = arg,
+      call = call)
+  }
 }
 
-#' Check if code is HCPCS Level I
+#' Validate HCPCS Code
+#'
+#' A valid HCPCS code is:
+#'
+#'    * 5 characters long
+#'    * Begins with one of `[A-CEGHJ-MP-V0-9]`
+#'    * Followed by any 3 digits, `[0-9]{3}`, and
+#'    * Ends with one of `[AFMTU0-9]`
+#'
+#' @param hcpcs_code `<chr>` string
+#'
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
+#'
+#' @examples
+#' x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', NA)
+#'
+#' is_valid_hcpcs(x)
+#'
+#' x[which(is_valid_hcpcs(x))]
+#'
+#' try(is_valid_hcpcs("1164"))
+#'
+#' @autoglobal
+#'
+#' @export
+is_valid_hcpcs <- function(hcpcs_code) {
+  check_nchars(hcpcs_code)
+  hcpcs_code <- stringfish::sf_toupper(hcpcs_code)
+  stringfish::sf_grepl(hcpcs_code, "^[A-CEGHJ-MP-V0-9]\\d{3}[AFMTU0-9]$")
+}
+
+#' Validate HCPCS Level I (CPT) Code
+#'
+#' A valid HCPCS Level I code is:
+#'
+#'    * 5 characters long
+#'    * Begins with any 4 digits, `[0-9]{4}`, and
+#'    * Ends with one of `[AFMTU0-9]`
 #'
 #' HCPCS Level I is comprised of CPT (Current Procedural Terminology),
 #' a numeric coding system maintained by the American Medical Association
-#' (AMA). CPT is a uniform coding system consisting of descriptive terms and
+#' (AMA).
+#'
+#' CPT is a uniform coding system consisting of descriptive terms and
 #' identifying codes that are used primarily to identify medical services and
 #' procedures furnished by physicians and other health care professionals.
+#'
 #' These health care professionals use the CPT to identify services and
 #' procedures for which they bill public or private health insurance programs.
 #'
 #' Decisions regarding the addition, deletion, or revision of CPT codes are
 #' made by the AMA. The CPT codes are republished and updated annually by the
-#' AMA. Level I of the HCPCS, the CPT codes, does not include codes needed to
-#' separately report medical items or services that are regularly billed by
-#' suppliers other than physicians.
+#' AMA.
 #'
-#' @template args-checks
+#' Level I does not include codes needed to separately report medical items or
+#' services that are regularly billed by suppliers other than physicians.
 #'
-#' @template returns
+#' @param hcpcs_code `<chr>` string
+#'
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
 #'
 #' @examples
-#' is_level_I("11646")
+#' x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', NA)
 #'
-#' is_level_I("E8015")
+#' is_hcpcs_level_I(x)
 #'
-#' purrr::map_vec(c("11646", "E8015"), is_level_I)
-#'
-#' @export
+#' x[which(is_hcpcs_level_I(x))]
 #'
 #' @autoglobal
-is_level_I <- function(x,
-                       arg = rlang::caller_arg(x),
-                       call = rlang::caller_env()) {
-  is_valid_length(x)
-
-  stringr::str_detect(x, stringr::regex("^\\d{4}[A-Z0-9]$"))
+#'
+#' @export
+is_hcpcs_level_I <- function(hcpcs_code) {
+  is_valid_hcpcs(hcpcs_code)
+  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[AFMTU0-9]$")
 }
 
-#' Check if code is HCPCS Level II
+#' Validate HCPCS Level II Code
 #'
-#' HCPCS Level II is a standardized coding system that is used primarily to
-#' identify products, supplies, and services not included in the CPT code set
-#' jurisdiction, such as ambulance services and durable medical equipment,
+#' A valid HCPCS Level II code is:
+#'
+#'    * 5 characters long
+#'    * Begins with one of `[A-CEGHJ-MP-V]` and
+#'    * Ends with any 4 digits, `[0-9]{4}`
+#'
+#' Level II of the HCPCS is a standardized coding system that is used primarily
+#' to identify products, supplies, and services not included in the Level I CPT
+#' codes.
+#'
+#' These include items such as ambulance services and durable medical equipment,
 #' prosthetics, orthotics, and supplies (DMEPOS) when used outside a physician's
 #' office.
 #'
-#' Level II of the HCPCS is a standardized coding system that is used primarily
-#' to identify products, supplies, and services not included in the CPT codes,
-#' such as ambulance services and durable medical equipment, prosthetics,
-#' orthotics, and supplies (DMEPOS) when used outside a physician's office.
 #' Because Medicare and other insurers cover a variety of services, supplies,
 #' and equipment that are not identified by CPT codes, the level II HCPCS codes
 #' were established for submitting claims for these items.
 #'
-#' The development and use of level II of the HCPCS began in the 1980's. Level
-#' II codes are also referred to as alpha-numeric codes because they consist of
-#' a single alphabetical letter followed by 4 numeric digits, while CPT codes
-#' are identified using 5 numeric digits.
+#' Level II codes are also referred to as alpha-numeric codes because they
+#' consist of a single alphabetical letter followed by 4 numeric digits, while
+#' CPT codes are identified using 5 numeric digits.
 #'
-#' @template args-checks
+#' @param hcpcs_code `<chr>` string
 #'
-#' @template returns
-#'
-#' @examples
-#' is_level_II("E8015")
-#'
-#' is_level_II("11646")
-#'
-#' @export
-#'
-#' @autoglobal
-is_level_II <- function(x,
-                        arg = rlang::caller_arg(x),
-                        call = rlang::caller_env()) {
-  is_valid_length(x)
-
-  stringr::str_detect(x, stringr::regex("^[A-V]\\d{4}$"))
-}
-
-#' Check if code is HCPCS Level 1 Category I (CPT)
-#'
-#' @template args-checks
-#'
-#' @template returns
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
 #'
 #' @examples
-#' is_category_I("11646")
+#' x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', NA)
 #'
-#' is_category_I("1164F")
+#' is_hcpcs_level_II(x)
 #'
-#' @export
+#' x[which(is_hcpcs_level_II(x))]
 #'
 #' @autoglobal
-is_category_I <- function(x,
-                          arg = rlang::caller_arg(x),
-                          call = rlang::caller_env()) {
-  is_level_I(x)
-
-  stringr::str_detect(x, stringr::regex("^\\d{4}[A-EG-SU-Z0-9]$"))
+#'
+#' @export
+is_hcpcs_level_II <- function(hcpcs_code) {
+  is_valid_hcpcs(hcpcs_code)
+  stringfish::sf_grepl(hcpcs_code, "^[A-CEGHJ-MP-V]\\d{4}$")
 }
 
-#' Check if code is CPT Category II Performance Measurement Codes (F codes)
+#' Validate HCPCS Level I (CPT) Category I Code
 #'
-#' Category II: Supplemental tracking codes that can be used for performance
-#' measurement. These codes are intended to facilitate data collection about
-#' quality of care by coding certain services and/or test results that support
-#' performance measures and that have been agreed upon as contributing to
-#' good patient care.
+#' A valid CPT Category I code is:
+#'
+#'    * 5 characters long
+#'    * Begins with any 4 digits, `[0-9]{4}`, and
+#'    * Ends with one of `[AMU0-9]`
+#'
+#' @param hcpcs_code `<chr>` string
+#'
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
+#'
+#' @examples
+#' x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', NA)
+#'
+#' is_cpt_category_I(x)
+#'
+#' x[which(is_cpt_category_I(x))]
+#'
+#' @autoglobal
+#'
+#' @export
+is_cpt_category_I <- function(hcpcs_code) {
+  is_hcpcs_level_I(hcpcs_code)
+  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[AMU0-9]$")
+}
+
+#' Validate HCPCS Level I (CPT) Category II Code
+#'
+#' A valid CPT Category II code is:
+#'
+#'    * 5 characters long
+#'    * Begins with any 4 digits, `[0-9]{4}`, and
+#'    * Ends with an `[F]`
+#'
+#' Category II codes are supplemental tracking codes that are used to track
+#' services on claims for performance measurement and are not billing codes.
+#'
+#' These codes are intended to facilitate data collection about quality of care
+#' by coding certain services and/or test results that support performance
+#' measures and that have been agreed upon as contributing to good patient care.
 #'
 #' Some codes in this category may relate to compliance by the health care
 #' professional with state or federal law. The use of these codes is optional.
 #' The codes are not required for correct coding and may not be used as a
-#' substitute for Category I codes. Services/procedures or test results
-#' described in this category make use of alpha characters as the 5th
-#' character in the string (i.e., 4 digits followed by an alpha character).
+#' substitute for Category I codes.
+#'
+#' Services/procedures or test results described in this category make use of
+#' alpha characters as the 5th character in the string (i.e., 4 digits followed
+#' by an alpha character).
 #'
 #' These digits are not intended to reflect the placement of the code in the
-#' regular (Category I) part of the CPT code set. Also, these codes describe
-#' components that are typically included in an evaluation and management
-#' service or test results that are part of the laboratory test/procedure.
+#' regular (Category I) part of the CPT code set.
 #'
-#' Consequently, they do not have a relative value associated with them.
-#'
-#' Category II codes are:
-#'  * Alphanumeric and consist of four digits followed by the letter F
-#'  * NOT billing codes
-#'  * Used to track services on claims for performance measurement
-#'  * Not to be used as a substitute for Category I codes
+#' Also, these codes describe components that are typically included in an
+#' evaluation and management service or test results that are part of the
+#' laboratory test/procedure. Consequently, they do not have a relative value
+#' associated with them.
 #'
 #' @source [AMA Category II Codes](https://www.ama-assn.org/practice-management/cpt/category-ii-codes)
 #'
-#' @template args-checks
+#' @param hcpcs_code `<chr>` string
 #'
-#' @template returns
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
 #'
 #' @examples
-#' is_category_II("1164F")
+#' x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', NA)
 #'
-#' is_category_II("11646")
+#' is_cpt_category_II(x)
 #'
-#' @export
+#' x[which(is_cpt_category_II(x))]
 #'
 #' @autoglobal
-is_category_II <- function(x,
-                          arg = rlang::caller_arg(x),
-                          call = rlang::caller_env()) {
-
-  is_level_I(x)
-
-  stringr::str_detect(x, stringr::regex("^\\d{4}[F]$"))
+#'
+#' @export
+is_cpt_category_II <- function(hcpcs_code) {
+  is_hcpcs_level_I(hcpcs_code)
+  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[F]$")
 }
 
-#' Check if code is CPT Category III Temporary Codes (T codes)
+#' Validate HCPCS Level I Category III Code
+#'
+#' A valid CPT Category III code is:
+#'
+#'    * 5 characters long
+#'    * Begins with any 4 digits, `[0-9]{4}`, and
+#'    * Ends with a `[T]`
 #'
 #' CPT Category III codes are a set of temporary codes that allow data
-#' collection for emerging technologies, services, procedures, and service
-#' paradigms.
-#'
-#' These codes are intended to be used for data collection to substantiate
-#' widespread usage or to provide documentation for the Food and Drug
+#' collection for emerging technologies and are used in the the Food and Drug
 #' Administration (FDA) approval process.
 #'
-#' CPT Category III codes may not conform to one or more of the following CPT
-#' Category I code requirements:
+#' No RVUs are assigned to these codes and payment is based on payer policy. If
+#' a Category III code is available, it must be reported in place of a Category
+#' I unlisted code.
 #'
-#'  - All devices and drugs necessary for performance of the procedure or service have received FDA clearance or approval when such is required for performance of the procedure or service.
-#'  - The procedure or service is performed by many physicians or other qualified health care professionals across the United States.
-#'  - The procedure or service is performed with frequency consistent with the intended clinical use (i.e., a service for a common condition should have high volume, whereas a service commonly performed for a rare condition may have low volume).
-#'  - The procedure or service is consistent with current medical practice.
-#'  - The clinical efficacy of the procedure or service is documented in literature that meets the requirements set forth in the CPT code change application.
+#' The procedure/service they describe may not meet the following Category I
+#' requirements:
 #'
-#' Category III codes are not developed as a result of Panel review of an
-#' incomplete proposal, the need for more information, or a lack of CPT Advisory
-#' Committee support of a code-change application.
-#'
-#' CPT Category III codes are not referred to the AMA-Specialty RVS Update
-#' Committee (RUC) for valuation because no relative value units (RVUs) are
-#' assigned to these codes. Payments for these services or procedures are based
-#' on the policies of payers and not on a yearly fee schedule.
-#'
-#' Category III codes allow data collection for these services or procedures,
-#' unlike the use of unlisted codes, which does not offer the opportunity for
-#' the collection of specific data.
-#'
-#' If a Category III code is available, this code must be reported instead of a
-#' Category I unlisted code. This is an activity that is critically important in
-#' the evaluation of health care delivery and the formation of public and
-#' private policy.
-#'
-#' The use of Category III codes allows physicians and other qualified health
-#' care professionals, insurers, health services researchers, and health policy
-#' experts to identify emerging technologies, services, procedures, and service
-#' paradigms for clinical efficacy, utilization, and outcomes.
-#'
-#' These codes have an alpha character as the 5th character in the string (i.e.,
-#' four digits followed by the letter T). The digits are not intended to reflect
-#' the placement of the code in the Category I section of CPT nomenclature.
-#'
-#' Codes in this section may or may not eventually receive a Category I CPT
-#' code. In either case, in general, a given Category III code will be archived
-#' five years from the initial publication or extension unless a modification of
-#' the archival date is specifically noted at the time of a revision or change
-#' to a code (e.g., addition of parenthetical, instructions, reinstatement).
-#'
-#' Services and procedures described by Category III codes which have been
-#' archived after five years, without conversion, must be reported using the
-#' Category I unlisted code unless another specific cross-reference is
-#' established at the time of archiving.
+#'  - Necessary devices/drugs have received FDA clearance/approval.
+#'  - It is performed by many US physicians/QHPs, at a frequency consistent with intended clinical use.
+#'  - It is consistent with current medical practice.
+#'  - It's clinical efficacy is documented in CPT-approved literature.
 #'
 #' @source [AMA Category III Codes](https://www.ama-assn.org/practice-management/cpt/category-iii-codes)
 #'
-#' @template args-checks
+#' @param hcpcs_code `<chr>` string
 #'
-#' @template returns
+#' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
 #'
 #' @examples
-#' is_category_III("0074T")
+#' x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', NA)
 #'
-#' is_category_III("11646")
+#' is_cpt_category_I(x)
 #'
-#' @export
+#' x[which(is_cpt_category_III(x))]
 #'
 #' @autoglobal
-is_category_III <- function(x,
-                           arg = rlang::caller_arg(x),
-                           call = rlang::caller_env()) {
-  is_level_I(x)
-
-  stringr::str_detect(x, stringr::regex("^\\d{4}[T]$"))
+#'
+#' @export
+is_cpt_category_III <- function(hcpcs_code) {
+  is_hcpcs_level_I(hcpcs_code)
+  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[T]$")
 }

@@ -18,6 +18,10 @@ a \link[tibble:tibble-package]{tibble}
 Validate CARC Group Codes
 }
 \examples{
-is_carc_group(c("- 253", "OA-23", "PI-", "-45 ", "OA23"))
+x <- c("- 253", "OA-23", "PI-", "-45 ", "OA23")
+
+is_carc_group(x)
+
+x[which(is_carc_group(x))]
 
 }

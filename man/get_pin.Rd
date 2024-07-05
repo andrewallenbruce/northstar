@@ -17,4 +17,3 @@ get_pin(pin, ...)
 \description{
 Get a pinned dataset from a \link[pins:pins-package]{pins} board
 }
-\keyword{internal}
