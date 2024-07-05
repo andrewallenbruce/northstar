@@ -191,23 +191,28 @@ Medicare would pay the provider \$80, and the patient would pay the
 provider \$20.</p>
 </div>
 <div class="section level5">
-<h5 id="nonparticipating-provider">Nonparticipating Provider<a class="anchor" aria-label="anchor" href="#nonparticipating-provider"></a>
+<h5 id="nonparticipating">Nonparticipating<a class="anchor" aria-label="anchor" href="#nonparticipating"></a>
 </h5>
 <p>A nonparticipating provider is permitted to decide on an individual
 claim basis whether or not to accept the Medicare fee schedule rate
-(accept assignment) or bill the patient via the limiting charge.</p>
-<p>The limiting charge is a calculation that allows you to charge a
+(accept assignment) or bill the patient via the limiting charge, a
 slightly higher rate than the Medicare fee schedule.</p>
-<p>As with participating providers, nonparticipating providers cannot
-balance bill the Medicare beneficiary for the difference between the
-provider’s fee schedule and the limiting charge.</p>
-<p>In addition, civil monetary penalties can be applied to providers
+<p>As with participating providers, nonparticipating providers
+<em>cannot</em> balance bill the Medicare beneficiary for the difference
+between the provider’s fee schedule and the limiting charge.</p>
+<blockquote>
+<p><em>In addition, civil monetary penalties can be applied to providers
 charging in excess of the limiting charge, as outlined in the Medicare
-Claims Processing and Program Integrity Manuals.</p>
-<p>The allowable fee for a nonparticipating provider is reduced by 5% in
+Claims Processing and Program Integrity Manuals.</em></p>
+</blockquote>
+The allowable fee for a nonparticipating provider is reduced by 5% in
 comparison to a participating provider; in other words, the allowable
 fee for nonparticipating providers is 95% of the Medicare fee schedule
-allowed amount, whether or not they choose to accept assignment.</p>
+allowed amount,
+<ul>
+whether or not
+</ul>
+<p>they choose to accept assignment.</p>
 <p>However, the provider is allowed to bill the patient the limiting
 charge. The limiting charge is 115% of 95% of the fee schedule allowed
 amount.</p>
@@ -216,39 +221,53 @@ nonparticipating provider starts at \$95 (95% of the Medicare fee
 schedule rate) and then adds the limiting charge (115% of the
 nonparticipating provider rate).</p>
 <p>In this case, the most that can be charged to the patient is
-$109.25.</p>
+\$109.25.</p>
 <p>The provider will submit an unassigned claim to Medicare; Medicare
-will pay 80% of the approved Medicare amount ($95) and the patient is
-responsible for 20% of the $95 plus the difference between the $95 and
+will pay 80% of the approved Medicare amount (\$95) and the patient is
+responsible for 20% of the \$95 plus the difference between the \$95 and
 the limiting charge.</p>
-<p>However, you are responsible for collecting the full amount (the
-limiting charge) from the patient and Medicare will send reimbursement
-directly to the patient for the 80%.</p>
+<p>However, the provider is responsible for collecting the full amount
+(the limiting charge) from the patient and Medicare will send
+reimbursement directly to the patient for the 80%.</p>
+<p>For example, the Medicare allowed amount for HCPCS code 92626 is
+\$85.88</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Example: Calculating the Limiting Charge Using 2022 National Medicare Rates</span></span>
-<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span>  hcpcs_code <span class="op">=</span> <span class="st">"92626"</span>,</span>
-<span>  rate_par_non <span class="op">=</span> <span class="fl">89.98</span>,</span>
-<span>  rate_non_non <span class="op">=</span> <span class="va">rate_par_non</span> <span class="op">*</span> <span class="fl">0.95</span>,</span>
-<span>  limiting_charge <span class="op">=</span> <span class="va">rate_non_non</span> <span class="op">*</span> <span class="fl">1.15</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_descriptions.html">search_descriptions</a></span><span class="op">(</span></span>
+<span>  hcpcs_code <span class="op">=</span> <span class="st">"92626"</span>, </span>
+<span>  hcpcs_desc_type <span class="op">=</span> <span class="st">"Consumer"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rvus</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_rvus.html">search_rvus</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"92626"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rvus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html" class="external-link">reframe</a></span><span class="op">(</span></span>
+<span>    <span class="va">hcpcs_code</span>,</span>
+<span>    participating_fee <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">rvu_work</span>, <span class="va">rvu_non_pe</span>, <span class="va">rvu_mp</span><span class="op">)</span> <span class="op">*</span> <span class="va">cf</span>,</span>
+<span>    medicare_responsibility <span class="op">=</span> <span class="va">participating_fee</span> <span class="op">*</span> <span class="fl">0.80</span>,</span>
+<span>    patient_responsibility <span class="op">=</span> <span class="va">participating_fee</span> <span class="op">*</span> <span class="fl">0.20</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">#&gt;   hcpcs_code rate_par_non rate_non_non limiting_charge</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 92626              90.0         85.5            98.3</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_rvus.html">search_rvus</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"92626"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 12</span></span></span>
-<span><span class="co">#&gt;   <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">mod</span>   <span style="font-weight: bold;">rvu_work</span> <span style="font-weight: bold;">rvu_non_pe</span> <span style="font-weight: bold;">rvu_fac_pe</span> <span style="font-weight: bold;">rvu_mp</span> <span style="font-weight: bold;">rvu_non_sum</span> <span style="font-weight: bold;">rvu_fac_sum</span></span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 92626      <span style="color: #BB0000;">NA</span>         1.4       1.14       <span style="color: #949494;">0.</span>76   <span style="color: #949494;">0.0</span>4        2.58         2.2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: </span><span style="color: #949494; font-weight: bold;">rvu_opps_non_pe</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">rvu_opps_fac_pe</span><span style="color: #949494;"> &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">rvu_opps_mp</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">cf</span><span style="color: #949494;"> &lt;dbl&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt;   hcpcs_code participating_fee medicare_responsibility patient_responsibility</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 92626                   85.9                    68.7                   17.2</span></span></code></pre>
 <p>In this example, Medicare will reimburse the patient 80% of the
-Medicare approved amount for nonparticipating providers ($85.48 x 0.80
-[80%] = $68.38).</p>
+Medicare approved amount for nonparticipating providers (\$81.59 x 0.80
+= \$65.27).</p>
 <p>The patient is fully responsible for the difference between the
-approved rate and the limiting charge ($98.30 - $68.38 = $29.92).</p>
+approved rate and the limiting charge (\$93.83 - \$65.27 = \$28.56).</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rvus</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html" class="external-link">reframe</a></span><span class="op">(</span></span>
+<span>    <span class="va">hcpcs_code</span>,</span>
+<span>    non_participating_fee <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">rvu_work</span>, <span class="va">rvu_non_pe</span>, <span class="va">rvu_mp</span><span class="op">)</span> <span class="op">*</span> <span class="va">cf</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.95</span>,</span>
+<span>    limiting_charge <span class="op">=</span> <span class="va">non_participating_fee</span> <span class="op">*</span> <span class="fl">1.15</span>,</span>
+<span>    approved_rate <span class="op">=</span> <span class="va">non_participating_fee</span> <span class="op">*</span> <span class="fl">0.80</span>,</span>
+<span>    patient_responsibility <span class="op">=</span> <span class="va">limiting_charge</span> <span class="op">-</span> <span class="va">approved_rate</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   hcpcs_code non_participating_fee limiting_charge approved_rate</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 92626                       81.6            93.8          65.3</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: patient_responsibility &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level4">
@@ -257,35 +276,9 @@ approved rate and the limiting charge ($98.30 - $68.38 = $29.92).</p>
 <p>The MPFS includes both facility and non-facility rates. In general,
 if services are rendered in one’s own office, the Medicare fee is higher
 (i.e., the non-facility rate) because the practitioner is paying for
-overhead and equipment costs.</p>
-<p>Providers receive lower rates when services are rendered in a
-facility because the facility incurs overhead/equipment costs.</p>
-</div>
-<div class="section level4">
-<h4 id="multiple-procedure-payment-reductions-mppr">Multiple Procedure Payment Reductions (MPPR)<a class="anchor" aria-label="anchor" href="#multiple-procedure-payment-reductions-mppr"></a>
-</h4>
-<p>Under the MPPR policy, Medicare reduces payment for the second and
-subsequent therapy, surgical, nuclear medicine, and advanced imaging
-procedures furnished to the same patient on the same day. Currently, no
-audiology procedures are affected by MPPR.</p>
-<p>Therapy Services MPPR is a per-day policy that applies across
-disciplines and across settings. For example, if an SLP and a physical
-therapist both provide treatment to the same patient on the same day,
-the MPPR applies to all codes billed that day, regardless of discipline.
-Under MPPR, full payment is made for the therapy service or unit with
-the highest practice expense value (MPFS reimbursement rates are based
-on professional work, practice expense, and malpractice components) and
-payment reductions will apply for any other therapy performed on the
-same day. For the additional procedures provided on the same day, the
-practice expense (i.e., support personnel time, supplies, equipment, and
-indirect costs) of each fee will be reduced by 50% (effective April 1,
-2013) for Part B services in all settings. The professional work and
-malpractice expense components of the payment will not be affected. ASHA
-has developed three MPPR scenarios to illustrate how reductions are
-calculated.</p>
-<p>MPPR primarily affects physical therapists and occupational
-therapists because they are professions that commonly bill multiple
-procedures or a timed procedure billed more than once per visit.</p>
+overhead and equipment costs. Providers receive lower rates when
+services are rendered in a facility because the facility incurs
+overhead/equipment costs.</p>
 </div>
 </div>
 </div>
