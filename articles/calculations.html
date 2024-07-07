@@ -141,6 +141,475 @@ amount) to yield the national average fee. Rates are adjusted according
 to geographic indices based on provider locality. Payers other than
 Medicare that adopt these relative values may apply a higher or lower
 conversion factor.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  Component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Work"</span>, <span class="st">"Practice Expense"</span>, <span class="st">"Malpractice"</span><span class="op">)</span>,</span>
+<span>  Weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.51</span>, <span class="fl">0.45</span>, <span class="fl">0.04</span><span class="op">)</span>,</span>
+<span>  Description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Time, effort, skill, and stress associated with the physician’s performance of a service."</span>, <span class="st">"Overhead costs of maintaining a practice, including staff, equipment, and supplies."</span>, <span class="st">"Cost of malpractice insurance based on the risk associated with the service provided."</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"Component"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html" class="external-link">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fl">2</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/gt_theme_northstar.html">gt_theme_northstar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#mwlefoodfi table {
+  font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mwlefoodfi thead, #mwlefoodfi tbody, #mwlefoodfi tfoot, #mwlefoodfi tr, #mwlefoodfi td, #mwlefoodfi th {
+  border-style: none;
+}
+
+#mwlefoodfi p {
+  margin: 0;
+  padding: 0;
+}
+
+#mwlefoodfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mwlefoodfi .gt_title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mwlefoodfi .gt_subtitle {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mwlefoodfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mwlefoodfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mwlefoodfi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mwlefoodfi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mwlefoodfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mwlefoodfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mwlefoodfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mwlefoodfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mwlefoodfi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mwlefoodfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_sourcenote {
+  font-size: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_left {
+  text-align: left;
+}
+
+#mwlefoodfi .gt_center {
+  text-align: center;
+}
+
+#mwlefoodfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mwlefoodfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#mwlefoodfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#mwlefoodfi .gt_font_italic {
+  font-style: italic;
+}
+
+#mwlefoodfi .gt_super {
+  font-size: 65%;
+}
+
+#mwlefoodfi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mwlefoodfi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mwlefoodfi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mwlefoodfi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mwlefoodfi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mwlefoodfi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mwlefoodfi .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="true" data-quarto-bootstrap="false"><tbody class="gt_table_body">
+<tr class="gt_row_group_first">
+<td headers="Work stub_1_1 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 2px; border-left-style: solid; border-left-color: powderblue; border-right-width: 2px; border-right-style: solid; border-right-color: powderblue; border-top-width: 2px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: powderblue;">Work</td>
+<td headers="Work stub_1_1 Weight" class="gt_row gt_left">51%</td>
+<td headers="Work stub_1_1 Description" class="gt_row gt_left">Time, effort, skill, and stress associated with the physician’s performance of a service.</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Practice Expense stub_1_2 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 2px; border-left-style: solid; border-left-color: powderblue; border-right-width: 2px; border-right-style: solid; border-right-color: powderblue; border-top-width: 2px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: powderblue;">Practice Expense</td>
+<td headers="Practice Expense stub_1_2 Weight" class="gt_row gt_left">45%</td>
+<td headers="Practice Expense stub_1_2 Description" class="gt_row gt_left">Overhead costs of maintaining a practice, including staff, equipment, and supplies.</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Malpractice stub_1_3 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 2px; border-left-style: solid; border-left-color: powderblue; border-right-width: 2px; border-right-style: solid; border-right-color: powderblue; border-top-width: 2px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: powderblue;">Malpractice</td>
+<td headers="Malpractice stub_1_3 Weight" class="gt_row gt_left">4%</td>
+<td headers="Malpractice stub_1_3 Description" class="gt_row gt_left">Cost of malpractice insurance based on the risk associated with the service provided.</td>
+</tr>
+</tbody></table>
+</div>
 <div class="section level3">
 <h3 id="how-medicare-part-b-fees-are-calculated-by-providers">How Medicare Part B Fees are Calculated by Providers<a class="anchor" aria-label="anchor" href="#how-medicare-part-b-fees-are-calculated-by-providers"></a>
 </h3>
@@ -231,7 +700,7 @@ the limiting charge.</p>
 reimbursement directly to the patient for the 80%.</p>
 <p>For example, the Medicare allowed amount for HCPCS code 92626 is
 \$85.88</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">desc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_descriptions.html">search_descriptions</a></span><span class="op">(</span></span>
 <span>  hcpcs_code <span class="op">=</span> <span class="st">"92626"</span>, </span>
 <span>  hcpcs_desc_type <span class="op">=</span> <span class="st">"Consumer"</span><span class="op">)</span></span>
@@ -254,7 +723,7 @@ Medicare approved amount for nonparticipating providers (\$81.59 x 0.80
 = \$65.27).</p>
 <p>The patient is fully responsible for the difference between the
 approved rate and the limiting charge (\$93.83 - \$65.27 = \$28.56).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvus</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html" class="external-link">reframe</a></span><span class="op">(</span></span>
 <span>    <span class="va">hcpcs_code</span>,</span>
@@ -290,9 +759,9 @@ overhead/equipment costs.</p>
   
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_16hpwp18wfmevjq0o9ux</title>
+<title>tinytable_wfmevjq0o9uxijtdx5nt</title>
 <style>
-.table td.tinytable_css_ijtdx5ntl7d2hervnp7p, .table th.tinytable_css_ijtdx5ntl7d2hervnp7p {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_l7d2hervnp7pfzwsoxmc, .table th.tinytable_css_l7d2hervnp7pfzwsoxmc {    border-bottom: solid 0.1em #d3d8dc; }
     </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     MathJax = {
@@ -304,7 +773,7 @@ overhead/equipment costs.</p>
       }
     };
     </script><div class="container">
-      <table class="table table table-hover" id="tinytable_16hpwp18wfmevjq0o9ux" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table table-hover" id="tinytable_wfmevjq0o9uxijtdx5nt" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead>
 <caption>Physician Fee Schedule Variables</caption>
               <tr>
@@ -346,12 +815,12 @@ overhead/equipment costs.</p>
 </div>
 
     <script>
-      function styleCell_tinytable_pd4bgcwwchv4awz6mnx7(i, j, css_id) {
-        var table = document.getElementById("tinytable_16hpwp18wfmevjq0o9ux");
+      function styleCell_tinytable_cwwchv4awz6mnx78oyhm(i, j, css_id) {
+        var table = document.getElementById("tinytable_wfmevjq0o9uxijtdx5nt");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_16hpwp18wfmevjq0o9ux');
+        var table = document.getElementById('tinytable_wfmevjq0o9uxijtdx5nt');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -359,8 +828,8 @@ overhead/equipment costs.</p>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_pd4bgcwwchv4awz6mnx7(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_16hpwp18wfmevjq0o9ux");
+      function spanCell_tinytable_cwwchv4awz6mnx78oyhm(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_wfmevjq0o9uxijtdx5nt");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -387,17 +856,17 @@ overhead/equipment costs.</p>
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_pd4bgcwwchv4awz6mnx7(0, 0, 'tinytable_css_ijtdx5ntl7d2hervnp7p') })
-window.addEventListener('load', function () { styleCell_tinytable_pd4bgcwwchv4awz6mnx7(0, 1, 'tinytable_css_ijtdx5ntl7d2hervnp7p') })
+window.addEventListener('load', function () { styleCell_tinytable_cwwchv4awz6mnx78oyhm(0, 0, 'tinytable_css_l7d2hervnp7pfzwsoxmc') })
+window.addEventListener('load', function () { styleCell_tinytable_cwwchv4awz6mnx78oyhm(0, 1, 'tinytable_css_l7d2hervnp7pfzwsoxmc') })
     </script><p><br></p>
  
 
   
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_gd4b69pzpxj7roh34t7s</title>
+<title>tinytable_69pzpxj7roh34t7stsbn</title>
 <style>
-.table td.tinytable_css_tsbnbucz7eq866j6k6qk, .table th.tinytable_css_tsbnbucz7eq866j6k6qk {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_bucz7eq866j6k6qk1n4y, .table th.tinytable_css_bucz7eq866j6k6qk1n4y {    border-bottom: solid 0.1em #d3d8dc; }
     </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     MathJax = {
@@ -409,7 +878,7 @@ window.addEventListener('load', function () { styleCell_tinytable_pd4bgcwwchv4aw
       }
     };
     </script><div class="container">
-      <table class="table table table-hover" id="tinytable_gd4b69pzpxj7roh34t7s" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table table-hover" id="tinytable_69pzpxj7roh34t7stsbn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead>
 <caption>Physician Fee Schedule Formulas</caption>
               <tr>
@@ -439,12 +908,12 @@ window.addEventListener('load', function () { styleCell_tinytable_pd4bgcwwchv4aw
 </div>
 
     <script>
-      function styleCell_tinytable_9dc94va645er44c0k8p3(i, j, css_id) {
-        var table = document.getElementById("tinytable_gd4b69pzpxj7roh34t7s");
+      function styleCell_tinytable_45er44c0k8p3avlpyuvw(i, j, css_id) {
+        var table = document.getElementById("tinytable_69pzpxj7roh34t7stsbn");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_gd4b69pzpxj7roh34t7s');
+        var table = document.getElementById('tinytable_69pzpxj7roh34t7stsbn');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -452,8 +921,8 @@ window.addEventListener('load', function () { styleCell_tinytable_pd4bgcwwchv4aw
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_9dc94va645er44c0k8p3(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_gd4b69pzpxj7roh34t7s");
+      function spanCell_tinytable_45er44c0k8p3avlpyuvw(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_69pzpxj7roh34t7stsbn");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -480,8 +949,8 @@ window.addEventListener('load', function () { styleCell_tinytable_pd4bgcwwchv4aw
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_9dc94va645er44c0k8p3(0, 0, 'tinytable_css_tsbnbucz7eq866j6k6qk') })
-window.addEventListener('load', function () { styleCell_tinytable_9dc94va645er44c0k8p3(0, 1, 'tinytable_css_tsbnbucz7eq866j6k6qk') })
+window.addEventListener('load', function () { styleCell_tinytable_45er44c0k8p3avlpyuvw(0, 0, 'tinytable_css_bucz7eq866j6k6qk1n4y') })
+window.addEventListener('load', function () { styleCell_tinytable_45er44c0k8p3avlpyuvw(0, 1, 'tinytable_css_bucz7eq866j6k6qk1n4y') })
     </script><p><br></p>
 <p>As there is a corresponding GPCI value for each of the three
 components of an RVU, the formula is essentially the <a href="https://www.toppr.com/guides/maths-formulas/dot-product-formula/" class="external-link">dot
@@ -491,7 +960,7 @@ Factor:</p>
 <p><span class="math display">\[ RVU \cdot GPCI = RVU_w(GPCI_w) +
 RVU_p(GPCI_p) + RVU_m(GPCI_m) \]</span></p>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wrvu</span>  <span class="op">=</span> <span class="fl">6.26</span>   <span class="co"># Work RVU</span></span>
 <span><span class="va">wgpci</span> <span class="op">=</span> <span class="fl">1</span>      <span class="co"># Work GPCI</span></span>
 <span></span>
@@ -506,24 +975,24 @@ RVU_p(GPCI_p) + RVU_m(GPCI_m) \]</span></p>
 <span><span class="va">rvus</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">wrvu</span> <span class="op">*</span> <span class="va">wgpci</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">prvu</span> <span class="op">*</span> <span class="va">pgpci</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">mrvu</span> <span class="op">*</span> <span class="va">mgpci</span><span class="op">)</span></span>
 <span><span class="va">rvus</span> <span class="co"># Total RVUs</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 11.22363</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvus</span> <span class="op">*</span> <span class="va">cf</span> <span class="co"># Participating Fee</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 367.5065</span></span></code></pre>
 <p><br></p>
 <p>Using base r’s matrix multiplication infix operator</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">prvu</span>, <span class="va">mrvu</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 11.22363</span></span></code></pre>
 <p><br></p>
 <p>Using the <code>dot()</code> function from the <code>{pracma}</code>
 package</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pracma</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pracma/man/dot.html" class="external-link">dot</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wrvu</span>, <span class="va">prvu</span>, <span class="va">mrvu</span><span class="op">)</span>, </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">wgpci</span>, <span class="va">pgpci</span>, <span class="va">mgpci</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 11.22363</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/calculate_amounts.html">calculate_amounts</a></span><span class="op">(</span></span>
 <span>  wrvu  <span class="op">=</span> <span class="fl">6.26</span>,</span>
 <span>  nprvu <span class="op">=</span> <span class="fl">7.92</span>,</span>
@@ -541,9 +1010,9 @@ package</p>
   
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_c2eop9ksz09od3p848lv</title>
+<title>tinytable_op9ksz09od3p848lv7af</title>
 <style>
-.table td.tinytable_css_7afn0ws8dilfgz1c09zn, .table th.tinytable_css_7afn0ws8dilfgz1c09zn {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_n0ws8dilfgz1c09znmem, .table th.tinytable_css_n0ws8dilfgz1c09znmem {    border-bottom: solid 0.1em #d3d8dc; }
     </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     MathJax = {
@@ -555,7 +1024,7 @@ package</p>
       }
     };
     </script><div class="container">
-      <table class="table table table-hover" id="tinytable_c2eop9ksz09od3p848lv" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table table-hover" id="tinytable_op9ksz09od3p848lv7af" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead><tr>
 <th scope="col">component</th>
                 <th scope="col">value</th>
@@ -606,12 +1075,12 @@ package</p>
 </div>
 
     <script>
-      function styleCell_tinytable_sllwu67riupt9an30w3e(i, j, css_id) {
-        var table = document.getElementById("tinytable_c2eop9ksz09od3p848lv");
+      function styleCell_tinytable_u67riupt9an30w3ey1d5(i, j, css_id) {
+        var table = document.getElementById("tinytable_op9ksz09od3p848lv7af");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_c2eop9ksz09od3p848lv');
+        var table = document.getElementById('tinytable_op9ksz09od3p848lv7af');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -619,8 +1088,8 @@ package</p>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_sllwu67riupt9an30w3e(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_c2eop9ksz09od3p848lv");
+      function spanCell_tinytable_u67riupt9an30w3ey1d5(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_op9ksz09od3p848lv7af");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -647,8 +1116,8 @@ package</p>
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_sllwu67riupt9an30w3e(0, 0, 'tinytable_css_7afn0ws8dilfgz1c09zn') })
-window.addEventListener('load', function () { styleCell_tinytable_sllwu67riupt9an30w3e(0, 1, 'tinytable_css_7afn0ws8dilfgz1c09zn') })
+window.addEventListener('load', function () { styleCell_tinytable_u67riupt9an30w3ey1d5(0, 0, 'tinytable_css_n0ws8dilfgz1c09znmem') })
+window.addEventListener('load', function () { styleCell_tinytable_u67riupt9an30w3ey1d5(0, 1, 'tinytable_css_n0ws8dilfgz1c09znmem') })
     </script>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

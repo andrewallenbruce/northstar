@@ -120,52 +120,48 @@
     
     
 <ul>
-<li>Calculate Patient Age -&gt; Check ICD/HCPCS for Age Conflicts</li>
-<li>Calculate Provider Lag -&gt; Days between DOS and DOR</li>
-<li>Calculate Balance -&gt; Charges - (Payments + Adjustments)</li>
-<li>Calculate Coinsurance -&gt; Charges - Allowed</li>
+<li>Patient Age -&gt; Check ICD/HCPCS for Age Conflicts</li>
+<li>Provider Lag -&gt; Days between DOS and DOR</li>
+<li>Balance -&gt; Charges - (Payments + Adjustments)</li>
+<li>Coinsurance -&gt; Charges - Allowed</li>
 </ul>
 <div class="section level2">
-<h2 id="load-example">Load Example<a class="anchor" aria-label="anchor" href="#load-example"></a>
+<h2 id="example-data">Example Data<a class="anchor" aria-label="anchor" href="#example-data"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_example.html">get_example</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">hcpcs</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WCPAIN"</span>, </span>
-<span>                               <span class="st">"MATERIALCTR"</span>, </span>
-<span>                               <span class="st">"MATERIALOFF"</span>, </span>
-<span>                               <span class="st">"MEDREC"</span>,</span>
-<span>                               <span class="st">"SPBARIATRIC"</span>, </span>
-<span>                               <span class="st">"LETTER"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">example</span> <span class="op">|&gt;</span> </span>
 <span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>     <span class="co"># coinsurance = charges - allowed,</span></span>
+<span>     <span class="co"># base_inspmt = allowed * 0.8,</span></span>
+<span>     <span class="co"># base_ptres = allowed * 0.2,</span></span>
+<span>     all_pmt <span class="op">=</span> <span class="va">payments</span> <span class="op">/</span> <span class="va">allowed</span>,</span>
 <span>     balance <span class="op">=</span> <span class="va">charges</span> <span class="op">-</span> <span class="op">(</span><span class="va">payments</span> <span class="op">+</span> <span class="va">adjustments</span><span class="op">)</span>, </span>
-<span>     .after <span class="op">=</span> <span class="va">adjustments</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 39,020 × 17</span></span></span>
-<span><span class="co">#&gt;    <span style="font-weight: bold;">claim_id</span> <span style="font-weight: bold;">dos</span>        <span style="font-weight: bold;">dor</span>        <span style="font-weight: bold;">dob</span>        <span style="font-weight: bold;">icd</span>   <span style="font-weight: bold;">order</span> <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">units</span> <span style="font-weight: bold;">mod</span>   <span style="font-weight: bold;">pos</span>  </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 30564-03 2022-08-09 <span style="color: #BB0000;">NA</span>         2007-11-05 F32.9     1 96101     1 <span style="color: #BB0000;">NA</span>    23   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 00068-01 2022-08-16 2022-08-17 1990-02-24 F43.…     1 90837     1 <span style="color: #BB0000;">NA</span>    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 00318-01 2022-08-16 2022-08-22 2012-10-24 F43.…     1 90832     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 01908-01 2022-08-16 2022-09-12 1985-01-09 F43.…     1 90834     1 95    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 02295-01 2022-08-16 2022-08-16 1977-09-30 F43.…     1 90837     1 95    10   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 04305-01 2022-08-16 2022-08-16 2006-01-07 A69.…     1 90791     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     1 90791     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     2 96130     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     3 96131     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     4 96136     1 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     5 96137     3 AH    02   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 04386-01 2022-08-16 2022-08-22 2011-08-22 F90.2     1 90834     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 05014-01 2022-08-16 2022-08-17 2003-09-09 F40.…     1 90837     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     1 90791     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     2 96130     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     3 96131     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     4 96136     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…     5 96137     3 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 07395-01 2022-08-16 2022-08-16 1994-11-18 F43.…     1 90837     1 <span style="color: #BB0000;">NA</span>    11   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 09495-01 2022-08-16 2022-08-17 1960-07-02 F44.4     1 90837     1 <span style="color: #BB0000;">NA</span>    10   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 39,000 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: </span><span style="color: #949494; font-weight: bold;">charges</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">allowed</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">payments</span><span style="color: #949494;"> &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">adjustments</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">balance</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">class</span><span style="color: #949494;"> &lt;fct&gt;, </span><span style="color: #949494; font-weight: bold;">adj</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre>
+<span>     .after <span class="op">=</span> <span class="va">adjustments</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33,225 × 19</span></span></span>
+<span><span class="co">#&gt;    <span style="font-weight: bold;">claim_id</span> <span style="font-weight: bold;">dos</span>        <span style="font-weight: bold;">dor</span>        <span style="font-weight: bold;">dob</span>        <span style="font-weight: bold;">icd</span>     <span style="font-weight: bold;">.id</span> <span style="font-weight: bold;">order</span> <span style="font-weight: bold;">hcpcs</span> <span style="font-weight: bold;">units</span> <span style="font-weight: bold;">mod</span>  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 00068-01 2022-08-16 2022-08-17 1990-02-24 F43.…     1     1 90837     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 00318-01 2022-08-16 2022-08-22 2012-10-24 F43.…     2     1 90832     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 01908-01 2022-08-16 2022-09-12 1985-01-09 F43.…     3     1 90834     1 95   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 02295-01 2022-08-16 2022-08-16 1977-09-30 F43.…     4     1 90837     1 95   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 04305-01 2022-08-16 2022-08-16 2006-01-07 A69.…     5     1 90791     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     6     1 90791     1 AH   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     7     2 96130     1 AH   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     8     3 96131     1 AH   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…     9     4 96136     1 AH   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 04367-01 2022-08-16 2022-08-16 1980-07-24 F43.…    10     5 96137     3 AH   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 04386-01 2022-08-16 2022-08-22 2011-08-22 F90.2    11     1 90834     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 05014-01 2022-08-16 2022-08-17 2003-09-09 F40.…    12     1 90837     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…    13     1 90791     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…    14     2 96130     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…    15     3 96131     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…    16     4 96136     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 06641-01 2022-08-16 2022-08-16 1987-07-21 F43.…    17     5 96137     3 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 07395-01 2022-08-16 2022-08-16 1994-11-18 F43.…    18     1 90837     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 09495-01 2022-08-16 2022-08-17 1960-07-02 F44.4    19     1 90837     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 09829-01 2022-08-16 2022-08-16 2004-12-27 F43.…    20     1 90837     1 <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 33,205 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: </span><span style="color: #949494; font-weight: bold;">pos</span><span style="color: #949494;"> &lt;chr&gt;, </span><span style="color: #949494; font-weight: bold;">charges</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">allowed</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">payments</span><span style="color: #949494;"> &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   </span><span style="color: #949494; font-weight: bold;">adjustments</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">all_pmt</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">balance</span><span style="color: #949494;"> &lt;dbl&gt;, </span><span style="color: #949494; font-weight: bold;">class</span><span style="color: #949494;"> &lt;fct&gt;, </span><span style="color: #949494; font-weight: bold;">adj</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="place-of-service">Place of Service<a class="anchor" aria-label="anchor" href="#place-of-service"></a>
@@ -173,141 +169,1855 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pos_trie</span> <span class="op">&lt;-</span> <span class="fu">triebeard</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/triebeard/man/trie.html" class="external-link">trie</a></span><span class="op">(</span></span>
 <span>    keys <span class="op">=</span> <span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">pos_code</span>,</span>
-<span>    values <span class="op">=</span> <span class="fu">chr</span><span class="op">(</span><span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">pos_type</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in chr(search_pos()$pos_type): could not find function "chr"</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pos_trie</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'pos_trie' not found</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x_pos</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span> </span>
+<span>    values <span class="op">=</span> <span class="va">.as</span><span class="op">$</span><span class="fu">chr</span><span class="op">(</span><span class="fu"><a href="../reference/search_pos.html">search_pos</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">pos_type</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example</span> <span class="op">&lt;-</span> <span class="va">example</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    pos_type <span class="op">=</span> <span class="fu">triebeard</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/triebeard/man/longest_match.html" class="external-link">longest_match</a></span><span class="op">(</span><span class="va">pos_trie</span>, <span class="va">pos</span><span class="op">)</span>, </span>
-<span>    .after <span class="op">=</span> <span class="va">pos</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `pos_type = triebeard::longest_match(pos_trie, pos)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'pos_trie' not found</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x_pos</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'x_pos' not found</span></span></code></pre>
+<span>    .after <span class="op">=</span> <span class="va">pos</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    claim_lines <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    pmt_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">payments</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    pmt_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">payments</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">class</span>, <span class="va">pos_type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">class</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">pos_type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span></span>
+<span>    groupname_col <span class="op">=</span> <span class="st">"class"</span>, </span>
+<span>    rowname_col <span class="op">=</span> <span class="st">"pos_type"</span>,</span>
+<span>    row_group_as_column <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">pmt_sum</span>, <span class="va">pmt_mean</span><span class="op">)</span>, </span>
+<span>    decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mwlefoodfi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mwlefoodfi thead, #mwlefoodfi tbody, #mwlefoodfi tfoot, #mwlefoodfi tr, #mwlefoodfi td, #mwlefoodfi th {
+  border-style: none;
+}
+
+#mwlefoodfi p {
+  margin: 0;
+  padding: 0;
+}
+
+#mwlefoodfi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mwlefoodfi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mwlefoodfi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mwlefoodfi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mwlefoodfi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mwlefoodfi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mwlefoodfi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mwlefoodfi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mwlefoodfi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mwlefoodfi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mwlefoodfi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mwlefoodfi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mwlefoodfi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mwlefoodfi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mwlefoodfi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mwlefoodfi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwlefoodfi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwlefoodfi .gt_left {
+  text-align: left;
+}
+
+#mwlefoodfi .gt_center {
+  text-align: center;
+}
+
+#mwlefoodfi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mwlefoodfi .gt_font_normal {
+  font-weight: normal;
+}
+
+#mwlefoodfi .gt_font_bold {
+  font-weight: bold;
+}
+
+#mwlefoodfi .gt_font_italic {
+  font-style: italic;
+}
+
+#mwlefoodfi .gt_super {
+  font-size: 65%;
+}
+
+#mwlefoodfi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mwlefoodfi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mwlefoodfi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mwlefoodfi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mwlefoodfi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mwlefoodfi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mwlefoodfi .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="2" scope="colgroup" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="claim_lines">claim_lines</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pmt_mean">pmt_mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pmt_sum">pmt_sum</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr class="gt_row_group_first">
+<td headers="BCBS stub_2_1 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">BCBS</td>
+<th id="stub_2_1" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="BCBS stub_2_1 claim_lines" class="gt_row gt_right">6035</td>
+<td headers="BCBS stub_2_1 pmt_mean" class="gt_row gt_right">$114</td>
+<td headers="BCBS stub_2_1 pmt_sum" class="gt_row gt_right">$685,291</td>
+</tr>
+<tr>
+<th id="claim_lines_2" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="BCBS claim_lines_2 claim_lines" class="gt_row gt_right">3580</td>
+<td headers="BCBS claim_lines_2 pmt_mean" class="gt_row gt_right">$85</td>
+<td headers="BCBS claim_lines_2 pmt_sum" class="gt_row gt_right">$304,899</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Commercial stub_2_3 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Commercial</td>
+<th id="stub_2_3" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Commercial stub_2_3 claim_lines" class="gt_row gt_right">3051</td>
+<td headers="Commercial stub_2_3 pmt_mean" class="gt_row gt_right">$99</td>
+<td headers="Commercial stub_2_3 pmt_sum" class="gt_row gt_right">$301,644</td>
+</tr>
+<tr>
+<th id="claim_lines_4" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Commercial claim_lines_4 claim_lines" class="gt_row gt_right">505</td>
+<td headers="Commercial claim_lines_4 pmt_mean" class="gt_row gt_right">$87</td>
+<td headers="Commercial claim_lines_4 pmt_sum" class="gt_row gt_right">$44,172</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Cigna stub_2_5 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Cigna</td>
+<th id="stub_2_5" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Cigna stub_2_5 claim_lines" class="gt_row gt_right">2655</td>
+<td headers="Cigna stub_2_5 pmt_mean" class="gt_row gt_right">$87</td>
+<td headers="Cigna stub_2_5 pmt_sum" class="gt_row gt_right">$231,590</td>
+</tr>
+<tr>
+<th id="claim_lines_6" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Cigna claim_lines_6 claim_lines" class="gt_row gt_right">859</td>
+<td headers="Cigna claim_lines_6 pmt_mean" class="gt_row gt_right">$76</td>
+<td headers="Cigna claim_lines_6 pmt_sum" class="gt_row gt_right">$65,283</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Medicaid stub_2_7 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Medicaid</td>
+<th id="stub_2_7" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Medicaid stub_2_7 claim_lines" class="gt_row gt_right">3656</td>
+<td headers="Medicaid stub_2_7 pmt_mean" class="gt_row gt_right">$113</td>
+<td headers="Medicaid stub_2_7 pmt_sum" class="gt_row gt_right">$412,056</td>
+</tr>
+<tr>
+<th id="claim_lines_8" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Medicaid claim_lines_8 claim_lines" class="gt_row gt_right">836</td>
+<td headers="Medicaid claim_lines_8 pmt_mean" class="gt_row gt_right">$99</td>
+<td headers="Medicaid claim_lines_8 pmt_sum" class="gt_row gt_right">$82,562</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Aetna stub_2_9 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Aetna</td>
+<th id="stub_2_9" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Aetna stub_2_9 claim_lines" class="gt_row gt_right">2071</td>
+<td headers="Aetna stub_2_9 pmt_mean" class="gt_row gt_right">$98</td>
+<td headers="Aetna stub_2_9 pmt_sum" class="gt_row gt_right">$203,674</td>
+</tr>
+<tr>
+<th id="claim_lines_10" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Aetna claim_lines_10 claim_lines" class="gt_row gt_right">748</td>
+<td headers="Aetna claim_lines_10 pmt_mean" class="gt_row gt_right">$84</td>
+<td headers="Aetna claim_lines_10 pmt_sum" class="gt_row gt_right">$62,787</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Medicare stub_2_11 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Medicare</td>
+<th id="stub_2_11" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Medicare stub_2_11 claim_lines" class="gt_row gt_right">2717</td>
+<td headers="Medicare stub_2_11 pmt_mean" class="gt_row gt_right">$103</td>
+<td headers="Medicare stub_2_11 pmt_sum" class="gt_row gt_right">$280,001</td>
+</tr>
+<tr>
+<th id="claim_lines_12" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Medicare claim_lines_12 claim_lines" class="gt_row gt_right">147</td>
+<td headers="Medicare claim_lines_12 pmt_mean" class="gt_row gt_right">$86</td>
+<td headers="Medicare claim_lines_12 pmt_sum" class="gt_row gt_right">$12,630</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="UBH stub_2_13 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">UBH</td>
+<th id="stub_2_13" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="UBH stub_2_13 claim_lines" class="gt_row gt_right">2083</td>
+<td headers="UBH stub_2_13 pmt_mean" class="gt_row gt_right">$96</td>
+<td headers="UBH stub_2_13 pmt_sum" class="gt_row gt_right">$199,739</td>
+</tr>
+<tr>
+<th id="claim_lines_14" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="UBH claim_lines_14 claim_lines" class="gt_row gt_right">483</td>
+<td headers="UBH claim_lines_14 pmt_mean" class="gt_row gt_right">$83</td>
+<td headers="UBH claim_lines_14 pmt_sum" class="gt_row gt_right">$40,300</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="EAP stub_2_15 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">EAP</td>
+<th id="stub_2_15" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="EAP stub_2_15 claim_lines" class="gt_row gt_right">802</td>
+<td headers="EAP stub_2_15 pmt_mean" class="gt_row gt_right">$68</td>
+<td headers="EAP stub_2_15 pmt_sum" class="gt_row gt_right">$54,192</td>
+</tr>
+<tr>
+<th id="claim_lines_16" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="EAP claim_lines_16 claim_lines" class="gt_row gt_right">89</td>
+<td headers="EAP claim_lines_16 pmt_mean" class="gt_row gt_right">$60</td>
+<td headers="EAP claim_lines_16 pmt_sum" class="gt_row gt_right">$5,297</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Med. Advantage stub_2_17 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Med. Advantage</td>
+<th id="stub_2_17" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Med. Advantage stub_2_17 claim_lines" class="gt_row gt_right">1511</td>
+<td headers="Med. Advantage stub_2_17 pmt_mean" class="gt_row gt_right">$88</td>
+<td headers="Med. Advantage stub_2_17 pmt_sum" class="gt_row gt_right">$132,343</td>
+</tr>
+<tr>
+<th id="claim_lines_18" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Med. Advantage claim_lines_18 claim_lines" class="gt_row gt_right">353</td>
+<td headers="Med. Advantage claim_lines_18 pmt_mean" class="gt_row gt_right">$88</td>
+<td headers="Med. Advantage claim_lines_18 pmt_sum" class="gt_row gt_right">$31,095</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Medicaid CMO stub_2_19 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Medicaid CMO</td>
+<th id="stub_2_19" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Medicaid CMO stub_2_19 claim_lines" class="gt_row gt_right">28</td>
+<td headers="Medicaid CMO stub_2_19 pmt_mean" class="gt_row gt_right">$117</td>
+<td headers="Medicaid CMO stub_2_19 pmt_sum" class="gt_row gt_right">$3,288</td>
+</tr>
+<tr>
+<th id="claim_lines_20" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Medicaid CMO claim_lines_20 claim_lines" class="gt_row gt_right">185</td>
+<td headers="Medicaid CMO claim_lines_20 pmt_mean" class="gt_row gt_right">$109</td>
+<td headers="Medicaid CMO claim_lines_20 pmt_sum" class="gt_row gt_right">$20,205</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Tricare stub_2_21 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Tricare</td>
+<th id="stub_2_21" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Tricare stub_2_21 claim_lines" class="gt_row gt_right">534</td>
+<td headers="Tricare stub_2_21 pmt_mean" class="gt_row gt_right">$102</td>
+<td headers="Tricare stub_2_21 pmt_sum" class="gt_row gt_right">$54,251</td>
+</tr>
+<tr>
+<th id="claim_lines_22" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Tricare claim_lines_22 claim_lines" class="gt_row gt_right">174</td>
+<td headers="Tricare claim_lines_22 pmt_mean" class="gt_row gt_right">$90</td>
+<td headers="Tricare claim_lines_22 pmt_sum" class="gt_row gt_right">$15,735</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="VA stub_2_23 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">VA</td>
+<th id="stub_2_23" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="VA stub_2_23 claim_lines" class="gt_row gt_right">35</td>
+<td headers="VA stub_2_23 pmt_mean" class="gt_row gt_right">$115</td>
+<td headers="VA stub_2_23 pmt_sum" class="gt_row gt_right">$4,011</td>
+</tr>
+<tr>
+<th id="claim_lines_24" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="VA claim_lines_24 claim_lines" class="gt_row gt_right">74</td>
+<td headers="VA claim_lines_24 pmt_mean" class="gt_row gt_right">$88</td>
+<td headers="VA claim_lines_24 pmt_sum" class="gt_row gt_right">$6,486</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Beacon Health stub_2_25 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group">Beacon Health</td>
+<th id="stub_2_25" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Beacon Health stub_2_25 claim_lines" class="gt_row gt_right">3</td>
+<td headers="Beacon Health stub_2_25 pmt_mean" class="gt_row gt_right">$204</td>
+<td headers="Beacon Health stub_2_25 pmt_sum" class="gt_row gt_right">$613</td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Workers' Comp stub_2_26 stub_1" rowspan="2" class="gt_row gt_left gt_stub_row_group">Workers' Comp</td>
+<th id="stub_2_26" scope="row" class="gt_row gt_left gt_stub">Non-Facility</th>
+<td headers="Workers' Comp stub_2_26 claim_lines" class="gt_row gt_right">6</td>
+<td headers="Workers' Comp stub_2_26 pmt_mean" class="gt_row gt_right">$252</td>
+<td headers="Workers' Comp stub_2_26 pmt_sum" class="gt_row gt_right">$1,512</td>
+</tr>
+<tr>
+<th id="claim_lines_27" scope="row" class="gt_row gt_left gt_stub">Facility</th>
+<td headers="Workers' Comp claim_lines_27 claim_lines" class="gt_row gt_right">5</td>
+<td headers="Workers' Comp claim_lines_27 pmt_mean" class="gt_row gt_right">$276</td>
+<td headers="Workers' Comp claim_lines_27 pmt_sum" class="gt_row gt_right">$1,382</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section level2">
 <h2 id="categorize-hcpcs">Categorize HCPCS<a class="anchor" aria-label="anchor" href="#categorize-hcpcs"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># hcpcs_unq &lt;- collapse::funique(x$hcpcs[!x$hcpcs %in% not_hcpcs])</span></span>
-<span><span class="va">hcpcs_unq</span> <span class="op">&lt;-</span> <span class="fu">collapse</span><span class="fu">::</span><span class="fu"><a href="https://sebkrantz.github.io/collapse/reference/funique.html" class="external-link">funique</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">hcpcs</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hcpcs_unq</span> <span class="op">&lt;-</span> <span class="fu">collapse</span><span class="fu">::</span><span class="fu"><a href="https://sebkrantz.github.io/collapse/reference/funique.html" class="external-link">funique</a></span><span class="op">(</span><span class="va">example</span><span class="op">$</span><span class="va">hcpcs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/search_rbcs.html">search_rbcs</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="va">hcpcs_unq</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">hcpcs_code</span><span class="op">:</span><span class="va">rbcs_family</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/search_descriptions.html">search_descriptions</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="va">hcpcs_unq</span>, </span>
-<span>                        hcpcs_desc_type <span class="op">=</span> <span class="st">"Long"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                        hcpcs_desc_type <span class="op">=</span> <span class="st">"Short"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">hcpcs_code</span>, <span class="va">hcpcs_description</span><span class="op">)</span>,</span>
-<span>  by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">hcpcs_code</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 34 × 6</span></span></span>
-<span><span class="co">#&gt;    <span style="font-weight: bold;">hcpcs_code</span> <span style="font-weight: bold;">rbcs_procedure</span> <span style="font-weight: bold;">rbcs_category</span> <span style="font-weight: bold;">rbcs_subcategory</span>          <span style="font-weight: bold;">rbcs_family</span></span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 90791      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 90792      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 90832      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 90833      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 90834      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 90836      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 90837      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 90839      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 90840      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 90846      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 90847      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 90853      Non-Procedure  E&amp;M           Behavioral Health Servic… Psychother…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 96101      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 96116      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 96121      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 96130      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 96131      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 96132      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 96133      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 96136      Non-Procedure  E&amp;M           Behavioral Health Servic… No RBCS Fa…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: </span><span style="color: #949494; font-weight: bold;">hcpcs_description</span><span style="color: #949494;"> &lt;chr&gt;</span></span></span></code></pre>
+<span>  by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">hcpcs_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">hcpcs_code</span>, <span class="va">rbcs_family</span>, <span class="va">hcpcs_description</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="eexombwkke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eexombwkke table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eexombwkke thead, #eexombwkke tbody, #eexombwkke tfoot, #eexombwkke tr, #eexombwkke td, #eexombwkke th {
+  border-style: none;
+}
+
+#eexombwkke p {
+  margin: 0;
+  padding: 0;
+}
+
+#eexombwkke .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#eexombwkke .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#eexombwkke .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#eexombwkke .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#eexombwkke .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eexombwkke .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eexombwkke .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eexombwkke .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#eexombwkke .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#eexombwkke .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#eexombwkke .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#eexombwkke .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#eexombwkke .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#eexombwkke .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#eexombwkke .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#eexombwkke .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#eexombwkke .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#eexombwkke .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#eexombwkke .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eexombwkke .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#eexombwkke .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#eexombwkke .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#eexombwkke .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eexombwkke .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#eexombwkke .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#eexombwkke .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eexombwkke .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eexombwkke .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#eexombwkke .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eexombwkke .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#eexombwkke .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eexombwkke .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eexombwkke .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eexombwkke .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eexombwkke .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eexombwkke .gt_left {
+  text-align: left;
+}
+
+#eexombwkke .gt_center {
+  text-align: center;
+}
+
+#eexombwkke .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#eexombwkke .gt_font_normal {
+  font-weight: normal;
+}
+
+#eexombwkke .gt_font_bold {
+  font-weight: bold;
+}
+
+#eexombwkke .gt_font_italic {
+  font-style: italic;
+}
+
+#eexombwkke .gt_super {
+  font-size: 65%;
+}
+
+#eexombwkke .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#eexombwkke .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#eexombwkke .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#eexombwkke .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#eexombwkke .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#eexombwkke .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#eexombwkke .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hcpcs_code">hcpcs_code</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="rbcs_family">rbcs_family</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="hcpcs_description">hcpcs_description</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90791</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCH DIAGNOSTIC EVALUATION</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90792</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCH DIAG EVAL W/MED SRVCS</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90832</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYTX W PT 30 MINUTES</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90834</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYTX W PT 45 MINUTES</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90837</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYTX W PT 60 MINUTES</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90839</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYTX CRISIS INITIAL 60 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90840</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYTX CRISIS EA ADDL 30 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90846</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">FAMILY PSYTX W/O PT 50 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90847</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Nongroup</td>
+<td headers="hcpcs_description" class="gt_row gt_left">FAMILY PSYTX W/PT 50 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">90853</td>
+<td headers="rbcs_family" class="gt_row gt_left">Psychotherapy - Group</td>
+<td headers="hcpcs_description" class="gt_row gt_left">GROUP PSYCHOTHERAPY</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96101</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">NA</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96116</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">NUBHVL XM PHYS/QHP 1ST HR</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96121</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">NUBHVL XM PHY/QHP EA ADDL HR</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96130</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCL TST EVAL PHYS/QHP 1ST</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96131</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCL TST EVAL PHYS/QHP EA</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96132</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">NRPSYC TST EVAL PHYS/QHP 1ST</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96133</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">NRPSYC TST EVAL PHYS/QHP EA</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96136</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCL/NRPSYC TST PHY/QHP 1ST</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96137</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCL/NRPSYC TST PHY/QHP EA</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96138</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCL/NRPSYC TECH 1ST</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">96139</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PSYCL/NRPSYC TST TECH EA</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99203</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - New</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P NEW LOW 30 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99203</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - New</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P NEW LOW 30-44 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99204</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - New</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P NEW MOD 45 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99204</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - New</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P NEW MOD 45-59 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99205</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - New</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P NEW HI 60 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99205</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - New</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P NEW HI 60-74 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99213</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - Established</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P EST LOW 20 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99213</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - Established</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P EST LOW 20-29 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99214</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - Established</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P EST MOD 30 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99214</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - Established</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P EST MOD 30-39 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99215</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - Established</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P EST HI 40 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99215</td>
+<td headers="rbcs_family" class="gt_row gt_left">Office E&amp;M - Established</td>
+<td headers="hcpcs_description" class="gt_row gt_left">OFFICE O/P EST HI 40-54 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99404</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PREV MED CNSL INDIV APPRX 60</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99404</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PREVENTIVE COUNSELING INDIV</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99441</td>
+<td headers="rbcs_family" class="gt_row gt_left">No RBCS Family</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PHONE E/M PHYS/QHP 5-10 MIN</td>
+</tr>
+<tr>
+<td headers="hcpcs_code" class="gt_row gt_right">99441</td>
+<td headers="rbcs_family" class="gt_row gt_left">Telephone Services</td>
+<td headers="hcpcs_description" class="gt_row gt_left">PHONE E/M PHYS/QHP 5-10 MIN</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section level2">
 <h2 id="define-modifiers">Define Modifiers<a class="anchor" aria-label="anchor" href="#define-modifiers"></a>
 </h2>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod_unq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">mod</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">mod</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">list_c</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">funique</span><span class="op">(</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod_unq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="va">example</span><span class="op">$</span><span class="va">mod</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">example</span><span class="op">$</span><span class="va">mod</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">collapse</span><span class="fu">::</span><span class="fu"><a href="https://sebkrantz.github.io/collapse/reference/funique.html" class="external-link">funique</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/search_modifiers.html">search_modifiers</a></span><span class="op">(</span>mod_code <span class="op">=</span> <span class="va">mod_unq</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">mod_code</span>, <span class="va">mod_description</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 2</span></span></span>
-<span><span class="co">#&gt;   <span style="font-weight: bold;">mod_code</span> <span style="font-weight: bold;">mod_description</span>                                                      </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25       Significant, Separately Identifiable Evaluation and Management Servi…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 59       Distinct Procedural Service                                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 95       Synchronous Telemedicine Service Rendered Via a Real-Time Interactiv…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> AH       Clinical psychologist                                                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> AJ       Clinical social worker                                               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> GT       Via interactive audio and video telecommunication systems            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> HJ       Employee assistance program                                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> U8       Medicaid level of care 8, as defined by each state                   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> UD       Medicaid level of care 13, as defined by each state</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, <span class="va">order</span>, <span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">claim_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12,138 × 4</span></span></span>
-<span><span class="co">#&gt;    claim_id dos        order hcpcs</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 04367-01 2022-08-16     1 90791</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 04367-01 2022-08-16     2 96130</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 04367-01 2022-08-16     3 96131</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04367-01 2022-08-16     4 96136</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 04367-01 2022-08-16     5 96137</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 06641-01 2022-08-16     1 90791</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 06641-01 2022-08-16     2 96130</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 06641-01 2022-08-16     3 96131</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 06641-01 2022-08-16     4 96136</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 06641-01 2022-08-16     5 96137</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12,128 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mod_code</span>, <span class="va">mod_description</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="ulbfdpbcyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ulbfdpbcyv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ulbfdpbcyv thead, #ulbfdpbcyv tbody, #ulbfdpbcyv tfoot, #ulbfdpbcyv tr, #ulbfdpbcyv td, #ulbfdpbcyv th {
+  border-style: none;
+}
+
+#ulbfdpbcyv p {
+  margin: 0;
+  padding: 0;
+}
+
+#ulbfdpbcyv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ulbfdpbcyv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ulbfdpbcyv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ulbfdpbcyv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ulbfdpbcyv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ulbfdpbcyv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ulbfdpbcyv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ulbfdpbcyv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ulbfdpbcyv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ulbfdpbcyv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ulbfdpbcyv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ulbfdpbcyv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ulbfdpbcyv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ulbfdpbcyv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ulbfdpbcyv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ulbfdpbcyv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ulbfdpbcyv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ulbfdpbcyv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ulbfdpbcyv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ulbfdpbcyv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ulbfdpbcyv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ulbfdpbcyv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ulbfdpbcyv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ulbfdpbcyv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ulbfdpbcyv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ulbfdpbcyv .gt_left {
+  text-align: left;
+}
+
+#ulbfdpbcyv .gt_center {
+  text-align: center;
+}
+
+#ulbfdpbcyv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ulbfdpbcyv .gt_font_normal {
+  font-weight: normal;
+}
+
+#ulbfdpbcyv .gt_font_bold {
+  font-weight: bold;
+}
+
+#ulbfdpbcyv .gt_font_italic {
+  font-style: italic;
+}
+
+#ulbfdpbcyv .gt_super {
+  font-size: 65%;
+}
+
+#ulbfdpbcyv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ulbfdpbcyv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ulbfdpbcyv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ulbfdpbcyv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ulbfdpbcyv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ulbfdpbcyv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ulbfdpbcyv .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="mod_code">mod_code</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="mod_description">mod_description</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="mod_code" class="gt_row gt_left">25</td>
+<td headers="mod_description" class="gt_row gt_left">Significant, Separately Identifiable Evaluation and Management Service by the Same Physician or Other Qualified Health Care Professional on the Same Day of the Procedure or Other Service</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">59</td>
+<td headers="mod_description" class="gt_row gt_left">Distinct Procedural Service</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">95</td>
+<td headers="mod_description" class="gt_row gt_left">Synchronous Telemedicine Service Rendered Via a Real-Time Interactive Audio and Video Telecommunications System</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">AH</td>
+<td headers="mod_description" class="gt_row gt_left">Clinical psychologist</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">AJ</td>
+<td headers="mod_description" class="gt_row gt_left">Clinical social worker</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">GT</td>
+<td headers="mod_description" class="gt_row gt_left">Via interactive audio and video telecommunication systems</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">HJ</td>
+<td headers="mod_description" class="gt_row gt_left">Employee assistance program</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">U8</td>
+<td headers="mod_description" class="gt_row gt_left">Medicaid level of care 8, as defined by each state</td>
+</tr>
+<tr>
+<td headers="mod_code" class="gt_row gt_left">UD</td>
+<td headers="mod_description" class="gt_row gt_left">Medicaid level of care 13, as defined by each state</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, <span class="va">.id</span>, <span class="va">order</span>, <span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">claim_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9,160 × 5</span></span></span>
+<span><span class="co">#&gt;    claim_id dos          .id order hcpcs</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 04367-01 2022-08-16     6     1 90791</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 04367-01 2022-08-16     7     2 96130</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 04367-01 2022-08-16     8     3 96131</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04367-01 2022-08-16     9     4 96136</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 04367-01 2022-08-16    10     5 96137</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 06641-01 2022-08-16    13     1 90791</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 06641-01 2022-08-16    14     2 96130</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 06641-01 2022-08-16    15     3 96131</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 06641-01 2022-08-16    16     4 96136</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 06641-01 2022-08-16    17     5 96137</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9,150 more rows</span></span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aocs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_aocs.html">search_aocs</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="va">hcpcs_unq</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">aoc_complements</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">aoc_pairs</span> <span class="op">&lt;-</span> <span class="va">aocs</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">aoc_type</span> <span class="op">==</span> <span class="st">"Primary"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span>hcpcs_primary <span class="op">=</span> <span class="va">hcpcs_code</span>, hcpcs_addon <span class="op">=</span> <span class="va">aoc_complement</span><span class="op">)</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">aoc_type</span> <span class="op">==</span> <span class="st">"Primary"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span>
+<span>    hcpcs_primary <span class="op">=</span> <span class="va">hcpcs_code</span>, </span>
+<span>    hcpcs_addon <span class="op">=</span> <span class="va">aoc_complement</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ex_aoc</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, <span class="va">order</span>, <span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">claim_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ex_aoc</span> <span class="op">&lt;-</span> <span class="va">example</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, <span class="va">order</span>, <span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">claim_id</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">prim</span> <span class="op">&lt;-</span> <span class="va">ex_aoc</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">order</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, hcpcs_primary <span class="op">=</span> <span class="va">hcpcs</span><span class="op">)</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">order</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, hcpcs_primary <span class="op">=</span> <span class="va">hcpcs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">addon</span> <span class="op">&lt;-</span> <span class="va">ex_aoc</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">order</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, order_addon <span class="op">=</span> <span class="va">order</span>, hcpcs_addon <span class="op">=</span> <span class="va">hcpcs</span><span class="op">)</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">order</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span>, order_addon <span class="op">=</span> <span class="va">order</span>, hcpcs_addon <span class="op">=</span> <span class="va">hcpcs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">addon</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">prim</span>, by <span class="op">=</span> <span class="fu">join_by</span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">claim_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'46440-13'</span>, <span class="st">'16057-35'</span>, <span class="st">'57128-01'</span><span class="op">)</span><span class="op">)</span> <span class="co">#|&gt;</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">prim</span>, by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">claim_id</span>, <span class="va">dos</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">claim_id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'46440-13'</span>, <span class="st">'16057-35'</span>, <span class="st">'57128-01'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
 <span><span class="co">#&gt;   claim_id dos        order_addon hcpcs_addon hcpcs_primary</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 46440-13 2023-03-31           2 90840       90839        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 16057-35 2023-11-16           2 90834       99214        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 16057-35 2023-11-16           3 90836       99214        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 57128-01 2023-12-18           2 96121       96116</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="co"># semi_join(aoc_pairs) |&gt; </span></span>
-<span>  <span class="co"># pull(claim_id)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 57128-01 2023-12-18           2 96121       96116</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

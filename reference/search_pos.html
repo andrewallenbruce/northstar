@@ -140,7 +140,92 @@ submission of professional claims.</p>
 set to be used for describing sites of service in such claims. POS
 information is often needed to determine the acceptability of direct billing
 of Medicare, Medicaid and private insurance services provided by a given
-provider.</p>
+provider.</p><div class="section">
+<h3 id="code-structure">Code Structure<a class="anchor" aria-label="anchor" href="#code-structure"></a></h3>
+
+
+<p>The first digit denotes service category and the second specifies location or
+service type.</p>
+<p>POS code 11 represents an Office for direct patient services.</p>
+<p>For instance, code 11 designates an Office, encompassing
+physician offices, clinics, group practices, and standalone facilities
+providing direct patient services.</p>
+<p>Conversely, place of service code 22
+denotes an On Campus-Outpatient Hospital, covering services in a
+hospital-based outpatient department where the patient is admitted as an
+outpatient.</p><ul><li><p>Structure: First digit for category, second for location/type</p></li>
+<li><p>Choose POS based on the majority of services in a specific encounter</p></li>
+<li><p>Modify POS codes if the location changes during a single encounter</p></li>
+</ul></div>
+
+<div class="section">
+<h3 id="location-types">Location Types<a class="anchor" aria-label="anchor" href="#location-types"></a></h3>
+
+
+<p>Based on the location of service, POS codes can be grouped into four
+categories: Facility, Non-Facility, Telehealth, and Other.</p><div class="section">
+<h4 id="facility-codes">Facility Codes<a class="anchor" aria-label="anchor" href="#facility-codes"></a></h4>
+
+
+<p>Facility POS codes are used to indicate services provided in a facility
+setting such as hospitals, nursing homes, or skilled nursing facilities.
+These include:</p><ul><li><p>Urgent Care Facility (20)</p></li>
+<li><p>Inpatient Hospital (21)</p></li>
+<li><p>Outpatient Hospital (22)</p></li>
+<li><p>Emergency Room-Hospital (23)</p></li>
+<li><p>Ambulatory Surgical Center (24)</p></li>
+<li><p>Skilled Nursing Facility (31)</p></li>
+<li><p>Hospice Facility (32)</p></li>
+</ul><p>These codes indicate that the services were provided in a facility that is
+owned and operated by a healthcare provider.</p>
+</div>
+
+<div class="section">
+<h4 id="non-facility-codes">Non-Facility Codes<a class="anchor" aria-label="anchor" href="#non-facility-codes"></a></h4>
+
+
+<p>Non-facility POS codes are used for services provided in non-facility
+settings such as physician offices or independent clinics. These include:</p><ul><li><p>School (03)</p></li>
+<li><p>Office (11)</p></li>
+<li><p>Home (12)</p></li>
+<li><p>Independent Clinic (49)</p></li>
+</ul><p>The above codes indicate that the services were provided in a setting not
+owned or operated by a healthcare provider.</p>
+</div>
+
+<div class="section">
+<h4 id="telehealth-pos-codes">Telehealth POS Codes<a class="anchor" aria-label="anchor" href="#telehealth-pos-codes"></a></h4>
+
+
+<p>Telehealth place-of-service codes are used to indicate services provided
+through telecommunication technology. These include:</p><ul><li><p>Telehealth (02)</p></li>
+<li><p>Store and Forward Telemedicine Services (18)</p></li>
+</ul><p>This category of POS codes was introduced due to the increasing use of
+telehealth services in healthcare, and to differentiate them from traditional
+in-person services.</p>
+</div>
+
+<div class="section">
+<h4 id="other-pos-codes">Other POS Codes<a class="anchor" aria-label="anchor" href="#other-pos-codes"></a></h4>
+
+
+<p>In addition to facility-specific POS codes, there are other codes that play a
+vital role in accurately describing healthcare encounters. These codes are
+designed for specific scenarios, such as visits to retail clinics, public
+health clinics, or rural health clinics. Each code serves a distinct purpose
+in the healthcare landscape.</p><ul><li><p>Homeless Shelter (04)</p></li>
+<li><p>Retail Clinic (17)</p></li>
+<li><p>Rural Health Clinic (72)</p></li>
+</ul><p>These codes, including Retail Clinic (17), Home Shelter (04), and Rural
+Health Clinic (72), cater to unique healthcare settings, ensuring
+comprehensive coverage in billing and reporting. Understanding and applying
+these codes appropriately contributes to the precision of healthcare
+documentation and facilitates effective reimbursement processes.</p>
+</div>
+
+
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
