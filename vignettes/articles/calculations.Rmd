@@ -45,6 +45,19 @@ national average fee. Rates are adjusted according to geographic indices based
 on provider locality. Payers other than Medicare that adopt these relative
 values may apply a higher or lower conversion factor.
 
+
+```{r}
+dplyr::tibble(
+  Component = c("Work", "Practice Expense", "Malpractice"),
+  Weight = c(0.51, 0.45, 0.04),
+  Description = c("Time, effort, skill, and stress associated with the physician’s performance of a service.", "Overhead costs of maintaining a practice, including staff, equipment, and supplies.", "Cost of malpractice insurance based on the risk associated with the service provided.")
+) |> 
+  gt::gt(groupname_col = "Component") |> 
+  gt::fmt_percent(columns = 2, decimals = 0) |>
+  gt_theme_northstar()
+```
+
+
 ## How Medicare Part B Fees are Calculated by Providers
 
 There are many factors providers must take into account when calculating the

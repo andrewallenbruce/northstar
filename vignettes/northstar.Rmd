@@ -31,27 +31,44 @@ library(gt)
 ```
 
 
-   * Calculate Patient Age  -> Check ICD/HCPCS for Age Conflicts
-   * Calculate Provider Lag -> Days between DOS and DOR
-   * Calculate Balance      -> Charges - (Payments + Adjustments)
-   * Calculate Coinsurance  -> Charges - Allowed
+```{r data, include = FALSE}
+example <- get_example(name = "report") |> 
+   dplyr::filter(
+     !hcpcs %in% c(
+       "WCPAIN", 
+       "MATERIALCTR", 
+       "MATERIALOFF", 
+       "MEDREC",
+       "SPBARIATRIC", 
+       "LETTER"
+       ),
+     class != "Self-Pay", 
+     !is.na(allowed)
+     ) |> 
+  dplyr::mutate(
+     .id = dplyr::row_number(),
+     .before = order
+     )
+```
+
+
+   * Patient Age  -> Check ICD/HCPCS for Age Conflicts
+   * Provider Lag -> Days between DOS and DOR
+   * Balance      -> Charges - (Payments + Adjustments)
+   * Coinsurance  -> Charges - Allowed
 
 
 
-## Load Example
+## Example Data
 
 ```{r}
-(x <- get_example() |> 
-   dplyr::filter(!hcpcs %in% c("WCPAIN", 
-                               "MATERIALCTR", 
-                               "MATERIALOFF", 
-                               "MEDREC",
-                               "SPBARIATRIC", 
-                               "LETTER")) |> 
+example |> 
    dplyr::mutate(
-     # coinsurance = charges - allowed,
+     # base_inspmt = allowed * 0.8,
+     # base_ptres = allowed * 0.2,
+     all_pmt = payments / allowed,
      balance = charges - (payments + adjustments), 
-     .after = adjustments))
+     .after = adjustments)
 ```
 
 ## Place of Service
@@ -59,56 +76,67 @@ library(gt)
 ```{r}
 pos_trie <- triebeard::trie(
     keys = search_pos()$pos_code,
-    values = chr(search_pos()$pos_type))
+    values = .as$chr(search_pos()$pos_type))
 
-pos_trie
-```
-
-
-```{r}
-x_pos <- x |> 
+example <- example |> 
   dplyr::mutate(
     pos_type = triebeard::longest_match(pos_trie, pos), 
     .after = pos)
 
-x_pos
+example |> 
+  dplyr::summarise(
+    claim_lines = dplyr::n(),
+    pmt_mean = mean(payments, na.rm = TRUE),
+    pmt_sum = sum(payments, na.rm = TRUE),
+    .by = c(class, pos_type)) |> 
+  dplyr::arrange(class, dplyr::desc(pos_type)) |> 
+  gt::gt(
+    groupname_col = "class", 
+    rowname_col = "pos_type",
+    row_group_as_column = TRUE
+    ) |> 
+  gt::fmt_currency(
+    columns = c(pmt_sum, pmt_mean), 
+    decimals = 0)
 ```
 
 
 ## Categorize HCPCS
 
 ```{r}
-# hcpcs_unq <- collapse::funique(x$hcpcs[!x$hcpcs %in% not_hcpcs])
-hcpcs_unq <- collapse::funique(x$hcpcs)
+hcpcs_unq <- collapse::funique(example$hcpcs)
 
 search_rbcs(hcpcs_code = hcpcs_unq) |> 
   dplyr::select(hcpcs_code:rbcs_family) |> 
   dplyr::left_join(
     search_descriptions(hcpcs_code = hcpcs_unq, 
-                        hcpcs_desc_type = "Long") |> 
+                        hcpcs_desc_type = "Short") |> 
   dplyr::select(hcpcs_code, hcpcs_description),
-  by = dplyr::join_by(hcpcs_code))
+  by = dplyr::join_by(hcpcs_code)) |> 
+  dplyr::select(hcpcs_code, rbcs_family, hcpcs_description) |> 
+  gt::gt()
 ```
 
 ## Define Modifiers
 
 ```{r}
-mod_unq <- strsplit(toupper(x$mod[!is.na(x$mod)]), "-") |> 
-  list_c() |> 
-  funique()
+mod_unq <- strsplit(toupper(example$mod[!is.na(example$mod)]), "-") |> 
+  purrr::list_c() |> 
+  collapse::funique()
 
 search_modifiers(mod_code = mod_unq) |> 
-  select(mod_code, mod_description)
+  dplyr::select(mod_code, mod_description) |> 
+  gt::gt()
 ```
 
 
 
 ```{r}
-x |> 
-  select(claim_id, dos, order, hcpcs) |> 
-  group_by(claim_id) |> 
-  filter(n() > 1) |> 
-  ungroup()
+example |> 
+  dplyr::select(claim_id, dos, .id, order, hcpcs) |> 
+  dplyr::group_by(claim_id) |> 
+  dplyr::filter(dplyr::n() > 1) |> 
+  dplyr::ungroup()
 ```
 
 ```{r}
@@ -116,28 +144,28 @@ aocs <- search_aocs(hcpcs_code = hcpcs_unq) |>
   tidyr::unnest(cols = aoc_complements)
 
 aoc_pairs <- aocs |> 
-  filter(aoc_type == "Primary") |> 
-  select(hcpcs_primary = hcpcs_code, hcpcs_addon = aoc_complement)
+  dplyr::filter(aoc_type == "Primary") |> 
+  dplyr::select(
+    hcpcs_primary = hcpcs_code, 
+    hcpcs_addon = aoc_complement)
 
-ex_aoc <- x |> 
-  select(claim_id, dos, order, hcpcs) |> 
-  group_by(claim_id) |> 
-  filter(n() > 1) |> 
-  ungroup()
+ex_aoc <- example |> 
+  dplyr::select(claim_id, dos, order, hcpcs) |> 
+  dplyr::group_by(claim_id) |> 
+  dplyr::filter(dplyr::n() > 1) |> 
+  dplyr::ungroup()
 
 prim <- ex_aoc |> 
-  filter(order == 1) |> 
-  select(claim_id, dos, hcpcs_primary = hcpcs)
+  dplyr::filter(order == 1) |> 
+  dplyr::select(claim_id, dos, hcpcs_primary = hcpcs)
 
 addon <- ex_aoc |> 
-  filter(order != 1) |> 
-  select(claim_id, dos, order_addon = order, hcpcs_addon = hcpcs)
+  dplyr::filter(order != 1) |> 
+  dplyr::select(claim_id, dos, order_addon = order, hcpcs_addon = hcpcs)
 
 addon |> 
-  left_join(prim, by = join_by(claim_id, dos)) |> 
-  filter(claim_id %in% c('46440-13', '16057-35', '57128-01')) #|>
-  # semi_join(aoc_pairs) |> 
-  # pull(claim_id)
+  dplyr::left_join(prim, by = dplyr::join_by(claim_id, dos)) |> 
+  dplyr::filter(claim_id %in% c('46440-13', '16057-35', '57128-01'))
 ```
 
 

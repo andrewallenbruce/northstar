@@ -2,6 +2,8 @@
 #'
 #' @param source `<chr>` `"local"` or `"remote"`
 #'
+#' @template args-dots
+#'
 #' @returns `<pins_board_folder>` or `<pins_board_url>`
 #'
 #' @autoglobal
@@ -9,14 +11,41 @@
 #' @keywords internal
 #'
 #' @export
-mount_board <- function(source = c("local", "remote")) {
+mount_board <- function(source = c("local", "remote"), ...) {
 
   source <- match.arg(source)
 
   switch(
     source,
-    local = pins::board_folder(fs::path_package("extdata/pins", package = "northstar")),
-    remote = pins::board_url("https://raw.githubusercontent.com/andrewallenbruce/northstar/master/inst/extdata/pins/"))
+    local = pins::board_folder(
+      fs::path_package(
+        "extdata/pins",
+        package = "northstar"
+        )
+      ),
+    remote = pins::board_url(
+      "https://raw.githubusercontent.com/andrewallenbruce/northstar/master/inst/extdata/pins/"
+      )
+    )
+}
+
+#' List pins from a [pins][pins::pins-package] board
+#'
+#' @param ... arguments to pass to [mount_board()]
+#'
+#' @returns `<list>` of [pins][pins::pins-package]
+#'
+#' @autoglobal
+#'
+#' @keywords internal
+#'
+#' @export
+list_pins <- function(...) {
+
+  board <- mount_board(...)
+
+  pins::pin_list(board)
+
 }
 
 #' Get a pinned dataset from a [pins][pins::pins-package] board
@@ -42,25 +71,6 @@ get_pin <- function(pin, ...) {
 
 }
 
-#' List pins from a [pins][pins::pins-package] board
-#'
-#' @param ... arguments to pass to [mount_board()]
-#'
-#' @returns `<list>` of [pins][pins::pins-package]
-#'
-#' @autoglobal
-#'
-#' @keywords internal
-#'
-#' @export
-list_pins <- function(...) {
-
-  board <- mount_board(...)
-
-  pins::pin_list(board)
-
-}
-
 #' Load Example Datasets
 #'
 #' @param name name of example
@@ -79,7 +89,6 @@ get_example <- function(name = c("report", "practicum")) {
   get_pin("examples")[[name]] |> .add_class()
 
 }
-
 
 #' Apply {gt} Theme
 #'

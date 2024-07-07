@@ -41,6 +41,9 @@ dplyr::tibble(
   code = c("A0021", "V5362", "J9264", "G8916")) |>
   search_descriptions(column = "code")
 
+search_descriptions() |>
+dplyr::filter(is_cpt_category_III(hcpcs_code))
+
 }
 \seealso{
 Other HIPAA Standards: 

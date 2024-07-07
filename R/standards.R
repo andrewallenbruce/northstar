@@ -25,6 +25,9 @@
 #'   code = c("A0021", "V5362", "J9264", "G8916")) |>
 #'   search_descriptions(column = "code")
 #'
+#' search_descriptions() |>
+#' dplyr::filter(is_cpt_category_III(hcpcs_code))
+#'
 #' @autoglobal
 #'
 #' @family HIPAA Standards
@@ -202,6 +205,91 @@ search_plas <- function(hcpcs_code = NULL, ...) {
 #' information is often needed to determine the acceptability of direct billing
 #' of Medicare, Medicaid and private insurance services provided by a given
 #' provider.
+#'
+#' ## Code Structure
+#'
+#' The first digit denotes service category and the second specifies location or
+#' service type.
+#'
+#' POS code 11 represents an Office for direct patient services.
+#'
+#' For instance, code 11 designates an Office, encompassing
+#' physician offices, clinics, group practices, and standalone facilities
+#' providing direct patient services.
+#'
+#' Conversely, place of service code 22
+#' denotes an On Campus-Outpatient Hospital, covering services in a
+#' hospital-based outpatient department where the patient is admitted as an
+#' outpatient.
+#'
+#'    * Structure: First digit for category, second for location/type
+#'    * Choose POS based on the majority of services in a specific encounter
+#'    * Modify POS codes if the location changes during a single encounter
+#'
+#' ## Location Types
+#'
+#' Based on the location of service, POS codes can be grouped into four
+#' categories: Facility, Non-Facility, Telehealth, and Other.
+#'
+#' ### Facility Codes
+#'
+#' Facility POS codes are used to indicate services provided in a facility
+#' setting such as hospitals, nursing homes, or skilled nursing facilities.
+#' These include:
+#'
+#'    * Urgent Care Facility (20)
+#'    * Inpatient Hospital (21)
+#'    * Outpatient Hospital (22)
+#'    * Emergency Room-Hospital (23)
+#'    * Ambulatory Surgical Center (24)
+#'    * Skilled Nursing Facility (31)
+#'    * Hospice Facility (32)
+#'
+#' These codes indicate that the services were provided in a facility that is
+#' owned and operated by a healthcare provider.
+#'
+#' ### Non-Facility Codes
+#'
+#' Non-facility POS codes are used for services provided in non-facility
+#' settings such as physician offices or independent clinics. These include:
+#'
+#'    * School (03)
+#'    * Office (11)
+#'    * Home (12)
+#'    * Independent Clinic (49)
+#'
+#' The above codes indicate that the services were provided in a setting not
+#' owned or operated by a healthcare provider.
+#'
+#' ### Telehealth POS Codes
+#'
+#' Telehealth place-of-service codes are used to indicate services provided
+#' through telecommunication technology. These include:
+#'
+#'    * Telehealth (02)
+#'    * Store and Forward Telemedicine Services (18)
+#'
+#' This category of POS codes was introduced due to the increasing use of
+#' telehealth services in healthcare, and to differentiate them from traditional
+#' in-person services.
+#'
+#' ### Other POS Codes
+#'
+#' In addition to facility-specific POS codes, there are other codes that play a
+#' vital role in accurately describing healthcare encounters. These codes are
+#' designed for specific scenarios, such as visits to retail clinics, public
+#' health clinics, or rural health clinics. Each code serves a distinct purpose
+#' in the healthcare landscape.
+#'
+#'    * Homeless Shelter (04)
+#'    * Retail Clinic (17)
+#'    * Rural Health Clinic (72)
+#'
+#' These codes, including Retail Clinic (17), Home Shelter (04), and Rural
+#' Health Clinic (72), cater to unique healthcare settings, ensuring
+#' comprehensive coverage in billing and reporting. Understanding and applying
+#' these codes appropriately contributes to the precision of healthcare
+#' documentation and facilitates effective reimbursement processes.
 #'
 #' @param pos_code `<chr>` vector of 2-character Place of Service codes; default
 #'   is `NULL`

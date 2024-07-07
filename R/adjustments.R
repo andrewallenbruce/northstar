@@ -1,6 +1,4 @@
-#' Search Adjustment Codes
-#'
-#' CARC and RARC Codes
+#' Search Claim Adjustment Codes
 #'
 #' @details Claim Adjustment Reason Codes:
 #'
@@ -12,11 +10,12 @@
 #'
 #'   The Claim Adjustment *Group Codes* are internal to the X12 standard. The
 #'   format is always two alpha characters:
-#' - **CO**: Contractual Obligations
-#' - **CR**: Corrections and Reversals
-#' - **OA**: Other Adjustments
-#' - **PI**: Payer Initiated Reductions
-#' - **PR**: Patient Responsibility
+#'
+#' - **CO** (Contractual Obligations): Indicates patient is responsible for remaining balance
+#' - **CR** (Corrections and Reversals)
+#' - **OA** (Other Adjustments): Indicates denial is related to other insurance coverage
+#' - **PI** (Payer-Initiated Reductions)
+#' - **PR** (Patient Responsibility): Indicates patient responsibility has been adjusted
 #'
 #' @details Remittance Advice Remark Codes:
 #'
@@ -61,8 +60,7 @@
 #' @export
 search_adjustments <- function(adj_code = NULL, adj_type = NULL, ...) {
 
-  adj_type <- if (!is.null(adj_type)) match.arg(
-    adj_type,
+  adj_type <- if (!is.null(adj_type)) match.arg(adj_type,
     c("Group", "CARC", "RARC"))
 
   adj <- get_pin("adj_codes")

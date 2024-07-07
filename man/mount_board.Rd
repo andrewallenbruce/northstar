@@ -4,10 +4,12 @@
 \alias{mount_board}
 \title{Mount \link[pins:pins-package]{pins} board}
 \usage{
-mount_board(source = c("local", "remote"))
+mount_board(source = c("local", "remote"), ...)
 }
 \arguments{
 \item{source}{\verb{<chr>} \code{"local"} or \code{"remote"}}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 \verb{<pins_board_folder>} or \verb{<pins_board_url>}

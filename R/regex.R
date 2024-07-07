@@ -110,7 +110,13 @@ construct_regex2 <- function(x) {
     purrr::list_c() |>
     paste0(collapse = "")
 
-  paste0("^", to_vec, "$")
+  x <- paste0("^", to_vec, "$")
+
+  x <- gsub(paste0(0:9, collapse = ""), "0-9", x)
+
+  x <- gsub(paste0(LETTERS, collapse = ""), "A-Z", x)
+
+  return(x)
 }
 
 #' Internal function for `construct_regex2()`
@@ -131,8 +137,7 @@ pos_re2 <- function(x) {
   paste0("[",
          fuimus::collapser(alphabet),
          fuimus::collapser(numbers),
-         "]",
-         "{1}"
+         "]"
          )
 
 }

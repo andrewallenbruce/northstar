@@ -2,7 +2,7 @@
 % Please edit documentation in R/adjustments.R
 \name{search_adjustments}
 \alias{search_adjustments}
-\title{Search Adjustment Codes}
+\title{Search Claim Adjustment Codes}
 \usage{
 search_adjustments(adj_code = NULL, adj_type = NULL, ...)
 }
@@ -18,7 +18,7 @@ default is \code{NULL}}
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-CARC and RARC Codes
+Search Claim Adjustment Codes
 }
 \details{
 Claim Adjustment Reason Codes:
@@ -32,11 +32,11 @@ amounts.
 The Claim Adjustment \emph{Group Codes} are internal to the X12 standard. The
 format is always two alpha characters:
 \itemize{
-\item \strong{CO}: Contractual Obligations
-\item \strong{CR}: Corrections and Reversals
-\item \strong{OA}: Other Adjustments
-\item \strong{PI}: Payer Initiated Reductions
-\item \strong{PR}: Patient Responsibility
+\item \strong{CO} (Contractual Obligations): Indicates patient is responsible for remaining balance
+\item \strong{CR} (Corrections and Reversals)
+\item \strong{OA} (Other Adjustments): Indicates denial is related to other insurance coverage
+\item \strong{PI} (Payer-Initiated Reductions)
+\item \strong{PR} (Patient Responsibility): Indicates patient responsibility has been adjusted
 }
 
 Remittance Advice Remark Codes:
