@@ -1,234 +1,80 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/404.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/adjustment-codes.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/calculations.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/columns.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/modifiers.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/ncci-edits.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/articles/northstar.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/assign_adjustments.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/carc_add_dash.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex2.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/data_dict.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_example.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/get_pin.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/gt_theme_northstar.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_code.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_full.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_group.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_I.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_II.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_III.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_hcpcs_level_I.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_hcpcs_level_II.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_rarc_code.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_hcpcs.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/limiting_charge.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/list_pins.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/mount_board.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/non_participating_fee.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_adjustments.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_anesthesia.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_aocs.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_descriptions.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_gpcis.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_hcpcs.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_mues.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_opps.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_payment.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_plas.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_pos.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_ptps.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/search_rvus.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_action_code.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_addon_edits.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_asc_group.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_assistant_surgery.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_betos.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_bilateral_surgery.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_co_surgeon.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_coverage.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_diagnostic_imaging.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_global_days.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_lab_certification.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_mue_mai.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_pricing.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_procedure.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_opps_indicator.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_pctc_indicator.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_pricing.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_ptp_mod.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_description.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_name.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_supervision.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_team_surgery.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/northstar/reference/switch_type_of_service.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://andrewallenbruce.github.io/northstar/404.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/LICENSE.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/adjustment-codes.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/calculations.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/columns.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/modifiers.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/ncci-edits.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/articles/northstar.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/authors.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/news/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/assign_adjustments.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/calculate_amounts.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/carc_add_dash.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/construct_regex2.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/data_dict.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/get_example.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/get_pin.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/gt_theme_northstar.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_code.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_full.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_carc_group.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_I.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_II.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_cpt_category_III.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_hcpcs_level_I.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_hcpcs_level_II.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_rarc_code.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/is_valid_hcpcs.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/limiting_charge.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/list_pins.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/mount_board.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/non_participating_fee.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/northstar-package.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_adjustments.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_anesthesia.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_aocs.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_denials.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_descriptions.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_gpcis.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_hcpcs.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_modifiers.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_mues.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_opps.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_payment.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_plas.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_pos.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_ptps.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_rbcs.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/search_rvus.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_action_code.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_addon_edits.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_asc_group.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_assistant_surgery.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_betos.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_bilateral_surgery.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_co_surgeon.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_coverage.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_diagnostic_imaging.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_global_days.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_lab_certification.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_mue_mai.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_pricing.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_multiple_procedure.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_opps_indicator.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_pctc_indicator.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_pricing.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_ptp_mod.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_description.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_status_name.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_supervision.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_team_surgery.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/northstar/reference/switch_type_of_service.html</loc></url>
 </urlset>
+
