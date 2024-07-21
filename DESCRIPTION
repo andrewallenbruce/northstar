@@ -2,8 +2,8 @@ Package: northstar
 Title: Tidy Revenue Integrity Tools
 Version: 0.0.7
 Authors@R: 
-    person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
-Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
+    person("Andrew", "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
+Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
 Description: Revenue integrity tools.
 License: Apache License (>= 2)
 URL: https://andrewallenbruce.github.io/northstar/,
