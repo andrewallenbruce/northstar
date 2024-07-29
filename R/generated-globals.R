@@ -5,6 +5,12 @@ utils::globalVariables(c(
   "aoc_complements",
   # <calculate_amounts>
   "facility",
+  # <id_runs>
+  "group",
+  # <id_runs>
+  "group_size",
+  # <id_runs>
+  "key",
   # <calculate_amounts>
   "nonfacility",
   # <search_ptps>
@@ -17,5 +23,7 @@ utils::globalVariables(c(
   "rbcs_procedure",
   # <search_rbcs>
   "rbcs_subcategory",
+  # <id_runs>
+  "value",
   NULL
 ))
