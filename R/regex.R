@@ -5,6 +5,17 @@
 #' @examples
 #' construct_regex(search_descriptions()$hcpcs_code)
 #'
+#' construct_regex(search_hcpcs()$hcpcs_code)
+#'
+#' # Incorrect:
+#' construct_regex(search_adjustments()$adj_code)
+#'
+#' # Should be:
+#' "^[A-DM-PWY1-9][AIOR0-9]?[0-9]{0,3}?$"
+#'
+#' # Test adj codes
+#' c("4", "CO", "P6", "100", "B19", "MA22", "MA124", "N766")
+#'
 #' @returns `<chr>` vector
 #'
 #' @autoglobal
@@ -12,11 +23,14 @@
 #' @export
 construct_regex <- function(x) {
 
-  x <- collapse::funique(
-    collapse::na_rm(
-      gsub(" ", "", x)
-    )
-  )
+  uniq_nona <- \(x) collapse::funique(collapse::na_rm(x))
+
+  x <- gsub(" ", "", uniq_nona(x))
+
+  # stringi::stri_split_boundaries(
+  # x,
+  # type = "character",
+  # simplify = TRUE)
 
   vecs <- stringr::str_split_fixed(
     x, "",
@@ -28,14 +42,14 @@ construct_regex <- function(x) {
     purrr::map(dplyr::na_if, y = "")
 
   to_brackets <- vecs |>
-    purrr::map(collapse::na_rm) |>
-    purrr::map(collapse::funique) |>
+    purrr::map(uniq_nona) |>
     purrr::map(pos_re)
 
   qmark <- names(which(purrr::map_lgl(vecs, anyNA)))
 
   if (!vctrs::vec_is_empty(qmark)) {
-    to_brackets[qmark] <- purrr::map(to_brackets[qmark], \(x) paste0(x, "?"))
+    to_brackets[qmark] <- purrr::map(
+      to_brackets[qmark], \(x) paste0(x, "?"))
   }
 
   to_vec <- to_brackets |>
@@ -44,8 +58,8 @@ construct_regex <- function(x) {
 
   if (collapse::any_duplicated(to_vec)) {
 
-    # TODO probably need to vectorize this,
-    # will surely have more than one unique duplicate
+    # TODO probably need to vectorize this, will surely
+    # have more than one unique duplicate out of order
 
     dupe_idx <- which(collapse::fduplicated(to_vec, all = TRUE))
 
@@ -71,13 +85,34 @@ construct_regex <- function(x) {
 #' @autoglobal
 #'
 #' @noRd
+pos_re <- function(x) {
+
+  sorted   <- stringr::str_sort(x, numeric = TRUE)
+  alphabet <- purrr::list_c(strex::str_extract_non_numerics(sorted))
+  numbers  <- purrr::list_c(strex::str_extract_numbers(sorted))
+
+  paste0(
+    fuimus::collapser(alphabet),
+    fuimus::collapser(numbers)
+  )
+}
+
+#' Internal function for `construct_regex()`
+#'
+#' @param x `<chr>` vector
+#'
+#' @returns `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
 id_runs <- function(x) {
 
   vec <- c(LETTERS, 0:9)
 
   vec <- rlang::set_names(rep(0, length(vec)), vec)
 
-  test <- strsplit(x, "")[[1]]
+  test <- fuimus::splitter(x)
 
   vecna <- vec[test]
 
@@ -148,28 +183,6 @@ id_runs <- function(x) {
     vectorize_all = FALSE)
 
   paste0("[", res, "]")
-}
-
-#' Internal function for `construct_regex()`
-#'
-#' @param x `<chr>` vector
-#'
-#' @returns `<chr>` vector
-#'
-#' @autoglobal
-#'
-#' @noRd
-pos_re <- function(x) {
-
-  sorted   <- stringr::str_sort(x, numeric = TRUE)
-  alphabet <- purrr::list_c(strex::str_extract_non_numerics(sorted))
-  numbers  <- purrr::list_c(strex::str_extract_numbers(sorted))
-
-  paste0(
-    fuimus::collapser(alphabet),
-    fuimus::collapser(numbers)
-    )
-
 }
 
 #' Internal function for `construct_regex2()`

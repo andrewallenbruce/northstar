@@ -18,4 +18,15 @@ Construct regex patterns
 \examples{
 construct_regex(search_descriptions()$hcpcs_code)
 
+construct_regex(search_hcpcs()$hcpcs_code)
+
+# Incorrect:
+construct_regex(search_adjustments()$adj_code)
+
+# Should be:
+"^[A-DM-PWY1-9][AIOR0-9]?[0-9]{0,3}?$"
+
+# Test adj codes
+c("4", "CO", "P6", "100", "B19", "MA22", "MA124", "N766")
+
 }
