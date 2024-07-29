@@ -67,7 +67,7 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">construct_regex</span><span class="op">(</span><span class="fu"><a href="search_descriptions.html">search_descriptions</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">hcpcs_code</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "^[ABCEGHJKLMPQRSTUV0123456789][0123456789][0123456789][0123456789][AFMTU0123456789]$"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "^[A-CEGHJ-MP-V0-9][0-9]{3}[AFMTU0-9]$"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
