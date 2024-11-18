@@ -15,8 +15,8 @@
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Atkinson_Hyperlegible-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Fee Schedule Calculations">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
@@ -722,26 +722,56 @@ overhead/equipment costs.</p>
 <div class="section level2">
 <h2 id="physician-fee-schedule-amount-calculation">Physician Fee Schedule Amount Calculation<a class="anchor" aria-label="anchor" href="#physician-fee-schedule-amount-calculation"></a>
 </h2>
- 
+<!-- preamble start -->
 
-  
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_wfmevjq0o9uxijtdx5nt</title>
-<style>
-.table td.tinytable_css_l7d2hervnp7pfzwsoxmc, .table th.tinytable_css_l7d2hervnp7pfzwsoxmc {    border-bottom: solid 0.1em #d3d8dc; }
-    </style>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      },
-      svg: {
-        fontCache: 'global'
+    <script>
+      function styleCell_htibg9ckz0265qbaehks(i, j, css_id) {
+        var table = document.getElementById("tinytable_htibg9ckz0265qbaehks");
+        table.rows[i].cells[j].classList.add(css_id);
       }
-    };
-    </script><div class="container">
-      <table class="table table table-hover" id="tinytable_wfmevjq0o9uxijtdx5nt" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_htibg9ckz0265qbaehks');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_htibg9ckz0265qbaehks(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_htibg9ckz0265qbaehks");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+window.addEventListener('load', function () { styleCell_htibg9ckz0265qbaehks(0, 0, 'tinytable_css_idtl7d2hervnp7pfzwsoxm') })
+window.addEventListener('load', function () { styleCell_htibg9ckz0265qbaehks(0, 1, 'tinytable_css_idtl7d2hervnp7pfzwsoxm') })
+    </script><style>
+    .table td.tinytable_css_idtl7d2hervnp7pfzwsoxm, .table th.tinytable_css_idtl7d2hervnp7pfzwsoxm {  border-bottom: solid 0.1em #d3d8dc; }
+    </style>
+<div class="container">
+      <table class="table table table-hover" id="tinytable_htibg9ckz0265qbaehks" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead>
 <caption>Physician Fee Schedule Variables</caption>
               <tr>
@@ -781,14 +811,17 @@ overhead/equipment costs.</p>
 </tbody>
 </table>
 </div>
+<!-- hack to avoid NA insertion in last line -->
+<p><br></p>
+<!-- preamble start -->
 
     <script>
-      function styleCell_tinytable_cwwchv4awz6mnx78oyhm(i, j, css_id) {
-        var table = document.getElementById("tinytable_wfmevjq0o9uxijtdx5nt");
+      function styleCell_crp18b5x1wg0rwyfubc7(i, j, css_id) {
+        var table = document.getElementById("tinytable_crp18b5x1wg0rwyfubc7");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_wfmevjq0o9uxijtdx5nt');
+        var table = document.getElementById('tinytable_crp18b5x1wg0rwyfubc7');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -796,8 +829,8 @@ overhead/equipment costs.</p>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_cwwchv4awz6mnx78oyhm(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_wfmevjq0o9uxijtdx5nt");
+      function spanCell_crp18b5x1wg0rwyfubc7(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_crp18b5x1wg0rwyfubc7");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -823,30 +856,13 @@ overhead/equipment costs.</p>
         targetCell.rowSpan = rowspan;
         targetCell.colSpan = colspan;
       }
-
-window.addEventListener('load', function () { styleCell_tinytable_cwwchv4awz6mnx78oyhm(0, 0, 'tinytable_css_l7d2hervnp7pfzwsoxmc') })
-window.addEventListener('load', function () { styleCell_tinytable_cwwchv4awz6mnx78oyhm(0, 1, 'tinytable_css_l7d2hervnp7pfzwsoxmc') })
-    </script><p><br></p>
- 
-
-  
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_69pzpxj7roh34t7stsbn</title>
-<style>
-.table td.tinytable_css_bucz7eq866j6k6qk1n4y, .table th.tinytable_css_bucz7eq866j6k6qk1n4y {    border-bottom: solid 0.1em #d3d8dc; }
+window.addEventListener('load', function () { styleCell_crp18b5x1wg0rwyfubc7(0, 0, 'tinytable_css_id24olspg8l5gya08tpxs7') })
+window.addEventListener('load', function () { styleCell_crp18b5x1wg0rwyfubc7(0, 1, 'tinytable_css_id24olspg8l5gya08tpxs7') })
+    </script><style>
+    .table td.tinytable_css_id24olspg8l5gya08tpxs7, .table th.tinytable_css_id24olspg8l5gya08tpxs7 {  border-bottom: solid 0.1em #d3d8dc; }
     </style>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
-    </script><div class="container">
-      <table class="table table table-hover" id="tinytable_69pzpxj7roh34t7stsbn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<div class="container">
+      <table class="table table table-hover" id="tinytable_crp18b5x1wg0rwyfubc7" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead>
 <caption>Physician Fee Schedule Formulas</caption>
               <tr>
@@ -874,52 +890,8 @@ window.addEventListener('load', function () { styleCell_tinytable_cwwchv4awz6mnx
 </tbody>
 </table>
 </div>
-
-    <script>
-      function styleCell_tinytable_45er44c0k8p3avlpyuvw(i, j, css_id) {
-        var table = document.getElementById("tinytable_69pzpxj7roh34t7stsbn");
-        table.rows[i].cells[j].classList.add(css_id);
-      }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_69pzpxj7roh34t7stsbn');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_tinytable_45er44c0k8p3avlpyuvw(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_69pzpxj7roh34t7stsbn");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
-        for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
-            }
-          }
-        }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
-      }
-
-window.addEventListener('load', function () { styleCell_tinytable_45er44c0k8p3avlpyuvw(0, 0, 'tinytable_css_bucz7eq866j6k6qk1n4y') })
-window.addEventListener('load', function () { styleCell_tinytable_45er44c0k8p3avlpyuvw(0, 1, 'tinytable_css_bucz7eq866j6k6qk1n4y') })
-    </script><p><br></p>
+<!-- hack to avoid NA insertion in last line -->
+<p><br></p>
 <p>As there is a corresponding GPCI value for each of the three
 components of an RVU, the formula is essentially the <a href="https://www.toppr.com/guides/maths-formulas/dot-product-formula/" class="external-link">dot
 product</a> of the RVU and GPCI vectors, multiplied by the Conversion
@@ -972,26 +944,56 @@ package</p>
 <span>  <span class="fu">tt</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">format_tt</span><span class="op">(</span>markdown <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">style_tt</span><span class="op">(</span>bootstrap_class <span class="op">=</span> <span class="st">"table table-hover"</span><span class="op">)</span></span></code></pre></div>
- 
+<!-- preamble start -->
 
-  
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_op9ksz09od3p848lv7af</title>
-<style>
-.table td.tinytable_css_n0ws8dilfgz1c09znmem, .table th.tinytable_css_n0ws8dilfgz1c09znmem {    border-bottom: solid 0.1em #d3d8dc; }
-    </style>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      },
-      svg: {
-        fontCache: 'global'
+    <script>
+      function styleCell_1w6vygmirm6eduyxl0zt(i, j, css_id) {
+        var table = document.getElementById("tinytable_1w6vygmirm6eduyxl0zt");
+        table.rows[i].cells[j].classList.add(css_id);
       }
-    };
-    </script><div class="container">
-      <table class="table table table-hover" id="tinytable_op9ksz09od3p848lv7af" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_1w6vygmirm6eduyxl0zt');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_1w6vygmirm6eduyxl0zt(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_1w6vygmirm6eduyxl0zt");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+window.addEventListener('load', function () { styleCell_1w6vygmirm6eduyxl0zt(0, 0, 'tinytable_css_id7riupt9an30w3ey1d5a6') })
+window.addEventListener('load', function () { styleCell_1w6vygmirm6eduyxl0zt(0, 1, 'tinytable_css_id7riupt9an30w3ey1d5a6') })
+    </script><style>
+    .table td.tinytable_css_id7riupt9an30w3ey1d5a6, .table th.tinytable_css_id7riupt9an30w3ey1d5a6 {  border-bottom: solid 0.1em #d3d8dc; }
+    </style>
+<div class="container">
+      <table class="table table table-hover" id="tinytable_1w6vygmirm6eduyxl0zt" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead><tr>
 <th scope="col">component</th>
                 <th scope="col">value</th>
@@ -1040,52 +1042,7 @@ package</p>
 </tbody>
 </table>
 </div>
-
-    <script>
-      function styleCell_tinytable_u67riupt9an30w3ey1d5(i, j, css_id) {
-        var table = document.getElementById("tinytable_op9ksz09od3p848lv7af");
-        table.rows[i].cells[j].classList.add(css_id);
-      }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_op9ksz09od3p848lv7af');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_tinytable_u67riupt9an30w3ey1d5(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_op9ksz09od3p848lv7af");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
-        for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
-            }
-          }
-        }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
-      }
-
-window.addEventListener('load', function () { styleCell_tinytable_u67riupt9an30w3ey1d5(0, 0, 'tinytable_css_n0ws8dilfgz1c09znmem') })
-window.addEventListener('load', function () { styleCell_tinytable_u67riupt9an30w3ey1d5(0, 1, 'tinytable_css_n0ws8dilfgz1c09znmem') })
-    </script>
+<!-- hack to avoid NA insertion in last line -->
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -1098,7 +1055,7 @@ window.addEventListener('load', function () { styleCell_tinytable_u67riupt9an30w
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
