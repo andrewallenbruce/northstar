@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{gt_theme_northstar}
 \alias{gt_theme_northstar}
-\title{Apply {gt} Theme}
+\title{Apply \link[gt:gt-package]{gt} Theme}
 \usage{
 gt_theme_northstar(
   gt_object,
@@ -16,6 +16,8 @@ gt_theme_northstar(
 \arguments{
 \item{gt_object}{\verb{<gt_tbl>} A \link[gt:gt-package]{gt} table object}
 
+\item{no_column_labels}{\verb{<lgl>} Show column labels, default is \code{TRUE}}
+
 \item{tab_align}{\verb{<chr>} Stub text alignment, default is \code{center}}
 
 \item{tab_size}{\verb{<int>} Font size, default is \code{16}}
@@ -23,13 +25,11 @@ gt_theme_northstar(
 \item{tab_weight}{Font weight, default is \code{bold}}
 
 \item{...}{Additional arguments to \link[gt:gt-package]{gt::table_options()}}
-
-\item{column_labels}{\verb{<lgl>} Show column labels, default is \code{TRUE}}
 }
 \value{
 An object of class \verb{<gt_tbl>}
 }
 \description{
-Apply {gt} Theme
+Apply \link[gt:gt-package]{gt} Theme
 }
 \keyword{internal}

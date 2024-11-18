@@ -23,8 +23,8 @@ knitr::opts_chunk$set(
 ![GitHub R package version](https://img.shields.io/github/r-package/v/andrewallenbruce/northstar?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/northstar/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/northstar)
 [![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar)
-[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/branch/master/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar?branch=master)
 [![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/northstar.svg)](https://github.com/andrewallenbruce/northstar/commits/master)
+[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/northstar/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/northstar)
 
 <!-- badges: end -->
 
@@ -43,34 +43,6 @@ pak::pak("andrewallenbruce/northstar")
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(northstar)
-```
-
-
-### Describe HCPCS
-
-```{r}
-describe_hcpcs(hcpcs = c("33924", "43116"))
-```
-
-
-## NCCI Edits
-
-### Add-On Codes
-
-```{r}
-get_addon_edits(hcpcs = c("33924", "33935"))
-```
-
-### Retrieve MUEs
-
-```{r}
-get_mue_edits(hcpcs = c("33924", "33935"))
-```
-
-### Procedure-to-Procedure Edits
-
-```{r}
-get_ptp_edits(hcpcs = c("33924", "33935"))
 ```
 
 

@@ -90,11 +90,11 @@ get_example <- function(name = c("report", "practicum")) {
 
 }
 
-#' Apply {gt} Theme
+#' Apply [gt][gt::gt-package] Theme
 #'
 #' @param gt_object `<gt_tbl>` A [gt][gt::gt-package] table object
 #'
-#' @param column_labels `<lgl>` Show column labels, default is `TRUE`
+#' @param no_column_labels `<lgl>` Show column labels, default is `TRUE`
 #'
 #' @param tab_align `<chr>` Stub text alignment, default is `center`
 #'
@@ -118,11 +118,7 @@ gt_theme_northstar <- function(gt_object,
                                tab_weight = "bold",
                                ...) {
 
-  stopifnot(
-    "`gt_object` must be a `gt_tbl`" = "gt_tbl" %in% class(
-      gt_object
-    )
-  )
+  stopifnot("`gt_object` must be a `gt_tbl`" = "gt_tbl" %in% class(gt_object))
 
   gt_object |>
     gt::cols_align("left") |>
