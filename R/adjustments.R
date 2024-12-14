@@ -60,13 +60,13 @@
 #' @export
 search_adjustments <- function(adj_code = NULL, adj_type = NULL, ...) {
 
-  adj_type <- if (!is.null(adj_type)) match.arg(adj_type,
-    c("Group", "CARC", "RARC"))
+  if (not_null(adj_type)) {
+    adj_type <- match.arg(adj_type, c("Group", "CARC", "RARC"))
+  }
 
   adj <- get_pin("adj_codes")
-
-  adj <- fuimus::search_in_if(adj, adj$adj_type, adj_type)
-  adj <- fuimus::search_in_if(adj, adj$adj_code, adj_code)
+  adj <- search_in(adj, "adj_type", adj_type)
+  adj <- search_in(adj, "adj_code", adj_code)
 
   return(.add_class(adj))
 }
@@ -84,10 +84,11 @@ search_adjustments <- function(adj_code = NULL, adj_type = NULL, ...) {
 #'
 #' @export
 search_denials <- function(...) {
+
   list(
-    site = get_pin("denials_site") |> .add_class(),
+    site  = get_pin("denials_site") |> .add_class(),
     site2 = get_pin("denials_site_2") |> .add_class(),
-    ext = get_pin("denials_extract") |> .add_class()
+    ext   = get_pin("denials_extract") |> .add_class()
   )
 
 }
@@ -149,30 +150,17 @@ adj_trie <- function() {
 #' @autoglobal
 assign_adjustments <- function(code, include_keys = FALSE, ...) {
 
-  cd <- carc_add_dash(code)
-
-  cd <- stringfish::sf_split(cd, "-")
+  cd <- sf_strsplit(carc_add_dash(code), "-")
 
   ln <- seq_along(cd)
 
   tr <- adj_trie()
 
-  group <- triebeard::longest_match(
-    tr,
-    purrr::map_chr(
-      ln,
-      ~getElement(cd, .x)[1]
-      ),
-    include_keys = include_keys
-    )
-  desc  <- triebeard::longest_match(
-    tr,
-    purrr::map_chr(
-      ln,
-      ~getElement(cd, .x)[2]
-      ),
-    include_keys = include_keys
-    )
+  group <- triebeard::longest_match(tr,
+    purrr::map_chr(ln, ~ getElement(cd, .x)[1]), include_keys = include_keys)
+
+  desc  <- triebeard::longest_match(tr,
+    purrr::map_chr(ln, ~ getElement(cd, .x)[2]), include_keys = include_keys)
 
   dplyr::tibble(
     adj_code  = code,
@@ -272,9 +260,12 @@ carc_add_dash <- \(x, placeholder = "||") {
 is_rarc_code <- function(x) {
 
   # Test for presence of "-"
-  stringfish::sf_grepl(
-    gsub("-", "", gsub(" ", "", x)),
+  sf_detect(
+    gsub("-", "",
+         gsub(" ", "", x)
+         ),
     "^[AMN]{1,2}[0-9]{1,3}$")
+
 }
 
 #' Validate CARC Codes
@@ -296,7 +287,8 @@ is_rarc_code <- function(x) {
 #'
 #' @export
 is_carc_full <- function(x) {
-  stringfish::sf_grepl(
+
+  sf_detect(
     gsub(" ", "", x),
     "^[COP][AIOR]-?[ABDPWY1-9]{1,3}$"
   )
@@ -321,7 +313,8 @@ is_carc_full <- function(x) {
 #'
 #' @export
 is_carc_code <- function(x) {
-  stringfish::sf_grepl(
+
+  sf_detect(
     gsub(" ", "", x),
     "^[COP]?[AIOR]?-?[ABDPWY1-9]{1,3}$"
   )
@@ -346,7 +339,8 @@ is_carc_code <- function(x) {
 #'
 #' @export
 is_carc_group <- function(x) {
-  stringfish::sf_grepl(
+
+  sf_detect(
     gsub(" ", "", x),
     "^[COP][AIOR]-?[ABDPWY1-9]{0,3}?$"
   )

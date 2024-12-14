@@ -45,7 +45,7 @@ search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", colu
     several.ok = TRUE
   )
 
-  if (!is.null(hcpcs_code)) {
+  if (not_null(hcpcs_code)) {
 
     obj_type <- names(
       which(c(vec = is.vector(hcpcs_code),
@@ -53,13 +53,13 @@ search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", colu
 
     hcp <- switch(
       obj_type,
-      vec = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code),
-      dfr = fuimus::search_in(hcp, hcp$hcpcs_code, hcpcs_code[[column]]))
+      vec = search_in(hcp, "hcpcs_code", hcpcs_code),
+      dfr = search_in(hcp, "hcpcs_code", hcpcs_code[[column]]))
   }
 
   if (hcpcs_desc_type != "All") {
 
-    hcp <- fuimus::search_in(hcp, hcp$hcpcs_desc_type, hcpcs_desc_type)
+    hcp <- search_in(hcp, "hcpcs_desc_type", hcpcs_desc_type)
   }
   return(.add_class(hcp))
 }
@@ -96,10 +96,10 @@ search_descriptions <- function(hcpcs_code = NULL, hcpcs_desc_type = "All", colu
 search_modifiers <- function(mod_code = NULL, mod_type = NULL, ...) {
 
   md <- get_pin("modifiers")
-  md <- fuimus::search_in_if(md, md$mod_type, mod_type)
-  md <- fuimus::search_in_if(md, md$mod_code, mod_code)
-  return(.add_class(md))
+  md <- search_in(md, "mod_type", mod_type)
+  md <- search_in(md, "mod_code", mod_code)
 
+  return(.add_class(md))
 }
 
 #' Level II HCPCS Codes
@@ -145,7 +145,7 @@ search_modifiers <- function(mod_code = NULL, mod_type = NULL, ...) {
 search_hcpcs <- function(hcpcs_code = NULL, ...) {
 
   lv <- get_pin("hcpcs_lvl2")
-  lv <- fuimus::search_in_if(lv, lv$hcpcs_code, hcpcs_code)
+  lv <- search_in(lv, "hcpcs_code", hcpcs_code)
   return(.add_class(lv))
 
 }
@@ -174,7 +174,7 @@ search_hcpcs <- function(hcpcs_code = NULL, ...) {
 search_plas <- function(hcpcs_code = NULL, ...) {
 
   pla <- get_pin("cpt_pla")
-  pla <- fuimus::search_in_if(pla, pla$hcpcs_code, hcpcs_code)
+  pla <- search_in(pla, "hcpcs_code", hcpcs_code)
   return(.add_class(pla))
 
 }
@@ -314,8 +314,8 @@ search_plas <- function(hcpcs_code = NULL, ...) {
 search_pos <- function(pos_code = NULL, pos_type = NULL, ...) {
 
   pos <- get_pin("pos_codes")
-  pos <- fuimus::search_in_if(pos, pos$pos_type, pos_type)
-  pos <- fuimus::search_in_if(pos, pos$pos_code, pos_code)
+  pos <- search_in(pos, "pos_type", pos_type)
+  pos <- search_in(pos, "pos_code", pos_code)
   return(.add_class(pos))
 }
 
@@ -411,21 +411,21 @@ search_rbcs <- function(hcpcs_code  = NULL,
 
   rb <- get_pin("rbcs")
 
-  rb <- fuimus::search_in_if(rb, rb$hcpcs_code, hcpcs_code)
-  rb <- fuimus::search_in_if(rb, rb$rbcs_family, family)
-  rb <- fuimus::search_in_if(rb, rb$rbcs_subcategory, subcategory)
+  rb <- search_in(rb, "hcpcs_code", hcpcs_code)
+  rb <- search_in(rb, "rbcs_family", family)
+  rb <- search_in(rb, "rbcs_subcategory", subcategory)
 
-  if (!is.null(procedure)) {
+  if (not_null(procedure)) {
 
     procedure <- rlang::arg_match(
       procedure,
       c("Major", "Non-Procedure", "Other"),
       multiple = TRUE)
 
-    rb <- fuimus::search_in(rb, rb$rbcs_procedure, procedure)
+    rb <- search_in(rb, "rbcs_procedure", procedure)
   }
 
-  if (!is.null(category)) {
+  if (not_null(category)) {
 
     category <- rlang::arg_match(
       category,
@@ -433,7 +433,7 @@ search_rbcs <- function(hcpcs_code  = NULL,
         "Imaging", "E&M", "Anesthesia", "Other"),
       multiple = TRUE)
 
-    rb <- fuimus::search_in(rb, rb$rbcs_category, category)
+    rb <- search_in(rb, "rbcs_category", category)
   }
 
   if (concatenate) {

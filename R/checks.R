@@ -10,7 +10,7 @@
 check_nchars <- function(x,
                          arg = rlang::caller_arg(x),
                          call = rlang::caller_env()) {
-  if (any(stringfish::sf_nchar(x) != 5L, na.rm = TRUE)) {
+  if (any(sf_chars(x) != 5L, na.rm = TRUE)) {
     cli::cli_abort(
       "{.arg {arg}} must be 5 characters long.",
       arg = arg,
@@ -44,9 +44,12 @@ check_nchars <- function(x,
 #'
 #' @export
 is_valid_hcpcs <- function(hcpcs_code) {
+
   check_nchars(hcpcs_code)
-  hcpcs_code <- stringfish::sf_toupper(hcpcs_code)
-  stringfish::sf_grepl(hcpcs_code, "^[A-CEGHJ-MP-V0-9]\\d{3}[AFMTU0-9]$")
+
+  sf_detect(
+    stringfish::sf_toupper(hcpcs_code),
+    "^[A-CEGHJ-MP-V0-9]\\d{3}[AFMTU0-9]$")
 }
 
 #' Validate HCPCS Level I (CPT) Code
@@ -90,8 +93,10 @@ is_valid_hcpcs <- function(hcpcs_code) {
 #'
 #' @export
 is_hcpcs_level_I <- function(hcpcs_code) {
+
   is_valid_hcpcs(hcpcs_code)
-  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[AFMTU0-9]$")
+
+  sf_detect(hcpcs_code, "^\\d{4}[AFMTU0-9]$")
 }
 
 #' Validate HCPCS Level II Code
@@ -133,8 +138,10 @@ is_hcpcs_level_I <- function(hcpcs_code) {
 #'
 #' @export
 is_hcpcs_level_II <- function(hcpcs_code) {
+
   is_valid_hcpcs(hcpcs_code)
-  stringfish::sf_grepl(hcpcs_code, "^[A-CEGHJ-MP-V]\\d{4}$")
+
+  sf_detect(hcpcs_code, "^[A-CEGHJ-MP-V]\\d{4}$")
 }
 
 #' Validate HCPCS Level I (CPT) Category I Code
@@ -160,8 +167,10 @@ is_hcpcs_level_II <- function(hcpcs_code) {
 #'
 #' @export
 is_cpt_category_I <- function(hcpcs_code) {
+
   is_hcpcs_level_I(hcpcs_code)
-  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[AMU0-9]$")
+
+  sf_detect(hcpcs_code, "^\\d{4}[AMU0-9]$")
 }
 
 #' Validate HCPCS Level I (CPT) Category II Code
@@ -213,8 +222,10 @@ is_cpt_category_I <- function(hcpcs_code) {
 #'
 #' @export
 is_cpt_category_II <- function(hcpcs_code) {
+
   is_hcpcs_level_I(hcpcs_code)
-  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[F]$")
+
+  sf_detect(hcpcs_code, "^\\d{4}[F]$")
 }
 
 #' Validate HCPCS Level I Category III Code
@@ -258,6 +269,8 @@ is_cpt_category_II <- function(hcpcs_code) {
 #'
 #' @export
 is_cpt_category_III <- function(hcpcs_code) {
+
   is_hcpcs_level_I(hcpcs_code)
-  stringfish::sf_grepl(hcpcs_code, "^\\d{4}[T]$")
+
+  sf_detect(hcpcs_code, "^\\d{4}[T]$")
 }

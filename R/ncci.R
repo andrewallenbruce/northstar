@@ -85,21 +85,9 @@ search_aocs <- function(hcpcs_code = NULL,
                         ...) {
 
   aoc <- get_pin("ncci_aoc_nested")
-
-  aoc <- fuimus::search_in_if(
-    aoc,
-    aoc$hcpcs_code,
-    hcpcs_code)
-
-  aoc  <- fuimus::search_in_if(
-    aoc,
-    aoc$aoc_edit,
-    aoc_edit)
-
-  aoc <- fuimus::search_in_if(
-    aoc,
-    aoc$aoc_type,
-    aoc_type)
+  aoc <- search_in(aoc, "hcpcs_code", hcpcs_code)
+  aoc <- search_in(aoc, "aoc_edit", aoc_edit)
+  aoc <- search_in(aoc, "aoc_type", aoc_type)
 
   aoc <- if (unnest) tidyr::unnest(aoc, aoc_complements) else aoc
 
@@ -200,9 +188,8 @@ search_mues <- function(hcpcs_code = NULL,
     Outpatient   = get_pin("ncci_mue_out"),
     DME          = get_pin("ncci_mue_dme"))
 
-  mue <- fuimus::search_in_if(mue, mue$hcpcs_code, hcpcs_code)
-
-  mue <- fuimus::search_in_if(mue, mue$mue_mai, mue_mai)
+  mue <- search_in(mue, "hcpcs_code", hcpcs_code)
+  mue <- search_in(mue, "mue_mai", mue_mai)
 
   return(.add_class(mue))
 }
@@ -316,18 +303,16 @@ search_ptps <- function(hcpcs_code = NULL,
                         unnest = FALSE,
                         ...) {
 
-  ptp_service <- match.arg(ptp_service, c("Practitioner", "Outpatient"))
+  ptp_service <- match.arg(ptp_service)
 
   ptp <- switch(
     ptp_service,
     Practitioner = get_pin("ncci_ptp_prac"),
     Outpatient   = get_pin("ncci_ptp_out"))
 
-  ptp <- fuimus::search_in_if(ptp, ptp$hcpcs_code, hcpcs_code)
-
-  ptp <- fuimus::search_in_if(ptp, ptp$ptp_type, ptp_type)
-
-  ptp <- fuimus::search_in_if(ptp, ptp$ptp_mod, ptp_mod)
+  ptp <- search_in(ptp, "hcpcs_code", hcpcs_code)
+  ptp <- search_in(ptp, "ptp_type", ptp_type)
+  ptp <- search_in(ptp, "ptp_mod", ptp_mod)
 
   ptp <- if (unnest) tidyr::unnest(ptp, ptp_complements) else ptp
 

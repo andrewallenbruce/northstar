@@ -12,21 +12,22 @@ BugReports: https://github.com/andrewallenbruce/northstar/issues
 Depends: 
     R (>= 4.1.0)
 Imports:
+    cheapr (>= 0.9.92),
     cli,
-    collapse,
+    collapse (>= 2.0.18),
     dplyr,
     fs,
-    kit,
+    kit (>= 0.0.19),
     pins,
     purrr,
     rlang,
     strex,
-    stringfish,
-    stringi,
+    stringfish (>= 0.16.0),
+    stringi (>= 1.8.4),
     stringr,
     tidyr,
     triebeard,
-    vctrs,
+    vctrs (>= 0.6.5),
     withr (>= 3.0.0)
 Suggests:
     clock,

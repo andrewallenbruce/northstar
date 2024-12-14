@@ -32,7 +32,8 @@ search_rvus <- function(hcpcs_code = NULL, type = c("amt", "ind"), ...) {
     ind = get_pin("pfs_rvu_ind")
   )
 
-  rv <- fuimus::search_in_if(rv, rv$hcpcs_code, hcpcs_code)
+  rv <- search_in(rv, "hcpcs_code", hcpcs_code)
+
   return(.add_class(rv))
 }
 
@@ -128,9 +129,9 @@ search_gpcis <- function(mac = NULL,
                          ...) {
 
   gp <- get_pin("pfs_gpci")
-  gp <- fuimus::search_in_if(gp, gp$state, state)
-  gp <- fuimus::search_in_if(gp, gp$mac, mac)
-  gp <- fuimus::search_in_if(gp, gp$locality, locality)
+  gp <- search_in(gp, "state", state)
+  gp <- search_in(gp, "mac", mac)
+  gp <- search_in(gp, "locality", locality)
   return(.add_class(gp))
 }
 
@@ -160,10 +161,12 @@ search_payment <- function(hcpcs_code = NULL,
                            mac = NULL,
                            locality = NULL,
                            ...) {
+
   pmt <- get_pin("pfs_pmt")
-  pmt <- fuimus::search_in_if(pmt, pmt$hcpcs_code, hcpcs_code)
-  pmt <- fuimus::search_in_if(pmt, pmt$mac, mac)
-  pmt <- fuimus::search_in_if(pmt, pmt$locality, locality)
+  pmt <- search_in(pmt, "hcpcs_code", hcpcs_code)
+  pmt <- search_in(pmt, "mac", mac)
+  pmt <- search_in(pmt, "locality", locality)
+
   return(.add_class(pmt))
 }
 
@@ -195,8 +198,9 @@ search_anesthesia <- function(mac      = NULL,
                               ...) {
 
   an <- get_pin("pfs_anes")
-  an <- fuimus::search_in_if(an, an$mac, mac)
-  an <- fuimus::search_in_if(an, an$locality, locality)
+  an <- search_in(an, "mac", mac)
+  an <- search_in(an, "locality", locality)
+
   return(.add_class(an))
 }
 
@@ -231,9 +235,9 @@ search_opps <- function(hcpcs_code = NULL,
                         ...) {
 
   op <- get_pin("pfs_opps")
-  op <- fuimus::search_in_if(op, op$hcpcs_code, hcpcs_code)
-  op <- fuimus::search_in_if(op, op$mac, mac)
-  op <- fuimus::search_in_if(op, op$locality, locality)
+  op <- search_in(op, "hcpcs_code", hcpcs_code)
+  op <- search_in(op, "mac", mac)
+  op <- search_in(op, "locality", locality)
 
   return(.add_class(op))
 }
